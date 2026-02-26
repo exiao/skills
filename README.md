@@ -73,7 +73,7 @@ cp -r ~/Projects/erics-skills/skills/ad-copy ~/.clawdbot/skills/
 
 | Skill | Description |
 |-------|-------------|
-| [ads-strategy](ads-strategy/SKILL.md) | Meta ad creative strategy: research-driven concepts, 6 Elements framework, lo-fi formats. |
+| [content-strategy](content-strategy/SKILL.md) | Paid and organic content creative strategy: research-driven concepts, 6 Elements framework, lo-fi formats, A/B testing. Works across Meta, TikTok, YouTube, X, and organic social. |
 | [google-ads](google-ads/SKILL.md) | manage Google Ads campaigns: performance checks, keyword pausing, optimization. |
 | [typefully](typefully/SKILL.md) | create, schedule, and manage social posts via Typefully. |
 | [whop-content-rewards](whop-content-rewards/SKILL.md) | set up and manage Content Rewards UGC campaigns on Whop. |

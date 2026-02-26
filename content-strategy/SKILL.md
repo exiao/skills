@@ -1,22 +1,22 @@
 ---
-name: ads-strategy
-description: "Use when building Meta ad creative strategy: research-driven concepts, 6 Elements framework, lo-fi formats, A/B testing variations. Principles apply broadly beyond Meta."
+name: content-strategy
+description: "Use when building paid or organic content creative strategy: research-driven concepts, 6 Elements framework, lo-fi formats, A/B testing variations. Works across Meta, TikTok, YouTube, X, and organic social."
 ---
 
-# Meta Ads Creative Skill
+# Content Creative Strategy
 
 ## Purpose
 
-Create Meta ad creative that converts using **research-driven development**, the **6 Elements framework**, and **format fitting** - matching your message to proven ad formats.
+Create content and ad creative that converts using **research-driven development**, the **6 Elements framework**, and **format fitting** — matching your message to proven formats for the platform.
 
-**Core Philosophy:** The best Meta ads don't look like ads. Lo-fi > polished. Authentic > produced. Native > interruptive.
+**Core Philosophy:** The best content doesn't look like an ad. Lo-fi > polished. Authentic > produced. Native > interruptive.
 
 ## When to Use
 
-- Create ad creative for Meta campaigns
-- Develop concepts for retargeting or cold audiences
+- Build creative strategy for paid or organic campaigns
+- Develop concepts for cold or retargeted audiences
 - Generate multiple variations for A/B testing
-- Transform testimonials into ad creative
+- Transform testimonials, hooks, or research into content
 
 **Related Skills:**
 - `headlines` - Optimizing Primary Text hooks
@@ -48,7 +48,7 @@ Every ad must communicate: (1) What transformation they want, (2) Will it work f
 
 ## The 6 Elements of Ad Creative
 
-Every Meta ad has 6 elements:
+Every piece of paid creative has 6 elements:
 
 | Element | Purpose | Key Guidance |
 |---------|---------|--------------|
@@ -79,7 +79,6 @@ Every Meta ad has 6 elements:
 **Output:** `[Campaign]_Research.md` with 10-20 insights and exact quotes.
 
 > **Load on-demand:** `references/creative-research-methods.md` for detailed research process.
-> **Load on-demand:** `references/audience-segments.md` for OpenEd segment mapping.
 
 ---
 
@@ -97,7 +96,7 @@ Every Meta ad has 6 elements:
 | 4 - Product Aware | Know you, haven't acted | Address objections, provide proof |
 | 5 - Fully Aware | Ready to act | Make offer irresistible |
 
-**OpenEd typical:** Cold traffic = Level 1-2. Retargeted = Level 3-4. Email list = Level 4-5.
+**Typical:** Cold traffic = Level 1-2. Retargeted = Level 3-4. Email list = Level 4-5.
 
 #### Write Hooks First
 
@@ -193,7 +192,7 @@ Run a full blitz at campaign launch, then weekly 10-variation refreshes. New ang
 #### Naming Convention
 
 `[Campaign]_[Format]_[Hook Type]_[Variation]`
-Example: `OpenEd_NotesApp_StarterPack_V1`
+Example: `Bloom_NotesApp_StarterPack_V1`
 
 **Output:** `[Campaign]_Ad_Concepts.md` with complete concepts.
 
@@ -266,26 +265,13 @@ High-trust format for cold traffic. Feels like journalism, not advertising. Outp
 
 ---
 
+## Common Mistakes
+
 1. **Skipping research phase** — Writing copy before mining testimonials and reviews. The best copy comes from actual customer language, not invented phrasing.
 2. **Polished = better fallacy** — Using stock footage, professional production, or branded graphics when lo-fi/native formats consistently outperform.
 3. **Testing too few variants too slowly** — Running 2-3 ads over several weeks instead of the 4-day rapid blitz with 20 variants. Statistical significance requires volume.
 4. **Mismatching awareness level** — Sending cold traffic (Level 1-2) straight to a product page instead of problem-agitation copy. Warm retargeting audiences need different hooks than cold audiences.
 5. **Landing page mismatch** — Writing a strong ad but pointing to a generic homepage. Message must mirror the specific promise in the ad creative.
-
----
-
-## OpenEd-Specific Notes
-
-**Brand Voice:** Warm, empowering, not salesy. "We're here to help" not "Buy now."
-
-**Key Messages:**
-- Tuition-free access to resources
-- Maintain educational freedom
-- Support without judgment
-
-**Testimonials:** Use real quotes verbatim. Match to audience segment. Get permission.
-
-**Compliance:** No outcome guarantees. Follow Meta ad policies.
 
 ---
 
@@ -297,18 +283,10 @@ High-trust format for cold traffic. Feels like journalism, not advertising. Outp
 | `references/ad-formats-library.md` | All formats with templates |
 | `references/copywriting-formulas.md` | PAS, AIDA, hooks, headlines |
 | `references/creative-research-methods.md` | Research process |
-| `references/audience-segments.md` | OpenEd segment mapping |
-| `examples/` | Existing OpenEd concepts |
 
 ---
 
 ## Related Skills
 
-- `dude-with-sign-writer` - One-liners for text-only ads (12 punchy patterns)
-- `headlines` - Hook formulas (extensive overlap, use for hook optimization)
-- `ad-copy` - Direct response copy that can become ads; brand voice framework
-- `ghostwriter` - Authentic voice guidelines
-
----
-
-*v1.1 (2026-01-23): Refactored for progressive disclosure. Detailed content moved to references.*
+- `headlines` - Hook formulas
+- `ad-copy` - Direct response copy and brand voice framework
