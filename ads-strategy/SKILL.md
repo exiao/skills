@@ -220,7 +220,51 @@ Before finalizing any concept:
 
 ---
 
-## Common Mistakes
+## Advanced Creative Angles
+
+### The Wound-First Pattern
+
+Studied from the viral ENTRGYM ad (deepfake Jeff Bezos, "by 2030 80% of jobs gone") — millions of views, product never mentioned until final seconds.
+
+**The pattern:**
+1. Open with a shared societal fear the audience already carries (not a product problem — a *life* fear)
+2. Deepen the wound: make it personal, inevitable, real
+3. Let the tension sit — no product mention
+4. Resolve with the brand as the only logical answer
+
+The product is never the subject of the ad. The fear is. The product is the exit.
+
+**For Bloom:**
+- Fear: "AI is eating the economy. Hedge funds run on algorithms. Retail investors are playing catch-up with a deck chair."
+- Resolution: "Bloom gives individual investors the same AI-powered research edge that used to cost $50k/year."
+- Frame: Bloom isn't AI threatening your money — it's AI working *for* you against the system.
+
+**When to use:** Cold traffic at Level 1-2 awareness. Highly shareable because the fear is universal — people share the wound, not the product.
+
+**Avoid:** Deepfakes of real people. The ENTRGYM virality was partly controversy-driven; the legal exposure isn't worth it. Use real talking heads or documentary b-roll instead.
+
+---
+
+### Documentary / Talking Heads Format
+
+High-trust format for cold traffic. Feels like journalism, not advertising. Outperforms polished brand video on credibility metrics.
+
+**Structure:**
+- Interview-style talking heads, medium shot, slightly imperfect framing
+- Yellow subtitle text (looks native to social documentary)
+- On-screen title cards for names/credentials ("Jane S., retail investor")
+- No logo until end card
+- Dark/moody or realistic setting — no studio lighting
+
+**When it wins:** Serious claims, skeptical audiences, financial products, health. Anything where "prove it" is the viewer's default reaction.
+
+**Add to Format Matrix:**
+
+| Audience Temp | Add This Format |
+|--------------|----------------|
+| Cold (Level 1-2) | Documentary/Talking Heads + Wound-First narrative |
+
+---
 
 1. **Skipping research phase** — Writing copy before mining testimonials and reviews. The best copy comes from actual customer language, not invented phrasing.
 2. **Polished = better fallacy** — Using stock footage, professional production, or branded graphics when lo-fi/native formats consistently outperform.
