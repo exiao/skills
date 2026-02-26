@@ -31,10 +31,11 @@ Mine what's working **right now** before writing a single word.
 | Reddit/Facebook groups | Exact audience language, recurring complaints, questions |
 | Competitor posts (30+ days live) | Proven angles, format patterns, hook structures |
 | X/TikTok trending content | Viral formats, cultural hooks, emerging memes |
+| Google trends and news | Breaking topics, search-driven angles, seasonal signals |
 | Testimonials and reviews | Transformation language, before/after framing |
 | Support tickets and FAQs | Objections, misconceptions, friction points |
 
-**Skills to use:** `last30days`, `grok-search`, `trend-research`
+**Skills to use:** `last30days`, `grok-search`, `trend-research`, `web-search`
 
 **Output:** 10-20 hook angles + exact audience language in their own words. Store in `[Campaign]_Research.md`.
 
@@ -223,3 +224,4 @@ Retired pillars aren't deleted. Keep `tiktok-marketing/pillar-bench.json` and re
 - `last30days` — recent trending research
 - `grok-search` — X/web search for zeitgeist signals
 - `trend-research` — trending content across platforms
+- `web-search` — Google search for trending topics and news
