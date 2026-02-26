@@ -73,7 +73,7 @@ cp -r ~/Projects/erics-skills/skills/ad-copy ~/.clawdbot/skills/
 
 | Skill | Description |
 |-------|-------------|
-| [content-strategy](content-strategy/SKILL.md) | Paid and organic content creative strategy: research-driven concepts, 6 Elements framework, lo-fi formats, A/B testing. Works across Meta, TikTok, YouTube, X, and organic social. |
+| [content-strategy](content-strategy/SKILL.md) | Build content strategy: hooks, angles, and ideas from what's trending now. Covers organic and paid creative across TikTok, X, YouTube, Meta, LinkedIn. |
 | [google-ads](google-ads/SKILL.md) | manage Google Ads campaigns: performance checks, keyword pausing, optimization. |
 | [typefully](typefully/SKILL.md) | create, schedule, and manage social posts via Typefully. |
 | [whop-content-rewards](whop-content-rewards/SKILL.md) | set up and manage Content Rewards UGC campaigns on Whop. |
@@ -101,7 +101,6 @@ cp -r ~/Projects/erics-skills/skills/ad-copy ~/.clawdbot/skills/
 | Skill | Description |
 |-------|-------------|
 | [ad-copy](ad-copy/SKILL.md) | direct response copy for any platform. |
-| [content-management](content-management/SKILL.md) | plan, schedule, distribute, and optimize content across platforms. |
 | [create-a-sales-asset](visual-design/create-a-sales-asset/SKILL.md) | generate sales assets (landing pages, decks, one-pagers). |
 | [dogfood](dogfood/SKILL.md) | QA and exploratory test web applications, produce structured reports. |
 | [growth](growth/SKILL.md) | full-funnel growth: CRO, onboarding, paywalls, churn, launches, pricing. |

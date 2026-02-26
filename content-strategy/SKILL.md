@@ -1,292 +1,225 @@
 ---
 name: content-strategy
-description: "Use when building paid or organic content creative strategy: research-driven concepts, 6 Elements framework, lo-fi formats, A/B testing variations. Works across Meta, TikTok, YouTube, X, and organic social."
+description: "Use when building content strategy: hooks, angles, and ideas from what's trending now. Covers organic and paid creative across TikTok, X, YouTube, Meta, LinkedIn."
 ---
 
-# Content Creative Strategy
+# Content Strategy
 
 ## Purpose
 
-Create content and ad creative that converts using **research-driven development**, the **6 Elements framework**, and **format fitting** — matching your message to proven formats for the platform.
+Turn zeitgeist signals into content that connects — then delegate creation, distribution, and optimization to the right tools.
 
-**Core Philosophy:** The best content doesn't look like an ad. Lo-fi > polished. Authentic > produced. Native > interruptive.
+**The flow:** Zeitgeist → Angles & Hooks → Create (via other skills) → Distribute → Analyze
 
-## When to Use
-
-- Build creative strategy for paid or organic campaigns
-- Develop concepts for cold or retargeted audiences
-- Generate multiple variations for A/B testing
-- Transform testimonials, hooks, or research into content
-
-**Related Skills:**
-- `headlines` - Optimizing Primary Text hooks
-- `ad-copy` - Direct response copy and brand voice alignment
+**NOT this skill:**
+- Writing tweets or posts → `tweet-ideas`
+- Generating images → `image-generator` or `nano-banana-pro`
+- Creating TikTok slideshows → `slideshow-creator`
+- Writing articles → `article-writer`
+- Scheduling → `typefully` or `slideshow-creator`/ReelFarm
 
 ---
 
-## Quick Reference
+## Step 1: Zeitgeist Research
 
-| Task | How |
-|------|-----|
-| Research phase | Mine testimonials, reviews, competitor ads, Reddit/FB groups |
-| Write hooks | Use `headlines` skill — hook is 80% of ad performance |
-| Match awareness | Cold → Level 1-2 (problem agitation); Retarget → Level 3-4 |
-| Best formats | Notes App, Text-Over-Video, Reddit screenshot (cold traffic) |
-| Testing blitz | Launch 20 variants in 4 days, kill bottom 75% by Day 3 |
-| Name convention | `[Campaign]_[Format]_[HookType]_V1` |
-| Asset production | Nano Banana Pro for cards, screen recordings for demos |
+Mine what's working **right now** before writing a single word.
 
----
+**Sources:**
 
-## The Value Formula
+| Source | What to look for |
+|--------|-----------------|
+| Reddit/Facebook groups | Exact audience language, recurring complaints, questions |
+| Competitor posts (30+ days live) | Proven angles, format patterns, hook structures |
+| X/TikTok trending content | Viral formats, cultural hooks, emerging memes |
+| Testimonials and reviews | Transformation language, before/after framing |
+| Support tickets and FAQs | Objections, misconceptions, friction points |
 
-**Value = Dream Outcome x Perceived Likelihood / Time Delay x Effort**
+**Skills to use:** `last30days`, `grok-search`, `trend-research`
 
-Every ad must communicate: (1) What transformation they want, (2) Will it work for them, (3) How long until results, (4) How hard is it.
-
----
-
-## The 6 Elements of Ad Creative
-
-Every piece of paid creative has 6 elements:
-
-| Element | Purpose | Key Guidance |
-|---------|---------|--------------|
-| **Media** | Stop the scroll (80% of performance) | iPhone footage > professional. Faces > stock. |
-| **Primary Text** | Hook + body copy above media | First 125 chars show before "See More" |
-| **Headline** | Short promise below media | 5-8 words max |
-| **Description** | Secondary text below headline | Urgency, proof, or clarification |
-| **CTA Button** | Action button | "Learn More" (cold) / "Apply Now" (warm) |
-| **Page** | Landing destination | Message must match ad |
-
-> **Load on-demand:** `references/6-elements-framework.md` for detailed guidance on each element.
-
----
-
-## The 4-Phase Workflow
-
-### Phase 1: Research
-
-**Goal:** Understand audience language before writing.
-
-**Sources to mine:**
-- Testimonials and reviews (exact language)
-- Support tickets and FAQs (objections)
-- Reddit/Facebook groups (common questions)
-- Competitor ads running 30+ days (proven angles)
-- Top organic posts (what resonates)
-
-**Output:** `[Campaign]_Research.md` with 10-20 insights and exact quotes.
+**Output:** 10-20 hook angles + exact audience language in their own words. Store in `[Campaign]_Research.md`.
 
 > **Load on-demand:** `references/creative-research-methods.md` for detailed research process.
 
 ---
 
-### Phase 2: Copywriting
+## Step 2: Angles & Hooks
 
-**Goal:** Transform research into compelling copy using proven formulas.
+Transform research into angles that match audience awareness.
 
-#### Match Awareness Level
+### Reader-First Reframe
 
-| Level | Audience State | Copy Approach |
-|-------|----------------|---------------|
+Every piece of content must pass this test: **can a stranger who has never heard of you use or relate to this right now?**
+
+| Source framing | Reader-first reframe |
+|----------------|----------------------|
+| "We hit 50k users by doing X" | "The one thing that unlocks your first 50k users" |
+| "Bloom now supports Y feature" | "The feature that makes investors actually stick around" |
+| "I learned Z from this experience" | "Why Z is the thing most people get backwards" |
+
+Tutorials, frameworks, explainers: no reframe needed. Achievements, milestones, announcements: always reframe.
+
+### Match Awareness Level
+
+| Level | Audience State | Angle |
+|-------|---------------|-------|
 | 1 - Unaware | Don't know problem exists | Lead with problem agitation |
 | 2 - Problem Aware | Know problem, not solutions | Validate + introduce solution |
 | 3 - Solution Aware | Know solutions, not you | Differentiate your approach |
 | 4 - Product Aware | Know you, haven't acted | Address objections, provide proof |
 | 5 - Fully Aware | Ready to act | Make offer irresistible |
 
-**Typical:** Cold traffic = Level 1-2. Retargeted = Level 3-4. Email list = Level 4-5.
+Cold traffic = Level 1-2. Retargeted = Level 3-4. Email list = Level 4-5.
 
-#### Write Hooks First
+### Hook Types
 
-The hook is 80% of performance. Types: Stated (what you SAY), Visual (what they SEE), Audio (what they HEAR).
+Write all three, then pick the right one for the format:
 
-> **Load on-demand:** `headlines` skill has 15+ proven hook formulas with examples.
+- **Stated** — what you SAY in copy
+- **Visual** — what they SEE in the first frame
+- **Audio** — what they HEAR in the first 3 seconds
 
-#### Body Copy Formulas
-
-- **PAS** - Problem, Agitate, Solution
-- **AIDA** - Attention, Interest, Desire, Action
-- **Before-After-Bridge** - Current state, desired state, how to get there
-- **Testimonial** - Quote, context, outcome, invitation
-
-**Output:** `[Campaign]_Copy_Variations.md` with 5-10 variations per concept.
-
-> **Load on-demand:** `references/copywriting-formulas.md` for detailed formulas with examples.
-
----
-
-### Phase 3: Format Selection
-
-**Goal:** Match copy to the format that amplifies it best.
-
-#### Lo-Fi Native Formats (High Performance)
-
-| Format | Why It Works | Best For |
-|--------|--------------|----------|
-| Notes App | Looks like personal content | Problem-solution, starter packs |
-| Text-Over-Video | Story through text sequence | Transformations, permission |
-| Reddit/Tweet Screenshot | Discovery energy | Hot takes, personal stories |
-| Instagram Comment | Dialogue/Q&A feel | Addressing objections |
-| Meme Formats | Culturally native | Contrasts, humor |
-| Testimonial Card | Direct social proof | Warm audiences |
-
-#### Format-Audience Matrix
-
-| Audience Temp | Best Formats |
-|--------------|--------------|
-| Cold | Notes App, Meme, Text-Over-Video, Reddit/Tweet |
-| Warm | UGC, Testimonial, Carousel, Before/After |
-| Hot | Talking Head, Demo, Direct Offer |
-
-**Output:** Select 3-5 formats per campaign.
-
-> **Load on-demand:** `references/ad-formats-library.md` for all formats with templates and examples.
-
----
-
-### Phase 4: Assembly & Testing
-
-**Goal:** Combine copy + format into complete concepts, then generate variations.
-
-#### Document Each Concept
-
-```markdown
-## Ad Concept: [Name]
-
-**Format:** [Selected format]
-**Audience:** [Segment] | **Awareness:** [Level 1-5]
-
-**Media:** [Description]
-**Primary Text:** [Full copy]
-**Headline:** [5-8 words]
-**Description:** [Secondary line]
-**CTA:** [Button choice]
-**Page:** [Landing destination]
-```
-
-#### Testing Variations
-
-- **Hook Testing:** Same format, different opening lines (3-5 versions)
-- **Format Testing:** Same message, different formats (3 versions)
-- **Angle Testing:** Same format, different emotional angles (fear vs hope)
-
-#### 4-Day Rapid Testing Blitz
-
-Don't test 3 creatives over 4 weeks. Test 20 over 4 days:
-
-| Day | Action | Output |
-|-----|--------|--------|
-| 1 | Generate 20 variations (3-5 styles × 4-6 angles × 2-3 tones) | 20 ready-to-launch ads |
-| 2 | Launch all simultaneously, $20-50/day each | All variants live |
-| 3 | Kill bottom 75%, identify top 3-5 by CTR + conversion | Winners identified |
-| 4 | Generate 10 iterations of winners (new hooks, proof, CTAs) | Second-gen creative live |
-
-Use Nano Banana Pro for visual cards, screen recordings for app demos, Larry for TikTok slideshows. One operator can produce 20-30 variations in a single day at $2-8 per asset vs. $200-800 for traditional UGC.
-
-Run a full blitz at campaign launch, then weekly 10-variation refreshes. New angle blitz every 60-90 days.
-
-> **Load on-demand:** `ad-copy` skill's A/B Testing Framework has the full protocol with statistical significance guidance.
-
-#### Naming Convention
-
-`[Campaign]_[Format]_[Hook Type]_[Variation]`
-Example: `Bloom_NotesApp_StarterPack_V1`
-
-**Output:** `[Campaign]_Ad_Concepts.md` with complete concepts.
-
----
-
-## Quality Checklist
-
-Before finalizing any concept:
-
-**Copy:**
-- [ ] Hook stops scroll in first 3 seconds
-- [ ] Value formula addressed
-- [ ] Awareness level matched
-- [ ] Sounds like real person, not corporate
-
-**Visual:**
-- [ ] Lo-fi/native feel
-- [ ] Text readable on mobile
-- [ ] Authentic, not stock
-
-**Strategic:**
-- [ ] Landing page message matches
-- [ ] Clear next step for viewer
-
----
-
-## Advanced Creative Angles
+> **Load on-demand:** `headlines` skill has 15+ proven hook formulas.
 
 ### The Wound-First Pattern
 
-Studied from the viral ENTRGYM ad (deepfake Jeff Bezos, "by 2030 80% of jobs gone") — millions of views, product never mentioned until final seconds.
+Open with a shared fear the audience already carries. Not a product problem — a *life* fear.
 
-**The pattern:**
-1. Open with a shared societal fear the audience already carries (not a product problem — a *life* fear)
-2. Deepen the wound: make it personal, inevitable, real
-3. Let the tension sit — no product mention
-4. Resolve with the brand as the only logical answer
+1. Open with the wound (fear, frustration, societal shift)
+2. Deepen it: make it personal, inevitable, real
+3. Let the tension sit — no product mention yet
+4. Resolve with your brand as the only logical answer
 
-The product is never the subject of the ad. The fear is. The product is the exit.
+The product is never the subject. The fear is. The product is the exit.
 
-**For Bloom:**
-- Fear: "AI is eating the economy. Hedge funds run on algorithms. Retail investors are playing catch-up with a deck chair."
-- Resolution: "Bloom gives individual investors the same AI-powered research edge that used to cost $50k/year."
-- Frame: Bloom isn't AI threatening your money — it's AI working *for* you against the system.
+Best for: cold traffic at Level 1-2. Highly shareable because the fear is universal.
 
-**When to use:** Cold traffic at Level 1-2 awareness. Highly shareable because the fear is universal — people share the wound, not the product.
+### Format Selection
 
-**Avoid:** Deepfakes of real people. The ENTRGYM virality was partly controversy-driven; the legal exposure isn't worth it. Use real talking heads or documentary b-roll instead.
+Match the angle to a format that amplifies it.
 
----
+| Format | Why It Works | Best For |
+|--------|-------------|---------|
+| Notes App | Looks like personal content | Problem-solution, starter packs |
+| Text-Over-Video | Story through text sequence | Transformations, confessions |
+| Reddit/Tweet Screenshot | Discovery energy | Hot takes, personal stories |
+| Instagram Comment | Dialogue/Q&A feel | Addressing objections |
+| Meme | Culturally native | Contrasts, humor |
+| Testimonial Card | Direct social proof | Warm audiences |
+| Documentary/Talking Head | High trust, feels like journalism | Skeptical audiences, financial products |
 
-### Documentary / Talking Heads Format
+| Audience Temp | Best Formats |
+|--------------|-------------|
+| Cold | Notes App, Meme, Text-Over-Video, Reddit/Tweet, Documentary |
+| Warm | UGC, Testimonial, Carousel, Before/After |
+| Hot | Talking Head, Demo, Direct Offer |
 
-High-trust format for cold traffic. Feels like journalism, not advertising. Outperforms polished brand video on credibility metrics.
-
-**Structure:**
-- Interview-style talking heads, medium shot, slightly imperfect framing
-- Yellow subtitle text (looks native to social documentary)
-- On-screen title cards for names/credentials ("Jane S., retail investor")
-- No logo until end card
-- Dark/moody or realistic setting — no studio lighting
-
-**When it wins:** Serious claims, skeptical audiences, financial products, health. Anything where "prove it" is the viewer's default reaction.
-
-**Add to Format Matrix:**
-
-| Audience Temp | Add This Format |
-|--------------|----------------|
-| Cold (Level 1-2) | Documentary/Talking Heads + Wound-First narrative |
+> **Load on-demand:** `references/ad-formats-library.md` for all formats with templates.
 
 ---
 
-## Common Mistakes
+## Step 3: Create (Delegate)
 
-1. **Skipping research phase** — Writing copy before mining testimonials and reviews. The best copy comes from actual customer language, not invented phrasing.
-2. **Polished = better fallacy** — Using stock footage, professional production, or branded graphics when lo-fi/native formats consistently outperform.
-3. **Testing too few variants too slowly** — Running 2-3 ads over several weeks instead of the 4-day rapid blitz with 20 variants. Statistical significance requires volume.
-4. **Mismatching awareness level** — Sending cold traffic (Level 1-2) straight to a product page instead of problem-agitation copy. Warm retargeting audiences need different hooks than cold audiences.
-5. **Landing page mismatch** — Writing a strong ad but pointing to a generic homepage. Message must mirror the specific promise in the ad creative.
+Don't write here. Route to the right skill.
+
+| Content Type | Skill |
+|-------------|-------|
+| Tweets / X posts | `tweet-ideas` |
+| Articles / long-form | `article-writer` |
+| TikTok slideshows | `slideshow-creator` |
+| Hooks and headlines | `headlines` |
+| Ad copy (paid) | `ad-copy` |
+| Paid creative concepts | `ad-copy` (includes A/B blitz protocol) |
+
+---
+
+## Step 4: Distribute
+
+| Platform | Tool |
+|---------|------|
+| LinkedIn, X, Threads | `typefully` skill |
+| TikTok | `slideshow-creator` / ReelFarm |
+
+**Queue minimums:**
+
+| Platform | Min Queue | Cadence |
+|---------|-----------|---------|
+| LinkedIn | 7 posts | 1/day |
+| X | 14 posts | 2/day |
+| TikTok | 14-21 posts | 2-3/day |
+| Threads | 7 posts | 1/day |
+
+Batch at least 7 days per session. Never schedule one post at a time. If queue drops below 3 days, refill immediately.
+
+> **Load on-demand:** `references/calendar-batching.md` for scheduling strategy and optimal posting times.
+
+---
+
+## Step 5: Analyze & Optimize
+
+### Decision Rules (Post Level)
+
+| Views | Action |
+|-------|--------|
+| 50K+ | DOUBLE DOWN — make 3 variations immediately |
+| 10K-50K | Good — keep in rotation, test small tweaks |
+| 1K-10K | Okay — try 1 variation before dropping |
+| <1K (twice) | DROP — radically different approach needed |
+
+### Two-Axis Diagnostic
+
+| Views | Conversions | Diagnosis | Fix |
+|-------|-------------|-----------|-----|
+| High | High | Scale it | Make variations, increase frequency |
+| High | Low | CTA problem | Hook works, downstream is broken |
+| Low | High | Hook problem | Content converts, needs more reach |
+| Low | Low | Full reset | Try radically different approach |
+
+### Hook Evolution Loop
+
+Track hook text, CTA, platform, and view/conversion data in `hook-performance.json`. Over time this reveals which hook + CTA combos actually drive results.
+
+### Monthly Pillar Review (Run on the 1st)
+
+Run 3-5 pillars at once. A pillar = one concept + 1-2 formats.
+
+| Status | Criteria | Action |
+|--------|---------|--------|
+| SCALE | High views + high conversions | Increase frequency |
+| KEEP | Decent and stable | Hold cadence |
+| ELEVATE | Underperforming but sound concept | Change one lever: hook, format, or value density |
+| ROTATE OUT | 2+ months underperforming after elevation | Move to bench |
+
+Retired pillars aren't deleted. Keep `tiktok-marketing/pillar-bench.json` and revisit quarterly.
+
+> **Load on-demand:** `references/analytics-loop.md` and `references/feedback-loop.md` for tracking setup and optimization details.
 
 ---
 
 ## References (Load On-Demand)
 
 | Reference | Contents |
-|-----------|----------|
-| `references/6-elements-framework.md` | Detailed element guidance |
-| `references/ad-formats-library.md` | All formats with templates |
+|-----------|---------|
+| `references/6-elements-framework.md` | Paid creative element guidance (Media, Primary Text, Headline, etc.) |
+| `references/ad-formats-library.md` | All formats with templates and examples |
 | `references/copywriting-formulas.md` | PAS, AIDA, hooks, headlines |
-| `references/creative-research-methods.md` | Research process |
+| `references/creative-research-methods.md` | Research process and sources |
+| `references/analytics-loop.md` | Postiz API, per-post tracking, pillar-level monthly review |
+| `references/feedback-loop.md` | Daily diagnostic, hook evolution, CTA rotation |
+| `references/calendar-batching.md` | Scheduling strategy, queue management, posting cadence |
+| `references/monetization-research.md` | CPM research, Content Rewards, niche selection |
+| `references/competitor-research.md` | TikTok/App Store gap analysis, storing findings |
 
 ---
 
 ## Related Skills
 
-- `headlines` - Hook formulas
-- `ad-copy` - Direct response copy and brand voice framework
+- `headlines` — hook formulas and title generation
+- `ad-copy` — direct response copy, brand voice, A/B testing blitz
+- `tweet-ideas` — standalone tweet content
+- `article-writer` — long-form drafts
+- `slideshow-creator` — TikTok production and ReelFarm automation
+- `content-atomizer` — repurpose long-form into platform-native pieces
+- `typefully` — scheduling to LinkedIn, X, Threads
+- `last30days` — recent trending research
+- `grok-search` — X/web search for zeitgeist signals
+- `trend-research` — trending content across platforms
