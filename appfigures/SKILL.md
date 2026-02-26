@@ -12,7 +12,7 @@ Pull app store analytics via the Appfigures REST API.
 All requests use Bearer token auth:
 ```
 curl -s "https://api.appfigures.com/v2/{route}" \
-  -H "Authorization: Bearer pat_ZqNCpq8IbC6qB6VK4WYmXdCEr2zO5Fds"
+  -H "Authorization: Bearer $APPFIGURES_PAT"
 ```
 
 ## Product IDs
@@ -94,25 +94,25 @@ GET /products/mine
 **Last 7 days downloads by date (Bloom iOS):**
 ```bash
 curl -s "https://api.appfigures.com/v2/reports/sales/?products=281045205499&group_by=dates&start_date=-7&end_date=0" \
-  -H "Authorization: Bearer pat_ZqNCpq8IbC6qB6VK4WYmXdCEr2zO5Fds"
+  -H "Authorization: Bearer $APPFIGURES_PAT"
 ```
 
 **Current subscription metrics (Bloom, all platforms):**
 ```bash
 curl -s "https://api.appfigures.com/v2/reports/subscriptions?products=281045205499,281090333286&include_inapps=true&start_date=-30&end_date=0" \
-  -H "Authorization: Bearer pat_ZqNCpq8IbC6qB6VK4WYmXdCEr2zO5Fds"
+  -H "Authorization: Bearer $APPFIGURES_PAT"
 ```
 
 **Recent 1-star reviews:**
 ```bash
 curl -s "https://api.appfigures.com/v2/reviews?products=281045205499&stars=1&count=20&sort=-date" \
-  -H "Authorization: Bearer pat_ZqNCpq8IbC6qB6VK4WYmXdCEr2zO5Fds"
+  -H "Authorization: Bearer $APPFIGURES_PAT"
 ```
 
 **Monthly revenue trend (Bloom, last 6 months):**
 ```bash
 curl -s "https://api.appfigures.com/v2/reports/sales/?products=281045205499,281090333286&group_by=dates&granularity=monthly&start_date=-6m&end_date=0&include_inapps=true" \
-  -H "Authorization: Bearer pat_ZqNCpq8IbC6qB6VK4WYmXdCEr2zO5Fds"
+  -H "Authorization: Bearer $APPFIGURES_PAT"
 ```
 
 ## Output Formatting
@@ -168,7 +168,7 @@ Use Appfigures data combined with these frameworks to optimize Bloom's store lis
 **Track keyword rankings via Appfigures:**
 ```bash
 curl -s "https://api.appfigures.com/v2/ranks/281045205499/daily/-30/0?countries=US" \
-  -H "Authorization: Bearer pat_ZqNCpq8IbC6qB6VK4WYmXdCEr2zO5Fds"
+  -H "Authorization: Bearer $APPFIGURES_PAT"
 ```
 
 ### Metadata Optimization
@@ -192,13 +192,13 @@ curl -s "https://api.appfigures.com/v2/ranks/281045205499/daily/-30/0?countries=
 ```bash
 # Seeking Alpha 1-2 star reviews (find their weaknesses)
 curl -s "https://api.appfigures.com/v2/reviews?products=212878126&stars=1,2&count=50&sort=-date" \
-  -H "Authorization: Bearer pat_ZqNCpq8IbC6qB6VK4WYmXdCEr2zO5Fds"
+  -H "Authorization: Bearer $APPFIGURES_PAT"
 ```
 
 **Compare ratings over time:**
 ```bash
 curl -s "https://api.appfigures.com/v2/ratings?products=281045205499,212878126,40417581583&start_date=-3m&end_date=0" \
-  -H "Authorization: Bearer pat_ZqNCpq8IbC6qB6VK4WYmXdCEr2zO5Fds"
+  -H "Authorization: Bearer $APPFIGURES_PAT"
 ```
 
 **Competitor keyword gap analysis:**
@@ -236,7 +236,7 @@ Run tests for at least 7 days. Single variable per test.
 ```bash
 # Bloom positive reviews (what do users love?)
 curl -s "https://api.appfigures.com/v2/reviews?products=281045205499&stars=4,5&count=100&sort=-date" \
-  -H "Authorization: Bearer pat_ZqNCpq8IbC6qB6VK4WYmXdCEr2zO5Fds"
+  -H "Authorization: Bearer $APPFIGURES_PAT"
 ```
 
 Look for:

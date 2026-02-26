@@ -123,7 +123,7 @@ with open(output_path, 'w') as f:
 print(f"Saved to {output_path} ({len(svg)} bytes)")
 ```
 
-**Important: Gemini 3.1 Pro takes 60-120 seconds for complex SVG generation.** Use `timeout=180` on exec calls. The sandbox may kill long-running processes; if that happens, run the Python script on the host directly or use `exec` with `host: "gateway"` if available. Always set the env var: `GEMINI_API_KEY=AIzaSyDs9eTTKoymNBv5i6jVvocdM7IfrL4fzZg`
+**Important: Gemini 3.1 Pro takes 60-120 seconds for complex SVG generation.** Use `timeout=180` on exec calls. The sandbox may kill long-running processes; if that happens, run the Python script on the host directly or use `exec` with `host: "gateway"` if available. Always set the env var: `GEMINI_API_KEY=<key from TOOLS.md>`
 
 ## Example Prompts
 
