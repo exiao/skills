@@ -10,35 +10,35 @@ Ralph Mode implements the Ralph Wiggum technique adapted for OpenClaw: autonomou
 
 This skill content is modularized into reference docs for readability.
 
-- [When to Use](references/when-to-use.md) - extracted from SKILL body
-- [Core Principles](references/core-principles.md) - extracted from SKILL body
-- [File Structure](references/file-structure.md) - extracted from SKILL body
-- [In Progress](references/in-progress.md) - extracted from SKILL body
-- [Completed](references/completed.md) - extracted from SKILL body
-- [Backlog](references/backlog.md) - extracted from SKILL body
-- [Build Commands](references/build-commands.md) - extracted from SKILL body
-- [Validation](references/validation.md) - extracted from SKILL body
-- [Operational Notes](references/operational-notes.md) - extracted from SKILL body
-- [Hats (Personas)](references/hats-personas.md) - extracted from SKILL body
-- [Loop Mechanics](references/loop-mechanics.md) - extracted from SKILL body
-- [Completion Criteria](references/completion-criteria.md) - extracted from SKILL body
-- [Completion Check - UX Quality](references/completion-check-ux-quality.md) - extracted from SKILL body
-- [Completion Check - Design Quality](references/completion-check-design-quality.md) - extracted from SKILL body
-- [Technology-Specific Patterns](references/technology-specific-patterns.md) - extracted from SKILL body
-- [Quick Start Command](references/quick-start-command.md) - extracted from SKILL body
-- [Operational Learnings](references/operational-learnings.md) - extracted from SKILL body
-- [Discovered Patterns](references/discovered-patterns.md) - extracted from SKILL body
-- [Escape Hatches](references/escape-hatches.md) - extracted from SKILL body
-- [Advanced: LLM-as-Judge Fixture](references/advanced-llm-as-judge-fixture.md) - extracted from SKILL body
-- [Critical Operational Requirements](references/critical-operational-requirements.md) - extracted from SKILL body
-- [Iteration [N] - [Timestamp]](references/iteration-n-timestamp.md) - extracted from SKILL body
-- [Status: COMPLETE ✅](references/status-complete.md) - extracted from SKILL body
-- [Operational Parameters](references/operational-parameters.md) - extracted from SKILL body
-- [Memory Updates](references/memory-updates.md) - extracted from SKILL body
-- [[Date] Ralph Mode Session](references/date-ralph-mode-session.md) - extracted from SKILL body
-- [Appendix: Hall of Failures](references/appendix-hall-of-failures.md) - extracted from SKILL body
-- [NEW: Session Initialization Best Practices (2025-02-07)](references/new-session-initialization-best-practices-2025-02-07.md) - extracted from SKILL body
-- [Task: [ONE specific thing]](references/task-one-specific-thing.md) - extracted from SKILL body
-- [Rules](references/rules.md) - extracted from SKILL body
-- [Iteration [N] - [Timestamp]](references/iteration-n-timestamp-2.md) - extracted from SKILL body
-- [Summary](references/summary.md) - extracted from SKILL body
+- [When to Use](references/when-to-use.md)
+- [Core Principles](references/core-principles.md)
+- [File Structure](references/file-structure.md)
+- [In Progress](references/in-progress.md)
+- [Completed](references/completed.md)
+- [Backlog](references/backlog.md)
+- [Build Commands](references/build-commands.md)
+- [Validation](references/validation.md)
+- [Operational Notes](references/operational-notes.md)
+- [Hats (Personas)](references/hats-personas.md)
+- [Loop Mechanics](references/loop-mechanics.md)
+- [Completion Criteria](references/completion-criteria.md)
+- [Completion Check - UX Quality](references/completion-check-ux-quality.md)
+- [Completion Check - Design Quality](references/completion-check-design-quality.md)
+- [Technology-Specific Patterns](references/technology-specific-patterns.md)
+- [Quick Start Command](references/quick-start-command.md)
+- [Operational Learnings](references/operational-learnings.md)
+- [Discovered Patterns](references/discovered-patterns.md)
+- [Escape Hatches](references/escape-hatches.md)
+- [Advanced: LLM-as-Judge Fixture](references/advanced-llm-as-judge-fixture.md)
+- [Critical Operational Requirements](references/critical-operational-requirements.md)
+- [Iteration [N] - [Timestamp]](references/iteration-n-timestamp.md)
+- [Status: COMPLETE ✅](references/status-complete.md)
+- [Operational Parameters](references/operational-parameters.md)
+- [Memory Updates](references/memory-updates.md)
+- [[Date] Ralph Mode Session](references/date-ralph-mode-session.md)
+- [Appendix: Hall of Failures](references/appendix-hall-of-failures.md)
+- [NEW: Session Initialization Best Practices (2025-02-07)](references/new-session-initialization-best-practices-2025-02-07.md)
+- [Task: [ONE specific thing]](references/task-one-specific-thing.md)
+- [Rules](references/rules.md)
+- [Iteration [N] - [Timestamp]](references/iteration-n-timestamp-2.md)
+- [Summary](references/summary.md)

@@ -10,22 +10,22 @@ One article in. Eight platforms out. Each piece native to where it lives.
 
 This skill content is modularized into reference docs for readability.
 
-- [Brand Voice Reference](references/brand-voice-reference.md) - extracted from SKILL body
-- [Input](references/input.md) - extracted from SKILL body
-- [The 1 Article → 8 Platforms Workflow](references/the-1-article-8-platforms-workflow.md) - extracted from SKILL body
-- [Platform Formats](references/platform-formats.md) - extracted from SKILL body
-- [TikTok: [title]](references/tiktok-title.md) - extracted from SKILL body
-- [IG Carousel: [title]](references/ig-carousel-title.md) - extracted from SKILL body
-- [IG Reel: [title]](references/ig-reel-title.md) - extracted from SKILL body
-- [YouTube Short: [title]](references/youtube-short-title.md) - extracted from SKILL body
-- [Threads: [topic]](references/threads-topic.md) - extracted from SKILL body
-- [Substack Excerpt: [title]](references/substack-excerpt-title.md) - extracted from SKILL body
-- [Output Directory Structure](references/output-directory-structure.md) - extracted from SKILL body
-- [Cross-Platform Consistency Rules](references/cross-platform-consistency-rules.md) - extracted from SKILL body
-- [Integration Points](references/integration-points.md) - extracted from SKILL body
-- [Quality Checklist (Run Before Saving)](references/quality-checklist-run-before-saving.md) - extracted from SKILL body
-- [Usage](references/usage.md) - extracted from SKILL body
-- [References](references/references.md) - extracted from SKILL body
+- [Brand Voice Reference](references/brand-voice-reference.md)
+- [Input](references/input.md)
+- [The 1 Article → 8 Platforms Workflow](references/the-1-article-8-platforms-workflow.md)
+- [Platform Formats](references/platform-formats.md)
+- [TikTok: [title]](references/tiktok-title.md)
+- [IG Carousel: [title]](references/ig-carousel-title.md)
+- [IG Reel: [title]](references/ig-reel-title.md)
+- [YouTube Short: [title]](references/youtube-short-title.md)
+- [Threads: [topic]](references/threads-topic.md)
+- [Substack Excerpt: [title]](references/substack-excerpt-title.md)
+- [Output Directory Structure](references/output-directory-structure.md)
+- [Cross-Platform Consistency Rules](references/cross-platform-consistency-rules.md)
+- [Integration Points](references/integration-points.md)
+- [Quality Checklist (Run Before Saving)](references/quality-checklist-run-before-saving.md)
+- [Usage](references/usage.md)
+- [References](references/references.md)
 
 ## Reader-First Reframe (Required Step)
 
