@@ -1,6 +1,6 @@
 ---
 name: frontend-slides
-description: Use when create animation-rich HTML presentations or convert PPT to web.
+description: Use when creating animation-rich HTML presentations or convert PPT to web.
 ---
 # Frontend Slides Skill
 
