@@ -95,3 +95,9 @@ await page.evaluate(() => window.scrollBy(0, 300));
 - **Quality**: 85-90 JPEG quality balances size and clarity
 - **Resolution**: Browser window size determines output resolution
 - **Loops**: GIFs should loop seamlessly - end where you started
+
+## Gotchas
+
+- **Screenshots vs video:** If the user just needs to see a feature, take screenshots inline instead of recording a full video. Check `browser action=tabs profile=clawd` first — if the app tab is already open, grab screenshots directly without a sub-agent.
+- **Context limit:** Screenshot-heavy recording loops burn through context fast (200k token limit). Keep scope narrow: record all frames first, then analyze — never interleave frame capture with analysis. If context is tight, write frames to disk and analyze in a separate pass.
+- **Parallel agent risk:** Don't spawn multiple demo agents concurrently against the same browser tab — they'll interfere with each other's navigation state.

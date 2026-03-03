@@ -15,6 +15,39 @@ Same product, different positioning:
 
 Three apps. Same category. Completely different angles. The angle determines everything downstream: the headlines, the landing page, the App Store screenshots, the TikTok hooks, the investor pitch.
 
+## Bloom Positioning Examples
+
+Three real angles that have been used for Bloom. Use these to calibrate tone and depth when generating new ones.
+
+---
+
+**Angle 1: The Democratization Frame**
+> "Hedge funds have had AI-powered research for 10 years. Bloom gives retail investors the same thing for the price of a coffee."
+
+- **Why it works:** Us vs. them (retail vs. institutions). Specific time gap makes the unfairness feel real. Price anchor diffuses cost objection before it forms.
+- **Channel fit:** Cold ads, App Store description, landing page hero
+- **Weakness:** Sounds like every fintech ever. Only works if the copy underneath is specific.
+
+---
+
+**Angle 2: The Builder-Insider Frame**
+> "I built Bloom because I was frustrated with the tools available. No analyst reports, no AI. Just a chart and a buy button."
+
+- **Why it works:** Founder credibility + shared frustration. "I built this for myself" is more trustworthy than "we built this for you."
+- **Channel fit:** X/Twitter, Substack, podcast, personal brand content
+- **Weakness:** Only works in Eric's voice. Doesn't transfer to paid ads.
+
+---
+
+**Angle 3: The Speed Frame**
+> "By the time you read the news, the trade already happened. Bloom surfaces the signal before it's news."
+
+- **Why it works:** Addresses the core investor fear (always late, always wrong). "Before it's news" implies unfair advantage without saying it directly.
+- **Channel fit:** Cold TikTok, Instagram, retargeted ads
+- **Weakness:** Could be perceived as trading advice. Needs a "not financial advice" qualifier in regulated contexts.
+
+---
+
 ## References
 
 This skill content is modularized into reference docs for readability.

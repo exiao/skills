@@ -34,9 +34,16 @@ This skill routes video tasks to the correct sub-skill. Read the task, pick the 
 - "Product video" — could be sora (AI footage), remotion-videos (coded), or demo-video (recorded walkthrough) → ask which
 - Both sora and kling apply when the user wants AI video but hasn't named a model → default to **sora** (has a working API integration); mention Kling as an alternative if they want to use that platform instead
 
+## Hook Reference
+
+Before writing any prompt or building any video: read `~/clawd/skills/video-production/VISUAL-HOOKS.md`.
+
+Every video needs a visual hook AND a spoken/text hook in the first 1–3 seconds. The hooks file has the full framework + per-sub-skill application notes.
+
 ## How to Execute
 
 Once routed:
-1. Read `~/clawd/skills/video-production/<sub-skill>/SKILL.md` fully.
-2. Follow its workflow exactly — do not improvise around its conventions.
-3. Sub-skill files are authoritative; this router is just dispatch.
+1. Read `~/clawd/skills/video-production/VISUAL-HOOKS.md` for hook guidance.
+2. Read `~/clawd/skills/video-production/<sub-skill>/SKILL.md` fully.
+3. Follow its workflow exactly — do not improvise around its conventions.
+4. Sub-skill files are authoritative; this router is just dispatch.
