@@ -176,6 +176,36 @@ Schedule via **typefully** skill.
 | `references/posts.md` | 49+ proven viral posts organized by format type. Study for rhythm, structure, and length. |
 | `references/voices.md` | 7 creator voice profiles (Hormozi, Naval, Gazdecki, etc.) with writing DNA and signature patterns. Match voice structurally, don't copy. |
 
+## Working Examples (Bloom / Eric voice)
+
+These are examples calibrated to Eric's actual topics and voice. Study the pattern, not the words.
+
+**Contrarian take:**
+> "Everyone's building AI wrappers. Nobody's building AI that actually changes your relationship with money. That's still wide open."
+*Pattern: names the crowded space, names the gap, implies you're working in the gap.*
+
+**Surprising number:**
+> "Bloom's AI analyzed 4,200 earnings calls last quarter. The average retail investor reads zero of them. That's the gap we're closing."
+*Pattern: your number vs. their number. Gap = your value prop, never stated.*
+
+**Observation:**
+> "The stock market is the only place people buy more when prices go up and less when prices go down. AI doesn't have that bug."
+*Pattern: flip a universal behavior. Make the reader nod then rethink.*
+
+**Provocative question:**
+> "If an AI can run 10,000 stock screens in the time it takes you to open your brokerage app, why are you still doing this manually?"
+*Pattern: question implies reader is doing it wrong. Never answers. Reader does.*
+
+**Analogy:**
+> "Building a startup is just debugging in production with real money and no stack trace."
+*Pattern: X is Y of Z. Technical audience reads it and laughs because it's true.*
+
+**Mini-story:**
+> "Shipped a feature at midnight. Woke up to 3 reviews calling it their favorite thing in Bloom. Solo founder math hits different."
+*Pattern: specific moment → specific result → emotional reframe. Under 200 chars.*
+
+---
+
 ## Related Skills
 
 - Fed by **article-writer** or any published content

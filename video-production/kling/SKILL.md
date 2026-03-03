@@ -106,3 +106,84 @@ Both work because they give Kling specific visual instructions. Realistic leans 
 3. Write the prompt as one flowing cinematic sentence
 4. Offer 2-3 variants (different camera angles, moods, or stylistic approaches)
 5. If the user has a reference video or image, match its visual language
+
+---
+
+## Generating Videos via higgsfield.ai (Browser Automation)
+
+Eric has a Higgsfield **Creator subscription** at higgsfield.ai. Use the clawd browser to generate videos without spending API credits.
+
+**Profile:** `clawd` — already logged in as `socials@promptpm.ai`
+
+### Full Workflow
+
+**Step 1: Generate start frame (if needed)**
+
+Use nano banana skill to create a 9:16 PNG first frame. Save to `/tmp/`.
+
+**Step 2: Open the video creation page**
+
+```
+browser navigate → https://higgsfield.ai/create/video
+targetId: 8F12A1B11B683C4F5E3F387AD4A1AE31
+```
+
+**Step 3: Set 9:16 ratio**
+
+Take a snapshot. Click the "16:9 Ratio" button → select "9:16" from the listbox.
+
+**Step 4: Upload the start frame**
+
+The "Start frame" button is a styled div over a hidden file input. Direct clicking is unreliable. Use `upload` action:
+
+```
+browser upload
+selector: "input[type=file]:first-of-type"
+paths: ["/tmp/your-frame.png"]
+```
+
+Then take a screenshot to confirm the thumbnail appears in the Start frame box.
+
+**Step 5: Add the motion prompt**
+
+Click the textbox (snapshot to get ref), then `type` the prompt.
+
+**Step 6: Generate**
+
+Click "Generate 9" button. Takes about 2-3 minutes. Poll with screenshots until the preview appears (the "Generating" spinner disappears and a video poster loads).
+
+**Step 7: Download the video**
+
+**Manual (browser UI):** Hover the generated video in the history list → a ♥ / ↓ / ⧉ / ⋯ overlay appears top-right → click ↓ to download. Works fine for humans, unreliable for automation (hover drops before click fires).
+
+**Automation:** The video CDN URL is not in the DOM statically. Use the authenticated internal API:
+
+```js
+// In browser evaluate (page must be on higgsfield.ai):
+const token = await window.Clerk?.session?.getToken();
+const r = await fetch('https://fnf.higgsfield.ai/project?job_set_type=kling3_0&size=5', {
+  headers: { 'Authorization': 'Bearer ' + token }
+});
+const d = await r.json();
+// Video URL is at:
+// d.job_sets[0].jobs[0].results.raw.url
+console.log(d.job_sets[0].jobs[0].results.raw.url);
+```
+
+The URL format: `https://d8j0ntlcm91z4.cloudfront.net/user_{ID}/{filename}.mp4`
+
+Then download with curl:
+```bash
+curl -L "https://d8j0ntlcm91z4.cloudfront.net/..." -o /tmp/bloom-ugc.mp4
+```
+
+**Note:** Assets page (`/asset/all`) only shows uploaded content, NOT generated videos. Don't waste time there.
+
+### Notes
+
+- Model: Kling 3.0 (9 credits per generation)
+- Duration: 5s default, 10s costs more credits
+- Resolution: 720p default (sufficient for TikTok/Reels)
+- The `targetId` `8F12A1B11B683C4F5E3F387AD4A1AE31` may change across sessions — take a fresh snapshot if navigation fails
+- Higgsfield Cloud API (`cloud.higgsfield.ai`) is **separate** from the subscription — pay-as-you-go, requires credit top-up
+- `input[type=file]:first-of-type` = start frame; `nth-of-type(2)` = end frame

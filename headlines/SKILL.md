@@ -28,6 +28,39 @@ LinkedIn shows exactly 2 lines before the "…more" button. That cutoff is the o
 
 **Process:** Generate 10 variants (2 per technique). Don't pick the "safest" one — pick the one that made you wince slightly.
 
+## Working Examples (Before → After)
+
+These show the transformation. The before is what a first draft usually looks like. The after is what actually gets clicked.
+
+**Topic: AI stock research**
+- ❌ Before: "How AI Can Help You Research Stocks Better"
+- ✅ After: "The Stock Market Has a Cheat Code. Most People Just Don't Know It Exists."
+- *Why:* Before describes the tool. After sells the outcome + implies insider knowledge.*
+
+**Topic: Bloom app feature**
+- ❌ Before: "Bloom Now Has an AI Portfolio Analyzer"
+- ✅ After: "I Let an AI Critique My Portfolio for 30 Days. It Found Things My Broker Never Mentioned."
+- *Why:* Personal experiment framing = relatable. Specific timeframe. Implies betrayal by trusted source.*
+
+**Topic: Investing with AI**
+- ❌ Before: "Why Retail Investors Should Use AI Tools"
+- ✅ After: "Hedge Funds Have Had This Advantage for 10 Years. You Can Have It Now for Free."
+- *Why:* Us vs. them + democratization. "10 years" makes the gap feel real. "For free" handles objection before it forms.*
+
+**Topic: Building Bloom (founder angle)**
+- ❌ Before: "Lessons From Building a Fintech App as a Solo Founder"
+- ✅ After: "6 Months Building a Fintech App Alone Taught Me One Thing Most PMs Never Learn"
+- *Why:* Specific time + specific person (solo) + promises one concrete lesson. Curiosity gap.*
+
+**LinkedIn hooks for the same Bloom topic:**
+```
+Line 1 (≤55 chars): "I replaced my analyst with an AI."
+Line 2 (≤55 chars): "It found what 3 years of manual research missed."
+```
+*Pattern: Contradiction → Proof. Reader hits "…more" to find out what it found.*
+
+---
+
 ## References
 
 This skill content is modularized into reference docs for readability.

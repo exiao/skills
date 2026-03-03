@@ -212,6 +212,42 @@ Retired pillars aren't deleted. Keep `tiktok-marketing/pillar-bench.json` and re
 
 ---
 
+## Sample Output
+
+What a complete strategy card looks like after running this skill. Use this as the template for what to produce.
+
+---
+
+**Campaign:** Bloom AI — Cold TikTok / Instagram (March 2026)  
+**Topic:** AI has an edge in investing that retail investors don't know about  
+**Audience level:** 1–2 (unaware / problem-aware)
+
+**Research insights:**
+- Trending on TikTok: "passive income" + "the stock market is rigged" + "what hedge funds don't tell you"
+- Competitor weakness (from reviews): "Robinhood tells you nothing, just a chart" — users want context
+- Audience language: "I don't even know where to start", "I feel like I'm always late to the news"
+
+**Angles (pick one per batch):**
+1. *Wound-first:* "By the time you read the news, the trade already happened." → exits to Bloom seeing it first
+2. *Surprising number:* "Hedge funds run 10,000 stock screens before breakfast. Here's how to match that for free."
+3. *Stolen thought:* "You already know the stock market isn't fair. Here's the part nobody explains."
+
+**Hook (stated / visual / audio):**
+- Stated: "The stock market has a cheat code most people don't know exists."
+- Visual: Phone showing a red portfolio → cut to AI identifying the reason → cut to green
+- Audio: "What if I told you the stocks that just dumped were actually the buy signal?"
+
+**Format:** Notes App (cold) → Testimonial Card (retargeted)  
+**Awareness level targeted:** Level 1–2 cold, Level 3–4 retargeted
+
+**Delegate to:**
+- Visuals → `ad-copy` + `nano-banana-pro`
+- Tweets → `tweet-ideas`
+- TikTok → `slideshow-creator`
+- Scheduling → `typefully`
+
+---
+
 ## Related Skills
 
 - `headlines` — hook formulas and title generation
