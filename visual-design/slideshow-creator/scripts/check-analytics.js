@@ -123,10 +123,10 @@ function extractTikTokVideoId(platformUrl) {
     const videoId = extractTikTokVideoId(post.platform_url);
     const analytics = await api('GET', `/analytics/${post.id}`);
     const metrics = {
-      views: analytics.views || 0,
-      likes: analytics.likes || 0,
-      comments: analytics.comments || 0,
-      shares: analytics.shares || 0
+      views: analytics?.views || 0,
+      likes: analytics?.likes || 0,
+      comments: analytics?.comments || 0,
+      shares: analytics?.shares || 0
     };
 
     const result = {
