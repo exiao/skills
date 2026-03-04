@@ -15,6 +15,28 @@ Same product, different positioning:
 
 Three apps. Same category. Completely different angles. The angle determines everything downstream: the headlines, the landing page, the App Store screenshots, the TikTok hooks, the investor pitch.
 
+**Novel angle, not novel solution.** You don't need a new idea or a new problem to solve. You need a fresh angle on an existing solution — repackaged for a specific person with a specific need. A Bible app for women. A screen blocker that won't unlock until you complete a task. A private photo vault. The solution already exists. The angle is the product.
+
+**Regional positioning.** When entering a new geographic market, the angle isn't just geo-tagged — it's repositioned for that audience. Adapt three elements: (1) industry context in the hook (dominant local industry, e.g. logistics in Memphis, healthcare in Nashville), (2) business size and operational framing (regional markets skew smaller teams, less enterprise), (3) tone register (warmer/relationship-oriented in southern markets, direct/efficiency-focused in northern/western). Same product, same core value prop, different frame for each market.
+
+## Painkiller vs. Vitamin Test
+
+Before committing to a positioning angle, sanity-check whether the product itself is a painkiller or a vitamin. The angle has to match what the product actually is — you can't position a vitamin as a painkiller and make it stick.
+
+| | Painkiller | Vitamin |
+|--|-----------|---------|
+| **Consequence of not using it** | Major (lose money, legal exposure, wasted time) | Minor (fewer likes, habit not formed) |
+| **Typical market** | B2B (also B2C for high-stakes problems) | B2C |
+| **Usage frequency** | Daily / weekly | Monthly / annually |
+| **How it sounds** | Boring. Describes a real problem. | Hype. Sounds exciting. |
+| **Parent test** | Hard to explain, "I prevent X from happening" | Easy to explain, embarrassing to mention |
+
+**Bloom as painkiller:** Retail investors make worse decisions without research. Bloom prevents the specific negative consequence of trading blind — money left on the table, missed signals, buying into bad news. That's a painkiller frame, not "it helps you invest smarter" (vitamin). Position against the loss, not the gain.
+
+The angle should lean into the negative consequence avoided, not the positive outcome achieved. People are more motivated by loss aversion than upside.
+
+---
+
 ## Bloom Positioning Examples
 
 Three real angles that have been used for Bloom. Use these to calibrate tone and depth when generating new ones.

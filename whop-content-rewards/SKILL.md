@@ -14,6 +14,35 @@ Launch and manage pay-per-view UGC campaigns on Whop's Content Rewards platform 
 - **Default CPM:** $2 per 1,000 views
 - **Chrome tab required** — use `browser` with `profile="chrome"` (attach tab first)
 
+## AI UGC Production Stack
+
+Use this when producing AI-generated UGC videos (for Whop campaigns or dedicated creator program).
+
+### Step 1 — Find a Reference Ad
+- Use [Meta Ad Library](https://facebook.com/ads/library) or [GetHooked.ai](https://gethooked.ai) to find ads in your category running 30+ days
+- Run duration = signal the advertiser is seeing return
+- Watch 3x: first for overall feel, second to map hook/product intro/proof structure, third to write explicit architecture you'll use as blueprint
+
+### Step 2 — Generate a Credible Avatar
+- Presenter should look like a peer to the target audience, not a tech spokesperson
+- For Bloom: working investor/operator in their 30s, not a finance bro or formal advisor
+- Tools: [Midjourney](https://midjourney.com) or [HeyGen](https://heygen.com)
+- Generate 4–6 variants, pick the one that matches the visual profile of the target audience's peer group
+- Competitor shortcut: find a high-performing ad with a presenter running 45+ days → use Claude to describe the demographic profile → generate a similar (not identical) avatar
+
+### Step 3 — Voice Match
+- Avatar voice must match in age, energy, and personality register — mismatches create subconscious friction
+- Tool: [ElevenLabs](https://elevenlabs.io) for micro-variation control
+- Test: place avatar image on screen, play voice samples, ask "can I genuinely imagine this person speaking like this?"
+- After generating VO: remove silences and gaps (Adobe Premiere silence removal) — reduces a 3-min VO by 20–30s and meaningfully improves pacing
+
+### Step 4 — Native Caption Formatting
+- 50–80% of Instagram viewers see content muted first — captions are not optional
+- Use Instagram's native story text style (semi-transparent dark background) — brain registers it as organic content, not an ad
+- Technique: generate caption inside the Instagram app using native text tool on a throwaway photo → import into editing software → remove background → overlay on video
+
+---
+
 ## Bloom Creative Brief
 
 The canonical brief lives at:
@@ -107,6 +136,52 @@ Navigate to https://whop.com/hub/ and log in.
 
 - Views, spend, top-performing creators visible in the dashboard
 - Track which hooks/formats perform best
+
+---
+
+---
+
+## Dedicated Creator Program (Managed Tier)
+
+For scaling beyond open campaigns. Run this alongside or instead of the open Whop campaign once you've validated formats.
+
+### Creator Sourcing
+
+- Find creators from saved viral content with **<1k followers** — not agencies or open applications
+- Source 5 to start. Watch their content cadence and comment engagement before reaching out.
+- Each creator sets up a **fresh ambassador account** (e.g. investingwithsarah, moneywithjake)
+
+### Compensation Structure
+
+| Component | Amount |
+|-----------|--------|
+| Monthly retainer | $500/m for 1 video per day |
+| Bonus — 10k views | Tiered payout |
+| Bonus — 100k views | Tiered payout |
+| Bonus — 1M views | Tiered payout |
+| Max payout cap | Set per video |
+| Eligibility window | 7 days per video |
+
+Cap total payout per video to control downside on breakout posts. Eligibility window prevents paying on views that trickle in months later.
+
+### Tracking & Payouts
+
+- Whop Content Rewards handles up to ~10 creators well
+- At scale, consider **viral.app** for automated campaign tracking and payouts
+
+### Scale Stages
+
+1. **5 creators** — validate CPM and format fit
+2. **Validate** — confirm eCPM >$1, views consistent, formats repeatable
+3. **Scale steadily to 100+ creators** — don't rush; quality degrades fast when overscaling
+
+### Creator Retention
+
+- Track performance of every video; give hands-on feedback + coaching
+- Double down on winning formats immediately
+- Keep experimenting — formats stop working overnight
+- **Coach flywheel:** top performers become creator coaches who recruit/train new creators
+- Build referral incentives to grow the roster organically
 
 ---
 

@@ -206,3 +206,26 @@ it's called Bloom. free download. you can thank me later"
 - ❌ "Check it out" as a CTA (check WHAT out WHERE?)
 
 ---
+
+### Geo-Targeted Ads: Regional Localization
+
+When running Meta paid ads to specific regional markets (city/radius targeting), localize the script — not just the targeting. Same product, different frame.
+
+**Three elements to adapt per regional variant:**
+
+1. **Industry context in the hook** — reference dominant local industry in the problem beat
+   - Memphis → logistics, distribution, supply chain
+   - Nashville → healthcare, insurance, medical admin
+   - Richmond → financial services, insurance
+   - Boise → independent retail, service businesses
+   - Phoenix → construction, real estate, professional services
+
+2. **Business size framing** — regional markets skew smaller teams; adjust "person like me" framing
+   - "managing a team of 8 to 15 people" > generic professional framing
+
+3. **Tone register**
+   - Southern markets: warmer, relationship-oriented, less efficiency jargon
+   - Northern/western: direct, outcome-first, efficiency-focused
+   - Midwest: practical, skeptical of hype
+
+**Production:** With AI UGC (see `references/7-ugc-script-templates.md`), regional variants are near-zero marginal effort — adapt hook + framing + tone, regenerate voice, redeploy. Test 8-12 markets simultaneously, concentrate paid budget on organic traction winners.

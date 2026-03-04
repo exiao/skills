@@ -40,7 +40,7 @@ Authorization: Bearer {v2SecretKey}
 
 `scripts/daily-report.js` runs daily to:
 
-1. **Pull TikTok analytics** from Postiz (last 3 days of posts)
+1. **Pull TikTok analytics** from PostBridge (last 3 days of posts)
 2. **Pull conversion data** from RevenueCat webhook logs OR manual input
 3. **Cross-reference** post timing with conversion spikes
 4. **Generate report** identifying which hooks drove actual revenue

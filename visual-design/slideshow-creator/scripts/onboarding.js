@@ -49,9 +49,9 @@ if (init) {
       apiKey: '',
       model: ''
     },
-    postiz: {
+    postbridge: {
       apiKey: '',
-      integrationIds: {
+      socialAccounts: {
         tiktok: ''
       }
     },
@@ -141,9 +141,9 @@ if (validate && configPath) {
     required.push('imageGen.apiKey — API key for image generation');
   }
 
-  // Postiz (required)
-  if (!config.postiz?.apiKey) required.push('postiz.apiKey — Postiz API key');
-  if (!config.postiz?.integrationIds?.tiktok) required.push('postiz.integrationIds.tiktok — TikTok integration ID');
+  // PostBridge (required)
+  if (!config.postbridge?.apiKey) required.push('postbridge.apiKey — PostBridge API key');
+  if (!config.postbridge?.socialAccounts?.tiktok) required.push('postbridge.socialAccounts.tiktok — TikTok social account ID');
 
   // Competitor research (important but not blocking)
   const compPath = config.competitors;
@@ -195,9 +195,9 @@ if (validate && configPath) {
   console.log(`   App: ${config.app?.name || '(not set)'}`);
   console.log(`   Category: ${config.app?.category || '(not set)'}`);
   console.log(`   Image Gen: ${config.imageGen?.provider || '(not set)'}${config.imageGen?.model ? ` (${config.imageGen.model})` : ''}`);
-  console.log(`   TikTok: ${config.postiz?.integrationIds?.tiktok ? 'Connected' : 'Not connected'}`);
+  console.log(`   TikTok: ${config.postbridge?.socialAccounts?.tiktok ? 'Connected' : 'Not connected'}`);
 
-  const crossPost = Object.keys(config.postiz?.integrationIds || {}).filter(k => k !== 'tiktok' && config.postiz.integrationIds[k]);
+  const crossPost = Object.keys(config.postbridge?.socialAccounts || {}).filter(k => k !== 'tiktok' && config.postbridge.socialAccounts[k]);
   if (crossPost.length > 0) console.log(`   Cross-posting: ${crossPost.join(', ')}`);
 
   if (config.revenuecat?.enabled) console.log(`   RevenueCat: Connected`);

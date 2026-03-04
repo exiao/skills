@@ -6,13 +6,13 @@ The daily + monthly cadence that turns posting into a system.
 
 After every post (24–48h):
 
-1. Pull per-post analytics (views, likes, comments, shares) via Postiz API or platform
+1. Pull per-post analytics (views, likes, comments, shares) from platform APIs or dashboard
 2. If RevenueCat is connected, pull conversions in the same 24–72h window
 3. Tag in `hook-performance.json`:
 
 ```json
 {
-  "postId": "postiz-id",
+  "postId": "platform-native-id",
   "date": "2026-02-26",
   "hook": "The hook text exactly as posted",
   "hookCategory": "person-conflict-ai",
@@ -119,7 +119,7 @@ Output: tiktok-marketing/reports/YYYY-MM-DD.md
 Why 3 days? TikTok posts peak at 24–48h. Conversion attribution takes up to 72h. The 3-day window captures the full lifecycle.
 
 The daily report:
-1. Fetches posts from last 3 days (Postiz API)
+1. Fetches posts from last 3 days via platform APIs
 2. Pulls per-post analytics
 3. Cross-references RevenueCat conversion events (if connected)
 4. Applies the diagnostic framework per post

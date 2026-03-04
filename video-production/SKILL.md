@@ -11,6 +11,8 @@ This skill routes video tasks to the correct sub-skill. Read the task, pick the 
 
 | Sub-skill | What it does | Use when |
 |-----------|-------------|----------|
+| **elevenlabs** | ElevenLabs v3 TTS via Fal.ai → MP3 audio file | Generating voiceover audio from a script for AI character videos or standalone narration |
+| **infinitetalk** | InfiniteTalk via Fal.ai — animates a character image to lip-sync audio → MP4 | Producing talking avatar videos from a character image + audio; requires `elevenlabs` output as input |
 | **sora** | OpenAI Sora API — generates or remixes short AI video clips from text/image prompts | You need a rendered MP4 from a text/image prompt; cinematic shots, social ads, UGC-style content, product teasers |
 | **kling** | Prompt engineering for Kling 3.0 AI video | The user explicitly mentions Kling, or wants film-director-style prompts crafted for that specific model |
 | **remotion-videos** | React/code animated marketing videos → MP4/GIF file | Branded animated video that needs precise programmatic control, captions, batch rendering, or a reusable composition |
@@ -21,6 +23,8 @@ This skill routes video tasks to the correct sub-skill. Read the task, pick the 
 ## Routing Logic
 
 **Auto-route (clear signal → act immediately):**
+- "generate voiceover" / "text to speech" / "ElevenLabs" / "read this script" → **elevenlabs**
+- "talking avatar" / "lip sync" / "InfiniteTalk" / "animate this character" → **infinitetalk** (requires image + audio; run elevenlabs first if audio not ready)
 - "generate a video of…" / "make a clip of…" / "Sora…" → **sora**
 - "Kling prompt" / "write a Kling…" → **kling**
 - "Remotion" / "render an MP4" / "animated marketing video in code" → **remotion-videos**

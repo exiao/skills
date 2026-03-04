@@ -211,59 +211,47 @@ This is the workflow that helped us hit 1M+ TikTok views and $670/month MRR. Don
 
 **Tell the user during onboarding:** "Posts will land in your TikTok inbox as drafts. Before publishing each one, add a trending sound from TikTok's library — this is the single biggest factor in reach. It takes 30 seconds and makes a massive difference."
 
-Cross-posts to any connected platforms (Instagram, YouTube, etc.) automatically via Postiz.
+Cross-posts to any connected platforms (Instagram, YouTube, etc.) automatically via PostBridge.
+
+**Alternatively — schedule directly via MCP (no script needed):**
+```bash
+# Upload slides to PostBridge media first (REST, one per slide)
+# Then schedule via MCP:
+mcporter call postbridge.list_social_accounts
+mcporter call postbridge.create_post \
+  caption="your caption" \
+  social_accounts='["tiktok-account-id"]' \
+  media_urls='["slide1-url","slide2-url","slide3-url","slide4-url","slide5-url","slide6-url"]' \
+  scheduled_at="2026-03-04T14:00:00Z"
+```
 
 **Caption rules:** Long storytelling captions (3x more views). Structure: Hook → Problem → Discovery → What it does → Result → max 5 hashtags. Conversational tone.
 
-### 4. Connect Post Analytics (After User Publishes)
+### 4. Pull Post Analytics (After User Publishes)
 
-After the user publishes from their TikTok inbox, the post needs to be connected to its TikTok video ID before per-post analytics work.
+After the user publishes from their TikTok inbox, PostBridge will automatically track the post result. Wait at least 1-2 hours after publishing before checking analytics — TikTok's API has an indexing delay.
 
-**⚠️ CRITICAL: Wait at least 1-2 hours after publishing before connecting.** TikTok's API has an indexing delay — if you try to connect immediately, the new video won't be in the list yet, and you might connect to the wrong video. This mistake is hard to undo (Postiz doesn't easily allow overwriting a release ID once set).
-
-Use `scripts/check-analytics.js` to automate the connection:
+Use `scripts/check-analytics.js` to pull analytics:
 
 ```bash
-node scripts/check-analytics.js --config tiktok-marketing/config.json --days 3 --connect
+node scripts/check-analytics.js --config tiktok-marketing/config.json --days 3
 ```
 
 The script:
-1. Fetches all Postiz posts from the last N days
-2. Skips posts published less than 2 hours ago (indexing delay)
-3. For unconnected posts, calls `GET /posts/{id}/missing` to get all TikTok videos on the account
-4. Matches posts to videos chronologically (TikTok IDs are sequential: higher number = newer video)
-5. Excludes already-connected video IDs to avoid duplicates
-6. Connects each post via `PUT /posts/{id}/release-id`
-7. Pulls per-post analytics (views, likes, comments, shares)
+1. Fetches all PostBridge post-results from the last N days
+2. Skips results published less than 2 hours ago (indexing delay)
+3. Extracts the TikTok video ID from `platform_url` in each post result (e.g. `https://www.tiktok.com/@user/video/7605531854921354518`)
+4. Triggers an analytics sync via `POST /v1/analytics/sync`
+5. Pulls per-post analytics via `GET /v1/analytics/{id}` (views, likes, comments, shares)
 
-**How the matching works:**
-- TikTok video IDs are sequential integers (e.g. `7605531854921354518`, `7605630185727118614`)
-- Higher number = more recently published
-- Sort both Postiz posts (by publish date) and TikTok IDs (numerically) in the same order
-- Match them up: oldest post → lowest unconnected ID, newest post → highest unconnected ID
-- This is reliable because both Postiz and TikTok maintain chronological order
+**How the TikTok video ID is resolved:**
+- PostBridge returns `platform_url` in each post result once the post is published
+- The TikTok video ID is the numeric segment at the end of the URL (e.g. `7605531854921354518`)
+- TikTok video IDs are sequential integers — higher number = more recently published
+- If `platform_url` is not yet populated, wait for the indexing delay and retry
 
-**Manual connection (if needed):**
-1. `GET /posts/{id}/missing` — returns all TikTok videos with thumbnail URLs
-2. Identify the correct video by thumbnail or timing
-3. `PUT /posts/{id}/release-id` with `{"releaseId": "tiktok-video-id"}`
-4. `GET /analytics/post/{id}` now returns views/likes/comments/shares
+**The daily cron handles all of this automatically.** It runs in the morning, checks posts from the last 3 days (all well past the 2-hour indexing window), syncs analytics, and generates the report.
 
-**The daily cron handles all of this automatically.** It runs in the morning, checks posts from the last 3 days (all well past the 2-hour indexing window), connects any unconnected posts, and generates the report.
-
-### ⚠️ Known Issue: Release ID Cannot Be Overwritten
-
-Once a Postiz post is connected to a TikTok video ID via `PUT /posts/{id}/release-id`, **it cannot be changed**. If you connect the wrong video, the analytics will permanently show the wrong video's stats for that post. The PUT endpoint appears to accept the update but silently keeps the original ID.
-
-**This is why the 2-hour wait is non-negotiable.** If you connect too early (before TikTok has indexed the new video), the `missing` endpoint will show older videos and you'll connect the wrong one. There is no undo.
-
-**Best practice:**
-1. Post as draft → user publishes with music
-2. Wait at least 2 hours (the daily morning cron handles this naturally)
-3. The newest unconnected TikTok video ID (highest number) corresponds to the most recently published video
-4. Always verify: the number of unconnected Postiz posts should match the number of new TikTok video IDs since the last connection run
-5. If something looks wrong, ask the user to confirm by checking the video thumbnail
-
-See [references/analytics-loop.md](references/analytics-loop.md) for full Postiz analytics API docs.
+See [references/analytics-loop.md](references/analytics-loop.md) for full PostBridge analytics API docs.
 
 ---

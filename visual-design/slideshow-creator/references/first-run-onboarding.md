@@ -163,35 +163,35 @@ No text, no watermarks, no logos.
 
 **NEVER use generic prompts** like "a nice living room" or "a beautiful face" — they produce generic images that get scrolled past.
 
-### Phase 4: Postiz Setup (ESSENTIAL — Powers the Entire Feedback Loop)
+### Phase 4: PostBridge Setup (ESSENTIAL — Powers the Entire Feedback Loop)
 
-Postiz isn't just a posting tool — it's what makes the whole feedback loop work. Without it, you're posting blind. With it, you get:
-- **Automated posting** to TikTok (and 28+ other platforms) via API
+PostBridge isn't just a posting tool — it's what makes the whole feedback loop work. Without it, you're posting blind. With it, you get:
+- **Automated posting** to TikTok (and other platforms) via API
 - **Per-post analytics** — views, likes, comments, shares for every post
 - **Platform analytics** — follower growth, total engagement over time
 - **Cross-posting** — same content to Instagram, YouTube, Threads simultaneously
 
-This data is what feeds the daily analytics cron (see Phase 8). Without Postiz analytics, the agent can't tell you which hooks are working and which to drop.
+This data is what feeds the daily analytics cron (see Phase 8). Without PostBridge analytics, the agent can't tell you which hooks are working and which to drop.
 
 Frame it naturally to the user:
 
-> "So here's the key piece — we need Postiz to handle posting and analytics. It's what lets me track every post's performance and tell you exactly which hooks are driving views and which to drop. Without it, we're guessing. With it, I can run a daily report that shows you what's working and automatically suggest better hooks."
+> "So here's the key piece — we need PostBridge to handle posting and analytics. It's what lets me track every post's performance and tell you exactly which hooks are driving views and which to drop. Without it, we're guessing. With it, I can run a daily report that shows you what's working and automatically suggest better hooks."
 >
-> "This skill is free and open source. If you want to support its development, signing up through this link is appreciated: [postiz.pro/oliverhenry](https://postiz.pro/oliverhenry)"
+> "PostBridge is a $5/month add-on. Get your API key at [post-bridge.com/dashboard/api-keys](https://post-bridge.com/dashboard/api-keys)."
 
 Walk them through connecting step by step:
 
-1. **Sign up at [postiz.pro/oliverhenry](https://postiz.pro/oliverhenry)** — create an account
-2. **Connect TikTok** — this is the main one. Go to Integrations → Add TikTok → Authorize
-3. **Note the TikTok integration ID** — you'll see it in the URL or integration settings. I need this to post and pull analytics
-4. **Get the API key** — Settings → API → copy the key. This is how I talk to Postiz programmatically
-5. **(Optional but recommended)** Connect Instagram, YouTube Shorts, Threads for cross-posting — same content, different algorithms, more reach for free
+1. **Sign up at [post-bridge.com](https://post-bridge.com)** and enable the $5/mo analytics add-on
+2. **Get your API key** — go to [post-bridge.com/dashboard/api-keys](https://post-bridge.com/dashboard/api-keys) and copy it
+3. **Connect TikTok** — go to Social Accounts → Add TikTok → Authorize
+4. **Get the TikTok social account ID** — call `GET /v1/social-accounts?platform=tiktok` with your API key. The response includes `{ data: [{ id, platform, name }] }`. Copy the `id` — I need this to post to TikTok
+5. **(Optional but recommended)** Connect Instagram, YouTube Shorts, Threads for cross-posting — get their account IDs the same way (`?platform=instagram`, `?platform=youtube`, etc.)
 
 Explain the draft workflow:
 
 > "One important thing — posts go to your TikTok inbox as drafts, not straight to your feed. Before you publish each one, add a trending sound from TikTok's sound library. Music is the single biggest factor in TikTok reach — silent slideshows get buried. It takes 30 seconds per post and makes a massive difference. This workflow helped us hit over 1 million TikTok views."
 
-**Don't move on until Postiz is connected and the API key works.** Test it by hitting the platform analytics endpoint. If it returns data, you're good.
+**Don't move on until PostBridge is connected and the API key works.** Test it by calling `GET /v1/social-accounts`. If it returns your accounts, you're good.
 
 ### Phase 5: Conversion Tracking (THE Intelligence Loop)
 
@@ -199,9 +199,9 @@ If they have a mobile app with RevenueCat (you should already know this from Pha
 
 Explain WHY it matters:
 
-> "So right now with Postiz, I can track which posts get views, likes, and comments. That's the top of the funnel. But views alone don't pay the bills — we need to know which posts actually drive paying subscribers."
+> "So right now with PostBridge, I can track which posts get views, likes, and comments. That's the top of the funnel. But views alone don't pay the bills — we need to know which posts actually drive paying subscribers."
 >
-> "This is where RevenueCat comes in. It tracks your subscribers, trials, MRR, churn — the actual revenue. When I combine TikTok analytics from Postiz with conversion data from RevenueCat, I can make genuinely intelligent decisions:"
+> "This is where RevenueCat comes in. It tracks your subscribers, trials, MRR, churn — the actual revenue. When I combine TikTok analytics from PostBridge with conversion data from RevenueCat, I can make genuinely intelligent decisions:"
 >
 > "If a post gets **50K views but zero conversions**, I know the hook is great but the CTA or app messaging needs work. If a post gets **2K views but 5 paid subscribers**, I know the content converts amazingly — we just need more eyeballs on it, so we fix the hook."
 >
@@ -239,7 +239,7 @@ Walk them through setup step by step:
 - "This hook got 5K views but 3 paid subscribers" → content converts amazingly, fix the hook for more reach
 - "Conversions are consistently poor across all posts" → might be an app issue (onboarding, paywall, pricing) not a content issue — the skill flags this for investigation
 
-**Without RevenueCat:** The loop still works on Postiz analytics (views/likes/comments). You can optimize for engagement. But you're flying blind on revenue. You'll know which posts get views but you won't know which posts make money.
+**Without RevenueCat:** The loop still works on PostBridge analytics (views/likes/comments). You can optimize for engagement. But you're flying blind on revenue. You'll know which posts get views but you won't know which posts make money.
 
 **With RevenueCat:** You optimize for actual paying users. You can tell the difference between a viral post that makes nothing and a quiet post that drives $50 in subscriptions. This is the entire point of the feedback loop. Every decision the daily report makes is better with RevenueCat data.
 
@@ -263,7 +263,7 @@ Save the strategy to `tiktok-marketing/strategy.json`.
 
 This is what makes the whole system self-improving. Set up a daily cron job that:
 
-1. Pulls the last 3 days of post analytics from Postiz
+1. Pulls the last 3 days of post analytics from PostBridge
 2. Pulls conversion data from RevenueCat (if connected)
 3. Cross-references views with conversions to diagnose what's working
 4. Generates a report with specific recommendations
@@ -314,12 +314,12 @@ Store everything in `tiktok-marketing/config.json` (this is the source of truth 
     "apiKey": "your-gemini-api-key",
     "model": "gemini-3.1-flash-image-preview"
   },
-  "postiz": {
-    "apiKey": "your-postiz-key",
-    "integrationIds": {
-      "tiktok": "id-here",
-      "instagram": "id-here-optional",
-      "youtube": "id-here-optional"
+  "postbridge": {
+    "apiKey": "your-postbridge-key",
+    "socialAccounts": {
+      "tiktok": "account-id-here",
+      "instagram": "account-id-here-optional",
+      "youtube": "account-id-here-optional"
     }
   },
   "revenuecat": {
