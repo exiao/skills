@@ -2,48 +2,49 @@
 
 ## Performance Tracking
 
-### Postiz Analytics API
+### PostBridge Analytics API
 
-**Platform analytics** (followers, views, likes, comments, shares over time):
+**Trigger a sync** (refresh analytics from TikTok):
 ```
-GET https://api.postiz.com/public/v1/analytics/{integrationId}
-Authorization: {apiKey}
-```
-
-Response:
-```json
-[
-  { "label": "Followers", "percentageChange": 2.4, "data": [{ "total": "1250", "date": "2025-01-01" }] },
-  { "label": "Views", "percentageChange": 4, "data": [{ "total": "5000", "date": "2025-01-01" }] },
-  { "label": "Total Likes", "data": [{ "total": "6709", "date": "2026-02-15" }] },
-  { "label": "Recent Likes", "data": [{ "total": "6354", "date": "2026-02-15" }] },
-  { "label": "Recent Comments", "data": [{ "total": "148", "date": "2026-02-15" }] },
-  { "label": "Recent Shares", "data": [{ "total": "119", "date": "2026-02-15" }] },
-  { "label": "Videos", "data": [{ "total": "43", "date": "2026-02-15" }] }
-]
+POST https://api.post-bridge.com/v1/analytics/sync
+Authorization: Bearer {apiKey}
 ```
 
-**Per-post analytics** (likes, comments per post):
+**List all analytics** (platform-level stats):
 ```
-GET https://api.postiz.com/public/v1/analytics/post/{postId}
-Authorization: {apiKey}
+GET https://api.post-bridge.com/v1/analytics
+Authorization: Bearer {apiKey}
 ```
 
 Response:
 ```json
 [
-  { "label": "Likes", "percentageChange": 16.7, "data": [{ "total": "150", "date": "2025-01-01" }, { "total": "175", "date": "2025-01-02" }] },
-  { "label": "Comments", "percentageChange": 20, "data": [{ "total": "25", "date": "2025-01-01" }, { "total": "30", "date": "2025-01-02" }] }
+  { "id": "analytics-id", "platform": "tiktok", "account_id": "acct-id", "data": { ... } }
 ]
 ```
 
-Note: Per-post analytics availability depends on the platform. TikTok may return empty arrays for some posts — in this case, fall back to the **delta method**: track platform-level view totals before and after each post to estimate per-post views.
+**Per-post analytics:**
+```
+GET https://api.post-bridge.com/v1/analytics/{id}
+Authorization: Bearer {apiKey}
+```
 
-**List posts** (to get post IDs for analytics):
+Note: Analytics currently TikTok only. Returns views, likes, comments, shares per post.
+
+**Post Results** (published post details, including platform URL):
 ```
-GET https://api.postiz.com/public/v1/posts?startDate={ISO}&endDate={ISO}
-Authorization: {apiKey}
+GET https://api.post-bridge.com/v1/post-results
+Authorization: Bearer {apiKey}
 ```
+
+```
+GET https://api.post-bridge.com/v1/post-results/{id}
+Authorization: Bearer {apiKey}
+```
+
+Response includes `platform_url`, `status`, `errors`. Extract the TikTok video ID from the `platform_url` (e.g. `https://www.tiktok.com/@user/video/7605531854921354518`).
+
+Note: Per-post analytics availability depends on the platform. TikTok may return empty data for some posts — in this case, fall back to the **delta method**: track platform-level view totals before and after each post to estimate per-post views.
 
 ### RevenueCat Integration (Optional)
 
@@ -67,7 +68,7 @@ Record in `hook-performance.json`:
       "likes": 450,
       "comments": 23,
       "saves": 89,
-      "postId": "postiz-id",
+      "postId": "postbridge-id",
       "appCategory": "home"
     }
   ]
@@ -124,7 +125,7 @@ Output: tiktok-marketing/reports/YYYY-MM-DD.md
 ```
 
 The daily report:
-1. Fetches all posts from the last 3 days via Postiz API
+1. Fetches all posts from the last 3 days via PostBridge API
 2. Pulls per-post analytics (views, likes, comments, shares)
 3. If RevenueCat is connected, pulls conversion events (trials, purchases) in the same window
 4. Cross-references: maps conversion timestamps to post publish times (24-72h attribution window)

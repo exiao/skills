@@ -2,52 +2,31 @@
 
 ## Performance Tracking
 
-### Postiz Analytics API
+Pull analytics directly from each platform's native API or dashboard. Track at two levels: platform-level (followers, aggregate views) and per-post (views, likes, comments, shares).
 
-**Platform analytics** (followers, views, likes, comments, shares over time):
-```
-GET https://api.postiz.com/public/v1/analytics/{integrationId}
-Authorization: {apiKey}
-```
-
-Response:
+Key fields to capture per post:
 ```json
-[
-  { "label": "Followers", "percentageChange": 2.4, "data": [{ "total": "1250", "date": "2025-01-01" }] },
-  { "label": "Views", "percentageChange": 4, "data": [{ "total": "5000", "date": "2025-01-01" }] },
-  { "label": "Total Likes", "data": [{ "total": "6709", "date": "2026-02-15" }] },
-  { "label": "Recent Likes", "data": [{ "total": "6354", "date": "2026-02-15" }] },
-  { "label": "Recent Comments", "data": [{ "total": "148", "date": "2026-02-15" }] },
-  { "label": "Recent Shares", "data": [{ "total": "119", "date": "2026-02-15" }] },
-  { "label": "Videos", "data": [{ "total": "43", "date": "2026-02-15" }] }
-]
+{
+  "date": "2026-02-15",
+  "hook": "hook text exactly as posted",
+  "hookCategory": "person-conflict-ai",
+  "views": 15000,
+  "likes": 450,
+  "comments": 23,
+  "saves": 89,
+  "platform": "tiktok",
+  "postId": "platform-native-id",
+  "appCategory": "home"
+}
 ```
 
-**Per-post analytics** (likes, comments per post):
-```
-GET https://api.postiz.com/public/v1/analytics/post/{postId}
-Authorization: {apiKey}
-```
+Store in `hook-performance.json`. Update within 24-48h of each post.
 
-Response:
-```json
-[
-  { "label": "Likes", "percentageChange": 16.7, "data": [{ "total": "150", "date": "2025-01-01" }, { "total": "175", "date": "2025-01-02" }] },
-  { "label": "Comments", "percentageChange": 20, "data": [{ "total": "25", "date": "2025-01-01" }, { "total": "30", "date": "2025-01-02" }] }
-]
-```
-
-Note: Per-post analytics availability depends on the platform. TikTok may return empty arrays for some posts — in this case, fall back to the **delta method**: track platform-level view totals before and after each post to estimate per-post views.
-
-**List posts** (to get post IDs for analytics):
-```
-GET https://api.postiz.com/public/v1/posts?startDate={ISO}&endDate={ISO}
-Authorization: {apiKey}
-```
+**Note on TikTok:** Per-post analytics may return empty arrays for some posts. Fall back to the **delta method**: record platform-level view totals before and after each post to estimate per-post views.
 
 ### RevenueCat Integration (Optional)
 
-If the user has RevenueCat, track conversions from TikTok:
+If RevenueCat is connected, track conversions from TikTok:
 - Downloads → Trial starts → Paid conversions
 - UTM parameters in App Store link
 - Compare conversion spikes with post timing
@@ -67,7 +46,7 @@ Record in `hook-performance.json`:
       "likes": 450,
       "comments": 23,
       "saves": 89,
-      "postId": "postiz-id",
+      "postId": "platform-post-id",
       "appCategory": "home"
     }
   ]
@@ -119,23 +98,22 @@ Views → Profile Visits → Link Clicks → App Store → Download → Trial �
 Set up a cron job to run every morning before the first post (e.g. 7:00 AM user's timezone):
 
 ```
-Task: node scripts/daily-report.js --config tiktok-marketing/config.json --days 3
+Task: Pull last 3 days of posts → fetch analytics → cross-reference conversions → apply diagnostic → suggest hooks → message user
 Output: tiktok-marketing/reports/YYYY-MM-DD.md
 ```
 
 The daily report:
-1. Fetches all posts from the last 3 days via Postiz API
-2. Pulls per-post analytics (views, likes, comments, shares)
-3. If RevenueCat is connected, pulls conversion events (trials, purchases) in the same window
-4. Cross-references: maps conversion timestamps to post publish times (24-72h attribution window)
-5. Applies the diagnostic framework:
+1. Pulls per-post analytics (views, likes, comments, shares) from platform APIs
+2. If RevenueCat is connected, pulls conversion events (trials, purchases) in the same window
+3. Cross-references: maps conversion timestamps to post publish times (24-72h attribution window)
+4. Applies the diagnostic framework:
    - High views + High conversions → SCALE (make variations)
    - High views + Low conversions → FIX CTA (hook works, downstream is broken)
    - Low views + High conversions → FIX HOOKS (content converts, needs more eyeballs)
    - Low views + Low conversions → FULL RESET (try radically different approach)
-6. Suggests 3-5 new hooks based on what's working
-7. Updates `hook-performance.json` with latest data
-8. Messages the user with a summary
+5. Suggests 3-5 new hooks based on what's working
+6. Updates `hook-performance.json` with latest data
+7. Messages the user with a summary
 
 ### Why 3 Days?
 - TikTok posts peak at 24-48 hours (not instant like Twitter)

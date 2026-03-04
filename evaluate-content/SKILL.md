@@ -247,6 +247,9 @@ Can a non-investor relate to it? Can a non-user of your app still feel something
 **Curiosity gap: Is there something they need to see by the end?**
 The hook must create a question the viewer needs answered. Tease a result, reveal, or test early — hold the answer until the final slide. If there's no unresolved tension, there's nothing keeping them to the end.
 
+**15-second silent demo test: Does it work with sound off?**
+Watch the first 15 seconds muted. If a stranger couldn't understand what the content is about or feel the hook's tension without audio, the visual hook is broken — and no amount of copy fixes a broken visual hook. Captions help but don't substitute for a self-explanatory visual sequence.
+
 **Line discipline: Does every line earn the next?**
 Read the script line by line. For each line, ask: does this build curiosity, escalate tension, or deliver on a promise? If it explains, teaches, or provides context without earning it — cut it. Information is the reward at the end, not the scaffolding throughout.
 

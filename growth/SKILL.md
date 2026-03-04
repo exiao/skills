@@ -258,6 +258,52 @@ Trigger → Exit Survey → Dynamic Save Offer → Confirmation → Post-Cancel
 
 ---
 
+# Landing Page Checklist
+
+A developer-built landing page is usually the weakest link. Run this before any launch.
+
+**Copy**
+- Replace every "we" / "our" with "you" / "your"
+- Headline = emotional promise. Subheadline = rational explanation of how it's delivered
+- Don't claim "best in market" — state the specific outcome
+- Remove "subscribe to get updates" from footer — no one signs up for that
+
+**Structure**
+- Limit feature/benefit lists to 3-5 points max (people won't remember more)
+- Add social proof (testimonials, user count, reviews) — be specific, not vague
+- One clear primary CTA — make the next action simple and desirable
+- Record a short product video with your commentary
+
+**Design**
+- 3-4 colors max
+- No animations (users aren't here for motion)
+- Don't make the page too wide — hard to read
+- Show product visuals that make people want to try it
+
+**Tone**
+- Don't be desperate (no "EARLY BIRD OFFER PLZ SIGN UP")
+- Don't be arrogant ("the best tool on the market")
+- Founder message explaining *why* you built it earns more trust than any headline
+
+**Validation**
+- Get 30 people who've never seen it to share screen + talk through it. Brutal but invaluable.
+
+---
+
+# Weekly Marketing Framework (3 Buckets)
+
+Pick **one goal** per week from one of these three buckets. Mixing them dilutes focus.
+
+| Bucket | Goal | Actions |
+|--------|------|---------|
+| **Sharpen Positioning** | Better message-market fit | Talk to customers, analyze competitors, polish copy, build in-demand features |
+| **Get Traffic** | More website visitors | Post new content, build free tools, run ads, send emails, find partnerships |
+| **Increase Conversion** | Turn visitors into users/paying | Fix landing page, write email sequences, collect testimonials, experiment with pricing |
+
+If unsure which bucket to pick: fix positioning first. Traffic and conversion problems are often just a positioning problem in disguise.
+
+---
+
 # CRO Output Format
 
 For any CRO stage, deliver:

@@ -2,6 +2,32 @@
 
 Script structures for AI-generated UGC testimonials. These pair with the Sora product integration pipeline (`sora/references/ugc-product-integration.md`) for full video production.
 
+## AI UGC Production Stack
+
+Before scripting, build the production infrastructure. See `whop-content-rewards` skill for full detail. Summary:
+
+**1. Find a reference ad first**
+- Use [Meta Ad Library](https://facebook.com/ads/library) or [GetHooked.ai](https://gethooked.ai) — find ads in your category running 30+ days (run duration = proof of return)
+- Watch 3x: map hook → product intro → proof → CTA structure explicitly. Use it as the script architecture, not a blank page.
+
+**2. Generate a credible avatar**
+- Presenter = peer to target audience, not a spokesperson or actor
+- For Bloom: working investor in their 30s, not a finance bro or formal advisor
+- Tools: Midjourney, HeyGen. Generate 4–6 variants, pick the best demographic match.
+
+**3. Voice match precisely**
+- Mismatch in age/energy/tone creates subconscious friction — viewers feel it without identifying it
+- Tool: ElevenLabs (best micro-variation and pacing control)
+- Test: place avatar image on screen, play voice samples — "can I genuinely imagine this person talking like this?"
+- After generating: remove silences (Adobe Premiere silence removal) — trims 20–30s off a 3-min VO, improves pacing
+
+**4. Native caption formatting**
+- 50–80% of Instagram viewers encounter content muted first — captions are not optional
+- Use Instagram's native story text style (semi-transparent dark background) — brain registers it as organic, not ad
+- Technique: generate inside Instagram app on throwaway photo → import into editor → remove background → overlay
+
+---
+
 ## Emotional Beat Structure
 
 Every UGC testimonial follows an emotional arc, not a flat pitch. Each beat has a specific energy level and purpose.

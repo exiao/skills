@@ -24,6 +24,66 @@ The moment you start explaining or teaching, you lose them. Information is the r
 
 ---
 
+## Format 2: Personal Journey / Tips (Soft Sell)
+
+**Best for:** apps where the transformation isn't visual — productivity, finance, learning, habits. Outperforms the transformation format in these niches because it feels like organic content, not an ad.
+
+### What makes it work
+- First-person confessional voice — lowercase, casual, humble ("honestly I had no idea", "my brain would just panic")
+- Hook = relatable problem + numbered promise: **"5 ways I finally [solved X]:"**
+- ONE of the 5 tips organically mentions the app as a tool they found — never a dedicated CTA slide
+- Images: niche lifestyle photos (Pinterest-sourced) — people in your content category, NOT AI-generated transformations
+- Text overlay: small numbered title top-left + 2-3 lines of personal story per slide
+
+### Slide structure (6 slides)
+
+| Slide | Purpose | Text style |
+|-------|---------|------------|
+| 1 | HOOK — relatable struggle + promise | "5 ways I finally [solved problem]:" — full hook over lifestyle image |
+| 2 | Tip 1 — common thing they stopped/started | numbered title + 2-3 lines of personal story |
+| 3 | Tip 2 — behavioral shift | numbered title + 2-3 lines, keep it relatable |
+| 4 | Tip 3 — **soft sell here** | "used [App] for [specific thing]" + "honestly [what it did for you]" + "the app [one-sentence value prop]" |
+| 5 | Tip 4 — mindset or habit shift | numbered title + 2-3 lines |
+| 6 | Tip 5 — empowering closer | "now I actually [positive outcome]" — ends on confidence, not CTA |
+
+### Placement rule for the soft sell
+- Put it at tip 3 (middle of the list) — feels organic, not tacked on at the end
+- Frame it as something you discovered, not something you're promoting:
+  - ✅ "started using bloom to actually understand what I was buying" / "the app breaks down earnings calls and analyst ratings so I don't have to guess"
+  - ❌ "Download Bloom — link in bio!" / "Bloom is the best investing app"
+
+### Hook formula
+```
+5 ways I finally [relatable outcome]:
+```
+Keep "5 ways" literally — the number sets expectations and increases swipes.
+
+**Bloom examples:**
+- "5 ways I finally stopped panic-selling my stocks:"
+- "5 ways I finally started actually understanding what I'm buying:"
+- "5 things I stopped doing after losing money in the market:"
+- "5 reasons I finally feel confident about my investments:"
+
+### Image direction
+- Niche lifestyle: cozy desk setups, phones with charts, coffee + laptop, person reading on couch
+- NOT product screenshots, NOT AI transforms
+- Consistent aesthetic across all 6 slides (same vibe, different shots)
+- Pinterest search terms for investing niche: "aesthetic finance desk", "investing aesthetic phone", "stock market coffee morning routine"
+
+### Voice / copy rules
+- All lowercase
+- Personal, not instructional — "I stopped doing X" not "you should stop doing X"
+- Specific details beat vague statements: "I used to refresh my portfolio 12 times a day" > "I checked it too often"
+- End each slide with a result or feeling, not a setup
+
+---
+
+## Format 1: Transformation (Visual Before/After)
+
+*Original format — best for visual apps: interior design, fitness, beauty, style.*
+
+---
+
 ## The 6-Slide Formula (EXACTLY 6 — TikTok minimum)
 
 | Slide | Purpose | Text Style |

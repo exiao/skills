@@ -2,12 +2,12 @@
 /**
  * Daily Marketing Report
  * 
- * Cross-references TikTok post analytics (via Postiz) with RevenueCat conversions
+ * Cross-references TikTok post analytics (via PostBridge) with RevenueCat conversions
  * to identify which hooks drive views AND revenue.
  * 
  * Data sources:
- * 1. Postiz API → per-post TikTok analytics (views, likes, comments, shares)
- * 2. Postiz API → platform-level stats (followers, total views) for delta tracking
+ * 1. PostBridge API → per-post TikTok analytics (views, likes, comments, shares)
+ * 2. PostBridge API → platform-level stats (followers, total views) for delta tracking
  * 3. RevenueCat API (optional) → trials, conversions, revenue
  * 
  * The diagnostic framework:
@@ -39,12 +39,18 @@ if (!configPath) {
 
 const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
 const baseDir = path.dirname(configPath);
-const POSTIZ_URL = 'https://api.postiz.com/public/v1';
+const POSTBRIDGE_URL = 'https://api.post-bridge.com/v1';
 
-async function postizAPI(endpoint) {
-  const res = await fetch(`${POSTIZ_URL}${endpoint}`, {
-    headers: { 'Authorization': config.postiz.apiKey }
-  });
+async function postbridgeAPI(endpoint, method = 'GET', body = null) {
+  const opts = {
+    method,
+    headers: {
+      'Authorization': `Bearer ${config.postbridge.apiKey}`,
+      'Content-Type': 'application/json'
+    }
+  };
+  if (body) opts.body = JSON.stringify(body);
+  const res = await fetch(`${POSTBRIDGE_URL}${endpoint}`, opts);
   return res.json();
 }
 
@@ -128,51 +134,60 @@ function savePlatformStats(stats) {
   console.log(`📊 Daily Report — ${dateStr} (last ${days} days)\n`);
 
   // ==========================================
-  // 1. POSTIZ: Per-post analytics
+  // 1. POSTBRIDGE: Sync analytics then pull post-results
   // ==========================================
-  const postsData = await postizAPI(`/posts?startDate=${startDate.toISOString()}&endDate=${now.toISOString()}`);
-  let posts = (postsData.posts || []).filter(p => 
-    p.integration?.providerIdentifier === 'tiktok' &&
-    p.releaseId && p.releaseId !== 'missing'
-  );
-  posts.sort((a, b) => new Date(b.publishDate) - new Date(a.publishDate));
+  console.log(`  🔄 Syncing PostBridge analytics...`);
+  await postbridgeAPI('/analytics/sync', 'POST');
+  await sleep(2000); // brief pause for sync to process
 
-  console.log(`  📱 Found ${posts.length} connected TikTok posts\n`);
+  const postResultsData = await postbridgeAPI('/post-results');
+  let posts = (postResultsData.data || []).filter(p => {
+    if (!p.published_at) return false;
+    const publishedAt = new Date(p.published_at);
+    return publishedAt >= startDate && publishedAt <= now && p.status === 'published';
+  });
+  posts.sort((a, b) => new Date(b.published_at) - new Date(a.published_at));
+
+  console.log(`  📱 Found ${posts.length} published posts in range\n`);
 
   const postResults = [];
   for (const post of posts) {
-    const analytics = await postizAPI(`/analytics/post/${post.id}`);
+    const analytics = await postbridgeAPI(`/analytics/${post.id}`);
     const metrics = {};
-    if (Array.isArray(analytics)) {
-      analytics.forEach(m => {
-        const latest = m.data?.[m.data.length - 1];
-        if (latest) metrics[m.label.toLowerCase()] = parseInt(latest.total) || 0;
-      });
+    if (analytics && typeof analytics === 'object') {
+      // PostBridge returns analytics object with views, likes, comments, shares
+      metrics.views = analytics.views || 0;
+      metrics.likes = analytics.likes || 0;
+      metrics.comments = analytics.comments || 0;
+      metrics.shares = analytics.shares || 0;
     }
     postResults.push({
       id: post.id,
-      date: post.publishDate?.slice(0, 10),
-      hook: (post.content || '').substring(0, 70),
-      app: post.integration?.name,
-      views: metrics.views || 0,
-      likes: metrics.likes || 0,
-      comments: metrics.comments || 0,
-      shares: metrics.shares || 0
+      date: post.published_at?.slice(0, 10),
+      hook: (post.caption || '').substring(0, 70),
+      app: post.platform || 'tiktok',
+      platformUrl: post.platform_url || '',
+      views: metrics.views,
+      likes: metrics.likes,
+      comments: metrics.comments,
+      shares: metrics.shares
     });
     await sleep(300);
   }
 
   // ==========================================
-  // 2. POSTIZ: Platform-level stats (delta tracking)
+  // 2. POSTBRIDGE: Platform-level stats (delta tracking)
   // ==========================================
   const platformStats = {};
-  for (const [platform, intId] of Object.entries(config.postiz?.integrationIds || {})) {
-    const stats = await postizAPI(`/analytics/${intId}`);
-    if (Array.isArray(stats)) {
+  const allAnalytics = await postbridgeAPI('/analytics');
+  for (const [platform] of Object.entries(config.postbridge?.socialAccounts || {})) {
+    const platformEntries = (allAnalytics.data || allAnalytics || []).filter(a => a.platform === platform);
+    if (platformEntries.length > 0) {
       platformStats[platform] = {};
-      stats.forEach(m => {
-        const latest = m.data?.[m.data.length - 1];
-        platformStats[platform][m.label] = parseInt(latest?.total) || 0;
+      platformEntries.forEach(entry => {
+        if (entry.data) {
+          Object.assign(platformStats[platform], entry.data);
+        }
       });
     }
   }

@@ -2,6 +2,33 @@
 
 These are not suggestions. They're the physics of conversion copy.
 
+### Emotion First, Logic Second
+
+People buy on emotion and justify with logic. This has been true for 2,000 years (Cicero used it to win elections in 63 BC). Every piece of copy that moves people works on this principle — fear, hope, pride, frustration, relief. The product is never the subject. The emotion is. The product is the exit.
+
+Apply the sequence: make them feel something → then give them the rational justification to act.
+
+### Open Loops
+
+An open loop is an unresolved question in the reader's mind. The brain has physical discomfort with unresolved information (Zeigarnik Effect: incomplete tasks are remembered far better than completed ones). Open a loop early and delay closing it as long as possible.
+
+- "I spent $5k on XYZ and I hate what I found…" — reader can't stop until they know what was found
+- "Here's what nobody tells you about picking stocks" — reader needs to see it before leaving
+- Tease a result, reveal, or test in the hook — hold the payoff until the end
+
+**Rule:** Open a loop in the first line. Close it only in the CTA or final beat.
+
+### Curiosity Gap
+
+The space between what someone knows and what they want to know. Foreshadow the destination, withhold the route.
+
+- Movie shows the ending first, cuts to "72 hours earlier" — you watch for 2 hours because you know where it ends but not how
+- In copy: state the outcome early ("how I 10x'd my research speed"), then build toward it — never give the answer before the middle
+
+Curiosity gap sustains attention between the open loop (tension) and the close (payoff).
+
+---
+
 ### AIDA (Attention → Interest → Desire → Action)
 
 Every piece of copy follows this arc. The mistake is spending 80% on Attention and 5% on Action.

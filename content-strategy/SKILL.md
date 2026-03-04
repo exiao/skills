@@ -34,10 +34,13 @@ Mine what's working **right now** before writing a single word.
 | Google trends and news | Breaking topics, search-driven angles, seasonal signals |
 | Testimonials and reviews | Transformation language, before/after framing |
 | Support tickets and FAQs | Objections, misconceptions, friction points |
+| TikTok accounts with <1k followers | Viral signals before algo amplification; comment sentiment on what's actually resonating |
 
 **Skills to use:** `last30days`, `grok-search`, `trend-research`, `web-search`
 
 **Output:** 10-20 hook angles + exact audience language in their own words. Store in `[Campaign]_Research.md`.
+
+> **Novel angle, not novel solution.** You don't need a new idea. You need a fresh angle to an existing solution — repackaged for a specific person with a specific need. A Bible app for women. A screen blocker that won't unlock until you complete a task. The solution exists; your job is the repackage.
 
 > **Load on-demand:** `references/creative-research-methods.md` for detailed research process.
 
@@ -94,9 +97,27 @@ The product is never the subject. The fear is. The product is the exit.
 
 Best for: cold traffic at Level 1-2. Highly shareable because the fear is universal.
 
+### Open Loops
+
+An open loop is an unresolved question in the viewer's mind. The brain has physical discomfort with unresolved information (Zeigarnik Effect: incomplete tasks are remembered far better than completed ones). Every great piece of content opens a loop in the first few seconds and delays closing it until the end.
+
+Examples: "I spent $5k on XYZ and I hate what I found…" / "GRWM" / cliffhanger episode structure.
+
+**Open loops = tension engine.** Curiosity gaps = sustain attention between open and close.
+
+### Curiosity Gap
+
+The space between what someone knows and what they want to know. Foreshadow the destination, withhold the route.
+
+Example: movie shows the ending first, cuts to "72 hours earlier" — you know where it ends, not how it gets there, so you watch for 2 hours.
+
+Apply in content: state the outcome or insight in the hook, then build toward it. Never give away the answer before the middle.
+
 ### Format Selection
 
 Match the angle to a format that amplifies it.
+
+**15-second silent demo test:** If someone watched a 15s demo of your content/app with sound off and didn't understand it, no amount of marketing fixes that. Visual hook must work muted. If it doesn't, the format choice is wrong — not the hook copy.
 
 | Format | Why It Works | Best For |
 |--------|-------------|---------|
@@ -118,6 +139,65 @@ Match the angle to a format that amplifies it.
 
 ---
 
+## Step 2b: Pre-Creator Validation (Before Paying Anyone)
+
+**Recreate before you recruit.** Prove a format works on your own account before committing creator budget to it.
+
+1. **Warm up one account** in the niche — watch and engage with niche content for a few days before posting
+2. **Save viral videos** from <1k follower accounts; these are pre-algo signals of what's actually resonating
+3. **Analyze why they worked** — hook structure, comment sentiment, format, pacing
+4. **Recreate the format yourself** — don't copy, match the structure and emotional beat
+5. **See early traction** before sourcing any paid creators
+
+Once a format proves out, hand it to creators via `whop-content-rewards` (managed tier). Skip this step only if you're scaling a format already validated in a prior batch.
+
+---
+
+## Step 2c: Video Series Planning
+
+When the output is an AI character video series (TikTok, Reels, Shorts) rather than a single post.
+
+### Series Setup
+
+1. **Load character config** from `~/clawd/characters/<slug>/config.json` — this defines the persona, speech style, and visual identity
+2. **Define the series**: topic cluster + episode count + arc (standalone episodes vs. serialized)
+3. **Generate episode ideas**: 10-20 ideas per series; each idea = one episode concept
+4. **Score each idea** (0-10 on each axis):
+
+| Axis | What it measures |
+|------|-----------------|
+| **Hook strength** | Can you write a compelling first 3 seconds? |
+| **Shareability** | Would someone forward this? |
+| **Niche relevance** | Does it serve the target audience directly? |
+| **Evergreen vs. timely** | Timely = post now; evergreen = queue |
+| **Production simplicity** | Can it be done with just a talking head? |
+
+Pick the top 3-5 ideas by total score. Those become the next production batch.
+
+### Script Format
+
+Write scripts in the character's voice (from config). Structure:
+
+```
+HOOK (0-3s): [Visual action or statement that stops the scroll]
+SETUP (3-10s): [State the problem or tension]
+BODY (10-50s): [Deliver the value — 3 points max, punchy]
+CTA (last 3s): [Follow for more / comment below / link in bio]
+```
+
+Rules:
+- Write how the character talks, not how you write
+- No paragraph-length sentences — one idea per line
+- Hook must work read aloud with no visuals (audio-only test)
+- 60-90 second scripts for TikTok/Reels; 60s max for Shorts
+- Label each line: HOOK / SETUP / POINT 1 / POINT 2 / POINT 3 / CTA
+
+### Output
+
+One file per episode: `~/clawd/characters/<slug>/scripts/YYYY-MM-DD-episode-title.md`
+
+---
+
 ## Step 3: Create (Delegate)
 
 Don't write here. Route to the right skill.
@@ -130,6 +210,8 @@ Don't write here. Route to the right skill.
 | Hooks and headlines | `headlines` |
 | Ad copy (paid) | `ad-copy` |
 | Paid creative concepts | `ad-copy` (includes A/B blitz protocol) |
+| AI character video scripts | Write inline using Step 2c above |
+| New AI character | `character-creation` |
 
 ---
 
@@ -152,6 +234,30 @@ Don't write here. Route to the right skill.
 Batch at least 7 days per session. Never schedule one post at a time. If queue drops below 3 days, refill immediately.
 
 > **Load on-demand:** `references/calendar-batching.md` for scheduling strategy and optimal posting times.
+
+### Geo-Targeting (Instagram / Reels)
+
+Most brands compete in the same saturated metros. Regional markets have lower CPMs, less competition, and engaged audiences who see far less branded content.
+
+**Layer 1 — Native location tags (fully compliant):**
+- Use Instagram's existing location tag library; attach regional business district tags (not just city name) when posting
+- Target specific coworking hubs, financial districts, tech clusters — not "New York City"
+- Surfaces content in location-specific story feeds and Explore pages at zero additional media spend
+
+**Layer 2 — Custom location tags (gray area):**
+- Create new tags via Facebook check-in + VPN to target underserved areas with no existing tag
+- Carries account-level risk if pattern is detectable; vary IP patterns, ensure content is genuinely relevant
+
+**Localization rules (content must feel native, not just tagged):**
+- Adapt industry context reference in the hook to match dominant industry in target city
+- Adapt business size + operational framing to local business profile
+- Adjust tone register: warmer/relationship-oriented in southern markets, direct/efficiency-focused in northern/western
+
+**4-Phase Regional Batch Framework:**
+1. **Market selection** — use Instagram Insights for existing follower geography + check location tag feed competition. Pick 8–12 test markets.
+2. **Production** — write base script, adapt 2–3 localization elements per variant (hook industry ref, operational framing, pain point language). Tag to specific business districts. Schedule at local peak hours (6:30–8:30am, 12–1:30pm, 6:30–9pm local time).
+3. **Evaluate (weeks 2–4)** — rank markets by organic discovery rate + engagement quality. Top 3–5 markets get paid amplification.
+4. **Deepen** — produce second-generation content for winning markets with deeper localization; expand test cohort using learnings.
 
 ---
 
@@ -204,7 +310,7 @@ Retired pillars aren't deleted. Keep `tiktok-marketing/pillar-bench.json` and re
 | `references/ad-formats-library.md` | All formats with templates and examples |
 | `references/copywriting-formulas.md` | PAS, AIDA, hooks, headlines |
 | `references/creative-research-methods.md` | Research process and sources |
-| `references/analytics-loop.md` | Postiz API, per-post tracking, pillar-level monthly review |
+| `references/analytics-loop.md` | Per-post tracking, pillar-level monthly review |
 | `references/feedback-loop.md` | Daily diagnostic, hook evolution, CTA rotation |
 | `references/calendar-batching.md` | Scheduling strategy, queue management, posting cadence |
 | `references/monetization-research.md` | CPM research, Content Rewards, niche selection |
@@ -248,6 +354,31 @@ What a complete strategy card looks like after running this skill. Use this as t
 
 ---
 
+## Channel Tier List (Bloom / B2C)
+
+What actually works for consumer apps vs. what sounds good but doesn't.
+
+**High-signal channels:**
+- TikTok / Instagram Reels — primary B2C organic discovery; recreate before recruiting creators
+- Facebook retargeting ads — works well once funnel is proven; lower CPM than Google for consumer
+- Free SEO tools — high-value lead magnets, easier to rank than blog posts, builds backlinks
+- Email marketing — works if sequences are built correctly (see growth skill); people do read emails
+- Influencer marketing — TikTok/YouTube/Instagram; only once you have budget and a validated offer
+
+**Low-signal channels (avoid or deprioritize):**
+- Newsletter sponsorships — expensive and most clicks are bots
+- Twitter ads — worst targeting in the industry; not worth the spend
+- Google ads — more expensive than Facebook for consumer apps, higher irrelevant clicks
+- Referral programs — very hard to make work; only viable with stable conversion and large customer base
+- Reddit audience building — ban risk is high; answering long-tail questions can work, but building an audience there doesn't
+- Beta directories (BetaList, etc.) — mostly dead; not worth the setup
+
+**SEO timing:**
+- Don't prioritize SEO before your first customers — takes months to kick in, and if you pivot the product, the work goes to zero
+- When you do SEO: free tools first (easier to rank, more shareable, generate backlinks naturally), then long-tail blog posts with purchase intent, then programmatic data-driven pages
+
+---
+
 ## Related Skills
 
 - `headlines` — hook formulas and title generation
@@ -261,3 +392,4 @@ What a complete strategy card looks like after running this skill. Use this as t
 - `grok-search` — X/web search for zeitgeist signals
 - `trend-research` — trending content across platforms
 - `web-search` — Google search for trending topics and news
+- `character-creation` — create and store AI video character configs + portraits

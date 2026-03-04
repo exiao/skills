@@ -8,6 +8,23 @@ Copy that converts. Not content that entertains.
 
 **The distinction matters.** Content marketing builds audience over time (blog posts, newsletters, thought leadership). Direct response gets someone to take a specific action RIGHT NOW (download the app, start a free trial, subscribe, buy). Every word either moves toward the conversion or it's dead weight. Cut it.
 
+## Core Copy Formula
+
+**Emotional Promise + Rational Explanation.**
+
+1. Open with what the customer *achieves* (not what the product does). Ship faster. Invest smarter. Feel calm.
+2. Follow immediately with the rational "how" — what the product actually does to deliver that promise.
+
+> "Hedge funds run AI-powered research 24/7. Bloom gives retail investors the same thing for $12/month." — Promise (parity with institutions), then rational delivery (AI research, specific price).
+
+Mix with: stories (yours or customers'), testimonials, specific numbers. That's the full recipe for copy people actually read.
+
+**What to cut:**
+- Superlatives ("the best," "the fastest," "the most popular") — claim the outcome instead
+- "Streamline" and "supercharge" — say what actually happens
+- Feature bullet lists over 5 items — people won't remember them; pick your strongest 3
+- Writing about yourself — every "we" that can be a "you" should be a "you"
+
 ## References
 
 This skill content is modularized into reference docs for readability.

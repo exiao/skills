@@ -2,7 +2,7 @@
 
 This is what separates "posting TikToks" from "running a marketing machine." The daily cron pulls data from two sources:
 
-1. **Postiz** → per-post TikTok analytics (views, likes, comments, shares)
+1. **PostBridge** → per-post TikTok analytics (views, likes, comments, shares)
 2. **RevenueCat** (if connected) → conversion data (trial starts, paid subscriptions, revenue)
 
 Combined, the agent can make intelligent decisions about what to do next — not guessing, not vibes, actual data-driven optimization.
@@ -11,7 +11,7 @@ Combined, the agent can make intelligent decisions about what to do next — not
 
 Every morning before the first post, the cron runs `scripts/daily-report.js`:
 
-1. Pulls the last 3 days of posts from Postiz (posts peak at 24-48h)
+1. Pulls the last 3 days of posts from PostBridge (posts peak at 24-48h)
 2. Fetches per-post analytics for each (views, likes, comments, shares)
 3. If RevenueCat is connected, pulls conversion events in the same window (24-72h attribution)
 4. Cross-references: which posts drove views AND which drove paying users
@@ -65,7 +65,7 @@ This is the core intelligence. Two axes: **views** (are people seeing it?) and *
 - Check the App Store page — does it match what the TikTok shows?
 - Check that "link in bio" actually works and goes to the right place
 
-**The daily report automates all of this.** It cross-references TikTok views (Postiz) with downloads and revenue (RevenueCat) and tells you exactly which part of the funnel is broken — per post. It also auto-generates new hook suggestions based on your winning patterns and flags when CTAs need rotating.
+**The daily report automates all of this.** It cross-references TikTok views (PostBridge) with downloads and revenue (RevenueCat) and tells you exactly which part of the funnel is broken — per post. It also auto-generates new hook suggestions based on your winning patterns and flags when CTAs need rotating.
 
 ### Hook Evolution
 
@@ -75,7 +75,7 @@ Track in `tiktok-marketing/hook-performance.json`:
 {
   "hooks": [
     {
-      "postId": "postiz-id",
+      "postId": "postbridge-id",
       "text": "My boyfriend said our flat looks like a catalogue",
       "app": "snugly",
       "date": "2026-02-15",
@@ -142,7 +142,7 @@ The daily cron handles post-level optimization. The monthly review handles strat
 
 **Monthly protocol (run on the 1st of each month):**
 
-1. **Pull per-pillar metrics** from Postiz analytics. Group posts by pillar. Track: total posts, total views, saves/bookmarks, new followers attributed, conversions (if RevenueCat connected).
+1. **Pull per-pillar metrics** from PostBridge analytics. Group posts by pillar. Track: total posts, total views, saves/bookmarks, new followers attributed, conversions (if RevenueCat connected).
 
 2. **Score each pillar** using the diagnostic framework:
    - **SCALE** — High views + high conversions. Make more of this. Increase posting frequency.

@@ -5,56 +5,77 @@ description: Use when querying Copilot Money for finances, transactions, net wor
 
 # Copilot Money CLI
 
-Command-line interface for [Copilot Money](https://copilot.money), a personal finance app. Authenticate once and query accounts, transactions, holdings, and allocation data from your terminal.
+Use the Rust CLI (`copilot` binary at `/usr/local/bin/copilot`). The Python `copilot-money` CLI is deprecated — don't use it.
 
-> **Note:** This is an unofficial tool and is not affiliated with Copilot Money.
+> **Note:** Unofficial tool, not affiliated with Copilot Money.
 
-## Install
+## Auth
 
-```bash
-pip install copilot-money-cli
-```
-
-## Quick start
+Token stored at `~/.config/copilot-money-cli/token`. Already configured.
 
 ```bash
-copilot-money config init
-copilot-money accounts
-copilot-money networth
+copilot auth status
 ```
 
 ## Commands
 
 ```bash
-copilot-money refresh                     # Refresh all bank connections
-copilot-money accounts                    # List accounts with balances
-copilot-money accounts --type CREDIT      # Filter by type
-copilot-money accounts --json             # Output as JSON
-copilot-money transactions                # Recent transactions (default 20)
-copilot-money transactions --count 50     # Specify count
-copilot-money networth                    # Assets, liabilities, net worth
-copilot-money holdings                    # Investment holdings (grouped by type)
-copilot-money holdings --group account    # Group by account
-copilot-money holdings --group symbol     # Group by symbol
-copilot-money holdings --type ETF         # Filter by security type
-copilot-money allocation                  # Stocks/bonds with US/Intl split
-copilot-money config show                 # Show config and token status
-copilot-money config init                 # Auto-detect token from browsers
-copilot-money config init --source chrome # From specific browser
-copilot-money config init --source manual # Manual token entry
+# Transactions
+copilot transactions list                                    # Last 25
+copilot transactions list --limit 50 --pages 10             # 500 txns
+copilot transactions list --all                             # Everything (slow)
+copilot transactions list --sort date-desc --output json
+copilot transactions list --unreviewed
+copilot transactions list --category "Groceries"
+copilot transactions list --name-contains "uber"
+copilot transactions list --date 2026-03-01
+
+# Categories
+copilot categories list --output json                       # {id, name} — use to resolve categoryId
+
+# Write (require --yes in scripts)
+copilot transactions set-category <id> --category "Food"
+copilot transactions set-notes <id> --notes "..."
+copilot transactions review <ids...>
 ```
 
-## Authentication
+## Analysis pattern
 
-Config stored at `~/.config/copilot-money/config.json`. The CLI auto-detects your Copilot Money refresh token from supported browsers on macOS.
+```python
+import subprocess, json
+from collections import defaultdict
 
-- Auto-detect: `copilot-money config init`
-- Explicit source: `copilot-money config init --source arc|chrome|safari|firefox`
-- Manual entry: `copilot-money config init --source manual`
+# Category map: id -> name
+cats = {c['id']: c['name'] for c in json.loads(
+    subprocess.check_output(['copilot', 'categories', 'list', '--output', 'json'])
+)}
 
-When using browser auto-detection, the CLI reads your browser's local IndexedDB storage to find your Copilot Money session token. This happens locally — no data is sent anywhere except to Copilot Money's API.
+# Transactions (last ~8 weeks)
+raw = json.loads(subprocess.check_output([
+    'copilot', 'transactions', 'list',
+    '--limit', '50', '--pages', '20', '--sort', 'date-desc', '--output', 'json'
+]))['transactions']
 
-## Requirements
+# Resolve categories
+for t in raw:
+    t['category'] = cats.get(t.get('categoryId', ''), 'Uncategorized')
+```
 
-- Python 3.10+
-- macOS for browser token extraction (manual token entry works everywhere)
+## JSON output fields (transactions)
+
+```json
+{
+  "id": "...",
+  "date": "2026-03-03",
+  "name": "Trader Joe's",
+  "amount": 28.88,
+  "categoryId": "K4Ij...",
+  "type": "REGULAR",
+  "isReviewed": false
+}
+```
+
+## Security
+
+- Calls only `app.copilot.money`. No telemetry.
+- Token stored in plaintext at `~/.config/copilot-money-cli/token`.
