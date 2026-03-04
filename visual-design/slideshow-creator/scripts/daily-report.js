@@ -153,7 +153,7 @@ function savePlatformStats(stats) {
   const postResults = [];
   for (const post of posts) {
     const analytics = await postbridgeAPI(`/analytics/${post.id}`);
-    const metrics = {};
+    const metrics = { views: 0, likes: 0, comments: 0, shares: 0 };
     if (analytics && typeof analytics === 'object') {
       // PostBridge returns analytics object with views, likes, comments, shares
       metrics.views = analytics.views || 0;
