@@ -13,14 +13,14 @@ Daily 4am routine: audit running ads via Meta Marketing API, kill underperformer
 
 ```bash
 TOKEN=$FACEBOOK_ACCESS_TOKEN   # set in gateway env vars
-ACCOUNT="<YOUR_AD_ACCOUNT_ID>"  # Bloom ad account
+ACCOUNT="$BLOOM_AD_ACCOUNT_ID"  # Bloom ad account
 API="https://graph.facebook.com/v22.0"
-PAGE_ID="<YOUR_PAGE_ID>"
-INSTAGRAM_ID="<YOUR_INSTAGRAM_USER_ID>"
-IOS_APP_LINK="http://itunes.apple.com/app/id<YOUR_APP_STORE_ID>"
+PAGE_ID="$BLOOM_PAGE_ID"
+INSTAGRAM_ID="$BLOOM_INSTAGRAM_ID"
+IOS_APP_LINK="http://itunes.apple.com/app/id${BLOOM_APP_STORE_ID_NEW}"
 ANDROID_APP_LINK="http://play.google.com/store/apps/details?id=com.bloom.invest"
-ADSET_IOS="<YOUR_IOS_ADSET_ID>"       # General, iOS (ACTIVE)
-ADSET_ANDROID="<YOUR_ANDROID_ADSET_ID>"   # General, Android (ACTIVE)
+ADSET_IOS="$BLOOM_IOS_ADSET_ID"       # General, iOS (ACTIVE)
+ADSET_ANDROID="$BLOOM_ANDROID_ADSET_ID"   # General, Android (ACTIVE)
 ```
 
 ---
@@ -234,7 +234,7 @@ Then send each of the 6 creative images one at a time with a caption.
 
 If the API returns `code=31` ("pending action" / security hold), **stop and notify Eric** — he must resolve it manually from his own browser. Do not attempt browser automation to fix it.
 
-Also note: the correct iOS App Store URL for Bloom is `http://itunes.apple.com/app/id<YOUR_APP_STORE_ID>` (app ID `<YOUR_APP_STORE_ID>`). The adset promoted object is authoritative — always verify the `object_store_url` from the adset before creating ad creatives.
+Also note: the correct iOS App Store URL for Bloom is `http://itunes.apple.com/app/id${BLOOM_APP_STORE_ID_NEW}` (app ID `$BLOOM_APP_STORE_ID`). The adset promoted object is authoritative — always verify the `object_store_url` from the adset before creating ad creatives.
 
 ## Common Mistakes
 
@@ -246,4 +246,4 @@ Also note: the correct iOS App Store URL for Bloom is `http://itunes.apple.com/a
 6. **Missing GEMINI_API_KEY** — resolve from clawdbot.json before Nano Banana Pro.
 7. **Not sending creative images** — Signal report must include all 6 images.
 8. **Forgetting the manifest** — required for future exclusion list audits.
-9. **Wrong App Store URL** — use `id<YOUR_APP_STORE_ID>`, not `id<YOUR_APP_STORE_ID>`. Verify against adset `promoted_object.object_store_url`.
+9. **Wrong App Store URL** — use `$BLOOM_APP_STORE_ID` (legacy) or `$BLOOM_APP_STORE_ID_NEW` (current). Verify against adset `promoted_object.object_store_url`.
