@@ -116,7 +116,8 @@ node scripts/typefully.js media:upload 286685 /tmp/insider-trade-card-$(date +%Y
 # → returns media_id
 
 # Create draft with media + scheduled slot
-node scripts/typefully.js drafts:create 286685 --platform x --text "<tweet_text>" --media <media_id> --schedule next-free-slot
+node scripts/typefully.js drafts:create 286685 --platform x --text "<tweet_text>" --media <media_id>
+# Do NOT add --schedule. Save as unscheduled draft only — Eric reviews before posting.
 # → returns draft_id and scheduled time
 ```
 

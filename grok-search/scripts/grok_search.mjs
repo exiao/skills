@@ -61,7 +61,7 @@ let mode = null; // 'web' | 'x'
 let jsonOut = false;
 let rawOut = false;
 let format = "json"; // json|text|links
-let model = "grok-4-1-fast";
+let model = "grok-4-1-fast-reasoning";
 let maxResults = 8;
 
 // X-search filters

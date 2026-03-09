@@ -7,7 +7,7 @@
  *
  * Examples:
  *   node {baseDir}/scripts/chat.mjs "What is xAI?"
- *   node {baseDir}/scripts/chat.mjs --model grok-4-1-fast "Summarize today's AI news"
+ *   node {baseDir}/scripts/chat.mjs --model grok-4-1-fast-reasoning "Summarize today's AI news"
  *   node {baseDir}/scripts/chat.mjs --image ./pic.jpg "What's in this image?"
  *   node {baseDir}/scripts/chat.mjs --json "Return a JSON object with keys a,b"
  */
@@ -82,7 +82,7 @@ function collectCitations(resp) {
 const args = process.argv.slice(2);
 if (!args.length) usage();
 
-let model = process.env.GROK_MODEL || "grok-4-1-fast";
+let model = process.env.GROK_MODEL || "grok-4-1-fast-reasoning";
 let jsonOut = false;
 let rawOut = false;
 let images = [];

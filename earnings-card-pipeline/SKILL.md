@@ -70,7 +70,7 @@ uv run /opt/homebrew/lib/node_modules/clawdbot/skills/nano-banana-pro/scripts/ge
 ```
 
 **Design spec per card (1080×1080):**
-- Style: Die-cut sticker with thick white border
+- Style: Die-cut sticker with thick white border — **perfectly upright, 0° rotation, no tilt, no skew**
 - Background: Dark navy `#0f172a`
 - Ticker: Bold white, top-left, large
 - Report day: "Reports [weekday]" in small text below ticker
@@ -82,6 +82,8 @@ uv run /opt/homebrew/lib/node_modules/clawdbot/skills/nano-banana-pro/scripts/ge
 - Overall feel: financial data card, confident and clean
 
 Output: `/tmp/earnings-card-[TICKER]-$(date +%Y%m%d).png`
+
+**exec timeout: 300s minimum** — image generation at 2K takes 60–120s; use `timeout=300, yieldMs=280000`
 
 ### Step 5 — Write Tweet per Company
 
@@ -104,8 +106,8 @@ node scripts/typefully.js media:upload 286685 /tmp/earnings-card-[TICKER]-$(date
 node scripts/typefully.js drafts:create 286685 \
   --platform x \
   --text "$[TICKER] reports [day]. Est: $[EPS] EPS / $[rev]. [Key watch]. [AI take]." \
-  --media <media_id> \
-  --schedule next-free-slot
+  --media <media_id>
+# Do NOT add --schedule. Save as unscheduled draft only — Eric reviews before posting.
 # → returns draft_id + scheduled time
 ```
 
@@ -147,10 +149,11 @@ Draft: https://typefully.com/?a=286685&d=[draft_id] | Scheduled: [time]
 
 ## Common Mistakes
 
-1. **PIL fallback** — ONLY use Nano Banana Pro. If it fails, log the failure and skip that card; do not generate a PIL fallback.
-2. **Missing GEMINI_API_KEY** — always resolve from clawdbot.json before calling Nano Banana Pro.
-3. **Including micro-caps** — stick to names retail investors know. If you've never heard of it, skip it.
-4. **Wrong date math on macOS** — macOS `date` uses `-v+5d` not `--date=+5days`. Use: `$(date -v+5d +%Y-%m-%d)`.
-5. **Overloading the queue** — use `next-free-slot` for each card to spread them out throughout the week.
-6. **Vague AI take** — "could move the stock" is not useful. Be specific: "margin guidance matters more than EPS beat."
-7. **Not reporting failures** — if Nano Banana Pro fails for one ticker, still process the others and report the failure in Signal.
+1. **Tilted cards** — always include "perfectly upright, 0° rotation, no tilt, no skew" in the image prompt. Gemini interprets "sticker" as slightly rotated; override it explicitly.
+2. **PIL fallback** — ONLY use Nano Banana Pro. If it fails, log the failure and skip that card; do not generate a PIL fallback.
+3. **Missing GEMINI_API_KEY** — always resolve from clawdbot.json before calling Nano Banana Pro.
+4. **Including micro-caps** — stick to names retail investors know. If you've never heard of it, skip it.
+5. **Wrong date math on macOS** — macOS `date` uses `-v+5d` not `--date=+5days`. Use: `$(date -v+5d +%Y-%m-%d)`.
+6. **Overloading the queue** — use `next-free-slot` for each card to spread them out throughout the week.
+7. **Vague AI take** — "could move the stock" is not useful. Be specific: "margin guidance matters more than EPS beat."
+8. **Not reporting failures** — if Nano Banana Pro fails for one ticker, still process the others and report the failure in Signal.

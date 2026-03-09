@@ -100,16 +100,16 @@ Do NOT publish. Do NOT send messages unless blocked.
 
 After all 3 sub-agents complete, for each article:
 
-```bash
-# X thread draft (tagged content-pipeline)
-cd ~/clawd/skills/typefully && node scripts/typefully.js drafts:create 286685 \
-  --platform x --text "$(cat ~/marketing/substack/drafts/[slug]/x-thread.md)" \
-  --schedule next-free-slot
+**IMPORTANT: Save as UNSCHEDULED drafts only. Do NOT schedule or publish anything.**
 
-# LinkedIn draft
+```bash
+# X thread draft — unscheduled draft only
+cd ~/clawd/skills/typefully && node scripts/typefully.js drafts:create 286685 \
+  --platform x --text "$(cat ~/marketing/substack/drafts/[slug]/x-thread.md)"
+
+# LinkedIn draft — unscheduled draft only
 node scripts/typefully.js drafts:create 286685 \
-  --platform linkedin --text "$(cat ~/marketing/substack/drafts/[slug]/linkedin-post.md)" \
-  --schedule next-free-slot
+  --platform linkedin --text "$(cat ~/marketing/substack/drafts/[slug]/linkedin-post.md)"
 ```
 
 ---

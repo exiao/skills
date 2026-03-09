@@ -50,7 +50,7 @@ Output:
 
 Common:
 - `--max <n>` limit results (default 8)
-- `--model <id>` (default `grok-4-1-fast`)
+- `--model <id>` (default `grok-4-1-fast-reasoning`)
 
 X-only filters (server-side via x_search tool params):
 - `--days <n>` (e.g. 7)

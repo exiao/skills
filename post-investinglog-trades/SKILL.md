@@ -144,8 +144,8 @@ node scripts/typefully.js drafts:create 286685 \
   --platform x \
   --text "<tweet_text>" \
   --media <media_id> \
-  --schedule next-free-slot \
   --tags investing-log
+# Do NOT add --schedule. Save as unscheduled draft only — Eric reviews before posting.
 # → returns draft_id + scheduled time
 ```
 
