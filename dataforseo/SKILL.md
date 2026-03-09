@@ -24,7 +24,7 @@ Dashboard: `https://app.dataforseo.com` (socials@promptpm.ai) | Balance: ~$0.83
 
 | App | Store | ID |
 |-----|-------|----|
-| Bloom: AI for Investing | App Store | `<YOUR_APP_STORE_ID>` |
+| Bloom: AI for Investing | App Store | `$BLOOM_APP_STORE_ID` |
 
 ## API Patterns
 
@@ -107,7 +107,7 @@ curl -s "$BASE/app_data/apple/app_searches/task_get/advanced/<TASK_ID>" -H "$DFS
 ```
 
 **Returns:** `result[0]['items']` — each item: `app_id`, `title`, `developer_name`, `rating.value`, `reviews_count`. Position = index + 1.  
-**Find Bloom:** look for `app_id == "<YOUR_APP_STORE_ID>"`
+**Find Bloom:** look for `app_id == "$BLOOM_APP_STORE_ID"`
 
 ---
 
@@ -116,7 +116,7 @@ curl -s "$BASE/app_data/apple/app_searches/task_get/advanced/<TASK_ID>" -H "$DFS
 ```bash
 curl -s -X POST "$BASE/dataforseo_labs/apple/keywords_for_app/live" \
   -H "$DFS_AUTH" -H "Content-Type: application/json" \
-  -d '[{"app_id": "<YOUR_APP_STORE_ID>", "location_code": 2840, "language_code": "en", "limit": 100}]'
+  -d '[{"app_id": "$BLOOM_APP_STORE_ID", "location_code": 2840, "language_code": "en", "limit": 100}]'
 ```
 
 **Returns:** `result[0]['total_count']` + items with `keyword_data.keyword`, `keyword_data.keyword_info.search_volume`, `ranked_serp_element.serp_item.rank_absolute`  
@@ -129,7 +129,7 @@ curl -s -X POST "$BASE/dataforseo_labs/apple/keywords_for_app/live" \
 ```bash
 curl -s -X POST "$BASE/dataforseo_labs/apple/app_competitors/live" \
   -H "$DFS_AUTH" -H "Content-Type: application/json" \
-  -d '[{"app_id": "<YOUR_APP_STORE_ID>", "location_code": 2840, "language_code": "en", "limit": 20}]'
+  -d '[{"app_id": "$BLOOM_APP_STORE_ID", "location_code": 2840, "language_code": "en", "limit": 20}]'
 ```
 
 **Returns:** Items with `app_id`, `title`, `avg_position`  
@@ -193,7 +193,7 @@ For full site: `target: "getbloom.app"`, `max_crawl_pages: 50`
 | Keyword ideas | 2. Use 2–5 seeds, sort by `search_volume` desc |
 | SEO difficulty | 3. <30 = easy target |
 | Google SERP check | 4. Search for `getbloom.app` in `domain` field |
-| App Store rank for keyword | 5. Find `app_id == "<YOUR_APP_STORE_ID>"` |
+| App Store rank for keyword | 5. Find `app_id == "$BLOOM_APP_STORE_ID"` |
 | All keywords Bloom ranks for | 6. Sort by `rank_absolute` for best positions |
 | App Store competitors | 7. Lower `avg_position` = stronger competitor |
 | Competitor SEO keywords | 8. Use their domain, find traffic terms |
