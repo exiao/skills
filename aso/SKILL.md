@@ -19,7 +19,7 @@ You have access to four specialized ASO sub-skills. Based on the user's request,
 ## Context
 
 - **App:** Bloom: AI for Investing
-- **App Store ID:** `1436348671`
+- **App Store ID:** `<YOUR_APP_STORE_ID>`
 - **Data source:** DataForSEO API (see `dataforseo/SKILL.md` for full reference)
 - **Known stats:** Bloom ranks for 2,663 App Store keywords. Avg position: 61.5. Best positions: #47 for "yahoo finance", #47 for "robinhood".
 
