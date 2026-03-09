@@ -1,11 +1,28 @@
 ---
 name: meta-ads-iteration
-description: Use when the cron fires at 4am ET daily — checks Instagram ad performance via browser, kills losers, promotes winners, generates 6 fresh creatives via Nano Banana Pro, uploads them as new Instagram ads, and reports to Signal.
+description: Use when the cron fires at 4am ET daily — checks Meta ad performance via API, kills losers, promotes winners, generates 6 fresh creatives via Nano Banana Pro, uploads them as new ads via API, and reports to Signal.
 ---
 
 # Meta Ads Iteration
 
-Daily 4am routine: audit running Instagram ads for performance, kill underperformers, boost winners, generate 6 brand-new creative concepts (never repeating a used hook/format combo), upload them as new $5/day ads, and report to Signal with all new creatives.
+Daily 4am routine: audit running ads via Meta Marketing API, kill underperformers, boost winners, generate 6 brand-new creative concepts (never repeating a used hook/format combo), upload them as new ads via API, and report to Signal.
+
+---
+
+## API Credentials
+
+```bash
+TOKEN=$FACEBOOK_ACCESS_TOKEN      # Meta Marketing API token
+ACCOUNT="$BLOOM_AD_ACCOUNT_ID"    # Bloom ad account (act_...)
+API="https://graph.facebook.com/v22.0"
+PAGE_ID="$BLOOM_PAGE_ID"           # Facebook Page ID
+INSTAGRAM_ID="$BLOOM_INSTAGRAM_ID" # Instagram user ID for creatives
+IOS_APP_LINK="http://itunes.apple.com/app/id${BLOOM_APP_STORE_ID_NEW}"  # current App Store ID
+ANDROID_APP_LINK="http://play.google.com/store/apps/details?id=com.bloom.invest"
+ADSET_IOS="$BLOOM_IOS_ADSET_ID"       # General, iOS (ACTIVE)
+ADSET_ANDROID="$BLOOM_ANDROID_ADSET_ID"   # General, Android (ACTIVE)
+# All BLOOM_* vars set in gateway env. BLOOM_APP_STORE_ID_NEW = current app for ad links.
+```
 
 ---
 
@@ -13,160 +30,166 @@ Daily 4am routine: audit running Instagram ads for performance, kill underperfor
 
 | Tool | Purpose |
 |------|---------|
-| `browser` (profile: clawd) | Instagram Professional Dashboard — view/manage/create ads |
+| `curl` + Meta Marketing API v22.0 | All ad management (read, pause, budget, create) |
 | `trend-research` skill | Find what investing/finance content is trending today |
 | `web-search` skill | Serper for trending finance content |
-| `nano-banana-pro` skill | Generate 1080×1080 Instagram ad creatives |
+| `nano-banana-pro` skill | Generate 1080×1080 ad creatives |
 | `message` tool | Report + send creatives to Signal group |
-
----
-
-## Key Context
-
-- **Eric's personal Facebook** is restricted from advertising — do NOT use it
-- **All ads run via Instagram boost** on `invest.with.bloom` account
-- **Mode:** "Without a Facebook ad account"
-- **Login:** admin@getbloom.app
-- **No API available** — everything via browser automation
 
 ---
 
 ## Workflow
 
-### Step 1 — Check Performance
+### Step 1 — Get Performance Data
 
-1. Open browser (profile: clawd): `https://www.instagram.com`
-2. Confirm logged in as `invest.with.bloom` (check profile icon)
-3. Navigate: **Professional Dashboard → Ad tools → Manage ads**
-4. For each running ad, screenshot and capture:
-   - Impressions
-   - Reach
-   - Engagement rate (%)
-   - Clicks / link clicks
-   - Spend to date
-   - CPM (calculate if not shown: spend / impressions × 1000)
+```bash
+# Get all ads with status
+curl -s "$API/$ACCOUNT/ads?fields=id,name,status,effective_status,adset_id&access_token=$TOKEN"
 
-5. Save performance data to `ads/iteration/$(date +%Y-%m-%d)_performance.md`
+# Get insights for last 7 days (use last_30d if an ad is newer)
+curl -s "$API/$ACCOUNT/insights?fields=ad_id,ad_name,impressions,reach,clicks,spend,cpm,ctr,actions&date_preset=last_7d&level=ad&access_token=$TOKEN"
+```
+
+Save to `ads/iteration/$(date +%Y-%m-%d)_performance.md`:
+- ad_id, name, impressions, spend, CPM, CTR, clicks
 
 ### Step 2 — Classify Ads
 
 Only classify ads with **1,000+ impressions** (insufficient data below this).
 
-Calculate median CPM across all ads (with 1000+ impressions).
+Calculate median CPM across all qualifying ads.
 
 | Decision | Criteria |
 |----------|----------|
-| **KILL** | CPM > 2× median CPM, OR engagement rate < 0.5% |
-| **PROMOTE** | CPM < 0.7× median CPM AND engagement rate > 2% |
+| **KILL** | CPM > 2× median CPM, OR CTR < 0.5% |
+| **PROMOTE** | CPM < 0.7× median CPM AND CTR > 2% |
 | **KEEP** | Everything else |
 
 Save decisions to `ads/iteration/$(date +%Y-%m-%d)_decisions.md`.
 
 ### Step 3 — Kill Losers
 
-For each KILL ad:
-1. In Ad tools → Manage ads: find the ad → pause or delete it (prefer pause to preserve data)
-2. Log to `ads/iteration/$(date +%Y-%m-%d)_kills.log`:
-   ```
-   [timestamp] KILLED: [ad title/id] | CPM: $X | Engagement: X% | Reason: [criteria triggered]
-   ```
+```bash
+# Pause a specific ad
+curl -s -X POST "$API/$AD_ID" \
+  -F "status=PAUSED" \
+  -F "access_token=$TOKEN"
+```
+
+Log each kill to `ads/iteration/$(date +%Y-%m-%d)_kills.log`.
 
 ### Step 4 — Promote Winners
 
-For each PROMOTE ad:
-1. In Ad tools: find the ad → edit → increase daily budget by $2-5/day
-2. Log to `ads/iteration/$(date +%Y-%m-%d)_promotions.log`:
-   ```
-   [timestamp] PROMOTED: [ad title/id] | CPM: $X | Engagement: X% | Budget: $old → $new
-   ```
+```bash
+# Increase ad set daily budget (in cents — $6/day = 600)
+# Get current adset budget first, then increase by $2
+CURRENT_BUDGET=$(curl -s "$API/$ADSET_ID?fields=daily_budget&access_token=$TOKEN" \
+  | python3 -c "import sys,json; print(json.load(sys.stdin)['daily_budget'])")
+NEW_BUDGET=$((CURRENT_BUDGET + 200))
+curl -s -X POST "$API/$ADSET_ID" \
+  -F "daily_budget=$NEW_BUDGET" \
+  -F "access_token=$TOKEN"
+```
+
+Log each promotion to `ads/iteration/$(date +%Y-%m-%d)_promotions.log`.
 
 ### Step 5 — Generate 6 New Creatives
 
-**Always generate exactly 6 new creatives per run, regardless of how many were killed.**
+**Always generate exactly 6 new creatives per run.**
 
 #### 5a — Build Exclusion List
 
-Before generating anything, audit:
-- All files in `ads/iteration/creatives/` (manifest.md files)
-- All `ads/iteration/*_report.md` files
-
-Build a list of used combos: `hook_type + format + concept`. No combo may be repeated.
+Audit all `ads/iteration/creatives/*/manifest.md` files. Build list of used `hook_type + format + concept` combos. No repeats.
 
 #### 5b — Research Trending Content
 
 Use trend-research skill + web-search:
-- Query: "investing finance content trending [today's date]"
-- Look for: viral formats on TikTok/Instagram, hot tickers, news-driven hooks
+- "investing finance content trending [today's date]"
+- Look for viral formats, hot tickers, news-driven hooks
 
 #### 5c — Pick 6 Novel Concepts
 
-Requirements:
-- All 6 hooks must differ from the exclusion list
-- At least 2 must come from fresh trend research
-- At least 1 must use a format not previously tested
+- All 6 hooks must differ from exclusion list
+- At least 2 from fresh trend research
+- At least 1 format not previously tested
 
-**Available formats to cycle through:**
-- iOS Notes App screenshot
-- Reddit post mockup
-- Twitter/X screenshot
-- Meme comparison (before/after)
-- Testimonial card
-- Dark stat card (big number, minimal text)
-- Text-over-chart
-- Founder video caption card
-- News headline mockup
-- App Store screenshot mock
-- Bold typographic (single statement, large font)
-- Phone mockup (app screen)
+**Available formats:**
+iOS Notes App screenshot, Reddit post mockup, Twitter/X screenshot, Meme comparison, Testimonial card, Dark stat card, Text-over-chart, Founder video caption card, News headline mockup, App Store screenshot mock, Bold typographic, Phone mockup, WhatsApp group chat, Court/legal parody, Weather app card, Bank statement, Review split card, CVS receipt, Glassdoor card, Earnings card
 
 #### 5d — Generate Each Creative
 
-Resolve GEMINI_API_KEY first:
 ```bash
 GEMINI_API_KEY=$(python3 -c "import json; d=json.load(open('/Users/testuser/.clawdbot/clawdbot.json')); print(d.get('skills',{}).get('entries',{}).get('nano-banana-pro',{}).get('apiKey','') or d['env']['vars'].get('GEMINI_API_KEY',''))" 2>/dev/null)
 export GEMINI_API_KEY
-```
 
-Generate via Nano Banana Pro:
-```bash
-uv run /opt/homebrew/lib/node_modules/clawdbot/skills/nano-banana-pro/scripts/generate_image.py
+uv run /opt/homebrew/lib/node_modules/clawdbot/skills/nano-banana-pro/scripts/generate_image.py \
+  --prompt "..." \
+  --filename "ads/iteration/creatives/$(date +%Y-%m-%d)/creative-N.png" \
+  --resolution 2K --thinking high
 ```
 
 **Design requirements:**
-- 1080×1080 pixels
-- Instagram-native: bright, high-contrast, thumb-stopping
-- Bloom brand colors: `#F5A623` amber, `#0f172a` navy
-- Variety across the 6: don't use the same layout twice
-- Each must have a strong hook visible in the first 0.5 seconds of scrolling
+- 1080×1080 pixels (square for feed)
+- Bloom brand colors: `#28B5BD` teal, `#0f172a` navy, `#F5A623` amber
+- High contrast, thumb-stopping in 0.5s
+- Bloom logo: 3 teal circles (light top-right, medium left, dark small bottom-right)
 
-**Output:** `ads/iteration/creatives/$(date +%Y-%m-%d)/creative-[1-6].png`
+**Output filename:** Use a short slug describing the format:
+- Pattern: `creative-N-<format-slug>.png` (e.g. `creative-1-whatsapp-chat.png`, `creative-3-weather-card.png`)
+- Slug: 2–3 words, lowercase, hyphenated. Makes files scannable without opening them.
 
 #### 5e — Save Manifest
 
-Write `ads/iteration/creatives/$(date +%Y-%m-%d)/manifest.md`:
-```markdown
-# Creatives — [date]
+Write `ads/iteration/creatives/$(date +%Y-%m-%d)/manifest.md` with format/hook/concept table. Use the labeled filenames (with slug) in the File column.
 
-| File | Format | Hook | Primary Text | Concept |
-|------|--------|------|-------------|---------|
-| creative-1.png | [format] | [hook] | [ad copy] | [concept desc] |
-...
+### Step 6 — Upload New Ads via API
+
+For each of the 6 creatives, run this 3-step sequence:
+
+**Step 6a: Upload image**
+```bash
+UPLOAD=$(curl -s -X POST "$API/$ACCOUNT/adimages" \
+  -F "filename=@/path/to/creative-N.png" \
+  -F "access_token=$TOKEN")
+
+IMAGE_HASH=$(echo $UPLOAD | python3 -c "import sys,json; d=json.load(sys.stdin); print(list(d['images'].values())[0]['hash'])")
 ```
 
-### Step 6 — Upload New Ads (Browser)
+**Step 6b: Create ad creative**
+```bash
+CREATIVE=$(curl -s -X POST "$API/$ACCOUNT/adcreatives" \
+  -F "name=Bloom Creative $(date +%Y-%m-%d) N" \
+  -F "object_story_spec={
+    \"page_id\": \"$PAGE_ID\",
+    \"instagram_user_id\": \"$INSTAGRAM_ID\",
+    \"link_data\": {
+      \"link\": \"$IOS_APP_LINK\",
+      \"message\": \"[ad copy — the hook text]\",
+      \"image_hash\": \"$IMAGE_HASH\",
+      \"call_to_action\": {
+        \"type\": \"LEARN_MORE\",
+        \"value\": {\"link\": \"$IOS_APP_LINK\"}
+      }
+    }
+  }" \
+  -F "access_token=$TOKEN")
 
-For each of the 6 creatives:
-1. Professional Dashboard → Ad tools → **Create ad**
-2. Select: **"Run an ad that won't show on profile"**
-3. Upload the PNG (1080×1080)
-4. Add the ad copy (hook text)
-5. When boost dialog appears: select **"Without a Facebook ad account"**
-6. Objective: **Visit your website**
-7. URL: `https://apps.apple.com/app/bloom-investing/id1590519285`
-8. Budget: **$5/day**, run until paused
-9. Submit
+CREATIVE_ID=$(echo $CREATIVE | python3 -c "import sys,json; print(json.load(sys.stdin)['id'])")
+```
 
-⚠️ **If at any point a payment method is required: STOP immediately. Do not enter any payment info. Notify Eric in Signal.**
+**Step 6c: Create ad in iOS ad set**
+```bash
+curl -s -X POST "$API/$ACCOUNT/ads" \
+  -F "name=Bloom $(date +%Y-%m-%d) Creative N" \
+  -F "adset_id=$ADSET_IOS" \
+  -F "creative={\"creative_id\": \"$CREATIVE_ID\"}" \
+  -F "status=ACTIVE" \
+  -F "access_token=$TOKEN"
+```
+
+Repeat 6a-6c for Android ad set (`$ADSET_ANDROID`) using the Android app link, so each creative gets two ads (iOS + Android).
+
+⚠️ **If any API call returns an error with `payment` or `billing`: STOP and notify Eric.**
 
 ### Step 7 — Report to Signal
 
@@ -175,18 +198,17 @@ Send to `group:5TgLlI8NfnETVAzVvUi0rJ0WKz2Pz2Flj5i2/VAcFSY=`:
 ```
 🎯 Meta Ads Daily Run — [date]
 
-X ads analyzed | Y killed | Z promoted | W new ads uploaded
+X ads analyzed | Y killed | Z promoted | 12 new ads uploaded (6 iOS + 6 Android)
 
-Best performer: [ad title] — CPM $X, X% engagement
-Worst performer: [ad title] — CPM $X, X% engagement
+Best performer: [ad name] — CPM $X, CTR X%
+Worst performer: [ad name] — CPM $X, CTR X%
 
 6 new concepts:
-1. [format] — [hook description]
-2. ...
-6. ...
+1. [format] — [hook]
+...
 ```
 
-Then send each of the 6 new creative images **one at a time** with a caption describing the concept.
+Then send each of the 6 creative images one at a time with a caption.
 
 ---
 
@@ -196,7 +218,7 @@ Then send each of the 6 new creative images **one at a time** with a caption des
 - Performance log: `ads/iteration/[date]_performance.md`
 - Kills log: `ads/iteration/[date]_kills.log`
 - Promotions log: `ads/iteration/[date]_promotions.log`
-- Creatives: `ads/iteration/creatives/[date]/creative-[1-6].png`
+- Creatives: `ads/iteration/creatives/[date]/creative-N-<format-slug>.png`
 - Manifest: `ads/iteration/creatives/[date]/manifest.md`
 
 ---
@@ -210,13 +232,22 @@ Then send each of the 6 new creative images **one at a time** with a caption des
 
 ---
 
+## ⚠️ CRITICAL: API Only — Never Browser Login
+
+**NEVER attempt to log into Meta Ads Manager or Facebook via browser.** Browser login can trigger a security lockout on the ad account. All Meta ad management must go through the Marketing API only (`graph.facebook.com/v22.0`).
+
+If the API returns `code=31` ("pending action" / security hold), **stop and notify Eric** — he must resolve it manually from his own browser. Do not attempt browser automation to fix it.
+
+Always use `$BLOOM_APP_STORE_ID_NEW` for iOS ad links (the current App Store ID). The adset's `promoted_object.object_store_url` is the ground truth — verify it matches before creating creatives.
+
 ## Common Mistakes
 
-1. **Using Eric's personal Facebook** — it's restricted. Always use invest.with.bloom Instagram boost only.
-2. **Repeating a hook/format/concept combo** — always audit the exclusion list before generating. Repetition = wasted $5/day.
-3. **Entering payment info** — if Instagram asks for payment, STOP and notify Eric. Never add payment details autonomously.
-4. **Generating fewer than 6 creatives** — always 6, even if nothing was killed. Fresh creatives are the priority.
-5. **Missing GEMINI_API_KEY** — resolve from clawdbot.json before calling Nano Banana Pro.
-6. **Not sending the creative images** — the Signal report should include all 6 images, one per message with caption.
-7. **Classifying ads with <1000 impressions** — insufficient data. Mark as KEEP and don't touch.
-8. **Forgetting to save the manifest** — without the manifest, future runs can't build the exclusion list properly.
+1. **Token not set** — always use `$FACEBOOK_ACCESS_TOKEN` from env. Never hardcode.
+2. **Wrong budget units** — daily_budget is in cents. $5/day = 500, $6/day = 600.
+3. **Repeating a hook/format/concept combo** — always audit exclusion list first.
+4. **Forgetting Android ad set** — each creative should get two ads (iOS + Android ad sets).
+5. **Not checking impressions threshold** — don't classify ads with <1000 impressions.
+6. **Missing GEMINI_API_KEY** — resolve from clawdbot.json before Nano Banana Pro.
+7. **Not sending creative images** — Signal report must include all 6 images.
+8. **Forgetting the manifest** — required for future exclusion list audits.
+9. **Wrong App Store URL** — always use `$BLOOM_APP_STORE_ID_NEW` for ad links. Verify against adset `promoted_object.object_store_url`.

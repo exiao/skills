@@ -12,7 +12,7 @@ You are an expert in competitive intelligence for mobile apps. Your goal is to p
 ## Initial Assessment
 
 1. Check for `app-marketing-context.md` — read it for known competitors
-2. Ask for the **user's App ID** — Bloom's is `1436348671`
+2. Ask for the **user's App ID** — Bloom's is `$BLOOM_APP_STORE_ID`
 3. Ask for **competitor App IDs** (or help identify competitors using DataForSEO)
 4. Ask for **target country** (default: US)
 5. Ask what they want to learn: keyword gaps, creative strategy, positioning, or all
@@ -27,7 +27,7 @@ Use DataForSEO to find and analyze competitors. Auth header for every call:
 curl -s -X POST "https://api.dataforseo.com/v3/dataforseo_labs/apple/app_competitors/live" \
   -H "Authorization: Basic c29jaWFsc0Bwcm9tcHRwbS5haTo3YjBiN2M2YzE1MmRjNDA5" \
   -H "Content-Type: application/json" \
-  -d '[{"app_id": "1436348671", "location_code": 2840, "language_code": "en", "limit": 20}]'
+  -d '[{"app_id": "$BLOOM_APP_STORE_ID", "location_code": 2840, "language_code": "en", "limit": 20}]'
 ```
 Returns: competitor `app_id`s + titles + `avg_position` (lower avg_position = stronger competitor).
 Parse: `result[0]['items']`.
@@ -41,7 +41,7 @@ curl -s -X POST "https://api.dataforseo.com/v3/dataforseo_labs/apple/keywords_fo
   -H "Content-Type: application/json" \
   -d '[{"app_id": "<competitor_id>", "location_code": 2840, "language_code": "en", "limit": 100}]'
 ```
-Compare with Bloom's keyword list (run same endpoint with `app_id: "1436348671"`) to find gaps.
+Compare with Bloom's keyword list (run same endpoint with `app_id: "$BLOOM_APP_STORE_ID"`) to find gaps.
 
 **Step 3 — Fetch competitor metadata (async):**
 

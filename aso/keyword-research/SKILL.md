@@ -12,7 +12,7 @@ You are an expert ASO keyword researcher with deep knowledge of App Store search
 ## Initial Assessment
 
 1. Check for `app-marketing-context.md` — read it for app context, competitors, and goals
-2. Ask for the **App ID** (to understand current rankings) — Bloom's is `1436348671`
+2. Ask for the **App ID** (to understand current rankings) — Bloom's is `$BLOOM_APP_STORE_ID`
 3. Ask for **target country** (default: US)
 4. Ask for **seed keywords** — 3-5 words that describe the app's core function
 5. Ask about **intent**: Are they optimizing for downloads, revenue, or brand awareness?
@@ -60,14 +60,14 @@ curl -s -X POST "https://api.dataforseo.com/v3/app_data/apple/app_searches/task_
   -H "Content-Type: application/json" \
   -d '[{"keyword": "<keyword>", "location_code": 2840, "language_code": "en"}]'
 ```
-Poll tasks_ready, then GET `task_get/advanced/<id>`. Look for `app_id == "1436348671"` in `result[0]['items']`. Position = index + 1.
+Poll tasks_ready, then GET `task_get/advanced/<id>`. Look for `app_id == "$BLOOM_APP_STORE_ID"` in `result[0]['items']`. Position = index + 1.
 
 **Step 5 — Pull all keywords Bloom already ranks for (to avoid duplicating current winners and find gaps):**
 ```bash
 curl -s -X POST "https://api.dataforseo.com/v3/dataforseo_labs/apple/keywords_for_app/live" \
   -H "Authorization: Basic c29jaWFsc0Bwcm9tcHRwbS5haTo3YjBiN2M2YzE1MmRjNDA5" \
   -H "Content-Type: application/json" \
-  -d '[{"app_id": "1436348671", "location_code": 2840, "language_code": "en", "limit": 100}]'
+  -d '[{"app_id": "$BLOOM_APP_STORE_ID", "location_code": 2840, "language_code": "en", "limit": 100}]'
 ```
 Parse: `result[0]['items']` — keywords Bloom already ranks for with positions. Use these as baseline.
 

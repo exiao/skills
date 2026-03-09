@@ -18,14 +18,14 @@ You are an expert in App Store Optimization with deep knowledge of Apple's and G
 
 ## Data Collection
 
-Use DataForSEO to fetch data. Bloom's App ID is `1436348671`.
+Use DataForSEO to fetch data. Bloom's App ID is `$BLOOM_APP_STORE_ID`.
 
 1. **Fetch current App Store keyword rankings:**
    ```bash
    curl -s -X POST "https://api.dataforseo.com/v3/dataforseo_labs/apple/keywords_for_app/live" \
      -H "Authorization: Basic c29jaWFsc0Bwcm9tcHRwbS5haTo3YjBiN2M2YzE1MmRjNDA5" \
      -H "Content-Type: application/json" \
-     -d '[{"app_id": "1436348671", "location_code": 2840, "language_code": "en", "limit": 100}]'
+     -d '[{"app_id": "$BLOOM_APP_STORE_ID", "location_code": 2840, "language_code": "en", "limit": 100}]'
    ```
    Returns: keyword list with App Store positions and Google search volume.
    Parse: `result[0]['items']` — each item has `keyword_data.keyword`, `keyword_data.keyword_info.search_volume`, `ranked_serp_element.serp_item.rank_absolute`.
@@ -35,7 +35,7 @@ Use DataForSEO to fetch data. Bloom's App ID is `1436348671`.
    curl -s -X POST "https://api.dataforseo.com/v3/dataforseo_labs/apple/app_competitors/live" \
      -H "Authorization: Basic c29jaWFsc0Bwcm9tcHRwbS5haTo3YjBiN2M2YzE1MmRjNDA5" \
      -H "Content-Type: application/json" \
-     -d '[{"app_id": "1436348671", "location_code": 2840, "language_code": "en", "limit": 10}]'
+     -d '[{"app_id": "$BLOOM_APP_STORE_ID", "location_code": 2840, "language_code": "en", "limit": 10}]'
    ```
    Returns: top competitor `app_id`s and titles, sorted by keyword overlap.
 
@@ -46,7 +46,7 @@ Use DataForSEO to fetch data. Bloom's App ID is `1436348671`.
    curl -s -X POST "https://api.dataforseo.com/v3/app_data/apple/app_info/task_post" \
      -H "Authorization: Basic c29jaWFsc0Bwcm9tcHRwbS5haTo3YjBiN2M2YzE1MmRjNDA5" \
      -H "Content-Type: application/json" \
-     -d '[{"app_id": "1436348671", "language_code": "en", "location_code": 2840}]'
+     -d '[{"app_id": "$BLOOM_APP_STORE_ID", "language_code": "en", "location_code": 2840}]'
    ```
    Save the task `id`.
 
