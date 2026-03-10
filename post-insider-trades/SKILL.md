@@ -65,7 +65,7 @@ If logo fetch fails or file is <5KB, skip the logo (proceed without it).
 ### Step 5 — Resolve GEMINI_API_KEY
 
 ```bash
-GEMINI_API_KEY=$(python3 -c "import json; d=json.load(open('/Users/testuser/.clawdbot/clawdbot.json')); print(d.get('skills',{}).get('entries',{}).get('nano-banana-pro',{}).get('apiKey','') or d['env']['vars'].get('GEMINI_API_KEY',''))" 2>/dev/null)
+GEMINI_API_KEY=$(python3 -c "import json, os; d=json.load(open(os.path.expanduser('~/.clawdbot/clawdbot.json'))); print(d.get('skills',{}).get('entries',{}).get('nano-banana-pro',{}).get('apiKey','') or d['env']['vars'].get('GEMINI_API_KEY',''))" 2>/dev/null)
 export GEMINI_API_KEY
 ```
 
@@ -109,7 +109,7 @@ Example format:
 ### Step 8 — Upload Card + Create Typefully Draft
 
 ```bash
-cd /Users/testuser/clawd/skills/typefully
+cd ~/clawd/skills/typefully
 
 # Upload media
 node scripts/typefully.js media:upload 286685 /tmp/insider-trade-card-$(date +%Y%m%d).png

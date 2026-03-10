@@ -89,7 +89,7 @@ Via web-search skill:
 ### Step 6 — Resolve GEMINI_API_KEY
 
 ```bash
-GEMINI_API_KEY=$(python3 -c "import json; d=json.load(open('/Users/testuser/.clawdbot/clawdbot.json')); print(d.get('skills',{}).get('entries',{}).get('nano-banana-pro',{}).get('apiKey','') or d['env']['vars'].get('GEMINI_API_KEY',''))" 2>/dev/null)
+GEMINI_API_KEY=$(python3 -c "import json, os; d=json.load(open(os.path.expanduser('~/.clawdbot/clawdbot.json'))); print(d.get('skills',{}).get('entries',{}).get('nano-banana-pro',{}).get('apiKey','') or d['env']['vars'].get('GEMINI_API_KEY',''))" 2>/dev/null)
 export GEMINI_API_KEY
 ```
 
@@ -130,7 +130,7 @@ YTD: +18.3%
 ### Step 9 — Ensure Tag + Upload + Create Draft
 
 ```bash
-cd /Users/testuser/clawd/skills/typefully
+cd ~/clawd/skills/typefully
 
 # Ensure 'investing-log' tag exists (safe to run even if it already exists)
 node scripts/typefully.js tags:create 286685 --name 'investing-log' 2>/dev/null || true
