@@ -57,7 +57,7 @@ Write a **2-3 sentence AI take** for each:
 ### Step 3 — Resolve GEMINI_API_KEY
 
 ```bash
-GEMINI_API_KEY=$(python3 -c "import json; d=json.load(open('/Users/testuser/.clawdbot/clawdbot.json')); print(d.get('skills',{}).get('entries',{}).get('nano-banana-pro',{}).get('apiKey','') or d['env']['vars'].get('GEMINI_API_KEY',''))" 2>/dev/null)
+GEMINI_API_KEY=$(python3 -c "import json,os; d=json.load(open(os.path.expanduser('~/.clawdbot/clawdbot.json'))); print(d.get('skills',{}).get('entries',{}).get('nano-banana-pro',{}).get('apiKey','') or d['env']['vars'].get('GEMINI_API_KEY',''))" 2>/dev/null)
 export GEMINI_API_KEY
 ```
 
@@ -97,7 +97,7 @@ No hashtags. No emojis. Confident and data-forward.
 ### Step 6 — Upload + Schedule Each Card
 
 ```bash
-cd /Users/testuser/clawd/skills/typefully
+cd ~/clawd/skills/typefully
 
 # For each company:
 node scripts/typefully.js media:upload 286685 /tmp/earnings-card-[TICKER]-$(date +%Y%m%d).png

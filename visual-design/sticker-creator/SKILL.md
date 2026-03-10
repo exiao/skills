@@ -43,8 +43,8 @@ These rules apply to every sticker unless explicitly overridden:
 
 ```bash
 GEMINI_API_KEY=$(python3 -c "
-import json
-d = json.load(open('/Users/testuser/.clawdbot/clawdbot.json'))
+import json, os
+d = json.load(open(os.path.expanduser('~/.clawdbot/clawdbot.json')))
 print(
   d.get('skills',{}).get('entries',{}).get('nano-banana-pro',{}).get('apiKey','')
   or d['env']['vars'].get('GEMINI_API_KEY','')

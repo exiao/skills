@@ -412,7 +412,7 @@ set -euo pipefail
 # Environment variables accessed: ASA_ACCESS_TOKEN, ASA_ORG_ID
 # External endpoints called: https://api.searchads.apple.com/api/v5/reports/*
 # Local files read: none
-# Local files written: ~/apple-search-ads/reports/weekly-{date}.json
+# Local files written: ~/apple-search-ads/reports/weekly-{date}.txt
 
 : "${ASA_ACCESS_TOKEN:?Set ASA_ACCESS_TOKEN}"
 : "${ASA_ORG_ID:?Set ASA_ORG_ID}"
@@ -421,7 +421,8 @@ OUTPUT_DIR="${HOME}/apple-search-ads/reports"
 mkdir -p "$OUTPUT_DIR"
 
 DATE=$(date +%Y-%m-%d)
-OUTPUT_FILE="$OUTPUT_DIR/weekly-$DATE.json"
+OUTPUT_FILE="$OUTPUT_DIR/weekly-$DATE.txt"
+exec > >(tee "$OUTPUT_FILE")
 
 echo "🍎 Apple Search Ads Weekly Optimization Report"
 echo "Date: $DATE"
