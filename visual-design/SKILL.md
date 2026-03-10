@@ -65,6 +65,22 @@ If the request could map to more than one sub-skill, ask:
 
 ---
 
+## Live Prototype Loop (for iterative visual work)
+
+For any design that requires visual iteration (layout, spacing, colors, typography, component feel), use the live browser prototyping technique instead of rebuilding on each change:
+
+1. Open the target in browser — local file or the app's production site (check TOOLS.md for the URL)
+2. Write initial HTML/CSS or navigate to the target page
+3. Use `browser action=act request={kind:evaluate, fn:"() => { /* JS to patch styles/DOM */ }"}` to apply changes live
+4. Screenshot to validate — iterate until it looks right
+5. Write only the final confirmed values back to the source file / PR
+
+Production site edits via JS eval are non-persistent (reset on reload) — safe for visual exploration. Always commit final changes to the codebase.
+
+This approach applies across all sub-skills: frontend-design, frontend-slides, d3js-visualization, and any work involving a live browser target.
+
+---
+
 ## Execution
 
 Once the sub-skill is identified:

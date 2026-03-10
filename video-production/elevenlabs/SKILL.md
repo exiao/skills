@@ -65,6 +65,23 @@ pip install fal-client
 
 ---
 
+## Realism Rule: Background Noise
+
+**Clean audio sounds fake.** A perfect studio recording is an instant AI tell in a UGC context.
+
+After generating the MP3, add ambient background noise before feeding it to InfiniteTalk:
+
+```bash
+# Mix in light ambient noise at low volume (-18dB)
+ffmpeg -i output.mp3 -i /path/to/ambient.mp3 \
+  -filter_complex "[1:a]volume=-18dB[noise];[0:a][noise]amix=inputs=2:duration=first" \
+  output_with_noise.mp3
+```
+
+Good ambient sources: coffee shop hum, light room tone, street noise. Keep it under -18dB — the goal is texture, not distraction. For indoor talking-head UGC, light room tone works best.
+
+---
+
 ## In the Pipeline
 
 1. Write script → `content-strategy` (Video Series section)

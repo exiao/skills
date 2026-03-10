@@ -165,3 +165,8 @@ Scheduled: [time]
 5. **Missing GEMINI_API_KEY** — always resolve it from clawdbot.json before calling Nano Banana Pro.
 6. **Scheduling without checking** — use `next-free-slot` to avoid stacking tweets; Typefully handles spacing.
 7. **Reporting when no trade found** — if Step 2 yields nothing, NO_REPLY silently. Don't send a "nothing found" message.
+
+## Constitutional Rules
+- NEVER lower the quality bar to find something to post. If nothing meets criteria, report "nothing to post today" and why.
+- NEVER post without reading back the full content first.
+- Always create as draft first; do not schedule or publish directly.

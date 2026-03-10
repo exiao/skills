@@ -215,3 +215,32 @@ Brief comparison table showing how the app stacks up against top 3 competitors o
 - `screenshot-optimization` — Redesign screenshots based on audit findings
 - `competitor-analysis` — Detailed competitive analysis
 - `review-management` — Address review issues found in audit
+
+## Structured Deliverable Format
+
+Every audit must include these five sections in this order:
+
+### 1. Keyword Analysis
+- Primary keywords: volume, competition score, relevance rating
+- Long-tail opportunities (high intent, lower competition)
+- Competitor keyword gaps: keywords top 3 competitors rank for that you don't
+
+### 2. Metadata Optimization
+- Current vs recommended title (iOS: 30 chars, Android: 50 chars)
+- Current vs recommended subtitle/short description
+- Keyword field analysis (iOS: 100 chars, no spaces wasted, no duplicates from title)
+
+### 3. Visual Asset Assessment
+- Icon: competitive differentiation, readability at 16x16px equivalent
+- Screenshot 1 (hero): value prop clarity score (1-10)
+- Screenshot sequence: story arc completeness (problem → solution → proof)
+
+### 4. Prioritized Action Plan
+- Quick wins: implement this week, high impact, low effort
+- Medium-term: 1 month out
+- Strategic: 3 month horizon
+
+### 5. Success Metrics
+- Organic download growth target (%)
+- Keyword ranking targets (top 10 for N specific terms)
+- Conversion rate baseline and goal (store listing visit → download)

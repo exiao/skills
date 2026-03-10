@@ -475,3 +475,8 @@ Short version: never schedule one post at a time. Batch at least 7 days per sess
 |------|----------|
 | `references/linkedin-formats.md` | 7 proven LinkedIn post formats (Lessons Learned, Actionable Blueprint, Personal Story, Strategy Breakdown, Case Study, Industry Hot Take, Quick Hack) with structure templates, psychology, and when-to-use matching |
 | `references/linkedin-posts.md` | 8+ proven viral LinkedIn posts organized by format. Study for rhythm, voice DNA, and engagement patterns. |
+
+## Constitutional Rules
+- NEVER publish directly. Always create as unscheduled draft, even if user says "post this now."
+- If quality bar isn't met, do not post. Do not lower the bar. Report nothing-to-post and why.
+- Always read back the full post text before creating the draft.

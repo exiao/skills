@@ -295,3 +295,19 @@ After the first draft is written, hand it to `editor-in-chief` and let it loop u
 6. [ ] SEO checklist passed
 7. [ ] Morning test: sleep on it, re-read fresh
 8. [ ] **Final slop scan**: intro and outro read one more time
+
+## GEO Citability Quality Gate
+
+AI systems (ChatGPT, Perplexity, Gemini) cite passages that are extractable. Passages that fail these checks are invisible to AI search even when the overall article ranks.
+
+Before finalizing, verify each H2 section meets:
+
+- [ ] Opens with a direct answer in the first 1-2 sentences (answer-first structure)
+- [ ] Section is 134-167 words (optimal for AI citation extraction)
+- [ ] Contains at least 1 named statistic with a source (not "many" or "most")
+- [ ] Names the subject explicitly — no pronouns that require prior context to understand
+- [ ] Is self-contained: a reader who sees only this section understands the point
+
+Research basis: Princeton/Georgia Tech/IIT Delhi 2024. Adding named statistics alone increases AI citation rate by 40%. Definition patterns increase it 2.1x.
+
+**Avoid vague quantifiers.** Every claim that can be supported by a specific number should have one. Replace: "many," "most," "several," "experts say," "studies show."

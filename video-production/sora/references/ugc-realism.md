@@ -65,3 +65,31 @@ Before finalizing a UGC prompt, check against these:
 - One person, one thought, one moment. No narrative arc.
 - If dialogue is included, keep it under 3 sentences. Conversational fragments work better than complete thoughts.
 - Avoid any language that implies production: "reveal", "transition", "cut to", "hero shot".
+
+---
+
+## Post-Production Realism Pass
+
+After generation, run this pass before publishing. Clean AI output is the main tell.
+
+**Color grade (most important):**
+- Drop contrast
+- Push shadows up (lift the blacks)
+- Add a slight fade
+- Goal: match the flat, auto-corrected look of an iPhone video, not a color-graded film
+
+**Consistency (critical for multi-clip ads):**
+- Match frame rates across every clip
+- Match lighting temperature and intensity
+- Lock actor appearance: same skin tone, same clothing, same face — any drift and it reads fake
+- If mixing Sora and Kling shots, sync these in the nano banana generation step, not in post
+
+**Imperfections:**
+- Add subtle skin texture (reduce AI's tendency toward too-smooth skin)
+- Add film grain (light grain, not heavy)
+
+**Final export:**
+- Upscale to 4K
+- Add grain pass at 4K
+- Re-export at target delivery resolution (1080p for TikTok/Reels)
+- The grain bakes in at 4K and reads as natural texture at 1080p rather than noise

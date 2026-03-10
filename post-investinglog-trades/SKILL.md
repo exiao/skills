@@ -211,3 +211,8 @@ Scheduled: [time]
 5. **State file not updated** — always write back after successful post; otherwise same trade posts again tomorrow.
 6. **Overwriting old state** — keep last 50 entries, don't truncate to just the new one.
 7. **Not creating the tag** — run `tags:create` before `drafts:create`; Typefully may reject unknown tags.
+
+## Constitutional Rules
+- NEVER lower the quality bar to find something to post. If nothing meets criteria, report "nothing to post today" and why.
+- NEVER post without reading back the full content first.
+- Always create as draft first; do not schedule or publish directly.
