@@ -516,3 +516,31 @@ Code reviewer: ✅ Approved
 **Subagents should use:** superpowers:test-driven-development
 
 **After all tasks:** superpowers:finishing-a-development-branch
+
+---
+
+## Quality Gates & Guardrails
+
+### Reality Checker — Task Completion Standard
+
+Default to **NEEDS WORK** unless there is concrete evidence the task is complete. Specifically: tests pass, no type errors, no lint errors, screenshots or logs confirm expected behavior.
+
+- "It looks right" is NOT evidence.
+- "CI is green + I verified the UI matches the spec" IS evidence.
+
+Never mark a task complete and never tell the user you're done until you have concrete evidence. If you're unsure, say what you verified and what you didn't.
+
+### Search-First Before External APIs
+
+Before implementing anything that calls an external API, library, or service you haven't used in this session: use the **context7 skill** or `web_fetch` to look up the current API docs first.
+
+Model names, parameter names, and auth methods change. Never assume. This applies to: OpenAI, GitHub Actions, Google APIs, RevenueCat, Stripe, Fal.ai, and any npm package you haven't recently read docs for.
+
+### 3-Error Escalation Rule
+
+If the same tool call or test fails 3 consecutive times without progress, **stop**. Do not keep trying. Report:
+1. What you tried (each attempt)
+2. What failed (exact error)
+3. What you think the root cause is
+
+Then let the human decide how to proceed. Spinning on the same error is never productive.

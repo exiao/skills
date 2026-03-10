@@ -251,3 +251,8 @@ Always use `$BLOOM_APP_STORE_ID_NEW` for iOS ad links (the current App Store ID)
 7. **Not sending creative images** — Signal report must include all 6 images.
 8. **Forgetting the manifest** — required for future exclusion list audits.
 9. **Wrong App Store URL** — always use `$BLOOM_APP_STORE_ID_NEW` for ad links. Verify against adset `promoted_object.object_store_url`.
+
+## Constitutional Rules
+- NEVER pause or kill an ad without reporting which ad, current spend, and ROAS first.
+- NEVER increase budgets by more than 20% in a single action without confirmation.
+- Always report what you changed after, not just what you plan to change.

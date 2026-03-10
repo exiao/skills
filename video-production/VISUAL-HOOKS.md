@@ -27,6 +27,20 @@ Don't rely on just one. Use both.
 
 ---
 
+## No-Intro Rule
+
+**Never use the first 3 seconds to introduce yourself or your topic.**
+
+Your caption and title card are your intro. The first 3 seconds are your hook. Jump directly to the hook action — a provocative statement, a visual, a question, a claim.
+
+If you feel the need to say who you are or what the video is about, that's what the persistent caption is for. On-screen text can establish context without burning your hook window.
+
+The test: if someone could skip the first 3 seconds without missing any value, you have an intro. Cut it.
+
+---
+
+---
+
 ## 5 Spoken/Text Hook Types
 
 Use one of these as your opening line or first on-screen text:

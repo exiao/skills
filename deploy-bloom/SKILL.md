@@ -73,3 +73,8 @@ make deploy
 - **Build SIGABRT**: Set `NODE_OPTIONS=--max-old-space-size=4096` (already in script)
 - **Modal auth expired**: `modal token set --token-id <id> --token-secret <secret> --profile=prompt-pm`
 - **Capgo CLI missing**: `cd ~/bloom/frontend && bun add -d @capgo/cli`
+
+## Constitutional Rules
+- NEVER deploy without reading back exactly what will be deployed and receiving explicit confirmation.
+- Treat any ambiguity or silence as NO. Stop and ask.
+- If anything unexpected appears during deploy (wrong version, wrong env), abort immediately.

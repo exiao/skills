@@ -139,6 +139,18 @@ All compositions: 15 seconds @ 30fps (450 frames).
 
 ---
 
+## Pre-Composition: Real Bloom Screenshots
+
+If the video features the Bloom app UI, capture real screenshots first:
+
+1. Start PhoneAgent bridge (see `~/clawd/skills/phoneagent/SKILL.md`)
+2. Run: `python scripts/capture_bloom_screenshots.py --feature <portfolio|stock_detail|watchlist> --output public/screenshots/<feature>`
+3. Reference screenshots in compositions: `staticFile("screenshots/<feature>/home.png")`
+
+Falls back gracefully if bridge not running.
+
+---
+
 ## Rendering
 
 ```bash
@@ -172,6 +184,20 @@ npx remotion render ProductDemo out/clip.mp4 --frames=0-150
    - Square: 1080x1080 (Twitter, Instagram)
    - Vertical: 1080x1920 (TikTok, Reels, Shorts)
    - Horizontal: 1920x1080 (YouTube)
+
+---
+
+## Post-Render QA
+
+Always run QA after rendering:
+
+```bash
+python scripts/visual_qa.py out/video.mp4 "Your goal description"
+# Or use the wrapper:
+./scripts/render_and_verify.sh BloomDemo out/demo.mp4 "Goal here"
+```
+
+Fix any flagged issues and re-render. Don't deliver a video that fails QA.
 
 ---
 

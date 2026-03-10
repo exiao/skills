@@ -95,22 +95,22 @@ Typical workflow: `stably test` → (failures?) → `stably fix` → `stably tes
 
 ```bash
 cd /tmp/bloom-tests-fix   # or wherever the repo is cloned
-STABLY_API_KEY=YOUR_STABLY_API_KEY \
-STABLY_PROJECT_ID=cmddjs2fq0000l70473vyhuwf \
+STABLY_API_KEY=$STABLY_API_KEY \
+STABLY_PROJECT_ID=$STABLY_PROJECT_ID \
 BASE_URL=https://bloom.onrender.com \
 stably test
 ```
 
 To fix after a failing run:
 ```bash
-STABLY_API_KEY=... STABLY_PROJECT_ID=... stably fix
+STABLY_API_KEY=$STABLY_API_KEY STABLY_PROJECT_ID=$STABLY_PROJECT_ID stably fix
 ```
 
 ## Required Env Vars
 
 ```bash
-STABLY_API_KEY=YOUR_STABLY_API_KEY
-STABLY_PROJECT_ID=cmddjs2fq0000l70473vyhuwf
+STABLY_API_KEY=<your-stably-api-key>
+STABLY_PROJECT_ID=<your-stably-project-id>
 ```
 
 ## Playwright Config (Reporter Setup)

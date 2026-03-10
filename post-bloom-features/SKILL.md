@@ -186,3 +186,8 @@ Typefully draft: https://typefully.com/?a=22264&d=[draft_id]
 5. **Wrong Typefully account** — this uses account 22264 (Bloom brand), NOT 286685.
 6. **Render timeout** — the Remotion render can take up to 4 minutes. Don't kill it early.
 7. **Simulator not ready** — always use `--wait-ready` when booting; launching too fast crashes the app.
+
+## Constitutional Rules
+- NEVER lower the quality bar to find something to post. If nothing meets criteria, report "nothing to post today" and why.
+- NEVER post without reading back the full content first.
+- Always create as draft first; do not schedule or publish directly.

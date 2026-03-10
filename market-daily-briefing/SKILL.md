@@ -67,8 +67,8 @@ After Signal, create a public-facing tweet of the sharpest single data point:
 cd /Users/testuser/clawd/skills/typefully
 node scripts/typefully.js drafts:create 286685 \
   --platform x \
-  --text "<post text>" \
-  --schedule next-free-slot
+  --text "<post text>"
+# Do NOT add --schedule. Save as unscheduled draft only — Eric reviews before posting.
 ```
 
 Tweet guidelines:

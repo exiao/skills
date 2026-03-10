@@ -27,6 +27,11 @@ This skill routes video tasks to the correct sub-skill. Read the task, pick the 
 - "talking avatar" / "lip sync" / "InfiniteTalk" / "animate this character" → **infinitetalk** (requires image + audio; run elevenlabs first if audio not ready)
 - "generate a video of…" / "make a clip of…" / "Sora…" → **sora**
 - "Kling prompt" / "write a Kling…" → **kling**
+
+**Sora vs. Kling — model selection for AI UGC:**
+- **Sora** → selfie-style talking-head shots (best facial realism)
+- **Kling** → product-in-hand shots (best identity/appearance consistency across frames)
+- Inconsistency across clips (mismatched frame rates, lighting, actor appearance) is the #1 tell that an ad is AI-generated. If mixing both models in a single ad, lock down a consistent actor appearance in the nano banana prompt first.
 - "Remotion" / "render an MP4" / "animated marketing video in code" → **remotion-videos**
 - "motion graphics" / "Framer Motion" / "GSAP animation" / "brand video for the web" → **browser-animation-video**
 - "record a demo" / "walkthrough video" / "screen-record the app" → **demo-video**

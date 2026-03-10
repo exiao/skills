@@ -66,7 +66,7 @@ Count posts per pillar.
 ### Step 3 — Pull Appfigures Download Data
 
 ```bash
-AUTH="Authorization: Bearer pat_ZqNCpq8IbC6qB6VK4WYmXdCEr2zO5Fds"
+AUTH="Authorization: Bearer $APPFIGURES_PAT"
 
 # Last 7 days (iOS + Android)
 curl -s "https://api.appfigures.com/v2/reports/sales/\

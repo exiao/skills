@@ -65,7 +65,7 @@ If logo fetch fails or file is <5KB, skip the logo (proceed without it).
 ### Step 5 — Resolve GEMINI_API_KEY
 
 ```bash
-GEMINI_API_KEY=$(python3 -c "import json; d=json.load(open('/Users/testuser/.clawdbot/clawdbot.json')); print(d.get('skills',{}).get('entries',{}).get('nano-banana-pro',{}).get('apiKey','') or d['env']['vars'].get('GEMINI_API_KEY',''))" 2>/dev/null)
+GEMINI_API_KEY=$(python3 -c "import json, os; d=json.load(open(os.path.expanduser('~/.clawdbot/clawdbot.json'))); print(d.get('skills',{}).get('entries',{}).get('nano-banana-pro',{}).get('apiKey','') or d['env']['vars'].get('GEMINI_API_KEY',''))" 2>/dev/null)
 export GEMINI_API_KEY
 ```
 
@@ -109,14 +109,15 @@ Example format:
 ### Step 8 — Upload Card + Create Typefully Draft
 
 ```bash
-cd /Users/testuser/clawd/skills/typefully
+cd ~/clawd/skills/typefully
 
 # Upload media
 node scripts/typefully.js media:upload 286685 /tmp/insider-trade-card-$(date +%Y%m%d).png
 # → returns media_id
 
 # Create draft with media + scheduled slot
-node scripts/typefully.js drafts:create 286685 --platform x --text "<tweet_text>" --media <media_id> --schedule next-free-slot
+node scripts/typefully.js drafts:create 286685 --platform x --text "<tweet_text>" --media <media_id>
+# Do NOT add --schedule. Save as unscheduled draft only — Eric reviews before posting.
 # → returns draft_id and scheduled time
 ```
 
@@ -164,3 +165,8 @@ Scheduled: [time]
 5. **Missing GEMINI_API_KEY** — always resolve it from clawdbot.json before calling Nano Banana Pro.
 6. **Scheduling without checking** — use `next-free-slot` to avoid stacking tweets; Typefully handles spacing.
 7. **Reporting when no trade found** — if Step 2 yields nothing, NO_REPLY silently. Don't send a "nothing found" message.
+
+## Constitutional Rules
+- NEVER lower the quality bar to find something to post. If nothing meets criteria, report "nothing to post today" and why.
+- NEVER post without reading back the full content first.
+- Always create as draft first; do not schedule or publish directly.

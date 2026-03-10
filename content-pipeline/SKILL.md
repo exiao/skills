@@ -74,8 +74,15 @@ Your job:
 4. Run /article-writer → draft.md (must pass "only Eric could write this" test: use Bloom-specific numbers, named frameworks, personal tool experience)
 5. Run /editor-in-chief — max 5 iterations → editing-log.md + draft-final.md
 6. Run /image-generator — hero image → hero.png
-7. Run /content-atomizer — X thread + LinkedIn post → x-thread.md + linkedin-post.md
-8. Format for Substack → substack-ready.md
+7. Write LinkedIn post directly → linkedin-post.md
+   - Re-read ~/marketing/WRITING-STYLE.md kill phrases list before writing
+   - Write a native LinkedIn post from draft-final.md. Do NOT reframe into "here's what most people get wrong" or "X isn't Y, it's Z" patterns. Lead with the most specific, surprising fact or data point from the article. Let the story carry the reader — no interpretive sentences telling them what to feel.
+   - Run /evaluate-content on the post (Voice + Leanness scores only). If either scores below 4/5, rewrite and re-check. Max 2 revision passes.
+   - Save final version to linkedin-post.md (post body only — no metadata headers)
+8. Write X thread → x-thread.md
+   - Run /tweet-ideas using draft-final.md as source. Pick the 5 strongest standalone tweets and sequence them as a thread.
+   - No promotional framing, no article links in thread body (link goes in reply)
+9. Format for Substack → substack-ready.md
 
 Do NOT publish. Do NOT send messages unless blocked.
 ```
@@ -96,28 +103,44 @@ Do NOT publish. Do NOT send messages unless blocked.
 
 ---
 
-## Phase 3 — Typefully Drafts
+## Phase 3 — Substack Drafts
 
-After all 3 sub-agents complete, for each article:
+After all 3 sub-agents complete, for each article save a Substack draft using the `substack-draft` skill with `profile=clawd`.
+
+**NEVER click Publish. Draft only.**
+
+Steps per article:
+1. Read `~/marketing/substack/drafts/[slug]/substack-ready.md` for title, subtitle, and body
+2. Open Substack editor: `browser action=open targetUrl="https://mycrystalball.substack.com/publish/post" profile=clawd`
+3. Paste title, subtitle, body
+4. Upload `hero.png` as the cover image
+5. Save as draft (never publish)
+6. Capture the draft URL and include it in the Phase 4 report
+
+---
+
+## Phase 4 — Typefully Drafts
+
+After Substack drafts are saved, create Typefully drafts for each article:
+
+**IMPORTANT: Save as UNSCHEDULED drafts only. Do NOT schedule or publish anything.**
 
 ```bash
-# X thread draft (tagged content-pipeline)
+# X thread draft — unscheduled draft only
 cd ~/clawd/skills/typefully && node scripts/typefully.js drafts:create 286685 \
-  --platform x --text "$(cat ~/marketing/substack/drafts/[slug]/x-thread.md)" \
-  --schedule next-free-slot
+  --platform x --text "$(cat ~/marketing/substack/drafts/[slug]/x-thread.md)"
 
-# LinkedIn draft
+# LinkedIn draft — unscheduled draft only
 node scripts/typefully.js drafts:create 286685 \
-  --platform linkedin --text "$(cat ~/marketing/substack/drafts/[slug]/linkedin-post.md)" \
-  --schedule next-free-slot
+  --platform linkedin --text "$(cat ~/marketing/substack/drafts/[slug]/linkedin-post.md)"
 ```
 
 ---
 
-## Phase 4 — Report
+## Phase 5 — Report
 
 Send summary to signal +15202753080:
 - 3 topics chosen (one line each with positioning angle)
-- Draft locations (`~/marketing/substack/drafts/[slug]/`)
-- Typefully draft links
+- Substack draft URLs (one per article — ready to review and publish)
+- Typefully draft links (LinkedIn + X thread, unscheduled)
 - Appfigures metrics used as data points

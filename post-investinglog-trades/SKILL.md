@@ -89,7 +89,7 @@ Via web-search skill:
 ### Step 6 — Resolve GEMINI_API_KEY
 
 ```bash
-GEMINI_API_KEY=$(python3 -c "import json; d=json.load(open('/Users/testuser/.clawdbot/clawdbot.json')); print(d.get('skills',{}).get('entries',{}).get('nano-banana-pro',{}).get('apiKey','') or d['env']['vars'].get('GEMINI_API_KEY',''))" 2>/dev/null)
+GEMINI_API_KEY=$(python3 -c "import json, os; d=json.load(open(os.path.expanduser('~/.clawdbot/clawdbot.json'))); print(d.get('skills',{}).get('entries',{}).get('nano-banana-pro',{}).get('apiKey','') or d['env']['vars'].get('GEMINI_API_KEY',''))" 2>/dev/null)
 export GEMINI_API_KEY
 ```
 
@@ -130,7 +130,7 @@ YTD: +18.3%
 ### Step 9 — Ensure Tag + Upload + Create Draft
 
 ```bash
-cd /Users/testuser/clawd/skills/typefully
+cd ~/clawd/skills/typefully
 
 # Ensure 'investing-log' tag exists (safe to run even if it already exists)
 node scripts/typefully.js tags:create 286685 --name 'investing-log' 2>/dev/null || true
@@ -144,8 +144,8 @@ node scripts/typefully.js drafts:create 286685 \
   --platform x \
   --text "<tweet_text>" \
   --media <media_id> \
-  --schedule next-free-slot \
   --tags investing-log
+# Do NOT add --schedule. Save as unscheduled draft only — Eric reviews before posting.
 # → returns draft_id + scheduled time
 ```
 
@@ -211,3 +211,8 @@ Scheduled: [time]
 5. **State file not updated** — always write back after successful post; otherwise same trade posts again tomorrow.
 6. **Overwriting old state** — keep last 50 entries, don't truncate to just the new one.
 7. **Not creating the tag** — run `tags:create` before `drafts:create`; Typefully may reject unknown tags.
+
+## Constitutional Rules
+- NEVER lower the quality bar to find something to post. If nothing meets criteria, report "nothing to post today" and why.
+- NEVER post without reading back the full content first.
+- Always create as draft first; do not schedule or publish directly.

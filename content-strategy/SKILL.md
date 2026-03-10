@@ -191,10 +191,34 @@ Rules:
 - Hook must work read aloud with no visuals (audio-only test)
 - 60-90 second scripts for TikTok/Reels; 60s max for Shorts
 - Label each line: HOOK / SETUP / POINT 1 / POINT 2 / POINT 3 / CTA
+- **No-intro rule:** Never use the first 3 seconds to introduce yourself or your topic. Your caption/title card is the verbal intro. Jump directly to the hook action. If you feel the urge to say "Hey guys, today I'm going to..." — cut it.
 
 ### Output
 
 One file per episode: `~/clawd/characters/<slug>/scripts/YYYY-MM-DD-episode-title.md`
+
+---
+
+## Step 2d: Viral Breakdown Pillar
+
+This is a full account pillar — not a one-off format. Run it every week.
+
+**How it works:**
+- Pick 1–3 viral posts in your niche each week
+- React to + annotate them in dual-screen format (your face/commentary + the source post side by side)
+- Explain the *specific mechanics* of why it worked — not "it's good," but "the credibility drop at 0:08 + the stacked loop at 0:14 are why retention holds past 30 seconds"
+- Label every piece "pt 1" even if there's no pt 2 yet — it signals series, invites return visits, and the algorithm treats it as episodic
+
+**Why it compounds:**
+| Benefit | Mechanism |
+|---------|-----------|
+| Borrowed traffic | Your content surfaces in searches and feeds for the source post's audience |
+| Authority positioning | You're the person who understands the craft, not just a consumer |
+| Series architecture | Built-in return reason; viewers expect more installments |
+
+**Format:** Dual-screen reaction (split-screen or side-by-side layout). If screen recording isn't possible, show the source clip and annotate with on-screen text labels while reacting verbally.
+
+**Sourcing:** Use `last30days`, `grok-search`, or `trend-research` to find viral posts in the investing/personal finance niche weekly. Look for 50K+ views, especially from accounts under 10K followers (pre-algo signal).
 
 ---
 
