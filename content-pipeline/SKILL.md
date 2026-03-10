@@ -103,9 +103,25 @@ Do NOT publish. Do NOT send messages unless blocked.
 
 ---
 
-## Phase 3 — Typefully Drafts
+## Phase 3 — Substack Drafts
 
-After all 3 sub-agents complete, for each article:
+After all 3 sub-agents complete, for each article save a Substack draft using the `substack-draft` skill with `profile=clawd`.
+
+**NEVER click Publish. Draft only.**
+
+Steps per article:
+1. Read `~/marketing/substack/drafts/[slug]/substack-ready.md` for title, subtitle, and body
+2. Open Substack editor: `browser action=open targetUrl="https://mycrystalball.substack.com/publish/post" profile=clawd`
+3. Paste title, subtitle, body
+4. Upload `hero.png` as the cover image
+5. Save as draft (never publish)
+6. Capture the draft URL and include it in the Phase 4 report
+
+---
+
+## Phase 4 — Typefully Drafts
+
+After Substack drafts are saved, create Typefully drafts for each article:
 
 **IMPORTANT: Save as UNSCHEDULED drafts only. Do NOT schedule or publish anything.**
 
@@ -121,10 +137,10 @@ node scripts/typefully.js drafts:create 286685 \
 
 ---
 
-## Phase 4 — Report
+## Phase 5 — Report
 
 Send summary to signal +15202753080:
 - 3 topics chosen (one line each with positioning angle)
-- Draft locations (`~/marketing/substack/drafts/[slug]/`)
-- Typefully draft links
+- Substack draft URLs (one per article — ready to review and publish)
+- Typefully draft links (LinkedIn + X thread, unscheduled)
 - Appfigures metrics used as data points
