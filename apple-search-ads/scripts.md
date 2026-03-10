@@ -118,25 +118,27 @@ set -euo pipefail
 : "${ASA_ORG_ID:?Set ASA_ORG_ID}"
 
 # Arguments
-NAME="${1:?Usage: $0 <name> <adam_id> <country> <daily_budget>}"
+NAME="${1:?Usage: $0 <name> <adam_id> <country> <daily_budget> <total_budget>}"
 ADAM_ID="${2:?Missing adam_id}"
 COUNTRY="${3:?Missing country}"
 DAILY_BUDGET="${4:?Missing daily_budget}"
+TOTAL_BUDGET="${5:?Missing total_budget}"
 
 curl -s -X POST "https://api.searchads.apple.com/api/v5/campaigns" \
   -H "Authorization: Bearer $ASA_ACCESS_TOKEN" \
   -H "X-AP-Context: orgId=$ASA_ORG_ID" \
   -H "Content-Type: application/json" \
-  -d '{
-    "name": "'"$NAME"'",
-    "adamId": '"$ADAM_ID"',
-    "countriesOrRegions": ["'"$COUNTRY"'"],
-    "budgetAmount": {"amount": "10000", "currency": "USD"},
-    "dailyBudgetAmount": {"amount": "'"$DAILY_BUDGET"'", "currency": "USD"},
-    "supplySources": ["APPSTORE_SEARCH_RESULTS"],
-    "billingEvent": "TAPS",
-    "status": "ENABLED"
-  }' | jq
+  -d "$(jq -n \
+    --arg name "$NAME" \
+    --argjson adam_id "$ADAM_ID" \
+    --arg country "$COUNTRY" \
+    --arg daily "$DAILY_BUDGET" \
+    --arg total "$TOTAL_BUDGET" \
+    '{name: $name, adamId: $adam_id, countriesOrRegions: [$country],
+      budgetAmount: {amount: $total, currency: "USD"},
+      dailyBudgetAmount: {amount: $daily, currency: "USD"},
+      supplySources: ["APPSTORE_SEARCH_RESULTS"],
+      billingEvent: "TAPS", status: "ENABLED"}')" | jq
 ```
 
 ### pause-campaign.sh
@@ -194,12 +196,13 @@ curl -s -X POST "https://api.searchads.apple.com/api/v5/campaigns/$CAMPAIGN_ID/a
   -H "Authorization: Bearer $ASA_ACCESS_TOKEN" \
   -H "X-AP-Context: orgId=$ASA_ORG_ID" \
   -H "Content-Type: application/json" \
-  -d '[{
-    "text": "'"$KEYWORD"'",
-    "matchType": "'"$MATCH_TYPE"'",
-    "bidAmount": {"amount": "'"$BID"'", "currency": "USD"},
-    "status": "ACTIVE"
-  }]' | jq
+  -d "$(jq -n \
+    --arg text "$KEYWORD" \
+    --arg match "$MATCH_TYPE" \
+    --arg bid "$BID" \
+    '[{text: $text, matchType: $match,
+      bidAmount: {amount: $bid, currency: "USD"},
+      status: "ACTIVE"}]')" | jq
 ```
 
 ### add-negatives.sh
@@ -227,10 +230,10 @@ curl -s -X POST "https://api.searchads.apple.com/api/v5/campaigns/$CAMPAIGN_ID/n
   -H "Authorization: Bearer $ASA_ACCESS_TOKEN" \
   -H "X-AP-Context: orgId=$ASA_ORG_ID" \
   -H "Content-Type: application/json" \
-  -d '[{
-    "text": "'"$KEYWORD"'",
-    "matchType": "'"$MATCH_TYPE"'"
-  }]' | jq
+  -d "$(jq -n \
+    --arg text "$KEYWORD" \
+    --arg match "$MATCH_TYPE" \
+    '[{text: $text, matchType: $match}]')" | jq
 ```
 
 ## Reports
