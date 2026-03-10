@@ -74,8 +74,15 @@ Your job:
 4. Run /article-writer → draft.md (must pass "only Eric could write this" test: use Bloom-specific numbers, named frameworks, personal tool experience)
 5. Run /editor-in-chief — max 5 iterations → editing-log.md + draft-final.md
 6. Run /image-generator — hero image → hero.png
-7. Run /content-atomizer — X thread + LinkedIn post → x-thread.md + linkedin-post.md
-8. Format for Substack → substack-ready.md
+7. Write LinkedIn post directly → linkedin-post.md
+   - Re-read ~/marketing/WRITING-STYLE.md kill phrases list before writing
+   - Write a native LinkedIn post from draft-final.md. Do NOT reframe into "here's what most people get wrong" or "X isn't Y, it's Z" patterns. Lead with the most specific, surprising fact or data point from the article. Let the story carry the reader — no interpretive sentences telling them what to feel.
+   - Run /evaluate-content on the post (Voice + Leanness scores only). If either scores below 4/5, rewrite and re-check. Max 2 revision passes.
+   - Save final version to linkedin-post.md (post body only — no metadata headers)
+8. Write X thread → x-thread.md
+   - Run /tweet-ideas using draft-final.md as source. Pick the 5 strongest standalone tweets and sequence them as a thread.
+   - No promotional framing, no article links in thread body (link goes in reply)
+9. Format for Substack → substack-ready.md
 
 Do NOT publish. Do NOT send messages unless blocked.
 ```
