@@ -83,8 +83,11 @@ Log each kill to `ads/iteration/$(date +%Y-%m-%d)_kills.log`.
 ```bash
 # Increase ad set daily budget (in cents — $6/day = 600)
 # Get current adset budget first, then increase by $2
+CURRENT_BUDGET=$(curl -s "$API/$ADSET_ID?fields=daily_budget&access_token=$TOKEN" \
+  | python3 -c "import sys,json; print(json.load(sys.stdin)['daily_budget'])")
+NEW_BUDGET=$((CURRENT_BUDGET + 200))
 curl -s -X POST "$API/$ADSET_ID" \
-  -F "daily_budget=600" \
+  -F "daily_budget=$NEW_BUDGET" \
   -F "access_token=$TOKEN"
 ```
 

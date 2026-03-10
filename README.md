@@ -62,6 +62,7 @@ cp -r ~/Projects/erics-skills/skills/ad-copy ~/.clawdbot/skills/
 | [dataforseo](dataforseo/SKILL.md) | keyword research, App Store/Google Play rankings, SERP rankings, ASO. |
 | [grok-search](grok-search/SKILL.md) | search the web or X/Twitter using xAI Grok. |
 | [last30days](last30days/SKILL.md) | research topics, manage watchlists, get briefings. Sources: Reddit, X, YouTube, web. |
+| [notebooklm](notebooklm/SKILL.md) | query Google NotebookLM notebooks for source-grounded answers; generate audio overviews and slides. |
 | [phoenix-cli](phoenix-cli/SKILL.md) | debug LLM apps with Phoenix CLI: traces, errors, experiments. |
 | [polymarket](polymarket/SKILL.md) | query Polymarket prediction markets. |
 | [seo-research](seo-research/SKILL.md) | SEO: keyword research, AI search optimization, technical audits, schema markup. |
@@ -84,6 +85,7 @@ cp -r ~/Projects/erics-skills/skills/ad-copy ~/.clawdbot/skills/
 |-------|-------------|
 | [claude-md-management](claude-md-management/SKILL.md) | audit, improve, and maintain CLAUDE.md files across repos. |
 | [context7](context7/SKILL.md) | fetch version-specific library/framework docs via Context7 MCP. |
+| [demo-pr-feature](demo-pr-feature/SKILL.md) | capture a demo screenshot/video of a PR's feature, deploy to Surge.sh, post as GitHub PR comment. |
 | [deploy-bloom](deploy-bloom/SKILL.md) | deploy Bloom OTA updates via bloom-updater pipeline. |
 | [documents](documents/SKILL.md) | work with .docx, .pdf, .pptx, .xlsx files. |
 | [fix-bloom-prs](fix-bloom-prs/SKILL.md) | fix CI failures, review code, squash Bloom PRs. |
@@ -91,6 +93,8 @@ cp -r ~/Projects/erics-skills/skills/ad-copy ~/.clawdbot/skills/
 | [ios-simulator](ios-simulator/SKILL.md) | iOS simulator scripts for app testing and build automation. |
 | [ralph-mode](ralph-mode/SKILL.md) | autonomous dev loops with iteration gates and test validation. |
 | [serena](serena/SKILL.md) | navigate/edit complex codebases at the symbol level via Serena MCP. |
+| [stably-cli](stably-cli/SKILL.md) | create, run, fix, and maintain Playwright tests via Stably CLI. |
+| [stably-sdk-rules](stably-sdk-rules/SKILL.md) | best practices for writing Stably AI-powered Playwright tests. |
 | [superpowers-coding](superpowers-coding/SKILL.md) | TDD-first feature implementation and systematic debugging. |
 | [superpowers-planning](superpowers-planning/SKILL.md) | explore intent and create detailed plans before touching code. |
 | [superpowers-reviews](superpowers-reviews/SKILL.md) | code review, branch finishing, batch execution with checkpoints. |

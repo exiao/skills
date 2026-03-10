@@ -158,7 +158,7 @@ B64=$(base64 < /tmp/pr-demo-<PR>.png)
 surge /tmp/bloom-pr-<PR>-demo bloom-pr-<PR>-demo.surge.sh
 ```
 
-Surge token is in `~/.netrc` for `exiao3@gmail.com`.
+Surge token is in `~/.netrc` for `your-email@example.com`.
 
 ## Step 7 — Post PR comment
 
