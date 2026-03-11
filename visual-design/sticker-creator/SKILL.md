@@ -123,7 +123,32 @@ uv run /opt/homebrew/lib/node_modules/clawdbot/skills/nano-banana-pro/scripts/ge
 
 ---
 
-## Step 4 — Review & Iterate
+## Step 4 — Remove Background
+
+After generation, strip the background so the sticker floats on transparency. Uses `rembg` via `uv`.
+
+```bash
+BGREMOVED="${OUTFILE%.png}-nobg.png"
+
+uv run --with "rembg[cpu]" --with pillow python3 - "$OUTFILE" "$BGREMOVED" << 'EOF'
+import sys
+from rembg import remove
+from PIL import Image
+
+inp = Image.open(sys.argv[1]).convert("RGBA")
+out = remove(inp)
+out.save(sys.argv[2])
+print(f"Background removed: {sys.argv[2]}")
+EOF
+```
+
+- Output overwrites the variable: use `$BGREMOVED` (ends in `-nobg.png`) for all subsequent steps
+- `rembg` downloads a ~170MB U2-Net model on first run — subsequent calls are fast (model cached)
+- If the edge looks rough, regenerate with a cleaner Nano Banana prompt (more contrast between sticker and bg)
+
+---
+
+## Step 5 — Review & Iterate
 
 After generation, show the image to the user. Common issues and fixes:
 
@@ -146,3 +171,4 @@ If the first result is off, regenerate with a more explicit prompt — don't acc
 3. **Using `--resolution 1K` for finals** — always use `2K` for anything that gets posted.
 4. **Vague prompts** — specify hex colors, exact text, font weight. Don't leave it to interpretation.
 5. **PIL fallback** — never fall back to PIL. If Nano Banana fails, report the failure.
+6. **Sending `$OUTFILE` instead of `$BGREMOVED`** — always send the `-nobg.png` version after background removal. The raw generated file still has a solid background.
