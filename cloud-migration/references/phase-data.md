@@ -28,13 +28,14 @@ pg_dump --version                              # must be >= source version
 
 ```bash
 # Custom format (preferred): compressed, supports parallel restore, selective table restore
+# Directory format is required for parallel dump (-j). Custom format (-Fc) does not support -j.
 pg_dump "$SOURCE_DB_URL" \
-  -Fc \                     # custom format (compressed binary)
-  -Z6 \                     # compression level 6 (good balance)
-  -j4 \                     # parallel dump using 4 workers
+  -Fd \
+  -Z6 \
+  -j4 \
   -f migration_$(date +%Y%m%d_%H%M%S).dump \
-  --no-owner \              # don't dump ownership info (role names differ between providers)
-  --no-privileges           # don't dump GRANT/REVOKE (role names differ)
+  --no-owner \
+  --no-privileges
 
 # Plain SQL (use if custom format causes issues on restore):
 pg_dump "$SOURCE_DB_URL" \
