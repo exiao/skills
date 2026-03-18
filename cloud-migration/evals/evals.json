@@ -1,0 +1,119 @@
+{
+  "skill_name": "cloud-migration",
+  "evals": [
+    {
+      "id": 0,
+      "prompt": "Migrate our Django + Postgres + Redis app from Render to Railway. Our app is called 'myapp' with: a web service (Django/Gunicorn on Render), a Postgres database on Render (connection string in DATABASE_URL env var), a Redis instance on Render (connection string in REDIS_URL env var), and about 50 env vars set on the Render service. Walk me through the full migration — provision everything on Railway, migrate the data, set env vars, deploy the app, verify it works, and cut over our custom domain (api.myapp.com). Be specific with actual commands to run.",
+      "expected_output": "A complete step-by-step migration guide covering: Railway project/service provisioning, pg_dump with correct flags, pg_restore with --no-owner --no-privileges, env var migration (all 50 vars), Railway service references for DB/Redis URLs, Django ASGI/Procfile fix, gunicorn PORT binding, data parity verification (row counts), DNS cutover with CNAME record, and cleanup steps.",
+      "assertions": [
+        {
+          "name": "covers-pg-dump",
+          "description": "Response includes pg_dump command with -Fc (custom format) flag",
+          "check": "contains 'pg_dump' AND contains '-Fc' or 'custom format'"
+        },
+        {
+          "name": "covers-pg-restore",
+          "description": "Response includes pg_restore with --no-owner flag",
+          "check": "contains 'pg_restore' AND contains '--no-owner'"
+        },
+        {
+          "name": "covers-all-6-phases",
+          "description": "Response addresses: audit/inventory, provision, data migration, deploy, verify, DNS cutover",
+          "check": "mentions provision + data migration + deploy + verify/parity + DNS"
+        },
+        {
+          "name": "covers-env-vars",
+          "description": "Response includes env var migration (not just a few vars, but bulk/all)",
+          "check": "mentions bulk env var export or import OR addresses all 50 vars"
+        },
+        {
+          "name": "covers-railway-service-refs",
+          "description": "Response mentions Railway service references for DATABASE_URL/REDIS_URL",
+          "check": "contains '${{Postgres' or 'service reference' or 'DATABASE_URL from Postgres service'"
+        },
+        {
+          "name": "covers-dns-cutover",
+          "description": "Response includes DNS cutover with CNAME record",
+          "check": "contains 'CNAME' AND contains 'railway.app'"
+        },
+        {
+          "name": "covers-parity-verification",
+          "description": "Response includes data parity verification (row counts or record comparison)",
+          "check": "contains 'row count' or 'n_live_tup' or 'verify' with data comparison"
+        },
+        {
+          "name": "covers-port-binding",
+          "description": "Response mentions Railway PORT env var injection and 0.0.0.0:$PORT binding",
+          "check": "mentions '$PORT' or '0.0.0.0:' in context of gunicorn/Railway"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 1,
+      "prompt": "We're on Heroku, move us to Railway — web dyno, Postgres, Redis. Our setup: Heroku app named 'myapp-prod', Heroku Postgres (hobby dev tier, ~10k rows), Heroku Redis (hobby dev tier), 30 config vars set via Heroku dashboard, custom domain: app.mycompany.com pointing to Heroku. Give me the full step-by-step migration — dump the data from Heroku, restore to Railway, move env vars, deploy, verify, and switch the domain. Include specific CLI commands.",
+      "expected_output": "Complete Heroku → Railway migration guide covering: heroku pg:backups:capture and pg_restore to Railway, heroku config export for all 30 vars, Railway provisioning (project, Postgres, Redis, web service), deploy, domain cutover from Heroku to Railway CNAME.",
+      "assertions": [
+        {
+          "name": "covers-heroku-db-export",
+          "description": "Response includes Heroku-specific database export commands (heroku pg:backups)",
+          "check": "contains 'heroku pg:backups' or 'pg:backups:capture'"
+        },
+        {
+          "name": "covers-heroku-config-export",
+          "description": "Response includes Heroku config var export (heroku config)",
+          "check": "contains 'heroku config' in context of exporting vars"
+        },
+        {
+          "name": "covers-railway-provision",
+          "description": "Response includes Railway project and service provisioning",
+          "check": "contains 'railway' and ('add --database' or 'init' or 'link')"
+        },
+        {
+          "name": "covers-pg-restore-to-railway",
+          "description": "Response includes restoring Heroku dump to Railway",
+          "check": "contains 'pg_restore' or 'psql' with Railway DB URL"
+        },
+        {
+          "name": "covers-domain-switch",
+          "description": "Response addresses switching app.mycompany.com from Heroku to Railway",
+          "check": "mentions DNS update or CNAME change from Heroku to Railway"
+        }
+      ],
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Clone our Railway project to Fly.io as a backup environment. We have on Railway: a Django web service (bloom-web), Postgres database (Railway managed), Redis instance (Railway managed), custom domain api.myapp.com, 40+ env vars. I want to provision an identical environment on Fly.io, copy the current data, and have it running as a hot standby that I can failover to. Walk me through it with actual commands.",
+      "expected_output": "Complete Railway → Fly.io clone guide: flyctl app creation, Fly Postgres provisioning, flyctl proxy for pg_dump from Railway, pg_restore to Fly Postgres, Upstash Redis setup, flyctl secrets for env vars, fly.toml config, deploy, and DNS failover strategy.",
+      "assertions": [
+        {
+          "name": "covers-fly-provisioning",
+          "description": "Response includes flyctl app/Postgres/Redis provisioning",
+          "check": "contains 'flyctl' and ('postgres create' or 'apps create')"
+        },
+        {
+          "name": "covers-railway-db-export",
+          "description": "Response explains how to get Railway Postgres public URL and dump it",
+          "check": "contains 'DATABASE_PUBLIC_URL' or 'railway variable' with pg_dump"
+        },
+        {
+          "name": "covers-fly-proxy-for-restore",
+          "description": "Response explains Fly.io Postgres proxy for external access",
+          "check": "contains 'flyctl proxy' or 'fly proxy' for DB access"
+        },
+        {
+          "name": "covers-env-var-migration",
+          "description": "Response addresses migrating 40+ env vars from Railway to Fly",
+          "check": "contains 'flyctl secrets' or 'flyctl secrets import'"
+        },
+        {
+          "name": "covers-fly-toml",
+          "description": "Response includes fly.toml configuration",
+          "check": "contains 'fly.toml' or '[http_service]'"
+        }
+      ],
+      "files": []
+    }
+  ]
+}

@@ -17,6 +17,36 @@ Trigger when user:
 - Uses phrases like "ask my NotebookLM", "check my docs", "query my notebook"
 - Wants to generate a slide deck, audio overview, mind map, etc. from a YouTube video or document
 
+## 📥 Download Slides as PDF
+
+Download the most recently generated Slide Deck from a notebook:
+
+```bash
+# Download from most recent notebook (auto-opens first notebook on home page)
+python scripts/run.py download_slides.py
+
+# Download from a specific notebook
+python scripts/run.py download_slides.py --notebook-url "https://notebooklm.google.com/notebook/..."
+
+# Custom output path
+python scripts/run.py download_slides.py --output ~/Desktop/my_slides.pdf
+
+# Show browser for debugging
+python scripts/run.py download_slides.py --show-browser
+```
+
+**How it works:**
+1. Opens NotebookLM with saved auth (no re-login needed if already authenticated)
+2. Opens the target notebook (or first notebook on home page)
+3. Finds and clicks the Slide Deck in the Studio panel
+4. Extracts the Google Slides link
+5. Downloads as PDF via Google's export URL (`/export/pdf`)
+6. Saves to `~/Downloads/notebooklm_slides.pdf` by default
+
+**Prerequisites:** Must be authenticated first (`python scripts/run.py auth_manager.py status`)
+
+---
+
 ## 🎯 Slide Deck from YouTube (Browser Automation)
 
 To generate a NotebookLM slide deck from a YouTube video:

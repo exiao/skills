@@ -1,0 +1,26 @@
+{
+  "name": "Brand Keywords",
+  "campaignId": 0,
+  "defaultBidAmount": {
+    "amount": "1.50",
+    "currency": "USD"
+  },
+  "cpaGoal": {
+    "amount": "5.00",
+    "currency": "USD"
+  },
+  "targetingDimensions": {
+    "age": {
+      "included": [{"minAge": 18}]
+    },
+    "deviceClass": {
+      "included": ["IPHONE", "IPAD"]
+    },
+    "appDownloaders": {
+      "included": [],
+      "excluded": []
+    }
+  },
+  "automatedKeywordsOptIn": false,
+  "status": "ENABLED"
+}

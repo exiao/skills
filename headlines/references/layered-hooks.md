@@ -8,3 +8,5 @@ Every piece of content needs multiple hook layers:
 **Layer 4+ — Mini hooks in body:** "But here's where it gets crazy…", "Wait until you see this part…", "This last one is the most important."
 
 Create open loops and delay the payoff at every layer.
+
+**For video content:** These layers map to a full retention architecture. See [Video Retention Architecture: 6-Step Framework](video-retention-architecture-6-step.md) for the complete video structure: hook → agitate → re-hook → establish → build → share CTA. The key addition is the **re-hook** (mid-roll pattern interrupt at 10-15 seconds) and the **delayed topic reveal** (don't tell them what the video is about until ~25 seconds in).

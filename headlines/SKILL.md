@@ -89,5 +89,6 @@ This skill content is modularized into reference docs for readability.
 - [4 Organic Growth Hacks That Look Like Cheating (SGE)](references/4-organic-growth-hacks-that-look-like-cheating-sge.md)
 - [Multi-Account Hook Testing at Scale (SGE)](references/multi-account-hook-testing-at-scale-sge.md)
 - [Instagram-Specific Adaptations (SGE)](references/instagram-specific-adaptations-sge.md)
+- [Video Retention Architecture: 6-Step Framework](references/video-retention-architecture-6-step.md)
 - [Usage](references/usage.md)
 - [References](references/references.md)
