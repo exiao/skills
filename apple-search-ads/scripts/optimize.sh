@@ -73,7 +73,7 @@ cmd_audit() {
     [.data.reportingDataResponse.row[]? |
      select((.total.localSpend.amount | tonumber) > 5) |
      select(.total.installs == 0)] |
-    sort_by(-.total.localSpend.amount | tonumber)[] |
+    sort_by(-(.total.localSpend.amount | tonumber))[] |
     [.metadata.keyword, .metadata.matchType,
      .total.localSpend.amount, .total.impressions, .total.taps] |
     @tsv' | column -t -s $'\t' | {
@@ -268,7 +268,7 @@ cmd_auto_bid() {
     batch_count=$(echo "$batch" | jq 'length')
     echo "  Ad group $agid: updating $batch_count keywords..." >&2
 
-    asa_api PUT "/campaigns/${cid}/adgroups/${agid}/targetingkeywords" "$batch" | \
+    asa_api PUT "/campaigns/${cid}/adgroups/${agid}/targetingkeywords/bulk" "$batch" | \
       jq '.data | length | tostring + " updated"'
   done
 

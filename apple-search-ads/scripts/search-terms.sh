@@ -129,7 +129,7 @@ cmd_losers() {
     [.data.reportingDataResponse.row[]? |
      select((.total.localSpend.amount | tonumber) >= ($ms | tonumber)) |
      select(.total.installs <= ($mi | tonumber))] |
-    sort_by(-.total.localSpend.amount | tonumber)[] |
+    sort_by(-(.total.localSpend.amount | tonumber))[] |
     [.metadata.searchTermText,
      .total.localSpend.amount,
      .total.impressions,
