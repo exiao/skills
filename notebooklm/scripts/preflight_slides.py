@@ -26,7 +26,7 @@ import asyncio
 import json
 import sys
 import time
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from patchright.sync_api import sync_playwright
@@ -87,8 +87,8 @@ def save_slides_cache(cache: dict):
 def _cache_is_fresh(entry: dict) -> bool:
     """Return True if the entry was checked within CACHE_TTL_DAYS."""
     try:
-        last = datetime.fromisoformat(entry["last_checked"])
-        return datetime.utcnow() - last < timedelta(days=CACHE_TTL_DAYS)
+        last = datetime.fromisoformat(entry["last_checked"]).replace(tzinfo=timezone.utc)
+        return datetime.now(timezone.utc) - last < timedelta(days=CACHE_TTL_DAYS)
     except Exception:
         return False
 
@@ -226,7 +226,7 @@ async def _check_notebooks_async(notebooks: list[dict], cache: dict, headless: b
                         "slides_url": None,
                         "title": title,
                         "notebook_url": notebook_url,
-                        "last_checked": datetime.utcnow().isoformat(),
+                        "last_checked": datetime.now(timezone.utc).isoformat(),
                     }
                     # Write cache after every notebook (protects progress on interrupt)
                     async with cache_lock:
