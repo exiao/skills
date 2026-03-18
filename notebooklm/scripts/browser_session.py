@@ -68,7 +68,6 @@ class BrowserSession:
             self._wait_for_ready()
 
             # Simulate human inspection
-            self.stealth.random_mouse_movement(self.page)
             self.stealth.random_delay(300, 600)
 
             print(f"✅ Session {self.id} ready!")
