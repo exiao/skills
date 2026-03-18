@@ -98,7 +98,7 @@ echo "⏹️  Stopping recording..."
 echo "🔧 Post-processing..."
 
 # Scale from Retina 2880x1800 → 1920x1080 for sharing
-$FFMPEG -y -i "$OUTPUT" \
+"$FFMPEG" -y -i "$OUTPUT" \
   -vf "scale=1920:1080" \
   -c:v libx264 \
   -crf 20 \

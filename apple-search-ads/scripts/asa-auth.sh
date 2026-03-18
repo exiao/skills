@@ -12,7 +12,7 @@ set -euo pipefail
 #   ASA_KEY_ID           — xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 #   ASA_PRIVATE_KEY_PATH — path to EC P-256 private key PEM
 #
-# Dependencies: python3.13, pyjwt[crypto], curl, jq
+# Dependencies: python3, pyjwt[crypto], curl, jq
 #
 # Usage:
 #   source asa-auth.sh
@@ -41,15 +41,19 @@ _asa_check_env() {
 }
 
 _asa_generate_client_secret() {
-  # Generate ES256 JWT using Python pyjwt (one-liner)
-  python3.13 -c "
-import jwt, time
-key = open('${ASA_PRIVATE_KEY_PATH}').read()
+  # Generate ES256 JWT using Python pyjwt — vars passed via env to avoid shell injection
+  ASA_PRIVATE_KEY_PATH="$ASA_PRIVATE_KEY_PATH" \
+  ASA_CLIENT_ID="$ASA_CLIENT_ID" \
+  ASA_TEAM_ID="$ASA_TEAM_ID" \
+  ASA_KEY_ID="$ASA_KEY_ID" \
+  python3 -c "
+import jwt, time, os
+key = open(os.environ['ASA_PRIVATE_KEY_PATH']).read()
 print(jwt.encode(
-    {'sub': '${ASA_CLIENT_ID}', 'aud': 'https://appleid.apple.com',
+    {'sub': os.environ['ASA_CLIENT_ID'], 'aud': 'https://appleid.apple.com',
      'iat': int(time.time()), 'exp': int(time.time()) + 3600,
-     'iss': '${ASA_TEAM_ID}'},
-    key, algorithm='ES256', headers={'kid': '${ASA_KEY_ID}'}
+     'iss': os.environ['ASA_TEAM_ID']},
+    key, algorithm='ES256', headers={'kid': os.environ['ASA_KEY_ID']}
 ))"
 }
 

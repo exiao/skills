@@ -268,7 +268,7 @@ cmd_auto_bid() {
     batch_count=$(echo "$batch" | jq 'length')
     echo "  Ad group $agid: updating $batch_count keywords..." >&2
 
-    asa_api PUT "/campaigns/${cid}/adgroups/${agid}/targetingkeywords/bulk" "$batch" | \
+    asa_api PUT "/campaigns/${cid}/adgroups/${agid}/targetingkeywords" "$batch" | \
       jq '.data | length | tostring + " updated"'
   done
 
