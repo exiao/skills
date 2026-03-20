@@ -78,6 +78,85 @@ Keep "5 ways" literally — the number sets expectations and increases swipes.
 
 ---
 
+## Format 3: Cartoon Story (Emotional Narrative — 8 Slides)
+
+**Best for:** any app category. Outperforms realistic AI images because the stylized look sidesteps uncanny valley entirely. People know it's AI but engage anyway because the style is intentional. Proven at 4.7M+ views per post.
+
+### Why it works
+- Cartoon/illustrated style = no "is this AI?" backlash. The style is the point.
+- Emotional storytelling creates watch time. People swipe to see what happens next.
+- 8 slides (not 6) gives room for a full narrative arc with tension and resolution.
+- The app appears as the turning point in the story, not as a product pitch.
+- Characters with exaggerated expressions drive empathy and relatability.
+
+### Image generation
+Use **Nano Banana Pro** (Gemini) for all slides. The cartoon/illustrated aesthetic is the default strength of this model.
+
+**Prompt structure:**
+```
+Cartoon illustration of [character description]. [Scene description]. 
+[Emotional expression]. [Lighting/mood]. Warm cinematic lighting, 
+illustrated art style, semi-realistic cartoon rendering. Portrait orientation.
+```
+
+**Consistency rules (same across all 8 slides):**
+- Same character design (hair, face shape, skin tone, clothing)
+- Same art style and color palette
+- Same level of detail/rendering
+- Vary: scene, expression, lighting mood, other characters present
+
+### The 8-slide formula
+
+| Slide | Purpose | Text style |
+|-------|---------|------------|
+| 1 | HOOK — character in a relatable situation | Bold hook text: the conflict or insecurity |
+| 2 | PAIN — someone says something cruel/dismissive | Quote from antagonist. Twist the knife. |
+| 3 | ESCALATION — the problem gets worse or compounds | Another painful moment, different context |
+| 4 | LOW POINT — character at their worst moment | Emotional reaction: defeated, alone, frustrated |
+| 5 | DISCOVERY — character finds the app/solution | "Then I found..." or shows character using phone |
+| 6 | FIRST RESULT — initial improvement visible | Surprise reaction: "Wait... is this working?" |
+| 7 | TRANSFORMATION — full result, character confident | Night and day difference from slide 4 |
+| 8 | PAYOFF — character confronts the doubter or thrives | Reversal of slide 2. The antagonist is proven wrong. |
+
+### Hook formulas for cartoon stories
+
+**Tier 1: Cruel quote from someone close (highest engagement)**
+- "Your [flaw] ruins everything. Just accept it."
+- "My ex never had [problem]. Her [feature] was always [ideal]."
+- "You should be grateful I even [action]. Do you think [group] line up for people with [flaw] like THAT?"
+
+**Tier 2: Internal monologue / self-doubt**
+- "I've always been the one who [negative pattern]"
+- "Everyone else seems to [positive thing] so easily"
+- "I stopped [activity] because of [insecurity]"
+
+**Tier 3: Authority figure delivers bad news**
+- "The doctor said it would take [expensive/long treatment]"
+- "My advisor told me [discouraging thing]"
+
+### What makes cartoon stories different from transformation slides
+- Transformation (Format 1): same subject, different styles. Visual wow factor.
+- Cartoon story (Format 3): same character, different scenes. Emotional narrative.
+- Transformation hooks are about curiosity ("what would this look like?"). Cartoon story hooks are about empathy ("I've been there too").
+
+### Caption template for cartoon stories
+```
+[Quote from slide 2 — the cruel/dismissive thing someone said] 😢
+[2-3 sentences telling the character's story in first person]
+I almost gave up until I found [APP NAME]. [One sentence: what it does]
+[Emotional result]. Now [reversal of the opening pain].
+#[niche] #[emotion] #[category] #fyp
+```
+
+### Adapting for Bloom / finance niche
+The emotional arc works for investing too. The "flaw" becomes financial insecurity:
+- "My friends all talk about their portfolios and I just nod along pretending I understand"
+- "My partner said I'm terrible with money. That I'd never figure out investing."
+- "The advisor said I needed $50K minimum to even start. I had $200."
+- Character discovers Bloom → starts understanding what they're buying → makes their first confident trade → proves the doubter wrong
+
+---
+
 ## Format 1: Transformation (Visual Before/After)
 
 *Original format — best for visual apps: interior design, fitness, beauty, style.*

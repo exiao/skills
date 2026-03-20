@@ -84,6 +84,24 @@ Write all three, then pick the right one for the format:
 
 > **Load on-demand:** `headlines` skill has 15+ proven hook formulas.
 
+### Hook Psychology Triggers
+
+Each hook type maps to a specific psychological mechanism. Name the mechanism when writing hooks to ensure you're triggering a real response, not just sounding clever.
+
+| Trigger | What it does | Hook example |
+|---------|-------------|--------------|
+| **Pattern interrupt + commitment cue** | Breaks scroll autopilot, asks for micro-commitment | "Stop scrolling if you're ready to level up" |
+| **Authority pledge + specificity** | Credibility claim + concrete action = trust | "I guarantee you'll sleep better if you try this tonight" |
+| **Effort reduction** | Lowers perceived friction; viewer believes it's easy | "The easiest path to real progress (no hustle myth)" |
+| **Contrast framing** | Replace a bad habit with a better one in one sentence | "Skip detox teas. Track protein instead." |
+| **Identity affirmation** | Speaks to a valued self-image; viewer feels seen | "To everyone building in silence: this is your nudge" |
+| **Curiosity gap** | Promises a solved puzzle, withholds the solution | "I finally cracked sustainable productivity" |
+| **Loss aversion** | Frames inaction as losing something | "Your portfolio is bleeding and you don't know why" |
+
+When brainstorming hooks, pick the trigger first, then write the line. Not the other way around.
+
+Source: @thebranding.ai — viral format breakdown (https://www.instagram.com/reel/DVPGF9BEz2n/)
+
 ### The Wound-First Pattern
 
 Open with a shared fear the audience already carries. Not a product problem — a *life* fear.
@@ -128,6 +146,29 @@ Match the angle to a format that amplifies it.
 | Meme | Culturally native | Contrasts, humor |
 | Testimonial Card | Direct social proof | Warm audiences |
 | Documentary/Talking Head | High trust, feels like journalism | Skeptical audiences, financial products |
+| Hands-Doing-Something | Tactile background task holds attention subconsciously while spoken content delivers value | Tutorials, study/productivity tips, any niche where the visual task signals relatability |
+| Tier List | Gamified ranking format; viewers argue placements in comments, driving engagement | Content strategy, tool reviews, platform comparisons, "best of" lists |
+| Viral Breakdown / Reaction | Dual-screen commentary on a viral post; borrowed traffic + authority positioning | Creator education, niche analysis, weekly pillar content |
+
+### The "Hands-Doing-Something" Format
+
+A viral format where the creator does a simple tactile task (cutting fruit, making tea, crafting) while speaking about a completely unrelated topic. The visual activity is background; the spoken content is the payload.
+
+Source: @thebranding.ai breakdown of multiple creators going viral with the same format.
+
+**Why it works:**
+- Tactile hand activity holds visual attention subconsciously (the eye tracks movement)
+- The mismatch between casual activity and spoken content creates curiosity ("why is she cutting an apple while talking about studying?")
+- Extremely simple production: phone on a stand, good mic, something to do with your hands
+- Scalable to any niche: investing (writing in a notebook), cooking (prep work), fitness (stretching), tech (unboxing)
+
+**Structure:**
+1. Open with a relatable spoken hook ("you don't wanna study? that's fine, just imagine...")
+2. Hands doing something throughout (never stop the activity)
+3. Deliver value through speech while the visual activity anchors attention
+4. Close with soft CTA or open loop
+
+**Bloom application:** Film hands writing stock tickers on a notepad, scrolling through the Bloom app, or organizing investment notes while delivering investing insights via voiceover.
 
 | Audience Temp | Best Formats |
 |--------------|-------------|
@@ -390,16 +431,40 @@ What a complete strategy card looks like after running this skill. Use this as t
 
 ---
 
+## Creator Activity Tier List
+
+What to spend your time on as a content creator, ranked by impact. Based on @wootak's framework (https://www.instagram.com/reel/DVwed_xEvHx/).
+
+| Tier | Activity | Why |
+|------|----------|-----|
+| **S** | **Post consistently** | Nothing else matters if you don't publish. Ship beats perfect. |
+| **S** | **Define your niche/target** | Focused content reaches the right people. Broad content reaches nobody. |
+| **S** | **Use TikTok (especially TikTok Shop)** | Highest-leverage platform for organic discovery right now. |
+| **S** | **Repurpose content cross-platform** | Every platform's audience sees it "for the first time." One piece of content = 3-5 posts. |
+| **A** | **Script/outline before filming** | Structure beats improv. But execution (posting) matters more than perfect scripts. |
+| **A** | **Track analytics** | Know what works. But analysis without posting is procrastination. |
+| **A** | **Post at optimal times** | Helps, but doesn't replace quality or consistency. |
+| **B** | **Writing elaborate captions** | Useful but overrated. Most creators over-invest here relative to impact. |
+| **C** | **Written/text-only content** | Video outperforms text on every social platform. Text content is C tier in a video-first world. |
+| **F** | **Hashtags** | Zero meaningful impact on modern algorithms. Complete waste of effort. |
+
+The hierarchy: **Posting > Targeting > Platform choice > Repurposing > Scripting > Analytics > Timing > Captions > Text content > Hashtags.**
+
+---
+
 ## Channel Tier List (Bloom / B2C)
 
 What actually works for consumer apps vs. what sounds good but doesn't.
 
 **High-signal channels:**
 - TikTok / Instagram Reels — primary B2C organic discovery; recreate before recruiting creators
-- Facebook retargeting ads — works well once funnel is proven; lower CPM than Google for consumer
+- Influencer/creator marketing — TikTok/YouTube/Instagram. Lovable ($400M ARR) spends 10x more on influencer marketing than paid social and considers it their key growth driver. Validate formats with your own account first, then hand proven formats to creators. This should be the primary paid channel, not Meta ads.
+- Free credits / freemium as marketing — treat free tier as a marketing channel, not a cost center. "Our free giveaways are bigger than paid marketing spend." (Lovable CEO, 20VC March 2026)
 - Free SEO tools — high-value lead magnets, easier to rank than blog posts, builds backlinks
 - Email marketing — works if sequences are built correctly (see growth skill); people do read emails
-- Influencer marketing — TikTok/YouTube/Instagram; only once you have budget and a validated offer
+
+**Questionable-signal channels (test carefully):**
+- Meta/Facebook ads — Lovable's CEO at $400M ARR: "Meta ads have little incrementality; pass through views which don't materialize into anything. I haven't seen them work in a while." (Lenny's Podcast, Dec 2025). If running Meta ads, watch incrementality closely: are installs you're paying for ones that would have happened organically? Compare install lift when ads are paused vs. running.
 
 **Low-signal channels (avoid or deprioritize):**
 - Newsletter sponsorships — expensive and most clicks are bots
@@ -408,6 +473,31 @@ What actually works for consumer apps vs. what sounds good but doesn't.
 - Referral programs — very hard to make work; only viable with stable conversion and large customer base
 - Reddit audience building — ban risk is high; answering long-tail questions can work, but building an audience there doesn't
 - Beta directories (BetaList, etc.) — mostly dead; not worth the setup
+
+**Alternative funnel: Quiz-based landing pages**
+
+Instead of Ad → App Store → Install, run Ad → Web Quiz → Personalized Results → App Store. A quiz between the ad and the offer warms cold traffic through micro-commitments. DTC benchmark: cold traffic conversion jumped from 1.2% to 4.7% with a quiz funnel (@DTC_Quizbuilder, $2M in 90 days).
+
+Why it works for apps:
+- Each question answered is a small "yes" that compounds (sunk cost)
+- Questions seed beliefs and pre-handle objections before the user sees pricing
+- Non-completers give you zero-party data for segmented retargeting (someone who answered "I struggle with timing the market" gets a different retargeting ad than someone who answered "I don't know what to invest in")
+- The loading/results screen is captive attention: 10-15s where you show testimonials, social proof, and app previews while "calculating their results"
+
+Quiz sequencing that converts:
+1. Q1-Q2: Low-friction demographics (age, experience level). Zero cognitive load, starts the yes-chain.
+2. Q3-Q4: Aspirational goals ("What's your investing goal?"). Emotional questions hit harder after they've committed.
+3. Q5-Q6: Pain points and struggles. Now they've told you their problems.
+4. Breather slide with social proof after Q4.
+5. Results page → personalized app recommendation → App Store link.
+
+Drop-off benchmarks: Q1 = 30-40% drop-off (normal, biggest filter). Remaining questions: under 15% each. Overall completion: aim for 25%+. If any single question has 10%+ drop-off, simplify it (fewer options, add "None of the above").
+
+Retargeting play: Everyone who takes the quiz but doesn't install gave you data. Segment retargeting by their answers: "tried other investing apps" → ad about why Bloom's AI is different. "Low confidence in stock picks" → ad about AI-powered research. Specific beats generic.
+
+Bloom application: The onboarding flow already asks risk tolerance and goals post-install. A pre-install web quiz version of this would warm traffic before the App Store page, and the data feeds retargeting even if they never install.
+
+Source: @DTC_Quizbuilder thread (https://x.com/DTC_Quizbuilder/status/2010379560769015885)
 
 **SEO timing:**
 - Don't prioritize SEO before your first customers — takes months to kick in, and if you pivot the product, the work goes to zero

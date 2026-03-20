@@ -337,12 +337,169 @@ Apply as: when making a proof/results video, lead with the outcome visible in th
 
 ---
 
+---
+
+# Source 5: @jun_yuh — Color Wash Overlays + Word-by-Word Captions
+
+Jun Yuh (Personal Branding & Content Strategy) — 8K+ likes, 14s reel
+Original reel: https://www.instagram.com/reel/DVxhDEVjSll/
+
+A talking-head creator education reel that gets all its visual energy from post-production overlays on a single continuous take. No cuts, no b-roll, no scene changes. Everything is editing-layer technique.
+
+---
+
+## Color = Concept Overlay System
+
+The defining technique: full-frame semi-transparent color washes that flood the entire scene to illustrate concepts as they're spoken.
+
+| Color | Concept | Trigger |
+|-------|---------|---------|
+| Yellow/gold | Informational / neutral | Discussing "title hook" concept |
+| Green (lime) | Safe / positive | The word "safe" |
+| Red (deep) | Danger / warning | The word "danger" |
+
+The overlays cover the entire frame including the background. The presenter appears inside the tinted world. Transitions between colors use fade-in/fade-out rather than hard cuts.
+
+**Why it works:** Color-to-emotion mapping is primal (green = safe, red = danger requires zero explanation). Each color change is a visual event that resets the viewer's attention clock. The viewer gets a new "scene" without an actual scene change.
+
+**Apply as:** Map your video's key concepts to 2-3 colors. Apply full-frame tinted overlays timed to when each concept is spoken. Fade between them. In Remotion: use `interpolateColors()` on a full-screen overlay div with the video's concept timeline.
+
+---
+
+## Word-by-Word Caption Display
+
+Auto-caption style where each spoken word appears individually, centered in the lower-middle of the frame. One word at a time, not phrases.
+
+- Font: Clean bold sans-serif, white with subtle dark outline/shadow
+- Placement: Consistent lower-center (chest/torso level of presenter)
+- Pacing: ~2-3 words per second, each word replacing the previous
+
+**Why it works:** Creates a staccato visual rhythm even when speech is smooth. Keeps muted viewers engaged. Each word appearance is a micro-visual-event that the eye tracks.
+
+**Apply as:** In Remotion, use `@remotion/captions` with word-level timestamps. Display one word at a time with a quick scale-in animation. Keep the position locked (no bouncing around the frame).
+
+---
+
+## Designed Graphic Labels
+
+Key terms get their own graphic treatment beyond just captions:
+
+- **Pill badge:** A large yellow rounded-rectangle drops in from the top of the frame containing "Title hook" in bold white text. Matches the yellow overlay theme.
+- **Highlighted caption words:** Individual caption words get colored pill backgrounds matching the current color theme (e.g., "and" in a yellow pill during the yellow section).
+
+**Why it works:** The label is a second visual layer on top of captions. It signals "this is the key term" without the presenter having to say "the key term is..." Feels like a textbook annotation happening in real-time.
+
+**Apply as:** Identify 1-2 key terms per video section. Animate a pill-shaped badge (rounded rect + bold text) that enters from top or scales in. Match the badge color to your concept-color system.
+
+---
+
+## Visual Divider Elements
+
+A horizontal dashed white line cuts across the screen at eye level as a section separator.
+
+**Apply as:** Use sparingly between major sections. A simple animated line drawing across the frame (left to right, 0.3s) marks transitions without needing a cut.
+
+---
+
+## Card/Frame Animation
+
+During color overlay sections, the presenter appears inside a rounded-corner rectangle "card" shape that scales in from center. The card boundary separates the presenter from the surrounding color wash.
+
+**Apply as:** In Remotion, render the talking-head video inside a `borderRadius` container, animate `scale` from 0.8 to 1.0 over ~0.5s when entering a new color section.
+
+---
+
+## Key Takeaway
+
+All dynamism comes from post-production on a single locked-off talking-head shot. No cuts, no camera moves, no b-roll. The techniques: color overlays, word captions, graphic labels, divider lines, and card frames. This is a fully templateable format in Remotion.
+
+---
+
+---
+
+# Source 6: @ugcbyasya — Zoom Hook + Meta Self-Reference + Two-Speed Text
+
+Asya (UGC creator, CapCut editing) — 4.5K+ likes, 10s reel
+Original reel: https://www.instagram.com/reel/DTk651IjUN-/
+
+A 10-second creator education reel that teaches about hooks while being a hook. The entire video is a self-referential demonstration where every technique is both the lesson and the example.
+
+---
+
+## Dramatic Zoom-In Opening (Scroll Stopper)
+
+Frame 1 uses an extreme radial motion blur simulating a rapid camera zoom-in toward the subject. The background flowers and plants smear into color streaks. The word "this" appears mid-blur.
+
+Then the blur resolves into a sharp, zoomed-in shot with "VISUAL HOOK" appearing in ultra-bold white text across the full width of the frame, with a brief neon glow/bloom effect on the letters.
+
+**Why it works:** The motion blur is a pure pattern interrupt. The eye can't process a blurred frame without pausing. The blur-to-sharp transition gives the viewer a visual "landing" that feels satisfying and locks them into the next beat.
+
+**Apply as:** In Remotion, start with a 0.3s `blur()` filter + `scale(1.3)` that animates to `blur(0)` + `scale(1.0)`. Layer a single word caption during the blur, then reveal the full title on the sharp landing.
+
+---
+
+## Two-Speed Text Strategy
+
+Two text layers running simultaneously at different speeds:
+
+| Layer | Style | Behavior |
+|-------|-------|----------|
+| **Hero title** ("VISUAL HOOK") | Ultra-bold, full-width, center | Persists across many frames (sustained anchor) |
+| **Caption subtitle** | Thin sans-serif, lower-center | Changes every 2-4 seconds (new information each beat) |
+
+The hero text stays put and grounds the viewer. The caption text keeps refreshing with new information. The viewer reads at two speeds simultaneously.
+
+**Apply as:** In Remotion, render a persistent bold title in the upper third. Below it, swap caption text on a timed sequence. The title is the "what this is about" anchor; the captions are the "what I'm saying now" stream.
+
+---
+
+## Eye-Direction Technique
+
+At the moment the caption reads "and the text above my head," the creator physically looks upward at the "VISUAL HOOK" title text above her. She directs the viewer's gaze to the graphic element being discussed.
+
+**Why it works:** The human eye follows gaze direction instinctively. When a person on screen looks somewhere, viewers look there too. Using this to point at your own text overlay is a playful self-referential move that makes the viewer feel in on the joke.
+
+**Apply as:** When a talking-head presenter references an on-screen element, time their gaze to look at it. In AI-generated content (Kling/Sora), specify "subject glances upward toward text" in the motion prompt.
+
+---
+
+## Music Badge as Teaching Prop
+
+A native-style Instagram music badge (dark rounded pill with ♪ icon and truncated song name) appears on screen while the creator discusses "audio hooks." The badge itself becomes a visual example of the concept being taught.
+
+**Why it works:** It breaks the visual layout of the frame in an unexpected way. Viewers see the badge and their brain processes it as "new UI element" which resets attention. It also serves double duty: visual variety + content illustration.
+
+---
+
+## Zoom Rhythm (In-Out Pacing)
+
+The video's spatial composition follows a deliberate rhythm:
+1. Wide shot (establishing) → extreme zoom-in (hook) → stabilize zoomed-in (teaching) → zoom back out (transition) → stay wide (conclusion)
+
+This single in-out cycle creates the feeling of multiple scenes from one camera angle.
+
+**Apply as:** Plan zoom keyframes as part of the video timeline. In Remotion, animate `scale` on the video container: `1.0 → 1.3 (with blur) → 1.3 (sharp) → 1.0`. Time each zoom to a content transition.
+
+---
+
+## Self-Referential Meta Format
+
+The reel teaches about visual hooks, text hooks, and audio hooks while simultaneously demonstrating each one. The zoom blur IS the visual hook. The title text IS the text hook. The sound effects ARE the audio hook. Viewers learn by experiencing.
+
+**Why it works:** Meta-content creates a double engagement loop. The viewer is both learning about the technique and watching it work on them. This self-awareness feels clever and earns saves/shares (people want to study it).
+
+**Apply as:** When making educational content about content creation, demonstrate the technique you're teaching inside the video itself. Don't just explain; perform.
+
+---
+
+---
+
 ## Application by Sub-skill
 
 | Sub-skill | Hook application |
 |-----------|----------------|
 | **sora** | Include hook directive in prompt: "opens with [visual hook type], first frame shows..." |
-| **kling** | Specify first-shot hook in Kling prompt; use movement + on-screen text in opening beat |
-| **remotion-videos** | First scene = hook scene; bold text overlay enters within first 1–2s at full opacity; use power word in opening text |
-| **browser-animation-video** | First animation beat should be the visual hook; start mid-motion, not from static |
+| **kling** | Specify first-shot hook in Kling prompt; use movement + on-screen text in opening beat. For gaze direction (Source 6), add "subject glances upward toward text overlay" in motion description |
+| **remotion-videos** | First scene = hook scene; bold text overlay enters within first 1-2s at full opacity; use power word in opening text. Color wash overlays (Source 5): `interpolateColors()` on full-screen div timed to concept changes. Word-by-word captions: `@remotion/captions` at word-level with single-word display. Zoom hook (Source 6): animate `scale` + `blur()` filter in first 0.3s. Two-speed text: persistent hero title + rotating caption layer |
+| **browser-animation-video** | First animation beat should be the visual hook; start mid-motion, not from static. Color overlays and zoom-blur transitions translate directly to CSS animations |
 | **demo-video** | Open with the most dramatic/surprising moment, not the beginning of the flow |

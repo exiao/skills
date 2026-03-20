@@ -13,7 +13,7 @@ Generate and post TikTok slideshows via ReelFarm. This skill is production only.
 - [Prerequisites](references/prerequisites.md)
 - [First Run — Onboarding](references/first-run-onboarding.md)
 - [Core Workflow](references/core-workflow.md)
-- [Slide Structure](references/slide-structure.md)
+- [Slide Structure](references/slide-structure.md) (includes Format 1: Transformation, Format 2: Personal Journey, Format 3: Cartoon Story)
 - [App Category Templates](references/app-category-templates.md)
 - [Cross-Posting](references/cross-posting.md)
 - [Common Mistakes](references/common-mistakes.md)

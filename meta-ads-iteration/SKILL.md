@@ -46,12 +46,27 @@ ADSET_ANDROID="$BLOOM_ANDROID_ADSET_ID"   # General, Android (ACTIVE)
 # Get all ads with status
 curl -s "$API/$ACCOUNT/ads?fields=id,name,status,effective_status,adset_id&access_token=$TOKEN"
 
-# Get insights for last 7 days (use last_30d if an ad is newer)
-curl -s "$API/$ACCOUNT/insights?fields=ad_id,ad_name,impressions,reach,clicks,spend,cpm,ctr,actions&date_preset=last_7d&level=ad&access_token=$TOKEN"
+# Get insights for last 7 days with frequency (use last_30d if an ad is newer)
+curl -s "$API/$ACCOUNT/insights?fields=ad_id,ad_name,impressions,reach,clicks,spend,cpm,ctr,frequency,actions&date_preset=last_7d&level=ad&access_token=$TOKEN"
 ```
 
 Save to `ads/iteration/$(date +%Y-%m-%d)_performance.md`:
-- ad_id, name, impressions, spend, CPM, CTR, clicks
+- ad_id, name, impressions, spend, CPM, CTR, clicks, frequency
+
+### Step 1b — Frequency Fatigue Detection
+
+Pull per-ad frequency from Step 1 insights. Frequency = impressions / reach (how many times the average person has seen the ad).
+
+| Frequency | Status | Action |
+|-----------|--------|--------|
+| < 2.0 | Fresh | No action |
+| 2.0–3.0 | Warming | Monitor, note in report |
+| 3.0–3.5 | Warning | Flag in report as "fatiguing soon" |
+| > 3.5 | Fatigued | Auto-pause. Audience is cooked, CTR will drop. |
+
+Frequency > 3.5 is a **leading indicator**: it catches dying ads before CPA spikes. Always pause fatigued ads even if current CPM/CTR still looks OK.
+
+Log fatigued ads to `ads/iteration/$(date +%Y-%m-%d)_fatigue.log` with: ad_id, name, frequency, current CTR, spend.
 
 ### Step 2 — Classify Ads
 
@@ -61,9 +76,11 @@ Calculate median CPM across all qualifying ads.
 
 | Decision | Criteria |
 |----------|----------|
-| **KILL** | CPM > 2× median CPM, OR CTR < 0.5% |
-| **PROMOTE** | CPM < 0.7× median CPM AND CTR > 2% |
+| **KILL** | CPM > 2× median CPM, OR CTR < 0.5%, OR frequency > 3.5 |
+| **PROMOTE** | CPM < 0.7× median CPM AND CTR > 2% AND frequency < 2.5 |
 | **KEEP** | Everything else |
+
+Note: Ads already flagged as fatigued in Step 1b are auto-killed regardless of other metrics. Ads can only be promoted if frequency is healthy (< 2.5).
 
 Save decisions to `ads/iteration/$(date +%Y-%m-%d)_decisions.md`.
 
@@ -78,20 +95,42 @@ curl -s -X POST "$API/$AD_ID" \
 
 Log each kill to `ads/iteration/$(date +%Y-%m-%d)_kills.log`.
 
-### Step 4 — Promote Winners
+### Step 4 — Promote Winners + Budget Reallocation
+
+#### 4a — Rank by Efficiency
+
+Score all KEEP and PROMOTE ads by efficiency:
+```
+efficiency_score = CTR / CPM × 1000
+```
+
+Rank from best to worst. The top 3 are candidates for budget increases.
+
+#### 4b — Calculate Budget Shift
+
+When ads are killed in Step 3, their freed budget should be redistributed:
+1. Sum the daily spend of all killed ads (approximate from last 7d average)
+2. Allocate freed budget to the top-ranked ad sets proportionally by efficiency score
+3. Cap any single increase at 20% of the ad set's current budget (constitutional rule)
 
 ```bash
-# Increase ad set daily budget (in cents — $6/day = 600)
-# Get current adset budget first, then increase by $2
+# Get current adset budget
 CURRENT_BUDGET=$(curl -s "$API/$ADSET_ID?fields=daily_budget&access_token=$TOKEN" \
   | python3 -c "import sys,json; print(json.load(sys.stdin)['daily_budget'])")
-NEW_BUDGET=$((CURRENT_BUDGET + 200))
+
+# Calculate new budget (freed_amount allocated proportionally, capped at 20% increase)
+MAX_INCREASE=$((CURRENT_BUDGET / 5))  # 20% cap
+INCREASE=$((FREED_SHARE < MAX_INCREASE ? FREED_SHARE : MAX_INCREASE))
+NEW_BUDGET=$((CURRENT_BUDGET + INCREASE))
+
 curl -s -X POST "$API/$ADSET_ID" \
   -F "daily_budget=$NEW_BUDGET" \
   -F "access_token=$TOKEN"
 ```
 
-Log each promotion to `ads/iteration/$(date +%Y-%m-%d)_promotions.log`.
+If no ads were killed, still increase budgets for PROMOTE-classified ads by $2/day (200 cents).
+
+Log each budget change to `ads/iteration/$(date +%Y-%m-%d)_promotions.log` with: ad_set, old_budget, new_budget, reason (freed reallocation or promote).
 
 ### Step 5 — Generate 6 New Creatives
 
@@ -198,10 +237,17 @@ Send to `group:5TgLlI8NfnETVAzVvUi0rJ0WKz2Pz2Flj5i2/VAcFSY=`:
 ```
 🎯 Meta Ads Daily Run — [date]
 
-X ads analyzed | Y killed | Z promoted | 12 new ads uploaded (6 iOS + 6 Android)
+X ads analyzed | Y killed (Z for fatigue) | W promoted | 12 new ads uploaded (6 iOS + 6 Android)
 
-Best performer: [ad name] — CPM $X, CTR X%
-Worst performer: [ad name] — CPM $X, CTR X%
+⚡ Fatigue report:
+- [N] ads fresh (freq < 2) | [N] warming (2-3) | [N] warning (3-3.5) | [N] fatigued & paused (>3.5)
+
+💰 Budget reallocation:
+- $X freed from killed ads → redistributed to top performers
+- [ad set name]: $old → $new (+X%)
+
+Best performer: [ad name] — CPM $X, CTR X%, freq X
+Worst performer: [ad name] — CPM $X, CTR X%, freq X
 
 6 new concepts:
 1. [format] — [hook]
@@ -217,6 +263,7 @@ Then send each of the 6 creative images one at a time with a caption.
 - Signal group: `group:5TgLlI8NfnETVAzVvUi0rJ0WKz2Pz2Flj5i2/VAcFSY=`
 - Performance log: `ads/iteration/[date]_performance.md`
 - Kills log: `ads/iteration/[date]_kills.log`
+- Fatigue log: `ads/iteration/[date]_fatigue.log`
 - Promotions log: `ads/iteration/[date]_promotions.log`
 - Creatives: `ads/iteration/creatives/[date]/creative-N-<format-slug>.png`
 - Manifest: `ads/iteration/creatives/[date]/manifest.md`
@@ -247,6 +294,8 @@ Always use `$BLOOM_APP_STORE_ID_NEW` for iOS ad links (the current App Store ID)
 3. **Repeating a hook/format/concept combo** — always audit exclusion list first.
 4. **Forgetting Android ad set** — each creative should get two ads (iOS + Android ad sets).
 5. **Not checking impressions threshold** — don't classify ads with <1000 impressions.
+10. **Ignoring frequency** — always pull `frequency` in insights. Frequency > 3.5 = auto-pause even if CPM/CTR look fine.
+11. **Promoting fatigued ads** — never promote an ad with frequency > 2.5. It's already past peak.
 6. **Missing GEMINI_API_KEY** — resolve from clawdbot.json before Nano Banana Pro.
 7. **Not sending creative images** — Signal report must include all 6 images.
 8. **Forgetting the manifest** — required for future exclusion list audits.

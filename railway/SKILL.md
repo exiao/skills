@@ -94,6 +94,83 @@ railway up --detach
 - `DATABASE_URL` auto-resolves via service reference `${{Postgres.DATABASE_URL}}`
 - Large builds may need `NODE_OPTIONS=--max-old-space-size=8192` if frontend bundling
 
+## Database Backup & Restore
+
+### Backup (dump to local file)
+
+Railway Postgres is accessible externally via the proxy URL. Use `pg_dump` with the public connection string.
+
+```bash
+# Ensure libpq tools are in PATH (macOS homebrew)
+export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
+
+# Get the public DB URL (from the Postgres service vars)
+cd ~/bloom-railway
+railway service link Postgres
+DB_URL=$(railway variable list --json | python3 -c "import sys,json; print(json.load(sys.stdin)['DATABASE_PUBLIC_URL'])")
+
+# Dump (custom format, compressed, parallel)
+pg_dump "$DB_URL" -Fc -Z6 -j4 -f backup_$(date +%Y%m%d_%H%M%S).dump
+
+# Dump (plain SQL, if you need readable SQL)
+pg_dump "$DB_URL" --no-owner --no-privileges -f backup_$(date +%Y%m%d_%H%M%S).sql
+```
+
+### Restore to a new Railway Postgres
+
+```bash
+# Create a fresh Postgres service (or use existing)
+railway add --database postgres
+
+# Get the new DB's public URL
+NEW_DB_URL="postgresql://postgres:<password>@<host>:<port>/railway"
+
+# Restore from custom-format dump
+pg_restore -d "$NEW_DB_URL" --no-owner --no-privileges -j4 backup.dump
+
+# Restore from SQL dump
+psql "$NEW_DB_URL" < backup.sql
+```
+
+### Restore to local Postgres (for dev/testing)
+
+```bash
+createdb bloom_local
+pg_restore -d bloom_local --no-owner --no-privileges -j4 backup.dump
+```
+
+### Verify backup integrity
+
+```bash
+# Compare row counts between source and restored DB
+psql "$DB_URL" -c "
+SELECT schemaname, relname, n_live_tup
+FROM pg_stat_user_tables
+WHERE n_live_tup > 0
+ORDER BY n_live_tup DESC
+LIMIT 20;
+"
+```
+
+### Automated backup (cron)
+
+Set up a Clawdbot cron job to dump weekly:
+
+```
+Schedule: 0 4 * * 0 (Sunday 4am)
+Task: Back up Railway Postgres to ~/backups/railway/
+```
+
+The dump file goes to `~/backups/railway/bloom_YYYYMMDD.dump`. Keep last 4 weekly backups.
+
+### Important notes
+
+- Railway Postgres proxy URL (`*.proxy.rlwy.net`) is the external-access URL. Internal services use `*.railway.internal`.
+- `pg_dump` requires matching major version. Railway runs Postgres 17. Install with: `brew install libpq`.
+- PostGIS/extension errors during restore are expected and harmless if you don't use spatial features.
+- Custom format (`-Fc`) is preferred: compressed, supports parallel restore, selective table restore.
+- Always use `--no-owner --no-privileges` on restore to avoid role-mismatch errors.
+
 ## MCP Tools
 
 ```
