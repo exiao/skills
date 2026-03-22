@@ -155,6 +155,7 @@ kill $PROXY_PID
 
 ```bash
 flyctl proxy 5432 -a myapp-db &
+PROXY_PID=$!
 
 pg_restore -d "postgresql://postgres:<pass>@localhost:5432/myapp" \
   --no-owner --no-privileges -j4 backup.dump

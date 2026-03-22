@@ -40,6 +40,7 @@ This skill content is modularized into reference docs for readability.
 - [5. Push Notifications](references/5-push-notifications.md)
 - [6. Email Sequences](references/6-email-sequences.md)
 - [7. UGC Script Templates](references/7-ugc-script-templates.md)
+- [Quiz Funnel Copy](references/quiz-funnel-copy.md)
 - [A/B Testing Framework](references/a-b-testing-framework.md)
 - [Test: App Store Screenshot Order](references/test-app-store-screenshot-order.md)
 - [Copy Anti-Patterns (Kill on Sight)](references/copy-anti-patterns-kill-on-sight.md)

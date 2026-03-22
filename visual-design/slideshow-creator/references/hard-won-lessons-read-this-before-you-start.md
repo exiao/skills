@@ -17,3 +17,7 @@ These come from real experience running this system. Not theory.
 **Listen when your agent flags a problem.** If your agent tells you the app needs work, listen. It's watching the funnel every day. It sees patterns you'd miss because you're not looking at the numbers as often. Trust it when it says the issue isn't the content, it's the product.
 
 **Music matters more than you think.** A slideshow with a trending sound will outperform the same slideshow with a random track by 10x. This especially goes for not letting TikTok pick your audio through the API. Do it yourself.
+
+**Cartoon style outperforms realistic AI.** People instinctively reject AI-generated photos that try to look real (uncanny valley, "is this AI?" backlash). But illustrated/cartoon style gets a pass because the style is obviously intentional. Engagement goes up when viewers KNOW it's AI but the aesthetic is deliberate. Use Nano Banana Pro for illustrated slides. Don't try to make AI images look like real photos.
+
+**8-slide story arcs beat 6-slide tip lists for emotional content.** The cartoon story format (Format 3) uses 8 slides to build a full narrative: problem → cruelty → low point → discovery → transformation → payoff. The extra 2 slides give room for emotional tension that makes people swipe to see the resolution. Proven at 4.7M+ views. Use this format when your app solves a problem tied to insecurity, social pressure, or self-doubt.

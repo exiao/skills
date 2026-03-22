@@ -27,9 +27,9 @@ pg_dump --version                              # must be >= source version
 ### Step 1: Dump source database
 
 ```bash
-# Custom format (preferred): compressed, supports parallel restore, selective table restore
+# Directory format (-Fd): required for parallel dump (-j4). Custom format (-Fc) does NOT support -j.
 pg_dump "$SOURCE_DB_URL" \
-  -Fc \                     # custom format (compressed binary)
+  -Fd \                     # directory format (required for parallel)
   -Z6 \                     # compression level 6 (good balance)
   -j4 \                     # parallel dump using 4 workers
   -f migration_$(date +%Y%m%d_%H%M%S).dump \
