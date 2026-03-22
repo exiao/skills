@@ -19,7 +19,7 @@ This skill executes a full cloud migration — from audit to DNS cutover to clea
 
 ## Migration Overview
 
-A migration has 6 phases. Don't skip any of them — each phase catches problems that would be expensive to debug later.
+A migration has 6 phases. Phases 0–4 always apply. Phase 5 (DNS Cutover) is **optional** — skip it when the goal is creating a cloud backup or staging environment that doesn't need to serve production traffic.
 
 ```
 Phase 0: Audit     → know exactly what you're moving
@@ -27,7 +27,7 @@ Phase 1: Provision → stand up target infrastructure
 Phase 2: Data      → move Postgres, Redis, files
 Phase 3: Deploy    → get app running on target
 Phase 4: Verify    → confirm data parity and app health
-Phase 5: Cutover   → switch DNS, monitor, then clean up
+Phase 5: Cutover   → [OPTIONAL] switch DNS, monitor, then clean up
 ```
 
 Start with **Phase 0** even if you think you know what's running — audits catch forgotten services, surprise cron jobs, and env vars you didn't know about.
@@ -147,6 +147,28 @@ Common issues:
 - Frontend still hitting old backend → check build-time env vars were set before the build (not after)
 - Hardcoded backend URLs in source → grep for old provider domains, fix before building
 
+### Background Workers (Celery, RQ, DBOS, custom)
+
+Background workers need their own deploy step — they're separate processes, not part of the web dyno.
+
+**Audit first (Phase 0 reminder):** Identify all worker processes before deploying. Common patterns:
+- `Procfile` entries like `worker: celery -A myapp worker`, `release:`, `scheduler:`
+- Django management commands run via cron or scheduled tasks
+- DBOS queue workers embedded in the app process
+
+**Deploy workers to target:**
+```bash
+# Procfile example — web + worker as separate processes:
+web: gunicorn -c gunicorn.conf.py myapp.asgi:application
+worker: celery -A myapp worker --loglevel=info --concurrency=2
+beat: celery -A myapp beat --loglevel=info
+release: python manage.py migrate --noinput
+```
+
+Railway, Render, and Fly each run Procfile entries as separate services/processes. Make sure all entries are present before deploying.
+
+**For backup/staging environments:** You may want to disable workers so they don't process jobs from a shared queue or fire duplicate notifications. Set `CELERY_TASK_ALWAYS_EAGER=True` (runs tasks synchronously, inline) or point workers at a separate Redis queue URL that nothing is writing to.
+
 ---
 
 ## Phase 4: Verify Parity
@@ -169,21 +191,44 @@ Don't cut over DNS until this passes.
 
 ---
 
-## Phase 5: DNS Cutover
+## Phase 5: DNS Cutover *(optional — skip for backup/staging environments)*
 
 **Goal:** Traffic moves to new provider.
 
 Read `references/phase-dns.md` only if you need TTL strategy details beyond the safe cutover sequence below.
 
+**Drain background workers before cutting over:**
+
+Stop workers on the source first, then start them on the target. Running workers on both simultaneously risks double-processing jobs.
+
+```bash
+# Celery: graceful shutdown (waits for in-flight tasks to finish)
+celery -A myapp control shutdown   # sends SIGTERM to all workers
+
+# RQ: let workers finish current job then exit
+rq suspend   # pause new jobs; workers finish current then idle
+# After confirming queue is empty:
+rq empty default  # clear any remaining queued jobs (if safe to discard)
+
+# DBOS: stop the app process — DBOS workers are embedded, they stop with the app
+
+# Verify queue is empty before proceeding:
+celery -A myapp inspect active    # should show no active tasks
+celery -A myapp inspect reserved  # should show no reserved tasks
+```
+
+Once source workers are stopped and queues are empty, start workers on the target (they should already be deployed from Phase 3, just not processing).
+
 **Safe cutover sequence:**
 1. Lower DNS TTL to 60s **24 hours before** cutover (so rollback is fast)
 2. Verify new environment passes all Phase 4 checks
-3. Update backend CNAME/A record to new provider
-4. **Update frontend** — if frontend has its own domain, update its DNS too. If frontend is already pointing at new backend via env var, just confirm the deployment is live.
-5. Monitor logs on both old and new for 15-30 minutes
-6. Confirm SSL provisioned on new provider (both backend and frontend domains)
-7. Keep old environment alive for 48h (confidence window)
-8. Decommission old environment after 48h with no issues
+3. Drain workers on source (see above)
+4. Update backend CNAME/A record to new provider
+5. **Update frontend** — if frontend has its own domain, update its DNS too. If frontend is already pointing at new backend via env var, just confirm the deployment is live.
+6. Monitor logs on both old and new for 15-30 minutes
+7. Confirm SSL provisioned on new provider (both backend and frontend domains)
+8. Keep old environment alive for 48h (confidence window)
+9. Decommission old environment after 48h with no issues
 
 ```
 # Railway custom domain:

@@ -240,6 +240,16 @@ If the API returns `code=31` ("pending action" / security hold), **stop and noti
 
 Always use `$BLOOM_APP_STORE_ID_NEW` for iOS ad links (the current App Store ID). The adset's `promoted_object.object_store_url` is the ground truth — verify it matches before creating creatives.
 
+## Attribution: Custom Product Pages
+
+For iOS app campaigns, use Apple Custom Product Pages (CPPs) as the ad destination instead of the default App Store listing. Each CPP gets tracked separately in App Store Connect analytics, giving you exact revenue per ad/campaign with zero SDK complexity.
+
+**How:** Create a CPP in App Store Connect, get its unique URL, and use it as the `object_store_url` in the ad's `promoted_object` (or set it at the ad level via `url_tags` / deep link).
+
+**The 30% rule:** CPP-attributed revenue undercounts by ~30%. Users who see the ad but search the App Store directly won't be attributed. Factor this into ROAS calculations.
+
+**Limit:** 35 CPPs per app. Allocate one per ad set or creative theme. This is the most reliable iOS attribution method post-ATT since it's deterministic and server-side (Apple tracks it, not an SDK).
+
 ## Common Mistakes
 
 1. **Token not set** — always use `$FACEBOOK_ACCESS_TOKEN` from env. Never hardcode.

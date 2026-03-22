@@ -189,6 +189,18 @@ When reporting findings, use tables:
 
 ---
 
+## Attribution: Custom Product Pages (iOS App Campaigns)
+
+For iOS app install campaigns, use Apple Custom Product Pages (CPPs) as the ad click-through destination. Each CPP is tracked in App Store Connect analytics with exact download and revenue data, giving you deterministic attribution per campaign/ad group without relying on SKAdNetwork or MMPs.
+
+**How:** Create a CPP in App Store Connect, then set the CPP URL as the Final URL in your App Campaign ads. Google Ads supports custom App Store URLs for app install campaigns.
+
+**The 30% rule:** CPP revenue undercounts by ~30% because view-through users (saw the ad, searched the App Store directly) aren't captured. Factor this into ROAS.
+
+**Limit:** 35 CPPs per app. One per campaign or ad group theme works well.
+
+This is the cleanest iOS attribution signal available post-ATT. Server-side, no SDK, no privacy thresholds.
+
 ## Common Mistakes
 
 1. **Using dashes in Customer ID** — The Google Ads API requires the 10-digit customer ID without dashes (e.g., `1234567890` not `123-456-7890`). Wrong format causes immediate authentication failure.

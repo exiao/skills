@@ -40,6 +40,10 @@ Mine what's working **right now** before writing a single word.
 
 **Output:** 10-20 hook angles + exact audience language in their own words. Store in `[Campaign]_Research.md`.
 
+> **Verbalized Sampling — avoid mode collapse:** LLMs default to the most "typical" response due to RLHF typicality bias. To get genuinely diverse angles, use this prompt structure:
+> *"Generate 15 hook angles for [topic]. For each, assign a probability (0–100%) representing how likely a typical AI would produce this exact angle. Include angles across the full distribution — obvious to unusual. Mark any below 20% probability as ⚡ Novel."*
+> This forces the model to surface low-probability angles it would normally skip. Aim for at least 4–5 ⚡ Novel angles per batch. ([Source: Verbalized Sampling, arXiv 2510.01171](https://arxiv.org/abs/2510.01171) — 1.6–2.1x diversity increase in creative writing)
+
 > **Novel angle, not novel solution.** You don't need a new idea. You need a fresh angle to an existing solution — repackaged for a specific person with a specific need. A Bible app for women. A screen blocker that won't unlock until you complete a task. The solution exists; your job is the repackage.
 
 > **Load on-demand:** `references/creative-research-methods.md` for detailed research process.
@@ -99,6 +103,8 @@ Each hook type maps to a specific psychological mechanism. Name the mechanism wh
 | **Loss aversion** | Frames inaction as losing something | "Your portfolio is bleeding and you don't know why" |
 
 When brainstorming hooks, pick the trigger first, then write the line. Not the other way around.
+
+> **Verbalized Sampling for hooks:** After picking a trigger, prompt: *"Write 5 hooks using the [trigger] mechanism. For each, assign a probability (0–100%) of a typical AI writing this exact line. Prioritize the lowest-probability hooks — those are the least clichéd."* Reject any hook above 70% probability unless it's a deliberate generic baseline.
 
 Source: @thebranding.ai — viral format breakdown (https://www.instagram.com/reel/DVPGF9BEz2n/)
 
@@ -202,7 +208,7 @@ When the output is an AI character video series (TikTok, Reels, Shorts) rather t
 
 1. **Load character config** from `~/clawd/characters/<slug>/config.json` — this defines the persona, speech style, and visual identity
 2. **Define the series**: topic cluster + episode count + arc (standalone episodes vs. serialized)
-3. **Generate episode ideas**: 10-20 ideas per series; each idea = one episode concept
+3. **Generate episode ideas**: 10-20 ideas per series; each idea = one episode concept. Use Verbalized Sampling: *"Generate 15 episode ideas for [series]. For each, assign a probability (0–100%) a typical AI would generate this idea. Flag anything under 20% as ⚡ Novel."* Pick from the low end of the distribution.
 4. **Score each idea** (0-10 on each axis):
 
 | Axis | What it measures |

@@ -277,13 +277,28 @@ Week 3+: Repeat. Target CPA within 20% of goal. Pause anything > 2x target.
 
 Always create separate campaigns per country. Mixing makes bid optimization impossible.
 
-### Custom Product Pages
+### Custom Product Pages (CPPs) — Attribution Hack
 
-Create CPP variations for different keyword themes. Test control vs CPP. Rotate seasonally.
+CPPs are the cleanest attribution signal for paid mobile ads. Assign a unique CPP to each ad/campaign, then check revenue per CPP in App Store Connect analytics. This gives you exact revenue per ad with zero SDK complexity.
+
+**Why this works:** App Store Connect shows downloads and proceeds per CPP. Unlike MMP attribution (which breaks with ATT opt-outs), CPP attribution is deterministic. Apple tracks it server-side.
+
+**The 30% rule:** CPP revenue undercounts by ~30%. People see your ad, don't tap it, then search the App Store directly. Factor this in when calculating true ROAS.
+
+**Limits:** 35 CPPs per app. Use them for:
+- Each ASA campaign/keyword theme (investing terms vs competitor terms vs brand)
+- Each Meta/TikTok/YouTube ad set
+- Each influencer or channel
+
+Create CPPs in App Store Connect > Custom Product Pages. Each gets a unique URL you use as the ad destination.
 
 ---
 
 ## Attribution Guide
+
+### Custom Product Pages (Simplest, Most Reliable)
+
+No SDK needed. Create a CPP per ad/campaign in App Store Connect, use it as your ad link, then read proceeds per CPP in ASC analytics. Deterministic, server-side, works regardless of ATT consent. Undercounts by ~30% (view-through users who search directly). See [Strategy Playbook > CPPs](#custom-product-pages-cpps--attribution-hack) for details.
 
 ### AdServices Framework (iOS 14.3+)
 
@@ -338,8 +353,9 @@ If using AppsFlyer, Adjust, or similar: they handle AdServices and SKAdNetwork. 
 | Scaling budget too fast | CPA spikes when scaling | Increase budget 20-30% at a time |
 | Multiple countries in one campaign | Can't optimize bids per market | One country per campaign |
 | Ignoring Search Tab / Today Tab | Missing cheaper discovery placements | Test with small budgets |
-| Not using Custom Product Pages | Missing easy conversion wins | Create themed pages per keyword group |
+| Not using Custom Product Pages | Missing easy conversion wins AND the best attribution signal | Create one CPP per campaign/ad set, read revenue per CPP in ASC |
 | Report timezone mismatch | Data misalignment | Search term reports only support ORTZ timezone |
+| Complex MMP setup when CPPs would suffice | Over-engineering attribution | Start with CPP-based attribution, add MMP only if you need cross-platform deduplication |
 
 ---
 
