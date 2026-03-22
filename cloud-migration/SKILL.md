@@ -93,7 +93,7 @@ Read `references/phase-data.md` only if you hit an edge case not covered by the 
 ### Postgres (quick reference)
 ```bash
 # Dump source (directory format required for parallel jobs)
-pg_dump "$SOURCE_DB_URL" -Fd -Z6 -j4 -f migration.dump
+pg_dump "$SOURCE_DB_URL" -Fd -Z6 -j4 -f migration.dump  # -Fd required for -j parallel; -Fc does not support -j
 
 # Restore to target
 pg_restore -d "$TARGET_DB_URL" --no-owner --no-privileges -j4 migration.dump

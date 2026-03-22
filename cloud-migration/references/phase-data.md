@@ -27,15 +27,14 @@ pg_dump --version                              # must be >= source version
 ### Step 1: Dump source database
 
 ```bash
-# Custom format (preferred): compressed, supports parallel restore, selective table restore
-# Directory format is required for parallel dump (-j). Custom format (-Fc) does not support -j.
+# Directory format (-Fd): required for parallel dump (-j4). Custom format (-Fc) does NOT support -j.
 pg_dump "$SOURCE_DB_URL" \
-  -Fd \
-  -Z6 \
-  -j4 \
+  -Fd \                     # directory format (required for parallel)
+  -Z6 \                     # compression level 6 (good balance)
+  -j4 \                     # parallel dump using 4 workers
   -f migration_$(date +%Y%m%d_%H%M%S).dump \
-  --no-owner \
-  --no-privileges
+  --no-owner \              # don't dump ownership info (role names differ between providers)
+  --no-privileges           # don't dump GRANT/REVOKE (role names differ)
 
 # Plain SQL (use if custom format causes issues on restore):
 pg_dump "$SOURCE_DB_URL" \
