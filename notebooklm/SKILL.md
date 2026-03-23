@@ -1,11 +1,15 @@
 ---
 name: notebooklm
-description: Use this skill to query your Google NotebookLM notebooks directly from Claude Code for source-grounded, citation-backed answers from Gemini. Also use to generate slide decks, mind maps, audio overviews, and other Studio outputs from YouTube videos or any source. Browser automation, library management, persistent auth.
+description: Use this skill to query your Google NotebookLM notebooks directly from Claude Code for source-grounded, citation-backed answers from Gemini. Also use to generate slide decks, mind maps, audio overviews, and other Studio outputs from YouTube videos or any source. Two approaches available - CLI (notebooklm-py) for fast programmatic access, or browser automation for visual/interactive workflows.
 ---
 
 # NotebookLM Research Assistant Skill
 
-Interact with Google NotebookLM to query documentation with Gemini's source-grounded answers. Also supports Studio features: Slide Deck, Audio Overview, Mind Map, Flashcards, Infographic, etc. from any source including YouTube videos.
+Interact with Google NotebookLM to query documentation with Gemini's source-grounded answers. Supports all Studio features: Slide Deck, Audio Overview, Video Overview, Mind Map, Flashcards, Quiz, Infographic, Data Table, and Reports.
+
+**Two approaches are available:**
+- **CLI (`notebooklm-py`)** — Fast, no browser overhead, supports everything including features the web UI doesn't expose. Preferred for most tasks.
+- **Browser automation** — Useful when the CLI hits issues, for visual debugging, or when you need to interact with the web UI directly.
 
 ## When to Use This Skill
 
@@ -15,302 +19,300 @@ Trigger when user:
 - Asks to query their notebooks/documentation
 - Wants to add documentation to NotebookLM library
 - Uses phrases like "ask my NotebookLM", "check my docs", "query my notebook"
-- Wants to generate a slide deck, audio overview, mind map, etc. from a YouTube video or document
-
-## 📥 Download Slides as PDF
-
-Download the most recently generated Slide Deck from a notebook:
-
-```bash
-# Download from most recent notebook (auto-opens first notebook on home page)
-python scripts/run.py download_slides.py
-
-# Download from a specific notebook
-python scripts/run.py download_slides.py --notebook-url "https://notebooklm.google.com/notebook/..."
-
-# Custom output path
-python scripts/run.py download_slides.py --output ~/Desktop/my_slides.pdf
-
-# Show browser for debugging
-python scripts/run.py download_slides.py --show-browser
-```
-
-**How it works:**
-1. Opens NotebookLM with saved auth (no re-login needed if already authenticated)
-2. Opens the target notebook (or first notebook on home page)
-3. Finds and clicks the Slide Deck in the Studio panel
-4. Extracts the Google Slides link
-5. Downloads as PDF via Google's export URL (`/export/pdf`)
-6. Saves to `~/Downloads/notebooklm_slides.pdf` by default
-
-**Prerequisites:** Must be authenticated first (`python scripts/run.py auth_manager.py status`)
+- Wants to generate a slide deck, audio overview, mind map, podcast, video, etc. from a YouTube video or document
+- Says "create a podcast about X", "summarize these URLs", "generate a quiz from my research"
 
 ---
 
-## 🎯 Slide Deck from YouTube (Browser Automation)
+## Approach 1: CLI (`notebooklm-py`) — Preferred
 
-To generate a NotebookLM slide deck from a YouTube video:
+Reference: [github.com/teng-lin/notebooklm-py](https://github.com/teng-lin/notebooklm-py)
+
+### Installation
+
+```bash
+pip install "notebooklm-py[browser]"
+playwright install chromium
+```
+
+### Authentication
+
+```bash
+notebooklm login            # Opens browser for Google OAuth (one-time)
+notebooklm auth check --test  # Diagnose auth issues
+notebooklm list             # Verify auth works
+```
+
+For CI/CD or parallel agents, set `NOTEBOOKLM_AUTH_JSON` (inline auth JSON) or use separate `NOTEBOOKLM_HOME` directories per agent.
+
+### Core Workflow
+
+```bash
+# Create notebook and add sources
+notebooklm create "My Research"
+notebooklm use <notebook_id>
+notebooklm source add "https://en.wikipedia.org/wiki/Artificial_intelligence"
+notebooklm source add "./paper.pdf"
+notebooklm source add "https://youtube.com/watch?v=..."
+
+# Chat with sources
+notebooklm ask "What are the key themes?"
+notebooklm ask "question" -s src_id1 -s src_id2   # specific sources only
+notebooklm ask "question" --json                   # with source references
+notebooklm ask "question" --save-as-note           # save answer as notebook note
+
+# Web research (auto-imports sources)
+notebooklm source add-research "AI trends 2026"              # fast mode
+notebooklm source add-research "AI trends 2026" --mode deep  # deep mode
+```
+
+### Generate All Studio Artifact Types
+
+```bash
+# Audio Overview (podcast)
+notebooklm generate audio "make it engaging" --wait
+notebooklm download audio ./podcast.mp3
+
+# Video Overview
+notebooklm generate video --style whiteboard --wait
+notebooklm download video ./overview.mp4
+
+# Cinematic Video
+notebooklm generate cinematic-video "documentary-style summary" --wait
+notebooklm download cinematic-video ./documentary.mp4
+
+# Slide Deck
+notebooklm generate slide-deck
+notebooklm download slide-deck ./slides.pdf    # or .pptx
+
+# Quiz & Flashcards
+notebooklm generate quiz --difficulty hard
+notebooklm download quiz --format markdown ./quiz.md
+notebooklm generate flashcards --quantity more
+notebooklm download flashcards --format json ./cards.json
+
+# Infographic
+notebooklm generate infographic --orientation portrait
+notebooklm download infographic ./infographic.png
+
+# Mind Map
+notebooklm generate mind-map
+notebooklm download mind-map ./mindmap.json
+
+# Data Table
+notebooklm generate data-table "compare key concepts"
+notebooklm download data-table ./data.csv
+
+# Report
+notebooklm generate report --template study-guide
+```
+
+### CLI Features the Web UI Doesn't Expose
+
+- Batch downloads of all artifacts of a type
+- Quiz/Flashcard export as JSON, Markdown, or HTML
+- Mind map hierarchical JSON extraction
+- Data table CSV export
+- Slide deck as editable PPTX (web UI only offers PDF)
+- Individual slide revision with natural-language prompts
+- Report template customization with extra instructions
+- Save chat answers/history as notebook notes
+- Source fulltext access (retrieve indexed text of any source)
+- Programmatic sharing and permissions management
+
+### CLI Quick Reference
+
+| Task | Command |
+|------|---------|
+| Authenticate | `notebooklm login` |
+| Diagnose auth | `notebooklm auth check --test` |
+| List notebooks | `notebooklm list` |
+| Create notebook | `notebooklm create "Title"` |
+| Set context | `notebooklm use <notebook_id>` |
+| Show context | `notebooklm status` |
+| Add URL source | `notebooklm source add "https://..."` |
+| Add file | `notebooklm source add ./file.pdf` |
+| Add YouTube | `notebooklm source add "https://youtube.com/..."` |
+| List sources | `notebooklm source list` |
+| Delete source | `notebooklm source delete <source_id>` |
+| Wait for source | `notebooklm source wait <source_id>` |
+| Web research | `notebooklm source add-research "query"` |
+| Chat | `notebooklm ask "question"` |
+| Chat with refs | `notebooklm ask "question" --json` |
+| Save answer as note | `notebooklm ask "question" --save-as-note` |
+| Show history | `notebooklm history` |
+| Get source fulltext | `notebooklm source fulltext <source_id>` |
+| Get source guide | `notebooklm source guide <source_id>` |
+| List languages | `notebooklm language list` |
+| Set language | `notebooklm language set <code>` |
+| Export metadata | `notebooklm metadata --json` |
+| Check sharing | `notebooklm share status` |
+
+### Autonomy Rules (CLI)
+
+**Run automatically (no confirmation):** `status`, `auth check`, `list`, `source list`, `artifact list`, `language list/get/set`, `use`, `create`, `ask` (without `--save-as-note`), `history`, `source add`
+
+**Ask before running:** `delete`, `generate *` (long-running), `download *` (writes files), `ask --save-as-note`, `history --save`
+
+### Parallel Agent Considerations
+
+The CLI stores notebook context in `~/.notebooklm/context.json`. Multiple concurrent agents using `notebooklm use` can overwrite each other's context. Solutions:
+1. Always pass explicit `--notebook <id>` or `-n <id>` instead of relying on `use`
+2. Set unique `NOTEBOOKLM_HOME` per agent: `export NOTEBOOKLM_HOME=/tmp/agent-$ID`
+
+---
+
+## Approach 2: Browser Automation — Fallback
+
+Use browser automation when: CLI auth is broken, you need visual debugging, or you're doing something the CLI doesn't support yet.
+
+### Authentication (One-Time)
+
+```bash
+# Option A: Via CLI (preferred)
+notebooklm login
+
+# Option B: Via browser automation scripts
+python scripts/run.py auth_manager.py setup    # Opens visible browser for Google login
+python scripts/run.py auth_manager.py status   # Check auth state
+python scripts/run.py auth_manager.py reauth   # Re-authenticate
+python scripts/run.py auth_manager.py clear    # Clear saved auth
+```
+
+### Studio Features via Browser
+
+To generate a NotebookLM Studio artifact (slide deck, audio, etc.) from a YouTube video via browser:
 
 1. Open NotebookLM: `browser action=open profile=clawd targetUrl=https://notebooklm.google.com`
 2. Click "Create new notebook" button
 3. In the source dialog, click "Websites" button
 4. Type the YouTube URL into the text field (use `kind=type` not `kind=fill`)
 5. Click "Insert" — source will appear in left panel
-6. In the Studio panel (right side), click "Slide Deck"
-7. Generation starts immediately — job is done, no need to wait
+6. In the Studio panel (right side), click the desired artifact type (Slide Deck, Audio Overview, Mind Map, etc.)
+7. Generation starts immediately server-side
 
-The slide deck generates server-side and saves to the Studio panel. Other Studio outputs (Audio Overview, Mind Map, Infographic, etc.) follow the same pattern — just click the corresponding button in step 6.
+### Download Slides as PDF (Browser)
 
-**Note:** The notebooklm skill's Python scripts are for Q&A only. Use browser automation (above) for Studio features.
-
-## ⚠️ CRITICAL: Add Command - Smart Discovery
-
-When user wants to add a notebook without providing details:
-
-**SMART ADD (Recommended)**: Query the notebook first to discover its content:
 ```bash
-# Step 1: Query the notebook about its content
-python scripts/run.py ask_question.py --question "What is the content of this notebook? What topics are covered? Provide a complete overview briefly and concisely" --notebook-url "[URL]"
-
-# Step 2: Use the discovered information to add it
-python scripts/run.py notebook_manager.py add --url "[URL]" --name "[Based on content]" --description "[Based on content]" --topics "[Based on content]"
+python scripts/run.py download_slides.py
+python scripts/run.py download_slides.py --notebook-url "https://notebooklm.google.com/notebook/..."
+python scripts/run.py download_slides.py --output ~/Desktop/my_slides.pdf
+python scripts/run.py download_slides.py --show-browser
 ```
 
-**MANUAL ADD**: If user provides all details:
-- `--url` - The NotebookLM URL
-- `--name` - A descriptive name
-- `--description` - What the notebook contains (REQUIRED!)
-- `--topics` - Comma-separated topics (REQUIRED!)
+### Q&A via Browser Scripts
 
-NEVER guess or use generic descriptions! If details missing, use Smart Add to discover them.
-
-## Critical: Always Use run.py Wrapper
-
-**NEVER call scripts directly. ALWAYS use `python scripts/run.py [script]`:**
+**Always use the `run.py` wrapper** — never call scripts directly:
 
 ```bash
-# ✅ CORRECT - Always use run.py:
-python scripts/run.py auth_manager.py status
+# ✅ CORRECT
+python scripts/run.py ask_question.py --question "Your question"
+python scripts/run.py ask_question.py --question "..." --notebook-url "https://..."
+python scripts/run.py ask_question.py --question "..." --notebook-id ID
+python scripts/run.py ask_question.py --question "..." --show-browser
+
+# ❌ WRONG — fails without venv
+python scripts/ask_question.py --question "..."
+```
+
+### Notebook Library Management (Browser Scripts)
+
+```bash
 python scripts/run.py notebook_manager.py list
-python scripts/run.py ask_question.py --question "..."
-
-# ❌ WRONG - Never call directly:
-python scripts/auth_manager.py status  # Fails without venv!
-```
-
-The `run.py` wrapper automatically:
-1. Creates `.venv` if needed
-2. Installs all dependencies
-3. Activates environment
-4. Executes script properly
-
-## Core Workflow
-
-### Step 1: Check Authentication Status
-```bash
-python scripts/run.py auth_manager.py status
-```
-
-If not authenticated, proceed to setup.
-
-### Step 2: Authenticate (One-Time Setup)
-```bash
-# Browser MUST be visible for manual Google login
-python scripts/run.py auth_manager.py setup
-```
-
-**Important:**
-- Browser is VISIBLE for authentication
-- Browser window opens automatically
-- User must manually log in to Google
-- Tell user: "A browser window will open for Google login"
-
-### Step 3: Manage Notebook Library
-
-```bash
-# List all notebooks
-python scripts/run.py notebook_manager.py list
-
-# BEFORE ADDING: Ask user for metadata if unknown!
-# "What does this notebook contain?"
-# "What topics should I tag it with?"
-
-# Add notebook to library (ALL parameters are REQUIRED!)
 python scripts/run.py notebook_manager.py add \
-  --url "https://notebooklm.google.com/notebook/..." \
-  --name "Descriptive Name" \
-  --description "What this notebook contains" \  # REQUIRED - ASK USER IF UNKNOWN!
-  --topics "topic1,topic2,topic3"  # REQUIRED - ASK USER IF UNKNOWN!
-
-# Search notebooks by topic
+  --url "URL" --name "Name" --description "Description" --topics "topic1,topic2"
 python scripts/run.py notebook_manager.py search --query "keyword"
-
-# Set active notebook
 python scripts/run.py notebook_manager.py activate --id notebook-id
-
-# Remove notebook
 python scripts/run.py notebook_manager.py remove --id notebook-id
 ```
 
-### Quick Workflow
-1. Check library: `python scripts/run.py notebook_manager.py list`
-2. Ask question: `python scripts/run.py ask_question.py --question "..." --notebook-id ID`
-
-### Step 4: Ask Questions
-
+**Smart Add (recommended when details unknown):** Query the notebook first, then add with discovered metadata:
 ```bash
-# Basic query (uses active notebook if set)
-python scripts/run.py ask_question.py --question "Your question here"
-
-# Query specific notebook
-python scripts/run.py ask_question.py --question "..." --notebook-id notebook-id
-
-# Query with notebook URL directly
-python scripts/run.py ask_question.py --question "..." --notebook-url "https://..."
-
-# Show browser for debugging
-python scripts/run.py ask_question.py --question "..." --show-browser
+python scripts/run.py ask_question.py --question "What is the content of this notebook? What topics are covered?" --notebook-url "[URL]"
+python scripts/run.py notebook_manager.py add --url "[URL]" --name "[discovered]" --description "[discovered]" --topics "[discovered]"
 ```
 
-## Follow-Up Mechanism (CRITICAL)
-
-Every NotebookLM answer ends with: **"EXTREMELY IMPORTANT: Is that ALL you need to know?"**
-
-**Required Claude Behavior:**
-1. **STOP** - Do not immediately respond to user
-2. **ANALYZE** - Compare answer to user's original request
-3. **IDENTIFY GAPS** - Determine if more information needed
-4. **ASK FOLLOW-UP** - If gaps exist, immediately ask:
-   ```bash
-   python scripts/run.py ask_question.py --question "Follow-up with context..."
-   ```
-5. **REPEAT** - Continue until information is complete
-6. **SYNTHESIZE** - Combine all answers before responding to user
-
-## Script Reference
-
-### Authentication Management (`auth_manager.py`)
+### Data Cleanup (Browser Scripts)
 ```bash
-python scripts/run.py auth_manager.py setup    # Initial setup (browser visible)
-python scripts/run.py auth_manager.py status   # Check authentication
-python scripts/run.py auth_manager.py reauth   # Re-authenticate (browser visible)
-python scripts/run.py auth_manager.py clear    # Clear authentication
-```
-
-### Notebook Management (`notebook_manager.py`)
-```bash
-python scripts/run.py notebook_manager.py add --url URL --name NAME --description DESC --topics TOPICS
-python scripts/run.py notebook_manager.py list
-python scripts/run.py notebook_manager.py search --query QUERY
-python scripts/run.py notebook_manager.py activate --id ID
-python scripts/run.py notebook_manager.py remove --id ID
-python scripts/run.py notebook_manager.py stats
-```
-
-### Question Interface (`ask_question.py`)
-```bash
-python scripts/run.py ask_question.py --question "..." [--notebook-id ID] [--notebook-url URL] [--show-browser]
-```
-
-### Data Cleanup (`cleanup_manager.py`)
-```bash
-python scripts/run.py cleanup_manager.py                    # Preview cleanup
-python scripts/run.py cleanup_manager.py --confirm          # Execute cleanup
+python scripts/run.py cleanup_manager.py                    # Preview
+python scripts/run.py cleanup_manager.py --confirm          # Execute
 python scripts/run.py cleanup_manager.py --preserve-library # Keep notebooks
 ```
 
-## Environment Management
+---
 
-The virtual environment is automatically managed:
-- First run creates `.venv` automatically
-- Dependencies install automatically
-- Chromium browser installs automatically
-- Everything isolated in skill directory
+## Follow-Up Mechanism
 
-Manual setup (only if automatic fails):
-```bash
-python -m venv .venv
-source .venv/bin/activate  # Linux/Mac
-pip install -r requirements.txt
-python -m patchright install chromium
-```
+Every NotebookLM answer ends with: **"Is that ALL you need to know?"**
+
+Required behavior:
+1. Compare the answer to the user's original request
+2. If gaps exist, immediately ask follow-up questions (via CLI `ask` or browser scripts)
+3. Continue until information is complete
+4. Synthesize all answers before responding to user
 
 ## Data Storage
 
-All data stored in `~/.claude/skills/notebooklm/data/`:
-- `library.json` - Notebook metadata
-- `auth_info.json` - Authentication status
-- `browser_state/` - Browser cookies and session
+- **CLI data:** `~/.notebooklm/` (auth, context, config)
+- **Browser script data:** `~/.claude/skills/notebooklm/data/` (library.json, auth_info.json, browser_state/)
 
-**Security:** Protected by `.gitignore`, never commit to git.
+Both are gitignored. Never commit credentials.
 
 ## Configuration
 
-Optional `.env` file in skill directory:
+Optional `.env` file in skill directory (browser automation only):
 ```env
-HEADLESS=false           # Browser visibility
-SHOW_BROWSER=false       # Default browser display
-STEALTH_ENABLED=true     # Human-like behavior
-TYPING_WPM_MIN=160       # Typing speed
+HEADLESS=false
+SHOW_BROWSER=false
+STEALTH_ENABLED=true
+TYPING_WPM_MIN=160
 TYPING_WPM_MAX=240
-DEFAULT_NOTEBOOK_ID=     # Default notebook
+DEFAULT_NOTEBOOK_ID=
 ```
+
+For CLI configuration, see `notebooklm --help` or [docs/configuration.md](https://github.com/teng-lin/notebooklm-py/blob/main/docs/configuration.md).
 
 ## Decision Flow
 
 ```
-User mentions NotebookLM
+User mentions NotebookLM / wants research / wants content generation
     ↓
-Check auth → python scripts/run.py auth_manager.py status
+Try CLI first: notebooklm status
     ↓
-If not authenticated → python scripts/run.py auth_manager.py setup
+If not authenticated → notebooklm login (or python scripts/run.py auth_manager.py setup)
     ↓
-Check/Add notebook → python scripts/run.py notebook_manager.py list/add (with --description)
+Create/select notebook → notebooklm create / notebooklm use <id>
     ↓
-Activate notebook → python scripts/run.py notebook_manager.py activate --id ID
+Add sources → notebooklm source add "URL/file/YouTube"
     ↓
-Ask question → python scripts/run.py ask_question.py --question "..."
+Query or generate → notebooklm ask "..." / notebooklm generate <type>
     ↓
-See "Is that ALL you need?" → Ask follow-ups until complete
+Download artifacts → notebooklm download <type> ./output
     ↓
-Synthesize and respond to user
+If CLI fails → fall back to browser automation scripts
 ```
 
 ## Troubleshooting
 
 | Problem | Solution |
 |---------|----------|
-| ModuleNotFoundError | Use `run.py` wrapper |
-| Authentication fails | Browser must be visible for setup! --show-browser |
+| CLI not found | `pip install "notebooklm-py[browser]"` |
+| Auth fails (CLI) | `notebooklm auth check --test`, then `notebooklm login` |
+| Auth fails (browser) | Browser must be visible: `--show-browser` flag |
 | Rate limit (50/day) | Wait or switch Google account |
 | Browser crashes | `python scripts/run.py cleanup_manager.py --preserve-library` |
-| Notebook not found | Check with `notebook_manager.py list` |
-
-## Best Practices
-
-1. **Always use run.py** - Handles environment automatically
-2. **Check auth first** - Before any operations
-3. **Follow-up questions** - Don't stop at first answer
-4. **Browser visible for auth** - Required for manual login
-5. **Include context** - Each question is independent
-6. **Synthesize answers** - Combine multiple responses
+| Notebook not found | `notebooklm list` or `python scripts/run.py notebook_manager.py list` |
+| CLI context conflicts | Use explicit `-n <id>` instead of `notebooklm use` |
+| ModuleNotFoundError | Use `run.py` wrapper for browser scripts |
 
 ## Limitations
 
-- No session persistence (each question = new browser)
-- Rate limits on free Google accounts (50 queries/day)
-- Manual upload required (user must add docs to NotebookLM)
-- Browser overhead (few seconds per question)
+- **CLI:** Uses undocumented Google APIs; may break without notice. Not affiliated with Google.
+- **Browser automation:** Slower (browser overhead per operation), no session persistence between questions.
+- **Both:** Rate limits on free Google accounts (~50 queries/day).
 
-## Resources (Skill Structure)
+## Resources
 
-**Important directories and files:**
-
-- `scripts/` - All automation scripts (ask_question.py, notebook_manager.py, etc.)
-- `data/` - Local storage for authentication and notebook library
-- `references/` - Extended documentation:
-  - `api_reference.md` - Detailed API documentation for all scripts
-  - `troubleshooting.md` - Common issues and solutions
-  - `usage_patterns.md` - Best practices and workflow examples
-- `.venv/` - Isolated Python environment (auto-created on first run)
-- `.gitignore` - Protects sensitive data from being committed
+- **CLI docs:** [github.com/teng-lin/notebooklm-py](https://github.com/teng-lin/notebooklm-py)
+- **Skill scripts:** `scripts/` directory (ask_question.py, notebook_manager.py, etc.)
+- **References:** `references/api_reference.md`, `references/troubleshooting.md`, `references/usage_patterns.md`

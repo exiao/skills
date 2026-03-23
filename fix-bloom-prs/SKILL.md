@@ -77,11 +77,11 @@ gh pr checks $PR --repo $REPO
 gh pr view $PR --repo $REPO --json headRefOid -q '.headRefOid'
 
 # Review comments (check staleness via original_commit_id vs HEAD)
-gh api "repos/$REPO/pulls/$PR/comments" | \
+gh api --paginate "repos/$REPO/pulls/$PR/comments" | \
   jq '.[] | {author: .user.login, commit: .original_commit_id, path: .path, line: .line, body: .body[0:300]}'
 
 # Claude-review sticky comment
-gh api "repos/$REPO/issues/$PR/comments" | \
+gh api --paginate "repos/$REPO/issues/$PR/comments" | \
   jq '[.[] | select(.user.login == "claude")] | last | .body[0:500]'
 
 # Last commit author (repeat fix detection)
@@ -194,9 +194,9 @@ cd /tmp/bloom-worktrees/review-${PR_NUM}
 
 4. **Read existing review comments:**
    ```bash
-   gh api repos/Bloom-Invest/bloom/pulls/${PR_NUM}/comments | \
+   gh api --paginate repos/Bloom-Invest/bloom/pulls/${PR_NUM}/comments | \
      jq '.[] | {author: .user.login, path: .path, line: .line, body: .body[0:300]}'
-   gh api repos/Bloom-Invest/bloom/pulls/${PR_NUM}/reviews | \
+   gh api --paginate repos/Bloom-Invest/bloom/pulls/${PR_NUM}/reviews | \
      jq '.[] | {author: .user.login, state: .state, body: .body[0:500]}'
    ```
 
