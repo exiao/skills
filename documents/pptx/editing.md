@@ -6,7 +6,7 @@ When using an existing presentation as a template:
 
 1. **Analyze existing slides**:
    ```bash
-   python scripts/thumbnail.py template.pptx
+   python scripts/pptx/thumbnail.py template.pptx
    python -m markitdown template.pptx
    ```
    Review `thumbnails.jpg` to see layouts, and markitdown output to see placeholder text.
@@ -37,7 +37,7 @@ When using an existing presentation as a template:
 5. **Edit content**: Update text in each `slide{N}.xml`.
    **Use subagents here if available** — slides are separate XML files, so subagents can edit in parallel.
 
-6. **Clean**: `python scripts/clean.py unpacked/`
+6. **Clean**: `python scripts/pptx/clean.py unpacked/`
 
 7. **Pack**: `python scripts/office/pack.py unpacked/ output.pptx --original template.pptx`
 
@@ -64,8 +64,8 @@ Extracts PPTX, pretty-prints XML, escapes smart quotes.
 ### add_slide.py
 
 ```bash
-python scripts/add_slide.py unpacked/ slide2.xml      # Duplicate slide
-python scripts/add_slide.py unpacked/ slideLayout2.xml # From layout
+python scripts/pptx/add_slide.py unpacked/ slide2.xml      # Duplicate slide
+python scripts/pptx/add_slide.py unpacked/ slideLayout2.xml # From layout
 ```
 
 Prints `<p:sldId>` to add to `<p:sldIdLst>` at desired position.
@@ -73,7 +73,7 @@ Prints `<p:sldId>` to add to `<p:sldIdLst>` at desired position.
 ### clean.py
 
 ```bash
-python scripts/clean.py unpacked/
+python scripts/pptx/clean.py unpacked/
 ```
 
 Removes slides not in `<p:sldIdLst>`, unreferenced media, orphaned rels.
@@ -89,7 +89,7 @@ Validates, repairs, condenses XML, re-encodes smart quotes.
 ### thumbnail.py
 
 ```bash
-python scripts/thumbnail.py input.pptx [output_prefix] [--cols N]
+python scripts/pptx/thumbnail.py input.pptx [output_prefix] [--cols N]
 ```
 
 Creates `thumbnails.jpg` with slide filenames as labels. Default 3 columns, max 12 per grid.

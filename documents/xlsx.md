@@ -74,7 +74,7 @@ This applies to ALL calculations — totals, percentages, ratios, differences, e
 4. **Save**: Write to file
 5. **Recalculate formulas (MANDATORY IF USING FORMULAS)**:
    ```bash
-   python scripts/recalc.py output.xlsx
+   python scripts/xlsx/recalc.py output.xlsx
    ```
 6. **Verify and fix any errors**: Check `status` in JSON output; fix `#REF!`, `#DIV/0!`, etc.
 
@@ -152,8 +152,8 @@ df.to_excel('output.xlsx', index=False)
 Excel files created or modified by openpyxl contain formulas as strings but not calculated values.
 
 ```bash
-python scripts/recalc.py output.xlsx
-# or: python scripts/recalc.py output.xlsx 30  (with timeout)
+python scripts/xlsx/recalc.py output.xlsx
+# or: python scripts/xlsx/recalc.py output.xlsx 30  (with timeout)
 ```
 
 The script:
