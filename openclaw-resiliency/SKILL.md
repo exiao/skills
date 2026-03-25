@@ -12,7 +12,7 @@ The watchdog is a lightweight shell script that runs every 5 minutes via launchd
 ## Prerequisites
 
 - A running OpenClaw gateway (via daemon or LaunchAgent/systemd)
-- `curl`, `python3`, `jq` available on PATH
+- `curl`, `python3` available on PATH
 - The OpenClaw CLI installed (for deep health checks)
 - The gateway's HTTP health endpoint accessible at `http://127.0.0.1:<port>/health`
 
