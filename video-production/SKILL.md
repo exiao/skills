@@ -1,6 +1,6 @@
 ---
 name: video-production
-description: Router skill — dispatches video tasks to the right sub-skill.
+description: "Use when making videos, creating clips, voiceovers, talking avatars, AI video generation, text-to-video, lip sync, motion graphics, screen recordings, or video editing. Covers Sora, Kling, ElevenLabs, InfiniteTalk, Remotion, and ffmpeg workflows. Use for any request involving video creation, animation, or audio-visual content."
 ---
 
 # Video Production Router

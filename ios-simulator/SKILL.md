@@ -1,6 +1,6 @@
 ---
 name: ios-simulator
-description: Use when running iOS simulator scripts for app testing and build automation.
+description: "Use when automating iOS Simulator tasks with 21 accessibility-driven scripts: building and running iOS apps, device lifecycle management, screenshot capture, UI navigation via accessibility, gesture replay, app install/launch, status bar configuration, and health checks. Also use for iOS testing automation and simulator setup."
 ---
 
 # iOS Simulator Skill

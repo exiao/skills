@@ -92,3 +92,18 @@ This skill content is modularized into reference docs for readability.
 - [Video Retention Architecture: 6-Step Framework](references/video-retention-architecture-6-step.md)
 - [Usage](references/usage.md)
 - [References](references/references.md)
+
+## Output Format
+
+Generate **10 headlines** for the given topic or content. Present as a numbered list:
+
+1. ⭐ **Best headline here** — _Rationale: why this one wins (hook strength, clarity, curiosity gap)_
+2. **Another headline** — _Rationale: one line on why it works_
+3. **Another headline** — _Rationale: ..._
+...
+
+Rules:
+- Star ⭐ the single recommended pick
+- Each headline gets a 1-line rationale explaining the mechanism (curiosity gap, pattern interrupt, specificity, etc.)
+- Mix formats: questions, statements, "How to", lists, contrarian takes
+- After presenting, ask if the user wants variations on any specific headline or adaptation for a different platform

@@ -3,6 +3,8 @@ name: wealth-management
 description: Wealth management workflows — client review prep, financial plans, investment proposals, portfolio rebalancing, and tax-loss harvesting. Adapted from Anthropic's financial-services-plugins (github.com/anthropics/financial-services-plugins).
 ---
 
+> **Source:** https://github.com/anthropics/financial-services-plugins — local copy, do not modify without checking upstream.
+
 # Wealth Management
 
 Client-facing wealth management workflows. Use when preparing for client meetings, building financial plans, generating investment proposals, rebalancing portfolios, or identifying tax-loss harvesting opportunities.

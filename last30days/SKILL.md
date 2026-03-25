@@ -230,165 +230,13 @@ Identify from the ACTUAL RESEARCH OUTPUT:
 
 **Display in this EXACT sequence:**
 
-**FIRST - What I learned (based on QUERY_TYPE):**
+> **See:** `references/output-format.md` for "What I learned" display templates (by query type) and stats block format.
 
-**If RECOMMENDATIONS** - Show specific things mentioned with sources:
-```
-🏆 Most mentioned:
-
-[Tool Name] - {n}x mentions
-Use Case: [what it does]
-Sources: @handle1, @handle2, r/sub, blog.com
-
-[Tool Name] - {n}x mentions
-Use Case: [what it does]
-Sources: @handle3, r/sub2, Complex
-
-Notable mentions: [other specific things with 1-2 mentions]
-```
-
-**CRITICAL for RECOMMENDATIONS:**
-- Each item MUST have a "Sources:" line with actual @handles from X posts (e.g., @LONGLIVE47, @ByDobson)
-- Include subreddit names (r/hiphopheads) and web sources (Complex, Variety)
-- Parse @handles from research output and include the highest-engagement ones
-- Format naturally - tables work well for wide terminals, stacked cards for narrow
-
-**If PROMPTING/NEWS/GENERAL** - Show synthesis and patterns:
-
-CITATION RULE: Cite sources sparingly to prove research is real.
-- In the "What I learned" intro: cite 1-2 top sources total, not every sentence
-- In KEY PATTERNS: cite 1 source per pattern, short format: "per @handle" or "per r/sub"
-- Do NOT include engagement metrics in citations (likes, upvotes) - save those for stats box
-- Do NOT chain multiple citations: "per @x, @y, @z" is too much. Pick the strongest one.
-
-CITATION PRIORITY (most to least preferred):
-1. @handles from X — "per @handle" (these prove the tool's unique value)
-2. r/subreddits from Reddit — "per r/subreddit"
-3. YouTube channels — "per [channel name] on YouTube" (transcript-backed insights)
-4. Web sources — ONLY when Reddit/X/YouTube don't cover that specific fact
-
-The tool's value is surfacing what PEOPLE are saying, not what journalists wrote.
-When both a web article and an X post cover the same fact, cite the X post.
-
-URL FORMATTING: NEVER paste raw URLs in the output.
-- **BAD:** "per https://www.rollingstone.com/music/music-news/kanye-west-bully-1235506094/"
-- **GOOD:** "per Rolling Stone"
-- **GOOD:** "per Complex"
-Use the publication name, not the URL. The user doesn't need links — they need clean, readable text.
-
-**BAD:** "His album is set for March 20 (per Rolling Stone; Billboard; Complex)."
-**GOOD:** "His album BULLY drops March 20 — fans on X are split on the tracklist, per @honest30bgfan_"
-**GOOD:** "Ye's apology got massive traction on r/hiphopheads"
-**OK** (web, only when Reddit/X don't have it): "The Hellwatt Festival runs July 4-18 at RCF Arena, per Billboard"
-
-**Lead with people, not publications.** Start each topic with what Reddit/X
-users are saying/feeling, then add web context only if needed. The user came
-here for the conversation, not the press release.
-
-```
-What I learned:
-
-**{Topic 1}** — [1-2 sentences about what people are saying, per @handle or r/sub]
-
-**{Topic 2}** — [1-2 sentences, per @handle or r/sub]
-
-**{Topic 3}** — [1-2 sentences, per @handle or r/sub]
-
-KEY PATTERNS from the research:
-1. [Pattern] — per @handle
-2. [Pattern] — per r/sub
-3. [Pattern] — per @handle
-```
-
-**THEN - Stats (right before invitation):**
-
-**CRITICAL: Calculate actual totals from the research output.**
-- Count posts/threads from each section
-- Sum engagement: parse `[Xlikes, Yrt]` from each X post, `[Xpts, Ycmt]` from Reddit
-- Identify top voices: highest-engagement @handles from X, most active subreddits
-
-**Copy this EXACTLY, replacing only the {placeholders}:**
-
-```
----
-✅ All agents reported back!
-├─ 🟠 Reddit: {N} threads │ {N} upvotes │ {N} comments
-├─ 🔵 X: {N} posts │ {N} likes │ {N} reposts
-├─ 🔴 YouTube: {N} videos │ {N} views │ {N} with transcripts
-├─ 🌐 Web: {N} pages (supplementary)
-└─ 🗣️ Top voices: @{handle1} ({N} likes), @{handle2} │ r/{sub1}, r/{sub2}
----
-```
-
-If Reddit returned 0 threads, write: "├─ 🟠 Reddit: 0 threads (no results this cycle)"
-If YouTube returned 0 videos or yt-dlp is not installed, omit the YouTube line entirely.
-NEVER use plain text dashes (-) or pipe (|). ALWAYS use ├─ └─ │ and the emoji.
-
-**SELF-CHECK before displaying**: Re-read your "What I learned" section. Does it match what the research ACTUALLY says? If you catch yourself projecting your own knowledge instead of the research, rewrite it.
+> **See:** `references/citation-rules.md` for citation format, priority, and URL formatting rules.
 
 **LAST - Invitation (adapt to QUERY_TYPE):**
 
-**CRITICAL: Every invitation MUST include 2-3 specific example suggestions based on what you ACTUALLY learned from the research.** Don't be generic — show the user you absorbed the content by referencing real things from the results.
-
-**If QUERY_TYPE = PROMPTING:**
-```
----
-I'm now an expert on {TOPIC} for {TARGET_TOOL}. What do you want to make? For example:
-- [specific idea based on popular technique from research]
-- [specific idea based on trending style/approach from research]
-- [specific idea riffing on what people are actually creating]
-
-Just describe your vision and I'll write a prompt you can paste straight into {TARGET_TOOL}.
-```
-
-**If QUERY_TYPE = RECOMMENDATIONS:**
-```
----
-I'm now an expert on {TOPIC}. Want me to go deeper? For example:
-- [Compare specific item A vs item B from the results]
-- [Explain why item C is trending right now]
-- [Help you get started with item D]
-```
-
-**If QUERY_TYPE = NEWS:**
-```
----
-I'm now an expert on {TOPIC}. Some things you could ask:
-- [Specific follow-up question about the biggest story]
-- [Question about implications of a key development]
-- [Question about what might happen next based on current trajectory]
-```
-
-**If QUERY_TYPE = GENERAL:**
-```
----
-I'm now an expert on {TOPIC}. Some things I can help with:
-- [Specific question based on the most discussed aspect]
-- [Specific creative/practical application of what you learned]
-- [Deeper dive into a pattern or debate from the research]
-```
-
-**Example invitations (to show the quality bar):**
-
-For `/last30days nano banana pro prompts for Gemini`:
-> I'm now an expert on Nano Banana Pro for Gemini. What do you want to make? For example:
-> - Photorealistic product shots with natural lighting (the most requested style right now)
-> - Logo designs with embedded text (Gemini's new strength per the research)
-> - Multi-reference style transfer from a mood board
->
-> Just describe your vision and I'll write a prompt you can paste straight into Gemini.
-
-For `/last30days kanye west` (GENERAL):
-> I'm now an expert on Kanye West. Some things I can help with:
-> - What's the real story behind the apology letter — genuine or PR move?
-> - Break down the BULLY tracklist reactions and what fans are expecting
-> - Compare how Reddit vs X are reacting to the Bianca narrative
-
-For `/last30days war in Iran` (NEWS):
-> I'm now an expert on the Iran situation. Some things you could ask:
-> - What are the realistic escalation scenarios from here?
-> - How is this playing differently in US vs international media?
-> - What's the economic impact on oil markets so far?
+> **See:** `references/invitation-templates.md` for invitation templates by query type and example invitations.
 
 ---
 
@@ -450,9 +298,7 @@ Only if they ask for alternatives or more prompts, provide 2-3 variations. Don't
 
 ## AFTER EACH PROMPT: Stay in Expert Mode
 
-After delivering a prompt, offer to write more:
-
-> Want another prompt? Just tell me what you're creating next.
+> **See:** `references/invitation-templates.md` for post-prompt follow-up and output summary footer format.
 
 ---
 
@@ -476,20 +322,6 @@ Only do new research if the user explicitly asks about a DIFFERENT topic.
 
 ---
 
-## Output Summary Footer (After Each Prompt)
-
-After delivering a prompt, end with:
-
-```
----
-📚 Expert in: {TOPIC} for {TARGET_TOOL}
-📊 Based on: {n} Reddit threads ({sum} upvotes) + {n} X posts ({sum} likes) + {n} YouTube videos ({sum} views) + {n} web pages
-
-Want another prompt? Just tell me what you're creating next.
-```
-
----
-
 ## Common Mistakes
 
 1. **Asking about target tool before research** — The skill explicitly instructs NOT to ask about the target tool before running research. Run research first, then ask if it wasn't specified in the query.
@@ -500,22 +332,4 @@ Want another prompt? Just tell me what you're creating next.
 
 ## Security & Permissions
 
-**What this skill does:**
-- Sends search queries to OpenAI's Responses API (`api.openai.com`) for Reddit discovery
-- Sends search queries to Twitter's GraphQL API (via browser cookie auth) or xAI's API (`api.x.ai`) for X search
-- Runs `yt-dlp` locally for YouTube search and transcript extraction (no API key, public data)
-- Optionally sends search queries to Brave Search API, Parallel AI API, or OpenRouter API for web search
-- Fetches public Reddit thread data from `reddit.com` for engagement metrics
-- Stores research findings in local SQLite database (watchlist mode only)
-
-**What this skill does NOT do:**
-- Does not post, like, or modify content on any platform
-- Does not access your Reddit, X, or YouTube accounts
-- Does not share API keys between providers (OpenAI key only goes to api.openai.com, etc.)
-- Does not log, cache, or write API keys to output files
-- Does not send data to any endpoint not listed above
-- Cannot be invoked autonomously by the agent (`disable-model-invocation: true`)
-
-**Bundled scripts:** `scripts/last30days.py` (main research engine), `scripts/lib/` (search, enrichment, rendering modules), `scripts/lib/vendor/bird-search/` (vendored X search client, MIT licensed)
-
-Review scripts before first use to verify behavior.
+> **See:** `references/security.md` for full details on what this skill does and doesn't do, API endpoints, and bundled scripts.

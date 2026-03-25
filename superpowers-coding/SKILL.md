@@ -3,6 +3,8 @@ name: superpowers-coding
 description: "Use when implementing any feature or bugfix (TDD required before writing code), encountering any bug, test failure, or unexpected behavior (systematic debugging before proposing fixes), creating isolated git worktrees, or executing independent plan tasks via sub-agents."
 ---
 
+> **Source:** https://github.com/obra/superpowers — local copy, do not modify without checking upstream.
+
 # Superpowers Coding
 
 Covers four coding discipline skills: Test-Driven Development, Systematic Debugging, Git Worktrees, and Subagent-Driven Development.
