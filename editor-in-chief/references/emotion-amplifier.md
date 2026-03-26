@@ -9,7 +9,7 @@ Every piece of content that works has a driving emotion. Find it. Then turn it u
 
 ## The Three Emotions That Drive Action
 
-From John Rush / headlines skill:
+From John Rush / hooks skill:
 1. **Frustration** — "I'm done with this crap." Call out what's broken.
 2. **Relief** — "This finally fixed it." Promise the solution.
 3. **Pride** — "I feel like myself again." Make them feel smart for reading.
@@ -101,4 +101,4 @@ If the draft has zero vulnerability, it reads like a press release.
 
 - Part of **article-writer** revision pipeline
 - Run after **show-dont-tell**, before **reader-simulator**
-- Shares emotion framework with **headlines** and **evaluate-content**
+- Shares emotion framework with **hooks** and **evaluate-content**

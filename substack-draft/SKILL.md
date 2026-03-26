@@ -21,7 +21,7 @@ The draft is already written, humanized, and approved before it gets here. This 
 
 Before saving the draft, verify:
 1. [ ] Draft approved by Eric
-2. [ ] Title + subtitle finalized (from headlines skill)
+2. [ ] Title + subtitle finalized (from hooks skill)
 3. [ ] All images placed with alt text
 4. [ ] SEO checklist passed (from article-writer)
 5. [ ] Humanizer checklist passed (from article-writer)

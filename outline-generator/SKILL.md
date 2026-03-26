@@ -5,7 +5,7 @@ description: "Use when generating outlines, article structures, content outlines
 
 # Outline Generator Skill
 
-Generate 3 structured outline variants with different angles for any article/blog post topic. Takes an approved headline from the headlines skill and produces detailed outlines with section structures, word count estimates, image placement markers, and a comparison matrix — ready for the human to pick or hybridize.
+Generate 3 structured outline variants with different angles for any article/blog post topic. Takes an approved headline from the hooks skill and produces detailed outlines with section structures, word count estimates, image placement markers, and a comparison matrix — ready for the human to pick or hybridize.
 
 ## Scope
 
@@ -13,7 +13,7 @@ Generate 3 structured outline variants with different angles for any article/blo
 
 **This skill does NOT do:**
 - SEO keyword research → `seo-research` skill
-- Headline/title generation → `headlines` skill
+- Headline/title generation → `hooks` skill
 - Actual article writing → `article-writer` skill
 - Image/diagram creation → `image-generator` skill
 
@@ -22,14 +22,14 @@ Generate 3 structured outline variants with different angles for any article/blo
 | Input | Source | Required |
 |-------|--------|----------|
 | Topic / subject | Human or project brief | Yes |
-| Approved title + subtitle | `headlines` skill output | Yes |
+| Approved title + subtitle | `hooks` skill output | Yes |
 | Target word count | Human (default: 1,500–2,500) | No |
 | Target audience notes | Human or `seo-research` brief | No |
 
 ## Process
 
 ### 1. Receive Topic + Approved Headlines
-Pull the approved title/subtitle from the headlines skill output (typically in `marketing/substack/drafts/[slug]/headlines.md`). Confirm topic scope and any angle preferences with the human.
+Pull the approved title/subtitle from the hooks skill output (typically in `marketing/substack/drafts/[slug]/hooks.md`). Confirm topic scope and any angle preferences with the human.
 
 ### 2. Generate 3 Variant Outlines
 Each variant uses a **different structure** from the structure menu below. Pick the 3 most fitting for the topic — don't force a structure that doesn't serve the content.

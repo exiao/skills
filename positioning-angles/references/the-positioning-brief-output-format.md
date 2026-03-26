@@ -1,6 +1,6 @@
 # The Positioning Brief (Output Format)
 
-After running this process, produce this document. It feeds directly into `headlines`, `direct-response-copy`, `content-atomizer`, and any other downstream skill.
+After running this process, produce this document. It feeds directly into `hooks`, `direct-response-copy`, `content-atomizer`, and any other downstream skill.
 
 ## Messaging Hierarchy
 

@@ -28,8 +28,8 @@ cp -r ~/Projects/erics-skills/skills/ad-copy ~/.clawdbot/skills/
 | [content-atomizer](content-atomizer/SKILL.md) | repurpose long-form content into platform-native pieces for 8+ channels. |
 | [editor-in-chief](editor-in-chief/SKILL.md) | autonomous editing orchestrator: diagnose, fix, and iterate drafts to quality. |
 | [evaluate-content](evaluate-content/SKILL.md) | judge content quality: shareability, readability, voice, cuttability, angle. |
-| [headlines](headlines/SKILL.md) | generate headlines, titles, and hooks for content. |
-| [outline-generator](outline-generator/SKILL.md) | generate structured article outlines from approved headlines. |
+| [hooks](hooks/SKILL.md) | generate headlines, titles, and hooks for content. |
+| [outline-generator](outline-generator/SKILL.md) | generate structured article outlines from approved hooks. |
 | [substack-draft](substack-draft/SKILL.md) | save finished articles to Substack as drafts. |
 | [tweet-ideas](tweet-ideas/SKILL.md) | generate standalone tweet ideas about a topic (Aaron Levie playbook). |
 
