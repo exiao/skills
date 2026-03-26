@@ -32,4 +32,5 @@ jobs:
             - Note any broken references (paths, tool names, commands that don't exist)
             - Call out anything that contradicts how the skill actually works
             Keep feedback concise and actionable. Skip praise.
+            If everything looks good and there are no issues, comment "LGTM" followed by one sentence summarizing what you reviewed.
           use_sticky_comment: true
