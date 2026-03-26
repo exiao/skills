@@ -25,11 +25,11 @@ jobs:
         uses: anthropics/claude-code-action@v1
         with:
           claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
-          direct_prompt: |
+          prompt: |
             Review this pull request. For each changed skill file:
             - Check that the frontmatter (name, description) is accurate and well-written
             - Flag any hardcoded secrets, tokens, or personal data that should be env vars
             - Note any broken references (paths, tool names, commands that don't exist)
             - Call out anything that contradicts how the skill actually works
             Keep feedback concise and actionable. Skip praise.
-          sticky_comment: true
+          use_sticky_comment: true
