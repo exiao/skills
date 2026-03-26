@@ -1,6 +1,6 @@
 ---
 name: trend-research
-description: Use when finding trending content on TikTok, YouTube, Instagram, Twitter, and other platforms.
+description: "Use when researching what's trending, viral content, social media trends, content ideas from trends, or platform-specific trends on TikTok, YouTube, Instagram, X/Twitter, Substack, LinkedIn, Reddit, and Lemon8. Also use for 'what's viral', 'what's working on social', 'trend report', 'what hooks are working', or 'trend scout'."
 ---
 
 # Trend Scout

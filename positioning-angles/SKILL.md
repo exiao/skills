@@ -1,6 +1,6 @@
 ---
 name: positioning-angles
-description: Use when defining product positioning angles and strategic frames.
+description: "Use when defining product positioning, choosing strategic angles, crafting value propositions, competitive positioning, product messaging, differentiation strategy, or go-to-market angles. Also use for 'how should I position my app', 'what angle should I use', 'painkiller vs vitamin', or 'market positioning'."
 ---
 # Positioning Angles Engine
 

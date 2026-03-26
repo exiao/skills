@@ -3,6 +3,8 @@ name: superpowers-reviews
 description: "Use when requesting or receiving code review, verifying work before claiming it's done, finishing a development branch (merge/PR/discard), executing written plans with batch checkpoints, or dispatching parallel agents for independent tasks."
 ---
 
+> **Source:** https://github.com/obra/superpowers — local copy, do not modify without checking upstream.
+
 # Superpowers Reviews
 
 Covers six review and execution workflow skills: Requesting Code Review, Receiving Code Review, Verification Before Completion, Finishing a Development Branch, Executing Plans, and Dispatching Parallel Agents.

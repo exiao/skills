@@ -3,6 +3,8 @@ name: documents
 description: "Use when working with any office document format: .docx Word files (creating, editing, tracked changes, reports, memos, templates); PDF files (reading, merging, splitting, OCR, watermarks, form filling, creating); .pptx presentations (decks, slides, editing templates, speaker notes); .xlsx spreadsheets (creating, editing, formulas, financial models, data analysis). Triggers on any mention of these file types or their content."
 ---
 
+> **Source:** https://github.com/anthropics/skills — local copy, do not modify without checking upstream.
+
 # Documents Skill
 
 Covers all office document formats. Based on the task, read the appropriate sub-file for complete instructions.

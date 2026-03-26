@@ -1,6 +1,6 @@
 ---
 name: nano-banana-pro
-description: Generate or edit images via Gemini 3 Pro Image (Nano Banana Pro).
+description: "Generate or edit images via Gemini 3 Pro Image (Nano Banana Pro). Use when asked to generate an image, create artwork, edit a photo, add/remove elements from an image, compose multiple images, style transfer, create avatars, illustrations, or any visual content generation. Also use for 'make me an image of', 'edit this photo', 'create artwork', or 'generate a picture'."
 homepage: https://ai.google.dev/
 metadata:
   {
@@ -63,3 +63,31 @@ Notes
 - Use timestamps in filenames: `yyyy-mm-dd-hh-mm-ss-name.png`.
 - The script prints a `MEDIA:` line for OpenClaw to auto-attach on supported chat providers.
 - Do not read the image back; report the saved path only.
+
+## Prompting Best Practices
+
+| Bad prompt | Good prompt |
+|-----------|------------|
+| "a dog" | "Golden retriever puppy sitting in autumn leaves, soft natural lighting, shallow depth of field, warm tones" |
+| "logo for my app" | "Minimal flat logo mark, teal gradient on white, geometric leaf shape, no text, SVG-ready clean edges" |
+| "edit: make it better" | "edit: increase contrast, warm the color temperature, sharpen the subject's face, blur background slightly" |
+
+Tips:
+- Be specific about **style** (photorealistic, watercolor, flat illustration, 3D render, pixel art)
+- Specify **lighting** (golden hour, studio lighting, dramatic shadows, soft diffused)
+- Mention **composition** (close-up, bird's eye view, rule of thirds, centered)
+- Reference known styles ("in the style of Studio Ghibli", "Wes Anderson color palette", "Bauhaus poster")
+- For edits, describe the change precisely rather than vaguely
+- Use `--resolution 2K` for final output; `1K` is fine for iterations
+
+## Output Review & Iteration
+
+After generation:
+1. Report the saved file path (the `MEDIA:` line handles auto-attachment)
+2. Do NOT read the image back into context with the image tool
+3. If the user isn't satisfied, suggest specific prompt refinements:
+   - **Wrong style?** → Add explicit style keywords
+   - **Wrong composition?** → Add camera angle and framing
+   - **Colors off?** → Specify a color palette or reference
+   - **Text illegible?** → Gemini struggles with text; try fewer words, larger, simpler fonts
+4. For iterative refinement, use edit mode (`-i previous_output.png`) with targeted instructions rather than regenerating from scratch

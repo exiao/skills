@@ -1,6 +1,6 @@
 ---
 name: ralph-mode
-description: Use when running autonomous development loops with iteration gates and test validation.
+description: "Use when running Ralph Mode, autonomous coding loops, iterative build-test-fix cycles, or hands-off development. Also use for 'let the agent code autonomously', 'auto-iterate until it works', 'autonomous development', or 'build loop with iteration gates'."
 ---
 # Ralph Mode - Autonomous Development Loops
 

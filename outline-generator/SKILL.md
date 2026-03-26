@@ -1,6 +1,6 @@
 ---
 name: outline-generator
-description: Use when generating structured article outlines from approved headlines.
+description: "Use when generating outlines, article structures, content outlines, blog outlines, planning article sections, structuring posts, breaking down topics into sections, or organizing ideas for long-form content. Also use for 'outline this', 'structure this article', or 'plan the sections'."
 ---
 
 # Outline Generator Skill

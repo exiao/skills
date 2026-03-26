@@ -3,6 +3,8 @@ name: skill-creator
 description: Create new skills, modify and improve existing skills, and measure skill performance. Use when creating or editing ANY skill — including rewrites, description tweaks, or adding examples. TDD pre-flight required: write failing test first (3+ pressure scenarios run WITHOUT the skill) before touching SKILL.md. Also use for running evals, benchmarking skill performance with variance analysis, and optimizing skill descriptions for better triggering accuracy.
 ---
 
+> **Source:** Anthropic internal skill — local copy, do not modify without checking upstream.
+
 # Skill Creator
 
 A skill for creating new skills and iteratively improving them.

@@ -1,6 +1,6 @@
 ---
 name: visual-design
-description: Router skill for all visual design and creative output tasks. Dispatches to the right sub-skill based on the request.
+description: "Use when designing graphics, creating charts, data visualizations, slides, presentations, sales decks, infographics, mockups, wireframes, diagrams, UI designs, landing pages, or any visual creative output. Covers Excalidraw, D3.js, canvas HTML, image generation, and frontend design. Use for any request that produces a visual artifact."
 ---
 
 # Design Visual — Router

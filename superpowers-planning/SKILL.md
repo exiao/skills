@@ -3,6 +3,8 @@ name: superpowers-planning
 description: "You MUST use this before any creative work, feature, or implementation — explores intent and requirements first, creates detailed plans before touching code. Also use when establishing how to find and use skills at session start."
 ---
 
+> **Source:** https://github.com/obra/superpowers — local copy, do not modify without checking upstream.
+
 # Superpowers Planning
 
 Covers three tightly related planning workflows. Based on the task, read the appropriate sub-file for complete instructions.
