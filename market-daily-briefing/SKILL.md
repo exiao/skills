@@ -13,13 +13,55 @@ Delivers a concise, narrative market briefing covering earnings results, economi
 
 | Tool | Purpose |
 |------|---------|
+| **Bloom CLI** (`bloom`) | Pull real-time price data, top movers, sentiment scores |
 | **Serper** (`web-search` skill, `SERPER_API_KEY`) | Search for earnings results, analyst reactions, market news |
 | **Firecrawl** (`FIRECRAWL_API_KEY`) | Scrape full articles when Serper snippets cut off before the numbers |
 | **Bloom MCP** (`https://api.getbloom.app/mcp/`, Bearer: `test-api-key`) | Check what stocks Bloom users are watching — front-load coverage of these |
 
 ---
 
+## Step 0: Pull Market Data (before web search)
+
+Run this block first. It gives you ground-truth numbers before any web search. All percentages in the final briefing must come from here, not from article snippets.
+
+```bash
+mkdir -p /tmp/bloom
+
+# Today's actual top movers
+bloom market --type top_movers --limit 20 -o /tmp/bloom/movers.json
+
+# Fear & Greed + AAII sentiment
+bloom sentiment -o /tmp/bloom/sentiment.json
+
+# Index prices
+bloom price SPY --timeframes 1d -o /tmp/bloom/spy.json
+bloom price QQQ --timeframes 1d -o /tmp/bloom/qqq.json
+bloom price IWM --timeframes 1d -o /tmp/bloom/iwm.json
+```
+
+Extract key data:
+
+```bash
+# Top movers summary
+jq '.[] | {symbol: .symbol, change_pct: .change_pct, price: .price}' /tmp/bloom/movers.json
+
+# Sentiment
+jq '{fear_greed: .fear_greed_value, fear_greed_label: .fear_greed_label, aaii_bull: .aaii_bullish, aaii_bear: .aaii_bearish}' /tmp/bloom/sentiment.json
+
+# Index moves
+jq '{spy_pct: .change_pct, spy_price: .price}' /tmp/bloom/spy.json
+jq '{qqq_pct: .change_pct, qqq_price: .price}' /tmp/bloom/qqq.json
+jq '{iwm_pct: .change_pct, iwm_price: .price}' /tmp/bloom/iwm.json
+```
+
+Keep these numbers in context. Every stock percentage you write must come from this data.
+
+---
+
 ## What to Cover
+
+### 0. Verified Numbers Rule
+Every stock percentage mentioned MUST be verified against bloom-cli price data. If bloom-cli shows a different number than a news article, use bloom-cli's number. Never estimate or round aggressively.
 
 ### 1. Earnings Results (Today + Last Night)
 For each notable company that reported:
@@ -95,3 +137,4 @@ Tweet guidelines:
 3. **Skipping stock reaction** — A beat/miss means nothing without the stock's actual % move. Always include both.
 4. **Too long** — Under 2000 characters. If it's longer, cut. Quiet days = 2-3 sentences.
 5. **Copying Signal verbatim to Typefully** — Public post needs to be distilled to one sharp point, not a copy-paste.
+6. **Hallucinated percentages** — News article snippets often don't contain exact current-day % moves. The model fills in plausible-sounding numbers that are wrong. Always pull from bloom-cli first (Step 0), then narrate around verified numbers.
