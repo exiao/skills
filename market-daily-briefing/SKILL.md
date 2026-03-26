@@ -46,7 +46,7 @@ Extract key data:
 jq '.[] | {symbol: .symbol, change_pct: .change_pct, price: .price}' /tmp/bloom/movers.json
 
 # Sentiment
-jq '{fear_greed: .fear_greed_value, fear_greed_label: .fear_greed_label, aaii_bull: .aaii_bullish, aaii_bear: .aaii_bearish}' /tmp/bloom/sentiment.json
+jq '{fear_greed: .cnn_fear_greed.index_value, fear_greed_label: .cnn_fear_greed.level, aaii_bull: .aaii_bullish, aaii_bear: .aaii_bearish}' /tmp/bloom/sentiment.json
 
 # Index moves
 jq '{spy_pct: .change_pct, spy_price: .price}' /tmp/bloom/spy.json
