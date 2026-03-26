@@ -3,11 +3,6 @@ name: agent-browser
 description: "Use when automating browsers via agent-browser CLI: headless browsing, web scraping with accessibility trees, CDP-based automation, filling forms, clicking buttons, navigating pages, or running isolated browser sessions for sub-agents. Prefer over Playwright browser tool when compact context and agent-first design matter."
 ---
 
----
-name: agent-browser
-description: "Use when automating browsers via agent-browser CLI: headless browsing, web scraping with accessibility trees, CDP-based automation, filling forms, clicking buttons, navigating pages, or running isolated browser sessions for sub-agents. Prefer over Playwright browser tool when compact context and agent-first design matter."
----
-
 # agent-browser Skill
 
 Browser automation via `agent-browser` CLI (v0.14.0). Native Rust, CDP-based, agent-first design. Uses compact accessibility tree snapshots to minimize context usage.
