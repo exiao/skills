@@ -111,6 +111,61 @@ cp -r ~/Projects/erics-skills/skills/ad-copy ~/.clawdbot/skills/
 | [positioning-angles](positioning-angles/SKILL.md) | define product positioning angles and strategic frames. |
 | [wealth-management](wealth-management/SKILL.md) | client reviews, financial plans, investment proposals, portfolio rebalancing, tax-loss harvesting. |
 
+## Bundled OpenClaw Skills
+
+These skills ship with [OpenClaw](https://github.com/openclaw/openclaw) and aren't in this repo. Install OpenClaw to get them, or grab individual SKILL.md files from the [OpenClaw skills directory](https://github.com/openclaw/openclaw/tree/main/skills).
+
+### Developer Tools
+
+| Skill | Description |
+|-------|-------------|
+| [github](https://github.com/openclaw/openclaw/tree/main/skills/github) | GitHub operations via `gh` CLI: issues, PRs, CI runs, code review, API queries. |
+| [gh-issues](https://github.com/openclaw/openclaw/tree/main/skills/gh-issues) | Fetch GitHub issues, spawn sub-agents to implement fixes and open PRs. |
+| [mcporter](https://github.com/openclaw/openclaw/tree/main/skills/mcporter) | List, configure, auth, and call MCP servers/tools directly. |
+| [tmux](https://github.com/openclaw/openclaw/tree/main/skills/tmux) | Remote-control tmux sessions by sending keystrokes and scraping pane output. |
+| [session-logs](https://github.com/openclaw/openclaw/tree/main/skills/session-logs) | Search and analyze your own OpenClaw session logs using jq. |
+| [healthcheck](https://github.com/openclaw/openclaw/tree/main/skills/healthcheck) | Host security hardening and risk-tolerance checks for OpenClaw deployments. |
+
+### Productivity
+
+| Skill | Description |
+|-------|-------------|
+| [trello](https://github.com/openclaw/openclaw/tree/main/skills/trello) | Manage Trello boards, lists, and cards via the REST API. |
+| [notion](https://github.com/openclaw/openclaw/tree/main/skills/notion) | Notion API for creating and managing pages, databases, and blocks. |
+| [obsidian](https://github.com/openclaw/openclaw/tree/main/skills/obsidian) | Work with Obsidian vaults and automate via obsidian-cli. |
+| [slack](https://github.com/openclaw/openclaw/tree/main/skills/slack) | Control Slack: send messages, react, pin/unpin items. |
+| [himalaya](https://github.com/openclaw/openclaw/tree/main/skills/himalaya) | CLI email via IMAP/SMTP: list, read, write, reply, forward, search. |
+| [1password](https://github.com/openclaw/openclaw/tree/main/skills/1password) | 1Password CLI for reading/injecting/running secrets. |
+
+### Apple Ecosystem
+
+| Skill | Description |
+|-------|-------------|
+| [apple-notes](https://github.com/openclaw/openclaw/tree/main/skills/apple-notes) | Manage Apple Notes via `memo` CLI (create, view, edit, search, export). |
+| [apple-reminders](https://github.com/openclaw/openclaw/tree/main/skills/apple-reminders) | Manage Apple Reminders via `remindctl` CLI. |
+| [bear-notes](https://github.com/openclaw/openclaw/tree/main/skills/bear-notes) | Create, search, and manage Bear notes via `grizzly` CLI. |
+| [things-mac](https://github.com/openclaw/openclaw/tree/main/skills/things-mac) | Manage Things 3 tasks, projects, and areas via CLI. |
+| [peekaboo](https://github.com/openclaw/openclaw/tree/main/skills/peekaboo) | Capture and automate macOS UI with Peekaboo CLI. |
+
+### Media & Files
+
+| Skill | Description |
+|-------|-------------|
+| [video-frames](https://github.com/openclaw/openclaw/tree/main/skills/video-frames) | Extract frames or short clips from videos using ffmpeg. |
+| [nano-pdf](https://github.com/openclaw/openclaw/tree/main/skills/nano-pdf) | Edit PDFs with natural-language instructions. |
+| [gifgrep](https://github.com/openclaw/openclaw/tree/main/skills/gifgrep) | Search GIF providers, download results, extract stills/sheets. |
+| [openai-whisper](https://github.com/openclaw/openclaw/tree/main/skills/openai-whisper) | Local speech-to-text with Whisper CLI (no API key). |
+| [openai-image-gen](https://github.com/openclaw/openclaw/tree/main/skills/openai-image-gen) | Batch-generate images via OpenAI Images API. |
+| [spotify-player](https://github.com/openclaw/openclaw/tree/main/skills/spotify-player) | Terminal Spotify playback and search. |
+
+### Utilities
+
+| Skill | Description |
+|-------|-------------|
+| [weather](https://github.com/openclaw/openclaw/tree/main/skills/weather) | Current weather and forecasts via wttr.in or Open-Meteo. No API key needed. |
+| [gemini](https://github.com/openclaw/openclaw/tree/main/skills/gemini) | Gemini CLI for one-shot Q&A, summaries, and generation. |
+| [goplaces](https://github.com/openclaw/openclaw/tree/main/skills/goplaces) | Google Places API: text search, place details, reviews. |
+
 ## Installation
 
 Skills live in `~/clawd/skills/`. Each skill is a folder with a `SKILL.md` file.
