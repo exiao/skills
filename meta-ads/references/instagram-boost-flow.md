@@ -86,5 +86,5 @@ Then send each new creative image via Signal (one at a time, with caption).
 ## Notes
 
 - This flow predates the Marketing API integration. The account was restricted from Facebook advertising at the time, so all ads ran through Instagram's "Without a Facebook ad account" mode.
-- If the account restriction is lifted, prefer the API-based flow in `skill.md` — it's faster, automatable, and supports iOS + Android ad sets separately.
+- If the account restriction is lifted, prefer the API-based flow in `SKILL.md` — it's faster, automatable, and supports iOS + Android ad sets separately.
 - Browser automation via instagram.com can break if Instagram changes their UI. Always take a snapshot before acting.
