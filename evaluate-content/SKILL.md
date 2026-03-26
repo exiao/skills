@@ -1,11 +1,23 @@
 ---
 name: evaluate-content
-description: "Use when judging content quality: shareability, readability, voice, cuttability, angle."
+description: "Use when judging content quality OR editing/improving existing copy: shareability, readability, voice, cuttability, angle, copy sweeps."
 ---
 
 # Evaluate Content
 
 Honest, brutal content evaluation. Run this on anything before it goes live — articles, threads, tweets, headlines, outlines.
+
+## When to Use Which Framework
+
+| Task | Framework |
+|------|-----------|
+| Evaluating content quality | The Six Questions |
+| Editing/improving existing copy | The Seven Sweeps |
+| Quick polish pass | Quick-Pass Editing Checks |
+| Monthly content review | Pillar-Level Evaluation |
+| Video hooks | Short-Form Video Hook Checklist |
+
+---
 
 ## The Six Questions
 
@@ -265,6 +277,237 @@ Before delivering any evaluation or suggested rewrites, scan your own output for
 - No vague rewrite examples — any rewrite you suggest must be as specific as the original content warrants. Generic improvement suggestions are not improvements.
 
 If your feedback contains any of these patterns, rewrite the feedback before sending.
+
+---
+
+## The Seven Sweeps Framework (Copy Editing)
+
+Edit copy through seven sequential passes, each focusing on one dimension. After each sweep, loop back to check previous sweeps aren't compromised (the cascading re-check pattern).
+
+**Cascading re-check:** After completing Sweep N, re-check Sweeps 1 through N-1 to ensure your edits didn't introduce new issues in already-cleared dimensions. This compounds: after Sweep 7, do one final pass through all six prior sweeps.
+
+### Sweep 1: Clarity
+
+**Focus:** Can the reader understand what you're saying?
+
+**What to check:**
+- Confusing sentence structures
+- Unclear pronoun references
+- Jargon or insider language
+- Ambiguous statements
+- Missing context
+
+**Common issues:**
+- Sentences trying to say too much
+- Abstract language instead of concrete
+- Assuming reader knowledge they don't have
+- Burying the point in qualifications
+
+**Process:**
+1. Read through quickly, highlighting unclear parts
+2. Don't correct yet: just note problem areas
+3. After marking issues, recommend specific edits
+4. Verify edits maintain the original intent
+5. Confirm the "Rule of One" (one main idea per section) and "You Rule" (copy speaks to the reader) are intact
+
+### Sweep 2: Voice and Tone
+
+**Focus:** Is the copy consistent in how it sounds?
+
+**What to check:**
+- Shifts between formal and casual
+- Inconsistent brand personality
+- Mood changes that feel jarring
+- Word choices that don't match the brand
+
+**Common issues:**
+- Starting casual, becoming corporate
+- Mixing "we" and "the company" references
+- Humor in some places, serious in others (unintentionally)
+- Technical language appearing randomly
+
+**Process:**
+1. Read aloud to hear inconsistencies
+2. Mark where tone shifts unexpectedly
+3. Recommend edits that smooth transitions
+4. Ensure personality remains throughout
+5. **Re-check:** Return to Clarity to ensure voice edits didn't introduce confusion
+
+### Sweep 3: So What
+
+**Focus:** Does every claim answer "why should I care?"
+
+**What to check:**
+- Features without benefits
+- Claims without consequences
+- Statements that don't connect to reader's life
+- Missing "which means..." bridges
+
+**The So What test:** For every statement, ask "Okay, so what?" If the copy doesn't answer with a deeper benefit, it needs work.
+
+- ❌ "Our platform uses AI-powered analytics"
+- ✅ "Our AI-powered analytics surface insights you'd miss manually, so you can make better decisions in half the time"
+
+**Process:**
+1. Read each claim and literally ask "so what?"
+2. Highlight claims missing the answer
+3. Add the benefit bridge or deeper meaning
+4. Ensure benefits connect to real reader desires
+5. **Re-check:** Return to Voice and Tone, then Clarity
+
+### Sweep 4: Prove It
+
+**Focus:** Is every claim supported with evidence?
+
+**What to check:**
+- Unsubstantiated claims
+- Missing social proof
+- Assertions without backup
+- "Best" or "leading" without evidence
+
+**Types of proof:** Testimonials with names, case study references, statistics and data, third-party validation, guarantees and risk reversals, customer logos, review scores.
+
+**Common issues:**
+- "Trusted by thousands" (which thousands?)
+- "Industry-leading" (according to whom?)
+- "Customers love us" (show them saying it)
+
+**Process:**
+1. Identify every claim that needs proof
+2. Check if proof exists nearby
+3. Flag unsupported assertions
+4. Recommend adding proof or softening claims
+5. **Re-check:** Return to So What, Voice and Tone, then Clarity
+
+### Sweep 5: Specificity
+
+**Focus:** Is the copy concrete enough to be compelling?
+
+**What to check:**
+- Vague language ("improve," "enhance," "optimize")
+- Generic statements that could apply to anyone
+- Round numbers that feel made up
+- Missing details that would make it real
+
+**Specificity upgrades:**
+
+| Vague | Specific |
+|-------|----------|
+| Save time | Save 4 hours every week |
+| Many customers | 2,847 teams |
+| Fast results | Results in 14 days |
+| Improve your workflow | Cut your reporting time in half |
+| Great support | Response within 2 hours |
+
+**Process:**
+1. Highlight vague words and phrases
+2. Ask "Can this be more specific?"
+3. Add numbers, timeframes, or examples
+4. Remove content that can't be made specific (it's probably filler)
+5. **Re-check:** Return to Prove It, So What, Voice and Tone, then Clarity
+
+### Sweep 6: Heightened Emotion
+
+**Focus:** Does the copy make the reader feel something?
+
+**What to check:**
+- Flat, informational language
+- Missing emotional triggers
+- Pain points mentioned but not felt
+- Aspirations stated but not evoked
+
+**Techniques:** Paint the "before" state vividly, use sensory language, tell micro-stories, reference shared experiences, ask questions that prompt reflection.
+
+**Process:**
+1. Read for emotional impact: does it move you?
+2. Identify flat sections that should resonate
+3. Add emotional texture while staying authentic
+4. Ensure emotion serves the message (not manipulation)
+5. **Re-check:** Return to Specificity, Prove It, So What, Voice and Tone, then Clarity
+
+### Sweep 7: Zero Risk
+
+**Focus:** Have we removed every barrier to action?
+
+**What to check:**
+- Friction near CTAs
+- Unanswered objections
+- Missing trust signals
+- Unclear next steps
+- Hidden costs or surprises
+
+**Risk reducers:** Money-back guarantees, free trials, "No credit card required," "Cancel anytime," social proof near CTA, clear expectations of what happens next, privacy assurances.
+
+**Process:**
+1. Focus on sections near CTAs
+2. List every reason someone might hesitate
+3. Check if the copy addresses each concern
+4. Add risk reversals or trust signals as needed
+5. **Re-check:** Return through ALL previous sweeps one final time
+
+---
+
+## Quick-Pass Editing Checks
+
+Use these for faster reviews when a full seven-sweep process isn't needed.
+
+### Word-Level Checks
+
+**Cut these words:**
+- Very, really, extremely, incredibly (weak intensifiers)
+- Just, actually, basically (filler)
+- In order to (use "to")
+- That (often unnecessary)
+- Things, stuff (vague)
+
+**Replace these:**
+
+| Weak | Strong |
+|------|--------|
+| Utilize | Use |
+| Implement | Set up |
+| Leverage | Use |
+| Facilitate | Help |
+| Innovative | New |
+| Robust | Strong |
+| Seamless | Smooth |
+| Cutting-edge | New/Modern |
+
+**Watch for:**
+- Adverbs (usually unnecessary)
+- Passive voice (switch to active)
+- Nominalizations (verb turned noun: "make a decision" → "decide")
+
+### Sentence-Level Checks
+
+- One idea per sentence
+- Vary sentence length (mix short and long)
+- Front-load important information
+- Max 3 conjunctions per sentence
+- No more than 25 words (usually)
+
+### Paragraph-Level Checks
+
+- One topic per paragraph
+- Short paragraphs (2-4 sentences for web)
+- Strong opening sentences
+- Logical flow between paragraphs
+- White space for scannability
+
+---
+
+## Common Copy Problems & Fixes
+
+| Problem | Symptom | Fix |
+|---------|---------|-----|
+| Wall of Features | List of what the product does without why it matters | Add "which means..." after each feature to bridge to benefits |
+| Corporate Speak | "Leverage synergies to optimize outcomes" | Ask "How would a human say this?" and use those words |
+| Weak Opening | Starting with company history or vague statements | Lead with the reader's problem or desired outcome |
+| Buried CTA | The ask comes after too much buildup, or isn't clear | Make the CTA obvious, early, and repeated |
+| No Proof | "Customers love us" with no evidence | Add specific testimonials, numbers, or case references |
+| Generic Claims | "We help businesses grow" | Specify who, how, and by how much |
+| Mixed Audiences | Copy tries to speak to everyone, resonates with no one | Pick one audience and write directly to them |
+| Feature Overload | Listing every capability, overwhelming the reader | Focus on 3-5 key benefits that matter most to the audience |
 
 ---
 
