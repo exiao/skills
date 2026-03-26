@@ -86,7 +86,7 @@ Write all three, then pick the right one for the format:
 - **Visual** — what they SEE in the first frame
 - **Audio** — what they HEAR in the first 3 seconds
 
-> **Load on-demand:** `headlines` skill has 15+ proven hook formulas.
+> **Load on-demand:** `hooks` skill has 15+ proven hook formulas.
 
 ### Hook Psychology Triggers
 
@@ -241,7 +241,7 @@ Don't write here. Route to the right skill.
 | Tweets / X posts | `tweet-ideas` |
 | Articles / long-form | `article-writer` |
 | TikTok slideshows | `slideshow-creator` |
-| Hooks and headlines | `headlines` |
+| Hooks and headlines | `hooks` |
 | Ad copy (paid) | `ad-copy` |
 | Paid creative concepts | `ad-copy` (includes A/B blitz protocol) |
 | AI character video scripts | Write inline using Step 2c above |
@@ -369,7 +369,7 @@ What a complete strategy card looks like after running this skill. Use this as t
 
 ## Related Skills
 
-- `headlines` — hook formulas and title generation
+- `hooks` — hook formulas and title generation
 - `ad-copy` — direct response copy, brand voice, A/B testing blitz
 - `tweet-ideas` — standalone tweet content
 - `article-writer` — long-form drafts

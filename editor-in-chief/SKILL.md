@@ -1,7 +1,7 @@
 ---
 name: editor-in-chief
 description: "Use when a first draft is complete and all Phase 1 gates are
-  done: topic selected (seo-research), title approved (headlines), outline
+  done: topic selected (seo-research), title approved (hooks), outline
   approved (outline-generator), draft written (article-writer). Runs
   autonomous diagnosis-prescribe-rewrite loop before Substack."
 ---
@@ -31,7 +31,7 @@ This skill replaces the old pipeline of: remove-chaff → show-dont-tell → emo
 
 After Phase 1 (human-in-the-loop) is complete:
 - ✅ Topic selected (seo-research)
-- ✅ Title/subtitle approved by Eric (headlines)
+- ✅ Title/subtitle approved by Eric (hooks)
 - ✅ Outline approved by Eric (outline-generator)
 - ✅ First draft written (article-writer)
 
@@ -45,7 +45,7 @@ The editor-in-chief takes the first draft and autonomously refines it.
 |-------|--------|----------|
 | Draft | `marketing/substack/drafts/[slug]/draft.md` | Yes |
 | Brand voice | `~/marketing/WRITING-STYLE.md` | Yes |
-| Approved title/subtitle | `marketing/substack/drafts/[slug]/headlines.md` | Yes |
+| Approved title/subtitle | `marketing/substack/drafts/[slug]/hooks.md` | Yes |
 | Target reader | From outline or evaluate-content Q6 | Yes |
 
 ## The Loop
@@ -404,5 +404,5 @@ When a dimension needs work, read the corresponding reference file for detailed 
 - **evaluate-content** — classification diagnostics (used in Step 1)
 - **article-writer** — humanizer checklist (used for Voice fixes)
 - `~/marketing/WRITING-STYLE.md` — ground truth for voice
-- **Phase 1** (upstream): `seo-research`, `headlines`, `outline-generator`
+- **Phase 1** (upstream): `seo-research`, `hooks`, `outline-generator`
 - **Phase 3** (downstream): `substack-draft`, `typefully`, `tweet-ideas`

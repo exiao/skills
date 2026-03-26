@@ -1,6 +1,6 @@
 ---
-name: headlines
-description: Use when generating headlines, titles, and hooks for content.
+name: hooks
+description: Use when generating hooks, headlines, titles, and scroll-stopping openers for content.
 ---
 # Headlines & Hooks Engine
 

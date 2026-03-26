@@ -11,7 +11,7 @@ Write full article drafts from approved outlines with SEO optimization and Bloom
 
 **Inputs:**
 - Approved outline → `outline-generator` skill
-- Approved title/subtitle → `headlines` skill
+- Approved title/subtitle → `hooks` skill
 - Generated images → `visual-design` skill
 
 **Output:**

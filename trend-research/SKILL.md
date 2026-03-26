@@ -307,7 +307,7 @@ Can be run as a cron job or heartbeat task:
 
 ## References
 
-- Fed into **headlines skill** — remix trending hooks
+- Fed into **hooks skill** — remix trending hooks
 - Fed into **outline-generator** — write about trending topics
 - Fed into **distribution skill** — ride trending waves
 - Uses **bird skill** for X/Twitter data

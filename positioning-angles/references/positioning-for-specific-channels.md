@@ -22,7 +22,7 @@ Google Ads is the fastest positioning test because you get CTR data within 48 ho
 
 ### TikTok / Short-Form Video
 - **First 2 seconds = the positioning angle as a hook**
-- Use `headlines` skill TikTok section for hook writing after positioning is decided
+- Use `hooks` skill TikTok section for hook writing after positioning is decided
 - The positioning determines the *concept* of the video. The hook determines the *execution*.
 - Example: Positioning = "replaces 2 hours of research." Video concept = showing the 2-hour process compressed into 30 seconds with AI.
 

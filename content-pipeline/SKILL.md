@@ -69,7 +69,7 @@ Output directory: ~/marketing/substack/drafts/[slug]/
 
 Your job:
 1. Read ~/marketing/WRITING-STYLE.md
-2. Run /headlines — generate 5 options, pick strongest → headlines.md
+2. Run /hooks — generate 5 options, pick strongest → hooks.md
 3. Run /outline-generator → outline.md
 4. Run /article-writer → draft.md (must pass "only Eric could write this" test: use Bloom-specific numbers, named frameworks, personal tool experience)
 5. Run /editor-in-chief — max 5 iterations → editing-log.md + draft-final.md
@@ -90,7 +90,7 @@ Do NOT publish. Do NOT send messages unless blocked.
 ### File structure per article
 ```
 ~/marketing/substack/drafts/[slug]/
-  headlines.md        # 5 options + winner
+  hooks.md            # 5 options + winner
   outline.md
   draft.md
   editing-log.md

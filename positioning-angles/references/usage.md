@@ -10,7 +10,7 @@ When asked to develop positioning:
 6. **Build the positioning stack** for the top 3 angles
 7. **Produce the positioning brief** in the output format above
 8. **Recommend a testing plan** with specific test setups for their budget/channels
-9. **Connect to downstream skills**: suggest headlines (→ `headlines` skill), ad copy, content hooks
+9. **Connect to downstream skills**: suggest headlines (→ `hooks` skill), ad copy, content hooks
 
 Always be opinionated. Don't present 15 angles and say "pick one." Recommend the top 3 with clear reasoning. Say which one you'd bet on and why.
 

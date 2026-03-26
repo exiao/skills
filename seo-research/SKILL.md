@@ -31,7 +31,7 @@ Unified SEO skill covering keyword research, AI search optimization, programmati
 ## Pipeline Position
 
 ```
-THIS SKILL (what to write about) → headlines → outline-generator → article-writer → image-generator → substack-draft → distribution
+THIS SKILL (what to write about) → hooks → outline-generator → article-writer → image-generator → substack-draft → distribution
 ```
 
 ---
@@ -324,6 +324,6 @@ For full audit checklist, read `references/seo-technical.md`. Critical items:
 ## Related Skills
 
 - **trend-scout** — viral content signals (complements SEO)
-- **headlines** — turns keyword research into titles
+- **hooks** — turns keyword research into titles
 - **content-calendar** — tracks research → written → published
 - **competitive-analysis** — competitor comparison pages (see references/seo-competitor-pages.md)

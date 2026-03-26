@@ -27,6 +27,25 @@ Cross out all the "ands" — add conflict so it builds:
 2. **Relief** ("This finally fixed it.") — promise the solution
 3. **Pride** ("I feel like myself again.") — make them feel smart for reading
 
+### The Tension Test (Jax Dwyer)
+The highest-performing hooks create massive internal tension. Before shipping any hook, check: does it trigger at least one of these reactions?
+
+- "Wait… what?"
+- "How is this legal?"
+- "Why didn't I know this?"
+- "I've been doing this wrong?"
+- "How did no one ever tell me about this?"
+
+If the hook doesn't create tension, it's informational, not compelling. Informational hooks get scrolled past. Tension hooks get clicked.
+
+**How to manufacture tension:**
+- **Imply a secret:** Reader feels excluded from knowledge they should have
+- **Imply a mistake:** Reader suspects they've been doing something wrong
+- **Imply unfairness:** Something exists that gives others an advantage
+- **Imply a lie:** Something they trusted was misleading them
+
+This isn't a separate technique. It's the quality bar every hook must pass regardless of which formula you used to write it.
+
 ### Audience Awareness Levels
 Tailor the hook per awareness level:
 - **Unaware**: Lead with the problem, not the solution ("Your AI investing app doesn't think.")
