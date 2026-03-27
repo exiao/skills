@@ -46,9 +46,11 @@ ffmpeg must be installed (brew install ffmpeg). Whisper model auto-downloads on 
 
 | Preset | Look | Details |
 |--------|------|---------|
-| `tiktok` (default) | Bold white, thick black outline | Montserrat Bold 68px, 4px outline, bottom-center, 3 words/block |
+| `tiktok` (default) | White text, active word fully opaque, inactive semi-transparent | Montserrat Bold 68px, 4px outline, bottom-center, 3 words/block |
 | `minimal` | Clean sans-serif, subtle shadow | Helvetica 54px, thin outline, soft shadow, center, 4 words/block |
-| `bold` | Large yellow highlight on dark | Impact 80px, yellow highlight color, dark outline, 3 words/block |
+| `bold` | Large yellow highlight on white base | Impact 80px, yellow active word, white inactive words, dark outline, 3 words/block |
+
+**How presets highlight differently:** `tiktok` and `minimal` use opacity contrast (active word is fully opaque, inactive words are semi-transparent). `bold` uses color contrast (active word is yellow, inactive are white). For a visible color pop like CapCut, use `bold` or set `--highlight-color` to a bright color on any preset.
 
 ## CLI Options
 
@@ -108,3 +110,4 @@ The pop-in animation uses `\fscx` and `\fscy` (scale) tags to animate each word 
 **Slow transcription**: Use `--model tiny` for faster results (lower accuracy). Use `--model large` for best accuracy on difficult audio.
 
 **Out of sync captions**: stable-ts handles this well, but if audio has long silences or music, try `--model medium` or `--model large` for better alignment.
+--model medium` or `--model large` for better alignment.

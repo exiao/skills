@@ -1,6 +1,6 @@
 ---
 name: thumbnail
-description: Generate video cover frames and thumbnails for YouTube, TikTok, and social media. Use when asked for a "video thumbnail", "cover frame", "YouTube thumbnail", or when needing to extract a still from a video for use as a cover image.
+description: Generate video cover frames and thumbnails for YouTube, TikTok, Reels, and social media. Use when asked for a video thumbnail, cover frame, YouTube thumbnail, or to extract a still from a video.
 ---
 
 # Thumbnail — Video Cover Frames & Thumbnails
@@ -26,7 +26,7 @@ After extracting candidates, review them with the image tool and pick the best o
 
 ### B. Generate Custom Thumbnail (Nano Banana Pro)
 
-Use an image generation tool (e.g., Gemini image generation) to generate a designed thumbnail from scratch.
+Use the `nano-banana-pro` skill to generate a designed thumbnail from scratch.
 
 Prompt guidance:
 - Include a face/subject with clear expression
@@ -65,12 +65,12 @@ ffmpeg -i thumb.jpg -vf "drawtext=text='3 MISTAKES':fontsize=80:fontcolor=white:
 ffmpeg -i thumb.jpg -vf "drawtext=text='WATCH THIS':fontsize=72:fontcolor=yellow:borderw=3:bordercolor=black:x=40:y=40" thumb_text.jpg
 ```
 
-For more complex text layouts (drop shadows, multiple text blocks, custom fonts), use an image generation tool to generate the thumbnail instead.
+For more complex text layouts (drop shadows, multiple text blocks, custom fonts), use Nano Banana Pro to generate the thumbnail instead.
 
 ## Workflow
 
 1. **Determine approach:** Does the user have a video to extract from (→ A) or need a generated thumbnail (→ B)?
 2. **Confirm platform:** YouTube 16:9 vs. vertical 9:16. Default to YouTube 1280x720 if unspecified.
 3. **Extract or generate:** Run the appropriate approach.
-4. **Add text if needed:** Use ffmpeg drawtext for simple overlays, or regenerate with image generation if complex.
+4. **Add text if needed:** Use ffmpeg drawtext for simple overlays, or regenerate with Nano Banana if complex.
 5. **Review:** Screenshot/display the result for user approval.

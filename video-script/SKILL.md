@@ -173,16 +173,20 @@ Highlight: "90%", "lose money" (not "of", "in", "their")
 - Chapters/timestamps help retention. Mark scene boundaries.
 - End screens and cards for CTA instead of "link in bio."
 
-## Bloom-Specific Context
+## Product Context (Example: Bloom)
 
-When writing scripts for Bloom (the default context unless another product is specified):
+> **This section is an example template.** Replace with your own product details. If no product is specified, write scripts without product-specific CTAs.
+
+When writing scripts for a specific product, define these fields. Here's an example using Bloom:
 
 - **App:** Bloom is an investing research and trading app for iOS and Android.
 - **Audience:** Retail investors, beginners to intermediate. People who want to learn, not day-trade.
 - **Tone:** Builder-educator. Show the work, explain the thinking, share real numbers. Not hype, not "finance bro," not get-rich-quick.
 - **Disclaimer:** Any video touching on stock picks, returns, or investment strategy needs "Not financial advice" either spoken or on screen. Place it in the first or last scene, not buried in the middle.
-- **CTA patterns:** "Download Bloom. Link in bio." / "Try Bloom free. Link in bio." / "Search 'Bloom' on the App Store."
-- **Visual assets:** App screenshots, screen recordings of the Bloom interface, the Bloom logo. Use `screen-recording` source type for product demos.
+- **CTA patterns:** "Download [App]. Link in bio." / "Try [App] free. Link in bio." / "Search '[App]' on the App Store."
+- **Visual assets:** App screenshots, screen recordings, logo. Use `screen-recording` source type for product demos.
+
+Adapt these fields to whatever product or brand the script is for. If the user doesn't specify a product, omit the CTA scene or use a generic engagement CTA ("Follow for more").
 
 ## Process
 
