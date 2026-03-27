@@ -16,6 +16,8 @@ Generate styled, word-by-word highlighted captions and burn them into video. The
 
 ## Quick Start
 
+In examples below, `{baseDir}` means the skill directory (e.g. `~/clawd/skills/auto-captions`); replace with that path or run from that directory.
+
 ```bash
 # Full pipeline: transcribe + style + burn in
 python3 {baseDir}/scripts/caption.py input.mp4 -o output.mp4
@@ -110,4 +112,3 @@ The pop-in animation uses `\fscx` and `\fscy` (scale) tags to animate each word 
 **Slow transcription**: Use `--model tiny` for faster results (lower accuracy). Use `--model large` for best accuracy on difficult audio.
 
 **Out of sync captions**: stable-ts handles this well, but if audio has long silences or music, try `--model medium` or `--model large` for better alignment.
---model medium` or `--model large` for better alignment.

@@ -14,30 +14,25 @@ Programmatic video editing via ffmpeg. This skill wraps common ffmpeg operations
 
 ## The Edit Script
 
-The main tool is `scripts/edit.sh` relative to this skill's directory. Run it with a subcommand:
-
-```bash
-SKILL_DIR="$(dirname "$(readlink -f "$0")")"  # resolve from SKILL.md location
-# Or just use the absolute path to the script
-```
+The main tool is `scripts/edit.sh` in this skill's directory. In examples below, `{baseDir}` means the skill directory (e.g. `~/clawd/skills/video-editor`); replace with that path.
 
 ### Core Video Operations
 
 **Trim** a segment from a video:
 ```bash
-./scripts/edit.sh trim -i input.mp4 -ss 00:01:00 -to 00:02:30 -o output.mp4
+{baseDir}/scripts/edit.sh trim -i input.mp4 -ss 00:01:00 -to 00:02:30 -o output.mp4
 ```
 Uses stream copy (`-c copy`) for speed. For frame-accurate cuts, add `--precise` which re-encodes.
 
 **Concat** multiple clips into one:
 ```bash
-./scripts/edit.sh concat -i "clip1.mp4,clip2.mp4,clip3.mp4" -o merged.mp4
+{baseDir}/scripts/edit.sh concat -i "clip1.mp4,clip2.mp4,clip3.mp4" -o merged.mp4
 ```
 Uses the concat demuxer for same-codec files. If codecs differ, it re-encodes automatically.
 
 **Overlay** an image or video on top of another (PiP, watermark, logo):
 ```bash
-./scripts/edit.sh overlay -i base.mp4 --overlay logo.png --position top-right -o output.mp4
+{baseDir}/scripts/edit.sh overlay -i base.mp4 --overlay logo.png --position top-right -o output.mp4
 # Positions: top-left, top-right, bottom-left, bottom-right, center
 # Custom position: --position "10:10" (x:y pixels)
 # Scale overlay: --scale 0.25 (25% of base video width)
@@ -45,39 +40,39 @@ Uses the concat demuxer for same-codec files. If codecs differ, it re-encodes au
 
 **Crossfade** transition between two clips:
 ```bash
-./scripts/edit.sh crossfade -i "clip1.mp4,clip2.mp4" --duration 1 -o output.mp4
+{baseDir}/scripts/edit.sh crossfade -i "clip1.mp4,clip2.mp4" --duration 1 -o output.mp4
 # --transition: fade (default), wipeleft, wiperight, slideup, slidedown, circleopen, dissolve
 ```
 
 **Speed** change (ramp up/slow down):
 ```bash
-./scripts/edit.sh speed -i input.mp4 --factor 2.0 -o output.mp4   # 2x speed
-./scripts/edit.sh speed -i input.mp4 --factor 0.5 -o output.mp4   # half speed (slow-mo)
+{baseDir}/scripts/edit.sh speed -i input.mp4 --factor 2.0 -o output.mp4   # 2x speed
+{baseDir}/scripts/edit.sh speed -i input.mp4 --factor 0.5 -o output.mp4   # half speed (slow-mo)
 ```
 Adjusts both video (setpts) and audio (atempo) together.
 
 **Crop** to an aspect ratio:
 ```bash
-./scripts/edit.sh crop -i input.mp4 --ratio 9:16 -o output.mp4    # vertical
-./scripts/edit.sh crop -i input.mp4 --ratio 1:1 -o output.mp4     # square
+{baseDir}/scripts/edit.sh crop -i input.mp4 --ratio 9:16 -o output.mp4    # vertical
+{baseDir}/scripts/edit.sh crop -i input.mp4 --ratio 1:1 -o output.mp4     # square
 # --gravity: center (default), top, bottom
 ```
 
 **Scale** / resize:
 ```bash
-./scripts/edit.sh scale -i input.mp4 --width 1920 --height 1080 -o output.mp4
-./scripts/edit.sh scale -i input.mp4 --width 720 -o output.mp4    # height auto-calculated
+{baseDir}/scripts/edit.sh scale -i input.mp4 --width 1920 --height 1080 -o output.mp4
+{baseDir}/scripts/edit.sh scale -i input.mp4 --width 720 -o output.mp4    # height auto-calculated
 ```
 
 **Fade** in/out (video and/or audio):
 ```bash
-./scripts/edit.sh fade -i input.mp4 --fade-in 1 --fade-out 2 -o output.mp4
+{baseDir}/scripts/edit.sh fade -i input.mp4 --fade-in 1 --fade-out 2 -o output.mp4
 # --video-only or --audio-only to apply to just one stream
 ```
 
 **Text overlay** using drawtext:
 ```bash
-./scripts/edit.sh text -i input.mp4 --text "Hello World" --position bottom-center \
+{baseDir}/scripts/edit.sh text -i input.mp4 --text "Hello World" --position bottom-center \
   --fontsize 48 --fontcolor white --from 0 --to 5 -o output.mp4
 # --font: path to .ttf file (optional, uses default sans)
 # --bg-color: background box color, e.g. "black@0.5"
@@ -85,23 +80,23 @@ Adjusts both video (setpts) and audio (atempo) together.
 
 **Rotate**:
 ```bash
-./scripts/edit.sh rotate -i input.mp4 --angle 90 -o output.mp4    # 90, 180, 270
+{baseDir}/scripts/edit.sh rotate -i input.mp4 --angle 90 -o output.mp4    # 90, 180, 270
 ```
 
 **Loop** a clip to fill a target duration:
 ```bash
-./scripts/edit.sh loop -i short.mp4 --duration 30 -o looped.mp4   # loop to 30 seconds
+{baseDir}/scripts/edit.sh loop -i short.mp4 --duration 30 -o looped.mp4   # loop to 30 seconds
 ```
 
 **Extract frames** to image sequence:
 ```bash
-./scripts/edit.sh frames -i input.mp4 --fps 2 -o frames/frame_%03d.jpg
+{baseDir}/scripts/edit.sh frames -i input.mp4 --fps 2 -o frames/frame_%03d.jpg
 # --fps: frames per second to extract (default 1)
 ```
 
 **GIF** creation:
 ```bash
-./scripts/edit.sh gif -i input.mp4 --fps 15 --width 480 -o output.gif
+{baseDir}/scripts/edit.sh gif -i input.mp4 --fps 15 --width 480 -o output.gif
 # --from and --to for segment, --optimize for two-pass palette optimization
 ```
 
@@ -109,17 +104,17 @@ Adjusts both video (setpts) and audio (atempo) together.
 
 **Add audio** track to video (mix with existing):
 ```bash
-./scripts/edit.sh add-audio -i video.mp4 --audio music.mp3 --volume 0.3 -o output.mp4
+{baseDir}/scripts/edit.sh add-audio -i video.mp4 --audio music.mp3 --volume 0.3 -o output.mp4
 ```
 
 **Replace audio** (swap the audio track entirely):
 ```bash
-./scripts/edit.sh replace-audio -i video.mp4 --audio voiceover.mp3 -o output.mp4
+{baseDir}/scripts/edit.sh replace-audio -i video.mp4 --audio voiceover.mp3 -o output.mp4
 ```
 
 **Audio ducking** (lower music when voice plays):
 ```bash
-./scripts/edit.sh ducking -i voice.mp3 --music bg.mp3 -o mixed.mp3
+{baseDir}/scripts/edit.sh ducking -i voice.mp3 --music bg.mp3 -o mixed.mp3
 # --threshold: voice detection threshold (default 0.02)
 # --ratio: compression ratio (default 8)
 # --attack: attack time ms (default 200)
@@ -128,19 +123,19 @@ Adjusts both video (setpts) and audio (atempo) together.
 
 **Volume normalize** using EBU R128 loudnorm:
 ```bash
-./scripts/edit.sh normalize -i audio.mp3 -o normalized.mp3
+{baseDir}/scripts/edit.sh normalize -i audio.mp3 -o normalized.mp3
 # --target-lufs: target loudness (default -16 for podcasts, -14 for music)
 ```
 
 **Mix** multiple audio tracks:
 ```bash
-./scripts/edit.sh mix -i "voice.mp3,music.mp3,sfx.mp3" --volumes "1.0,0.15,0.3" -o output.mp3
+{baseDir}/scripts/edit.sh mix -i "voice.mp3,music.mp3,sfx.mp3" --volumes "1.0,0.15,0.3" -o output.mp3
 # --duration: longest (default), shortest, or specific seconds
 ```
 
 **Fade audio**:
 ```bash
-./scripts/edit.sh fade-audio -i audio.mp3 --fade-in 2 --fade-out 3 -o output.mp3
+{baseDir}/scripts/edit.sh fade-audio -i audio.mp3 --fade-in 2 --fade-out 3 -o output.mp3
 ```
 
 ## Recipes

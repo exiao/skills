@@ -9,28 +9,26 @@ Search and download free stock video clips from Pexels (primary) and Pixabay (fa
 
 ## Quick Start
 
-Run the script at `scripts/footage.sh` (relative to this skill's directory). Resolve the path from the skill location.
+In examples below, `{baseDir}` means the skill directory (e.g. `~/clawd/skills/stock-footage`); replace with that path or run from that directory.
 
 ```bash
-SKILL_DIR="<path-to-this-skill>"
-
 # Search for clips
-"$SKILL_DIR/scripts/footage.sh" search "stock market trading" --orientation portrait --per-page 5
+{baseDir}/scripts/footage.sh search "stock market trading" --orientation portrait --per-page 5
 
 # Download a specific video by ID
-"$SKILL_DIR/scripts/footage.sh" download 12345 --quality hd --output ~/clawd/assets/broll/
+{baseDir}/scripts/footage.sh download 12345 --quality hd --output ~/clawd/assets/broll/
 
 # Search and immediately download the best match
-"$SKILL_DIR/scripts/footage.sh" grab "office meeting" --orientation landscape --output ./broll/
+{baseDir}/scripts/footage.sh grab "office meeting" --orientation landscape --output ./broll/
 
 # Show preview URL for a video
-"$SKILL_DIR/scripts/footage.sh" preview 12345
+{baseDir}/scripts/footage.sh preview 12345
 
 # Search with duration filter (seconds)
-"$SKILL_DIR/scripts/footage.sh" search "nature aerial" --min-duration 5 --max-duration 15
+{baseDir}/scripts/footage.sh search "nature aerial" --min-duration 5 --max-duration 15
 
 # JSON output for pipeline use
-"$SKILL_DIR/scripts/footage.sh" search "city timelapse" --json
+{baseDir}/scripts/footage.sh search "city timelapse" --json
 ```
 
 ## Environment Variables
