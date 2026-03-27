@@ -99,16 +99,6 @@ Each caption block shows N words at once. The currently spoken word renders in t
 
 The pop-in animation uses `\fscx` and `\fscy` (scale) tags to animate each word from 80% to 100% size over 50ms as it becomes active.
 
-## ffmpeg 8.0 Quick Alternative
-
-For simple jobs where you don't need karaoke styling (just plain subtitles), ffmpeg 8.0+ has a built-in Whisper filter:
-
-```bash
-ffmpeg -i video.mp4 -af whisper=model=base -vf subtitles=output.srt output.mp4
-```
-
-This is faster to set up but produces basic SRT subtitles with no word-level highlighting or styling. Use the full caption.py pipeline for karaoke-style results.
-
 ## Troubleshooting
 
 **"No module named stable_ts"**: Run `pip install stable-ts`. If using a venv, activate it first.

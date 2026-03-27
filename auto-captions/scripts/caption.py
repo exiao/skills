@@ -28,7 +28,7 @@ PRESETS = {
     "tiktok": {
         "font": "Montserrat",
         "font_size": 68,
-        "highlight_color": "&H00FFFFFF",   # white (active word)
+        "highlight_color": "&H0000FFFF",   # yellow (active word)
         "base_color": "&H80FFFFFF",        # semi-transparent white (inactive)
         "outline_color": "&H00000000",     # black outline
         "outline_width": 4,
