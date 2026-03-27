@@ -28,34 +28,77 @@ Run this block first. It gives you ground-truth numbers before any web search. A
 mkdir -p /tmp/bloom
 
 # Today's actual top movers
-(bloom market --type top_movers --limit 20 -o /tmp/bloom/movers.json) || echo '[]' > /tmp/bloom/movers.json
+if ! bloom market --type top_movers --limit 20 -f json -o /tmp/bloom/movers.json 2>/tmp/bloom/movers.err; then
+  echo "WARN: bloom market failed ($(cat /tmp/bloom/movers.err))" >&2
+  echo '{"status":"error"}' > /tmp/bloom/movers.json
+fi
 
 # Fear & Greed + AAII sentiment
-(bloom sentiment -o /tmp/bloom/sentiment.json) || echo '{}' > /tmp/bloom/sentiment.json
+if ! bloom sentiment -f json -o /tmp/bloom/sentiment.json 2>/tmp/bloom/sentiment.err; then
+  echo "WARN: bloom sentiment failed ($(cat /tmp/bloom/sentiment.err))" >&2
+  echo '{}' > /tmp/bloom/sentiment.json
+fi
 
-# Index prices
-(bloom price SPY --timeframes 1d -o /tmp/bloom/spy.json) || echo '{}' > /tmp/bloom/spy.json
-(bloom price QQQ --timeframes 1d -o /tmp/bloom/qqq.json) || echo '{}' > /tmp/bloom/qqq.json
-(bloom price IWM --timeframes 1d -o /tmp/bloom/iwm.json) || echo '{}' > /tmp/bloom/iwm.json
+# Index prices (--timeframes 1d returns intraday points for today)
+for SYM in SPY QQQ IWM; do
+  OUTFILE="/tmp/bloom/$(echo $SYM | tr '[:upper:]' '[:lower:]').json"
+  if ! bloom price "$SYM" --timeframes 1d -f json -o "$OUTFILE" 2>/tmp/bloom/price_${SYM}.err; then
+    echo "WARN: bloom price $SYM failed ($(cat /tmp/bloom/price_${SYM}.err))" >&2
+    echo '{}' > "$OUTFILE"
+  fi
+done
+```
+
+### Validate bloom output before extraction
+
+If any bloom command returned empty, null, or error JSON, skip the verification step for that data source rather than passing bad data to the model.
+
+```bash
+# Helper: check if file has valid, non-empty bloom data
+bloom_valid() {
+  local f="$1"
+  [ -s "$f" ] && ! grep -q '"status":"error"' "$f" && [ "$(jq 'length' "$f" 2>/dev/null)" != "0" ]
+}
 ```
 
 Extract key data:
 
-> **Note:** The jq key paths below are based on expected bloom-cli output structure.
-> If bloom wraps responses in a `"data"` envelope (e.g. `{"data": {...}}`), prepend `.data` to each path.
-> Verify field names against actual `bloom` output if extraction fails (run without jq first to inspect raw JSON).
+> **Verified bloom-cli output formats (as of bloom-cli v1.x):**
+> - `bloom market --type top_movers -f json` → `{"status":"success","data":{"stocks":[{"symbol","change_percent","market_cap",...}]}}`
+> - `bloom sentiment -f json` → `{"aaii_sentiment":{"bullish_percent","bearish_percent",...},"cnn_fear_greed":{"index_value","level",...},...}`
+> - `bloom price <SYM> --timeframes 1d -f json` → `{"type":"chart_data","timeframes":{"1d":[{"date","price"},...]}}` (time series, no single change_pct field)
 
 ```bash
-# Top movers summary (assumes top-level array; if wrapped, use '.data[]' instead of '.[]')
-jq '.[] | {symbol: .symbol, change_pct: .change_pct, price: .price}' /tmp/bloom/movers.json
+# Top movers summary
+if bloom_valid /tmp/bloom/movers.json; then
+  jq '.data.stocks[] | {symbol: .symbol, change_pct: .change_percent, market_cap: .market_cap}' /tmp/bloom/movers.json
+else
+  echo "SKIP: movers data unavailable or invalid" >&2
+fi
 
-# Sentiment (key paths may vary — inspect raw output if these return null)
-jq '{fear_greed: .cnn_fear_greed.index_value, fear_greed_label: .cnn_fear_greed.level, aaii_bull: .aaii_bullish, aaii_bear: .aaii_bearish}' /tmp/bloom/sentiment.json
+# Sentiment
+if bloom_valid /tmp/bloom/sentiment.json; then
+  jq '{fear_greed: .cnn_fear_greed.index_value, fear_greed_label: .cnn_fear_greed.level, aaii_bull: .aaii_sentiment.bullish_percent, aaii_bear: .aaii_sentiment.bearish_percent}' /tmp/bloom/sentiment.json
+else
+  echo "SKIP: sentiment data unavailable or invalid" >&2
+fi
 
-# Index moves (assumes flat structure; if wrapped, use '.data.change_pct' etc.)
-jq '{spy_pct: .change_pct, spy_price: .price}' /tmp/bloom/spy.json
-jq '{qqq_pct: .change_pct, qqq_price: .price}' /tmp/bloom/qqq.json
-jq '{iwm_pct: .change_pct, iwm_price: .price}' /tmp/bloom/iwm.json
+# Index prices — extract latest price from the 1d time series
+# bloom price returns {"timeframes":{"1d":[{"date":"...","price":N},...]}}
+# We take the last entry as the most recent price.
+for SYM in SPY QQQ IWM; do
+  OUTFILE="/tmp/bloom/$(echo $SYM | tr '[:upper:]' '[:lower:]').json"
+  if bloom_valid "$OUTFILE"; then
+    jq --arg sym "$SYM" '{
+      symbol: $sym,
+      latest_price: (.timeframes["1d"] | last | .price),
+      first_price: (.timeframes["1d"] | first | .price),
+      data_points: (.timeframes["1d"] | length)
+    }' "$OUTFILE"
+  else
+    echo "SKIP: $SYM price data unavailable or invalid" >&2
+  fi
+done
 ```
 
 Keep these numbers in context. Every stock percentage you write must come from this data.
@@ -66,6 +109,8 @@ Keep these numbers in context. Every stock percentage you write must come from t
 
 ### 0. Verified Numbers Rule
 Every stock percentage mentioned MUST be verified against bloom-cli price data. If bloom-cli shows a different number than a news article, use bloom-cli's number. Never estimate or round aggressively.
+
+If bloom-cli returned null or was unavailable for a field, fall back to the article's number but mark it as unverified: e.g., "~+2.3% (unverified — source: article)". Never silently use null as a percentage.
 
 ### 1. Earnings Results (Today + Last Night)
 For each notable company that reported:
