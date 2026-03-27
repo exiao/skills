@@ -13,7 +13,7 @@ Delivers a concise, narrative market briefing covering earnings results, economi
 
 | Tool | Purpose |
 |------|---------|
-| **Bloom CLI** (`bloom`) | Pull real-time price data, top movers, sentiment scores |
+| **Bloom CLI** (`bloom`) | Pull real-time price data, top movers, sentiment scores. Auth: bloom-cli reads API keys from `~/.bloom/config.json` or env vars (`BLOOM_API_KEY`). Run `bloom auth` to configure. |
 | **Serper** (`web-search` skill, `SERPER_API_KEY`) | Search for earnings results, analyst reactions, market news |
 | **Firecrawl** (`FIRECRAWL_API_KEY`) | Scrape full articles when Serper snippets cut off before the numbers |
 | **Bloom MCP** (`https://api.getbloom.app/mcp/`, Bearer: `test-api-key`) | Check what stocks Bloom users are watching — front-load coverage of these |
@@ -28,27 +28,31 @@ Run this block first. It gives you ground-truth numbers before any web search. A
 mkdir -p /tmp/bloom
 
 # Today's actual top movers
-bloom market --type top_movers --limit 20 -o /tmp/bloom/movers.json
+(bloom market --type top_movers --limit 20 -o /tmp/bloom/movers.json) || echo '[]' > /tmp/bloom/movers.json
 
 # Fear & Greed + AAII sentiment
-bloom sentiment -o /tmp/bloom/sentiment.json
+(bloom sentiment -o /tmp/bloom/sentiment.json) || echo '{}' > /tmp/bloom/sentiment.json
 
 # Index prices
-bloom price SPY --timeframes 1d -o /tmp/bloom/spy.json
-bloom price QQQ --timeframes 1d -o /tmp/bloom/qqq.json
-bloom price IWM --timeframes 1d -o /tmp/bloom/iwm.json
+(bloom price SPY --timeframes 1d -o /tmp/bloom/spy.json) || echo '{}' > /tmp/bloom/spy.json
+(bloom price QQQ --timeframes 1d -o /tmp/bloom/qqq.json) || echo '{}' > /tmp/bloom/qqq.json
+(bloom price IWM --timeframes 1d -o /tmp/bloom/iwm.json) || echo '{}' > /tmp/bloom/iwm.json
 ```
 
 Extract key data:
 
+> **Note:** The jq key paths below are based on expected bloom-cli output structure.
+> If bloom wraps responses in a `"data"` envelope (e.g. `{"data": {...}}`), prepend `.data` to each path.
+> Verify field names against actual `bloom` output if extraction fails (run without jq first to inspect raw JSON).
+
 ```bash
-# Top movers summary
+# Top movers summary (assumes top-level array; if wrapped, use '.data[]' instead of '.[]')
 jq '.[] | {symbol: .symbol, change_pct: .change_pct, price: .price}' /tmp/bloom/movers.json
 
-# Sentiment
+# Sentiment (key paths may vary — inspect raw output if these return null)
 jq '{fear_greed: .cnn_fear_greed.index_value, fear_greed_label: .cnn_fear_greed.level, aaii_bull: .aaii_bullish, aaii_bear: .aaii_bearish}' /tmp/bloom/sentiment.json
 
-# Index moves
+# Index moves (assumes flat structure; if wrapped, use '.data.change_pct' etc.)
 jq '{spy_pct: .change_pct, spy_price: .price}' /tmp/bloom/spy.json
 jq '{qqq_pct: .change_pct, qqq_price: .price}' /tmp/bloom/qqq.json
 jq '{iwm_pct: .change_pct, iwm_price: .price}' /tmp/bloom/iwm.json
