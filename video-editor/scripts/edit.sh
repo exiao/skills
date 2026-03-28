@@ -15,8 +15,8 @@ require_arg() {
 }
 
 check_ffmpeg() {
-  command -v ffmpeg >/dev/null 2>&1 || die "ffmpeg not found. Install with: brew install ffmpeg"
-  command -v ffprobe >/dev/null 2>&1 || die "ffprobe not found. Install with: brew install ffmpeg"
+  command -v ffmpeg >/dev/null 2>&1 || die "ffmpeg not found. Install it from https://ffmpeg.org/download.html or via your package manager (e.g. brew install ffmpeg / apt install ffmpeg)"
+  command -v ffprobe >/dev/null 2>&1 || die "ffprobe not found. Install it from https://ffmpeg.org/download.html or via your package manager (e.g. brew install ffmpeg / apt install ffmpeg)"
 }
 
 get_duration() {
@@ -401,10 +401,14 @@ cmd_text() {
     *)             x_expr="(w-tw)/2"; y_expr="h-th-40" ;;
   esac
 
-  local dt_filter="drawtext=text='${text}':fontsize=${fontsize}:fontcolor=${fontcolor}:x=${x_expr}:y=${y_expr}"
+  local safe_text="${text//\'/\\\'}"
+  local dt_filter="drawtext=text='${safe_text}':fontsize=${fontsize}:fontcolor=${fontcolor}:x=${x_expr}:y=${y_expr}"
   [[ -n "$font" ]] && dt_filter+=":fontfile=${font}"
   [[ -n "$bg_color" ]] && dt_filter+=":box=1:boxcolor=${bg_color}:boxborderw=8"
-  [[ -n "$from" ]] && dt_filter+=":enable='between(t,${from},${to:-9999})'"
+  if [[ -n "$from" ]]; then
+    local end_time="${to:-$(get_duration "$input")}"
+    dt_filter+=":enable='between(t,${from},${end_time})'"
+  fi
 
   ffmpeg -y -i "$input" -vf "$dt_filter" -c:a copy "$output"
   echo "Text overlay applied: $output"

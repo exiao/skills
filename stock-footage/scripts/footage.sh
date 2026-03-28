@@ -89,6 +89,8 @@ cmd_search() {
     [[ -n "$max_dur" ]] && url="${url}&max_duration=${max_dur}"
     result=$(pexels_curl "$url")
   else
+    # Pixabay requires the API key as a URL query param (their API design — unlike Pexels which uses a header).
+    # Trade-off: the key is visible in logs/process lists; mitigate by keeping it in env vars, not scripts.
     local url="${PIXABAY_BASE}/?key=${PIXABAY_API_KEY}&q=$(jq -rn --arg q "$query" '$q|@uri')&per_page=${per_page}&page=${page}"
     result=$(pixabay_curl "$url")
   fi

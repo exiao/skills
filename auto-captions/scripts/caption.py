@@ -393,6 +393,8 @@ def main():
 
     if args.ass_only:
         output_ass = args.output
+        if not output_ass.lower().endswith(".ass"):
+            print(f"warning: --ass-only output path '{output_ass}' does not end in .ass — the file will contain ASS subtitle data regardless", file=sys.stderr)
         with open(output_ass, "w", encoding="utf-8") as f:
             f.write(ass_content)
         print(f"ASS subtitle file saved to: {output_ass}")
