@@ -50,22 +50,19 @@ fi
 
 If any bloom command returned empty, null, or error JSON, skip the verification step for that data source rather than passing bad data to the model.
 
-```bash
-# Helper: check if file has valid, non-empty bloom data
-bloom_valid() {
-  local f="$1"
-  [ -s "$f" ] && ! grep -q '"status":"error"' "$f" && [ "$(jq 'length' "$f" 2>/dev/null)" != "0" ]
-}
-```
-
-Extract key data:
-
 > **Verified bloom-cli output formats (as of bloom-cli v1.x):**
 > - `bloom market --type top_movers -f json` → `{"status":"success","data":{"stocks":[{"symbol","change_percent","market_cap",...}]}}`
 > - `bloom market --type major_indexes -f json` → index data with day-over-day change fields directly (no manual computation needed)
 > - `bloom sentiment -f json` → `{"aaii_sentiment":{"bullish_percent","bearish_percent",...},"cnn_fear_greed":{"index_value","level",...},...}`
 
 ```bash
+# Helper: check if file has valid, non-empty bloom data
+# Uses jq instead of grep to correctly handle both '"status":"error"' and '"status": "error"'
+bloom_valid() {
+  local f="$1"
+  [ -s "$f" ] && jq -e '.status != "error"' "$f" >/dev/null 2>&1 && [ "$(jq 'length' "$f" 2>/dev/null)" != "0" ]
+}
+
 # Top movers summary
 if bloom_valid /tmp/bloom/movers.json; then
   jq '.data.stocks[] | {symbol: .symbol, change_pct: .change_percent, market_cap: .market_cap}' /tmp/bloom/movers.json
@@ -74,6 +71,8 @@ else
 fi
 
 # Sentiment
+# Verify key paths: .cnn_fear_greed and .aaii_sentiment nesting may differ in actual API response
+# (may be nested differently or absent — confirm against live bloom output before relying on these paths)
 if bloom_valid /tmp/bloom/sentiment.json; then
   jq '{fear_greed: .cnn_fear_greed.index_value, fear_greed_label: .cnn_fear_greed.level, aaii_bull: .aaii_sentiment.bullish_percent, aaii_bear: .aaii_sentiment.bearish_percent}' /tmp/bloom/sentiment.json
 else
@@ -81,8 +80,9 @@ else
 fi
 
 # Major index summary — change_pct comes directly from the API (day-over-day)
+# Extracting only needed fields to avoid bloating context window
 if bloom_valid /tmp/bloom/indexes.json; then
-  jq '.' /tmp/bloom/indexes.json
+  jq '.data // . | to_entries[] | {symbol: .key, change_pct, price}' /tmp/bloom/indexes.json
 else
   echo "SKIP: index data unavailable or invalid" >&2
 fi
