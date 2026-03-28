@@ -83,18 +83,29 @@ else
   echo "SKIP: sentiment data unavailable or invalid" >&2
 fi
 
-# Index prices — extract latest price from the 1d time series
+# Index prices — extract latest price and compute change_pct from the 1d time series
 # bloom price returns {"timeframes":{"1d":[{"date":"...","price":N},...]}}
-# We take the last entry as the most recent price.
+# We take first and last entries to compute the day's percentage change.
 for SYM in SPY QQQ IWM; do
   OUTFILE="/tmp/bloom/$(echo $SYM | tr '[:upper:]' '[:lower:]').json"
   if bloom_valid "$OUTFILE"; then
-    jq --arg sym "$SYM" '{
+    RESULT=$(jq --arg sym "$SYM" '{
       symbol: $sym,
       latest_price: (.timeframes["1d"] | last | .price),
       first_price: (.timeframes["1d"] | first | .price),
+      change_pct: (
+        ((.timeframes["1d"] | last | .price) - (.timeframes["1d"] | first | .price))
+        / (.timeframes["1d"] | first | .price) * 100 * 100 | round / 100
+      ),
       data_points: (.timeframes["1d"] | length)
-    }' "$OUTFILE"
+    }' "$OUTFILE" 2>/dev/null)
+    # Guard against null computation (e.g. first_price is 0 or missing)
+    if [ -z "$RESULT" ] || echo "$RESULT" | jq -e '.change_pct == null or .latest_price == null' >/dev/null 2>&1; then
+      echo "WARN: $SYM price computation returned null — inspect raw JSON" >&2
+      echo "$RESULT"
+    else
+      echo "$RESULT"
+    fi
   else
     echo "SKIP: $SYM price data unavailable or invalid" >&2
   fi
