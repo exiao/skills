@@ -11,7 +11,7 @@ A speaker on camera with cutaway clips, background music ducked under the voice,
 **Ingredients:** main talking head footage, 2-3 B-roll clips, voice audio (or extracted from main), background music track.
 
 ```bash
-EDIT="path/to/video-editor/scripts/edit.sh"  # Set to absolute path of edit.sh
+EDIT="{baseDir}/scripts/edit.sh"
 
 # 1. Trim the talking head to the usable segment
 $EDIT trim -i talking_head.mp4 -ss 00:00:05 -to 00:03:20 -o head_trimmed.mp4
@@ -69,7 +69,7 @@ Turn a set of images into a vertical video with music, transitions, and optional
 **Ingredients:** 4-8 images (any size), a music track, optional caption text per slide.
 
 ```bash
-EDIT="path/to/video-editor/scripts/edit.sh"  # Set to absolute path of edit.sh
+EDIT="{baseDir}/scripts/edit.sh"
 
 # 1. Convert each image to a 3-second video clip at 9:16 (1080x1920)
 for i in img1.jpg img2.jpg img3.jpg img4.jpg img5.jpg; do
@@ -119,7 +119,7 @@ Screen recording with zoom-ins on key areas, speed ramping for boring parts, bac
 **Ingredients:** screen recording, logo image, background music, optional voice narration.
 
 ```bash
-EDIT="path/to/video-editor/scripts/edit.sh"  # Set to absolute path of edit.sh
+EDIT="{baseDir}/scripts/edit.sh"
 
 # 1. Trim the screen recording to remove setup/cleanup
 $EDIT trim -i screen_recording.mp4 -ss 00:00:12 -to 00:04:30 -o demo_trimmed.mp4

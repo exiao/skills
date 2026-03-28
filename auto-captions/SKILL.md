@@ -48,11 +48,11 @@ ffmpeg must be installed (brew install ffmpeg). Whisper model auto-downloads on 
 
 | Preset | Look | Details |
 |--------|------|---------|
-| `tiktok` (default) | White text, active word fully opaque, inactive semi-transparent | Montserrat Bold 68px, 4px outline, bottom-center, 3 words/block |
+| `tiktok` (default) | Yellow active word, inactive semi-transparent white | Montserrat Bold 68px, 4px outline, bottom-center, 3 words/block |
 | `minimal` | Clean sans-serif, subtle shadow | Helvetica 54px, thin outline, soft shadow, center, 4 words/block |
 | `bold` | Large yellow highlight on white base | Impact 80px, yellow active word, white inactive words, dark outline, 3 words/block |
 
-**How presets highlight differently:** `tiktok` and `minimal` use opacity contrast (active word is fully opaque, inactive words are semi-transparent). `bold` uses color contrast (active word is yellow, inactive are white). For a visible color pop like CapCut, use `bold` or set `--highlight-color` to a bright color on any preset.
+**How presets highlight differently:** `tiktok` uses color contrast (active word is yellow, inactive are semi-transparent white). `minimal` uses opacity contrast (active word is fully opaque, inactive words are semi-transparent). `bold` uses color contrast (active word is yellow, inactive are white). For a visible color pop like CapCut, use `tiktok`, `bold`, or set `--highlight-color` to a bright color on any preset.
 
 ## CLI Options
 
