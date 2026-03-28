@@ -36,13 +36,13 @@ fi
 # Fear & Greed + AAII sentiment
 if ! bloom sentiment -f json -o /tmp/bloom/sentiment.json 2>/tmp/bloom/sentiment.err; then
   echo "WARN: bloom sentiment failed ($(cat /tmp/bloom/sentiment.err))" >&2
-  echo '{}' > /tmp/bloom/sentiment.json
+  echo '{"status":"error"}' > /tmp/bloom/sentiment.json
 fi
 
 # Major index data (includes day-over-day change_pct directly from the API)
 if ! bloom market --type major_indexes -f json -o /tmp/bloom/indexes.json 2>/tmp/bloom/indexes.err; then
   echo "WARN: bloom market major_indexes failed ($(cat /tmp/bloom/indexes.err))" >&2
-  echo '{}' > /tmp/bloom/indexes.json
+  echo '{"status":"error"}' > /tmp/bloom/indexes.json
 fi
 ```
 
@@ -54,6 +54,8 @@ If any bloom command returned empty, null, or error JSON, skip the verification 
 > - `bloom market --type top_movers -f json` → `{"status":"success","data":{"stocks":[{"symbol","change_percent","market_cap",...}]}}`
 > - `bloom market --type major_indexes -f json` → `{"status":"success","data":{"SPY":{"change_pct":-0.42,"price":512.30,...},...}}` (day-over-day change fields directly, no manual computation needed)
 > - `bloom sentiment -f json` → `{"aaii_sentiment":{"bullish_percent","bearish_percent",...},"cnn_fear_greed":{"index_value","level",...},...}`
+
+> ⚠️ **Scope note:** Claude Code runs each Bash tool call in a fresh shell. The `bloom_valid()` function defined below **must be in the same shell block** as all the `if bloom_valid ...` calls that use it. Do not split the function definition and its callers across separate code blocks.
 
 ```bash
 # Helper: check if file has valid, non-empty bloom data
@@ -87,7 +89,7 @@ else
 fi
 ```
 
-> **Important:** Run both blocks (data collection + extraction) as a single script or in the same shell session so that `bloom_valid()` stays in scope for the extraction calls.
+> **Important:** The `bloom_valid()` function definition and all calls to it **must be in the same Bash block** — Claude Code runs each tool call in a fresh shell, so the function won't survive across blocks.
 
 Keep these numbers in context. Every stock percentage you write must come from this data.
 
@@ -134,6 +136,8 @@ Prioritize: mega-caps, widely-held names, dramatic movers (>5%), anything popula
 Send to the Signal group configured in `$SIGNAL_BRIEFING_GROUP` (or the Cron Admin group if unset).
 
 ```python
+import os
+
 # Use message tool
 channel = "signal"
 target = os.environ.get("SIGNAL_BRIEFING_GROUP", "<set SIGNAL_BRIEFING_GROUP env var>")
@@ -143,9 +147,9 @@ target = os.environ.get("SIGNAL_BRIEFING_GROUP", "<set SIGNAL_BRIEFING_GROUP env
 After Signal, create a public-facing tweet of the sharpest single data point:
 
 ```bash
-# Resolve typefully skill relative to this skill's directory
-cd "$(dirname "$0")/../typefully" 2>/dev/null || cd "$SKILLS_DIR/typefully"
-node scripts/typefully.js drafts:create "${TYPEFULLY_SOCIAL_SET_ID:-286685}" \
+# The agent should resolve the typefully skill path using the path provided to it (e.g. {baseDir}/../typefully).
+# Do NOT use $(dirname "$0") — in agent context $0 is the shell interpreter, not this file.
+node "$(cd {baseDir}/../typefully && pwd)/scripts/typefully.js" drafts:create "$TYPEFULLY_SOCIAL_SET_ID" \
   --platform x \
   --text "<post text>"
 # Do NOT add --schedule. Save as unscheduled draft only — Eric reviews before posting.
