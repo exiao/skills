@@ -52,7 +52,7 @@ If any bloom command returned empty, null, or error JSON, skip the verification 
 
 > **Verified bloom-cli output formats (as of bloom-cli v1.x):**
 > - `bloom market --type top_movers -f json` → `{"status":"success","data":{"stocks":[{"symbol","change_percent","market_cap",...}]}}`
-> - `bloom market --type major_indexes -f json` → index data with day-over-day change fields directly (no manual computation needed)
+> - `bloom market --type major_indexes -f json` → `{"status":"success","data":{"SPY":{"change_pct":-0.42,"price":512.30,...},...}}` (day-over-day change fields directly, no manual computation needed)
 > - `bloom sentiment -f json` → `{"aaii_sentiment":{"bullish_percent","bearish_percent",...},"cnn_fear_greed":{"index_value","level",...},...}`
 
 ```bash
@@ -82,7 +82,7 @@ fi
 # Major index summary — change_pct comes directly from the API (day-over-day)
 # Extracting only needed fields to avoid bloating context window
 if bloom_valid /tmp/bloom/indexes.json; then
-  jq '.data // . | to_entries[] | {symbol: .key, change_pct, price}' /tmp/bloom/indexes.json
+  jq '.data // . | to_entries[] | {symbol: .key, change_pct: .value.change_pct, price: .value.price}' /tmp/bloom/indexes.json
 else
   echo "SKIP: index data unavailable or invalid" >&2
 fi
