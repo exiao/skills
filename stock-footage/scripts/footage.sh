@@ -181,7 +181,7 @@ cmd_download() {
     curl -sS -L -o "${output_dir}/${filename}" "$download_url"
     echo "Saved: ${output_dir}/${filename}"
   else
-    # Pixabay: download medium quality video
+    # Pixabay: always downloads medium quality (--quality flag not used for Pixabay)
     local result
     result=$(pixabay_curl "${PIXABAY_BASE}/?key=${PIXABAY_API_KEY}&id=${video_id}")
     local download_url

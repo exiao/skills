@@ -63,10 +63,10 @@ Downloads the video file for a given Pexels video ID.
 
 | Flag | Default | Description |
 |------|---------|-------------|
-| `--quality` | hd | `hd`, `sd`, or `uhd` (falls back to next best) |
+| `--quality` | hd | `hd`, `sd`, or `uhd` (falls back to next best). Only affects Pexels; Pixabay always downloads medium quality. |
 | `--output` | `.` | Directory to save to |
 
-The file is saved with a descriptive name: `pexels-<id>-<quality>.mp4`.
+Files are saved with descriptive names: Pexels files as `pexels-<id>-<quality>.mp4`; Pixabay files as `pixabay-<id>.mp4`.
 
 ### `grab <query>` — Search + download top result
 

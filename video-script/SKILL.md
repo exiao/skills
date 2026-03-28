@@ -17,7 +17,7 @@ Save each script as a markdown file. The header block captures global metadata; 
 **Aspect:** 9:16 | 16:9 | 1:1
 **Duration:** ~30s | ~60s | ~90s
 **Style:** talking-head | slideshow | explainer | demo | montage
-**Character:** [slug from ~/clawd/characters/ if applicable, or "none"]
+**Character:** [slug from ~/clawd/characters/ if applicable — see character-creation skill, or "none"]
 **Music mood:** upbeat | dramatic | chill | corporate | none
 
 ---
@@ -57,7 +57,7 @@ Save each script as a markdown file. The header block captures global metadata; 
 | **Aspect** | Frame ratio | 9:16 (vertical), 16:9 (landscape), 1:1 (square) |
 | **Duration** | Total target length | ~15s, ~30s, ~60s, ~90s, ~2min, ~5min |
 | **Style** | Production approach | talking-head, slideshow, explainer, demo, montage |
-| **Character** | AI character slug | Matches directory name in `~/clawd/characters/`, or "none" |
+| **Character** | AI character slug | Matches directory name in `~/clawd/characters/` (created by the character-creation skill), or "none" |
 | **Music mood** | Background music direction | upbeat, dramatic, chill, corporate, none |
 | **Visual** | What the viewer sees | Plain-language description of the shot |
 | **Source** | How to produce the visual | `stock-footage "query"`, `sora "prompt"`, `kling "prompt"`, `screen-recording`, `image overlay`, `talking-head` |

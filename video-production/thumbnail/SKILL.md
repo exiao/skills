@@ -26,7 +26,7 @@ After extracting candidates, review them with the image tool and pick the best o
 
 ### B. Generate Custom Thumbnail (Nano Banana Pro)
 
-> **Note:** `nano-banana-pro` is an external skill (not in this repo). It is a separate AI image generation skill. If it is not available in your setup, use the `image_generate` tool directly or any AI image generation method instead.
+> **Note:** `nano-banana-pro` is an external skill (not in this repo). It is a separate AI image generation skill. If it is not available in your setup, use any available AI image generation capability instead.
 
 Use the `nano-banana-pro` skill to generate a designed thumbnail from scratch.
 
