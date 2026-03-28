@@ -16,7 +16,7 @@ Delivers a concise, narrative market briefing covering earnings results, economi
 | **Bloom CLI** (`bloom`) | Pull real-time price data, top movers, sentiment scores. Auth: bloom-cli reads API keys from `~/.bloom/config.json` or env vars (`BLOOM_API_KEY`). Run `bloom auth` to configure. |
 | **Serper** (`web-search` skill, `SERPER_API_KEY`) | Search for earnings results, analyst reactions, market news |
 | **Firecrawl** (`FIRECRAWL_API_KEY`) | Scrape full articles when Serper snippets cut off before the numbers |
-| **Bloom MCP** (`https://api.getbloom.app/mcp/`, Bearer: `${BLOOM_MCP_API_KEY}`) | Check what stocks Bloom users are watching — front-load coverage of these |
+| **Bloom MCP** (`https://api.getbloom.app/mcp/`, Bearer: `${BLOOM_MCP_API_KEY}`) | Check what stocks Bloom users are watching — front-load coverage of these. Note: `BLOOM_MCP_API_KEY` is a separate credential from bloom-cli's `BLOOM_API_KEY`. |
 
 ---
 
@@ -71,22 +71,23 @@ else
 fi
 
 # Sentiment
-# Verify key paths: .cnn_fear_greed and .aaii_sentiment nesting may differ in actual API response
-# (may be nested differently or absent — confirm against live bloom output before relying on these paths)
 if bloom_valid /tmp/bloom/sentiment.json; then
+  # Paths may differ across bloom-cli versions — confirm against live output if extraction returns null
   jq '{fear_greed: .cnn_fear_greed.index_value, fear_greed_label: .cnn_fear_greed.level, aaii_bull: .aaii_sentiment.bullish_percent, aaii_bear: .aaii_sentiment.bearish_percent}' /tmp/bloom/sentiment.json
 else
   echo "SKIP: sentiment data unavailable or invalid" >&2
 fi
 
 # Major index summary — change_pct comes directly from the API (day-over-day)
-# Extracting only needed fields to avoid bloating context window
+# Only extract from .data to avoid leaking non-index keys (status, etc.) into output
 if bloom_valid /tmp/bloom/indexes.json; then
-  jq '.data // . | to_entries[] | {symbol: .key, change_pct: .value.change_pct, price: .value.price}' /tmp/bloom/indexes.json
+  jq '.data | to_entries[] | {symbol: .key, change_pct: .value.change_pct, price: .value.price}' /tmp/bloom/indexes.json
 else
   echo "SKIP: index data unavailable or invalid" >&2
 fi
 ```
+
+> **Important:** Run both blocks (data collection + extraction) as a single script or in the same shell session so that `bloom_valid()` stays in scope for the extraction calls.
 
 Keep these numbers in context. Every stock percentage you write must come from this data.
 
@@ -130,20 +131,21 @@ Prioritize: mega-caps, widely-held names, dramatic movers (>5%), anything popula
 ## Delivery
 
 ### Signal (primary)
-Send to: `signal group:5TgLlI8NfnETVAzVvUi0rJ0WKz2Pz2Flj5i2/VAcFSY=`
+Send to the Signal group configured in `$SIGNAL_BRIEFING_GROUP` (or the Cron Admin group if unset).
 
 ```python
 # Use message tool
 channel = "signal"
-target = "group:5TgLlI8NfnETVAzVvUi0rJ0WKz2Pz2Flj5i2/VAcFSY="
+target = os.environ.get("SIGNAL_BRIEFING_GROUP", "<set SIGNAL_BRIEFING_GROUP env var>")
 ```
 
 ### Typefully (secondary — @investwithbloom)
 After Signal, create a public-facing tweet of the sharpest single data point:
 
 ```bash
-cd /Users/testuser/clawd/skills/typefully
-node scripts/typefully.js drafts:create 286685 \
+# Resolve typefully skill relative to this skill's directory
+cd "$(dirname "$0")/../typefully" 2>/dev/null || cd "$SKILLS_DIR/typefully"
+node scripts/typefully.js drafts:create "${TYPEFULLY_SOCIAL_SET_ID:-286685}" \
   --platform x \
   --text "<post text>"
 # Do NOT add --schedule. Save as unscheduled draft only — Eric reviews before posting.
