@@ -224,7 +224,7 @@ ScaledBorderAndShadow: yes
 
 [V4+ Styles]
 Format: Name, Fontname, Fontsize, PrimaryColour, SecondaryColour, OutlineColour, BackColour, Bold, Italic, Underline, StrikeOut, ScaleX, ScaleY, Spacing, Angle, BorderStyle, Outline, Shadow, Alignment, MarginL, MarginR, MarginV, Encoding
-Style: Highlight,{style.font},{style.font_size},{style.highlight_color},&H000000FF,{style.outline_color},&H00000000,{bold_flag},0,0,0,100,100,0,0,1,{style.outline_width},{style.shadow_depth},{alignment},40,40,{margin_v},1
+Style: Highlight,{style.font},{style.font_size},{style.highlight_color},{style.base_color},{style.outline_color},&H00000000,{bold_flag},0,0,0,100,100,0,0,1,{style.outline_width},{style.shadow_depth},{alignment},40,40,{margin_v},1
 Style: Base,{style.font},{style.font_size},{style.base_color},&H000000FF,{style.outline_color},&H00000000,{bold_flag},0,0,0,100,100,0,0,1,{style.outline_width},{style.shadow_depth},{alignment},40,40,{margin_v},1
 
 [Events]
