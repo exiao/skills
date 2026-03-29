@@ -1,3 +1,7 @@
+---
+name: codex
+description: Get a second opinion from OpenAI Codex CLI — code review (pass/fail), adversarial challenge, or open consultation. Use when asked for "codex review", "second opinion", or "ask codex".
+---
 # gstack-codex — Multi-AI Second Opinion
 
 > Adapted from [garrytan/gstack](https://github.com/garrytan/gstack/blob/main/codex/SKILL.md) (MIT).

@@ -1,3 +1,7 @@
+---
+name: document-release
+description: Update all project documentation to match what was just shipped. Use after merging a PR or shipping a feature to catch stale READMEs and drifted docs.
+---
 # Document Release
 
 Update all project documentation to match what was just shipped. Catches stale READMEs, outdated file paths, wrong command references, and drifted project structure.
