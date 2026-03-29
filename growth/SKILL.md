@@ -19,6 +19,9 @@ You are an expert in SaaS growth — both in-product conversion rate optimizatio
 | **Onboarding** | Post-signup activation, first-run experience, time-to-value |
 | **Paywall** | In-app upgrade screens, feature gates, trial expiration |
 | **Retention** | Cancel flows, save offers, dunning, win-back |
+| **Page CRO** | Landing page, homepage, pricing page, feature page conversion optimization |
+| **Form CRO** | Lead capture forms, contact forms, demo request forms, checkout forms |
+| **Popup CRO** | Exit intent, email capture popups, modals, slide-ins, announcement banners |
 | **Launches** | Product launches, feature releases, Product Hunt, go-to-market |
 | **Pricing** | Tiers, packaging, value metrics, price increases, monetization |
 | **Email** | Drip campaigns, welcome sequences, nurture, re-engagement |
@@ -521,3 +524,9 @@ See `references/ab-test-sample-size.md` and `references/ab-test-templates.md`.
 **Design**: Hick's Law (fewer choices = faster decisions), BJ Fogg (Behavior = Motivation × Ability × Prompt), EAST (Easy, Attractive, Social, Timely)
 
 For full model descriptions with marketing applications, see `references/psychology-models.md`.
+
+---
+
+# CRO Deep Dives
+
+For detailed frameworks on page CRO (7-dimension audit), signup flow optimization (social auth, password UX, mobile), onboarding (checklists, empty states, stalled users), paywall screens (templates, timing rules, anti-patterns), form CRO (field optimization, multi-step, error handling, submit buttons), and popup CRO (triggers, types, frequency capping, compliance), see `references/cro-frameworks.md`.

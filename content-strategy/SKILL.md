@@ -291,8 +291,8 @@ Don't write here. Route to the right skill.
 | Articles / long-form | `article-writer` |
 | TikTok slideshows | `slideshow-creator` |
 | Hooks and headlines | `headlines` |
-| Ad copy (paid) | `ad-copy` |
-| Paid creative concepts | `ad-copy` (includes A/B blitz protocol) |
+| Ad copy (paid) | `copywriting` |
+| Paid creative concepts | `copywriting` (includes A/B blitz protocol) |
 | AI character video scripts | Write inline using Step 2c above |
 | New AI character | `character-creation` |
 
@@ -430,7 +430,7 @@ What a complete strategy card looks like after running this skill. Use this as t
 **Awareness level targeted:** Level 1–2 cold, Level 3–4 retargeted
 
 **Delegate to:**
-- Visuals → `ad-copy` + `nano-banana-pro`
+- Visuals → `copywriting` + `nano-banana-pro`
 - Tweets → `tweet-ideas`
 - TikTok → `slideshow-creator`
 - Scheduling → `typefully`
@@ -511,10 +511,26 @@ Source: @DTC_Quizbuilder thread (https://x.com/DTC_Quizbuilder/status/2010379560
 
 ---
 
+## Reference Files
+
+| File | Contents |
+|------|----------|
+| `references/social-content.md` | Social media strategy: content pillars, hook formulas, calendars, engagement, repurposing, analytics |
+| `references/free-tool-strategy.md` | Engineering-as-marketing: tool types, ideation, evaluation scorecard, lead capture |
+| `references/lead-magnets.md` | Lead magnet types, buyer stage matching, gating strategy, distribution, benchmarks |
+| `references/marketing-ideas.md` | 139 SaaS marketing ideas catalog organized by category, stage, and budget |
+| `references/blog-seo-planning.md` | Searchable vs shareable, content pillars, topic clusters, buyer stage keywords, ideation sources |
+| `references/6-elements-framework.md` | Content creation framework |
+| `references/copywriting-formulas.md` | Copywriting formulas for social content |
+| `references/creative-research-methods.md` | How to research what's working |
+| `references/ad-formats-library.md` | Ad format reference library |
+
+---
+
 ## Related Skills
 
 - `headlines` — hook formulas and title generation
-- `ad-copy` — direct response copy, brand voice, A/B testing blitz
+- `copywriting` — page copy, direct response, brand voice, A/B testing blitz
 - `tweet-ideas` — standalone tweet content
 - `article-writer` — long-form drafts
 - `slideshow-creator` — TikTok production and ReelFarm automation

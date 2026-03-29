@@ -14,7 +14,7 @@ cp -r ~/Projects/erics-skills/skills/* ~/.clawdbot/skills/
 Or install individual skills:
 
 ```bash
-cp -r ~/Projects/erics-skills/skills/ad-copy ~/.clawdbot/skills/
+cp -r ~/Projects/erics-skills/skills/copywriting ~/.clawdbot/skills/
 ```
 
 ## Skills
@@ -23,7 +23,7 @@ cp -r ~/Projects/erics-skills/skills/ad-copy ~/.clawdbot/skills/
 
 | Skill | Description |
 |-------|-------------|
-| [ad-copy](ad-copy/SKILL.md) | write ad copy: App Store listings, Google Ads, landing pages, TikTok/Meta scripts, push, email. |
+| [copywriting](copywriting/SKILL.md) | write ad copy: App Store listings, Google Ads, landing pages, TikTok/Meta scripts, push, email. |
 | [article-writer](article-writer/SKILL.md) | write article drafts from approved outlines with SEO and brand voice. |
 | [content-atomizer](content-atomizer/SKILL.md) | repurpose long-form content into platform-native pieces for 8+ channels. |
 | [editor-in-chief](editor-in-chief/SKILL.md) | autonomous editing orchestrator: diagnose, fix, and iterate drafts to quality. |
@@ -104,7 +104,14 @@ cp -r ~/Projects/erics-skills/skills/ad-copy ~/.clawdbot/skills/
 
 | Skill | Description |
 |-------|-------------|
-| [ad-copy](ad-copy/SKILL.md) | direct response copy for any platform. |
+| [copywriting](copywriting/SKILL.md) | Page copy frameworks + direct response for any platform (ads, App Store, landing pages, scripts). |
+| [marketing-psychology](marketing-psychology/SKILL.md) | Psychological principles, mental models, and behavioral science for marketing. |
+| [pricing-strategy](pricing-strategy/SKILL.md) | Pricing decisions, tier packaging, value metrics, monetization strategy. |
+| [launch-strategy](launch-strategy/SKILL.md) | Product launches, feature announcements, Product Hunt, go-to-market. |
+| [paid-ads](paid-ads/SKILL.md) | Paid advertising strategy: platform selection, targeting, creative, optimization. |
+| [referral-program](referral-program/SKILL.md) | Referral and affiliate program design, optimization, and measurement. |
+| [cold-email](cold-email/SKILL.md) | B2B cold email writing and follow-up sequences. |
+| [product-marketing-context](product-marketing-context/SKILL.md) | Create product marketing context doc referenced by all marketing skills. |
 | [create-a-sales-asset](visual-design/create-a-sales-asset/SKILL.md) | generate sales assets (landing pages, decks, one-pagers). |
 | [dogfood](dogfood/SKILL.md) | QA and exploratory test web applications, produce structured reports. |
 | [growth](growth/SKILL.md) | full-funnel growth: CRO, onboarding, paywalls, churn, launches, pricing. |
