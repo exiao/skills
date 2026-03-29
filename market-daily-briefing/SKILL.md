@@ -62,7 +62,7 @@ If any bloom command returned empty, null, or error JSON, skip the verification 
 # Uses jq instead of grep to correctly handle both '"status":"error"' and '"status": "error"'
 bloom_valid() {
   local f="$1"
-  [ -s "$f" ] && jq -e '.status != "error"' "$f" >/dev/null 2>&1 && [ "$(jq 'length' "$f" 2>/dev/null)" != "0" ]
+  [ -s "$f" ] && jq -e '.status != "error"' "$f" >/dev/null 2>&1 && [ "$(jq '.data | length' "$f" 2>/dev/null)" != "0" ]
 }
 
 # Top movers summary
@@ -147,8 +147,12 @@ target = os.environ.get("SIGNAL_BRIEFING_GROUP", "<set SIGNAL_BRIEFING_GROUP env
 After Signal, create a public-facing tweet of the sharpest single data point:
 
 ```bash
-# The agent should resolve the typefully skill path using the path provided to it (e.g. {baseDir}/../typefully).
+# {baseDir} is a template placeholder — the AI agent replaces it with the absolute path to this skill's
+# directory at runtime. It is NOT valid shell syntax and must not be run literally.
+# Example resolved path: /Users/yourname/clawd/skills/market-daily-briefing
 # Do NOT use $(dirname "$0") — in agent context $0 is the shell interpreter, not this file.
+# TYPEFULLY_SOCIAL_SET_ID is the Typefully social set ID for @investwithbloom (set as an env var;
+# do not hardcode the numeric ID here — store it in the gateway env or .env file).
 node "$(cd {baseDir}/../typefully && pwd)/scripts/typefully.js" drafts:create "$TYPEFULLY_SOCIAL_SET_ID" \
   --platform x \
   --text "<post text>"
