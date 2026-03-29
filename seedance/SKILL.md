@@ -1,6 +1,7 @@
 ---
 name: seedance
-description: Generate videos using ByteDance Seedance 2.0 via PiAPI. Supports text-to-video, image-to-video, video editing, and video extension.
+version: "1.0"
+description: Generate videos using ByteDance Seedance 2.0 via PiAPI. Triggers on "Seedance", "ByteDance video", "video generation", "text-to-video", "image-to-video". Supports text-to-video, image-to-video, video editing, and video extension.
 ---
 
 # Seedance 2.0 Video Generation
@@ -27,12 +28,11 @@ Generate cinematic AI videos using ByteDance's Seedance 2.0 model through PiAPI'
 ### Text-to-Video
 
 ```bash
-# Run from the skill directory: cd {baseDir}/seedance
 # Quick generation (5s, fast model)
-scripts/seedance.sh generate "A cinematic aerial shot of a coastal city at sunrise"
+{baseDir}/scripts/seedance.sh generate "A cinematic aerial shot of a coastal city at sunrise"
 
 # Full quality, 10 seconds, vertical
-scripts/seedance.sh generate "A woman walks through a neon-lit Tokyo street at night" \
+{baseDir}/scripts/seedance.sh generate "A woman walks through a neon-lit Tokyo street at night" \
   --model seedance-2-preview \
   --duration 10 \
   --aspect 9:16
@@ -42,11 +42,11 @@ scripts/seedance.sh generate "A woman walks through a neon-lit Tokyo street at n
 
 ```bash
 # Animate a reference image
-scripts/seedance.sh generate "The person in @image1 starts dancing" \
+{baseDir}/scripts/seedance.sh generate "The person in @image1 starts dancing" \
   --image https://example.com/photo.jpg
 
 # Multiple image references
-scripts/seedance.sh generate "@image1 transforms into @image2" \
+{baseDir}/scripts/seedance.sh generate "@image1 transforms into @image2" \
   --image https://example.com/before.jpg \
   --image https://example.com/after.jpg
 ```
@@ -55,7 +55,7 @@ scripts/seedance.sh generate "@image1 transforms into @image2" \
 
 ```bash
 # Edit an existing video
-scripts/seedance.sh generate "Change the background to a snowy mountain landscape" \
+{baseDir}/scripts/seedance.sh generate "Change the background to a snowy mountain landscape" \
   --video https://example.com/original.mp4
 ```
 
@@ -63,17 +63,20 @@ scripts/seedance.sh generate "Change the background to a snowy mountain landscap
 
 ```bash
 # Extend a previously generated video by providing its task ID
-scripts/seedance.sh extend <task_id>
+{baseDir}/scripts/seedance.sh extend <task_id>
+
+# Extend with a custom continuation prompt
+{baseDir}/scripts/seedance.sh extend <task_id> "zoom out to reveal the full skyline"
 ```
 
 ### Check Status
 
 ```bash
 # Poll a task until complete
-scripts/seedance.sh status <task_id>
+{baseDir}/scripts/seedance.sh status <task_id>
 
 # Poll with auto-download
-scripts/seedance.sh wait <task_id> --output video.mp4
+{baseDir}/scripts/seedance.sh wait <task_id> --output video.mp4
 ```
 
 ## Parameters
@@ -81,11 +84,14 @@ scripts/seedance.sh wait <task_id> --output video.mp4
 | Parameter | Values | Default |
 |-----------|--------|---------|
 | `--model` | `seedance-2-preview`, `seedance-2-fast-preview` | `seedance-2-fast-preview` |
-| `--duration` | `5`, `10`, `15` (seconds) | `5` |
+| `--duration` | `5`, `10`, or `15` (seconds) — other values rejected | `5` |
 | `--aspect` | `16:9`, `9:16`, `4:3`, `3:4` | `16:9` |
 | `--image` | URL (repeatable, max 9) | none |
 | `--video` | URL (1 max, enables edit mode) | none |
-| `--output` | Output file path | auto-named |
+
+> **Model mapping:** The `--model` value (e.g. `seedance-2-fast-preview`) is sent as `task_type` in the API request. The `model` field is always `"seedance"` (the PiAPI product name). This is correct API behavior — don't change it.
+
+> **`--output`** is only supported by the `wait` subcommand (auto-downloads when complete). The `generate` subcommand only submits the task; use `wait <task_id> --output file.mp4` to download.
 
 ## Image References in Prompts
 

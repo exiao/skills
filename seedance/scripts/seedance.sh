@@ -60,7 +60,12 @@ create_task() {
   while [[ $# -gt 0 ]]; do
     case "$1" in
       --model) model="$2"; shift 2 ;;
-      --duration) duration="$2"; shift 2 ;;
+      --duration)
+        case "$2" in
+          5|10|15) duration="$2" ;;
+          *) echo "Error: --duration must be 5, 10, or 15" >&2; exit 1 ;;
+        esac
+        shift 2 ;;
       --aspect) aspect="$2"; shift 2 ;;
       --image) images+=("$2"); shift 2 ;;
       --video) video="$2"; shift 2 ;;
@@ -95,6 +100,9 @@ create_task() {
   fi
 
   # Build request body
+  # NOTE: PiAPI uses "model" as the product name (always "seedance") and
+  # "task_type" as the specific model variant the user chose (e.g. "seedance-2-fast-preview").
+  # This is the correct PiAPI API contract — do not swap these fields.
   local body
   body=$(jq -n \
     --arg model "seedance" \
@@ -222,7 +230,7 @@ wait_for_task() {
         ;;
     esac
 
-    ((attempt++))
+    attempt=$((attempt + 1))
   done
 
   echo "Timed out after $max_attempts attempts ($((max_attempts * 5 / 60)) min)"
@@ -243,7 +251,12 @@ case "${1:-}" in
     shift
     [[ $# -lt 1 ]] && usage
     parent_id="$1"; shift
-    create_task "continue the video" --parent "$parent_id" "$@"
+    extend_prompt="continue the video"
+    # Optional second positional arg overrides the default continuation prompt
+    if [[ $# -gt 0 && "${1:0:2}" != "--" ]]; then
+      extend_prompt="$1"; shift
+    fi
+    create_task "$extend_prompt" --parent "$parent_id" "$@"
     ;;
   status)
     shift
