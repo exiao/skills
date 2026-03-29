@@ -17,11 +17,11 @@ ACCOUNT="$BLOOM_AD_ACCOUNT_ID"    # Bloom ad account (act_...)
 API="https://graph.facebook.com/v22.0"
 PAGE_ID="$BLOOM_PAGE_ID"           # Facebook Page ID
 INSTAGRAM_ID="$BLOOM_INSTAGRAM_ID" # Instagram user ID for creatives
-IOS_APP_LINK="http://itunes.apple.com/app/id${BLOOM_APP_STORE_ID_NEW}"  # current App Store ID
+IOS_APP_LINK="http://itunes.apple.com/app/id${BLOOM_APP_STORE_ID}"
 ANDROID_APP_LINK="http://play.google.com/store/apps/details?id=com.bloom.invest"
 ADSET_IOS="$BLOOM_IOS_ADSET_ID"       # General, iOS (ACTIVE)
 ADSET_ANDROID="$BLOOM_ANDROID_ADSET_ID"   # General, Android (ACTIVE)
-# All BLOOM_* vars set in gateway env. BLOOM_APP_STORE_ID_NEW = current app for ad links.
+# All BLOOM_* vars set in gateway env.
 ```
 
 ---
@@ -328,7 +328,7 @@ Quality filter after each wave:
 
 If the API returns `code=31` ("pending action" / security hold), **stop and notify Eric** — he must resolve it manually from his own browser. Do not attempt browser automation to fix it.
 
-Always use `$BLOOM_APP_STORE_ID_NEW` for iOS ad links (the current App Store ID). The adset's `promoted_object.object_store_url` is the ground truth — verify it matches before creating creatives.
+Always use `$BLOOM_APP_STORE_ID` for iOS ad links (the current App Store ID). The adset's `promoted_object.object_store_url` is the ground truth — verify it matches before creating creatives.
 
 ## Attribution: Custom Product Pages
 
@@ -350,7 +350,7 @@ For iOS app campaigns, use Apple Custom Product Pages (CPPs) as the ad destinati
 6. **Missing GEMINI_API_KEY** — resolve from clawdbot.json before Nano Banana Pro.
 7. **Not sending creative images** — Signal report must include all 6 images.
 8. **Forgetting the manifest** — required for future exclusion list audits.
-9. **Wrong App Store URL** — always use `$BLOOM_APP_STORE_ID_NEW` for ad links. Verify against adset `promoted_object.object_store_url`.
+9. **Wrong App Store URL** — always use `$BLOOM_APP_STORE_ID` for ad links. Verify against adset `promoted_object.object_store_url`.
 
 ## Constitutional Rules
 - NEVER pause or kill an ad without reporting which ad, current spend, and ROAS first.

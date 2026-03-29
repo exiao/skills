@@ -98,7 +98,7 @@ Write the post copy:
 - User-benefit-first voice — what does this do *for you*, not what the code does
 - No dev language (no "PR", "refactor", "API", "backend")
 - Name the specific feature (not vague like "improved experience")
-- Add App Store link if space allows — use `https://apps.apple.com/app/bloom-investing/id` + the value of `$BLOOM_APP_STORE_ID_NEW` env var
+- Add App Store link if space allows — use `https://apps.apple.com/app/bloom-investing/id` + the value of `$BLOOM_APP_STORE_ID` env var
 
 Also write a `featureTitle` (3-5 words) for the Remotion video overlay.
 

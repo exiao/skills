@@ -15,7 +15,7 @@ Delivers a concise, narrative market briefing covering earnings results, economi
 |------|---------|
 | **Serper** (`web-search` skill, `SERPER_API_KEY`) | Search for earnings results, analyst reactions, market news |
 | **Firecrawl** (`FIRECRAWL_API_KEY`) | Scrape full articles when Serper snippets cut off before the numbers |
-| **Bloom MCP** (`https://api.getbloom.app/mcp/`, Bearer: `test-api-key`) | Check what stocks Bloom users are watching — front-load coverage of these |
+| **Bloom MCP** (`https://api.getbloom.app/mcp/`, Bearer: `$BLOOM_MCP_API_KEY`) | Check what stocks Bloom users are watching — front-load coverage of these |
 
 ---
 
