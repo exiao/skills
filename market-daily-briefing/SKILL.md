@@ -22,27 +22,28 @@ Delivers a concise, narrative market briefing covering earnings results, economi
 
 ## Step 0: Pull Market Data (before web search)
 
-Run this block first. It gives you ground-truth numbers before any web search. All percentages in the final briefing must come from here, not from article snippets.
+Run this block first. It gives you ground-truth numbers before any web search. Prefer bloom-cli data for all stock percentages; fall back to article numbers only when bloom-cli is unavailable (see Verified Numbers Rule below).
 
 ```bash
-mkdir -p /tmp/bloom
+BLOOM_TMP=$(mktemp -d /tmp/bloom-XXXXXX)
+trap 'rm -rf "$BLOOM_TMP"' EXIT
 
 # Today's actual top movers
-if ! bloom market --type top_movers --limit 20 -f json -o /tmp/bloom/movers.json 2>/tmp/bloom/movers.err; then
-  echo "WARN: bloom market failed ($(cat /tmp/bloom/movers.err))" >&2
-  echo '{"status":"error"}' > /tmp/bloom/movers.json
+if ! bloom market --type top_movers --limit 20 -f json -o "$BLOOM_TMP/movers.json" 2>"$BLOOM_TMP/movers.err"; then
+  echo "WARN: bloom market failed ($(cat "$BLOOM_TMP/movers.err"))" >&2
+  echo '{"status":"error"}' > "$BLOOM_TMP/movers.json"
 fi
 
 # Fear & Greed + AAII sentiment
-if ! bloom sentiment -f json -o /tmp/bloom/sentiment.json 2>/tmp/bloom/sentiment.err; then
-  echo "WARN: bloom sentiment failed ($(cat /tmp/bloom/sentiment.err))" >&2
-  echo '{"status":"error"}' > /tmp/bloom/sentiment.json
+if ! bloom sentiment -f json -o "$BLOOM_TMP/sentiment.json" 2>"$BLOOM_TMP/sentiment.err"; then
+  echo "WARN: bloom sentiment failed ($(cat "$BLOOM_TMP/sentiment.err"))" >&2
+  echo '{"status":"error"}' > "$BLOOM_TMP/sentiment.json"
 fi
 
 # Major index data (includes day-over-day change_pct directly from the API)
-if ! bloom market --type major_indexes -f json -o /tmp/bloom/indexes.json 2>/tmp/bloom/indexes.err; then
-  echo "WARN: bloom market major_indexes failed ($(cat /tmp/bloom/indexes.err))" >&2
-  echo '{"status":"error"}' > /tmp/bloom/indexes.json
+if ! bloom market --type major_indexes -f json -o "$BLOOM_TMP/indexes.json" 2>"$BLOOM_TMP/indexes.err"; then
+  echo "WARN: bloom market major_indexes failed ($(cat "$BLOOM_TMP/indexes.err"))" >&2
+  echo '{"status":"error"}' > "$BLOOM_TMP/indexes.json"
 fi
 ```
 
@@ -64,30 +65,30 @@ bloom_valid() {
   local f="$1"
   [ -s "$f" ] && jq -e '.status != "error"' "$f" >/dev/null 2>&1 && {
     local len
-    len=$(jq 'if .data then (.data | length) else (keys | length) end' "$f" 2>/dev/null)
+    len=$(jq 'if .data then (.data | length) else ([keys[] | select(. != "status")] | length) end' "$f" 2>/dev/null)
     [ "${len:-0}" != "0" ]
   }
 }
 
 # Top movers summary
-if bloom_valid /tmp/bloom/movers.json; then
-  jq '.data.stocks[] | {symbol: .symbol, change_pct: .change_percent, market_cap: .market_cap}' /tmp/bloom/movers.json
+if bloom_valid "$BLOOM_TMP/movers.json"; then
+  jq '.data.stocks[] | {symbol: .symbol, change_pct: .change_percent, market_cap: .market_cap}' "$BLOOM_TMP/movers.json"
 else
   echo "SKIP: movers data unavailable or invalid" >&2
 fi
 
 # Sentiment
-if bloom_valid /tmp/bloom/sentiment.json; then
+if bloom_valid "$BLOOM_TMP/sentiment.json"; then
   # Paths may differ across bloom-cli versions — confirm against live output if extraction returns null
-  jq '{fear_greed: .cnn_fear_greed.index_value, fear_greed_label: .cnn_fear_greed.level, aaii_bull: .aaii_sentiment.bullish_percent, aaii_bear: .aaii_sentiment.bearish_percent}' /tmp/bloom/sentiment.json
+  jq '{fear_greed: .cnn_fear_greed.index_value, fear_greed_label: .cnn_fear_greed.level, aaii_bull: .aaii_sentiment.bullish_percent, aaii_bear: .aaii_sentiment.bearish_percent}' "$BLOOM_TMP/sentiment.json"
 else
   echo "SKIP: sentiment data unavailable or invalid" >&2
 fi
 
 # Major index summary — change_pct comes directly from the API (day-over-day)
 # Only extract from .data to avoid leaking non-index keys (status, etc.) into output
-if bloom_valid /tmp/bloom/indexes.json; then
-  jq '.data | to_entries[] | {symbol: .key, change_pct: .value.change_pct, price: .value.price}' /tmp/bloom/indexes.json
+if bloom_valid "$BLOOM_TMP/indexes.json"; then
+  jq '.data | to_entries[] | {symbol: .key, change_pct: .value.change_pct, price: .value.price}' "$BLOOM_TMP/indexes.json"
 else
   echo "SKIP: index data unavailable or invalid" >&2
 fi
