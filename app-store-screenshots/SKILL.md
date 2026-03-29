@@ -47,7 +47,7 @@ Required context:
 - Number of slides: 6
 - Style: clean/minimal, dark mode preferred
 
-When done, run: clawdbot gateway wake --text "App Store screenshots done. Output in [dir]" --mode now'
+When done, run: clawdbot gateway wake --text "App Store screenshots done. Output in [dir]" --mode now
 ```
 
 ## What Gets Scaffolded
