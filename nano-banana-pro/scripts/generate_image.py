@@ -7,7 +7,7 @@
 # ]
 # ///
 """
-Generate images using Google's Nano Banana Pro (Gemini 3 Pro Image) API.
+Generate images using Google's Nano Banana Pro (Gemini 2.0 Flash Image Generation) API.
 
 Usage:
     uv run generate_image.py --prompt "your image description" --filename "output.png" [--resolution 1K|2K|4K] [--api-key KEY]
@@ -179,7 +179,7 @@ def main():
             image_cfg_kwargs["aspect_ratio"] = args.aspect_ratio
 
         response = client.models.generate_content(
-            model="gemini-3-pro-image-preview",
+            model="gemini-2.0-flash-preview-image-generation",
             contents=contents,
             config=types.GenerateContentConfig(
                 response_modalities=["TEXT", "IMAGE"],
