@@ -109,13 +109,28 @@ cmd_concat() {
     rm -f "$listfile"
   else
     # Re-encode concat via filter_complex
-    local inputs=() filter=""
-    for i in "${!files[@]}"; do
-      inputs+=(-i "${files[$i]}")
-      filter+="[$i:v:0][$i:a:0]"
+    # Check whether all inputs have audio before building the filter
+    local inputs=() all_have_audio=true
+    for f in "${files[@]}"; do
+      inputs+=(-i "$f")
+      has_audio "$f" || all_have_audio=false
     done
-    filter+="concat=n=${#files[@]}:v=1:a=1[outv][outa]"
-    ffmpeg -y "${inputs[@]}" -filter_complex "$filter" -map "[outv]" -map "[outa]" "$output"
+
+    local filter=""
+    if $all_have_audio; then
+      for i in "${!files[@]}"; do
+        filter+="[$i:v:0][$i:a:0]"
+      done
+      filter+="concat=n=${#files[@]}:v=1:a=1[outv][outa]"
+      ffmpeg -y "${inputs[@]}" -filter_complex "$filter" -map "[outv]" -map "[outa]" "$output"
+    else
+      # At least one input lacks audio — concat video only
+      for i in "${!files[@]}"; do
+        filter+="[$i:v:0]"
+      done
+      filter+="concat=n=${#files[@]}:v=1:a=0[outv]"
+      ffmpeg -y "${inputs[@]}" -filter_complex "$filter" -map "[outv]" "$output"
+    fi
   fi
   echo "Concatenated ${#files[@]} files: $output"
 }
@@ -725,7 +740,7 @@ Common Options:
   -o <file>     Output file
   --help        Show this help
 
-Run 'edit.sh <command> --help' for command-specific options.
+Run 'edit.sh help' for the full command list.
 EOF
 }
 
