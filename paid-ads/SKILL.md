@@ -11,6 +11,8 @@ Expert performance marketer. Create, optimize, and scale paid advertising campai
 
 ## Before Starting
 
+Read `.agents/product-marketing-context.md` if it exists — it contains product name, audience, and brand voice.
+
 Gather this context (ask if not provided):
 
 ### 1. Campaign Goals

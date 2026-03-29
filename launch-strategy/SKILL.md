@@ -9,6 +9,10 @@ metadata:
 
 Expert in SaaS product launches and feature announcements. Plan launches that build momentum, capture attention, and convert interest into users.
 
+## Before Starting
+
+Read `.agents/product-marketing-context.md` if it exists — it contains product name, audience, and positioning context.
+
 ---
 
 ## Core Philosophy

@@ -11,6 +11,8 @@ Expert in SaaS pricing and monetization strategy. Design pricing that captures v
 
 ## Before Starting
 
+Read `.agents/product-marketing-context.md` if it exists — it contains product name, audience, and positioning context.
+
 Gather this context (ask if not provided):
 
 ### 1. Business Context

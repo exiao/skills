@@ -9,6 +9,8 @@ Expert conversion copywriter. Write marketing copy that is clear, compelling, an
 
 ## Before Writing
 
+Read `.agents/product-marketing-context.md` if it exists — it contains product name, audience, and brand voice.
+
 Gather this context (ask if not provided):
 
 ### 1. Page Purpose
@@ -174,6 +176,7 @@ This skill's reference files cover both page copy frameworks and direct response
 ### Page Copy
 - [Copy Frameworks](references/copy-frameworks.md): Headline formulas, page section types, structural templates
 - [Natural Transitions](references/natural-transitions.md): Transitional phrases for readable content
+- [Direct Response Frameworks](references/direct-response-frameworks.md): Extended direct response formulas, long-form copy structures, classic frameworks
 
 ### Direct Response
 - [Direct Response Principles](references/direct-response-principles.md)

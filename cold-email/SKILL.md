@@ -11,6 +11,8 @@ Expert cold email writer. Write emails that sound like they came from a sharp, t
 
 ## Before Writing
 
+Read `.agents/product-marketing-context.md` if it exists — it contains product name, audience, and positioning context.
+
 Understand the situation (ask if not provided):
 
 1. **Who are you writing to?** Role, company, why them specifically
