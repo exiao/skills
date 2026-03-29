@@ -1,184 +1,232 @@
 # Eric's Skills
 
-My [Clawdbot](https://clawdbot.com) skills collection — prompt templates and tools I invoke on demand across 70+ domains.
+90+ [OpenClaw](https://github.com/openclaw/openclaw) skills I use daily for content, marketing, development, investing, and growth. Some are original, some are adapted from great open-source projects. All are battle-tested.
 
-## Quick Start
+## What's Here
 
-Clone this repo and copy skills to your Clawdbot skills directory:
+This repo is my personal skills directory. Skills are prompt templates that OpenClaw (or any Claude Code-compatible agent) invokes on demand. Each skill is a folder with a `SKILL.md` file.
 
-```bash
-git clone https://github.com/exiao/erics-skills ~/Projects/erics-skills
-cp -r ~/Projects/erics-skills/skills/* ~/.clawdbot/skills/
-```
+**Looking for more skills?**
+- [OpenClaw native skills](https://github.com/openclaw/openclaw/tree/main/skills) ship with the platform (GitHub, Slack, Apple Notes, weather, etc.)
+- [ClawHub](https://clawhub.ai) is the community skill marketplace
+- [skills.sh](https://skills.sh) has third-party skills from tool vendors
 
-Or install individual skills:
+---
 
-```bash
-cp -r ~/Projects/erics-skills/skills/ad-copy ~/.clawdbot/skills/
-```
-
-## Skills
+## My Original Skills
 
 ### Content & Writing
 
 | Skill | Description |
 |-------|-------------|
-| [ad-copy](ad-copy/SKILL.md) | write ad copy: App Store listings, Google Ads, landing pages, TikTok/Meta scripts, push, email. |
-| [article-writer](article-writer/SKILL.md) | write article drafts from approved outlines with SEO and brand voice. |
-| [content-atomizer](content-atomizer/SKILL.md) | repurpose long-form content into platform-native pieces for 8+ channels. |
-| [editor-in-chief](editor-in-chief/SKILL.md) | autonomous editing orchestrator: diagnose, fix, and iterate drafts to quality. |
-| [evaluate-content](evaluate-content/SKILL.md) | judge content quality: shareability, readability, voice, cuttability, angle. |
-| [hooks](hooks/SKILL.md) | generate headlines, titles, and hooks for content. |
-| [outline-generator](outline-generator/SKILL.md) | generate structured article outlines from approved hooks. |
-| [substack-draft](substack-draft/SKILL.md) | save finished articles to Substack as drafts. |
-| [tweet-ideas](tweet-ideas/SKILL.md) | generate standalone tweet ideas about a topic (Aaron Levie playbook). |
+| [article-writer](article-writer/) | Write article drafts from approved outlines with SEO and brand voice |
+| [brand-identity](brand-identity/) | Build a complete brand identity: purpose, values, voice, visual system, guidelines |
+| [content-pipeline](content-pipeline/) | Orchestrator for the 3-article content pipeline with parallel sub-agents |
+| [content-strategy](content-strategy/) | Build content strategy: hooks, angles, and ideas from what's trending now |
+| [editor-in-chief](editor-in-chief/) | Autonomous editing orchestrator: diagnose, fix, and iterate drafts to quality |
+| [evaluate-content](evaluate-content/) | Judge content quality: shareability, readability, voice, cuttability, angle |
+| [hooks](hooks/) | Generate headlines, titles, and scroll-stopping openers |
+| [outline-generator](outline-generator/) | Generate structured article outlines from approved hooks |
+| [substack-draft](substack-draft/) | Save finished articles to Substack as drafts |
+| [tweet-ideas](tweet-ideas/) | Generate standalone tweet ideas (Aaron Levie playbook) |
 
-### Design & Media
+### Marketing & Growth
 
 | Skill | Description |
 |-------|-------------|
-| [visual-design](visual-design/SKILL.md) | router skill for all visual design and creative output tasks. |
-| [visual-design/browser-animation-video](visual-design/browser-animation-video/SKILL.md) | create browser-based motion graphics with Framer Motion, GSAP, and Tailwind. |
-| [visual-design/canvas-design](visual-design/canvas-design/SKILL.md) | create visual art and designs as .png/.pdf files. |
-| [visual-design/d3js-visualization](visual-design/d3js-visualization/SKILL.md) | create interactive D3.js data visualizations. |
-| [visual-design/frontend-design](visual-design/frontend-design/SKILL.md) | build production-grade frontend interfaces with high design quality. |
-| [visual-design/frontend-slides](visual-design/frontend-slides/SKILL.md) | create animation-rich HTML presentations or convert PPT to web. |
-| [visual-design/gemini-svg](visual-design/gemini-svg/SKILL.md) | generate interactive SVG animations via Gemini. |
-| [visual-design/image-generator](visual-design/image-generator/SKILL.md) | generate article visuals: diagrams, hero images, screenshots. |
-| [visual-design/remotion-videos](visual-design/remotion-videos/SKILL.md) | create animated marketing videos with Remotion (renders to MP4). |
-| [visual-design/slideshow-creator](visual-design/slideshow-creator/SKILL.md) | create and post TikTok slideshows via ReelFarm. |
-| [visual-design/sora](visual-design/sora/SKILL.md) | generate, remix, and manage Sora AI videos. |
-| [visual-design/kling](visual-design/kling/SKILL.md) | generate AI video prompts for Kling 3.0 using cinematic directing techniques. |
-| [video-production](video-production/SKILL.md) | router skill — dispatches video tasks to the right sub-skill. |
-| [video-production/demo-video](video-production/demo-video/SKILL.md) | create product demo videos by automating browser interactions and capturing frames. |
+| [aso](aso/) | App Store Optimization: keyword research, audits, metadata, competitor analysis via DataForSEO |
+| [competitive-analysis](competitive-analysis/) | Research competitors and build interactive battlecards |
+| [content-performance-report](content-performance-report/) | Weekly content pillar performance report (cron) |
+| [dogfood](dogfood/) | QA and exploratory test web applications, produce structured reports |
+| [market-daily-briefing](market-daily-briefing/) | Daily market briefing: earnings, macro, notable moves (cron) |
+| [meta-ads](meta-ads/) | Daily Meta ad operations via Marketing API |
+| [optimize-prompt](optimize-prompt/) | Iteratively optimize system prompts via autoresearch loop |
+| [synthetic-userstudies](synthetic-userstudies/) | Run synthetic user research sessions with AI personas |
+| [typefully](typefully/) | Create, schedule, and manage social posts via Typefully |
+| [whop-content-rewards](whop-content-rewards/) | Set up and manage UGC campaigns on Whop |
+
+### Design & Visual
+
+| Skill | Description |
+|-------|-------------|
+| [visual-design](visual-design/) | Router skill for all visual design tasks (dispatches to sub-skills below) |
+| [visual-design/canvas-design](visual-design/canvas-design/) | Create visual art and designs as .png/.pdf files |
+| [visual-design/create-a-sales-asset](visual-design/create-a-sales-asset/) | Generate sales assets: landing pages, decks, one-pagers |
+| [visual-design/d3js-visualization](visual-design/d3js-visualization/) | Create interactive D3.js data visualizations |
+| [visual-design/image-generator](visual-design/image-generator/) | Generate article visuals: diagrams, hero images, screenshots |
+| [visual-design/slideshow-creator](visual-design/slideshow-creator/) | Create and post TikTok slideshows via ReelFarm |
+| [visual-design/sticker-creator](visual-design/sticker-creator/) | Create die-cut sticker style cards via Nano Banana Pro |
+| [visual-design/apple-ux-guidelines](visual-design/apple-ux-guidelines/) | Apple HIG reference for UI/UX decisions |
+| [app-store-screenshots](app-store-screenshots/) | Generate production-ready App Store marketing screenshots |
+| [design-review](design-review/) | Product design review: 13 questions + Nielsen Norman heuristic eval |
+| [nano-banana-pro](nano-banana-pro/) | Generate or edit images via Gemini 3 Pro Image |
+| [excalidraw-mcp](excalidraw-mcp/) | Create hand-drawn style diagrams via Excalidraw MCP |
+
+### Video Production
+
+| Skill | Description |
+|-------|-------------|
+| [video-production](video-production/) | Router skill for all video tasks (dispatches to sub-skills below) |
+| [video-production/demo-video](video-production/demo-video/) | Create product demo videos via browser automation |
+| [video-production/elevenlabs](video-production/elevenlabs/) | Generate voiceover audio via ElevenLabs + Fal.ai |
+| [video-production/infinitetalk](video-production/infinitetalk/) | Generate talking avatar videos with lip sync via Fal.ai |
+| [video-production/browser-animation-video](video-production/browser-animation-video/) | Browser-based motion graphics with Framer Motion, GSAP, Tailwind |
+| [video-production/gemini-svg](video-production/gemini-svg/) | Generate interactive SVG animations via Gemini |
+| [video-production/hook-frames](video-production/hook-frames/) | Generate hook frames for video content |
+| [video-production/kling](video-production/kling/) | Kling 3.0 video/image generation with cinematic directing |
+| [video-production/sora](video-production/sora/) | Generate, remix, and manage Sora AI videos |
+| [screen-recording](screen-recording/) | Record macOS screen via CLI with ffmpeg |
+| [character-creation](character-creation/) | Create consistent AI video characters for reuse across content |
+| [seedance](seedance/) | Generate videos using ByteDance Seedance 2.0 via PiAPI |
+| [klingai](klingai/) | Kling AI video/image generation via API |
 
 ### Analytics & Research
 
 | Skill | Description |
 |-------|-------------|
-| [appfigures](appfigures/SKILL.md) | query Appfigures for app store analytics (downloads, revenue, reviews, rankings). |
-| [competitive-analysis](competitive-analysis/SKILL.md) | research competitors and build interactive battlecards. |
-| [copilot-money](copilot-money/SKILL.md) | query Copilot Money for finances, transactions, net worth, and holdings. |
-| [dataforseo](dataforseo/SKILL.md) | keyword research, App Store/Google Play rankings, SERP rankings, ASO. |
-| [grok-search](grok-search/SKILL.md) | search the web or X/Twitter using xAI Grok. |
-| [last30days](last30days/SKILL.md) | research topics, manage watchlists, get briefings. Sources: Reddit, X, YouTube, web. |
-| [notebooklm](notebooklm/SKILL.md) | query Google NotebookLM notebooks for source-grounded answers; generate audio overviews and slides. |
-| [phoenix-cli](phoenix-cli/SKILL.md) | debug LLM apps with Phoenix CLI: traces, errors, experiments. |
-| [polymarket](polymarket/SKILL.md) | query Polymarket prediction markets. |
-| [seo-research](seo-research/SKILL.md) | SEO: keyword research, AI search optimization, technical audits, schema markup. |
-| [stock-research](stock-research/SKILL.md) | stock/equity research, earnings analysis, daily market briefings. |
-| [trend-research](trend-research/SKILL.md) | find trending content on TikTok, YouTube, Instagram, Twitter, etc. |
-| [web-search](web-search/SKILL.md) | search the web via Serper (Google Search) API. |
+| [appfigures](appfigures/) | App store analytics: downloads, revenue, reviews, rankings |
+| [copilot-money](copilot-money/) | Query Copilot Money for finances, transactions, net worth |
+| [dataforseo](dataforseo/) | Keyword research, app rankings, SERP data via DataForSEO API |
+| [grok-search](grok-search/) | Search web or X/Twitter using xAI Grok |
+| [notebooklm](notebooklm/) | Query Google NotebookLM for source-grounded answers |
+| [phoenix-cli](phoenix-cli/) | Debug LLM apps with Phoenix CLI: traces, errors, experiments |
+| [polymarket](polymarket/) | Query Polymarket prediction markets |
+| [seo-research](seo-research/) | SEO: keyword research, AI search optimization, technical audits |
+| [stock-research](stock-research/) | Stock/equity research, earnings analysis, daily market briefings |
+| [trend-research](trend-research/) | Find trending content across TikTok, YouTube, Instagram, X |
+| [web-search](web-search/) | Search the web via Serper (Google Search) API |
 
 ### Advertising
 
 | Skill | Description |
 |-------|-------------|
-| [content-strategy](content-strategy/SKILL.md) | Build content strategy: hooks, angles, and ideas from what's trending now. Covers organic and paid creative across TikTok, X, YouTube, Meta, LinkedIn. |
-| [google-ads](google-ads/SKILL.md) | manage Google Ads campaigns: performance checks, keyword pausing, optimization. |
-| [typefully](typefully/SKILL.md) | create, schedule, and manage social posts via Typefully. |
-| [whop-content-rewards](whop-content-rewards/SKILL.md) | set up and manage Content Rewards UGC campaigns on Whop. |
+| [google-ads](google-ads/) | Manage Google Ads campaigns: performance, keywords, optimization |
+| [apple-search-ads](apple-search-ads/) | Apple Search Ads campaigns with API automation and bid strategy |
 
-### Development
+### Development & Coding
 
 | Skill | Description |
 |-------|-------------|
-| [claude-md-management](claude-md-management/SKILL.md) | audit, improve, and maintain CLAUDE.md files across repos. |
-| [context7](context7/SKILL.md) | fetch version-specific library/framework docs via Context7 MCP. |
-| [demo-pr-feature](demo-pr-feature/SKILL.md) | capture a demo screenshot/video of a PR's feature, deploy to Surge.sh, post as GitHub PR comment. |
-| [deploy-bloom](deploy-bloom/SKILL.md) | deploy Bloom OTA updates via bloom-updater pipeline. |
-| [documents](documents/SKILL.md) | work with .docx, .pdf, .pptx, .xlsx files. |
-| [fix-bloom-prs](fix-bloom-prs/SKILL.md) | fix CI failures, review code, squash Bloom PRs. |
-| [fix-sentry-issues](fix-sentry-issues/SKILL.md) | scan Sentry issues for Bloom and create fix PRs. |
-| [ios-simulator](ios-simulator/SKILL.md) | iOS simulator scripts for app testing and build automation. |
-| [ralph-mode](ralph-mode/SKILL.md) | autonomous dev loops with iteration gates and test validation. |
-| [serena](serena/SKILL.md) | navigate/edit complex codebases at the symbol level via Serena MCP. |
-| [stably-cli](stably-cli/SKILL.md) | create, run, fix, and maintain Playwright tests via Stably CLI. |
-| [stably-sdk-rules](stably-sdk-rules/SKILL.md) | best practices for writing Stably AI-powered Playwright tests. |
-| [superpowers-coding](superpowers-coding/SKILL.md) | TDD-first feature implementation and systematic debugging. |
-| [superpowers-planning](superpowers-planning/SKILL.md) | explore intent and create detailed plans before touching code. |
-| [superpowers-reviews](superpowers-reviews/SKILL.md) | code review, branch finishing, batch execution with checkpoints. |
-| [superpowers-writing-skills](superpowers-writing-skills/SKILL.md) | create, edit, or verify agent skills before deployment. |
+| [agent-browser](agent-browser/) | Automate browsers via agent-browser CLI |
+| [bloom-cli](bloom-cli/) | Fetch stock data, fundamentals, earnings, SEC filings via Bloom CLI |
+| [claude-md-management](claude-md-management/) | Audit, improve, and maintain CLAUDE.md files across repos |
+| [coding-agent](coding-agent/) | Run coding agents (Codex, Claude Code, etc.) via ACP |
+| [context7](context7/) | Fetch version-specific library docs via Context7 MCP |
+| [demo-pr-feature](demo-pr-feature/) | Capture PR demo screenshots, deploy to Surge.sh, post as PR comment |
+| [deploy-bloom](deploy-bloom/) | Deploy Bloom OTA updates via bloom-updater |
+| [fix-bloom-prs](fix-bloom-prs/) | Fix CI failures and review code on Bloom PRs |
+| [fix-sentry-issues](fix-sentry-issues/) | Scan Sentry issues and create fix PRs |
+| [app-store-connect](app-store-connect/) | App Store Connect via `asc` CLI: releases, TestFlight, builds, metadata, subscriptions |
+| [ios-simulator](ios-simulator/) | iOS simulator automation: builds, screenshots, device management |
+| [serena](serena/) | Navigate and edit complex codebases at the symbol level via Serena MCP |
+| [verify-deploy](verify-deploy/) | Post-merge deploy verification and production benchmarking |
 
-### Strategy & Growth
+### Strategy & Business
 
 | Skill | Description |
 |-------|-------------|
-| [ad-copy](ad-copy/SKILL.md) | direct response copy for any platform. |
-| [create-a-sales-asset](visual-design/create-a-sales-asset/SKILL.md) | generate sales assets (landing pages, decks, one-pagers). |
-| [dogfood](dogfood/SKILL.md) | QA and exploratory test web applications, produce structured reports. |
-| [growth](growth/SKILL.md) | full-funnel growth: CRO, onboarding, paywalls, churn, launches, pricing. |
-| [positioning-angles](positioning-angles/SKILL.md) | define product positioning angles and strategic frames. |
-| [wealth-management](wealth-management/SKILL.md) | client reviews, financial plans, investment proposals, portfolio rebalancing, tax-loss harvesting. |
+| [alpaca](alpaca/) | Trade stocks and crypto via Alpaca API |
+| [another-perspective](another-perspective/) | Multi-perspective council analysis on decisions |
+| [cloud-migration](cloud-migration/) | Full cloud provider migrations end-to-end |
+| [porkbun](porkbun/) | Manage domains, DNS, SSL via Porkbun API |
+| [railway](railway/) | Deploy and manage Railway projects via CLI and MCP |
+| [yc-office-hours](yc-office-hours/) | YC office hours prep |
 
-## Bundled OpenClaw Skills
-
-These skills ship with [OpenClaw](https://github.com/openclaw/openclaw) and aren't in this repo. Install OpenClaw to get them, or grab individual SKILL.md files from the [OpenClaw skills directory](https://github.com/openclaw/openclaw/tree/main/skills).
-
-### Developer Tools
+### OpenClaw & Infrastructure
 
 | Skill | Description |
 |-------|-------------|
-| [github](https://github.com/openclaw/openclaw/tree/main/skills/github) | GitHub operations via `gh` CLI: issues, PRs, CI runs, code review, API queries. |
-| [gh-issues](https://github.com/openclaw/openclaw/tree/main/skills/gh-issues) | Fetch GitHub issues, spawn sub-agents to implement fixes and open PRs. |
-| [mcporter](https://github.com/openclaw/openclaw/tree/main/skills/mcporter) | List, configure, auth, and call MCP servers/tools directly. |
-| [tmux](https://github.com/openclaw/openclaw/tree/main/skills/tmux) | Remote-control tmux sessions by sending keystrokes and scraping pane output. |
-| [session-logs](https://github.com/openclaw/openclaw/tree/main/skills/session-logs) | Search and analyze your own OpenClaw session logs using jq. |
-| [healthcheck](https://github.com/openclaw/openclaw/tree/main/skills/healthcheck) | Host security hardening and risk-tolerance checks for OpenClaw deployments. |
+| [openclaw-memory-setup](openclaw-memory-setup/) | Set up a complete memory system for an OpenClaw instance |
+| [openclaw-resiliency](openclaw-resiliency/) | Gateway watchdog for health monitoring and auto-recovery |
+| [security-audit](security-audit/) | Security audit for codebases and deployments |
 
-### Productivity
+### Automated Pipelines (Cron)
 
 | Skill | Description |
 |-------|-------------|
-| [trello](https://github.com/openclaw/openclaw/tree/main/skills/trello) | Manage Trello boards, lists, and cards via the REST API. |
-| [notion](https://github.com/openclaw/openclaw/tree/main/skills/notion) | Notion API for creating and managing pages, databases, and blocks. |
-| [obsidian](https://github.com/openclaw/openclaw/tree/main/skills/obsidian) | Work with Obsidian vaults and automate via obsidian-cli. |
-| [slack](https://github.com/openclaw/openclaw/tree/main/skills/slack) | Control Slack: send messages, react, pin/unpin items. |
-| [himalaya](https://github.com/openclaw/openclaw/tree/main/skills/himalaya) | CLI email via IMAP/SMTP: list, read, write, reply, forward, search. |
-| [1password](https://github.com/openclaw/openclaw/tree/main/skills/1password) | 1Password CLI for reading/injecting/running secrets. |
+| [earnings-card-pipeline](earnings-card-pipeline/) | Weekly earnings event cards for social (Mon 8 AM ET) |
+| [post-bloom-features](post-bloom-features/) | Screenshot new features, render social cards (Tue/Thu 1 AM ET) |
+| [post-insider-trades](post-insider-trades/) | Scrape insider buys, generate trade cards (weekdays 9 AM + 2 PM ET) |
+| [post-investinglog-trades](post-investinglog-trades/) | Post trade cards from investing-log (weekdays 4 PM ET) |
 
-### Apple Ecosystem
+### UI/UX
 
 | Skill | Description |
 |-------|-------------|
-| [apple-notes](https://github.com/openclaw/openclaw/tree/main/skills/apple-notes) | Manage Apple Notes via `memo` CLI (create, view, edit, search, export). |
-| [apple-reminders](https://github.com/openclaw/openclaw/tree/main/skills/apple-reminders) | Manage Apple Reminders via `remindctl` CLI. |
-| [bear-notes](https://github.com/openclaw/openclaw/tree/main/skills/bear-notes) | Create, search, and manage Bear notes via `grizzly` CLI. |
-| [things-mac](https://github.com/openclaw/openclaw/tree/main/skills/things-mac) | Manage Things 3 tasks, projects, and areas via CLI. |
-| [peekaboo](https://github.com/openclaw/openclaw/tree/main/skills/peekaboo) | Capture and automate macOS UI with Peekaboo CLI. |
+| [userinterface-wiki](userinterface-wiki/) | UI/UX best practices: animations, CSS, typography, UX patterns |
 
-### Media & Files
+### Other
 
 | Skill | Description |
 |-------|-------------|
-| [video-frames](https://github.com/openclaw/openclaw/tree/main/skills/video-frames) | Extract frames or short clips from videos using ffmpeg. |
-| [nano-pdf](https://github.com/openclaw/openclaw/tree/main/skills/nano-pdf) | Edit PDFs with natural-language instructions. |
-| [gifgrep](https://github.com/openclaw/openclaw/tree/main/skills/gifgrep) | Search GIF providers, download results, extract stills/sheets. |
-| [openai-whisper](https://github.com/openclaw/openclaw/tree/main/skills/openai-whisper) | Local speech-to-text with Whisper CLI (no API key). |
-| [openai-image-gen](https://github.com/openclaw/openclaw/tree/main/skills/openai-image-gen) | Batch-generate images via OpenAI Images API. |
-| [spotify-player](https://github.com/openclaw/openclaw/tree/main/skills/spotify-player) | Terminal Spotify playback and search. |
+| [document-release](document-release/) | Document release processes |
+| [email-sequence](email-sequence/) | Design lifecycle messaging sequences: email, push, drip campaigns |
 
-### Utilities
+---
+
+## Adapted Skills
+
+These started from other open-source projects. I've modified and extended them for my workflows. Links to the originals:
+
+### From [Anthropic](https://github.com/anthropics)
+
+| Skill | Original |
+|-------|----------|
+| [documents](documents/) | [anthropics/skills](https://github.com/anthropics/skills) |
+| [wealth-management](wealth-management/) | [anthropics/financial-services-plugins](https://github.com/anthropics/financial-services-plugins) |
+| [skill-creator](skill-creator/) | [anthropics/claude-code](https://github.com/anthropics/claude-code/tree/main/plugins/plugin-dev) |
+| [skill-improver](skill-improver/) | [anthropics/claude-code](https://github.com/anthropics/claude-code/tree/main/plugins/plugin-dev) |
+| [visual-design/frontend-design](visual-design/frontend-design/) | [anthropics/claude-code](https://github.com/anthropics/claude-code/tree/main/plugins/frontend-design) |
+| [ralph-mode](ralph-mode/) | [anthropics/claude-code](https://github.com/anthropics/claude-code/tree/main/plugins/ralph-wiggum) |
+
+### From [obra/superpowers](https://github.com/obra/superpowers)
 
 | Skill | Description |
 |-------|-------------|
-| [weather](https://github.com/openclaw/openclaw/tree/main/skills/weather) | Current weather and forecasts via wttr.in or Open-Meteo. No API key needed. |
-| [gemini](https://github.com/openclaw/openclaw/tree/main/skills/gemini) | Gemini CLI for one-shot Q&A, summaries, and generation. |
-| [goplaces](https://github.com/openclaw/openclaw/tree/main/skills/goplaces) | Google Places API: text search, place details, reviews. |
+| [superpowers-coding](superpowers-coding/) | TDD-first feature implementation and systematic debugging |
+| [superpowers-planning](superpowers-planning/) | Explore intent and create detailed plans before touching code |
+| [superpowers-reviews](superpowers-reviews/) | Code review, branch finishing, batch execution with checkpoints |
+
+### From [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills)
+
+| Skill | Description |
+|-------|-------------|
+| [growth](growth/) | Full-funnel growth: CRO, onboarding, paywalls, churn, launches, pricing |
+| [churn-prevention](churn-prevention/) | Subscription retention, cancel flows, save offers, dunning |
+| [email-sequence](email-sequence/) | Email sequences, drip campaigns, lifecycle messaging |
+| [ad-copy](ad-copy/) | Direct response copy for any platform |
+| [positioning-angles](positioning-angles/) | Product positioning, strategic angles, value propositions |
+
+### From Other Projects
+
+| Skill | Original |
+|-------|----------|
+| [codex](codex/) | [garrytan/gstack](https://github.com/garrytan/gstack) (MIT) |
+| [impeccable](impeccable/) | [pbakaus/impeccable](https://github.com/pbakaus/impeccable) |
+| [app-store-screenshots](app-store-screenshots/) | [ParthJadhav/app-store-screenshots](https://github.com/ParthJadhav/app-store-screenshots) |
+| [video-production/remotion-videos](video-production/remotion-videos/) | [remotion-dev/skills](https://github.com/remotion-dev/skills) |
+| [visual-design/frontend-slides](visual-design/frontend-slides/) | [zarazhangrui/frontend-slides](https://github.com/zarazhangrui/frontend-slides) |
+| [last30days](last30days/) | [mvanhorn/last30days-skill](https://github.com/mvanhorn/last30days-skill) |
+| [stably-cli](stably-cli/) | [skills.sh/stablyai](https://skills.sh/stablyai/agent-skills/stably-cli) |
+| [stably-sdk-rules](stably-sdk-rules/) | [skills.sh/stablyai](https://skills.sh/stablyai/agent-skills/stably-sdk-rules) |
+
+---
 
 ## Installation
 
-Skills live in `~/clawd/skills/`. Each skill is a folder with a `SKILL.md` file.
-
-To sync from this repo:
+Skills live in your OpenClaw skills directory. Clone and point your config:
 
 ```bash
 git clone https://github.com/exiao/skills ~/clawd/skills
 ```
 
-## Contributing
+Or grab individual skills:
 
-Fork and adapt for your own workflow. Replace any account-specific credentials and API keys.
+```bash
+cp -r ~/path/to/skills/ad-copy ~/.openclaw/skills/
+```
+
+Each skill is a folder with a `SKILL.md` file. OpenClaw auto-discovers them at startup.
 
 ## License
 
