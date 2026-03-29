@@ -23,7 +23,7 @@ Unified skill for Phoenix AI observability: CLI debugging, evaluators, and traci
 
 ```bash
 # Replace with your actual Phoenix host URL (e.g. https://app.phoenix.arize.com/s/your-org)
-export PHOENIX_HOST=https://app.phoenix.arize.com/s/your-org
+export PHOENIX_HOST=https://app.phoenix.arize.com/s/<your-org>
 export PHOENIX_API_KEY=<from bloom .env>
 ```
 

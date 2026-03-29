@@ -212,5 +212,5 @@ For long-running tasks, append a wake trigger to the prompt:
 ```bash
 acpx --approve-all codex 'Build a REST API for todos.
 
-When completely finished, run: openclaw gateway wake --text "Done: Built todos REST API" --mode now'
+When completely finished, run: openclaw gateway wake --text "Done: Built todos REST API" --mode now
 ```
