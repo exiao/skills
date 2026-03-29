@@ -62,7 +62,11 @@ If any bloom command returned empty, null, or error JSON, skip the verification 
 # Uses jq instead of grep to correctly handle both '"status":"error"' and '"status": "error"'
 bloom_valid() {
   local f="$1"
-  [ -s "$f" ] && jq -e '.status != "error"' "$f" >/dev/null 2>&1 && [ "$(jq '.data | length' "$f" 2>/dev/null)" != "0" ]
+  [ -s "$f" ] && jq -e '.status != "error"' "$f" >/dev/null 2>&1 && {
+    local len
+    len=$(jq 'if .data then (.data | length) else (keys | length) end' "$f" 2>/dev/null)
+    [ "${len:-0}" != "0" ]
+  }
 }
 
 # Top movers summary
@@ -88,9 +92,6 @@ else
   echo "SKIP: index data unavailable or invalid" >&2
 fi
 ```
-
-> **Important:** The `bloom_valid()` function definition and all calls to it **must be in the same Bash block** — Claude Code runs each tool call in a fresh shell, so the function won't survive across blocks.
-
 Keep these numbers in context. Every stock percentage you write must come from this data.
 
 ---
@@ -133,6 +134,13 @@ Prioritize: mega-caps, widely-held names, dramatic movers (>5%), anything popula
 ## Delivery
 
 ### Signal (primary)
+Required env vars for delivery:
+```bash
+export SKILLS_DIR=/path/to/your/skills          # directory containing skill folders
+export SIGNAL_BRIEFING_GROUP=<group-id>          # Signal group for briefing delivery
+export TYPEFULLY_SOCIAL_SET_ID=<social-set-id>   # Typefully social set for @investwithbloom
+```
+
 Send to the Signal group configured in `$SIGNAL_BRIEFING_GROUP` (or the Cron Admin group if unset).
 
 ```python
@@ -147,13 +155,11 @@ target = os.environ.get("SIGNAL_BRIEFING_GROUP", "<set SIGNAL_BRIEFING_GROUP env
 After Signal, create a public-facing tweet of the sharpest single data point:
 
 ```bash
-# {baseDir} is a template placeholder — the AI agent replaces it with the absolute path to this skill's
-# directory at runtime. It is NOT valid shell syntax and must not be run literally.
-# Example resolved path: /Users/yourname/clawd/skills/market-daily-briefing
-# Do NOT use $(dirname "$0") — in agent context $0 is the shell interpreter, not this file.
+# SKILLS_DIR must point to the directory containing skill folders (e.g. /Users/yourname/clawd/skills).
 # TYPEFULLY_SOCIAL_SET_ID is the Typefully social set ID for @investwithbloom (set as an env var;
 # do not hardcode the numeric ID here — store it in the gateway env or .env file).
-node "$(cd {baseDir}/../typefully && pwd)/scripts/typefully.js" drafts:create "$TYPEFULLY_SOCIAL_SET_ID" \
+# Do NOT use $(dirname "$0") — in agent context $0 is the shell interpreter, not this file.
+node "$(cd "$SKILLS_DIR/typefully" && pwd)/scripts/typefully.js" drafts:create "$TYPEFULLY_SOCIAL_SET_ID" \
   --platform x \
   --text "<post text>"
 # Do NOT add --schedule. Save as unscheduled draft only — Eric reviews before posting.
