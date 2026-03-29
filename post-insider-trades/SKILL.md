@@ -65,7 +65,7 @@ If logo fetch fails or file is <5KB, skip the logo (proceed without it).
 ### Step 5 — Resolve GEMINI_API_KEY
 
 ```bash
-GEMINI_API_KEY=$(python3 -c "import json, os; d=json.load(open(os.path.expanduser('~/.clawdbot/clawdbot.json'))); print(d.get('skills',{}).get('entries',{}).get('nano-banana-pro',{}).get('apiKey','') or d['env']['vars'].get('GEMINI_API_KEY',''))" 2>/dev/null)
+GEMINI_API_KEY=$(python3 -c "import json, os; d=json.load(open(os.path.expanduser('~/.openclaw/openclaw.json'))); print(d.get('skills',{}).get('entries',{}).get('nano-banana-pro',{}).get('apiKey','') or d['env']['vars'].get('GEMINI_API_KEY',''))" 2>/dev/null)
 export GEMINI_API_KEY
 ```
 
@@ -73,7 +73,7 @@ export GEMINI_API_KEY
 
 Use Nano Banana Pro:
 ```bash
-uv run /opt/homebrew/lib/node_modules/clawdbot/skills/nano-banana-pro/scripts/generate_image.py
+uv run ~/clawd/skills/nano-banana-pro/scripts/generate_image.py
 ```
 
 **Design spec:**
@@ -162,7 +162,7 @@ Scheduled: [time]
 2. **Using PIL/Pillow fallback** — always use Nano Banana Pro for image generation. Never fall back to Python PIL.
 3. **Logo too small** — always validate logo file is >5KB before using. Placeholder/icon files are useless.
 4. **Tweet over 260 chars** — count carefully; the Form 4 URL alone is ~60 chars.
-5. **Missing GEMINI_API_KEY** — always resolve it from clawdbot.json before calling Nano Banana Pro.
+5. **Missing GEMINI_API_KEY** — always resolve it from openclaw.json before calling Nano Banana Pro.
 6. **Scheduling without checking** — use `next-free-slot` to avoid stacking tweets; Typefully handles spacing.
 7. **Reporting when no trade found** — if Step 2 yields nothing, NO_REPLY silently. Don't send a "nothing found" message.
 

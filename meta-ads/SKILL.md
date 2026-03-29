@@ -122,7 +122,7 @@ iOS Notes App screenshot, Reddit post mockup, Twitter/X screenshot, Meme compari
 GEMINI_API_KEY=$(python3 -c "import json; d=json.load(open('/Users/testuser/.openclaw/openclaw.json')); print(d.get('skills',{}).get('entries',{}).get('nano-banana-pro',{}).get('apiKey','') or d['env']['vars'].get('GEMINI_API_KEY',''))" 2>/dev/null)
 export GEMINI_API_KEY
 
-uv run /opt/homebrew/lib/node_modules/clawdbot/skills/nano-banana-pro/scripts/generate_image.py \
+uv run ~/clawd/skills/nano-banana-pro/scripts/generate_image.py \
   --prompt "..." \
   --filename "ads/iteration/creatives/$(date +%Y-%m-%d)/creative-N.png" \
   --resolution 2K --thinking high
@@ -347,7 +347,7 @@ For iOS app campaigns, use Apple Custom Product Pages (CPPs) as the ad destinati
 3. **Repeating a hook/format/concept combo** — always audit exclusion list first.
 4. **Forgetting Android ad set** — each creative should get two ads (iOS + Android ad sets).
 5. **Not checking impressions threshold** — don't classify ads with <1000 impressions.
-6. **Missing GEMINI_API_KEY** — resolve from clawdbot.json before Nano Banana Pro.
+6. **Missing GEMINI_API_KEY** — resolve from openclaw.json before Nano Banana Pro.
 7. **Not sending creative images** — Signal report must include all 6 images.
 8. **Forgetting the manifest** — required for future exclusion list audits.
 9. **Wrong App Store URL** — always use `$BLOOM_APP_STORE_ID` for ad links. Verify against adset `promoted_object.object_store_url`.

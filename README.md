@@ -1,20 +1,20 @@
 # Eric's Skills
 
-My [Clawdbot](https://clawdbot.com) skills collection — prompt templates and tools I invoke on demand across 70+ domains.
+My [OpenClaw](https://openclaw.com) skills collection — prompt templates and tools I invoke on demand across 70+ domains.
 
 ## Quick Start
 
-Clone this repo and copy skills to your Clawdbot skills directory:
+Clone this repo and copy skills to your OpenClaw skills directory:
 
 ```bash
 git clone https://github.com/exiao/erics-skills ~/Projects/erics-skills
-cp -r ~/Projects/erics-skills/skills/* ~/.clawdbot/skills/
+cp -r ~/Projects/erics-skills/skills/* ~/.openclaw/skills/
 ```
 
 Or install individual skills:
 
 ```bash
-cp -r ~/Projects/erics-skills/skills/ad-copy ~/.clawdbot/skills/
+cp -r ~/Projects/erics-skills/skills/ad-copy ~/.openclaw/skills/
 ```
 
 ## Skills

@@ -1,7 +1,7 @@
 ---
 name: coding-agent
 description: Run Codex CLI, Claude Code, OpenCode, or Pi Coding Agent via acpx (Agent Client Protocol) for structured, non-PTY agent communication. Use when delegating coding tasks, PR reviews, or iterative code work to a coding agent.
-metadata: {"clawdbot":{"emoji":"🧩","requires":{"anyBins":["acpx","claude","codex","opencode","pi"]}}}
+metadata: {"openclaw":{"emoji":"🧩","requires":{"anyBins":["acpx","claude","codex","opencode","pi"]}}}
 ---
 
 # Coding Agent (acpx-first)
@@ -190,7 +190,7 @@ exec workdir:~/project command:"claude --permission-mode bypassPermissions --pri
 3. **Use `--cwd` when working outside current dir** — session scope is tied to directory.
 4. **Respect tool choice** — if user asks for Codex, use `acpx codex`. Don't silently swap agents.
 5. **Never start agents in `~/clawd/`** — they'll read soul docs and get weird ideas about the org chart.
-6. **Never checkout branches in the live Clawdbot workspace** — use worktrees.
+6. **Never checkout branches in the live OpenClaw workspace** — use worktrees.
 7. **Parallel is fine** — named sessions + `--no-wait` makes it easy.
 
 ---
@@ -212,5 +212,5 @@ For long-running tasks, append a wake trigger to the prompt:
 ```bash
 acpx --approve-all codex 'Build a REST API for todos.
 
-When completely finished, run: clawdbot gateway wake --text "Done: Built todos REST API" --mode now'
+When completely finished, run: openclaw gateway wake --text "Done: Built todos REST API" --mode now'
 ```

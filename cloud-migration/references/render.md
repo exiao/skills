@@ -165,7 +165,7 @@ If Render deactivated your account before you could dump data:
 
 **Lesson from Bloom migration (2026-03-11):** Render deactivated without warning. No pg_dump was possible. The Bloom backend was rebuilt on Railway with a fresh database and Django migrations re-applied to reconstruct the schema. User data was lost.
 
-This is why regular off-provider backups are critical: `clawdbot cron` can run weekly `pg_dump` and save to `~/backups/`.
+This is why regular off-provider backups are critical: `openclaw cron` can run weekly `pg_dump` and save to `~/backups/`.
 
 ---
 
