@@ -57,9 +57,8 @@ This repo is my personal skills directory. Skills are prompt templates that Open
 | [visual-design/slideshow-creator](visual-design/slideshow-creator/) | Create and post TikTok slideshows via ReelFarm |
 | [visual-design/sticker-creator](visual-design/sticker-creator/) | Create die-cut sticker style cards via Nano Banana Pro |
 | [visual-design/apple-ux-guidelines](visual-design/apple-ux-guidelines/) | Apple HIG reference for UI/UX decisions |
-| [app-store-screenshots](app-store-screenshots/) | Generate production-ready App Store marketing screenshots |
 | [design-review](design-review/) | Product design review: 13 questions + Nielsen Norman heuristic eval |
-| [nano-banana-pro](nano-banana-pro/) | Generate or edit images via Gemini 3 Pro Image |
+| [nano-banana-pro](nano-banana-pro/) | Generate or edit images via Gemini native image generation |
 | [excalidraw-mcp](excalidraw-mcp/) | Create hand-drawn style diagrams via Excalidraw MCP |
 
 ### Video Production
@@ -73,12 +72,12 @@ This repo is my personal skills directory. Skills are prompt templates that Open
 | [video-production/browser-animation-video](video-production/browser-animation-video/) | Browser-based motion graphics with Framer Motion, GSAP, Tailwind |
 | [video-production/gemini-svg](video-production/gemini-svg/) | Generate interactive SVG animations via Gemini |
 | [video-production/hook-frames](video-production/hook-frames/) | Generate hook frames for video content |
-| [video-production/kling](video-production/kling/) | Kling 3.0 video/image generation with cinematic directing |
+| [video-production/kling](video-production/kling/) | Kling 3.0 cinematic directing prompts (sub-skill of video-production) |
 | [video-production/sora](video-production/sora/) | Generate, remix, and manage Sora AI videos |
 | [screen-recording](screen-recording/) | Record macOS screen via CLI with ffmpeg |
 | [character-creation](character-creation/) | Create consistent AI video characters for reuse across content |
 | [seedance](seedance/) | Generate videos using ByteDance Seedance 2.0 via PiAPI |
-| [klingai](klingai/) | Kling AI video/image generation via API |
+| [klingai](klingai/) | Kling AI video/image generation via API (standalone entry point) |
 
 ### Analytics & Research
 
@@ -160,7 +159,6 @@ This repo is my personal skills directory. Skills are prompt templates that Open
 | Skill | Description |
 |-------|-------------|
 | [document-release](document-release/) | Document release processes |
-| [email-sequence](email-sequence/) | Design lifecycle messaging sequences: email, push, drip campaigns |
 
 ---
 
@@ -223,7 +221,7 @@ git clone https://github.com/exiao/skills ~/clawd/skills
 Or grab individual skills:
 
 ```bash
-cp -r ~/path/to/skills/ad-copy ~/.openclaw/skills/
+cp -r ~/path/to/skills/ad-copy ~/clawd/skills/
 ```
 
 Each skill is a folder with a `SKILL.md` file. OpenClaw auto-discovers them at startup.
