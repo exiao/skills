@@ -38,7 +38,7 @@ Uses the concat demuxer for same-codec files. If codecs differ, it re-encodes au
 # Scale overlay: --scale 0.25 (25% of base video width)
 ```
 
-**Crossfade** transition between two clips:
+**Crossfade** transition between clips (2 or more):
 ```bash
 {baseDir}/scripts/edit.sh crossfade -i "clip1.mp4,clip2.mp4" --duration 1 -o output.mp4
 # --transition: fade (default), wipeleft, wiperight, slideup, slidedown, circleopen, dissolve

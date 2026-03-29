@@ -24,11 +24,9 @@ ffmpeg -i video.mp4 -vf "fps=1/5" -q:v 2 thumb_%03d.jpg
 
 After extracting candidates, review them with the image tool and pick the best one (sharpest, best expression, good composition).
 
-### B. Generate Custom Thumbnail (Nano Banana Pro)
+### B. Generate Custom Thumbnail (AI Image Generation)
 
-> **Note:** `nano-banana-pro` is an external skill (not in this repo). It is a separate AI image generation skill. If it is not available in your setup, use any available AI image generation capability instead.
-
-Use the `nano-banana-pro` skill to generate a designed thumbnail from scratch.
+Use the sibling `nano-banana-pro` skill (`../nano-banana-pro/`) if available, or any AI image generation tool (DALL-E, Midjourney, Stable Diffusion, etc.) to generate a designed thumbnail from scratch.
 
 Prompt guidance:
 - Include a face/subject with clear expression
@@ -67,12 +65,12 @@ ffmpeg -i thumb.jpg -vf "drawtext=text='3 MISTAKES':fontsize=80:fontcolor=white:
 ffmpeg -i thumb.jpg -vf "drawtext=text='WATCH THIS':fontsize=72:fontcolor=yellow:borderw=3:bordercolor=black:x=40:y=40" thumb_text.jpg
 ```
 
-For more complex text layouts (drop shadows, multiple text blocks, custom fonts), use Nano Banana Pro to generate the thumbnail instead.
+For more complex text layouts (drop shadows, multiple text blocks, custom fonts), use AI image generation (see approach B above) to generate the thumbnail instead.
 
 ## Workflow
 
 1. **Determine approach:** Does the user have a video to extract from (→ A) or need a generated thumbnail (→ B)?
 2. **Confirm platform:** YouTube 16:9 vs. vertical 9:16. Default to YouTube 1280x720 if unspecified.
 3. **Extract or generate:** Run the appropriate approach.
-4. **Add text if needed:** Use ffmpeg drawtext for simple overlays, or regenerate with Nano Banana if complex.
+4. **Add text if needed:** Use ffmpeg drawtext for simple overlays, or regenerate with AI image generation if complex.
 5. **Review:** Screenshot/display the result for user approval.
