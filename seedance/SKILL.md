@@ -10,6 +10,7 @@ Generate cinematic AI videos using ByteDance's Seedance 2.0 model through PiAPI'
 ## Requirements
 
 - `PIAPI_API_KEY` env var (get from app.piapi.ai)
+- `jq` (brew install jq)
 - PiAPI credits topped up
 
 ## Models & Pricing
@@ -26,6 +27,7 @@ Generate cinematic AI videos using ByteDance's Seedance 2.0 model through PiAPI'
 ### Text-to-Video
 
 ```bash
+# Run from the skill directory: cd {baseDir}/seedance
 # Quick generation (5s, fast model)
 scripts/seedance.sh generate "A cinematic aerial shot of a coastal city at sunrise"
 

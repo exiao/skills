@@ -2,12 +2,13 @@
 set -euo pipefail
 
 # Seedance 2.0 Video Generation via PiAPI
-# Requires: PIAPI_API_KEY env var
+# Requires: PIAPI_API_KEY env var, jq
 
 PIAPI_BASE="https://api.piapi.ai"
 DEFAULT_MODEL="seedance-2-fast-preview"
 DEFAULT_DURATION=5
 DEFAULT_ASPECT="16:9"
+DEFAULT_MAX_ATTEMPTS=720  # 1 hour at 5s intervals
 
 usage() {
   cat <<EOF
@@ -15,15 +16,16 @@ Usage:
   seedance.sh generate "prompt" [options]
   seedance.sh extend <task_id> [options]
   seedance.sh status <task_id>
-  seedance.sh wait <task_id> [--output file.mp4]
+  seedance.sh wait <task_id> [--output file.mp4] [--max-attempts N]
 
 Options:
-  --model     seedance-2-preview | seedance-2-fast-preview (default: fast)
-  --duration  5 | 10 | 15 seconds (default: 5)
-  --aspect    16:9 | 9:16 | 4:3 | 3:4 (default: 16:9)
-  --image     Reference image URL (repeatable, max 9)
-  --video     Video URL for edit mode (1 max)
-  --output    Output file path for download
+  --model        seedance-2-preview | seedance-2-fast-preview (default: fast)
+  --duration     5 | 10 | 15 seconds (default: 5)
+  --aspect       16:9 | 9:16 | 4:3 | 3:4 (default: 16:9)
+  --image        Reference image URL (repeatable, max 9)
+  --video        Video URL for edit mode (1 max)
+  --output       Output file path for download
+  --max-attempts Max poll attempts for wait command (default: 720 = 1 hour)
 EOF
   exit 1
 }
@@ -33,6 +35,17 @@ check_key() {
     echo "Error: PIAPI_API_KEY not set" >&2
     exit 1
   fi
+}
+
+# Extract video URL from API response, checking all known field locations
+extract_video_url() {
+  local response="$1"
+  echo "$response" | jq -r '
+    .data.task_result.task_output.video_url //
+    .data.output.video //
+    .data.output.video_url //
+    .data.task_result.task_output.video //
+    empty'
 }
 
 create_task() {
@@ -128,10 +141,9 @@ get_status() {
   echo "Task: $task_id"
   echo "Status: $status"
 
-  if [[ "$status" == "success" ]]; then
-    # Try video output URL
+  if [[ "$status" == "success" || "$status" == "completed" ]]; then
     local video_url
-    video_url=$(echo "$response" | jq -r '.data.task_result.task_output.video_url // .data.output.video_url // .data.task_result.task_output.image_url // empty')
+    video_url=$(extract_video_url "$response")
     if [[ -n "$video_url" ]]; then
       echo "Video URL: $video_url"
     fi
@@ -154,16 +166,17 @@ get_status() {
 wait_for_task() {
   local task_id="$1"; shift
   local output=""
+  local max_attempts="$DEFAULT_MAX_ATTEMPTS"
 
   while [[ $# -gt 0 ]]; do
     case "$1" in
       --output) output="$2"; shift 2 ;;
+      --max-attempts) max_attempts="$2"; shift 2 ;;
       *) shift ;;
     esac
   done
 
-  echo "Waiting for task $task_id..."
-  local max_attempts=120  # 10 minutes at 5s intervals
+  echo "Waiting for task $task_id (max $max_attempts attempts, ~$((max_attempts * 5 / 60)) min)..."
   local attempt=0
 
   while [[ $attempt -lt $max_attempts ]]; do
@@ -175,10 +188,10 @@ wait_for_task() {
     status=$(echo "$response" | jq -r '.data.status // "unknown"')
 
     case "$status" in
-      success)
+      success|completed)
         echo "Complete!"
         local video_url
-        video_url=$(echo "$response" | jq -r '.data.task_result.task_output.video_url // .data.output.video_url // .data.task_result.task_output.image_url // empty')
+        video_url=$(extract_video_url "$response")
 
         if [[ -n "$video_url" ]]; then
           echo "Video URL: $video_url"
@@ -212,7 +225,7 @@ wait_for_task() {
     ((attempt++))
   done
 
-  echo "Timed out after $max_attempts attempts"
+  echo "Timed out after $max_attempts attempts ($((max_attempts * 5 / 60)) min)"
   return 1
 }
 
@@ -230,7 +243,7 @@ case "${1:-}" in
     shift
     [[ $# -lt 1 ]] && usage
     parent_id="$1"; shift
-    create_task "" --parent "$parent_id" "$@"
+    create_task "continue the video" --parent "$parent_id" "$@"
     ;;
   status)
     shift
