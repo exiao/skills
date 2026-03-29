@@ -22,7 +22,7 @@ Unified skill for Phoenix AI observability: CLI debugging, evaluators, and traci
 ## Connection
 
 ```bash
-export PHOENIX_HOST=https://app.phoenix.arize.com/s/exiao3
+export PHOENIX_HOST=$PHOENIX_HOST
 export PHOENIX_API_KEY=<from bloom .env>
 ```
 
