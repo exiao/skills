@@ -72,7 +72,7 @@ Generate cinematic AI videos using ByteDance's Seedance 2.0 model through PiAPI'
 ### Check Status
 
 ```bash
-# Poll a task until complete
+# Check task status (single call)
 {baseDir}/scripts/seedance.sh status <task_id>
 
 # Poll with auto-download

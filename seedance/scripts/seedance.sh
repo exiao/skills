@@ -180,7 +180,7 @@ wait_for_task() {
     case "$1" in
       --output) output="$2"; shift 2 ;;
       --max-attempts) max_attempts="$2"; shift 2 ;;
-      *) shift ;;
+      *) die "wait: unknown option $1" ;;
     esac
   done
 
