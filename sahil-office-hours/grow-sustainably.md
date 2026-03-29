@@ -22,7 +22,7 @@ Make more than you spend: your company can keep going forever. Make less: you wi
 ## Cost-Cutting Rules
 
 1. **Pay yourself as little as possible, at least to start.** Increase your salary as the company can afford it.
-2. **Hire software, not humans.** Use Pilot/Bench for accounting, Gusto for payroll, Zapier for automation. Software is cheap; people are expensive.
+2. **Hire software, not humans.** Use Pilot for accounting, Gusto for payroll, Zapier for automation. Software is cheap; people are expensive.
 3. **Don't get an office.** Remote is the default now. An office creates massive associated costs.
 4. **Don't move to Silicon Valley.** It's expensive, and remote work means you can stay where you are.
 5. **Outsource everything.** Use freelancers before hiring full-time. You and your army of robots first. Then freelancers. Then employees.
@@ -38,7 +38,7 @@ Make more than you spend: your company can keep going forever. Make less: you wi
 
 - **Bootstrap first.** Profitability gives you leverage in any fundraising conversation.
 - **Consider Regulation Crowdfunding.** Turn your customers into investors.
-- **New VC alternatives exist:** Earnest Capital, Indie.vc, Tinyseed Fund.
+- **New VC alternatives exist:** Earnest Capital, Calm Fund, Tinyseed Fund.
 - **If you take VC:** profitability means lower dilution and retained control.
 
 ## Avoiding Burnout
