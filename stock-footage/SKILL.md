@@ -59,7 +59,7 @@ Output table columns: ID, Duration, Resolution (best quality), Preview URL.
 
 ### `download <video-id>` — Download a video file
 
-Downloads the video file for a given Pexels video ID.
+Downloads the video file for a given video ID (Pexels or Pixabay).
 
 | Flag | Default | Description |
 |------|---------|-------------|

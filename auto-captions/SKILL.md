@@ -87,11 +87,11 @@ ASS uses `&HAABBGGRR` (alpha, blue, green, red). Common colors:
 
 ## Vertical Video (TikTok/Reels)
 
-The script detects vertical video (height > width) and applies default margins sized for platform UI:
+Default margins are sized for vertical video platform UI:
 - Top 100px reserved (status bar / back button)
 - Bottom 150px reserved (TikTok controls / description)
 
-These defaults apply to all videos; override with `--margin-top` and `--margin-bottom`.
+These defaults apply to all videos regardless of orientation. Override with `--margin-top` and `--margin-bottom`.
 
 ## How the Karaoke Highlighting Works
 
