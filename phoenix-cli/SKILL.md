@@ -22,9 +22,9 @@ Unified skill for Phoenix AI observability: CLI debugging, evaluators, and traci
 ## Connection
 
 ```bash
-# Replace with your actual Phoenix host URL (e.g. https://app.phoenix.arize.com/s/your-org)
-export PHOENIX_HOST=https://app.phoenix.arize.com/s/<your-org>
-export PHOENIX_API_KEY=<from bloom .env>
+# PHOENIX_HOST and PHOENIX_API_KEY should be set in gateway env vars.
+# If not already in your environment, set them:
+#   openclaw config patch '{"env":{"vars":{"PHOENIX_HOST":"https://...","PHOENIX_API_KEY":"..."}}}'
 ```
 
 Projects: `bloom_chat` (prod), `bloom_chat_dev` (dev).
