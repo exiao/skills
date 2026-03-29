@@ -28,7 +28,7 @@ Run this block first. It gives you ground-truth numbers before any web search. A
 mkdir -p /tmp/bloom
 
 # Today's actual top movers (top 20 only — stocks outside this set won't have verified data)
-# Note: verify --timeframes flag against `bloom --help` if this errors; flag may differ by version
+# Note: verify flag names against `bloom --help` if this errors; flags may differ by version
 bloom market --type top_movers --limit 20 -f json > /tmp/bloom/movers.json 2>/tmp/bloom/movers.err \
   && jq empty /tmp/bloom/movers.json 2>/dev/null \
   || { echo "WARN: bloom market failed or invalid JSON ($(cat /tmp/bloom/movers.err))" >&2; echo '{"status":"error"}' > /tmp/bloom/movers.json; }

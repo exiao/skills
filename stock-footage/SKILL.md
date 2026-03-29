@@ -7,6 +7,11 @@ description: Search and download free stock video footage from Pexels and Pixaba
 
 Search and download free stock video clips from Pexels (primary) and Pixabay (fallback). All footage is free for commercial use with no watermarks.
 
+## Prerequisites
+
+- `curl` — HTTP requests to Pexels/Pixabay APIs
+- `jq` — JSON parsing and URL-encoding queries (`jq -rn --arg q "$query" '$q|@uri'`)
+
 ## Quick Start
 
 In examples below, `{baseDir}` means the skill directory (e.g. `~/clawd/skills/stock-footage`); replace with that path or run from that directory.
@@ -36,7 +41,7 @@ In examples below, `{baseDir}` means the skill directory (e.g. `~/clawd/skills/s
 | Variable | Required | Description |
 |----------|----------|-------------|
 | `PEXELS_API_KEY` | Yes | Free API key from pexels.com/api |
-| `PIXABAY_API_KEY` | No | Fallback. Free key from pixabay.com/api/docs |
+| `PIXABAY_API_KEY` | No | Fallback. Free key from pixabay.com/api/docs. Note: appears in URL query strings, so it is visible in server logs and shell history. |
 
 If `PEXELS_API_KEY` is missing, the script falls back to Pixabay (if `PIXABAY_API_KEY` is set). If neither is set, it errors with signup instructions.
 

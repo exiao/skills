@@ -124,7 +124,7 @@ Adjusts both video (setpts) and audio (atempo) together.
 **Volume normalize** using EBU R128 loudnorm:
 ```bash
 {baseDir}/scripts/edit.sh normalize -i audio.mp3 -o normalized.mp3
-# --target-lufs: target loudness (default -16 for podcasts, -14 for music)
+# --target-lufs: target loudness (default -16; use -14 for music)
 ```
 
 **Mix** multiple audio tracks:

@@ -26,7 +26,7 @@ After extracting candidates, review them with the image tool and pick the best o
 
 ### B. Generate Custom Thumbnail (AI Image Generation)
 
-Use the sibling `nano-banana-pro` skill (`../nano-banana-pro/`) if available, or any AI image generation tool (DALL-E, Midjourney, Stable Diffusion, etc.) to generate a designed thumbnail from scratch.
+Use the `image_generate` tool directly or any image generation skill to generate a designed thumbnail from scratch.
 
 Prompt guidance:
 - Include a face/subject with clear expression
