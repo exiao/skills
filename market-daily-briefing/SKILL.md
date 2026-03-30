@@ -24,6 +24,15 @@ Delivers a concise, narrative market briefing covering earnings results, economi
 
 Run this block first. It gives you ground-truth numbers before any web search. Prefer bloom-cli data for all stock percentages; fall back to article numbers only when bloom-cli is unavailable (see Verified Numbers Rule below).
 
+### Validate bloom output before extraction
+
+If any bloom command returned empty, null, or error JSON, skip the verification step for that data source rather than passing bad data to the model.
+
+> **Verified bloom-cli output formats (as of bloom-cli v1.x):**
+> - `bloom market --type top_movers -f json` → `{"status":"success","data":{"stocks":[{"symbol","change_percent","market_cap",...}]}}`
+> - `bloom market --type major_indexes -f json` → `{"status":"success","data":{"SPY":{"change_pct":-0.42,"price":512.30,...},...}}` (day-over-day change fields directly, no manual computation needed)
+> - `bloom sentiment -f json` → `{"aaii_sentiment":{"bullish_percent","bearish_percent",...},"cnn_fear_greed":{"index_value","level",...},...}`
+
 ```bash
 BLOOM_TMP=$(mktemp -d /tmp/bloom-XXXXXX)
 trap 'rm -rf "$BLOOM_TMP"' EXIT
@@ -45,20 +54,7 @@ if ! bloom market --type major_indexes -f json -o "$BLOOM_TMP/indexes.json" 2>"$
   echo "WARN: bloom market major_indexes failed ($(cat "$BLOOM_TMP/indexes.err"))" >&2
   echo '{"status":"error"}' > "$BLOOM_TMP/indexes.json"
 fi
-```
 
-### Validate bloom output before extraction
-
-If any bloom command returned empty, null, or error JSON, skip the verification step for that data source rather than passing bad data to the model.
-
-> **Verified bloom-cli output formats (as of bloom-cli v1.x):**
-> - `bloom market --type top_movers -f json` → `{"status":"success","data":{"stocks":[{"symbol","change_percent","market_cap",...}]}}`
-> - `bloom market --type major_indexes -f json` → `{"status":"success","data":{"SPY":{"change_pct":-0.42,"price":512.30,...},...}}` (day-over-day change fields directly, no manual computation needed)
-> - `bloom sentiment -f json` → `{"aaii_sentiment":{"bullish_percent","bearish_percent",...},"cnn_fear_greed":{"index_value","level",...},...}`
-
-> ⚠️ **Scope note:** Claude Code runs each Bash tool call in a fresh shell. The `bloom_valid()` function defined below **must be in the same shell block** as all the `if bloom_valid ...` calls that use it. Do not split the function definition and its callers across separate code blocks.
-
-```bash
 # Helper: check if file has valid, non-empty bloom data
 # Uses jq instead of grep to correctly handle both '"status":"error"' and '"status": "error"'
 bloom_valid() {
@@ -140,6 +136,7 @@ Required env vars for delivery:
 export SKILLS_DIR=/path/to/your/skills          # directory containing skill folders
 export SIGNAL_BRIEFING_GROUP=<group-id>          # Signal group for briefing delivery
 export TYPEFULLY_SOCIAL_SET_ID=<social-set-id>   # Typefully social set for @investwithbloom
+export BLOOM_MCP_API_KEY=<api-key>               # Bloom MCP bearer token (separate from bloom-cli's BLOOM_API_KEY)
 ```
 
 Send to the Signal group configured in `$SIGNAL_BRIEFING_GROUP` (or the Cron Admin group if unset).
@@ -149,7 +146,7 @@ import os
 
 # Use message tool
 channel = "signal"
-target = os.environ.get("SIGNAL_BRIEFING_GROUP", "<set SIGNAL_BRIEFING_GROUP env var>")
+target = os.environ["SIGNAL_BRIEFING_GROUP"]  # raises KeyError if unset — set this env var before running
 ```
 
 ### Typefully (secondary — @investwithbloom)
