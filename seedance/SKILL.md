@@ -106,7 +106,7 @@ Use `@image1`, `@image2`, etc. to reference images in order:
 
 ## Notes
 
-- Peak hours (09:00-15:00 GMT): queue times can extend to hours
+- Peak hours (09:00-15:00 GMT): queue times can extend to hours. Use `--max-attempts 3600` (5 hours) to avoid timeouts during peak.
 - Video edit mode ignores `--duration`; output length = input video length
 - Aspect ratio of reference image overrides the `--aspect` parameter
 - Videos are generated asynchronously; use `wait` to poll until complete

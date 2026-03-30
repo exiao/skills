@@ -13,10 +13,10 @@ DEFAULT_MAX_ATTEMPTS=720  # 1 hour at 5s intervals
 usage() {
   cat <<EOF
 Usage:
-  seedance.sh generate "prompt" [options]
-  seedance.sh extend <task_id> [options]
-  seedance.sh status <task_id>
-  seedance.sh wait <task_id> [--output file.mp4] [--max-attempts N]
+  scripts/seedance.sh generate "prompt" [options]
+  scripts/seedance.sh extend <task_id> [options]
+  scripts/seedance.sh status <task_id>
+  scripts/seedance.sh wait <task_id> [--output file.mp4] [--max-attempts N]
 
 Options:
   --model        seedance-2-preview | seedance-2-fast-preview (default: fast)
@@ -134,8 +134,8 @@ create_task() {
   [[ ${#images[@]} -gt 0 ]] && echo "Images: ${#images[@]} reference(s)"
   [[ -n "$video" ]] && echo "Mode: video edit"
   echo ""
-  echo "Check status: seedance.sh status $task_id"
-  echo "Wait for result: seedance.sh wait $task_id --output output.mp4"
+  echo "Check status: scripts/seedance.sh status $task_id"
+  echo "Wait for result: scripts/seedance.sh wait $task_id --output output.mp4"
 }
 
 get_status() {
