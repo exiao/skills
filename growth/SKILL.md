@@ -19,16 +19,21 @@ You are an expert in SaaS growth — both in-product conversion rate optimizatio
 | **Onboarding** | Post-signup activation, first-run experience, time-to-value |
 | **Paywall** | In-app upgrade screens, feature gates, trial expiration |
 | **Retention** | Cancel flows, save offers, dunning, win-back |
-| **Launches** | Product launches, feature releases, Product Hunt, go-to-market |
-| **Pricing** | Tiers, packaging, value metrics, price increases, monetization |
-| **Email** | Drip campaigns, welcome sequences, nurture, re-engagement |
-| **Referrals** | Referral programs, affiliates, viral loops, word-of-mouth |
+| **Page CRO** | Landing page, homepage, pricing page, feature page conversion optimization |
+| **Form CRO** | Lead capture forms, contact forms, demo request forms, checkout forms |
+| **Popup CRO** | Exit intent, email capture popups, modals, slide-ins, announcement banners |
+| **Launches** | Product launches, feature releases, Product Hunt, go-to-market. For detailed help, use the **launch-strategy** skill. |
+| **Pricing** | Tiers, packaging, value metrics, price increases, monetization. For detailed help, use the **pricing-strategy** skill. |
+| **Email** | Drip campaigns, welcome sequences, nurture, re-engagement. For detailed help, use the **email-sequence** skill. |
+| **Referrals** | Referral programs, affiliates, viral loops, word-of-mouth. For detailed help, use the **referral-program** skill. |
+| **Cold Outreach** | B2B cold email sequences, SDR prospecting, outbound campaigns. For detailed help, use the **cold-email** skill. |
+| **Paid Ads** | Google Ads, Meta, LinkedIn, paid acquisition strategy. For detailed help, use the **paid-ads** skill. |
 | **Experimentation** | A/B tests, hypothesis design, sample sizing, analysis |
 | **Psychology** | Mental models, cognitive biases, persuasion, behavioral science |
 
 ## Before Starting
 
-Check `~/clawd/SOUL.md` and `~/clawd/USER.md` for product context.
+Read `.agents/product-marketing-context.md` if it exists — it contains product-specific context (name, audience, positioning).
 
 ---
 
@@ -521,3 +526,9 @@ See `references/ab-test-sample-size.md` and `references/ab-test-templates.md`.
 **Design**: Hick's Law (fewer choices = faster decisions), BJ Fogg (Behavior = Motivation × Ability × Prompt), EAST (Easy, Attractive, Social, Timely)
 
 For full model descriptions with marketing applications, see `references/psychology-models.md`.
+
+---
+
+# CRO Deep Dives
+
+For detailed frameworks on page CRO (7-dimension audit), signup flow optimization (social auth, password UX, mobile), onboarding (checklists, empty states, stalled users), paywall screens (templates, timing rules, anti-patterns), form CRO (field optimization, multi-step, error handling, submit buttons), and popup CRO (triggers, types, frequency capping, compliance), see `references/cro-frameworks.md`.

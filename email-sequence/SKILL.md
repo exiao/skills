@@ -11,7 +11,7 @@ Design lifecycle messaging sequences: email, push notifications, or both.
 
 ## Before Starting
 
-Read `product-marketing-context.md` in the workspace root if it exists.
+Read `.agents/product-marketing-context.md` if it exists.
 
 Gather this context (ask if not provided):
 
