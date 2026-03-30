@@ -30,6 +30,8 @@ EOF
   exit 1
 }
 
+die() { echo "Error: $*" >&2; exit 1; }
+
 check_key() {
   if [[ -z "${PIAPI_API_KEY:-}" ]]; then
     echo "Error: PIAPI_API_KEY not set" >&2

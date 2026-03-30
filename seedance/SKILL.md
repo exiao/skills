@@ -79,6 +79,10 @@ Generate cinematic AI videos using ByteDance's Seedance 2.0 model through PiAPI'
 {baseDir}/scripts/seedance.sh wait <task_id> --output video.mp4
 ```
 
+**`wait` options:**
+- `--output <file>` — download the completed video to this path
+- `--max-attempts <N>` — max poll attempts (default: 720 = 1 hour at 5s intervals)
+
 ## Parameters
 
 | Parameter | Values | Default |
@@ -88,10 +92,10 @@ Generate cinematic AI videos using ByteDance's Seedance 2.0 model through PiAPI'
 | `--aspect` | `16:9`, `9:16`, `4:3`, `3:4` | `16:9` |
 | `--image` | URL (repeatable, max 9) | none |
 | `--video` | URL (1 max, enables edit mode) | none |
+| `--output` | (wait only) file path to download video to | none |
+| `--max-attempts` | (wait only) max poll attempts | 720 |
 
 > **Model mapping:** The `--model` value (e.g. `seedance-2-fast-preview`) is sent as `task_type` in the API request. The `model` field is always `"seedance"` (the PiAPI product name). This is correct API behavior — don't change it.
-
-> **`--output`** is only supported by the `wait` subcommand (auto-downloads when complete). The `generate` subcommand only submits the task; use `wait <task_id> --output file.mp4` to download.
 
 ## Image References in Prompts
 
