@@ -1,19 +1,19 @@
-# Copy Guidelines (Bloom)
+# Copy Guidelines
 
-Guidelines for writing push notifications and email copy for Bloom's lifecycle messaging.
+Guidelines for writing push notifications and email copy for lifecycle messaging.
 
 ---
 
-## Bloom's Voice
+## Brand Voice
 
 - Direct, not corporate
 - Helpful, not salesy
 - Confident, not hype-y
-- Treats users as smart investors, not beginners (unless they are)
-- No AI slop patterns (see SOUL.md for the full kill list)
+- Treats users as capable adults, not beginners (unless they are)
+- No AI slop patterns (vague superlatives, filler phrases, hollow enthusiasm)
 
-**Do:** "Your watchlist stock AAPL is up 3% today."
-**Don't:** "Great news! 🎉 We're thrilled to let you know that your amazing portfolio has some exciting updates!"
+**Do:** "Your tracked item dropped to $49 today."
+**Don't:** "Great news! 🎉 We're thrilled to let you know that your amazing account has some exciting updates!"
 
 ---
 
@@ -32,42 +32,42 @@ Guidelines for writing push notifications and email copy for Bloom's lifecycle m
 ### Patterns That Work
 
 **Data-driven:**
-- "[Stock] is up 5% today" (specific, relevant)
-- "Your portfolio gained $X this week" (personalized)
-- "3 of your stocks hit new highs" (aggregated insight)
+- "[Item] hit your target price" (specific, relevant)
+- "You reached your weekly goal" (personalized milestone)
+- "3 of your tracked items have updates" (aggregated insight)
 
 **Feature education:**
-- "Ask Bloom about any stock" (clear, actionable)
-- "Connect your brokerage to track everything" (specific benefit)
+- "Ask [Product] any question" (clear, actionable)
+- "Connect your account to track everything" (specific benefit)
 
-**FOMO (use sparingly):**
-- "[Stock] just reported earnings. See the analysis." (timely)
-- "Markets opened down 2%. Your watchlist update is ready." (relevant)
+**Timely:**
+- "[Event] just happened. See the summary." (timely)
+- "Weekly update is ready." (relevant)
 
 ### Patterns to Avoid
 
 - Generic: "Check out what's new!" (no reason to tap)
 - Desperate: "We miss you! Come back!" (cringe)
-- Clickbait: "You won't believe what happened to your stock!" (breaks trust)
-- Guilt: "Your watchlist is lonely" (manipulative)
+- Clickbait: "You won't believe what happened!" (breaks trust)
+- Guilt: "Your account feels lonely" (manipulative)
 - Too frequent: More than 1 push per day for non-urgent content (push fatigue)
 
 ### Emoji in Push
 
 - One emoji max per push, and only if it adds meaning
-- ✅ "📊 AAPL earnings are out" (emoji adds context)
-- ❌ "🎉🚀💰 Your portfolio is up!!!" (emoji spam)
+- ✅ "📊 Your report is ready" (emoji adds context)
+- ❌ "🎉🚀💰 Great things happening!!!" (emoji spam)
 
 ---
 
-## Email Copy (Future)
+## Email Copy
 
 ### Structure
 1. **Hook**: First line grabs attention (no "Hi [Name], I hope you're well")
 2. **Context**: Why this matters to them
 3. **Value**: The useful content
 4. **CTA**: What to do next (one primary CTA per email)
-5. **Sign-off**: Simple. "— Bloom" is fine.
+5. **Sign-off**: Simple. "— [Product Name]" is fine.
 
 ### Length
 - Transactional (billing, alerts): 50-100 words
@@ -79,13 +79,13 @@ Guidelines for writing push notifications and email copy for Bloom's lifecycle m
 - 40-60 characters
 - Clear > clever
 - Specific > vague
-- Personalized when possible ("[Stock] moved X% today")
+- Personalized when possible ("[Item] moved X% today")
 
 **Patterns that work:**
-- Data: "Your portfolio is up 8% this month"
-- Question: "Have you tried AI stock analysis?"
-- Direct: "Payment issue with your Bloom subscription"
-- Update: "New in Bloom: [feature name]"
+- Data: "You hit your goal this month"
+- Question: "Have you tried [feature]?"
+- Direct: "Payment issue with your subscription"
+- Update: "New in [Product]: [feature name]"
 
 **Patterns to avoid:**
 - Vague: "Important update" (about what?)
@@ -101,7 +101,7 @@ Guidelines for writing push notifications and email copy for Bloom's lifecycle m
 
 ### CTA Guidelines
 - One primary CTA per email (button)
-- Button text: Action verb + destination ("See Full Report", "Update Payment", "Add a Stock")
+- Button text: Action verb + destination ("See Full Report", "Update Payment", "Add an Item")
 - Links for secondary actions (in-text)
 - Every CTA deep links to the relevant app screen or web page
 
@@ -110,21 +110,21 @@ Guidelines for writing push notifications and email copy for Bloom's lifecycle m
 ## Personalization
 
 ### Data to Use
-- Stock names from their watchlist
-- Portfolio performance numbers
-- Feature usage stats (insights received, stocks tracked)
+- Names or identifiers from their profile (items tracked, activity)
+- Performance numbers or stats relevant to them
+- Feature usage patterns (actions taken, content consumed)
 - Subscription tenure
 - Platform (iOS/Android) for correct settings deep links
 
 ### Dynamic Content
 - Personalize based on segment (free vs. paid, new vs. long-term)
 - Personalize based on behavior (active vs. dormant, features used)
-- Personalize based on their actual data (watchlist, portfolio)
+- Personalize based on their actual data (tracked items, history)
 
 ### Fallbacks
-- No watchlist data? Use market index data instead
+- No user-specific data? Use aggregate or default content
 - No name? Skip the greeting or use "there"
-- No portfolio? Focus on watchlist or discovery features
+- No activity data? Focus on feature discovery
 
 ---
 
@@ -157,7 +157,7 @@ Guidelines for writing push notifications and email copy for Bloom's lifecycle m
 - Sequence: timing between messages, number of messages, exit conditions
 
 ### How to Test
-- Use PostHog feature flags for A/B tests
+- Use feature flags for A/B tests
 - One variable at a time
 - Sufficient sample size before declaring a winner
 - Document every test and result
@@ -165,12 +165,12 @@ Guidelines for writing push notifications and email copy for Bloom's lifecycle m
 ### Metrics to Track
 
 **Push:**
-- Delivery rate (expect low due to token staleness)
+- Delivery rate (expect some loss due to token staleness)
 - Open/tap rate (5-15% is normal for mobile push)
 - Conversion rate (action taken after tap)
 - Opt-out rate (keep under 0.5% per push)
 
-**Email (future):**
+**Email:**
 - Open rate (target: 25-40%)
 - Click rate (target: 3-5%)
 - Unsubscribe rate (keep under 0.5%)

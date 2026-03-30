@@ -145,7 +145,7 @@ TRIM: [paragraph/sentence] → [shorter version]
 - **The reader** in one sentence: "A 28-year-old PM who just got assigned to an AI product and has no idea what evals are."
 - **Their trigger**: What happened that made them need this? "Their AI shipped a wrong answer and the CEO noticed."
 - **What they'd Google**: The search query that would lead to this. "how to test AI product quality"
-- **Their awareness level** (from hooks skill):
+- **Their awareness level** (from headlines skill):
   - Unaware: doesn't know the problem exists
   - Problem-aware: knows the problem, doesn't know the solution
   - Solution-aware: knows solutions exist, comparing options
@@ -473,6 +473,66 @@ Use these for faster reviews when a full seven-sweep process isn't needed.
 | Seamless | Smooth |
 | Cutting-edge | New/Modern |
 
+### Plain English Alternatives
+
+Replace complex or pompous words with simpler ones. Source: Plain English Campaign, plainlanguage.gov.
+
+| Complex | Plain |
+|---------|-------|
+| absence of | no, none |
+| accomplish | do, finish |
+| additional | extra, more |
+| advise | tell, say |
+| allocate | give, share |
+| anticipate | expect |
+| approximately | about |
+| ascertain | find out |
+| assistance | help |
+| at the present time | now |
+| cease | stop, end |
+| commence | start, begin |
+| communicate | tell, talk |
+| consequently | so |
+| currently | now |
+| demonstrate | show, prove |
+| determine | decide |
+| discontinue | stop |
+| disseminate | spread |
+| due to the fact that | because |
+| endeavour | try |
+| establish | set up, show |
+| expedite | speed up |
+| facilitate | help |
+| for the purpose of | to, for |
+| furthermore | also, and |
+| implement | carry out, do |
+| in accordance with | under |
+| in conjunction with | with |
+| in order to | to |
+| in the event of | if |
+| indicate | show, suggest |
+| initiate | start, begin |
+| moreover | also, and |
+| notify | tell |
+| obtain | get |
+| on behalf of | for |
+| owing to | because |
+| permit | let, allow |
+| prior to | before |
+| procure | get |
+| provide | give |
+| purchase | buy |
+| regarding | about |
+| reimburse | repay |
+| require | need |
+| retain | keep |
+| subsequently | later |
+| sufficient | enough |
+| terminate | end, stop |
+| utilise | use |
+
+**Phrases to remove entirely:** "a total of," "absolutely," "actually," "at the end of the day," "at this moment in time," "basically," "I am of the opinion that" (use "I think"), "in the final analysis," "it should be understood," "last but not least," "obviously," "of course," "quite," "really," "the fact of the matter is," "to all intents and purposes," "very."
+
 **Watch for:**
 - Adverbs (usually unnecessary)
 - Passive voice (switch to active)
@@ -588,6 +648,6 @@ Use all three levels together. A great post (high individual score) in a dying p
 - Used by **article-writer** (revision pass)
 - Used by **typefully** (hook quality check)
 - Used by **tweet-ideas** (tweet quality)
-- Used by **hooks** (title evaluation)
+- Used by **headlines** (title evaluation)
 - Shares voice standards with **article-writer** humanizer section
 - **`~/marketing/WRITING-STYLE.md`** — ground truth for voice evaluation. Read the Kill Phrases list and Voice Fingerprint section before scoring Question 3. Generic "sounds human" is not the bar; Eric's specific fingerprint is.

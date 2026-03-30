@@ -13,22 +13,25 @@ This repo is my personal skills directory. Skills are prompt templates that Open
 
 ---
 
-## My Original Skills
+```bash
+cp -r ~/Projects/erics-skills/skills/copywriting ~/.clawdbot/skills/
+```
+
+## Skills
 
 ### Content & Writing
 
 | Skill | Description |
 |-------|-------------|
-| [article-writer](article-writer/) | Write article drafts from approved outlines with SEO and brand voice |
-| [brand-identity](brand-identity/) | Build a complete brand identity: purpose, values, voice, visual system, guidelines |
-| [content-pipeline](content-pipeline/) | Orchestrator for the 3-article content pipeline with parallel sub-agents |
-| [content-strategy](content-strategy/) | Build content strategy: hooks, angles, and ideas from what's trending now |
-| [editor-in-chief](editor-in-chief/) | Autonomous editing orchestrator: diagnose, fix, and iterate drafts to quality |
-| [evaluate-content](evaluate-content/) | Judge content quality: shareability, readability, voice, cuttability, angle |
-| [hooks](hooks/) | Generate headlines, titles, and scroll-stopping openers |
-| [outline-generator](outline-generator/) | Generate structured article outlines from approved hooks |
-| [substack-draft](substack-draft/) | Save finished articles to Substack as drafts |
-| [tweet-ideas](tweet-ideas/) | Generate standalone tweet ideas (Aaron Levie playbook) |
+| [copywriting](copywriting/SKILL.md) | write ad copy: App Store listings, Google Ads, landing pages, TikTok/Meta scripts, push, email. |
+| [article-writer](article-writer/SKILL.md) | write article drafts from approved outlines with SEO and brand voice. |
+| [content-atomizer](content-atomizer/SKILL.md) | repurpose long-form content into platform-native pieces for 8+ channels. |
+| [editor-in-chief](editor-in-chief/SKILL.md) | autonomous editing orchestrator: diagnose, fix, and iterate drafts to quality. |
+| [evaluate-content](evaluate-content/SKILL.md) | judge content quality: shareability, readability, voice, cuttability, angle. |
+| [headlines](headlines/SKILL.md) | generate headlines, titles, and hooks for content. |
+| [outline-generator](outline-generator/SKILL.md) | generate structured article outlines from approved headlines. |
+| [substack-draft](substack-draft/SKILL.md) | save finished articles to Substack as drafts. |
+| [tweet-ideas](tweet-ideas/SKILL.md) | generate standalone tweet ideas about a topic (Aaron Levie playbook). |
 
 ### Marketing & Growth
 
@@ -124,93 +127,19 @@ This repo is my personal skills directory. Skills are prompt templates that Open
 
 | Skill | Description |
 |-------|-------------|
-| [alpaca](alpaca/) | Trade stocks and crypto via Alpaca API |
-| [another-perspective](another-perspective/) | Multi-perspective council analysis on decisions |
-| [cloud-migration](cloud-migration/) | Full cloud provider migrations end-to-end |
-| [porkbun](porkbun/) | Manage domains, DNS, SSL via Porkbun API |
-| [railway](railway/) | Deploy and manage Railway projects via CLI and MCP |
-| [sahil-office-hours](sahil-office-hours/) | Startup advice frameworks from Sahil Lavingia (Gumroad) |
-| [yc-office-hours](yc-office-hours/) | YC office hours prep |
-
-### OpenClaw & Infrastructure
-
-| Skill | Description |
-|-------|-------------|
-| [openclaw-memory-setup](openclaw-memory-setup/) | Set up a complete memory system for an OpenClaw instance |
-| [openclaw-resiliency](openclaw-resiliency/) | Gateway watchdog for health monitoring and auto-recovery |
-| [security-audit](security-audit/) | Security audit for codebases and deployments |
-
-### Automated Pipelines (Cron)
-
-| Skill | Description |
-|-------|-------------|
-| [earnings-card-pipeline](earnings-card-pipeline/) | Weekly earnings event cards for social (Mon 8 AM ET) |
-| [post-bloom-features](post-bloom-features/) | Screenshot new features, render social cards (Tue/Thu 1 AM ET) |
-| [post-insider-trades](post-insider-trades/) | Scrape insider buys, generate trade cards (weekdays 9 AM + 2 PM ET) |
-| [post-investinglog-trades](post-investinglog-trades/) | Post trade cards from investing-log (weekdays 4 PM ET) |
-
-### UI/UX
-
-| Skill | Description |
-|-------|-------------|
-| [userinterface-wiki](userinterface-wiki/) | UI/UX best practices: animations, CSS, typography, UX patterns |
-
-### Other
-
-| Skill | Description |
-|-------|-------------|
-| [document-release](document-release/) | Document release processes |
-
----
-
-## Adapted Skills
-
-These started from other open-source projects. I've modified and extended them for my workflows. Links to the originals:
-
-### From [Anthropic](https://github.com/anthropics)
-
-| Skill | Original |
-|-------|----------|
-| [documents](documents/) | [anthropics/skills](https://github.com/anthropics/skills) |
-| [wealth-management](wealth-management/) | [anthropics/financial-services-plugins](https://github.com/anthropics/financial-services-plugins) |
-| [skill-creator](skill-creator/) | [anthropics/claude-code](https://github.com/anthropics/claude-code/tree/main/plugins/plugin-dev) |
-| [skill-improver](skill-improver/) | [anthropics/claude-code](https://github.com/anthropics/claude-code/tree/main/plugins/plugin-dev) |
-| [visual-design/frontend-design](visual-design/frontend-design/) | [anthropics/claude-code](https://github.com/anthropics/claude-code/tree/main/plugins/frontend-design) |
-| [ralph-mode](ralph-mode/) | [anthropics/claude-code](https://github.com/anthropics/claude-code/tree/main/plugins/ralph-wiggum) |
-
-### From [obra/superpowers](https://github.com/obra/superpowers)
-
-| Skill | Description |
-|-------|-------------|
-| [superpowers-coding](superpowers-coding/) | TDD-first feature implementation and systematic debugging |
-| [superpowers-planning](superpowers-planning/) | Explore intent and create detailed plans before touching code |
-| [superpowers-reviews](superpowers-reviews/) | Code review, branch finishing, batch execution with checkpoints |
-
-### From [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills)
-
-| Skill | Description |
-|-------|-------------|
-| [growth](growth/) | Full-funnel growth: CRO, onboarding, paywalls, churn, launches, pricing |
-| [churn-prevention](churn-prevention/) | Subscription retention, cancel flows, save offers, dunning |
-| [email-sequence](email-sequence/) | Email sequences, drip campaigns, lifecycle messaging |
-| [ad-copy](ad-copy/) | Direct response copy for any platform |
-| [positioning-angles](positioning-angles/) | Product positioning, strategic angles, value propositions |
-
-### From Other Projects
-
-| Skill | Original |
-|-------|----------|
-| [codex](codex/) | [garrytan/gstack](https://github.com/garrytan/gstack) (MIT) |
-| [impeccable](impeccable/) | [pbakaus/impeccable](https://github.com/pbakaus/impeccable) |
-| [app-store-screenshots](app-store-screenshots/) | [ParthJadhav/app-store-screenshots](https://github.com/ParthJadhav/app-store-screenshots) |
-| [video-production/remotion-videos](video-production/remotion-videos/) | [remotion-dev/skills](https://github.com/remotion-dev/skills) |
-| [visual-design/frontend-slides](visual-design/frontend-slides/) | [zarazhangrui/frontend-slides](https://github.com/zarazhangrui/frontend-slides) |
-| [last30days](last30days/) | [mvanhorn/last30days-skill](https://github.com/mvanhorn/last30days-skill) |
-| [stably-cli](stably-cli/) | [skills.sh/stablyai](https://skills.sh/stablyai/agent-skills/stably-cli) |
-| [stably-sdk-rules](stably-sdk-rules/) | [skills.sh/stablyai](https://skills.sh/stablyai/agent-skills/stably-sdk-rules) |
-| [sahil-office-hours](sahil-office-hours/) | [slavingia/skills](https://github.com/slavingia/skills) |
-
----
+| [copywriting](copywriting/SKILL.md) | Page copy frameworks + direct response for any platform (ads, App Store, landing pages, scripts). |
+| [marketing-psychology](marketing-psychology/SKILL.md) | Psychological principles, mental models, and behavioral science for marketing. |
+| [pricing-strategy](pricing-strategy/SKILL.md) | Pricing decisions, tier packaging, value metrics, monetization strategy. |
+| [launch-strategy](launch-strategy/SKILL.md) | Product launches, feature announcements, Product Hunt, go-to-market. |
+| [paid-ads](paid-ads/SKILL.md) | Paid advertising strategy: platform selection, targeting, creative, optimization. |
+| [referral-program](referral-program/SKILL.md) | Referral and affiliate program design, optimization, and measurement. |
+| [cold-email](cold-email/SKILL.md) | B2B cold email writing and follow-up sequences. |
+| [product-marketing-context](product-marketing-context/SKILL.md) | Create product marketing context doc referenced by all marketing skills. |
+| [create-a-sales-asset](visual-design/create-a-sales-asset/SKILL.md) | generate sales assets (landing pages, decks, one-pagers). |
+| [dogfood](dogfood/SKILL.md) | QA and exploratory test web applications, produce structured reports. |
+| [growth](growth/SKILL.md) | full-funnel growth: CRO, onboarding, paywalls, churn, launches, pricing. |
+| [positioning-angles](positioning-angles/SKILL.md) | define product positioning angles and strategic frames. |
+| [wealth-management](wealth-management/SKILL.md) | client reviews, financial plans, investment proposals, portfolio rebalancing, tax-loss harvesting. |
 
 ## Installation
 

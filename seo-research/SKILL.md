@@ -24,6 +24,7 @@ Unified SEO skill covering keyword research, AI search optimization, programmati
 | E-E-A-T detailed criteria | `references/eeat-framework.md` |
 | Content quality thresholds | `references/quality-gates.md` |
 | Core Web Vitals thresholds | `references/cwv-thresholds.md` |
+| Site architecture, page hierarchy, URL structure, internal linking | `references/site-architecture.md` |
 | Bloom keyword seeds | `references/keyword-seeds.md` |
 
 ---
@@ -31,7 +32,7 @@ Unified SEO skill covering keyword research, AI search optimization, programmati
 ## Pipeline Position
 
 ```
-THIS SKILL (what to write about) → hooks → outline-generator → article-writer → image-generator → substack-draft → distribution
+THIS SKILL (what to write about) → headlines → outline-generator → article-writer → image-generator → substack-draft → distribution
 ```
 
 ---
@@ -317,6 +318,7 @@ For full audit checklist, read `references/seo-technical.md`. Critical items:
 | `references/eeat-framework.md` | Detailed E-E-A-T criteria |
 | `references/quality-gates.md` | Content quality thresholds |
 | `references/cwv-thresholds.md` | Core Web Vitals thresholds |
+| `references/site-architecture.md` | Site architecture: page hierarchy, URL patterns, navigation, internal linking |
 | `references/keyword-seeds.md` | Bloom keyword seed list |
 
 ---
@@ -324,6 +326,6 @@ For full audit checklist, read `references/seo-technical.md`. Critical items:
 ## Related Skills
 
 - **trend-scout** — viral content signals (complements SEO)
-- **hooks** — turns keyword research into titles
+- **headlines** — turns keyword research into titles
 - **content-calendar** — tracks research → written → published
 - **competitive-analysis** — competitor comparison pages (see references/seo-competitor-pages.md)
