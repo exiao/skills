@@ -23,7 +23,7 @@ Use DataForSEO to fetch data. Bloom's App ID is `$BLOOM_APP_STORE_ID`.
 1. **Fetch current App Store keyword rankings:**
    ```bash
    curl -s -X POST "https://api.dataforseo.com/v3/dataforseo_labs/apple/keywords_for_app/live" \
-     -H "Authorization: Basic c29jaWFsc0Bwcm9tcHRwbS5haTo3YjBiN2M2YzE1MmRjNDA5" \
+     -H "Authorization: Basic $DATAFORSEO_AUTH_BASE64" \
      -H "Content-Type: application/json" \
      -d '[{"app_id": "$BLOOM_APP_STORE_ID", "location_code": 2840, "language_code": "en", "limit": 100}]'
    ```
@@ -33,7 +33,7 @@ Use DataForSEO to fetch data. Bloom's App ID is `$BLOOM_APP_STORE_ID`.
 2. **Fetch competitor apps:**
    ```bash
    curl -s -X POST "https://api.dataforseo.com/v3/dataforseo_labs/apple/app_competitors/live" \
-     -H "Authorization: Basic c29jaWFsc0Bwcm9tcHRwbS5haTo3YjBiN2M2YzE1MmRjNDA5" \
+     -H "Authorization: Basic $DATAFORSEO_AUTH_BASE64" \
      -H "Content-Type: application/json" \
      -d '[{"app_id": "$BLOOM_APP_STORE_ID", "location_code": 2840, "language_code": "en", "limit": 10}]'
    ```
@@ -44,7 +44,7 @@ Use DataForSEO to fetch data. Bloom's App ID is `$BLOOM_APP_STORE_ID`.
    Step 1 — Post task:
    ```bash
    curl -s -X POST "https://api.dataforseo.com/v3/app_data/apple/app_info/task_post" \
-     -H "Authorization: Basic c29jaWFsc0Bwcm9tcHRwbS5haTo3YjBiN2M2YzE1MmRjNDA5" \
+     -H "Authorization: Basic $DATAFORSEO_AUTH_BASE64" \
      -H "Content-Type: application/json" \
      -d '[{"app_id": "$BLOOM_APP_STORE_ID", "language_code": "en", "location_code": 2840}]'
    ```
@@ -53,13 +53,13 @@ Use DataForSEO to fetch data. Bloom's App ID is `$BLOOM_APP_STORE_ID`.
    Step 2 — Poll until ready:
    ```bash
    curl -s "https://api.dataforseo.com/v3/app_data/apple/app_info/tasks_ready" \
-     -H "Authorization: Basic c29jaWFsc0Bwcm9tcHRwbS5haTo3YjBiN2M2YzE1MmRjNDA5"
+     -H "Authorization: Basic $DATAFORSEO_AUTH_BASE64"
    ```
 
    Step 3 — Fetch results:
    ```bash
    curl -s "https://api.dataforseo.com/v3/app_data/apple/app_info/task_get/advanced/<TASK_ID>" \
-     -H "Authorization: Basic c29jaWFsc0Bwcm9tcHRwbS5haTo3YjBiN2M2YzE1MmRjNDA5"
+     -H "Authorization: Basic $DATAFORSEO_AUTH_BASE64"
    ```
    Returns: full metadata — title, subtitle, description, rating, reviews count, screenshots info.
 

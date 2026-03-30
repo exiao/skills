@@ -154,7 +154,7 @@ LIMIT 20;
 
 ### Automated backup (cron)
 
-Set up a Clawdbot cron job to dump weekly:
+Set up an OpenClaw cron job to dump weekly:
 
 ```
 Schedule: 0 4 * * 0 (Sunday 4am)

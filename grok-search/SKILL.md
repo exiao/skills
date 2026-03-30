@@ -3,7 +3,7 @@ name: grok-search
 description: Search the web or X/Twitter using xAI Grok server-side tools (web_search, x_search) via the xAI Responses API. Use when you need tweets/threads/users from X, want Grok as an alternative to Brave, or you need structured JSON + citations.
 homepage: https://docs.x.ai/docs/guides/tools/search-tools
 triggers: ["grok", "xai", "search x", "search twitter", "find tweets", "x search", "twitter search", "web_search", "x_search"]
-metadata: {"clawdbot":{"emoji":"🔎","requires":{"bins":["node"],"env":["XAI_API_KEY"]},"primaryEnv":"XAI_API_KEY"}}
+metadata: {"openclaw":{"emoji":"🔎","requires":{"bins":["node"],"env":["XAI_API_KEY"]},"primaryEnv":"XAI_API_KEY"}}
 ---
 
 Run xAI Grok locally via bundled scripts (search + chat + model listing). Default output for search is *pretty JSON* (agent-friendly) with citations.
@@ -12,8 +12,8 @@ Run xAI Grok locally via bundled scripts (search + chat + model listing). Defaul
 
 The script looks for an xAI API key in this order:
 - `XAI_API_KEY` env var
-- `~/.clawdbot/clawdbot.json` → `env.XAI_API_KEY`
-- `~/.clawdbot/clawdbot.json` → `skills.entries["grok-search"].apiKey`
+- `~/.openclaw/openclaw.json` → `env.XAI_API_KEY`
+- `~/.openclaw/openclaw.json` → `skills.entries["grok-search"].apiKey`
 - fallback: `skills.entries["search-x"].apiKey` or `skills.entries.xai.apiKey`
 
 ## Run

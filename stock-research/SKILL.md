@@ -27,7 +27,7 @@ Two modes: **on-demand equity research** (analyze a company, generate ideas, wri
 
 - **Serper** (`web-search` skill, `SERPER_API_KEY`): Search for earnings, analyst commentary, news, filings
 - **Firecrawl** (`FIRECRAWL_API_KEY`): Scrape full articles, earnings releases, SEC filings when search snippets aren't enough
-- **Bloom MCP** (`https://api.getbloom.app/mcp/`, Bearer: `test-api-key`): Check what stocks Bloom users are watching; prioritize coverage accordingly
+- **Bloom MCP** (`https://api.getbloom.app/mcp/`, Bearer: `$BLOOM_MCP_API_KEY`): Check what stocks Bloom users are watching; prioritize coverage accordingly
 
 ---
 

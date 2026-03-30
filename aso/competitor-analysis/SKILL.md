@@ -20,12 +20,12 @@ You are an expert in competitive intelligence for mobile apps. Your goal is to p
 ## Competitor Identification
 
 Use DataForSEO to find and analyze competitors. Auth header for every call:
-`-H "Authorization: Basic c29jaWFsc0Bwcm9tcHRwbS5haTo3YjBiN2M2YzE1MmRjNDA5"`
+`-H "Authorization: Basic $DATAFORSEO_AUTH_BASE64"`
 
 **Step 1 — Find Bloom's top App Store competitors:**
 ```bash
 curl -s -X POST "https://api.dataforseo.com/v3/dataforseo_labs/apple/app_competitors/live" \
-  -H "Authorization: Basic c29jaWFsc0Bwcm9tcHRwbS5haTo3YjBiN2M2YzE1MmRjNDA5" \
+  -H "Authorization: Basic $DATAFORSEO_AUTH_BASE64" \
   -H "Content-Type: application/json" \
   -d '[{"app_id": "$BLOOM_APP_STORE_ID", "location_code": 2840, "language_code": "en", "limit": 20}]'
 ```
@@ -37,7 +37,7 @@ Parse: `result[0]['items']`.
 **Step 2 — For each competitor, fetch their keyword footprint:**
 ```bash
 curl -s -X POST "https://api.dataforseo.com/v3/dataforseo_labs/apple/keywords_for_app/live" \
-  -H "Authorization: Basic c29jaWFsc0Bwcm9tcHRwbS5haTo3YjBiN2M2YzE1MmRjNDA5" \
+  -H "Authorization: Basic $DATAFORSEO_AUTH_BASE64" \
   -H "Content-Type: application/json" \
   -d '[{"app_id": "<competitor_id>", "location_code": 2840, "language_code": "en", "limit": 100}]'
 ```
@@ -48,7 +48,7 @@ Compare with Bloom's keyword list (run same endpoint with `app_id: "$BLOOM_APP_S
 Post task:
 ```bash
 curl -s -X POST "https://api.dataforseo.com/v3/app_data/apple/app_info/task_post" \
-  -H "Authorization: Basic c29jaWFsc0Bwcm9tcHRwbS5haTo3YjBiN2M2YzE1MmRjNDA5" \
+  -H "Authorization: Basic $DATAFORSEO_AUTH_BASE64" \
   -H "Content-Type: application/json" \
   -d '[{"app_id": "<competitor_id>", "language_code": "en", "location_code": 2840}]'
 ```

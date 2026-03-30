@@ -1,3 +1,7 @@
+---
+name: verify-deploy
+description: Post-merge deploy verification. Waits for deploy, benchmarks production, monitors for regressions. Use after merging a PR to confirm the deploy is healthy.
+---
 # Verify Deploy
 
 Post-merge deploy verification. Waits for deploy, benchmarks production, monitors for regressions. One skill to go from "just merged" to "verified in production."

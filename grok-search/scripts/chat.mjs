@@ -24,9 +24,9 @@ function usage(msg) {
   process.exit(2);
 }
 
-function readKeyFromClawdbotConfig() {
+function readKeyFromOpenclawConfig() {
   try {
-    const p = path.join(os.homedir(), ".clawdbot", "clawdbot.json");
+    const p = path.join(os.homedir(), ".openclaw", "openclaw.json");
     const raw = fs.readFileSync(p, "utf8");
     const j = JSON.parse(raw);
 
@@ -107,7 +107,7 @@ for (let i = 0; i < args.length; i++) {
 const prompt = promptParts.join(" ").trim();
 if (!prompt) usage("Missing <prompt>");
 
-const apiKey = readKeyFromClawdbotConfig();
+const apiKey = readKeyFromOpenclawConfig();
 if (!apiKey) {
   console.error("Missing XAI_API_KEY.");
   process.exit(1);
