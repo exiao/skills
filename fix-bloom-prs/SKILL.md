@@ -15,7 +15,7 @@ Scan open PRs across all tracked repos for CI failures, review comments, and mer
 | `bloom-invest/investing-log` | `~/clawd/investing-log` | `CLAUDE.md` or `AGENTS.md` |
 | `exiao/skills` | `~/clawd/skills` | n/a |
 
-The cron preflight script scans all tracked repos. When running manually, scan each.
+The cron preflight script scans all tracked repos.
 
 ## Core Principle: Don't Loop
 
@@ -75,7 +75,7 @@ For each PR, gather context before deciding to fix or comment:
 
 ```bash
 PR=<number>
-REPO=Bloom-Invest/bloom
+REPO=<repo>  # from preflight output, e.g. Bloom-Invest/bloom
 
 # Commit count (circuit breaker check)
 gh api "repos/$REPO/pulls/$PR/commits?per_page=100" --jq 'length'
@@ -107,7 +107,7 @@ For each PR, make a deliberate decision:
 
 **If fixing:**
 1. Use a git worktree (never the main checkout)
-2. Read `~/bloom/CLAUDE.md` for project conventions
+2. Read the repo's conventions file (see Tracked Repos table) if one exists
 3. Make the minimal, targeted fix
 4. Verify locally: run the specific test, check lint, confirm logic
 5. Single commit with a clear message explaining what was fixed and why
