@@ -129,7 +129,6 @@ This repo is my personal skills directory. Skills are prompt templates that Open
 | [cloud-migration](cloud-migration/) | Full cloud provider migrations end-to-end |
 | [porkbun](porkbun/) | Manage domains, DNS, SSL via Porkbun API |
 | [railway](railway/) | Deploy and manage Railway projects via CLI and MCP |
-| [sahil-office-hours](sahil-office-hours/) | Business advisory based on The Minimalist Entrepreneur: pricing, growth, marketing, validation |
 | [yc-office-hours](yc-office-hours/) | YC office hours prep |
 
 ### OpenClaw & Infrastructure
@@ -208,6 +207,7 @@ These started from other open-source projects. I've modified and extended them f
 | [last30days](last30days/) | [mvanhorn/last30days-skill](https://github.com/mvanhorn/last30days-skill) |
 | [stably-cli](stably-cli/) | [skills.sh/stablyai](https://skills.sh/stablyai/agent-skills/stably-cli) |
 | [stably-sdk-rules](stably-sdk-rules/) | [skills.sh/stablyai](https://skills.sh/stablyai/agent-skills/stably-sdk-rules) |
+| [sahil-office-hours](sahil-office-hours/) | [slavingia/skills](https://github.com/slavingia/skills) |
 
 ---
 
