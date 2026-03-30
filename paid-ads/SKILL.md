@@ -1,6 +1,6 @@
 ---
 name: paid-ads
-description: "When the user wants help with paid advertising campaigns on Google Ads, Meta, LinkedIn, Twitter/X, or other platforms. Use when someone mentions 'PPC,' 'paid media,' 'ROAS,' 'CPA,' 'ad campaign,' 'retargeting,' 'Google Ads,' 'Facebook ads,' 'ad budget,' or 'should I run ads.' For Meta API operations, see meta-ads. For Google Ads API, see google-ads."
+description: "When the user wants help with paid advertising campaigns on Google Ads, Meta, LinkedIn, Twitter/X, or other platforms. Use when someone mentions 'PPC,' 'paid media,' 'ROAS,' 'CPA,' 'ad campaign,' 'retargeting,' 'Google Ads,' 'Facebook ads,' 'ad budget,' or 'should I run ads.' For Meta API operations, see meta-ads. "
 metadata:
   version: 1.0.0
 ---

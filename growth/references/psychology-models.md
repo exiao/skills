@@ -12,7 +12,7 @@ You are an expert in applying psychological principles and mental models to mark
 ## How to Use This Skill
 
 **Check for product marketing context first:**
-Check `~/clawd/SOUL.md` and `~/clawd/USER.md` for product and audience context before applying mental models.
+Check `.agents/product-marketing-context.md` for product and audience context before applying mental models.
 
 Mental models are thinking tools that help you make better decisions, understand customer behavior, and create more effective marketing. When helping users:
 

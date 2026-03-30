@@ -2,14 +2,14 @@
 
 This reference contains proven patterns for lead magnet giveaway posts that maximize comments and DM opt-ins.
 
-> **Note:** Opening hooks are generated using `viral-hook-creator` patterns. This file focuses on value anchors, CTAs, and post structure.
+> **Note:** Opening hooks are generated using the `hooks` skill. This file focuses on value anchors, CTAs, and post structure.
 
 ---
 
 ## The Psychology
 
 Lead magnet posts work because they stack three psychological triggers:
-1. **Viral hook** — Stops the scroll with curiosity (from viral-hook-creator)
+1. **Viral hook** — Stops the scroll with curiosity (from `hooks` skill)
 2. **Value perception** — "This is worth real money"
 3. **Low friction** — "All I have to do is comment"
 
@@ -121,7 +121,7 @@ The trigger word should be:
 
 ### Quick Format Structure
 ```
-[OPENING HOOK - from viral-hook-creator]
+[OPENING HOOK - from hooks skill]
 
 [WHAT YOU BUILT]
 
@@ -143,7 +143,7 @@ Comment "SKILL" and I'll send it to you for free (must be following)
 
 ### Detailed Format Structure
 ```
-[OPENING HOOK - from viral-hook-creator]
+[OPENING HOOK - from hooks skill]
 
 [WHAT YOU BUILT]
 

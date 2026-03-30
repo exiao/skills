@@ -145,7 +145,7 @@ TRIM: [paragraph/sentence] → [shorter version]
 - **The reader** in one sentence: "A 28-year-old PM who just got assigned to an AI product and has no idea what evals are."
 - **Their trigger**: What happened that made them need this? "Their AI shipped a wrong answer and the CEO noticed."
 - **What they'd Google**: The search query that would lead to this. "how to test AI product quality"
-- **Their awareness level** (from headlines skill):
+- **Their awareness level** (from hooks skill):
   - Unaware: doesn't know the problem exists
   - Problem-aware: knows the problem, doesn't know the solution
   - Solution-aware: knows solutions exist, comparing options
@@ -648,6 +648,6 @@ Use all three levels together. A great post (high individual score) in a dying p
 - Used by **article-writer** (revision pass)
 - Used by **typefully** (hook quality check)
 - Used by **tweet-ideas** (tweet quality)
-- Used by **headlines** (title evaluation)
+- Used by **hooks** (title evaluation)
 - Shares voice standards with **article-writer** humanizer section
 - **`~/marketing/WRITING-STYLE.md`** — ground truth for voice evaluation. Read the Kill Phrases list and Voice Fingerprint section before scoring Question 3. Generic "sounds human" is not the bar; Eric's specific fingerprint is.
