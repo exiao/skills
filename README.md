@@ -129,6 +129,7 @@ This repo is my personal skills directory. Skills are prompt templates that Open
 | [cloud-migration](cloud-migration/) | Full cloud provider migrations end-to-end |
 | [porkbun](porkbun/) | Manage domains, DNS, SSL via Porkbun API |
 | [railway](railway/) | Deploy and manage Railway projects via CLI and MCP |
+| [sahil-office-hours](sahil-office-hours/) | Startup advice frameworks from Sahil Lavingia (Gumroad) |
 | [yc-office-hours](yc-office-hours/) | YC office hours prep |
 
 ### OpenClaw & Infrastructure
