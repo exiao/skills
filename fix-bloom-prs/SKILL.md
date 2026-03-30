@@ -5,7 +5,17 @@ description: Use when fixing CI failures, reviewing code, or addressing review c
 
 # Fix Bloom PRs
 
-Scan open PRs on Bloom-Invest/bloom for CI failures and review comments. Fix only when confident; comment when not.
+Scan open PRs across all tracked repos for CI failures, review comments, and merge conflicts. Fix only when confident; comment when not.
+
+## Tracked Repos
+
+| Repo | Local path | Conventions file |
+|------|-----------|-----------------|
+| `Bloom-Invest/bloom` | `~/bloom` | `CLAUDE.md` |
+| `bloom-invest/investing-log` | `~/clawd/investing-log` | `CLAUDE.md` or `AGENTS.md` |
+| `exiao/skills` | `~/clawd/skills` | n/a |
+
+The cron preflight script scans all tracked repos. When running manually, scan each.
 
 ## Core Principle: Don't Loop
 
@@ -53,11 +63,11 @@ The #1 failure mode is pushing speculative fixes that trigger new CI runs, new r
 
 When run via cron, the preflight script (`bash ~/clawd/scripts/pr-preflight.sh`) handles PR discovery. If no output, stop. Otherwise proceed with the flagged PRs.
 
-When run manually, scan open PRs:
+When run manually, use the preflight script which scans all tracked repos:
 ```bash
-gh pr list --repo Bloom-Invest/bloom --state open --json number,title,headRefName,createdAt,updatedAt \
-  --jq '[.[] | select(.createdAt > (now - 259200 | strftime("%Y-%m-%dT%H:%M:%SZ")) or .updatedAt > (now - 259200 | strftime("%Y-%m-%dT%H:%M:%SZ")))]'
+bash ~/clawd/scripts/pr-preflight.sh
 ```
+Output includes `repo` field for each PR needing attention.
 
 ### 2. Triage each PR
 
@@ -125,6 +135,31 @@ After pushing a fix, check that CI starts. Do NOT wait for CI to complete and pu
 - **Frontend Lint** → `cd frontend && bun run lint --fix`
 - **Bugbot/Seer** → Read the comment, understand the root cause, fix if confident
 - **claude-review** → Usually informational. Fix only clear bugs; comment on the rest
+
+## Fixing Merge Conflicts
+
+When a PR has merge conflicts:
+
+1. **Check if the branch diverged far from main** (many old commits already merged):
+   ```bash
+   git log --oneline origin/main..origin/<branch> | wc -l
+   git diff origin/main origin/<branch> --stat | tail -1
+   ```
+
+2. **If the branch has old merged commits causing conflicts** (rebase would be painful):
+   - Create a fresh branch from `origin/main`
+   - Apply only the unique diff: `git diff origin/main origin/<branch> -- . | git apply --3way`
+   - If a file was deleted on main, exclude it: `':!deleted-file.md'`
+   - If `git apply` fails, manually apply the changes
+   - Commit, push new branch, create new PR referencing the old one
+   - Close old PR with "Superseded by #XX (clean rebase from main)"
+
+3. **If the branch is recent with a simple conflict** (few commits ahead):
+   - Rebase onto main: `git rebase origin/main`
+   - Resolve conflicts, `git add`, `git rebase --continue`
+   - Force push: `git push --force-with-lease`
+
+Always prefer the fresh-branch approach for branches with 5+ old commits.
 
 ## Excluding PRs
 
