@@ -149,7 +149,7 @@ When a PR has merge conflicts:
 2. **If the branch has old merged commits causing conflicts** (rebase would be painful):
    - Create a fresh branch from `origin/main`
    - Apply only the unique diff: `git diff origin/main origin/<branch> -- . | git apply --3way`
-   - If a file was deleted on main, exclude it: `':!deleted-file.md'`
+   - If a file was deleted on main, exclude it from the diff: `git diff origin/main origin/<branch> -- . ':!deleted-file.md' | git apply --3way`
    - If `git apply` fails, manually apply the changes
    - Commit, push new branch, create new PR referencing the old one
    - Close old PR with "Superseded by #XX (clean rebase from main)"
