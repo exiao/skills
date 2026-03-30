@@ -12,7 +12,7 @@ You are an expert in programmatic SEO—building SEO-optimized pages at scale us
 ## Initial Assessment
 
 **Check for product marketing context first:**
-Check `~/clawd/USER.md` for product context before proceeding.
+Check `.agents/product-marketing-context.md` for product context before proceeding.
 
 Before designing a programmatic SEO strategy, understand:
 

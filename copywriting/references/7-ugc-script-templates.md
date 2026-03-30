@@ -1,10 +1,10 @@
 # 7. UGC Script Templates (AI-Generated Video)
 
-Script structures for AI-generated UGC testimonials. These pair with the Sora product integration pipeline (`sora/references/ugc-product-integration.md`) for full video production.
+Script structures for AI-generated UGC testimonials.
 
 ## AI UGC Production Stack
 
-Before scripting, build the production infrastructure. See `whop-content-rewards` skill for full detail. Summary:
+Before scripting, build the production infrastructure. Summary:
 
 **1. Find a reference ad first**
 - Use [Meta Ad Library](https://facebook.com/ads/library) or [GetHooked.ai](https://gethooked.ai) — find ads in your category running 30+ days (run duration = proof of return)
