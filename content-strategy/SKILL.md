@@ -520,10 +520,7 @@ Source: @DTC_Quizbuilder thread (https://x.com/DTC_Quizbuilder/status/2010379560
 | `references/lead-magnets.md` | Lead magnet types, buyer stage matching, gating strategy, distribution, benchmarks |
 | `references/marketing-ideas.md` | 139 SaaS marketing ideas catalog organized by category, stage, and budget |
 | `references/blog-seo-planning.md` | Searchable vs shareable, content pillars, topic clusters, buyer stage keywords, ideation sources |
-| `references/6-elements-framework.md` | Content creation framework |
-| `references/copywriting-formulas.md` | Copywriting formulas for social content |
-| `references/creative-research-methods.md` | How to research what's working |
-| `references/ad-formats-library.md` | Ad format reference library |
+
 
 ---
 
