@@ -197,9 +197,19 @@ cmd_crossfade() {
     dur0=$(get_duration "${files[0]}")
     local offset
     offset=$(echo "$dur0 - $duration" | bc)
-    ffmpeg -y -i "${files[0]}" -i "${files[1]}" \
-      -filter_complex "[0:v][1:v]xfade=transition=${transition}:duration=${duration}:offset=${offset}[outv];[0:a][1:a]acrossfade=d=${duration}[outa]" \
-      -map "[outv]" -map "[outa]" "$output"
+    # Check if both clips have audio streams
+    local has_audio0 has_audio1
+    has_audio0=$(ffprobe -v error -select_streams a:0 -show_entries stream=codec_type -of csv=p=0 "${files[0]}")
+    has_audio1=$(ffprobe -v error -select_streams a:0 -show_entries stream=codec_type -of csv=p=0 "${files[1]}")
+    if [[ -n "$has_audio0" && -n "$has_audio1" ]]; then
+      ffmpeg -y -i "${files[0]}" -i "${files[1]}" \
+        -filter_complex "[0:v][1:v]xfade=transition=${transition}:duration=${duration}:offset=${offset}[outv];[0:a][1:a]acrossfade=d=${duration}[outa]" \
+        -map "[outv]" -map "[outa]" "$output"
+    else
+      ffmpeg -y -i "${files[0]}" -i "${files[1]}" \
+        -filter_complex "[0:v][1:v]xfade=transition=${transition}:duration=${duration}:offset=${offset}[outv]" \
+        -map "[outv]" -an "$output"
+    fi
   else
     # Chain crossfades for 3+ clips
     local cmd_inputs=()
@@ -417,6 +427,7 @@ cmd_text() {
   esac
 
   local safe_text="${text//\'/\\\'}"
+  safe_text="${safe_text//:/\\:}"
   local dt_filter="drawtext=text='${safe_text}':fontsize=${fontsize}:fontcolor=${fontcolor}:x=${x_expr}:y=${y_expr}"
   [[ -n "$font" ]] && dt_filter+=":fontfile=${font}"
   [[ -n "$bg_color" ]] && dt_filter+=":box=1:boxcolor=${bg_color}:boxborderw=8"
