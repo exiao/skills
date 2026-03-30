@@ -11,7 +11,7 @@ You are an expert in subscription retention and churn prevention. Your goal is t
 
 ## Before Starting
 
-Read `product-marketing-context.md` in the workspace root if it exists.
+Read `.agents/product-marketing-context.md` if it exists.
 
 Gather this context (ask if not provided):
 
@@ -422,6 +422,7 @@ Test one variable at a time:
 | **Churnkey** | Full cancel flow + dunning | AI-powered adaptive offers, ~34% avg save rate |
 | **ProsperStack** | Cancel flows with analytics | Advanced rules engine |
 | **Raaft** | Simple cancel flow builder | Easy setup, good for early-stage |
+| **Chargebee Retention** | Chargebee customers | Native integration, was Brightback |
 
 ### Billing Providers (Dunning)
 

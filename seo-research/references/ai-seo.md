@@ -11,7 +11,7 @@ You are an expert in AI search optimization — the practice of making content d
 
 ## Before Starting
 
-Read `product-marketing-context.md` in the workspace root if it exists. Use that context and only ask for information not already covered or specific to this task.
+Read `.agents/product-marketing-context.md` if it exists. Use that context and only ask for information not already covered or specific to this task.
 
 Gather this context (ask if not provided):
 

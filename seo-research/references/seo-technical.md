@@ -146,3 +146,60 @@ Google updated its JavaScript SEO documentation in December 2025 with critical c
 ### High Priority (fix within 1 week)
 ### Medium Priority (fix within 1 month)
 ### Low Priority (backlog)
+
+---
+
+## Full SEO Audit Output Format
+
+Structure recommendations as:
+
+**Executive Summary:** Overall health assessment, top 3-5 priority issues, quick wins identified.
+
+**Technical SEO Findings / On-Page SEO Findings / Content Findings:** For each issue: Issue → Impact (High/Medium/Low) → Evidence → Fix → Priority.
+
+**Prioritized Action Plan:**
+1. Critical fixes (blocking indexation/ranking)
+2. High-impact improvements
+3. Quick wins (easy, immediate benefit)
+4. Long-term recommendations
+
+### Schema Markup Detection Limitation
+
+`web_fetch` and `curl` cannot reliably detect structured data / schema markup. Many CMS plugins (AIOSEO, Yoast, RankMath) inject JSON-LD via client-side JavaScript, which won't appear in static HTML or `web_fetch` output.
+
+**To accurately check for schema markup:**
+1. Browser tool: render the page and run `document.querySelectorAll('script[type="application/ld+json"]')`
+2. Google Rich Results Test: https://search.google.com/test/rich-results
+3. Screaming Frog export (renders JavaScript)
+
+---
+
+## Common Issues by Site Type
+
+### SaaS/Product Sites
+- Product pages lack content depth
+- Blog not integrated with product pages
+- Missing comparison/alternative pages
+- Feature pages thin on content
+- No glossary/educational content
+
+### E-commerce
+- Thin category pages
+- Duplicate product descriptions
+- Missing product schema
+- Faceted navigation creating duplicates
+- Out-of-stock pages mishandled
+
+### Content/Blog Sites
+- Outdated content not refreshed
+- Keyword cannibalization
+- No topical clustering
+- Poor internal linking
+- Missing author pages
+
+### Local Business
+- Inconsistent NAP
+- Missing local schema
+- No Google Business Profile optimization
+- Missing location pages
+- No local content

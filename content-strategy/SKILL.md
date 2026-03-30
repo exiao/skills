@@ -156,7 +156,25 @@ Match the angle to a format that amplifies it.
 | Tier List | Gamified ranking format; viewers argue placements in comments, driving engagement | Content strategy, tool reviews, platform comparisons, "best of" lists |
 | Viral Breakdown / Reaction | Dual-screen commentary on a viral post; borrowed traffic + authority positioning | Creator education, niche analysis, weekly pillar content |
 
-> **See:** `references/content-formats.md` for the "Hands-Doing-Something" format details, structure, and Bloom application.
+### The "Hands-Doing-Something" Format
+
+A viral format where the creator does a simple tactile task (cutting fruit, making tea, crafting) while speaking about a completely unrelated topic. The visual activity is background; the spoken content is the payload.
+
+Source: @thebranding.ai breakdown of multiple creators going viral with the same format.
+
+**Why it works:**
+- Tactile hand activity holds visual attention subconsciously (the eye tracks movement)
+- The mismatch between casual activity and spoken content creates curiosity ("why is she cutting an apple while talking about studying?")
+- Extremely simple production: phone on a stand, good mic, something to do with your hands
+- Scalable to any niche: investing (writing in a notebook), cooking (prep work), fitness (stretching), tech (unboxing)
+
+**Structure:**
+1. Open with a relatable spoken hook ("you don't wanna study? that's fine, just imagine...")
+2. Hands doing something throughout (never stop the activity)
+3. Deliver value through speech while the visual activity anchors attention
+4. Close with soft CTA or open loop
+
+**Bloom application:** Film hands writing stock tickers on a notepad, scrolling through the Bloom app, or organizing investment notes while delivering investing insights via voiceover.
 
 | Audience Temp | Best Formats |
 |--------------|-------------|
@@ -228,7 +246,38 @@ One file per episode: `~/clawd/characters/<slug>/scripts/YYYY-MM-DD-episode-titl
 
 ---
 
-> **See:** `references/content-formats.md` for viral breakdown pillar details, dual-screen format, on-screen labels, and Bloom-specific examples.
+## Step 2d: Viral Breakdown Pillar
+
+This is a full account pillar — not a one-off format. Run it every week.
+
+**How it works:**
+- Pick 1–3 viral posts in your niche each week
+- React to + annotate them in dual-screen format (your face/commentary + the source post side by side)
+- Explain the *specific mechanics* of why it worked — not "it's good," but "the credibility drop at 0:08 + the stacked loop at 0:14 are why retention holds past 30 seconds"
+- Label every piece "pt 1" even if there's no pt 2 yet — it signals series, invites return visits, and the algorithm treats it as episodic
+
+**Why it compounds:**
+| Benefit | Mechanism |
+|---------|-----------|
+| Borrowed traffic | Your content surfaces in searches and feeds for the source post's audience |
+| Authority positioning | You're the person who understands the craft, not just a consumer |
+| Series architecture | Built-in return reason; viewers expect more installments |
+
+**Format:** Dual-screen reaction (split-screen or side-by-side layout). If screen recording isn't possible, show the source clip and annotate with on-screen text labels while reacting verbally.
+
+**On-screen keyword labels (retention device):** As you narrate your breakdown, flash bold single-word or short-phrase labels on screen that name the tactic being used: "HOOK", "AVATAR", "MESSAGING", "OPEN LOOP", "SOCIAL PROOF", etc. This serves three purposes:
+1. Viewers feel like they're learning a *system*, not just watching a reaction
+2. Labels create visual rhythm that sustains attention through the middle of the video (the retention dead zone)
+3. Each label is a micro-open-loop: the viewer wants to understand *why* you labeled it that, so they keep watching
+
+Place labels at the moment you identify the tactic, not before. Let the source video play 2-3 seconds first, then drop the label as your "aha" moment. Use bold white or colored text, large enough to read on mobile, centered or near the source video panel.
+
+**Bloom-specific example:**
+- Source: viral TikTok of someone showing their Robinhood portfolio down 40% (2M+ views)
+- Labels you'd drop: "LOSS AVERSION" (the emotional hook), "ROUND NUMBER" (they lost exactly $10K, not $9,847), "SCREENSHOT FORMAT" (looks organic, not produced), "NO CTA" (the virality IS the content, no ask)
+- Your commentary: explain each label as an investing psychology + content strategy concept simultaneously. Double value for the viewer.
+
+**Sourcing:** Use `last30days`, `grok-search`, or `trend-research` to find viral posts in the investing/personal finance niche weekly. Look for 50K+ views, especially from accounts under 10K followers (pre-algo signal).
 
 ---
 
@@ -242,8 +291,8 @@ Don't write here. Route to the right skill.
 | Articles / long-form | `article-writer` |
 | TikTok slideshows | `slideshow-creator` |
 | Hooks and headlines | `hooks` |
-| Ad copy (paid) | `ad-copy` |
-| Paid creative concepts | `ad-copy` (includes A/B blitz protocol) |
+| Ad copy (paid) | `copywriting` |
+| Paid creative concepts | `copywriting` (includes A/B blitz protocol) |
 | AI character video scripts | Write inline using Step 2c above |
 | New AI character | `character-creation` |
 
@@ -256,11 +305,42 @@ Don't write here. Route to the right skill.
 | LinkedIn, X, Threads | `typefully` skill |
 | TikTok | `slideshow-creator` / ReelFarm |
 
-> **See:** `references/distribution.md` for queue minimums and batch scheduling cadence.
+**Queue minimums:**
+
+| Platform | Min Queue | Cadence |
+|---------|-----------|---------|
+| LinkedIn | 7 posts | 1/day |
+| X | 14 posts | 2/day |
+| TikTok | 14-21 posts | 2-3/day |
+| Threads | 7 posts | 1/day |
+
+Batch at least 7 days per session. Never schedule one post at a time. If queue drops below 3 days, refill immediately.
 
 > **Load on-demand:** `references/calendar-batching.md` for scheduling strategy and optimal posting times.
 
-> **See:** `references/geo-targeting.md` for Instagram/Reels geo-targeting strategy, location tags, localization rules, and the 4-phase regional batch framework.
+### Geo-Targeting (Instagram / Reels)
+
+Most brands compete in the same saturated metros. Regional markets have lower CPMs, less competition, and engaged audiences who see far less branded content.
+
+**Layer 1 — Native location tags (fully compliant):**
+- Use Instagram's existing location tag library; attach regional business district tags (not just city name) when posting
+- Target specific coworking hubs, financial districts, tech clusters — not "New York City"
+- Surfaces content in location-specific story feeds and Explore pages at zero additional media spend
+
+**Layer 2 — Custom location tags (gray area):**
+- Create new tags via Facebook check-in + VPN to target underserved areas with no existing tag
+- Carries account-level risk if pattern is detectable; vary IP patterns, ensure content is genuinely relevant
+
+**Localization rules (content must feel native, not just tagged):**
+- Adapt industry context reference in the hook to match dominant industry in target city
+- Adapt business size + operational framing to local business profile
+- Adjust tone register: warmer/relationship-oriented in southern markets, direct/efficiency-focused in northern/western
+
+**4-Phase Regional Batch Framework:**
+1. **Market selection** — use Instagram Insights for existing follower geography + check location tag feed competition. Pick 8–12 test markets.
+2. **Production** — write base script, adapt 2–3 localization elements per variant (hook industry ref, operational framing, pain point language). Tag to specific business districts. Schedule at local peak hours (6:30–8:30am, 12–1:30pm, 6:30–9pm local time).
+3. **Evaluate (weeks 2–4)** — rank markets by organic discovery rate + engagement quality. Top 3–5 markets get paid amplification.
+4. **Deepen** — produce second-generation content for winning markets with deeper localization; expand test cohort using learnings.
 
 ---
 
@@ -309,10 +389,6 @@ Retired pillars aren't deleted. Keep `tiktok-marketing/pillar-bench.json` and re
 
 | Reference | Contents |
 |-----------|---------|
-| `references/6-elements-framework.md` | Paid creative element guidance (Media, Primary Text, Headline, etc.) |
-| `references/ad-formats-library.md` | All formats with templates and examples |
-| `references/copywriting-formulas.md` | PAS, AIDA, hooks, headlines |
-| `references/creative-research-methods.md` | Research process and sources |
 | `references/analytics-loop.md` | Per-post tracking, pillar-level monthly review |
 | `references/feedback-loop.md` | Daily diagnostic, hook evolution, CTA rotation |
 | `references/calendar-batching.md` | Scheduling strategy, queue management, posting cadence |
@@ -350,27 +426,104 @@ What a complete strategy card looks like after running this skill. Use this as t
 **Awareness level targeted:** Level 1–2 cold, Level 3–4 retargeted
 
 **Delegate to:**
-- Visuals → `ad-copy` + `nano-banana-pro`
+- Visuals → `copywriting` + `nano-banana-pro`
 - Tweets → `tweet-ideas`
 - TikTok → `slideshow-creator`
 - Scheduling → `typefully`
 
 ---
 
-> **See:** `references/content-formats.md` for creator activity tier list (S through F ranking by impact).
+## Creator Activity Tier List
+
+What to spend your time on as a content creator, ranked by impact. Based on @wootak's framework (https://www.instagram.com/reel/DVwed_xEvHx/).
+
+| Tier | Activity | Why |
+|------|----------|-----|
+| **S** | **Post consistently** | Nothing else matters if you don't publish. Ship beats perfect. |
+| **S** | **Define your niche/target** | Focused content reaches the right people. Broad content reaches nobody. |
+| **S** | **Use TikTok (especially TikTok Shop)** | Highest-leverage platform for organic discovery right now. |
+| **S** | **Repurpose content cross-platform** | Every platform's audience sees it "for the first time." One piece of content = 3-5 posts. |
+| **A** | **Script/outline before filming** | Structure beats improv. But execution (posting) matters more than perfect scripts. |
+| **A** | **Track analytics** | Know what works. But analysis without posting is procrastination. |
+| **A** | **Post at optimal times** | Helps, but doesn't replace quality or consistency. |
+| **B** | **Writing elaborate captions** | Useful but overrated. Most creators over-invest here relative to impact. |
+| **C** | **Written/text-only content** | Video outperforms text on every social platform. Text content is C tier in a video-first world. |
+| **F** | **Hashtags** | Zero meaningful impact on modern algorithms. Complete waste of effort. |
+
+The hierarchy: **Posting > Targeting > Platform choice > Repurposing > Scripting > Analytics > Timing > Captions > Text content > Hashtags.**
 
 ---
 
-> **See:** `references/distribution.md` for channel tier list (high-signal, questionable-signal, low-signal channels) and SEO timing.
+## Channel Tier List (Bloom / B2C)
 
-> **See:** `references/interactive-content.md` for quiz-based landing page funnels, sequencing, drop-off benchmarks, and retargeting play.
+What actually works for consumer apps vs. what sounds good but doesn't.
+
+**High-signal channels:**
+- TikTok / Instagram Reels — primary B2C organic discovery; recreate before recruiting creators
+- Influencer/creator marketing — TikTok/YouTube/Instagram. Lovable ($400M ARR) spends 10x more on influencer marketing than paid social and considers it their key growth driver. Validate formats with your own account first, then hand proven formats to creators. This should be the primary paid channel, not Meta ads.
+- Free credits / freemium as marketing — treat free tier as a marketing channel, not a cost center. "Our free giveaways are bigger than paid marketing spend." (Lovable CEO, 20VC March 2026)
+- Free SEO tools — high-value lead magnets, easier to rank than blog posts, builds backlinks
+- Email marketing — works if sequences are built correctly (see growth skill); people do read emails
+
+**Questionable-signal channels (test carefully):**
+- Meta/Facebook ads — Lovable's CEO at $400M ARR: "Meta ads have little incrementality; pass through views which don't materialize into anything. I haven't seen them work in a while." (Lenny's Podcast, Dec 2025). If running Meta ads, watch incrementality closely: are installs you're paying for ones that would have happened organically? Compare install lift when ads are paused vs. running.
+
+**Low-signal channels (avoid or deprioritize):**
+- Newsletter sponsorships — expensive and most clicks are bots
+- Twitter ads — worst targeting in the industry; not worth the spend
+- Google ads — more expensive than Facebook for consumer apps, higher irrelevant clicks
+- Referral programs — very hard to make work; only viable with stable conversion and large customer base
+- Reddit audience building — ban risk is high; answering long-tail questions can work, but building an audience there doesn't
+- Beta directories (BetaList, etc.) — mostly dead; not worth the setup
+
+**Alternative funnel: Quiz-based landing pages**
+
+Instead of Ad → App Store → Install, run Ad → Web Quiz → Personalized Results → App Store. A quiz between the ad and the offer warms cold traffic through micro-commitments. DTC benchmark: cold traffic conversion jumped from 1.2% to 4.7% with a quiz funnel (@DTC_Quizbuilder, $2M in 90 days).
+
+Why it works for apps:
+- Each question answered is a small "yes" that compounds (sunk cost)
+- Questions seed beliefs and pre-handle objections before the user sees pricing
+- Non-completers give you zero-party data for segmented retargeting (someone who answered "I struggle with timing the market" gets a different retargeting ad than someone who answered "I don't know what to invest in")
+- The loading/results screen is captive attention: 10-15s where you show testimonials, social proof, and app previews while "calculating their results"
+
+Quiz sequencing that converts:
+1. Q1-Q2: Low-friction demographics (age, experience level). Zero cognitive load, starts the yes-chain.
+2. Q3-Q4: Aspirational goals ("What's your investing goal?"). Emotional questions hit harder after they've committed.
+3. Q5-Q6: Pain points and struggles. Now they've told you their problems.
+4. Breather slide with social proof after Q4.
+5. Results page → personalized app recommendation → App Store link.
+
+Drop-off benchmarks: Q1 = 30-40% drop-off (normal, biggest filter). Remaining questions: under 15% each. Overall completion: aim for 25%+. If any single question has 10%+ drop-off, simplify it (fewer options, add "None of the above").
+
+Retargeting play: Everyone who takes the quiz but doesn't install gave you data. Segment retargeting by their answers: "tried other investing apps" → ad about why Bloom's AI is different. "Low confidence in stock picks" → ad about AI-powered research. Specific beats generic.
+
+Bloom application: The onboarding flow already asks risk tolerance and goals post-install. A pre-install web quiz version of this would warm traffic before the App Store page, and the data feeds retargeting even if they never install.
+
+Source: @DTC_Quizbuilder thread (https://x.com/DTC_Quizbuilder/status/2010379560769015885)
+
+**SEO timing:**
+- Don't prioritize SEO before your first customers — takes months to kick in, and if you pivot the product, the work goes to zero
+- When you do SEO: free tools first (easier to rank, more shareable, generate backlinks naturally), then long-tail blog posts with purchase intent, then programmatic data-driven pages
+
+---
+
+## Reference Files
+
+| File | Contents |
+|------|----------|
+| `references/social-content.md` | Social media strategy: content pillars, hook formulas, calendars, engagement, repurposing, analytics |
+| `references/free-tool-strategy.md` | Engineering-as-marketing: tool types, ideation, evaluation scorecard, lead capture |
+| `references/lead-magnets.md` | Lead magnet types, buyer stage matching, gating strategy, distribution, benchmarks |
+| `references/marketing-ideas.md` | 139 SaaS marketing ideas catalog organized by category, stage, and budget |
+| `references/blog-seo-planning.md` | Searchable vs shareable, content pillars, topic clusters, buyer stage keywords, ideation sources |
+
 
 ---
 
 ## Related Skills
 
 - `hooks` — hook formulas and title generation
-- `ad-copy` — direct response copy, brand voice, A/B testing blitz
+- `copywriting` — page copy, direct response, brand voice, A/B testing blitz
 - `tweet-ideas` — standalone tweet content
 - `article-writer` — long-form drafts
 - `slideshow-creator` — TikTok production and ReelFarm automation
