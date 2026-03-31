@@ -63,6 +63,8 @@ The #1 failure mode is pushing speculative fixes that trigger new CI runs, new r
 
 When run via cron, the preflight script (`bash ~/clawd/scripts/pr-preflight.sh`) handles PR discovery. If no output, stop. Otherwise proceed with the flagged PRs.
 
+> **Note:** `pr-preflight.sh` is a machine-local script (not in this repo). It scans tracked repos for PRs needing attention.
+
 When run manually, use the preflight script which scans all tracked repos:
 ```bash
 bash ~/clawd/scripts/pr-preflight.sh
@@ -140,7 +142,7 @@ After pushing a fix, check that CI starts. Do NOT wait for CI to complete and pu
 
 When a PR has merge conflicts:
 
-1. **Check if the branch diverged far from main** (many old commits already merged):
+1. **Check if the branch diverged far from main** (5+ commits ahead of main, many already merged):
    ```bash
    git log --oneline origin/main..origin/<branch> | wc -l
    git diff origin/main origin/<branch> --stat | tail -1
@@ -149,7 +151,7 @@ When a PR has merge conflicts:
 2. **If the branch has old merged commits causing conflicts** (rebase would be painful):
    - Create a fresh branch from `origin/main`
    - Apply only the unique diff: `git diff origin/main origin/<branch> -- . | git apply --3way`
-   - If a file was deleted on main, exclude it from the diff: `git diff origin/main origin/<branch> -- . ':!path/to/deleted-file' | git apply --3way`  (replace `path/to/deleted-file` with the actual path)
+   - If a file was deleted on main, exclude it from the diff: `git diff origin/main origin/<branch> -- . ':!path/to/deleted-file' | git apply --3way`  # replace path/to/deleted-file with actual path(s) of deleted files
    - If `git apply` fails, manually apply the changes
    - Commit, push new branch, create new PR referencing the old one
    - Close old PR with "Superseded by #XX (clean rebase from main)"

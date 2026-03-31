@@ -169,7 +169,7 @@ If the file doesn't exist, create it:
 
 ### Step 11 — Report to Signal
 
-Send to `group:VEsNr2at9GMf41l5TiBLXc++af4v+/M61r844tgZITE=`:
+Send to `$SIGNAL_GROUP_ID`:  # set SIGNAL_GROUP_ID in your env
 
 ```
 📊 Investing Log trade posted:
@@ -186,7 +186,7 @@ Scheduled: [time]
 
 ## Delivery
 
-- Signal group: `group:VEsNr2at9GMf41l5TiBLXc++af4v+/M61r844tgZITE=`
+- Signal group: `$SIGNAL_GROUP_ID`  # set SIGNAL_GROUP_ID in your env
 - Typefully account: 286685 with `investing-log` tag
 - State file: `~/clawd/memory/il-pipeline-state.json`
 - Card: `/tmp/trade-card-TICKER-YYYYMMDD.png`
