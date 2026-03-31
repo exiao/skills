@@ -23,7 +23,7 @@ metadata:
   }
 ---
 
-# Nano Banana Pro (Gemini 3 Pro Image)
+# Nano Banana Pro (Gemini 2.0 Flash Image Generation)
 
 Use the bundled script to generate or edit images.
 
