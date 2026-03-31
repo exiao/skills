@@ -11,6 +11,8 @@ Expert in viral growth and referral marketing. Design and optimize programs that
 
 ## Before Starting
 
+Read `.agents/product-marketing-context.md` if it exists — it contains product name, audience, and positioning context.
+
 Gather this context (ask if not provided):
 
 1. **Program Type**: Customer referral, affiliate, or both? B2B or B2C?

@@ -201,7 +201,6 @@ These started from other open-source projects. I've modified and extended them f
 | [growth](growth/) | Full-funnel growth: CRO, onboarding, paywalls, churn, launches, pricing |
 | [churn-prevention](churn-prevention/) | Subscription retention, cancel flows, save offers, dunning |
 | [email-sequence](email-sequence/) | Email sequences, drip campaigns, lifecycle messaging |
-| [copywriting](copywriting/) | Page copy frameworks + direct response for any platform |
 | [positioning-angles](positioning-angles/) | Product positioning, strategic angles, value propositions |
 
 ### From Other Projects
