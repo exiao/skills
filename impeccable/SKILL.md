@@ -7,7 +7,7 @@ description: Run impeccable design quality commands on frontend code — audit, 
 
 # Impeccable
 
-Design quality layer for Claude Code. 17 commands that audit, review, polish, and refine frontend interfaces. Complements the `frontend-design` skill (vision/direction) with systematic QA passes.
+Design quality layer for Claude Code. 21 commands that audit, review, polish, and refine frontend interfaces. Complements the `frontend-design` skill (vision/direction) with systematic QA passes.
 
 **Source:** https://github.com/pbakaus/impeccable  
 **Installed at:** `~/.claude/skills/` (frontend-design + 17 individual command skills)
