@@ -1,5 +1,5 @@
 ---
-name: fix-bloom-prs
+name: fix-prs
 description: Use when fixing CI failures, reviewing code, or addressing review comments on PRs across tracked repos.
 ---
 
@@ -121,6 +121,8 @@ For each PR, make a deliberate decision:
    ```bash
    bash ~/clawd/scripts/pr-mark-skip.sh <PR_NUM> "<reason>"
    ```
+   > **Note:** `pr-mark-skip.sh` is a machine-local script (not in this repo). It marks a PR as skipped so the cron doesn't re-flag it.
+
    Example reasons: `"stale bot threads"`, `"architecture decision needed"`, `"design change required"`
    The cron will re-flag the PR automatically if HEAD or updatedAt changes (new commit or comment).
 3. Do NOT post PR comments (they trigger claude-review re-runs and waste tokens)
@@ -151,11 +153,10 @@ When a PR has merge conflicts:
 2. **If the branch has old merged commits causing conflicts** (rebase would be painful):
    - Create a fresh branch from `origin/main`
    - Apply only the unique diff: `git diff origin/main origin/<branch> -- . | git apply --3way`
-   - If a file was deleted on main, exclude it from the diff:
+   - If a file was deleted on main, exclude it from the diff. Substitute the actual deleted file path in the pathspec exclusion:
      ```bash
      git diff origin/main origin/<branch> -- . ':!path/to/deleted-file' | git apply --3way
      ```
-     _(Replace `path/to/deleted-file` with the actual path.)_
    - If `git apply` fails, manually apply the changes
    - Commit, push new branch, create new PR referencing the old one
    - Close old PR with "Superseded by #XX (clean rebase from main)"
