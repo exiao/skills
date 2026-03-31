@@ -3,7 +3,7 @@ name: fix-bloom-prs
 description: Use when fixing CI failures, reviewing code, or addressing review comments on open PRs. Scans all tracked repos (Bloom, investing-log, skills), not just Bloom.
 ---
 
-# Fix Bloom PRs
+# Fix PRs
 
 Scan open PRs across all tracked repos for CI failures, review comments, and merge conflicts. Fix only when confident; comment when not.
 
@@ -11,7 +11,7 @@ Scan open PRs across all tracked repos for CI failures, review comments, and mer
 
 | Repo | Local path | Conventions file |
 |------|-----------|-----------------|
-| `Bloom-Invest/bloom` | `~/bloom` | `CLAUDE.md` |
+| `bloom-invest/bloom` | `~/bloom` | `CLAUDE.md` |
 | `bloom-invest/investing-log` | `~/clawd/investing-log` | `CLAUDE.md` or `AGENTS.md` |
 | `exiao/skills` | `~/clawd/skills` | n/a |
 
@@ -77,7 +77,7 @@ For each PR, gather context before deciding to fix or comment:
 
 ```bash
 PR=<number>
-REPO=<repo>  # use the repo value from preflight output, e.g. Bloom-Invest/bloom
+REPO=<repo>  # use the repo value from preflight output, e.g. bloom-invest/bloom
 
 # Commit count (circuit breaker check)
 gh api "repos/$REPO/pulls/$PR/commits?per_page=100" --jq 'length'
@@ -195,7 +195,7 @@ Review a PR with the same criteria as the GitHub Actions `claude-code-review.yml
 Use a worktree for isolated review — never switch branches in the main checkout:
 
 ```bash
-REPO=<repo>        # e.g. Bloom-Invest/bloom, exiao/skills
+REPO=<repo>        # e.g. bloom-invest/bloom, exiao/skills
 LOCAL=<local-path>  # e.g. ~/bloom, ~/clawd/skills (see Tracked Repos table)
 PR_NUM=<number>
 cd "$LOCAL"
