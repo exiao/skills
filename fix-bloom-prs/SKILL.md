@@ -51,6 +51,8 @@ The #1 failure mode is pushing speculative fixes that trigger new CI runs, new r
 
 ## Circuit Breakers
 
+> **Note:** `$REPO` below refers to the repo slug from preflight output (e.g. `bloom-invest/bloom`). It is set explicitly in the Triage step.
+
 **Commit count:** If a PR already has 15+ commits, DO NOT push more fixes. Comment only. The PR needs a squash or human attention, not more automated commits.
 
 **Repeat fix detection:** Before fixing, check if the last commit on the PR was from a previous cron run (author = "claude" or commit message matches cron fix patterns). If the cron already pushed a fix and the issue persists, the fix didn't work. Comment explaining what you tried and what's still broken. Do not retry the same approach.
@@ -70,6 +72,12 @@ When run manually:
 bash ~/clawd/scripts/pr-preflight.sh
 ```
 Output includes `repo` field for each PR needing attention.
+
+<!-- Manual fallback if preflight script is unavailable:
+gh pr list --repo bloom-invest/bloom --state open --json number,title,headRefName,updatedAt
+gh pr list --repo bloom-invest/investing-log --state open --json number,title,headRefName,updatedAt
+gh pr list --repo exiao/skills --state open --json number,title,headRefName,updatedAt
+-->
 
 ### 2. Triage each PR
 

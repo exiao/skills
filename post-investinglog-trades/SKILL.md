@@ -13,7 +13,7 @@ Pulls recent AI model trades from the Bloom investing-log repo, picks the most c
 
 | Tool | Purpose |
 |------|---------|
-| `gh` CLI | Fetch trade files from Bloom-Invest/investing-log repo |
+| `gh` CLI | Fetch trade files from bloom-invest/investing-log repo |
 | `web-search` skill | Enrich with current price + YTD % |
 | `nano-banana-pro` skill | Generate 1080×1080 trade card |
 | `typefully` skill | Upload card + create scheduled tweet draft |
@@ -29,15 +29,15 @@ Fetch the 5 most recent trades from each model folder:
 
 ```bash
 # Claude
-gh api 'repos/Bloom-Invest/investing-log/contents/trades/claude' \
+gh api 'repos/bloom-invest/investing-log/contents/trades/claude' \
   --jq '[.[] | {name: .name, download_url: .download_url}] | sort_by(.name) | reverse | .[0:5]'
 
 # OpenAI
-gh api 'repos/Bloom-Invest/investing-log/contents/trades/openai' \
+gh api 'repos/bloom-invest/investing-log/contents/trades/openai' \
   --jq '[.[] | {name: .name, download_url: .download_url}] | sort_by(.name) | reverse | .[0:5]'
 
 # Gemini
-gh api 'repos/Bloom-Invest/investing-log/contents/trades/gemini' \
+gh api 'repos/bloom-invest/investing-log/contents/trades/gemini' \
   --jq '[.[] | {name: .name, download_url: .download_url}] | sort_by(.name) | reverse | .[0:5]'
 ```
 
