@@ -19,13 +19,13 @@ Design quality layer for Claude Code. 17 commands that audit, review, polish, an
 - Targeted fixes: `/colorize`, `/animate`, `/bolder`, `/quieter`
 - Design system alignment: `/normalize`, `/extract`
 
-## 17 Commands
+## 21 Commands
 
 | Command | What it does |
 |---|---|
 | `/teach-impeccable` | One-time setup: gather design context, save to project config |
-| `/audit` | Technical quality checks (a11y, performance, responsive) |
-| `/critique` | UX design review: hierarchy, clarity, emotional resonance |
+| `/audit` | Technical quality checks (a11y, performance, responsive) — scores 5 dimensions with P0-P3 severity |
+| `/critique` | UX design review — scores against Nielsen's 10 heuristics, persona archetypes, cognitive load |
 | `/normalize` | Align with design system standards |
 | `/polish` | Final pass before shipping |
 | `/distill` | Strip to essence — remove unnecessary complexity |
@@ -40,6 +40,9 @@ Design quality layer for Claude Code. 17 commands that audit, review, polish, an
 | `/extract` | Pull into reusable components |
 | `/adapt` | Adapt for different devices |
 | `/onboard` | Design onboarding flows |
+| `/typeset` | Fix typography: font choices, hierarchy, sizing, weight, readability |
+| `/arrange` | Fix layout, spacing, visual rhythm, monotonous grids |
+| `/overdrive` | Technically extraordinary effects: shaders, spring physics, scroll-driven reveals (beta) |
 
 ## 7 Reference Files
 
