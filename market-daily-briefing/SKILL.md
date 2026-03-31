@@ -15,7 +15,7 @@ Delivers a concise, narrative market briefing covering earnings results, economi
 |------|---------|
 | **Serper** (`web-search` skill, `SERPER_API_KEY`) | Search for earnings results, analyst reactions, market news |
 | **Firecrawl** (`FIRECRAWL_API_KEY`) | Scrape full articles when Serper snippets cut off before the numbers |
-| **Bloom MCP** (`https://api.getbloom.app/mcp/`, Bearer: `test-api-key`) | Check what stocks Bloom users are watching — front-load coverage of these |
+| **Bloom MCP** (`https://api.getbloom.app/mcp/`, Bearer: `${BLOOM_MCP_API_KEY}`) | Check what stocks Bloom users are watching — front-load coverage of these |
 
 ---
 
@@ -52,20 +52,20 @@ Prioritize: mega-caps, widely-held names, dramatic movers (>5%), anything popula
 ## Delivery
 
 ### Signal (primary)
-Send to: `signal group:5TgLlI8NfnETVAzVvUi0rJ0WKz2Pz2Flj5i2/VAcFSY=`
+Send to: `signal group:$SIGNAL_BRIEFING_GROUP`
 
 ```python
 # Use message tool
 channel = "signal"
-target = "group:5TgLlI8NfnETVAzVvUi0rJ0WKz2Pz2Flj5i2/VAcFSY="
+target = f"group:{os.environ['SIGNAL_BRIEFING_GROUP']}"
 ```
 
 ### Typefully (secondary — @investwithbloom)
 After Signal, create a public-facing tweet of the sharpest single data point:
 
 ```bash
-cd /Users/testuser/clawd/skills/typefully
-node scripts/typefully.js drafts:create 286685 \
+cd $SKILLS_DIR/typefully
+node scripts/typefully.js drafts:create $TYPEFULLY_SOCIAL_SET_ID \
   --platform x \
   --text "<post text>"
 # Do NOT add --schedule. Save as unscheduled draft only — Eric reviews before posting.

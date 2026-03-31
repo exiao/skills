@@ -1,6 +1,6 @@
 ---
 name: nano-banana-pro
-description: "Generate or edit images via Gemini 3 Pro Image (Nano Banana Pro). Use when asked to generate an image, create artwork, edit a photo, add/remove elements from an image, compose multiple images, style transfer, create avatars, illustrations, or any visual content generation. Also use for 'make me an image of', 'edit this photo', 'create artwork', or 'generate a picture'."
+description: "Generate or edit images via Gemini 2.0 Flash Image Generation (Nano Banana Pro). Use when asked to generate an image, create artwork, edit a photo, add/remove elements from an image, compose multiple images, style transfer, create avatars, illustrations, or any visual content generation. Also use for 'make me an image of', 'edit this photo', 'create artwork', or 'generate a picture'."
 homepage: https://ai.google.dev/
 metadata:
   {
