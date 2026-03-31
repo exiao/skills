@@ -13,10 +13,6 @@ This repo is my personal skills directory. Skills are prompt templates that Open
 
 ---
 
-```bash
-cp -r ~/Projects/erics-skills/skills/copywriting ~/.clawdbot/skills/
-```
-
 ## Skills
 
 ### Content & Writing
@@ -25,7 +21,6 @@ cp -r ~/Projects/erics-skills/skills/copywriting ~/.clawdbot/skills/
 |-------|-------------|
 | [copywriting](copywriting/SKILL.md) | Page copy frameworks + direct response for any platform (ads, App Store, landing pages, scripts). |
 | [article-writer](article-writer/SKILL.md) | write article drafts from approved outlines with SEO and brand voice. |
-| [content-atomizer](content-atomizer/SKILL.md) | repurpose long-form content into platform-native pieces for 8+ channels. |
 | [editor-in-chief](editor-in-chief/SKILL.md) | autonomous editing orchestrator: diagnose, fix, and iterate drafts to quality. |
 | [evaluate-content](evaluate-content/SKILL.md) | judge content quality: shareability, readability, voice, cuttability, angle. |
 | [hooks](hooks/SKILL.md) | generate hooks, titles, and scroll-stopping openers for content. |
