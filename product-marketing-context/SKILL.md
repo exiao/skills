@@ -167,7 +167,6 @@ Show the completed document, ask for adjustments, save to `.agents/product-marke
 
 ## Related Skills
 
-- **competitive-analysis**: For deeper competitive research
-- **brand-identity**: For visual and verbal brand identity
+- **competitive-analysis**: For deeper competitive research and battlecards
 - **positioning-angles**: For positioning framework development
 - **copywriting**: For writing copy using this context

@@ -57,15 +57,15 @@ Send to: `signal group:$SIGNAL_BRIEFING_GROUP`
 ```python
 # Use message tool
 channel = "signal"
-target = "group:$SIGNAL_BRIEFING_GROUP"  # env var substituted at runtime
+target = f"group:$SIGNAL_BRIEFING_GROUP"
 ```
 
 ### Typefully (secondary — @investwithbloom)
 After Signal, create a public-facing tweet of the sharpest single data point:
 
 ```bash
-cd $SKILLS_DIR/typefully
-node scripts/typefully.js drafts:create $TYPEFULLY_SOCIAL_SET_ID \
+cd "$SKILLS_DIR/typefully"
+node scripts/typefully.js drafts:create "$TYPEFULLY_SOCIAL_SET_ID" \
   --platform x \
   --text "<post text>"
 # Do NOT add --schedule. Save as unscheduled draft only — Eric reviews before posting.
