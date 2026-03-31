@@ -34,13 +34,13 @@ Description: "Smart investing without the emotional decisions. Start with as lit
 ```
 Why it works: Addresses pain (emotional decisions). Low barrier ($10). Risk reversal (no minimum).
 
-### Bloom Ad Copy Examples
+### [YourApp] Ad Copy Examples
 
 **Google Search Ad (targeting "stock research app"):**
 ```
 Headline 1: AI Stock Research App           (21)
 Headline 2: Research Stocks in Seconds      (26)
-Headline 3: Free Download — Bloom           (20)
+Headline 3: Free Download — [YourApp]           (20)
 Description 1: Search any stock, get an instant AI breakdown. Analyst ratings, insider trades, earnings — all in one app.  (89)
 Description 2: 52,000+ investors. 4.8★ rating. AI reads the filings so you don't have to. Download free, no credit card.   (90)
 ```
@@ -55,7 +55,7 @@ Description 2: 52,000+ investors. 4.8★ rating. AI reads the filings so you don
         [Show app screen recording]
 [15-20s] "4.8 stars, 50K+ investors."
 [20-25s] "It's free. Link in bio."
-         Text: "Bloom — Download Free"
+         Text: "[YourApp] — Download Free"
 ```
 
 ---

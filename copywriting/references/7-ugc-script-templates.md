@@ -12,7 +12,7 @@ Before scripting, build the production infrastructure. Summary:
 
 **2. Generate a credible avatar**
 - Presenter = peer to target audience, not a spokesperson or actor
-- For Bloom: working investor in their 30s, not a finance bro or formal advisor
+- For [YourApp]: working investor in their 30s, not a finance bro or formal advisor
 - Tools: Midjourney, HeyGen. Generate 4–6 variants, pick the best demographic match.
 
 **3. Voice match precisely**
@@ -182,14 +182,14 @@ why you didn't switch sooner."
 - **30 seconds:** Full structure, compressed. One sentence per beat.
 - **45-60 seconds:** Full structure with room for details. Add second VALIDATION beat or DEMO segment.
 
-## Bloom-Specific Adaptations
+## [YourApp]-Specific Adaptations
 
-These templates work for Bloom ads by replacing generic placeholders:
+These templates work for [YourApp] ads by replacing generic placeholders:
 
-| Beat | Bloom-Specific Content |
+| Beat | [YourApp]-Specific Content |
 |------|----------------------|
 | PROBLEM | "Hours on Yahoo Finance, Reddit, Seeking Alpha. By the time I had a thesis, the stock already moved." |
 | DISCOVERY | "Search any ticker. Full AI breakdown in 30 seconds: analyst ratings, insider trades, earnings, bull/bear case." |
 | VALIDATION | "4.8 stars. 52,000 investors. The AI shows you WHERE it got the information." |
 | CTA | "Free to download. Link in bio." |
-| DEMO | Screen recording of Bloom: search NVDA → AI analysis → insider trades → earnings |
+| DEMO | Screen recording of [YourApp]: search NVDA → AI analysis → insider trades → earnings |

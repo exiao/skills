@@ -11,13 +11,13 @@ The name is your #1 ranking factor and your #1 brand signal. Use it wisely.
 **Formula**: `[Brand Name]: [Core Value Prop]` or `[Brand Name] - [Key Benefit]`
 
 ```
-✅ Bloom: Stock Research & AI      (28 chars)
-✅ Bloom - AI Investing Research    (30 chars)
-✅ Bloom: AI Stock Analysis         (25 chars)
+✅ [YourApp]: Stock Research & AI      (28 chars)
+✅ [YourApp] - AI Investing Research    (30 chars)
+✅ [YourApp]: AI Stock Analysis         (25 chars)
 
-❌ Bloom                            (wastes keyword space)
-❌ Bloom - The Best AI-Powered...   (truncated, looks broken)
-❌ Bloom Investing Research AI App  (keyword stuffing)
+❌ [YourApp]                         (wastes keyword space)
+❌ [YourApp] - The Best AI-Powered...   (truncated, looks broken)
+❌ [YourApp] Investing Research AI App  (keyword stuffing)
 ```
 
 **Finance/investing app examples that convert:**
@@ -66,7 +66,7 @@ Only the first 3 lines (~90 characters) are visible before "more." These 3 lines
 LINE 1-3 (above the fold — this is everything):
 [Benefit-driven hook that makes them tap "more"]
 
-"Research any stock in 30 seconds. Bloom uses AI to break down analyst
+"Research any stock in 30 seconds. [YourApp] uses AI to break down analyst
 ratings, insider trades, earnings, and catalysts — so you make smarter
 investment decisions without spending hours reading filings."
 
@@ -85,9 +85,9 @@ HOW IT WORKS
 3. Receive alerts when something changes (analyst upgrade, insider buy, earnings beat)
 
 WHAT MAKES BLOOM DIFFERENT
-Unlike stock screeners that give you raw data, Bloom explains what the data means. Our AI reads 10-K filings, earnings transcripts, and analyst reports — then gives you the insight in plain English.
+Unlike stock screeners that give you raw data, [YourApp] explains what the data means. Our AI reads 10-K filings, earnings transcripts, and analyst reports — then gives you the insight in plain English.
 
-"I found a 40% undervalued stock in my first week using Bloom."
+"I found a 40% undervalued stock in my first week using [YourApp]."
 — App Store review, ★★★★★
 
 WHAT'S INCLUDED FREE
@@ -102,7 +102,7 @@ BLOOM PREMIUM
 ✓ Advanced screeners and filters
 ✓ Priority alerts
 
-Download Bloom. Research your first stock in 60 seconds.
+Download [YourApp]. Research your first stock in 60 seconds.
 ```
 
 **Rules:**
@@ -110,7 +110,7 @@ Download Bloom. Research your first stock in 60 seconds.
 - Use line breaks aggressively. Walls of text don't get read.
 - Bullet points > paragraphs for features
 - One user quote with stars. Specificity > effusiveness.
-- End with a CTA. "Download Bloom" not "We hope you enjoy our app!"
+- End with a CTA. "Download [YourApp]" not "We hope you enjoy our app!"
 - Don't use the description for keyword stuffing. iOS doesn't index it.
 - Update quarterly. Test different above-fold hooks.
 
@@ -121,7 +121,7 @@ Most apps waste this with "bug fixes and performance improvements." That's a mis
 ```
 ✅ GOOD:
 NEW: AI earnings analysis
-Bloom now breaks down earnings reports in real-time. Get the bull case, bear 
+[YourApp] now breaks down earnings reports in real-time. Get the bull case, bear 
 case, and key surprises within minutes of the announcement.
 
 Also in this update:
@@ -177,7 +177,7 @@ This is your App Store subtitle equivalent but with nearly 3x the space. Use it.
 ✅ Research any stock in 30 seconds with AI. Free to download.                   (65 chars)
 
 ❌ The best investing app for stock market research                               (generic)
-❌ Bloom is an AI-powered investing research platform                             (feature, not benefit)
+❌ [YourApp] is an AI-powered investing research platform                             (feature, not benefit)
 ```
 
 #### Full Description (4,000 characters)

@@ -11,7 +11,7 @@ Subject: Your first stock research is waiting (26 chars + emoji optional)
 Preview: Search any stock and get an instant AI breakdown
 
 Body:
-Welcome to Bloom.
+Welcome to [YourApp].
 
 Here's how to get your first insight in 60 seconds:
 
@@ -21,7 +21,7 @@ Here's how to get your first insight in 60 seconds:
 
 That's it. You just did in 30 seconds what used to take 30 minutes.
 
-[CTA Button: "Open Bloom"]
+[CTA Button: "Open [YourApp]"]
 
 — Eric, Founder
 
@@ -35,14 +35,14 @@ Subject: The feature 90% of new users miss
 Preview: Most people don't set this up and regret it
 
 Body:
-Most Bloom users don't set up alerts until after they miss a big move.
+Most [YourApp] users don't set up alerts until after they miss a big move.
 
 Set up a watchlist alert in 20 seconds:
 1. Add stocks to your watchlist
 2. Tap the bell icon on any stock
 3. Choose: analyst upgrades, insider trades, earnings, or price targets
 
-Last week, Bloom users got alerted to 47 analyst upgrades before the 
+Last week, [YourApp] users got alerted to 47 analyst upgrades before the 
 market opened.
 
 [CTA Button: "Set Up Alerts"]
@@ -51,18 +51,18 @@ market opened.
 **Email 3: Day 4 (Social proof)**
 
 ```
-Subject: What 52,000 investors found in Bloom
+Subject: What 52,000 investors found in [YourApp]
 Preview: Real results from real users
 
 Body:
-Bloom has a 4.8★ rating from 2,400+ reviews. Here's what investors say:
+[YourApp] has a 4.8★ rating from 2,400+ reviews. Here's what investors say:
 
 "Found an insider buying pattern I never would've caught on my own."
 "Replaced Seeking Alpha, Yahoo Finance, and 2 hours of morning research."
 "The AI doesn't just summarize — it actually tells you what matters."
 
 The pattern: investors who research at least 3 stocks in their first 
-week are 4x more likely to keep using Bloom daily.
+week are 4x more likely to keep using [YourApp] daily.
 
 You've researched [X] so far. Try 3 more today.
 
@@ -72,16 +72,16 @@ You've researched [X] so far. Try 3 more today.
 **Email 4: Day 7 (Value expansion)**
 
 ```
-Subject: You're using 20% of Bloom
+Subject: You're using 20% of [YourApp]
 Preview: 3 features most users discover late
 
 Body:
-You've been using Bloom for a week. Here are 3 things you probably 
+You've been using [YourApp] for a week. Here are 3 things you probably 
 haven't tried yet:
 
 1. ASK THE AI A QUESTION
 Type a question like "Is NVDA overvalued?" and get a sourced answer.
-Not ChatGPT guessing — Bloom cites actual filings and data.
+Not ChatGPT guessing — [YourApp] cites actual filings and data.
 
 2. COMPARE STOCKS
 Search a stock and tap "Compare." Side-by-side analysis with AI 
@@ -128,7 +128,7 @@ Subject: Your Premium trial is live
 Preview: Here's how to get the most out of the next 14 days
 
 Body:
-You've got 14 days of Bloom Premium. Here's the fastest way to see 
+You've got 14 days of [YourApp] Premium. Here's the fastest way to see 
 the difference:
 
 1. Search a stock you're considering buying
@@ -199,7 +199,7 @@ While you were away, here's what happened to your watchlist:
 • AAPL: CEO bought $5M in stock  
 • TSLA: Beat earnings by 12%
 
-You missed these alerts because you haven't opened Bloom in 2 weeks.
+You missed these alerts because you haven't opened [YourApp] in 2 weeks.
 
 [CTA Button: "See What You Missed"]
 ```
@@ -209,7 +209,7 @@ Use real data from their watchlist. Generic "we miss you" emails get deleted.
 **Email 2: Day 21**
 
 ```
-Subject: What changed in Bloom since you left
+Subject: What changed in [YourApp] since you left
 Preview: 2 new features you haven't seen
 
 Body:
@@ -220,7 +220,7 @@ We shipped 2 features since your last visit:
 
 Plus: your watchlist is still active and tracking [X] stocks.
 
-[CTA Button: "Open Bloom"]
+[CTA Button: "Open [YourApp]"]
 ```
 
 **Email 3: Day 30 (final attempt)**

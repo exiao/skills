@@ -61,7 +61,7 @@ Every piece of content must pass this test: **can a stranger who has never heard
 | Source framing | Reader-first reframe |
 |----------------|----------------------|
 | "We hit 50k users by doing X" | "The one thing that unlocks your first 50k users" |
-| "Bloom now supports Y feature" | "The feature that makes investors actually stick around" |
+| "Our app now supports Y feature" | "The feature that makes users actually stick around" |
 | "I learned Z from this experience" | "Why Z is the thing most people get backwards" |
 
 Tutorials, frameworks, explainers: no reframe needed. Achievements, milestones, announcements: always reframe.
@@ -174,7 +174,7 @@ Source: @thebranding.ai breakdown of multiple creators going viral with the same
 3. Deliver value through speech while the visual activity anchors attention
 4. Close with soft CTA or open loop
 
-**Bloom application:** Film hands writing stock tickers on a notepad, scrolling through the Bloom app, or organizing investment notes while delivering investing insights via voiceover.
+**Application example:** Film hands writing notes on a pad, scrolling through your app, or organizing research while delivering insights via voiceover.
 
 | Audience Temp | Best Formats |
 |--------------|-------------|
@@ -272,10 +272,10 @@ This is a full account pillar — not a one-off format. Run it every week.
 
 Place labels at the moment you identify the tactic, not before. Let the source video play 2-3 seconds first, then drop the label as your "aha" moment. Use bold white or colored text, large enough to read on mobile, centered or near the source video panel.
 
-**Bloom-specific example:**
-- Source: viral TikTok of someone showing their Robinhood portfolio down 40% (2M+ views)
+**Example:**
+- Source: viral TikTok of someone showing their portfolio down 40% (2M+ views)
 - Labels you'd drop: "LOSS AVERSION" (the emotional hook), "ROUND NUMBER" (they lost exactly $10K, not $9,847), "SCREENSHOT FORMAT" (looks organic, not produced), "NO CTA" (the virality IS the content, no ask)
-- Your commentary: explain each label as an investing psychology + content strategy concept simultaneously. Double value for the viewer.
+- Your commentary: explain each label as a psychology + content strategy concept simultaneously. Double value for the viewer.
 
 **Sourcing:** Use `last30days`, `grok-search`, or `trend-research` to find viral posts in the investing/personal finance niche weekly. Look for 50K+ views, especially from accounts under 10K followers (pre-algo signal).
 
@@ -403,7 +403,7 @@ What a complete strategy card looks like after running this skill. Use this as t
 
 ---
 
-**Campaign:** Bloom AI — Cold TikTok / Instagram (March 2026)  
+**Campaign:** [Your Product] — Cold TikTok / Instagram  
 **Topic:** AI has an edge in investing that retail investors don't know about  
 **Audience level:** 1–2 (unaware / problem-aware)
 
@@ -413,7 +413,7 @@ What a complete strategy card looks like after running this skill. Use this as t
 - Audience language: "I don't even know where to start", "I feel like I'm always late to the news"
 
 **Angles (pick one per batch):**
-1. *Wound-first:* "By the time you read the news, the trade already happened." → exits to Bloom seeing it first
+1. *Wound-first:* "By the time you read the news, the trade already happened." → exits to your product seeing it first
 2. *Surprising number:* "Hedge funds run 10,000 stock screens before breakfast. Here's how to match that for free."
 3. *Stolen thought:* "You already know the stock market isn't fair. Here's the part nobody explains."
 
@@ -454,7 +454,7 @@ The hierarchy: **Posting > Targeting > Platform choice > Repurposing > Scripting
 
 ---
 
-## Channel Tier List (Bloom / B2C)
+## Channel Tier List (B2C)
 
 What actually works for consumer apps vs. what sounds good but doesn't.
 
@@ -495,9 +495,9 @@ Quiz sequencing that converts:
 
 Drop-off benchmarks: Q1 = 30-40% drop-off (normal, biggest filter). Remaining questions: under 15% each. Overall completion: aim for 25%+. If any single question has 10%+ drop-off, simplify it (fewer options, add "None of the above").
 
-Retargeting play: Everyone who takes the quiz but doesn't install gave you data. Segment retargeting by their answers: "tried other investing apps" → ad about why Bloom's AI is different. "Low confidence in stock picks" → ad about AI-powered research. Specific beats generic.
+Retargeting play: Everyone who takes the quiz but doesn't install gave you data. Segment retargeting by their answers: "tried other apps" → ad about why your product is different. "Low confidence" → ad about your core differentiator. Specific beats generic.
 
-Bloom application: The onboarding flow already asks risk tolerance and goals post-install. A pre-install web quiz version of this would warm traffic before the App Store page, and the data feeds retargeting even if they never install.
+Application: If your onboarding flow already asks preference questions post-install, a pre-install web quiz version warms traffic before the App Store page, and the data feeds retargeting even if they never install.
 
 Source: @DTC_Quizbuilder thread (https://x.com/DTC_Quizbuilder/status/2010379560769015885)
 

@@ -57,7 +57,7 @@ Send to: `signal group:$SIGNAL_BRIEFING_GROUP`
 ```python
 # Use message tool
 channel = "signal"
-target = f"group:{os.environ['SIGNAL_BRIEFING_GROUP']}"
+target = "group:$SIGNAL_BRIEFING_GROUP"  # env var substituted at runtime
 ```
 
 ### Typefully (secondary — @investwithbloom)

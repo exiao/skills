@@ -22,15 +22,15 @@ Never Miss an Upgrade           (22)
 **Tier 2: Proof/trust headlines (write 3)**
 ```
 4.8★ Rating, 2,400+ Reviews    (28)
-52,000+ Investors Use Bloom     (27)
+52,000+ Investors Use [YourApp]     (27)
 Free Download, No Card Needed   (30)
 ```
 
 **Tier 3: CTA headlines (write 3)**
 ```
-Download Bloom Free             (19)
+Download [YourApp] Free             (19)
 Start Investing Smarter         (23)
-Try Bloom - It's Free           (20)
+Try [YourApp] - It's Free           (20)
 ```
 
 **Tier 4: Keyword-match headlines (write 4)**
@@ -62,7 +62,7 @@ Description 3 (risk reversal):
 "Free to download. No credit card. Cancel premium anytime. Start in under a minute." (84)
 
 Description 4 (differentiator):
-"Unlike screeners, Bloom explains what the data means. AI reads filings for you."    (81)
+"Unlike screeners, [YourApp] explains what the data means. AI reads filings for you."    (81)
 ```
 
 **Rules:**
@@ -75,12 +75,12 @@ Description 4 (differentiator):
 
 Performance Max needs more creative variation. Supply:
 
-| Asset Type | Quantity | Bloom Examples |
+| Asset Type | Quantity | [YourApp] Examples |
 |-----------|----------|----------------|
 | Headlines (30 char) | 5 min | Same RSA headlines |
 | Long headlines (90 char) | 5 min | "Research Any Stock in 30 Seconds with AI-Powered Analysis. Download Free." |
 | Descriptions (90 char) | 4 min | Same RSA descriptions |
-| Business name | 1 | "Bloom" |
+| Business name | 1 | "[YourApp]" |
 | Call to action | 1 | "Download" or "Get offer" |
 | Images | 3+ (1200x628, 960x960, 480x600) | App screenshots, results, UI |
 | Videos | 1+ (landscape + vertical) | Same as TikTok/Meta scripts |
@@ -112,7 +112,7 @@ Desc 2: "Research your first stock in 60s."
 
 Title: "See App Reviews"
 Desc 1: "4.8★ average from 2,400+ ratings."
-Desc 2: "Investors love Bloom's AI research."
+Desc 2: "Investors love [YourApp]'s AI research."
 ```
 
 **Callouts (25 characters):**

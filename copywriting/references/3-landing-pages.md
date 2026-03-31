@@ -11,7 +11,7 @@ HEADLINE (8-12 words):
 "Research Any Stock in 30 Seconds"
 
 SUBHEADLINE (15-25 words):
-"Bloom uses AI to break down analyst ratings, insider trades, and earnings.
+"[YourApp] uses AI to break down analyst ratings, insider trades, and earnings.
 52,000 investors already use it."
 
 CTA BUTTON:
@@ -36,7 +36,7 @@ HEADER: "Researching Stocks Shouldn't Take Hours"
 You're juggling Yahoo Finance, SEC filings, Reddit threads, and CNBC alerts.
 By the time you piece it all together, the move already happened.
 
-[Visual: cluttered multi-tab browser screenshot vs. clean Bloom UI]
+[Visual: cluttered multi-tab browser screenshot vs. clean [YourApp] UI]
 ```
 
 Name the specific pain. "Investing is hard" is not a problem statement. "You're checking 6 sources to make one decision" is.
@@ -46,7 +46,7 @@ Name the specific pain. "Investing is hard" is not a problem statement. "You're 
 ```
 HEADER: "One Screen. Every Insight."
 
-Bloom reads the filings, tracks the analysts, monitors insider trades, and
+[YourApp] reads the filings, tracks the analysts, monitors insider trades, and
 summarizes it all in plain English.
 
 FEATURE BLOCKS (3 max, benefit-first):
@@ -63,7 +63,7 @@ FEATURE BLOCKS (3 max, benefit-first):
 #### Social Proof Section
 
 ```
-HEADER: "52,000 Investors Already Use Bloom"
+HEADER: "52,000 Investors Already Use [YourApp]"
 
 ★★★★★ "I found a 40% undervalued stock in my first week."
 — @InvestorMike, App Store review
@@ -95,15 +95,15 @@ Yes. Download and basic research are completely free. No credit card required.
 Premium unlocks unlimited AI conversations and advanced alerts.
 
 "Is the AI actually good?"
-Bloom's AI cites its sources. Every insight links back to the filing, transcript,
+[YourApp]'s AI cites its sources. Every insight links back to the filing, transcript,
 or data point it came from. No hallucinated financial advice.
 
 "I already use [competitor]."
-Bloom isn't a replacement for your brokerage. It's a research layer that makes
-every platform better. Use Bloom to research, use your broker to trade.
+[YourApp] isn't a replacement for your brokerage. It's a research layer that makes
+every platform better. Use [YourApp] to research, use your broker to trade.
 
 "Is my data safe?"
-Bloom doesn't access your brokerage accounts. Read-only market data. Your 
+[YourApp] doesn't access your brokerage accounts. Read-only market data. Your 
 portfolio data stays on your device.
 ```
 

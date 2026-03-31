@@ -1,12 +1,12 @@
 # Brand Voice Reference
 
-**Read `~/marketing/WRITING-STYLE.md`** before writing any copy. Bloom's voice is concrete, specific, honest, and irreverent. Even in ads, we sound like a smart friend, not a corporation. "Start investing smarter" is generic. "See exactly why Tesla dropped 12% before your coworker does" is Bloom.
+**Read your writing style guide** before writing any copy. Your voice should be concrete, specific, honest, and irreverent. Even in ads, sound like a smart friend, not a corporation. "Start investing smarter" is generic. "See exactly why Tesla dropped 12% before your coworker does" is specific.
 
 ## Voice and Tone Matrix
 
-Before writing, pin the brand on each axis. Bloom's defaults shown — adjust per context (e.g., error states skew more serious; TikTok skews more casual).
+Before writing, pin the brand on each axis. [YourApp]'s defaults shown — adjust per context (e.g., error states skew more serious; TikTok skews more casual).
 
-| Axis | ← | → | Bloom default |
+| Axis | ← | → | [YourApp] default |
 |------|---|---|---------------|
 | Tone | Funny | Serious | 30% funny / 70% serious |
 | Register | Casual | Formal | Casual |
