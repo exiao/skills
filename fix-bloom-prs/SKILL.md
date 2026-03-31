@@ -183,23 +183,25 @@ Ask Eric before fixing PRs by other authors.
 
 # Review PR
 
-Review a Bloom PR with the same criteria as the GitHub Actions `claude-code-review.yml`.
+Review a PR with the same criteria as the GitHub Actions `claude-code-review.yml`.
 
 ## Inputs
 
 - PR number or URL (ask if not provided)
-- Repo defaults to `Bloom-Invest/bloom`
+- Repo (ask if not provided; see Tracked Repos table for valid repos)
 
 ## Setup
 
 Use a worktree for isolated review — never switch branches in the main checkout:
 
 ```bash
-cd ~/bloom
+REPO=<repo>        # e.g. Bloom-Invest/bloom, exiao/skills
+LOCAL=<local-path>  # e.g. ~/bloom, ~/clawd/skills (see Tracked Repos table)
 PR_NUM=<number>
+cd "$LOCAL"
 git fetch origin pull/${PR_NUM}/head:pr-${PR_NUM}
-git worktree add /tmp/bloom-worktrees/review-${PR_NUM} pr-${PR_NUM}
-cd /tmp/bloom-worktrees/review-${PR_NUM}
+git worktree add /tmp/review-worktrees/review-${PR_NUM} pr-${PR_NUM}
+cd /tmp/review-worktrees/review-${PR_NUM}
 ```
 
 ## Review Criteria
@@ -224,22 +226,22 @@ cd /tmp/bloom-worktrees/review-${PR_NUM}
 
 1. **Read PR metadata and diff:**
    ```bash
-   gh pr view ${PR_NUM} --repo Bloom-Invest/bloom --json title,body,files,author,labels
-   gh pr diff ${PR_NUM} --repo Bloom-Invest/bloom
+   gh pr view ${PR_NUM} --repo $REPO --json title,body,files,author,labels
+   gh pr diff ${PR_NUM} --repo $REPO
    ```
 
 2. **Understand context** — read the changed files in full, not just the diff.
 
 3. **Check CI status:**
    ```bash
-   gh pr checks ${PR_NUM} --repo Bloom-Invest/bloom
+   gh pr checks ${PR_NUM} --repo $REPO
    ```
 
 4. **Read existing review comments:**
    ```bash
-   gh api --paginate repos/Bloom-Invest/bloom/pulls/${PR_NUM}/comments | \
+   gh api --paginate "repos/$REPO/pulls/${PR_NUM}/comments" | \
      jq '.[] | {author: .user.login, path: .path, line: .line, body: .body[0:300]}'
-   gh api --paginate repos/Bloom-Invest/bloom/pulls/${PR_NUM}/reviews | \
+   gh api --paginate "repos/$REPO/pulls/${PR_NUM}/reviews" | \
      jq '.[] | {author: .user.login, state: .state, body: .body[0:500]}'
    ```
 
@@ -258,13 +260,13 @@ cd /tmp/bloom-worktrees/review-${PR_NUM}
 ## Output
 
 ```bash
-gh pr comment ${PR_NUM} --repo Bloom-Invest/bloom --body "<review>"
+gh pr comment ${PR_NUM} --repo $REPO --body "<review>"
 ```
 
 ## Cleanup
 
 ```bash
-cd ~/bloom
-git worktree remove /tmp/bloom-worktrees/review-${PR_NUM}
+cd "$LOCAL"
+git worktree remove /tmp/review-worktrees/review-${PR_NUM}
 git branch -D pr-${PR_NUM} 2>/dev/null
 ```
