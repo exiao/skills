@@ -66,8 +66,7 @@ target = f"group:{os.environ['SIGNAL_BRIEFING_GROUP']}"
 After Signal, create a public-facing tweet of the sharpest single data point:
 
 ```bash
-cd "$SKILLS_DIR/typefully"
-node scripts/typefully.js drafts:create "$TYPEFULLY_SOCIAL_SET_ID" \
+node "$SKILLS_DIR/typefully/scripts/typefully.js" drafts:create "$TYPEFULLY_SOCIAL_SET_ID" \
   --platform x \
   --text "<post text>"
 # Do NOT add --schedule. Save as unscheduled draft only — Eric reviews before posting.
@@ -97,3 +96,4 @@ Tweet guidelines:
 3. **Skipping stock reaction** — A beat/miss means nothing without the stock's actual % move. Always include both.
 4. **Too long** — Under 2000 characters. If it's longer, cut. Quiet days = 2-3 sentences.
 5. **Copying Signal verbatim to Typefully** — Public post needs to be distilled to one sharp point, not a copy-paste.
+6. **Unverified numbers** — Article snippets often cite stale or approximate % moves. Verify price moves against a live source (Serper, Firecrawl on earnings release) before including specific figures.
