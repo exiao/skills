@@ -3,7 +3,7 @@ name: fix-bloom-prs
 description: Use when fixing CI failures, reviewing code, or addressing review comments on PRs across tracked repos.
 ---
 
-# Fix Bloom PRs
+# Fix PRs (Multi-Repo)
 
 Scan open PRs across all tracked repos for CI failures, review comments, and merge conflicts. Fix only when confident; comment when not.
 
