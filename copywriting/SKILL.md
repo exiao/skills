@@ -1,6 +1,8 @@
 ---
 name: copywriting
 description: "Write or improve marketing copy for any surface: pages, ads, app stores, landing pages, TikTok/Meta scripts, push notifications, UGC. Combines page copy frameworks with direct response principles."
+metadata:
+  version: 1.0.0
 ---
 
 # Copywriting
