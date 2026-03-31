@@ -55,9 +55,11 @@ Prioritize: mega-caps, widely-held names, dramatic movers (>5%), anything popula
 Send to: `signal group:$SIGNAL_BRIEFING_GROUP`
 
 ```python
+import os
+
 # Use message tool
 channel = "signal"
-target = f"group:$SIGNAL_BRIEFING_GROUP"
+target = f"group:{os.environ['SIGNAL_BRIEFING_GROUP']}"
 ```
 
 ### Typefully (secondary — @investwithbloom)

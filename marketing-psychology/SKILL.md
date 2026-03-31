@@ -157,6 +157,8 @@ Study failed campaigns, not just successful ones. The viral hit you're copying h
 | Decision paralysis | Paradox of Choice, Default Effect, Nudge Theory |
 | Onboarding | Goal-Gradient, IKEA Effect, Commitment & Consistency |
 
+> Models without dedicated sections above (Hick's Law, Activation Energy, Default Effect, Nudge Theory, Local vs Global Optima) are well-documented externally. Use them when the symptom matches.
+
 ---
 
 ## Related Skills
