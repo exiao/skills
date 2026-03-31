@@ -12,7 +12,7 @@ Daily 4am routine: audit running ads via Meta Marketing API, kill underperformer
 ## API Credentials
 
 ```bash
-TOKEN=$META_ACCESS_TOKEN      # Meta Marketing API token
+TOKEN="${META_ACCESS_TOKEN:-$FACEBOOK_ACCESS_TOKEN}"  # Meta Marketing API token (supports both env var names)
 ACCOUNT="$BLOOM_AD_ACCOUNT_ID"    # Bloom ad account (act_...)
 API="https://graph.facebook.com/v22.0"
 PAGE_ID="$BLOOM_PAGE_ID"           # Facebook Page ID
@@ -342,7 +342,7 @@ For iOS app campaigns, use Apple Custom Product Pages (CPPs) as the ad destinati
 
 ## Common Mistakes
 
-1. **Token not set** — always use `$META_ACCESS_TOKEN` from env. Never hardcode.
+1. **Token not set** — always use `$META_ACCESS_TOKEN` from env (also accepts `$FACEBOOK_ACCESS_TOKEN`). Never hardcode.
 2. **Wrong budget units** — daily_budget is in cents. $5/day = 500, $6/day = 600.
 3. **Repeating a hook/format/concept combo** — always audit exclusion list first.
 4. **Forgetting Android ad set** — each creative should get two ads (iOS + Android ad sets).
