@@ -169,7 +169,7 @@ If the file doesn't exist, create it:
 
 ### Step 11 — Report to Signal
 
-Send to `$SIGNAL_GROUP_ID` (set `SIGNAL_GROUP_ID` env var):
+Send to the Signal group configured via the `$SIGNAL_GROUP_ID` environment variable:
 
 ```
 📊 Investing Log trade posted:

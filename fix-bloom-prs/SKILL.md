@@ -1,9 +1,9 @@
 ---
-name: fix-prs
-description: Use when fixing CI failures, reviewing code, or addressing review comments on PRs across tracked repos.
+name: fix-bloom-prs
+description: Use when fixing CI failures, reviewing code, or addressing review comments on open PRs. Scans all tracked repos (Bloom, investing-log, skills), not just Bloom.
 ---
 
-# Fix PRs (Multi-Repo)
+# Fix Bloom PRs
 
 Scan open PRs across all tracked repos for CI failures, review comments, and merge conflicts. Fix only when confident; comment when not.
 
@@ -63,9 +63,9 @@ The #1 failure mode is pushing speculative fixes that trigger new CI runs, new r
 
 When run via cron, the preflight script (`bash ~/clawd/scripts/pr-preflight.sh`) handles PR discovery. If no output, stop. Otherwise proceed with the flagged PRs.
 
-> **Note:** `pr-preflight.sh` is a machine-local script (not in this repo). It scans tracked repos for PRs needing attention.
+> **Note:** `pr-preflight.sh` is a workspace-specific script (not included in this repo). It scans tracked repos for PRs needing attention and outputs a `repo` field for each flagged PR.
 
-When run manually, use the preflight script which scans all tracked repos:
+When run manually:
 ```bash
 bash ~/clawd/scripts/pr-preflight.sh
 ```
@@ -77,7 +77,7 @@ For each PR, gather context before deciding to fix or comment:
 
 ```bash
 PR=<number>
-REPO=<repo>  # from preflight output, e.g. Bloom-Invest/bloom
+REPO=<repo>  # use the repo value from preflight output, e.g. Bloom-Invest/bloom
 
 # Commit count (circuit breaker check)
 gh api "repos/$REPO/pulls/$PR/commits?per_page=100" --jq 'length'
@@ -144,7 +144,7 @@ After pushing a fix, check that CI starts. Do NOT wait for CI to complete and pu
 
 When a PR has merge conflicts:
 
-1. **Check if the branch diverged far from main** (5+ commits ahead of main, many already merged):
+1. **Check if the branch diverged far from main** (5+ commits ahead of main, especially if some were already merged into main separately):
    ```bash
    git log --oneline origin/main..origin/<branch> | wc -l
    git diff origin/main origin/<branch> --stat | tail -1
@@ -153,8 +153,9 @@ When a PR has merge conflicts:
 2. **If the branch has old merged commits causing conflicts** (rebase would be painful):
    - Create a fresh branch from `origin/main`
    - Apply only the unique diff: `git diff origin/main origin/<branch> -- . | git apply --3way`
-   - If a file was deleted on main, exclude it from the diff. Substitute the actual deleted file path in the pathspec exclusion:
+   - If a file was deleted on main, exclude it from the diff:
      ```bash
+     # Replace path/to/deleted-file with the actual path of the file deleted on main
      git diff origin/main origin/<branch> -- . ':!path/to/deleted-file' | git apply --3way
      ```
    - If `git apply` fails, manually apply the changes
