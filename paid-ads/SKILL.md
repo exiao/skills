@@ -193,7 +193,6 @@ Captions always (85% watch without sound). Native feel outperforms polished.
 ## Related Skills
 
 - **meta-ads**: For Meta Marketing API operations
-- **google-ads**: For Google Ads API operations
 - **copywriting**: For landing page and ad copy
 - **growth**: For post-click conversion optimization
 - **marketing-psychology**: For ad psychology principles
