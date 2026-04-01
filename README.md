@@ -38,7 +38,7 @@ This repo is my personal skills directory. Skills are prompt templates that Open
 | [cold-email](cold-email/) | B2B cold email writing and follow-up sequences |
 | [competitive-analysis](competitive-analysis/) | Research competitors and build interactive battlecards |
 | [content-performance-report](content-performance-report/) | Weekly content pillar performance report (cron) |
-| [copywriting](copywriting/) | Page copy frameworks + direct response for any platform (adapted from [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills)) |
+| [copywriting](copywriting/) | Write or improve marketing copy for any surface: pages, ads, app stores, landing pages, video scripts, push notifications. Combines page copy frameworks with direct response principles. |
 | [dogfood](dogfood/) | QA and exploratory test web applications, produce structured reports |
 | [launch-strategy](launch-strategy/) | Product launches, feature announcements, Product Hunt, go-to-market |
 | [market-daily-briefing](market-daily-briefing/) | Daily market briefing: earnings, macro, notable moves (cron) |
