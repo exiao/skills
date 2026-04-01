@@ -157,7 +157,15 @@ Study failed campaigns, not just successful ones. The viral hit you're copying h
 | Decision paralysis | Paradox of Choice, Default Effect, Nudge Theory |
 | Onboarding | Goal-Gradient, IKEA Effect, Commitment & Consistency |
 
-> Models without dedicated sections above (Hick's Law, Activation Energy, Default Effect, Nudge Theory, Local vs Global Optima) are well-documented externally. Use them when the symptom matches.
+## Model Definitions
+
+Brief descriptions for models referenced above without dedicated sections:
+
+- **Hick's Law**: More choices = longer decision time. Reduce options to speed up conversions.
+- **Activation Energy**: The effort required to start an action. Lower activation energy (fewer clicks, pre-filled forms) to increase uptake.
+- **Default Effect**: People stick with pre-selected defaults. Set smart defaults that serve both user and business goals.
+- **Nudge Theory**: Small environmental changes guide behavior without restricting choices. Surface the desired action where attention already is.
+- **Local vs Global Optima**: Optimizing one part of the funnel can hurt overall performance. Evaluate changes against the full-funnel metric, not just the step being changed.
 
 ---
 

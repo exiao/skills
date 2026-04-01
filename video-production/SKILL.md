@@ -37,7 +37,7 @@ This skill routes video tasks to the correct sub-skill. Read the task, pick the 
 - "motion graphics" / "Framer Motion" / "GSAP animation" / "brand video for the web" → **browser-animation-video**
 - "record a demo" / "walkthrough video" / "screen-record the app" → **demo-video**
 - "SVG animation" / "animated icon" / "Gemini SVG" → **gemini-svg**
-- "thumbnail" / "cover frame" / "video cover" / "extract frame" → **thumbnail**
+- "thumbnail" / "cover frame" / "video cover" / "extract frame" / "YouTube thumbnail" → **thumbnail**
 
 **Ambiguous cases — ask the user:**
 - "Make me a video" with no other context → ask: *Do you want (a) AI-generated footage, (b) a coded animation, or (c) a screen recording of a real app?*
