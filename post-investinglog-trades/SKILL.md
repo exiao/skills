@@ -13,7 +13,7 @@ Pulls recent AI model trades from the Bloom investing-log repo, picks the most c
 
 | Tool | Purpose |
 |------|---------|
-| `gh` CLI | Fetch trade files from Bloom-Invest/investing-log repo |
+| `gh` CLI | Fetch trade files from bloom-invest/investing-log repo |
 | `web-search` skill | Enrich with current price + YTD % |
 | `nano-banana-pro` skill | Generate 1080×1080 trade card |
 | `typefully` skill | Upload card + create scheduled tweet draft |
@@ -29,15 +29,15 @@ Fetch the 5 most recent trades from each model folder:
 
 ```bash
 # Claude
-gh api 'repos/Bloom-Invest/investing-log/contents/trades/claude' \
+gh api 'repos/bloom-invest/investing-log/contents/trades/claude' \
   --jq '[.[] | {name: .name, download_url: .download_url}] | sort_by(.name) | reverse | .[0:5]'
 
 # OpenAI
-gh api 'repos/Bloom-Invest/investing-log/contents/trades/openai' \
+gh api 'repos/bloom-invest/investing-log/contents/trades/openai' \
   --jq '[.[] | {name: .name, download_url: .download_url}] | sort_by(.name) | reverse | .[0:5]'
 
 # Gemini
-gh api 'repos/Bloom-Invest/investing-log/contents/trades/gemini' \
+gh api 'repos/bloom-invest/investing-log/contents/trades/gemini' \
   --jq '[.[] | {name: .name, download_url: .download_url}] | sort_by(.name) | reverse | .[0:5]'
 ```
 
@@ -169,7 +169,7 @@ If the file doesn't exist, create it:
 
 ### Step 11 — Report to Signal
 
-Send to `group:5TgLlI8NfnETVAzVvUi0rJ0WKz2Pz2Flj5i2/VAcFSY=`:
+Send to the Signal group configured via the `$SIGNAL_GROUP_ID` environment variable:
 
 ```
 📊 Investing Log trade posted:
@@ -186,7 +186,7 @@ Scheduled: [time]
 
 ## Delivery
 
-- Signal group: `group:5TgLlI8NfnETVAzVvUi0rJ0WKz2Pz2Flj5i2/VAcFSY=`
+- Signal group: `$SIGNAL_GROUP_ID`
 - Typefully account: 286685 with `investing-log` tag
 - State file: `~/clawd/memory/il-pipeline-state.json`
 - Card: `/tmp/trade-card-TICKER-YYYYMMDD.png`
