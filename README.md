@@ -58,6 +58,7 @@ This repo is my personal skills directory. Skills are prompt templates that Open
 | [design-review](design-review/) | Product design review: 13 questions + Nielsen Norman heuristic eval |
 | [nano-banana-pro](nano-banana-pro/) | Generate or edit images via Gemini native image generation |
 | [excalidraw-mcp](excalidraw-mcp/) | Create hand-drawn style diagrams via Excalidraw MCP |
+| [impeccable](impeccable/) | Design quality commands for frontend code: audit, critique, polish, animate, normalize |
 
 ### Video Production
 
@@ -122,18 +123,16 @@ This repo is my personal skills directory. Skills are prompt templates that Open
 
 | Skill | Description |
 |-------|-------------|
-| [marketing-psychology](marketing-psychology/SKILL.md) | Psychological principles, mental models, and behavioral science for marketing. |
-| [pricing-strategy](pricing-strategy/SKILL.md) | Pricing decisions, tier packaging, value metrics, monetization strategy. |
-| [launch-strategy](launch-strategy/SKILL.md) | Product launches, feature announcements, Product Hunt, go-to-market. |
-| [paid-ads](paid-ads/SKILL.md) | Paid advertising strategy: platform selection, targeting, creative, optimization. |
-| [referral-program](referral-program/SKILL.md) | Referral and affiliate program design, optimization, and measurement. |
-| [cold-email](cold-email/SKILL.md) | B2B cold email writing and follow-up sequences. |
-| [product-marketing-context](product-marketing-context/SKILL.md) | Create product marketing context doc referenced by all marketing skills. |
-| [create-a-sales-asset](visual-design/create-a-sales-asset/SKILL.md) | generate sales assets (landing pages, decks, one-pagers). |
-| [dogfood](dogfood/SKILL.md) | QA and exploratory test web applications, produce structured reports. |
-| [growth](growth/SKILL.md) | full-funnel growth: CRO, onboarding, paywalls, churn, launches, pricing. |
-| [positioning-angles](positioning-angles/SKILL.md) | define product positioning angles and strategic frames. |
-| [wealth-management](wealth-management/SKILL.md) | client reviews, financial plans, investment proposals, portfolio rebalancing, tax-loss harvesting. |
+| [marketing-psychology](marketing-psychology/) | Psychological principles, mental models, and behavioral science for marketing. |
+| [pricing-strategy](pricing-strategy/) | Pricing decisions, tier packaging, value metrics, monetization strategy. |
+| [launch-strategy](launch-strategy/) | Product launches, feature announcements, Product Hunt, go-to-market. |
+| [paid-ads](paid-ads/) | Paid advertising strategy: platform selection, targeting, creative, optimization. |
+| [referral-program](referral-program/) | Referral and affiliate program design, optimization, and measurement. |
+| [cold-email](cold-email/) | B2B cold email writing and follow-up sequences. |
+| [product-marketing-context](product-marketing-context/) | Create product marketing context doc referenced by all marketing skills. |
+| [growth](growth/) | full-funnel growth: CRO, onboarding, paywalls, churn, launches, pricing. |
+| [positioning-angles](positioning-angles/) | define product positioning angles and strategic frames. |
+| [wealth-management](wealth-management/) | client reviews, financial plans, investment proposals, portfolio rebalancing, tax-loss harvesting. |
 
 ## Installation
 
