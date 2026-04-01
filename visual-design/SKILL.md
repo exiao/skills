@@ -85,6 +85,6 @@ This approach applies across all sub-skills: frontend-design, frontend-slides, d
 
 Once the sub-skill is identified:
 
-1. Read that sub-skill's `SKILL.md` in full. Sub-skills live at `~/clawd/skills/visual-design/<sub-skill>/SKILL.md`. Exception: `nano-banana-pro` is a built-in at `/opt/homebrew/lib/node_modules/clawdbot/skills/nano-banana-pro/SKILL.md`.
+1. Read that sub-skill's `SKILL.md` in full. Sub-skills live at `~/clawd/skills/visual-design/<sub-skill>/SKILL.md`. Exception: `nano-banana-pro` lives at `~/clawd/skills/nano-banana-pro/SKILL.md`.
 2. Follow its instructions exactly — this router adds nothing on top.
 3. Do not blend sub-skill approaches unless the user explicitly asks for both.

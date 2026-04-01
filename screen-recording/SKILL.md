@@ -1,7 +1,7 @@
 ---
 name: screen-recording
 description: Record macOS screen via CLI with ffmpeg. Pair with peekaboo for automated UI demos. Use when recording tutorials, product walkthroughs, or automated demo videos.
-metadata: {"clawdbot":{"emoji":"🎬","requires":{"anyBins":["ffmpeg"],"optionalBins":["peekaboo","screencapture"]}}}
+metadata: {"openclaw":{"emoji":"🎬","requires":{"anyBins":["ffmpeg"],"optionalBins":["peekaboo","screencapture"]}}}
 ---
 
 # Screen Recording (macOS CLI)

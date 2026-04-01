@@ -58,7 +58,7 @@ Billed per character. Estimated: ~$0.001/word. A 60-second script (~150 words) c
 
 ## Setup
 
-Requires `FAL_KEY` in env (add to `~/.clawdbot/clawdbot.json` under `env`):
+Requires `FAL_KEY` in env (add to `~/.openclaw/openclaw.json` under `env`):
 ```bash
 pip install fal-client
 ```

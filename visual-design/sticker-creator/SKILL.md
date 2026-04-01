@@ -44,7 +44,7 @@ These rules apply to every sticker unless explicitly overridden:
 ```bash
 GEMINI_API_KEY=$(python3 -c "
 import json, os
-d = json.load(open(os.path.expanduser('~/.clawdbot/clawdbot.json')))
+d = json.load(open(os.path.expanduser('~/.openclaw/openclaw.json')))
 print(
   d.get('skills',{}).get('entries',{}).get('nano-banana-pro',{}).get('apiKey','')
   or d['env']['vars'].get('GEMINI_API_KEY','')
@@ -110,7 +110,7 @@ Style: clean brand mark, no gradients, no decorative elements.
 ```bash
 OUTFILE="/tmp/sticker-[name]-$(date +%Y%m%d-%H%M%S).png"
 
-uv run /opt/homebrew/lib/node_modules/clawdbot/skills/nano-banana-pro/scripts/generate_image.py \
+uv run ~/clawd/skills/nano-banana-pro/scripts/generate_image.py \
   --prompt "[assembled prompt]" \
   --filename "$OUTFILE" \
   --resolution 2K

@@ -24,7 +24,7 @@ mcporter call 'https://mcp.excalidraw.com/mcp.create_view' --args '{"elements": 
 | Tool | Purpose |
 |------|---------|
 | `read_me` | Returns element format reference. Call once per conversation. |
-| `create_view` | Renders diagram in Clawdbot canvas panel (visible to user in chat). |
+| `create_view` | Renders diagram in OpenClaw canvas panel (visible to user in chat). |
 | `export_to_excalidraw` | Uploads to excalidraw.com, returns shareable URL you can screenshot. |
 | `save_checkpoint` | Save user-edited state by ID. |
 | `read_checkpoint` | Read checkpoint state for restore. |

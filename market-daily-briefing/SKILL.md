@@ -90,7 +90,6 @@ else
 fi
 ```
 Keep these numbers in context. Every stock percentage you write must come from this data.
-
 ---
 
 ## What to Cover

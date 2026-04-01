@@ -57,7 +57,7 @@ Write a **2-3 sentence AI take** for each:
 ### Step 3 — Resolve GEMINI_API_KEY
 
 ```bash
-GEMINI_API_KEY=$(python3 -c "import json,os; d=json.load(open(os.path.expanduser('~/.clawdbot/clawdbot.json'))); print(d.get('skills',{}).get('entries',{}).get('nano-banana-pro',{}).get('apiKey','') or d['env']['vars'].get('GEMINI_API_KEY',''))" 2>/dev/null)
+GEMINI_API_KEY=$(python3 -c "import json,os; d=json.load(open(os.path.expanduser('~/.openclaw/openclaw.json'))); print(d.get('skills',{}).get('entries',{}).get('nano-banana-pro',{}).get('apiKey','') or d['env']['vars'].get('GEMINI_API_KEY',''))" 2>/dev/null)
 export GEMINI_API_KEY
 ```
 
@@ -66,7 +66,7 @@ export GEMINI_API_KEY
 **ONLY use Nano Banana Pro. Never fall back to PIL.**
 
 ```bash
-uv run /opt/homebrew/lib/node_modules/clawdbot/skills/nano-banana-pro/scripts/generate_image.py
+uv run ~/clawd/skills/nano-banana-pro/scripts/generate_image.py
 ```
 
 **Design spec per card (1080×1080):**
@@ -151,7 +151,7 @@ Draft: https://typefully.com/?a=286685&d=[draft_id] | Scheduled: [time]
 
 1. **Tilted cards** — always include "perfectly upright, 0° rotation, no tilt, no skew" in the image prompt. Gemini interprets "sticker" as slightly rotated; override it explicitly.
 2. **PIL fallback** — ONLY use Nano Banana Pro. If it fails, log the failure and skip that card; do not generate a PIL fallback.
-3. **Missing GEMINI_API_KEY** — always resolve from clawdbot.json before calling Nano Banana Pro.
+3. **Missing GEMINI_API_KEY** — always resolve from openclaw.json before calling Nano Banana Pro.
 4. **Including micro-caps** — stick to names retail investors know. If you've never heard of it, skip it.
 5. **Wrong date math on macOS** — macOS `date` uses `-v+5d` not `--date=+5days`. Use: `$(date -v+5d +%Y-%m-%d)`.
 6. **Overloading the queue** — use `next-free-slot` for each card to spread them out throughout the week.

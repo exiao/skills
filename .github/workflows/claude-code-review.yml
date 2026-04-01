@@ -35,11 +35,6 @@ jobs:
             - Note any broken references (paths, tool names, commands that don't exist)
             - Call out anything that contradicts how the skill actually works
 
-            README check: If this PR adds, removes, or renames any skill directories,
-            verify that README.md is updated to match. Every skill directory must appear
-            in the README under the correct category. If README.md is not updated, post
-            a comment listing the missing/stale entries and request an update.
-
             Keep feedback concise and actionable. Skip praise.
             Use inline comments for specific code issues.
             Use `gh pr comment` for top-level feedback.

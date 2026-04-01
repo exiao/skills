@@ -18,12 +18,12 @@ curl -s "https://api.appfigures.com/v2/{route}" \
 ## Product IDs
 
 **Bloom (own apps):**
-- `281045205499` — Bloom: AI for Investing (iOS)
-- `281090333286` — Bloom: AI for Investing (Google Play)
+- `$APPFIGURES_BLOOM_IOS_ID` — Bloom: AI for Investing (iOS)
+- `$APPFIGURES_BLOOM_ANDROID_ID` — Bloom: AI for Investing (Google Play)
 
 **Bible Genius (own apps):**
-- `337976251547` — Bible Genius (iOS)
-- `337932807605` — Bible Genius (Google Play)
+- `$APPFIGURES_BG_IOS_ID` — Bible Genius (iOS)
+- `$APPFIGURES_BG_ANDROID_ID` — Bible Genius (Google Play)
 
 **Competitors (tracked):**
 - `212878126` — Seeking Alpha (iOS)
@@ -93,25 +93,25 @@ GET /products/mine
 
 **Last 7 days downloads by date (Bloom iOS):**
 ```bash
-curl -s "https://api.appfigures.com/v2/reports/sales/?products=281045205499&group_by=dates&start_date=-7&end_date=0" \
+curl -s "https://api.appfigures.com/v2/reports/sales/?products=$APPFIGURES_BLOOM_IOS_ID&group_by=dates&start_date=-7&end_date=0" \
   -H "Authorization: Bearer $APPFIGURES_PAT"
 ```
 
 **Current subscription metrics (Bloom, all platforms):**
 ```bash
-curl -s "https://api.appfigures.com/v2/reports/subscriptions?products=281045205499,281090333286&include_inapps=true&start_date=-30&end_date=0" \
+curl -s "https://api.appfigures.com/v2/reports/subscriptions?products=$APPFIGURES_BLOOM_IOS_ID,$APPFIGURES_BLOOM_ANDROID_ID&include_inapps=true&start_date=-30&end_date=0" \
   -H "Authorization: Bearer $APPFIGURES_PAT"
 ```
 
 **Recent 1-star reviews:**
 ```bash
-curl -s "https://api.appfigures.com/v2/reviews?products=281045205499&stars=1&count=20&sort=-date" \
+curl -s "https://api.appfigures.com/v2/reviews?products=$APPFIGURES_BLOOM_IOS_ID&stars=1&count=20&sort=-date" \
   -H "Authorization: Bearer $APPFIGURES_PAT"
 ```
 
 **Monthly revenue trend (Bloom, last 6 months):**
 ```bash
-curl -s "https://api.appfigures.com/v2/reports/sales/?products=281045205499,281090333286&group_by=dates&granularity=monthly&start_date=-6m&end_date=0&include_inapps=true" \
+curl -s "https://api.appfigures.com/v2/reports/sales/?products=$APPFIGURES_BLOOM_IOS_ID,$APPFIGURES_BLOOM_ANDROID_ID&group_by=dates&granularity=monthly&start_date=-6m&end_date=0&include_inapps=true" \
   -H "Authorization: Bearer $APPFIGURES_PAT"
 ```
 
