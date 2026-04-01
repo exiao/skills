@@ -19,14 +19,14 @@ This repo is my personal skills directory. Skills are prompt templates that Open
 
 | Skill | Description |
 |-------|-------------|
-| [copywriting](copywriting/SKILL.md) | Page copy frameworks + direct response for any platform (ads, App Store, landing pages, scripts). |
-| [article-writer](article-writer/SKILL.md) | write article drafts from approved outlines with SEO and brand voice. |
-| [editor-in-chief](editor-in-chief/SKILL.md) | autonomous editing orchestrator: diagnose, fix, and iterate drafts to quality. |
-| [evaluate-content](evaluate-content/SKILL.md) | judge content quality: shareability, readability, voice, cuttability, angle. |
-| [hooks](hooks/SKILL.md) | generate hooks, titles, and scroll-stopping openers for content. |
-| [outline-generator](outline-generator/SKILL.md) | generate structured article outlines from approved headlines. |
-| [substack-draft](substack-draft/SKILL.md) | save finished articles to Substack as drafts. |
-| [tweet-ideas](tweet-ideas/SKILL.md) | generate standalone tweet ideas about a topic (Aaron Levie playbook). |
+| [copywriting](copywriting/) | Page copy frameworks + direct response for any platform (ads, App Store, landing pages, scripts). |
+| [article-writer](article-writer/) | write article drafts from approved outlines with SEO and brand voice. |
+| [editor-in-chief](editor-in-chief/) | autonomous editing orchestrator: diagnose, fix, and iterate drafts to quality. |
+| [evaluate-content](evaluate-content/) | judge content quality: shareability, readability, voice, cuttability, angle. |
+| [hooks](hooks/) | generate hooks, titles, and scroll-stopping openers for content. |
+| [outline-generator](outline-generator/) | generate structured article outlines from approved headlines. |
+| [substack-draft](substack-draft/) | save finished articles to Substack as drafts. |
+| [tweet-ideas](tweet-ideas/) | generate standalone tweet ideas about a topic (Aaron Levie playbook). |
 
 ### Marketing & Growth
 
