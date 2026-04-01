@@ -44,7 +44,7 @@ Design quality layer for Claude Code. 21 commands that audit, review, polish, an
 | `/arrange` | Fix layout, spacing, visual rhythm, monotonous grids |
 | `/overdrive` | Technically extraordinary effects: shaders, spring physics, scroll-driven reveals (beta) |
 
-## 7 Reference Files
+## 10 Reference Files
 
 | Reference | Covers |
 |---|---|

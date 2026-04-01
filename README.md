@@ -50,7 +50,7 @@ This repo is my personal skills directory. Skills are prompt templates that Open
 
 | Skill | Description |
 |-------|-------------|
-| [impeccable](impeccable/) | Run design quality commands on frontend code — audit, critique, polish, animate, normalize, and more. 21 steering commands and 7 reference files. |
+| [impeccable](impeccable/) | Run design quality commands on frontend code — audit, critique, polish, animate, normalize, and more. 21 steering commands and 10 reference files. |
 | [visual-design](visual-design/) | Router skill for all visual design tasks (dispatches to sub-skills below) |
 | [visual-design/canvas-design](visual-design/canvas-design/) | Create visual art and designs as .png/.pdf files |
 | [visual-design/create-a-sales-asset](visual-design/create-a-sales-asset/) | Generate sales assets: landing pages, decks, one-pagers |
@@ -134,7 +134,6 @@ This repo is my personal skills directory. Skills are prompt templates that Open
 | [cold-email](cold-email/) | B2B cold email writing and follow-up sequences. |
 | [product-marketing-context](product-marketing-context/) | Create product marketing context doc referenced by all marketing skills. |
 | [create-a-sales-asset](visual-design/create-a-sales-asset/) | generate sales assets (landing pages, decks, one-pagers). |
-| [dogfood](dogfood/) | QA and exploratory test web applications, produce structured reports. |
 | [growth](growth/) | full-funnel growth: CRO, onboarding, paywalls, churn, launches, pricing. |
 | [positioning-angles](positioning-angles/) | define product positioning angles and strategic frames. |
 | [wealth-management](wealth-management/) | client reviews, financial plans, investment proposals, portfolio rebalancing, tax-loss harvesting. |
