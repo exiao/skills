@@ -11,7 +11,20 @@ Monitor a single PR through its full lifecycle: wait for CI, read reviews, fix i
 
 - **PR number** (required)
 - **Repo** (optional, defaults to current repo via `gh repo view --json nameWithOwner -q '.nameWithOwner'`)
+- **Parent session key** (optional, for sending progress updates to the parent agent via `sessions_send`)
 - **Max cycles** (optional, default 10. Each cycle = one CI wait + fix attempt)
+
+## Spawning
+
+When spawning this skill as a sub-agent, use `streamTo: "parent"` so the parent receives real-time progress. Also pass the parent session key so the sub-agent can send structured status updates at key milestones.
+
+```
+sessions_spawn({
+  task: "Use the babysit-pr skill. PR #<number>, repo <owner/repo>. Parent session: <session_key>. ...",
+  streamTo: "parent",
+  runTimeoutSeconds: 1800
+})
+```
 
 ## Setup
 
@@ -146,7 +159,14 @@ After pushing (or deciding not to):
 
 ## Reporting
 
-Send status updates via the message tool (channel=signal) to the group configured in `$BABYSIT_PR_SIGNAL_GROUP` (or pass it as an input when invoking the skill).
+Send progress updates to the parent agent via `sessions_send`. Do NOT try to send messages to Signal/Slack/etc directly (sub-agents don't have channel access). The parent agent handles delivery to the user.
+
+If a parent session key was provided, use:
+```
+sessions_send(sessionKey="<parent_session_key>", message="<status update>")
+```
+
+If no parent session key was provided, include status in your final output text (the auto-announce will deliver it).
 
 **When to report:**
 - After each fix push (brief: what was fixed)
