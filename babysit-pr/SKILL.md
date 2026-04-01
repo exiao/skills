@@ -67,18 +67,20 @@ States:
 
 ### 2. Check Reviews
 
+**Always read ALL comments and reviews, even when CI is green.** Automated reviewers (claude-review, Seer, Bugbot) post findings as issue comments or review bodies that may flag real issues despite passing CI.
+
 ```bash
 # Review comments (inline)
 gh api --paginate "repos/$REPO/pulls/$PR/comments" | \
-  jq '.[] | {author: .user.login, path: .path, line: .line, body: .body[0:500], commit: .original_commit_id, created: .created_at}'
+  jq '.[] | {author: .user.login, path: .path, line: .line, body: .body, commit: .original_commit_id, created: .created_at}'
 
-# Issue comments
+# Issue comments — read FULL body, not truncated. Automated reviewers put findings here.
 gh api --paginate "repos/$REPO/issues/$PR/comments" | \
-  jq '.[] | {author: .user.login, body: .body[0:500], created: .created_at}'
+  jq '.[] | {author: .user.login, body: .body, created: .created_at}'
 
-# Review verdicts
+# Review verdicts — read FULL body. claude-review puts its analysis in the review body.
 gh api --paginate "repos/$REPO/pulls/$PR/reviews" | \
-  jq '.[] | {author: .user.login, state: .state, body: .body[0:300]}'
+  jq '.[] | {author: .user.login, state: .state, body: .body}'
 
 # Current HEAD for staleness check
 HEAD=$(gh pr view $PR --repo $REPO --json headRefOid -q '.headRefOid')
@@ -86,9 +88,11 @@ HEAD=$(gh pr view $PR --repo $REPO --json headRefOid -q '.headRefOid')
 
 **Staleness check:** Compare each comment's `original_commit_id` (or `created_at`) against HEAD. If a comment was made on an older commit, verify the issue still exists in the latest code before acting.
 
-**If CI green + no unaddressed comments → PR is ready. Report success and stop.**
+**Triage review findings:** For each actionable issue flagged by reviewers (human or automated), classify it as AUTO-FIX or ESCALATE per step 3. Informational observations or style suggestions that don't affect correctness can be noted but don't block the PR.
 
-**If there are unaddressed comments → go to step 3.**
+**If CI green + no actionable unaddressed findings → PR is ready. Report success and stop.**
+
+**If there are actionable findings → go to step 3.**
 
 ### 3. Analyze and Decide
 
