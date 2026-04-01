@@ -19,23 +19,26 @@ This repo is my personal skills directory. Skills are prompt templates that Open
 
 | Skill | Description |
 |-------|-------------|
-| [copywriting](copywriting/SKILL.md) | Page copy frameworks + direct response for any platform (ads, App Store, landing pages, scripts). |
-| [article-writer](article-writer/SKILL.md) | write article drafts from approved outlines with SEO and brand voice. |
-| [editor-in-chief](editor-in-chief/SKILL.md) | autonomous editing orchestrator: diagnose, fix, and iterate drafts to quality. |
-| [evaluate-content](evaluate-content/SKILL.md) | judge content quality: shareability, readability, voice, cuttability, angle. |
-| [hooks](hooks/SKILL.md) | generate hooks, titles, and scroll-stopping openers for content. |
-| [outline-generator](outline-generator/SKILL.md) | generate structured article outlines from approved headlines. |
-| [substack-draft](substack-draft/SKILL.md) | save finished articles to Substack as drafts. |
-| [tweet-ideas](tweet-ideas/SKILL.md) | generate standalone tweet ideas about a topic (Aaron Levie playbook). |
+| [copywriting](copywriting/) | Page copy frameworks + direct response for any platform (ads, App Store, landing pages, scripts). |
+| [article-writer](article-writer/) | write article drafts from approved outlines with SEO and brand voice. |
+| [content-strategy](content-strategy/) | Build content strategy from trending hooks, angles, and ideas across TikTok, X, YouTube, Meta, and LinkedIn. |
+| [editor-in-chief](editor-in-chief/) | autonomous editing orchestrator: diagnose, fix, and iterate drafts to quality. |
+| [evaluate-content](evaluate-content/) | judge content quality: shareability, readability, voice, cuttability, angle. |
+| [hooks](hooks/) | generate hooks, titles, and scroll-stopping openers for content. |
+| [outline-generator](outline-generator/) | generate structured article outlines from approved headlines. |
+| [substack-draft](substack-draft/) | save finished articles to Substack as drafts. |
+| [tweet-ideas](tweet-ideas/) | generate standalone tweet ideas about a topic (Aaron Levie playbook). |
 
 ### Marketing & Growth
 
 | Skill | Description |
 |-------|-------------|
 | [aso](aso/) | App Store Optimization: keyword research, audits, metadata, competitor analysis via DataForSEO |
+| [churn-prevention](churn-prevention/) | Reduce churn: cancellation flows, save offers, retention strategies, dunning, win-back sequences. |
 | [competitive-analysis](competitive-analysis/) | Research competitors and build interactive battlecards |
 | [content-performance-report](content-performance-report/) | Weekly content pillar performance report (cron) |
 | [dogfood](dogfood/) | QA and exploratory test web applications, produce structured reports |
+| [email-sequence](email-sequence/) | Create and optimize email sequences, drip campaigns, onboarding flows, and lifecycle messaging. |
 | [market-daily-briefing](market-daily-briefing/) | Daily market briefing: earnings, macro, notable moves (cron) |
 | [meta-ads](meta-ads/) | Daily Meta ad operations via Marketing API |
 | [optimize-prompt](optimize-prompt/) | Iteratively optimize system prompts via autoresearch loop |
@@ -47,6 +50,7 @@ This repo is my personal skills directory. Skills are prompt templates that Open
 
 | Skill | Description |
 |-------|-------------|
+| [impeccable](impeccable/) | Run design quality commands on frontend code — audit, critique, polish, animate, normalize, and more. 21 steering commands and 7 reference files. |
 | [visual-design](visual-design/) | Router skill for all visual design tasks (dispatches to sub-skills below) |
 | [visual-design/canvas-design](visual-design/canvas-design/) | Create visual art and designs as .png/.pdf files |
 | [visual-design/create-a-sales-asset](visual-design/create-a-sales-asset/) | Generate sales assets: landing pages, decks, one-pagers |
@@ -122,18 +126,18 @@ This repo is my personal skills directory. Skills are prompt templates that Open
 
 | Skill | Description |
 |-------|-------------|
-| [marketing-psychology](marketing-psychology/SKILL.md) | Psychological principles, mental models, and behavioral science for marketing. |
-| [pricing-strategy](pricing-strategy/SKILL.md) | Pricing decisions, tier packaging, value metrics, monetization strategy. |
-| [launch-strategy](launch-strategy/SKILL.md) | Product launches, feature announcements, Product Hunt, go-to-market. |
-| [paid-ads](paid-ads/SKILL.md) | Paid advertising strategy: platform selection, targeting, creative, optimization. |
-| [referral-program](referral-program/SKILL.md) | Referral and affiliate program design, optimization, and measurement. |
-| [cold-email](cold-email/SKILL.md) | B2B cold email writing and follow-up sequences. |
-| [product-marketing-context](product-marketing-context/SKILL.md) | Create product marketing context doc referenced by all marketing skills. |
-| [create-a-sales-asset](visual-design/create-a-sales-asset/SKILL.md) | generate sales assets (landing pages, decks, one-pagers). |
-| [dogfood](dogfood/SKILL.md) | QA and exploratory test web applications, produce structured reports. |
-| [growth](growth/SKILL.md) | full-funnel growth: CRO, onboarding, paywalls, churn, launches, pricing. |
-| [positioning-angles](positioning-angles/SKILL.md) | define product positioning angles and strategic frames. |
-| [wealth-management](wealth-management/SKILL.md) | client reviews, financial plans, investment proposals, portfolio rebalancing, tax-loss harvesting. |
+| [marketing-psychology](marketing-psychology/) | Psychological principles, mental models, and behavioral science for marketing. |
+| [pricing-strategy](pricing-strategy/) | Pricing decisions, tier packaging, value metrics, monetization strategy. |
+| [launch-strategy](launch-strategy/) | Product launches, feature announcements, Product Hunt, go-to-market. |
+| [paid-ads](paid-ads/) | Paid advertising strategy: platform selection, targeting, creative, optimization. |
+| [referral-program](referral-program/) | Referral and affiliate program design, optimization, and measurement. |
+| [cold-email](cold-email/) | B2B cold email writing and follow-up sequences. |
+| [product-marketing-context](product-marketing-context/) | Create product marketing context doc referenced by all marketing skills. |
+| [create-a-sales-asset](visual-design/create-a-sales-asset/) | generate sales assets (landing pages, decks, one-pagers). |
+| [dogfood](dogfood/) | QA and exploratory test web applications, produce structured reports. |
+| [growth](growth/) | full-funnel growth: CRO, onboarding, paywalls, churn, launches, pricing. |
+| [positioning-angles](positioning-angles/) | define product positioning angles and strategic frames. |
+| [wealth-management](wealth-management/) | client reviews, financial plans, investment proposals, portfolio rebalancing, tax-loss harvesting. |
 
 ## Installation
 
