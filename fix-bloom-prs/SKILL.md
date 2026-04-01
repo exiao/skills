@@ -41,8 +41,6 @@ The #1 failure mode is pushing speculative fixes that trigger new CI runs, new r
 
 ## Circuit Breakers
 
-**Commit count:** If a PR already has 15+ commits, DO NOT push more fixes. Comment only. The PR needs a squash or human attention, not more automated commits.
-
 **Repeat fix detection:** Before fixing, check if the last commit on the PR was from a previous cron run (author = "claude" or commit message matches cron fix patterns). If the cron already pushed a fix and the issue persists, the fix didn't work. Comment explaining what you tried and what's still broken. Do not retry the same approach.
 
 **CI-only failures:** If the only issue is a CI failure that looks infrastructure-related (timeout, runner error, network issue, flaky test), re-request the check run instead of pushing code. Use: `gh api repos/Bloom-Invest/bloom/actions/runs/{run_id}/rerun-failed-jobs -X POST`
@@ -130,7 +128,6 @@ After pushing a fix, check that CI starts. Do NOT wait for CI to complete and pu
 
 Skip PRs that:
 - Are tagged [CLASS]
-- Have 15+ commits (comment only)
 - Have fundamental architecture issues requiring Eric's input
 - Are drafts or WIP
 
