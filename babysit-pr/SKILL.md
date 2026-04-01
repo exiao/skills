@@ -10,7 +10,7 @@ Monitor a single PR through its full lifecycle: wait for CI, read reviews, fix i
 ## Inputs
 
 - **PR number** (required)
-- **Repo** (optional, defaults to `Bloom-Invest/bloom`)
+- **Repo** (optional, defaults to current repo via `gh repo view --json nameWithOwner -q '.nameWithOwner'`)
 - **Max cycles** (optional, default 10. Each cycle = one CI wait + fix attempt)
 
 ## Setup
@@ -121,7 +121,7 @@ If auto-fixable issues exist:
 2. Read the relevant files in full (not just the diff)
 3. Make the minimal, targeted fix
 4. Verify locally:
-   - Backend: `cd $WORKTREE && uv run black <file> && uv run ruff check <file>`
+   - Backend: `cd $WORKTREE && uv run --python 3.13 black <file> && uv run --python 3.13 ruff check <file>`
    - Frontend: `cd $WORKTREE/frontend && bun run lint --fix && bun run typecheck`
    - Run the specific failing test if identifiable
 5. Single commit: `git commit -am "fix: <description> (#$PR)"`
@@ -145,7 +145,7 @@ After pushing (or deciding not to):
 
 ## Reporting
 
-Send status updates to this Signal group (`group:iGrccZxHzYtMPu5SlxMgYYEQNKRi019TIICdcHVMDsY=`) via the message tool (channel=signal).
+Send status updates via the message tool (channel=signal) to the group configured in `$BABYSIT_PR_SIGNAL_GROUP` (or pass it as an input when invoking the skill).
 
 **When to report:**
 - After each fix push (brief: what was fixed)
