@@ -70,15 +70,16 @@ States:
 **Always read ALL comments and reviews, even when CI is green.** Automated reviewers (claude-review, Seer, Bugbot) post findings as issue comments or review bodies that may flag real issues despite passing CI.
 
 ```bash
-# Review comments (inline)
+# 1. Inline review comments (on specific lines of code)
 gh api --paginate "repos/$REPO/pulls/$PR/comments" | \
   jq '.[] | {author: .user.login, path: .path, line: .line, body: .body, commit: .original_commit_id, created: .created_at}'
 
-# Issue comments — read FULL body, not truncated. Automated reviewers put findings here.
+# 2. Issue comments — the main comment thread. Automated reviewers (claude-review, Codex) post here.
+#    Read FULL body, not truncated. This is where most actionable feedback lives.
 gh api --paginate "repos/$REPO/issues/$PR/comments" | \
   jq '.[] | {author: .user.login, body: .body, created: .created_at}'
 
-# Review verdicts — read FULL body. claude-review puts its analysis in the review body.
+# 3. Review verdicts — formal approve/request-changes. claude-review puts analysis in the body.
 gh api --paginate "repos/$REPO/pulls/$PR/reviews" | \
   jq '.[] | {author: .user.login, state: .state, body: .body}'
 
@@ -190,6 +191,7 @@ git -C "$LOCAL_DIR" worktree remove "$WORKTREE" --force 2>/dev/null
 - **Sub-agents can introduce unintended refactors.** Always diff `$BRANCH` against `origin/$BRANCH~1` before pushing to confirm only the intended fix is included.
 - **`uv run` requires `--python 3.13`** for Bloom backend. psycopg-binary wheels don't support 3.14.
 - **Frontend lint may auto-fix unrelated files.** Run lint only on the files you changed, not the whole project.
+- **Check ALL three comment sources.** `gh pr view --json reviews` only shows formal review submissions. Automated reviewers like claude-review often post as issue comments (`/issues/$PR/comments`), not formal reviews. Always check all three: inline review comments, issue comments, and review verdicts.
 
 ## Do NOT
 
