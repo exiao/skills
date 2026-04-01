@@ -24,7 +24,7 @@ This repo is my personal skills directory. Skills are prompt templates that Open
 | [editor-in-chief](editor-in-chief/) | autonomous editing orchestrator: diagnose, fix, and iterate drafts to quality. |
 | [evaluate-content](evaluate-content/) | judge content quality: shareability, readability, voice, cuttability, angle. |
 | [hooks](hooks/) | generate hooks, titles, and scroll-stopping openers for content. |
-| [outline-generator](outline-generator/) | generate structured article outlines from approved headlines. |
+| [outline-generator](outline-generator/) | generate structured article outlines from approved hooks. |
 | [substack-draft](substack-draft/) | save finished articles to Substack as drafts. |
 | [tweet-ideas](tweet-ideas/) | generate standalone tweet ideas about a topic (Aaron Levie playbook). |
 
