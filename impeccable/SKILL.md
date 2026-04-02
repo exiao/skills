@@ -1,16 +1,16 @@
 ---
 name: impeccable
-description: Run impeccable design quality commands on frontend code — audit, critique, polish, animate, normalize, and more. Built on top of the frontend-design skill with 17 steering commands and 7 domain-specific reference files. Use when doing a design QA pass, reviewing UI quality, or refining a frontend component before shipping.
+description: Run impeccable design quality commands on frontend code — audit, critique, polish, animate, normalize, and more. Built on top of the frontend-design skill with 21 steering commands and 10 domain-specific reference files. Use when doing a design QA pass, reviewing UI quality, or refining a frontend component before shipping.
 ---
 
 > **Source:** External skill (frontend-design ecosystem) — local copy, do not modify without checking upstream.
 
 # Impeccable
 
-Design quality layer for Claude Code. 17 commands that audit, review, polish, and refine frontend interfaces. Complements the `frontend-design` skill (vision/direction) with systematic QA passes.
+Design quality layer for Claude Code. 21 commands that audit, review, polish, and refine frontend interfaces. Complements the `frontend-design` skill (vision/direction) with systematic QA passes.
 
 **Source:** https://github.com/pbakaus/impeccable  
-**Installed at:** `~/.claude/skills/` (frontend-design + 17 individual command skills)
+**Installed at:** `~/clawd/skills/` (frontend-design + 21 individual command skills)
 
 ## When to Use
 
@@ -19,13 +19,13 @@ Design quality layer for Claude Code. 17 commands that audit, review, polish, an
 - Targeted fixes: `/colorize`, `/animate`, `/bolder`, `/quieter`
 - Design system alignment: `/normalize`, `/extract`
 
-## 17 Commands
+## 21 Commands
 
 | Command | What it does |
 |---|---|
 | `/teach-impeccable` | One-time setup: gather design context, save to project config |
-| `/audit` | Technical quality checks (a11y, performance, responsive) |
-| `/critique` | UX design review: hierarchy, clarity, emotional resonance |
+| `/audit` | Technical quality checks (a11y, performance, responsive) — scores 5 dimensions with P0-P3 severity |
+| `/critique` | UX design review — scores against Nielsen's 10 heuristics, persona archetypes, cognitive load |
 | `/normalize` | Align with design system standards |
 | `/polish` | Final pass before shipping |
 | `/distill` | Strip to essence — remove unnecessary complexity |
@@ -40,8 +40,11 @@ Design quality layer for Claude Code. 17 commands that audit, review, polish, an
 | `/extract` | Pull into reusable components |
 | `/adapt` | Adapt for different devices |
 | `/onboard` | Design onboarding flows |
+| `/typeset` | Fix typography: font choices, hierarchy, sizing, weight, readability |
+| `/arrange` | Fix layout, spacing, visual rhythm, monotonous grids |
+| `/overdrive` | Technically extraordinary effects: shaders, spring physics, scroll-driven reveals (beta) |
 
-## 7 Reference Files
+## 10 Reference Files
 
 | Reference | Covers |
 |---|---|
@@ -52,6 +55,9 @@ Design quality layer for Claude Code. 17 commands that audit, review, polish, an
 | `interaction-design.md` | Forms, focus states, loading patterns |
 | `responsive-design.md` | Mobile-first, fluid design, container queries |
 | `ux-writing.md` | Button labels, error messages, empty states |
+| `cognitive-load.md` | Cognitive load theory, chunking, progressive disclosure |
+| `heuristics-scoring.md` | Nielsen's heuristics scoring rubric and evaluation |
+| `personas.md` | User persona archetypes for design critique |
 
 ## How to Use from OpenClaw
 
