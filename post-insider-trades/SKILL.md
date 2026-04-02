@@ -121,9 +121,9 @@ node scripts/typefully.js drafts:create 286685 --platform x --text "<tweet_text>
 # → returns draft_id and scheduled time
 ```
 
-### Step 9 — Report to Signal
+### Step 9 — Report
 
-Send to `group:5TgLlI8NfnETVAzVvUi0rJ0WKz2Pz2Flj5i2/VAcFSY=`:
+Include in your final reply (cron delivery handles routing to Signal):
 
 ```
 📈 Insider trade found:
@@ -134,14 +134,13 @@ Stock: $[current] | YTD: [+/-X%]
 
 Tweet: [tweet text]
 Typefully: https://typefully.com/?a=286685&d=[draft_id]
-Scheduled: [time]
 ```
 
 ---
 
 ## Delivery
 
-- Signal group: `group:5TgLlI8NfnETVAzVvUi0rJ0WKz2Pz2Flj5i2/VAcFSY=`
+- Cron delivery: announces to Marketing Signal group automatically
 - Typefully account: 286685 (Bloom @invest.with.bloom)
 - Card saved to: `/tmp/insider-trade-card-YYYYMMDD.png`
 
