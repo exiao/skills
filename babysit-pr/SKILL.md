@@ -12,7 +12,6 @@ Monitor a single PR through its full lifecycle: wait for CI, read reviews, fix i
 - **PR number** (required)
 - **Repo** (optional, defaults to current repo via `gh repo view --json nameWithOwner -q '.nameWithOwner'`)
 - **Parent session key** (optional, for sending progress updates to the parent agent via `sessions_send`)
-- **Signal group** (optional, env var `$BABYSIT_PR_SIGNAL_GROUP`. If unset, skip Signal notifications)
 - **Max cycles** (optional, default 10. Each cycle = one CI wait + fix attempt)
 
 ## Spawning
@@ -23,7 +22,7 @@ When spawning this skill as a sub-agent, use `streamTo: "parent"` so the parent 
 sessions_spawn({
   task: "Use the babysit-pr skill. PR #<number>, repo <owner/repo>. Parent session: <session_key>. ...",
   streamTo: "parent",
-  runTimeoutSeconds: 1800
+  run_timeout_seconds: 1800
 })
 ```
 
