@@ -11,7 +11,7 @@ Evaluate a skill against the checklist in [references/checklist.md](references/c
 
 1. **Locate the skill.** Get the path from the user. Read the entire directory: SKILL.md, all subdirectories, all files.
 2. **Run the checklist.** Score each of the 10 items (S1-S4, C1-C4, D1-D2). Each item is 1 point. Binary: pass or fail.
-3. **Classify the skill type.** Determine which type it is (Library/API, Verification, Data Fetching, Business Process, Scaffolding). If it doesn't fit cleanly, note that.
+3. **Classify the skill type.** Determine which type it is (Library & API Reference, Product Verification, Data Fetching & Analysis, Business Process & Team Automation, Code Scaffolding & Templates). If it doesn't fit cleanly, note that.
 4. **Generate the scorecard.** Use the format below.
 5. **Offer to fix.** List recommended actions in priority order. Ask before making any changes.
 
@@ -25,7 +25,7 @@ Evaluate a skill against the checklist in [references/checklist.md](references/c
 ### ✅ Passing
 - [item]: [brief note on what's good]
 
-### ⚠️ Warnings
+### ⚠️ Warnings (technically passes but fragile or could be better)
 - [item]: [what's borderline and why]
 
 ### ❌ Failing
