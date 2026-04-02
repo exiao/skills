@@ -136,10 +136,7 @@ If auto-fixable issues exist:
 1. Pull latest: `cd "$WORKTREE" && git pull origin $BRANCH`
 2. Read the relevant files in full (not just the diff)
 3. Make the minimal, targeted fix
-4. Verify locally using whatever lint/test commands the project's CLAUDE.md or AGENTS.md specifies. Examples:
-   - Python projects often use: `uv run black <file> && uv run ruff check <file>`
-   - JS/TS projects often use: `bun run lint --fix && bun run typecheck`
-   - Run the specific failing test if identifiable
+4. Verify locally using whatever lint/test commands the project's CLAUDE.md or AGENTS.md specifies. Run the specific failing test if identifiable.
 5. Single commit: `cd "$WORKTREE" && git commit -am "fix: <description>"`
 6. Push: `cd "$WORKTREE" && git push origin HEAD:$BRANCH`
 
