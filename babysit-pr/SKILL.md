@@ -53,10 +53,10 @@ done
 BRANCH=$(gh pr view $PR --repo $REPO --json headRefName -q '.headRefName')
 WORKTREE="/tmp/${REPO_DIR}-pr-${PR}"
 git -C "$LOCAL_DIR" fetch origin "$BRANCH"
-git -C "$LOCAL_DIR" worktree add "$WORKTREE" "$BRANCH" 2>/dev/null || \
+git -C "$LOCAL_DIR" worktree add "$WORKTREE" "origin/$BRANCH" 2>/dev/null || \
   git -C "$LOCAL_DIR" worktree add --detach "$WORKTREE" "origin/$BRANCH"
 cd "$WORKTREE"
-git checkout "$BRANCH" 2>/dev/null
+git checkout -B "$BRANCH" "origin/$BRANCH" 2>/dev/null
 ```
 
 ## The Loop
@@ -209,8 +209,8 @@ git -C "$LOCAL_DIR" worktree remove "$WORKTREE" --force 2>/dev/null
 - **Read CLAUDE.md/AGENTS.md first.** Every repo has different lint, test, and build commands. Never assume. Read the project's config files during Setup and use those commands throughout.
 - **Stale review comments:** `original_commit_id` on inline comments refers to the commit when the comment was made. If HEAD has moved past it, the issue may already be fixed. Always check the current code before acting.
 - **claude-review sticky comments:** These appear as issue comments from the `claude` user. They re-run on every push. Don't try to "fix" informational observations.
-- **GitHub Actions GITHUB_TOKEN suppression:** Pushes via `gh` CLI with the default token don't trigger workflow runs. If CI doesn't start after your push, the repo may need a personal SSH key or a close+reopen to kick off checks.
-- **Worktree branch conflicts:** `git worktree add` fails if the branch is already checked out somewhere. Use `--detach` and then `git checkout` inside the worktree.
+- **GitHub Actions GITHUB_TOKEN suppression:** Pushes from inside a GitHub Actions job using the default `GITHUB_TOKEN` don't trigger other workflow runs. This does NOT apply to local `gh` CLI pushes (which use your OAuth token). If CI doesn't start after your push from inside Actions, close+reopen the PR to kick off checks.
+- **Worktree branch conflicts:** `git worktree add` fails if the branch is already checked out somewhere. The Setup uses `origin/$BRANCH` to avoid this, then creates a local tracking branch with `checkout -B`.
 - **Sub-agents can introduce unintended refactors.** Always diff `$BRANCH` against `origin/$BRANCH` before pushing to confirm only the intended fix is included.
 - **Frontend lint may auto-fix unrelated files.** Run lint only on the files you changed, not the whole project.
 - **Check ALL three comment sources.** `gh pr view --json reviews` only shows formal review submissions. Automated reviewers like claude-review often post as issue comments (`/issues/$PR/comments`), not formal reviews. Always check all three: inline review comments, issue comments, and review verdicts.
