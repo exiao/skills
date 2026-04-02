@@ -105,8 +105,8 @@ def main():
     parser.add_argument(
         "--model", "-m",
         choices=["pro", "flash"],
-        default="pro",
-        help="Model to use: 'pro' (gemini-3-pro-image-preview, best quality) or 'flash' (gemini-3.1-flash-image-preview, faster). Default: pro"
+        default="flash",
+        help="Model to use: 'flash' (gemini-3.1-flash-image-preview, fast, default) or 'pro' (gemini-3-pro-image-preview, best quality). Default: flash"
     )
     parser.add_argument(
         "--api-key", "-k",

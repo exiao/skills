@@ -33,10 +33,10 @@ Generate
 uv run {baseDir}/scripts/generate_image.py --prompt "your image description" --filename "output.png" --resolution 1K
 ```
 
-Generate (fast, using Flash model)
+Generate (pro quality)
 
 ```bash
-uv run {baseDir}/scripts/generate_image.py --prompt "your image description" --filename "output.png" --resolution 1K --model flash
+uv run {baseDir}/scripts/generate_image.py --prompt "your image description" --filename "output.png" --resolution 1K --model pro
 ```
 
 Edit (single image)
@@ -64,7 +64,7 @@ uv run {baseDir}/scripts/generate_image.py --prompt "portrait photo" --filename 
 
 Notes
 
-- Models: `--model pro` (default, best quality, Gemini 3 Pro) or `--model flash` (faster, Gemini 3.1 Flash).
+- Models: `--model flash` (default, fast, Gemini 3.1 Flash) or `--model pro` (best quality, Gemini 3 Pro).
 - Resolutions: `1K` (default), `2K`, `4K`.
 - Aspect ratios: `1:1`, `2:3`, `3:2`, `3:4`, `4:3`, `4:5`, `5:4`, `9:16`, `16:9`, `21:9`. Without `--aspect-ratio` / `-a`, the model picks freely - use this flag for avatars, profile pics, or consistent batch generation.
 - Use timestamps in filenames: `yyyy-mm-dd-hh-mm-ss-name.png`.
