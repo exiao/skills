@@ -108,6 +108,7 @@ This repo is my personal skills directory. Skills are prompt templates that Open
 | Skill | Description |
 |-------|-------------|
 | [agent-browser](agent-browser/) | Automate browsers via agent-browser CLI |
+| [babysit-pr](babysit-pr/) | Monitor a PR through CI, reviews, and fixes until it's ready to merge |
 | [bloom-cli](bloom-cli/) | Fetch stock data, fundamentals, earnings, SEC filings via Bloom CLI |
 | [claude-md-management](claude-md-management/) | Audit, improve, and maintain CLAUDE.md files across repos |
 | [coding-agent](coding-agent/) | Run coding agents (Codex, Claude Code, etc.) via ACP |
