@@ -121,11 +121,18 @@ This repo is my personal skills directory. Skills are prompt templates that Open
 | [context7](context7/) | Fetch version-specific library docs via Context7 MCP |
 | [demo-pr-feature](demo-pr-feature/) | Capture PR demo screenshots, deploy to Surge.sh, post as PR comment |
 | [deploy-bloom](deploy-bloom/) | Deploy Bloom OTA updates via bloom-updater |
-| [fix-bloom-prs](fix-bloom-prs/) | Fix CI failures and review code on Bloom PRs |
+| [documents](documents/) | Work with .docx, .pdf, .pptx, .xlsx files |
+| [fix-bloom-prs](fix-bloom-prs/) | Fix CI failures, review code, and address review comments on PRs across tracked repos |
 | [fix-sentry-issues](fix-sentry-issues/) | Scan Sentry issues and create fix PRs |
 | [app-store-connect](app-store-connect/) | App Store Connect via `asc` CLI: releases, TestFlight, builds, metadata, subscriptions |
 | [ios-simulator](ios-simulator/) | iOS simulator automation: builds, screenshots, device management |
+| [ralph-mode](ralph-mode/) | Autonomous dev loops with iteration gates and test validation |
 | [serena](serena/) | Navigate and edit complex codebases at the symbol level via Serena MCP |
+| [stably-cli](stably-cli/) | Create, run, fix, and maintain Playwright tests via Stably CLI |
+| [stably-sdk-rules](stably-sdk-rules/) | Best practices for writing Stably AI-powered Playwright tests |
+| [superpowers-coding](superpowers-coding/) | TDD-first feature implementation and systematic debugging |
+| [superpowers-planning](superpowers-planning/) | Explore intent and create detailed plans before touching code |
+| [superpowers-reviews](superpowers-reviews/) | Code review, branch finishing, batch execution with checkpoints |
 | [verify-deploy](verify-deploy/) | Post-merge deploy verification and production benchmarking |
 
 ### Strategy & Business

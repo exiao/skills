@@ -8,7 +8,7 @@ homepage: https://github.com/mvanhorn/last30days-skill
 user-invocable: true
 disable-model-invocation: true
 metadata:
-  clawdbot:
+  openclaw:
     emoji: "📰"
     requires:
       env:

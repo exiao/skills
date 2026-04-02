@@ -54,7 +54,7 @@ if [ "$SIZE" -lt 102400 ]; then
 fi
 ```
 
-### Fallback: Clawdbot Browser (spin up local dev server)
+### Fallback: OpenClaw Browser (spin up local dev server)
 
 If simulator unavailable or screenshot <100KB after retry:
 

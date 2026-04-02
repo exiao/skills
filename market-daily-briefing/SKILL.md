@@ -15,8 +15,80 @@ Delivers a concise, narrative market briefing covering earnings results, economi
 |------|---------|
 | **Serper** (`web-search` skill, `SERPER_API_KEY`) | Search for earnings results, analyst reactions, market news |
 | **Firecrawl** (`FIRECRAWL_API_KEY`) | Scrape full articles when Serper snippets cut off before the numbers |
-| **Bloom MCP** (`https://api.getbloom.app/mcp/`, Bearer: `${BLOOM_MCP_API_KEY}`) | Check what stocks Bloom users are watching — front-load coverage of these |
+| **Bloom MCP** (`https://api.getbloom.app/mcp/`, Bearer: `${BLOOM_MCP_API_KEY}`) | Check what stocks Bloom users are watching — front-load coverage of these. Note: `BLOOM_MCP_API_KEY` is a separate credential from bloom-cli's `BLOOM_API_KEY`. |
 
+---
+
+## Step 0: Pull Market Data (before web search)
+
+Run this block first. It gives you ground-truth numbers before any web search. Prefer bloom-cli data for all stock percentages; fall back to article numbers only when bloom-cli is unavailable (see Verified Numbers Rule below).
+
+### Validate bloom output before extraction
+
+If any bloom command returned empty, null, or error JSON, skip the verification step for that data source rather than passing bad data to the model.
+
+> **Verified bloom-cli output formats (as of bloom-cli v1.x):**
+> - `bloom market --type top_movers -f json` → `{"status":"success","data":{"stocks":[{"symbol","change_percent","market_cap",...}]}}`
+> - `bloom market --type major_indexes -f json` → `{"status":"success","data":{"SPY":{"change_pct":-0.42,"price":512.30,...},...}}` (day-over-day change fields directly, no manual computation needed)
+> - `bloom sentiment -f json` → `{"aaii_sentiment":{"bullish_percent","bearish_percent",...},"cnn_fear_greed":{"index_value","level",...},...}`
+
+```bash
+BLOOM_TMP=$(mktemp -d /tmp/bloom-XXXXXX)
+trap 'rm -rf "$BLOOM_TMP"' EXIT
+
+# Today's actual top movers
+if ! bloom market --type top_movers --limit 20 -f json -o "$BLOOM_TMP/movers.json" 2>"$BLOOM_TMP/movers.err"; then
+  echo "WARN: bloom market failed ($(cat "$BLOOM_TMP/movers.err"))" >&2
+  echo '{"status":"error"}' > "$BLOOM_TMP/movers.json"
+fi
+
+# Fear & Greed + AAII sentiment
+if ! bloom sentiment -f json -o "$BLOOM_TMP/sentiment.json" 2>"$BLOOM_TMP/sentiment.err"; then
+  echo "WARN: bloom sentiment failed ($(cat "$BLOOM_TMP/sentiment.err"))" >&2
+  echo '{"status":"error"}' > "$BLOOM_TMP/sentiment.json"
+fi
+
+# Major index data (includes day-over-day change_pct directly from the API)
+if ! bloom market --type major_indexes -f json -o "$BLOOM_TMP/indexes.json" 2>"$BLOOM_TMP/indexes.err"; then
+  echo "WARN: bloom market major_indexes failed ($(cat "$BLOOM_TMP/indexes.err"))" >&2
+  echo '{"status":"error"}' > "$BLOOM_TMP/indexes.json"
+fi
+
+# Helper: check if file has valid, non-empty bloom data
+# Uses jq instead of grep to correctly handle both '"status":"error"' and '"status": "error"'
+bloom_valid() {
+  local f="$1"
+  [ -s "$f" ] && jq -e '.status != "error"' "$f" >/dev/null 2>&1 && {
+    local len
+    len=$(jq 'if .data then (.data | length) else ([keys[] | select(. != "status")] | length) end' "$f" 2>/dev/null)
+    [ "${len:-0}" != "0" ]
+  }
+}
+
+# Top movers summary
+if bloom_valid "$BLOOM_TMP/movers.json"; then
+  jq '.data.stocks[] | {symbol: .symbol, change_pct: .change_percent, market_cap: .market_cap}' "$BLOOM_TMP/movers.json"
+else
+  echo "SKIP: movers data unavailable or invalid" >&2
+fi
+
+# Sentiment
+if bloom_valid "$BLOOM_TMP/sentiment.json"; then
+  # Paths may differ across bloom-cli versions — confirm against live output if extraction returns null
+  jq '{fear_greed: .cnn_fear_greed.index_value, fear_greed_label: .cnn_fear_greed.level, aaii_bull: .aaii_sentiment.bullish_percent, aaii_bear: .aaii_sentiment.bearish_percent}' "$BLOOM_TMP/sentiment.json"
+else
+  echo "SKIP: sentiment data unavailable or invalid" >&2
+fi
+
+# Major index summary — change_pct comes directly from the API (day-over-day)
+# Only extract from .data to avoid leaking non-index keys (status, etc.) into output
+if bloom_valid "$BLOOM_TMP/indexes.json"; then
+  jq '.data | to_entries[] | {symbol: .key, change_pct: .value.change_pct, price: .value.price}' "$BLOOM_TMP/indexes.json"
+else
+  echo "SKIP: index data unavailable or invalid" >&2
+fi
+```
+Keep these numbers in context. Every stock percentage you write must come from this data.
 ---
 
 ## What to Cover

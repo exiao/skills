@@ -61,7 +61,7 @@ Account
 ### Naming Convention
 ```
 [Platform]_[Objective]_[Audience]_[Offer]_[Date]
-META_Conv_Lookalike-Customers_FreeTrial_YYYY_Q1
+META_Conv_Lookalike-Customers_FreeTrial_2024Q1
 ```
 
 ### Budget Allocation
@@ -193,6 +193,10 @@ Captions always (85% watch without sound). Native feel outperforms polished.
 ## Related Skills
 
 - **meta-ads**: For Meta Marketing API operations
+<<<<<<< HEAD
+=======
+- **google-ads**: For Google Ads API operations
+>>>>>>> origin/main
 - **copywriting**: For landing page and ad copy
 - **growth**: For post-click conversion optimization
 - **marketing-psychology**: For ad psychology principles

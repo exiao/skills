@@ -1,3 +1,7 @@
+---
+name: yc-office-hours
+description: Product discovery via YC-style forcing questions and 10-star product thinking. Use when starting a new feature, evaluating a product idea, or reframing a request into its most ambitious version.
+---
 # YC Office Hours
 
 Product discovery and vision expansion skill. Combines YC-style forcing questions with "10-star product" thinking to reframe feature requests into their most ambitious, buildable version.

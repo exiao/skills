@@ -20,14 +20,14 @@ You are an expert ASO keyword researcher with deep knowledge of App Store search
 ## Research Process
 
 Use DataForSEO for all keyword data. Auth header for every call:
-`-H "Authorization: Basic c29jaWFsc0Bwcm9tcHRwbS5haTo3YjBiN2M2YzE1MmRjNDA5"`
+`-H "Authorization: Basic $DATAFORSEO_AUTH_BASE64"`
 
 ### Phase 1: Seed Expansion
 
 **Step 1 — Get keyword volumes for seed terms:**
 ```bash
 curl -s -X POST "https://api.dataforseo.com/v3/keywords_data/google_ads/search_volume/live" \
-  -H "Authorization: Basic c29jaWFsc0Bwcm9tcHRwbS5haTo3YjBiN2M2YzE1MmRjNDA5" \
+  -H "Authorization: Basic $DATAFORSEO_AUTH_BASE64" \
   -H "Content-Type: application/json" \
   -d '[{"keywords": ["<seed1>", "<seed2>", "<seed3>"], "location_code": 2840, "language_code": "en"}]'
 ```
@@ -36,7 +36,7 @@ Parse: `data['tasks'][0]['result']` — flat list of keyword objects with `searc
 **Step 2 — Expand to related keywords:**
 ```bash
 curl -s -X POST "https://api.dataforseo.com/v3/keywords_data/google_ads/keywords_for_keywords/live" \
-  -H "Authorization: Basic c29jaWFsc0Bwcm9tcHRwbS5haTo3YjBiN2M2YzE1MmRjNDA5" \
+  -H "Authorization: Basic $DATAFORSEO_AUTH_BASE64" \
   -H "Content-Type: application/json" \
   -d '[{"keywords": ["<seed1>", "<seed2>"], "location_code": 2840, "language_code": "en", "limit": 100}]'
 ```
@@ -45,7 +45,7 @@ curl -s -X POST "https://api.dataforseo.com/v3/keywords_data/google_ads/keywords
 **Step 3 — Get keyword difficulty:**
 ```bash
 curl -s -X POST "https://api.dataforseo.com/v3/dataforseo_labs/google/bulk_keyword_difficulty/live" \
-  -H "Authorization: Basic c29jaWFsc0Bwcm9tcHRwbS5haTo3YjBiN2M2YzE1MmRjNDA5" \
+  -H "Authorization: Basic $DATAFORSEO_AUTH_BASE64" \
   -H "Content-Type: application/json" \
   -d '[{"keywords": ["kw1", "kw2", "kw3"], "location_code": 2840, "language_code": "en"}]'
 ```
@@ -56,7 +56,7 @@ Parse: `result[0]['items']` — each item has `keyword`, `keyword_difficulty` (0
 Post task:
 ```bash
 curl -s -X POST "https://api.dataforseo.com/v3/app_data/apple/app_searches/task_post" \
-  -H "Authorization: Basic c29jaWFsc0Bwcm9tcHRwbS5haTo3YjBiN2M2YzE1MmRjNDA5" \
+  -H "Authorization: Basic $DATAFORSEO_AUTH_BASE64" \
   -H "Content-Type: application/json" \
   -d '[{"keyword": "<keyword>", "location_code": 2840, "language_code": "en"}]'
 ```
@@ -65,7 +65,7 @@ Poll tasks_ready, then GET `task_get/advanced/<id>`. Look for `app_id == "$BLOOM
 **Step 5 — Pull all keywords Bloom already ranks for (to avoid duplicating current winners and find gaps):**
 ```bash
 curl -s -X POST "https://api.dataforseo.com/v3/dataforseo_labs/apple/keywords_for_app/live" \
-  -H "Authorization: Basic c29jaWFsc0Bwcm9tcHRwbS5haTo3YjBiN2M2YzE1MmRjNDA5" \
+  -H "Authorization: Basic $DATAFORSEO_AUTH_BASE64" \
   -H "Content-Type: application/json" \
   -d '[{"app_id": "$BLOOM_APP_STORE_ID", "location_code": 2840, "language_code": "en", "limit": 100}]'
 ```

@@ -17,13 +17,13 @@ Create polished product demo videos by automating browser interactions.
 
 ### Prerequisites
 
-- Clawdbot browser running (`browser action=start profile=clawd`)
+- OpenClaw browser running (`browser action=start profile=clawd`)
 - App accessible via browser (localhost or remote)
 - FFmpeg installed for encoding
 
 ### Recording Workflow
 
-1. Start the Clawdbot browser if not running
+1. Start the OpenClaw browser if not running
 2. Navigate to the app manually or via `browser action=open`
 3. Customize `scripts/record-demo.js` for the target app
 4. Run: `node scripts/record-demo.js`
@@ -42,7 +42,7 @@ See `references/demo-planning.md` for guidance on:
 ### `scripts/record-demo.js`
 
 Template Playwright script that:
-- Connects to Clawdbot browser via CDP
+- Connects to OpenClaw browser via CDP
 - Starts screencast capture (JPEG frames)
 - Executes demo sequence (navigation, clicks, hovers, typing)
 - Saves frames to output directory

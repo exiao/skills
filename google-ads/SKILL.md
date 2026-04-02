@@ -29,7 +29,7 @@ If no config found, ask: "Do you have Google Ads API credentials, or should I us
 
 ### Setup
 1. User opens ads.google.com and logs in
-2. User clicks Clawdbot Browser Relay toolbar icon (badge ON)
+2. User clicks OpenClaw Browser Relay toolbar icon (badge ON)
 3. Use `browser` tool with `profile="chrome"`
 
 ### Common Workflows

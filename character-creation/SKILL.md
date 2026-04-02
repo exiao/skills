@@ -40,7 +40,7 @@ Two images required: **portrait** (for thumbnails, branding) and **face referenc
 ### Portrait (9:16 for TikTok/Reels)
 
 ```bash
-uv run /opt/homebrew/lib/node_modules/clawdbot/skills/nano-banana-pro/scripts/generate_image.py \
+uv run ~/clawd/skills/nano-banana-pro/scripts/generate_image.py \
   --prompt "<appearance description>, looking directly at camera, confident expression, <visual style>, professional lighting, clean background" \
   --filename "~/clawd/characters/<slug>/portrait-$(date +%Y-%m-%d).png" \
   --aspect-ratio 9:16 \
@@ -51,7 +51,7 @@ uv run /opt/homebrew/lib/node_modules/clawdbot/skills/nano-banana-pro/scripts/ge
 ### Face Reference (1:1 for InfiniteTalk)
 
 ```bash
-uv run /opt/homebrew/lib/node_modules/clawdbot/skills/nano-banana-pro/scripts/generate_image.py \
+uv run ~/clawd/skills/nano-banana-pro/scripts/generate_image.py \
   --prompt "<appearance description>, extreme close-up headshot, neutral expression, facing forward, <visual style>, studio lighting, white background" \
   --filename "~/clawd/characters/<slug>/face-ref-$(date +%Y-%m-%d).png" \
   --aspect-ratio 1:1 \
