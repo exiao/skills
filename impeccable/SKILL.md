@@ -1,6 +1,6 @@
 ---
 name: impeccable
-description: Run impeccable design quality commands on frontend code — audit, critique, polish, animate, normalize, and more. Built on top of the frontend-design skill with 21 steering commands and 7 domain-specific reference files. Use when doing a design QA pass, reviewing UI quality, or refining a frontend component before shipping.
+description: Run impeccable design quality commands on frontend code — audit, critique, polish, animate, normalize, and more. Built on top of the frontend-design skill with 21 steering commands and 10 domain-specific reference files. Use when doing a design QA pass, reviewing UI quality, or refining a frontend component before shipping.
 ---
 
 > **Source:** External skill (frontend-design ecosystem) — local copy, do not modify without checking upstream.
@@ -10,7 +10,7 @@ description: Run impeccable design quality commands on frontend code — audit, 
 Design quality layer for Claude Code. 21 commands that audit, review, polish, and refine frontend interfaces. Complements the `frontend-design` skill (vision/direction) with systematic QA passes.
 
 **Source:** https://github.com/pbakaus/impeccable  
-**Installed at:** `~/.claude/skills/` (frontend-design + 21 individual command skills)
+**Installed at:** `~/clawd/skills/` (frontend-design + 21 individual command skills)
 
 ## When to Use
 
@@ -55,6 +55,9 @@ Design quality layer for Claude Code. 21 commands that audit, review, polish, an
 | `interaction-design.md` | Forms, focus states, loading patterns |
 | `responsive-design.md` | Mobile-first, fluid design, container queries |
 | `ux-writing.md` | Button labels, error messages, empty states |
+| `cognitive-load.md` | Cognitive load theory, chunking, progressive disclosure |
+| `heuristics-scoring.md` | Nielsen's heuristics scoring rubric and evaluation |
+| `personas.md` | User persona archetypes for design critique |
 
 ## How to Use from Clawdbot
 
