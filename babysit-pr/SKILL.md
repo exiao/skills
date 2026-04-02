@@ -22,7 +22,7 @@ When spawning this skill as a sub-agent, use `streamTo: "parent"` so the parent 
 sessions_spawn({
   task: "Use the babysit-pr skill. PR #<number>, repo <owner/repo>. Parent session: <session_key>. ...",
   streamTo: "parent",
-  run_timeout_seconds: 1800
+  runTimeoutSeconds: 1800
 })
 ```
 
@@ -68,7 +68,7 @@ Repeat up to `max_cycles` times:
 Poll CI status every 60 seconds until all checks complete or 20 minutes pass (whichever comes first).
 
 ```bash
-# Check CI status
+cd "$WORKTREE"
 gh pr checks $PR --repo $REPO
 ```
 
@@ -83,6 +83,8 @@ States:
 **Always read ALL comments and reviews, even when CI is green.** Automated reviewers (claude-review, Seer, Bugbot) post findings as issue comments or review bodies that may flag real issues despite passing CI.
 
 ```bash
+cd "$WORKTREE"
+
 # 1. Inline review comments (on specific lines of code)
 gh api --paginate "repos/$REPO/pulls/$PR/comments" | \
   jq '.[] | {author: .user.login, path: .path, line: .line, body: .body, commit: .original_commit_id, created: .created_at}'
@@ -134,9 +136,9 @@ If auto-fixable issues exist:
 1. Pull latest: `git pull origin $BRANCH`
 2. Read the relevant files in full (not just the diff)
 3. Make the minimal, targeted fix
-4. Verify locally using the project's lint/test commands (read CLAUDE.md or AGENTS.md for the correct commands). Common patterns:
-   - Python: `uv run black <file> && uv run ruff check <file>`
-   - JS/TS: `bun run lint --fix && bun run typecheck`
+4. Verify locally using whatever lint/test commands the project's CLAUDE.md or AGENTS.md specifies. Examples:
+   - Python projects often use: `uv run black <file> && uv run ruff check <file>`
+   - JS/TS projects often use: `bun run lint --fix && bun run typecheck`
    - Run the specific failing test if identifiable
 5. Single commit: `git commit -am "fix: <description> (#$PR)"`
 6. Push: `git push origin $BRANCH`
