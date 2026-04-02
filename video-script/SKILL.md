@@ -1,11 +1,11 @@
 ---
 name: video-script
-description: Generate structured scene-by-scene video scripts with production metadata (visuals, audio, sources, transitions, captions) ready to feed into the video-production pipeline (Sora, Kling, ElevenLabs, InfiniteTalk, Remotion, stock-footage, auto-captions, video-editor). Use when asked to "write a video script", "script for TikTok", "video outline", "plan a video", "storyboard", "scene breakdown", "video concept", "content brief for video", "shooting script", or whenever the video-production pipeline needs a structured script before production begins. Also trigger for "Reels script", "Shorts script", "YouTube script", "video idea with scenes", or any request that implies breaking a video concept into timed scenes with production directions.
+description: Generate structured scene-by-scene video scripts with production metadata (visuals, audio, sources, transitions, captions) ready to feed into the video-production pipeline (Sora, Kling, ElevenLabs, InfiniteTalk, Remotion, stock-footage, video-editor). Use when asked to "write a video script", "script for TikTok", "video outline", "plan a video", "storyboard", "scene breakdown", "video concept", "content brief for video", "shooting script", or whenever the video-production pipeline needs a structured script before production begins. Also trigger for "Reels script", "Shorts script", "YouTube script", "video idea with scenes", or any request that implies breaking a video concept into timed scenes with production directions.
 ---
 
 # Video Script Generator
 
-Takes a topic, hook, or concept and produces a scene-by-scene video script with production metadata. Every field in the output is designed to be machine-readable by downstream pipeline skills (Sora for AI video, stock-footage for B-roll, ElevenLabs/InfiniteTalk for voiceover, auto-captions for subtitle highlights, Remotion/video-editor for assembly).
+Takes a topic, hook, or concept and produces a scene-by-scene video script with production metadata. Every field in the output is designed to be machine-readable by downstream pipeline skills (Sora for AI video, stock-footage for B-roll, ElevenLabs/InfiniteTalk for voiceover, Remotion/video-editor for assembly).
 
 ## Output Format
 

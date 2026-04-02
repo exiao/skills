@@ -61,7 +61,7 @@ Every piece of content must pass this test: **can a stranger who has never heard
 | Source framing | Reader-first reframe |
 |----------------|----------------------|
 | "We hit 50k users by doing X" | "The one thing that unlocks your first 50k users" |
-| "Bloom now supports Y feature" | "The feature that makes investors actually stick around" |
+| "[Your App] now supports Y feature" | "The feature that makes investors actually stick around" |
 | "I learned Z from this experience" | "Why Z is the thing most people get backwards" |
 
 Tutorials, frameworks, explainers: no reframe needed. Achievements, milestones, announcements: always reframe.
@@ -206,7 +206,7 @@ When the output is an AI character video series (TikTok, Reels, Shorts) rather t
 
 ### Series Setup
 
-1. **Load character config** from `~/clawd/characters/<slug>/config.json` — this defines the persona, speech style, and visual identity
+1. **Load character config** from `$CHARACTERS_DIR/<slug>/config.json` — this defines the persona, speech style, and visual identity
 2. **Define the series**: topic cluster + episode count + arc (standalone episodes vs. serialized)
 3. **Generate episode ideas**: 10-20 ideas per series; each idea = one episode concept. Use Verbalized Sampling: *"Generate 15 episode ideas for [series]. For each, assign a probability (0–100%) a typical AI would generate this idea. Flag anything under 20% as ⚡ Novel."* Pick from the low end of the distribution.
 4. **Score each idea** (0-10 on each axis):
@@ -242,7 +242,7 @@ Rules:
 
 ### Output
 
-One file per episode: `~/clawd/characters/<slug>/scripts/YYYY-MM-DD-episode-title.md`
+One file per episode: `$CHARACTERS_DIR/<slug>/scripts/YYYY-MM-DD-episode-title.md`
 
 ---
 
@@ -272,7 +272,7 @@ This is a full account pillar — not a one-off format. Run it every week.
 
 Place labels at the moment you identify the tactic, not before. Let the source video play 2-3 seconds first, then drop the label as your "aha" moment. Use bold white or colored text, large enough to read on mobile, centered or near the source video panel.
 
-**Bloom-specific example:**
+**Example (investing niche):**
 - Source: viral TikTok of someone showing their Robinhood portfolio down 40% (2M+ views)
 - Labels you'd drop: "LOSS AVERSION" (the emotional hook), "ROUND NUMBER" (they lost exactly $10K, not $9,847), "SCREENSHOT FORMAT" (looks organic, not produced), "NO CTA" (the virality IS the content, no ask)
 - Your commentary: explain each label as an investing psychology + content strategy concept simultaneously. Double value for the viewer.
@@ -403,7 +403,7 @@ What a complete strategy card looks like after running this skill. Use this as t
 
 ---
 
-**Campaign:** Bloom AI — Cold TikTok / Instagram (March 2026)  
+**Campaign:** [Your App] — Cold TikTok / Instagram (March 2026)
 **Topic:** AI has an edge in investing that retail investors don't know about  
 **Audience level:** 1–2 (unaware / problem-aware)
 
@@ -413,7 +413,7 @@ What a complete strategy card looks like after running this skill. Use this as t
 - Audience language: "I don't even know where to start", "I feel like I'm always late to the news"
 
 **Angles (pick one per batch):**
-1. *Wound-first:* "By the time you read the news, the trade already happened." → exits to Bloom seeing it first
+1. *Wound-first:* "By the time you read the news, the trade already happened." → exits to [Your App] seeing it first
 2. *Surprising number:* "Hedge funds run 10,000 stock screens before breakfast. Here's how to match that for free."
 3. *Stolen thought:* "You already know the stock market isn't fair. Here's the part nobody explains."
 
@@ -454,7 +454,7 @@ The hierarchy: **Posting > Targeting > Platform choice > Repurposing > Scripting
 
 ---
 
-## Channel Tier List (Bloom / B2C)
+## Channel Tier List (B2C)
 
 What actually works for consumer apps vs. what sounds good but doesn't.
 

@@ -237,7 +237,7 @@ git clone https://github.com/exiao/skills ~/clawd/skills
 Or grab individual skills:
 
 ```bash
-cp -r ~/path/to/skills/ad-copy ~/clawd/skills/
+cp -r ~/path/to/skills/copywriting ~/clawd/skills/
 ```
 
 Each skill is a folder with a `SKILL.md` file. OpenClaw auto-discovers them at startup.
