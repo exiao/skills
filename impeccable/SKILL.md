@@ -53,7 +53,7 @@ Design quality layer for Claude Code. 17 commands that audit, review, polish, an
 | `responsive-design.md` | Mobile-first, fluid design, container queries |
 | `ux-writing.md` | Button labels, error messages, empty states |
 
-## How to Use from Clawdbot
+## How to Use from OpenClaw
 
 Delegate to Claude Code via acpx. Pass the target file/component and the command:
 

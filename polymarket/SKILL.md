@@ -2,7 +2,7 @@
 name: polymarket
 description: Query Polymarket prediction markets via the polymarket CLI. Browse markets, search topics, check prices, order books, and view events. Use when a user asks about prediction markets, odds, or "what does Polymarket say about X".
 metadata:
-  clawdbot:
+  openclaw:
     emoji: "🔮"
     requires:
       bins:

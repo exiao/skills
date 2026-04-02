@@ -13,12 +13,12 @@ Run once at the start of every session:
 
 ```bash
 export BASE="https://api.dataforseo.com/v3"
-export DFS_AUTH="Authorization: Basic c29jaWFsc0Bwcm9tcHRwbS5haTo3YjBiN2M2YzE1MmRjNDA5"
+export DFS_AUTH="Authorization: Basic $DATAFORSEO_AUTH_BASE64"
 # All POSTs: curl -s -X POST "$BASE/..." -H "$DFS_AUTH" -H "Content-Type: application/json" -d '[...]'
 # All GETs:  curl -s "$BASE/..." -H "$DFS_AUTH"
 ```
 
-Dashboard: `https://app.dataforseo.com` (socials@promptpm.ai) | Balance: ~$0.83
+Dashboard: `https://app.dataforseo.com`
 
 ## Key IDs
 

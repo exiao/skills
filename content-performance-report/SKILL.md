@@ -70,7 +70,7 @@ AUTH="Authorization: Bearer $APPFIGURES_PAT"
 
 # Last 7 days (iOS + Android)
 curl -s "https://api.appfigures.com/v2/reports/sales/\
-?products=281045205499,281090333286\
+?products=$APPFIGURES_BLOOM_IOS_ID,$APPFIGURES_BLOOM_ANDROID_ID\
 &group_by=dates\
 &start_date=-7\
 &end_date=0" \
@@ -78,7 +78,7 @@ curl -s "https://api.appfigures.com/v2/reports/sales/\
 
 # Last 30 days (for trend comparison)
 curl -s "https://api.appfigures.com/v2/reports/sales/\
-?products=281045205499,281090333286\
+?products=$APPFIGURES_BLOOM_IOS_ID,$APPFIGURES_BLOOM_ANDROID_ID\
 &group_by=dates\
 &start_date=-30\
 &end_date=0" \

@@ -1,3 +1,7 @@
+---
+name: security-audit
+description: Run a codebase security audit using OWASP Top 10 and STRIDE threat modeling. Use when auditing code for vulnerabilities or preparing for a pentest.
+---
 # Security Audit
 
 Codebase security audit using OWASP Top 10 and STRIDE threat modeling. Scans application code for vulnerabilities, not infrastructure (see `healthcheck` skill for host hardening).

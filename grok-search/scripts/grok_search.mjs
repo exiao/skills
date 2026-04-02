@@ -10,7 +10,7 @@
  *
  * Usage:
  *   node scripts/grok_search.mjs "query" --web --json
- *   node scripts/grok_search.mjs "query" --x --days 7 --handles @clawdbot --json
+ *   node scripts/grok_search.mjs "query" --x --days 7 --handles @openclaw --json
  *   node scripts/grok_search.mjs "query" --x --from 2026-01-01 --to 2026-01-27 --json
  *   node scripts/grok_search.mjs "query" --x --links-only
  *   node scripts/grok_search.mjs "query" --x --raw --json
@@ -28,14 +28,14 @@ function usage(msg) {
   process.exit(2);
 }
 
-function readKeyFromClawdbotConfig() {
+function readKeyFromOpenclawConfig() {
   // Priority:
   // 1) env var
-  // 2) clawdbot.json env.XAI_API_KEY
-  // 3) clawdbot.json skills.entries.grok-search.apiKey
-  // 4) clawdbot.json skills.entries.search-x.apiKey / skills.entries.xai.apiKey (fallback)
+  // 2) openclaw.json env.XAI_API_KEY
+  // 3) openclaw.json skills.entries.grok-search.apiKey
+  // 4) openclaw.json skills.entries.search-x.apiKey / skills.entries.xai.apiKey (fallback)
   try {
-    const p = path.join(os.homedir(), ".clawdbot", "clawdbot.json");
+    const p = path.join(os.homedir(), ".openclaw", "openclaw.json");
     const raw = fs.readFileSync(p, "utf8");
     const j = JSON.parse(raw);
 
@@ -127,10 +127,10 @@ const query = queryParts.join(" ").trim();
 if (!query) usage("Missing <query>");
 if (!mode) usage("Must specify --web or --x");
 
-const apiKey = readKeyFromClawdbotConfig();
+const apiKey = readKeyFromOpenclawConfig();
 if (!apiKey) {
   console.error(
-    "Missing XAI_API_KEY. Set env var or add env.XAI_API_KEY in ~/.clawdbot/clawdbot.json"
+    "Missing XAI_API_KEY. Set env var or add env.XAI_API_KEY in ~/.openclaw/openclaw.json"
   );
   process.exit(1);
 }

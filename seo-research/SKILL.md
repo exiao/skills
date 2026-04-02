@@ -39,7 +39,7 @@ THIS SKILL (what to write about) → hooks → outline-generator → article-wri
 ## Keyword Research Tools
 
 ### Primary: DataForSEO (API)
-Auth: Basic `c29jaWFsc0Bwcm9tcHRwbS5haTo3YjBiN2M2YzE1MmRjNDA5`  
+Auth: Basic `$DATAFORSEO_AUTH_BASE64`  
 Skill: `dataforseo` — read it for full endpoint reference and cost table.
 
 Key operations:
@@ -52,13 +52,13 @@ Key operations:
 ```bash
 # Volume for known keywords
 curl -s -X POST "https://api.dataforseo.com/v3/keywords_data/google_ads/search_volume/live" \
-  -H "Authorization: Basic c29jaWFsc0Bwcm9tcHRwbS5haTo3YjBiN2M2YzE1MmRjNDA5" \
+  -H "Authorization: Basic $DATAFORSEO_AUTH_BASE64" \
   -H "Content-Type: application/json" \
   -d '[{"keywords": ["ai investing app", "stock screener"], "location_code": 2840, "language_code": "en"}]'
 
 # Keyword ideas from seeds
 curl -s -X POST "https://api.dataforseo.com/v3/keywords_data/google_ads/keywords_for_keywords/live" \
-  -H "Authorization: Basic c29jaWFsc0Bwcm9tcHRwbS5haTo3YjBiN2M2YzE1MmRjNDA5" \
+  -H "Authorization: Basic $DATAFORSEO_AUTH_BASE64" \
   -H "Content-Type: application/json" \
   -d '[{"keywords": ["stock research", "ai investing"], "location_code": 2840, "language_code": "en", "limit": 100}]'
 ```
@@ -88,19 +88,19 @@ For each seed:
 ```bash
 # Step 2a: Ideas
 curl -s -X POST "https://api.dataforseo.com/v3/keywords_data/google_ads/keywords_for_keywords/live" \
-  -H "Authorization: Basic c29jaWFsc0Bwcm9tcHRwbS5haTo3YjBiN2M2YzE1MmRjNDA5" \
+  -H "Authorization: Basic $DATAFORSEO_AUTH_BASE64" \
   -H "Content-Type: application/json" \
   -d '[{"keywords": ["SEED_KEYWORD"], "location_code": 2840, "language_code": "en", "limit": 200}]'
 
 # Step 2b: Difficulty on filtered candidates
 curl -s -X POST "https://api.dataforseo.com/v3/dataforseo_labs/google/bulk_keyword_difficulty/live" \
-  -H "Authorization: Basic c29jaWFsc0Bwcm9tcHRwbS5haTo3YjBiN2M2YzE1MmRjNDA5" \
+  -H "Authorization: Basic $DATAFORSEO_AUTH_BASE64" \
   -H "Content-Type: application/json" \
   -d '[{"keywords": ["keyword1", "keyword2"], "location_code": 2840, "language_code": "en"}]'
 
 # Step 2c: SERP check on winners
 curl -s -X POST "https://api.dataforseo.com/v3/serp/google/organic/live/advanced" \
-  -H "Authorization: Basic c29jaWFsc0Bwcm9tcHRwbS5haTo3YjBiN2M2YzE1MmRjNDA5" \
+  -H "Authorization: Basic $DATAFORSEO_AUTH_BASE64" \
   -H "Content-Type: application/json" \
   -d '[{"keyword": "TARGET_KEYWORD", "location_code": 2840, "language_code": "en", "depth": 10}]'
 ```
@@ -159,7 +159,7 @@ Save to `marketing/substack/research/[slug].md`.
 ```bash
 # Check current ranking for a keyword
 curl -s -X POST "https://api.dataforseo.com/v3/serp/google/organic/live/advanced" \
-  -H "Authorization: Basic c29jaWFsc0Bwcm9tcHRwbS5haTo3YjBiN2M2YzE1MmRjNDA5" \
+  -H "Authorization: Basic $DATAFORSEO_AUTH_BASE64" \
   -H "Content-Type: application/json" \
   -d '[{"keyword": "TARGET_KEYWORD", "location_code": 2840, "language_code": "en", "depth": 100}]'
 ```

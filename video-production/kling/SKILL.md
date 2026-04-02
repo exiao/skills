@@ -236,7 +236,7 @@ Every submission is billed. Confirm with the user before submitting. On failure,
 
 Eric has a Higgsfield **Creator subscription** at higgsfield.ai. Use the clawd browser to generate videos without spending API credits.
 
-**Profile:** `clawd` — already logged in as `socials@promptpm.ai`
+**Profile:** `clawd` — already logged in via browser profile
 
 #### Full Workflow
 
