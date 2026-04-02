@@ -132,7 +132,7 @@ Draft: https://typefully.com/?a=286685&d=[draft_id] | Scheduled: [time]
 
 ## Delivery
 
-- Signal group: `group:5TgLlI8NfnETVAzVvUi0rJ0WKz2Pz2Flj5i2/VAcFSY=`
+- Signal group: `group:VEsNr2at9GMf41l5TiBLXc++af4v+/M61r844tgZITE=` (Marketing) — cron delivery handles routing, do NOT send via message tool
 - Typefully account: 286685
 - Cards: `/tmp/earnings-card-TICKER-YYYYMMDD.png`
 

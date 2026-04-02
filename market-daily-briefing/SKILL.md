@@ -130,22 +130,13 @@ Prioritize: mega-caps, widely-held names, dramatic movers (>5%), anything popula
 ## Delivery
 
 ### Signal (primary)
-Required env vars for delivery:
+Do NOT send via the message tool. The cron delivery handles Signal routing automatically. Just output the briefing text as your reply.
+
+Required env vars:
 ```bash
 export SKILLS_DIR=/path/to/your/skills          # directory containing skill folders
-export SIGNAL_BRIEFING_GROUP=<group-id>          # Signal group for briefing delivery
 export TYPEFULLY_SOCIAL_SET_ID=<social-set-id>   # Typefully social set for @investwithbloom
 export BLOOM_MCP_API_KEY=<api-key>               # Bloom MCP bearer token (separate from bloom-cli's BLOOM_API_KEY)
-```
-
-Send to the Signal group configured in `$SIGNAL_BRIEFING_GROUP` (or the Cron Admin group if unset).
-
-```python
-import os
-
-# Use message tool
-channel = "signal"
-target = os.environ["SIGNAL_BRIEFING_GROUP"]  # raises KeyError if unset — set this env var before running
 ```
 
 ### Typefully (secondary — @investwithbloom)

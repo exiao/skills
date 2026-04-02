@@ -160,7 +160,7 @@ Typefully draft: https://typefully.com/?a=22264&d=[draft_id]
 
 ## Delivery
 
-- Signal group: `group:5TgLlI8NfnETVAzVvUi0rJ0WKz2Pz2Flj5i2/VAcFSY=`
+- Signal group: `group:VEsNr2at9GMf41l5TiBLXc++af4v+/M61r844tgZITE=` (Marketing) — cron delivery handles routing, do NOT send via message tool
 - Typefully account: 22264 (Bloom brand account), tag: `bloom-features`
 - Draft is **NOT scheduled** — Eric reviews and publishes manually
 - Screenshot: `/tmp/bloom-shot-1.png`

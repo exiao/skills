@@ -34,7 +34,7 @@ ADSET_ANDROID="$BLOOM_ANDROID_ADSET_ID"   # General, Android (ACTIVE)
 | `trend-research` skill | Find what investing/finance content is trending today |
 | `web-search` skill | Serper for trending finance content |
 | `nano-banana-pro` skill | Generate 1080×1080 ad creatives |
-| `message` tool | Report + send creatives to Signal group |
+| Reply output | Report + creative summaries (cron delivery handles Signal routing) |
 
 ---
 
@@ -191,9 +191,9 @@ Repeat 6a-6c for Android ad set (`$ADSET_ANDROID`) using the Android app link, s
 
 ⚠️ **If any API call returns an error with `payment` or `billing`: STOP and notify Eric.**
 
-### Step 7 — Report to Signal
+### Step 7 — Output Report
 
-Send to `group:5TgLlI8NfnETVAzVvUi0rJ0WKz2Pz2Flj5i2/VAcFSY=`:
+Do NOT send via the message tool. Just output the report as your reply. Cron delivery handles routing to Signal (Marketing group).
 
 ```
 🎯 Meta Ads Daily Run — [date]
@@ -304,7 +304,7 @@ Quality filter after each wave:
 
 ## Delivery
 
-- Signal group: `group:5TgLlI8NfnETVAzVvUi0rJ0WKz2Pz2Flj5i2/VAcFSY=`
+- Signal group: `group:VEsNr2at9GMf41l5TiBLXc++af4v+/M61r844tgZITE=` (Marketing) — cron delivery handles routing, do NOT send via message tool
 - Performance log: `ads/iteration/[date]_performance.md`
 - Kills log: `ads/iteration/[date]_kills.log`
 - Promotions log: `ads/iteration/[date]_promotions.log`
