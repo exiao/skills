@@ -139,7 +139,9 @@ node scripts/typefully.js drafts:create 286685 \
 
 ## Phase 5 — Report
 
-Send summary to signal +15202753080:
+Do NOT send via the message tool. Just output the summary as your reply. Cron delivery handles routing.
+
+Include:
 - 3 topics chosen (one line each with positioning angle)
 - Substack draft URLs (one per article — ready to review and publish)
 - Typefully draft links (LinkedIn + X thread, unscheduled)
