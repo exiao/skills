@@ -12,6 +12,7 @@ Monitor a single PR through its full lifecycle: wait for CI, read reviews, fix i
 - **PR number** (required)
 - **Repo** (optional, defaults to current repo via `gh repo view --json nameWithOwner -q '.nameWithOwner'`)
 - **Parent session key** (optional, for sending progress updates to the parent agent via `sessions_send`)
+- **Signal group** (optional, env var `$BABYSIT_PR_SIGNAL_GROUP`. If unset, skip Signal notifications)
 - **Max cycles** (optional, default 10. Each cycle = one CI wait + fix attempt)
 
 ## Spawning
@@ -34,7 +35,7 @@ REPO=<owner/repo>
 
 # Read repo conventions
 REPO_DIR=$(echo "$REPO" | cut -d/ -f2)
-for DIR in ~/bloom ~/clawd/$REPO_DIR ~/$REPO_DIR /tmp/$REPO_DIR; do
+for DIR in ~/$REPO_DIR ~/clawd/$REPO_DIR /tmp/$REPO_DIR; do
   [ -d "$DIR/.git" ] && LOCAL_DIR="$DIR" && break
 done
 
@@ -44,7 +45,7 @@ if [ -z "$LOCAL_DIR" ]; then
   LOCAL_DIR="/tmp/$REPO_DIR"
 fi
 
-# Read project rules
+# Read project rules — these define lint commands, test runners, Python version, etc.
 for F in CLAUDE.md AGENTS.md; do
   [ -f "$LOCAL_DIR/$F" ] && cat "$LOCAL_DIR/$F"
 done
@@ -134,9 +135,9 @@ If auto-fixable issues exist:
 1. Pull latest: `git pull origin $BRANCH`
 2. Read the relevant files in full (not just the diff)
 3. Make the minimal, targeted fix
-4. Verify locally:
-   - Backend: `cd $WORKTREE && uv run --python 3.13 black <file> && uv run --python 3.13 ruff check <file>`
-   - Frontend: `cd $WORKTREE/frontend && bun run lint --fix && bun run typecheck`
+4. Verify locally using the project's lint/test commands (read CLAUDE.md or AGENTS.md for the correct commands). Common patterns:
+   - Python: `uv run black <file> && uv run ruff check <file>`
+   - JS/TS: `bun run lint --fix && bun run typecheck`
    - Run the specific failing test if identifiable
 5. Single commit: `git commit -am "fix: <description> (#$PR)"`
 6. Push: `git push origin $BRANCH`
@@ -204,19 +205,19 @@ git -C "$LOCAL_DIR" worktree remove "$WORKTREE" --force 2>/dev/null
 
 ## Gotchas
 
+- **Read CLAUDE.md/AGENTS.md first.** Every repo has different lint, test, and build commands. Never assume. Read the project's config files during Setup and use those commands throughout.
 - **Stale review comments:** `original_commit_id` on inline comments refers to the commit when the comment was made. If HEAD has moved past it, the issue may already be fixed. Always check the current code before acting.
 - **claude-review sticky comments:** These appear as issue comments from the `claude` user. They re-run on every push. Don't try to "fix" informational observations.
 - **GitHub Actions GITHUB_TOKEN suppression:** Pushes via `gh` CLI with the default token don't trigger workflow runs. If CI doesn't start after your push, the repo may need a personal SSH key or a close+reopen to kick off checks.
 - **Worktree branch conflicts:** `git worktree add` fails if the branch is already checked out somewhere. Use `--detach` and then `git checkout` inside the worktree.
-- **Sub-agents can introduce unintended refactors.** Always diff `$BRANCH` against `origin/$BRANCH~1` before pushing to confirm only the intended fix is included.
-- **`uv run` requires `--python 3.13`** for Bloom backend. psycopg-binary wheels don't support 3.14.
+- **Sub-agents can introduce unintended refactors.** Always diff `$BRANCH` against `origin/$BRANCH` before pushing to confirm only the intended fix is included.
 - **Frontend lint may auto-fix unrelated files.** Run lint only on the files you changed, not the whole project.
 - **Check ALL three comment sources.** `gh pr view --json reviews` only shows formal review submissions. Automated reviewers like claude-review often post as issue comments (`/issues/$PR/comments`), not formal reviews. Always check all three: inline review comments, issue comments, and review verdicts.
 
 ## Do NOT
 
 - Post PR comments (triggers claude-review re-runs, wastes tokens)
-- Merge the PR (Eric merges)
+- Merge the PR (the repo owner merges)
 - Force push or rewrite history
 - Make changes unrelated to the PR's purpose
 - Fix more than one issue per commit
