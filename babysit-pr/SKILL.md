@@ -22,7 +22,7 @@ When spawning this skill as a sub-agent, use `streamTo: "parent"` so the parent 
 sessions_spawn({
   task: "Use the babysit-pr skill. PR #<number>, repo <owner/repo>. Parent session: <session_key>. ...",
   streamTo: "parent",
-  runTimeoutSeconds: 1800
+  run_timeout_seconds: 1800
 })
 ```
 
@@ -56,7 +56,7 @@ git -C "$LOCAL_DIR" fetch origin "$BRANCH"
 git -C "$LOCAL_DIR" worktree add "$WORKTREE" "origin/$BRANCH" 2>/dev/null || \
   git -C "$LOCAL_DIR" worktree add --detach "$WORKTREE" "origin/$BRANCH"
 cd "$WORKTREE"
-git checkout -B "$BRANCH" "origin/$BRANCH" 2>/dev/null
+git checkout -B "$BRANCH" "origin/$BRANCH" || true
 ```
 
 ## The Loop
@@ -133,15 +133,15 @@ Examples: typos, missing imports, lint failures, simple logic bugs, null checks,
 
 If auto-fixable issues exist:
 
-1. Pull latest: `git pull origin $BRANCH`
+1. Pull latest: `cd "$WORKTREE" && git pull origin $BRANCH`
 2. Read the relevant files in full (not just the diff)
 3. Make the minimal, targeted fix
 4. Verify locally using whatever lint/test commands the project's CLAUDE.md or AGENTS.md specifies. Examples:
    - Python projects often use: `uv run black <file> && uv run ruff check <file>`
    - JS/TS projects often use: `bun run lint --fix && bun run typecheck`
    - Run the specific failing test if identifiable
-5. Single commit: `git commit -am "fix: <description> (#$PR)"`
-6. Push: `git push origin $BRANCH`
+5. Single commit: `cd "$WORKTREE" && git commit -am "fix: <description>"`
+6. Push: `cd "$WORKTREE" && git push origin HEAD:$BRANCH`
 
 **One commit per cycle.** Don't stack multiple speculative fixes.
 
