@@ -31,7 +31,7 @@ Put the CTA within the first scroll. Then repeat it after every major section. S
 ❌ "Submit"              → sounds like surrendering
 ❌ "Sign Up"             → sounds like homework
 
-✅ "Download Bloom Free"  → specific action + product + risk reversal
+✅ "Download [YourApp] Free"  → specific action + product + risk reversal
 ✅ "Start Investing Smarter" → benefit-driven
 ✅ "Research Your First Stock" → specific, immediate value
 ✅ "Get the App — It's Free" → action + risk reversal
@@ -58,7 +58,7 @@ If your landing page / ad / listing doesn't include at least ONE of these, it's 
 
 ### The "We" Problem
 ```
-❌ "We built Bloom to help investors research smarter"
+❌ "We built [YourApp] to help investors research smarter"
 ✅ "Research any stock in 30 seconds"
 ```
 The reader doesn't care about you. They care about what they get. Lead with "you" and the benefit, not "we" and the origin story.

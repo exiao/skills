@@ -24,6 +24,7 @@ Unified SEO skill covering keyword research, AI search optimization, programmati
 | E-E-A-T detailed criteria | `references/eeat-framework.md` |
 | Content quality thresholds | `references/quality-gates.md` |
 | Core Web Vitals thresholds | `references/cwv-thresholds.md` |
+| Site architecture, page hierarchy, URL structure, internal linking | `references/site-architecture.md` |
 | Bloom keyword seeds | `references/keyword-seeds.md` |
 
 ---

@@ -61,7 +61,7 @@ Account
 ### Naming Convention
 ```
 [Platform]_[Objective]_[Audience]_[Offer]_[Date]
-META_Conv_Lookalike-Customers_FreeTrial_2024Q1
+META_Conv_Lookalike-Customers_FreeTrial_YYYY_Q1
 ```
 
 ### Budget Allocation

@@ -1,11 +1,11 @@
 # Quick Reference: CTA Library
 
-Strong CTAs for Bloom, organized by context:
+Strong CTAs for [YourApp], organized by context:
 
 | Context | CTA | Notes |
 |---------|-----|-------|
-| App Store | "Download Bloom Free" | Risk reversal built in |
-| Google Ad | "Get Bloom — Free Download" | Action + risk reversal |
+| App Store | "Download [YourApp] Free" | Risk reversal built in |
+| Google Ad | "Get [YourApp] — Free Download" | Action + risk reversal |
 | Landing page (primary) | "Download Free" | Short, clear, no friction words |
 | Landing page (secondary) | "See How It Works" | For not-ready visitors |
 | TikTok/Meta | "Link in bio" / "Download now" | Platform native |

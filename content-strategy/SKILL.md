@@ -61,7 +61,7 @@ Every piece of content must pass this test: **can a stranger who has never heard
 | Source framing | Reader-first reframe |
 |----------------|----------------------|
 | "We hit 50k users by doing X" | "The one thing that unlocks your first 50k users" |
-| "Bloom now supports Y feature" | "The feature that makes investors actually stick around" |
+| "[Your App] now supports Y feature" | "The feature that makes investors actually stick around" |
 | "I learned Z from this experience" | "Why Z is the thing most people get backwards" |
 
 Tutorials, frameworks, explainers: no reframe needed. Achievements, milestones, announcements: always reframe.
@@ -156,7 +156,25 @@ Match the angle to a format that amplifies it.
 | Tier List | Gamified ranking format; viewers argue placements in comments, driving engagement | Content strategy, tool reviews, platform comparisons, "best of" lists |
 | Viral Breakdown / Reaction | Dual-screen commentary on a viral post; borrowed traffic + authority positioning | Creator education, niche analysis, weekly pillar content |
 
-> **See:** `references/content-formats.md` for the "Hands-Doing-Something" format details, structure, and Bloom application.
+### The "Hands-Doing-Something" Format
+
+A viral format where the creator does a simple tactile task (cutting fruit, making tea, crafting) while speaking about a completely unrelated topic. The visual activity is background; the spoken content is the payload.
+
+Source: @thebranding.ai breakdown of multiple creators going viral with the same format.
+
+**Why it works:**
+- Tactile hand activity holds visual attention subconsciously (the eye tracks movement)
+- The mismatch between casual activity and spoken content creates curiosity ("why is she cutting an apple while talking about studying?")
+- Extremely simple production: phone on a stand, good mic, something to do with your hands
+- Scalable to any niche: investing (writing in a notebook), cooking (prep work), fitness (stretching), tech (unboxing)
+
+**Structure:**
+1. Open with a relatable spoken hook ("you don't wanna study? that's fine, just imagine...")
+2. Hands doing something throughout (never stop the activity)
+3. Deliver value through speech while the visual activity anchors attention
+4. Close with soft CTA or open loop
+
+**Example application:** Film hands writing stock tickers on a notepad, scrolling through [Your App], or organizing investment notes while delivering investing insights via voiceover.
 
 | Audience Temp | Best Formats |
 |--------------|-------------|
@@ -188,7 +206,7 @@ When the output is an AI character video series (TikTok, Reels, Shorts) rather t
 
 ### Series Setup
 
-1. **Load character config** from `~/clawd/characters/<slug>/config.json` — this defines the persona, speech style, and visual identity
+1. **Load character config** from `$CHARACTERS_DIR/<slug>/config.json` — this defines the persona, speech style, and visual identity
 2. **Define the series**: topic cluster + episode count + arc (standalone episodes vs. serialized)
 3. **Generate episode ideas**: 10-20 ideas per series; each idea = one episode concept. Use Verbalized Sampling: *"Generate 15 episode ideas for [series]. For each, assign a probability (0–100%) a typical AI would generate this idea. Flag anything under 20% as ⚡ Novel."* Pick from the low end of the distribution.
 4. **Score each idea** (0-10 on each axis):
@@ -224,11 +242,42 @@ Rules:
 
 ### Output
 
-One file per episode: `~/clawd/characters/<slug>/scripts/YYYY-MM-DD-episode-title.md`
+One file per episode: `$CHARACTERS_DIR/<slug>/scripts/YYYY-MM-DD-episode-title.md`
 
 ---
 
-> **See:** `references/content-formats.md` for viral breakdown pillar details, dual-screen format, on-screen labels, and Bloom-specific examples.
+## Step 2d: Viral Breakdown Pillar
+
+This is a full account pillar — not a one-off format. Run it every week.
+
+**How it works:**
+- Pick 1–3 viral posts in your niche each week
+- React to + annotate them in dual-screen format (your face/commentary + the source post side by side)
+- Explain the *specific mechanics* of why it worked — not "it's good," but "the credibility drop at 0:08 + the stacked loop at 0:14 are why retention holds past 30 seconds"
+- Label every piece "pt 1" even if there's no pt 2 yet — it signals series, invites return visits, and the algorithm treats it as episodic
+
+**Why it compounds:**
+| Benefit | Mechanism |
+|---------|-----------|
+| Borrowed traffic | Your content surfaces in searches and feeds for the source post's audience |
+| Authority positioning | You're the person who understands the craft, not just a consumer |
+| Series architecture | Built-in return reason; viewers expect more installments |
+
+**Format:** Dual-screen reaction (split-screen or side-by-side layout). If screen recording isn't possible, show the source clip and annotate with on-screen text labels while reacting verbally.
+
+**On-screen keyword labels (retention device):** As you narrate your breakdown, flash bold single-word or short-phrase labels on screen that name the tactic being used: "HOOK", "AVATAR", "MESSAGING", "OPEN LOOP", "SOCIAL PROOF", etc. This serves three purposes:
+1. Viewers feel like they're learning a *system*, not just watching a reaction
+2. Labels create visual rhythm that sustains attention through the middle of the video (the retention dead zone)
+3. Each label is a micro-open-loop: the viewer wants to understand *why* you labeled it that, so they keep watching
+
+Place labels at the moment you identify the tactic, not before. Let the source video play 2-3 seconds first, then drop the label as your "aha" moment. Use bold white or colored text, large enough to read on mobile, centered or near the source video panel.
+
+**Example (investing niche):**
+- Source: viral TikTok of someone showing their Robinhood portfolio down 40% (2M+ views)
+- Labels you'd drop: "LOSS AVERSION" (the emotional hook), "ROUND NUMBER" (they lost exactly $10K, not $9,847), "SCREENSHOT FORMAT" (looks organic, not produced), "NO CTA" (the virality IS the content, no ask)
+- Your commentary: explain each label as an investing psychology + content strategy concept simultaneously. Double value for the viewer.
+
+**Sourcing:** Use `last30days`, `grok-search`, or `trend-research` to find viral posts in the investing/personal finance niche weekly. Look for 50K+ views, especially from accounts under 10K followers (pre-algo signal).
 
 ---
 
@@ -242,8 +291,8 @@ Don't write here. Route to the right skill.
 | Articles / long-form | `article-writer` |
 | TikTok slideshows | `slideshow-creator` |
 | Hooks and headlines | `hooks` |
-| Ad copy (paid) | `ad-copy` |
-| Paid creative concepts | `ad-copy` (includes A/B blitz protocol) |
+| Ad copy (paid) | `copywriting` |
+| Paid creative concepts | `copywriting` (includes A/B blitz protocol) |
 | AI character video scripts | Write inline using Step 2c above |
 | New AI character | `character-creation` |
 
@@ -256,11 +305,42 @@ Don't write here. Route to the right skill.
 | LinkedIn, X, Threads | `typefully` skill |
 | TikTok | `slideshow-creator` / ReelFarm |
 
-> **See:** `references/distribution.md` for queue minimums and batch scheduling cadence.
+**Queue minimums:**
+
+| Platform | Min Queue | Cadence |
+|---------|-----------|---------|
+| LinkedIn | 7 posts | 1/day |
+| X | 14 posts | 2/day |
+| TikTok | 14-21 posts | 2-3/day |
+| Threads | 7 posts | 1/day |
+
+Batch at least 7 days per session. Never schedule one post at a time. If queue drops below 3 days, refill immediately.
 
 > **Load on-demand:** `references/calendar-batching.md` for scheduling strategy and optimal posting times.
 
-> **See:** `references/geo-targeting.md` for Instagram/Reels geo-targeting strategy, location tags, localization rules, and the 4-phase regional batch framework.
+### Geo-Targeting (Instagram / Reels)
+
+Most brands compete in the same saturated metros. Regional markets have lower CPMs, less competition, and engaged audiences who see far less branded content.
+
+**Layer 1 — Native location tags (fully compliant):**
+- Use Instagram's existing location tag library; attach regional business district tags (not just city name) when posting
+- Target specific coworking hubs, financial districts, tech clusters — not "New York City"
+- Surfaces content in location-specific story feeds and Explore pages at zero additional media spend
+
+**Layer 2 — Custom location tags (gray area):**
+- Create new tags via Facebook check-in + VPN to target underserved areas with no existing tag
+- Carries account-level risk if pattern is detectable; vary IP patterns, ensure content is genuinely relevant
+
+**Localization rules (content must feel native, not just tagged):**
+- Adapt industry context reference in the hook to match dominant industry in target city
+- Adapt business size + operational framing to local business profile
+- Adjust tone register: warmer/relationship-oriented in southern markets, direct/efficiency-focused in northern/western
+
+**4-Phase Regional Batch Framework:**
+1. **Market selection** — use Instagram Insights for existing follower geography + check location tag feed competition. Pick 8–12 test markets.
+2. **Production** — write base script, adapt 2–3 localization elements per variant (hook industry ref, operational framing, pain point language). Tag to specific business districts. Schedule at local peak hours (6:30–8:30am, 12–1:30pm, 6:30–9pm local time).
+3. **Evaluate (weeks 2–4)** — rank markets by organic discovery rate + engagement quality. Top 3–5 markets get paid amplification.
+4. **Deepen** — produce second-generation content for winning markets with deeper localization; expand test cohort using learnings.
 
 ---
 
@@ -309,15 +389,19 @@ Retired pillars aren't deleted. Keep `tiktok-marketing/pillar-bench.json` and re
 
 | Reference | Contents |
 |-----------|---------|
-| `references/6-elements-framework.md` | Paid creative element guidance (Media, Primary Text, Headline, etc.) |
-| `references/ad-formats-library.md` | All formats with templates and examples |
-| `references/copywriting-formulas.md` | PAS, AIDA, hooks, headlines |
-| `references/creative-research-methods.md` | Research process and sources |
 | `references/analytics-loop.md` | Per-post tracking, pillar-level monthly review |
 | `references/feedback-loop.md` | Daily diagnostic, hook evolution, CTA rotation |
 | `references/calendar-batching.md` | Scheduling strategy, queue management, posting cadence |
 | `references/monetization-research.md` | CPM research, Content Rewards, niche selection |
 | `references/competitor-research.md` | TikTok/App Store gap analysis, storing findings |
+| `references/creative-research-methods.md` | Discovering trending ad formats, creative concepts, and content styles |
+| `references/ad-formats-library.md` | All ad formats with structure templates, best uses, and examples |
+| `references/6-elements-framework.md` | The 6 elements of Meta ad creative with best practices and optimization |
+| `references/copywriting-formulas.md` | Copy structures for writing Meta ad primary text, headlines, and descriptions |
+| `references/content-formats.md` | Content format types, templates, and selection criteria |
+| `references/distribution.md` | Distribution channels, cross-posting strategy, amplification |
+| `references/geo-targeting.md` | Geo-targeting strategy for content localization |
+| `references/interactive-content.md` | Interactive content types, quizzes, calculators, assessments |
 
 ---
 
@@ -327,7 +411,7 @@ What a complete strategy card looks like after running this skill. Use this as t
 
 ---
 
-**Campaign:** Bloom AI — Cold TikTok / Instagram (March 2026)  
+**Campaign:** [Your App] — Cold TikTok / Instagram (March 2026)
 **Topic:** AI has an edge in investing that retail investors don't know about  
 **Audience level:** 1–2 (unaware / problem-aware)
 
@@ -337,7 +421,7 @@ What a complete strategy card looks like after running this skill. Use this as t
 - Audience language: "I don't even know where to start", "I feel like I'm always late to the news"
 
 **Angles (pick one per batch):**
-1. *Wound-first:* "By the time you read the news, the trade already happened." → exits to Bloom seeing it first
+1. *Wound-first:* "By the time you read the news, the trade already happened." → exits to [Your App] seeing it first
 2. *Surprising number:* "Hedge funds run 10,000 stock screens before breakfast. Here's how to match that for free."
 3. *Stolen thought:* "You already know the stock market isn't fair. Here's the part nobody explains."
 
@@ -350,27 +434,55 @@ What a complete strategy card looks like after running this skill. Use this as t
 **Awareness level targeted:** Level 1–2 cold, Level 3–4 retargeted
 
 **Delegate to:**
-- Visuals → `ad-copy` + `nano-banana-pro`
+- Visuals → `copywriting` + `nano-banana-pro`
 - Tweets → `tweet-ideas`
 - TikTok → `slideshow-creator`
 - Scheduling → `typefully`
 
 ---
 
-> **See:** `references/content-formats.md` for creator activity tier list (S through F ranking by impact).
+## Creator Activity Tier List
+
+What to spend your time on as a content creator, ranked by impact. Based on @wootak's framework (https://www.instagram.com/reel/DVwed_xEvHx/).
+
+| Tier | Activity | Why |
+|------|----------|-----|
+| **S** | **Post consistently** | Nothing else matters if you don't publish. Ship beats perfect. |
+| **S** | **Define your niche/target** | Focused content reaches the right people. Broad content reaches nobody. |
+| **S** | **Use TikTok (especially TikTok Shop)** | Highest-leverage platform for organic discovery right now. |
+| **S** | **Repurpose content cross-platform** | Every platform's audience sees it "for the first time." One piece of content = 3-5 posts. |
+| **A** | **Script/outline before filming** | Structure beats improv. But execution (posting) matters more than perfect scripts. |
+| **A** | **Track analytics** | Know what works. But analysis without posting is procrastination. |
+| **A** | **Post at optimal times** | Helps, but doesn't replace quality or consistency. |
+| **B** | **Writing elaborate captions** | Useful but overrated. Most creators over-invest here relative to impact. |
+| **C** | **Written/text-only content** | Video outperforms text on every social platform. Text content is C tier in a video-first world. |
+| **F** | **Hashtags** | Zero meaningful impact on modern algorithms. Complete waste of effort. |
+
+The hierarchy: **Posting > Targeting > Platform choice > Repurposing > Scripting > Analytics > Timing > Captions > Text content > Hashtags.**
 
 ---
 
-> **See:** `references/distribution.md` for channel tier list (high-signal, questionable-signal, low-signal channels) and SEO timing.
+> **Load on-demand:** `references/channel-playbook.md` for channel tier list, quiz funnel strategy, and SEO timing.
 
-> **See:** `references/interactive-content.md` for quiz-based landing page funnels, sequencing, drop-off benchmarks, and retargeting play.
+---
+
+## Reference Files
+
+| File | Contents |
+|------|----------|
+| `references/social-content.md` | Social media strategy: content pillars, hook formulas, calendars, engagement, repurposing, analytics |
+| `references/free-tool-strategy.md` | Engineering-as-marketing: tool types, ideation, evaluation scorecard, lead capture |
+| `references/lead-magnets.md` | Lead magnet types, buyer stage matching, gating strategy, distribution, benchmarks |
+| `references/marketing-ideas.md` | 139 SaaS marketing ideas catalog organized by category, stage, and budget |
+| `references/blog-seo-planning.md` | Searchable vs shareable, content pillars, topic clusters, buyer stage keywords, ideation sources |
+
 
 ---
 
 ## Related Skills
 
 - `hooks` — hook formulas and title generation
-- `ad-copy` — direct response copy, brand voice, A/B testing blitz
+- `copywriting` — page copy, direct response, brand voice, A/B testing blitz
 - `tweet-ideas` — standalone tweet content
 - `article-writer` — long-form drafts
 - `slideshow-creator` — TikTok production and ReelFarm automation

@@ -39,7 +39,7 @@ Body: "Amazon crossed $200 for the first time since March. Tap to see what chang
 ```
 NEW FEATURE:
 Title: "New: AI Earnings Analysis"
-Body: "Bloom now breaks down earnings calls in real-time. Try it with AAPL's report tonight."
+Body: "[YourApp] now breaks down earnings calls in real-time. Try it with AAPL's report tonight."
 
 IMPROVEMENT:
 Title: "Stock search is 2x faster"
@@ -67,7 +67,7 @@ Body: "243 companies report this week, including 3 on your watchlist. Set your a
 #### Push Anti-Patterns
 
 - ❌ "We miss you! Come back!" (guilt trip, zero value)
-- ❌ "Check out what's new in Bloom" (what IS new? be specific)
+- ❌ "Check out what's new in [YourApp]" (what IS new? be specific)
 - ❌ "Investing tip of the day" (unsolicited, not personalized)
 - ❌ Pushing the same message to all users (segment or don't push)
 - ❌ More than 3 pushes in a day (instant uninstall territory)

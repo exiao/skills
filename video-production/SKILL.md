@@ -19,7 +19,7 @@ This skill routes video tasks to the correct sub-skill. Read the task, pick the 
 | **browser-animation-video** | Motion graphics via Framer Motion + GSAP, runs in-browser | High-fidelity motion piece that lives on the web, plays in-page, or needs to be screen-recorded; no file output required |
 | **demo-video** | Records real browser interactions via Playwright CDP | Walkthrough or product demo of an actual running web app; capturing real UI |
 | **gemini-svg** | AI-generated interactive SVG animations (Gemini) | Small UI components, decorative animations, data viz, icons, or anything SVG-sized and interactive in a browser |
-| **thumbnail** | Generate video cover frames / thumbnails | User asks for a video thumbnail, cover frame, YouTube thumbnail, or needs to extract a still from a video |
+| **thumbnail** | Generate video cover frames and thumbnails | YouTube/TikTok/Reels thumbnails, cover frames, or extracting stills from video |
 
 ## Routing Logic
 

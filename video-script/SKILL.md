@@ -1,11 +1,11 @@
 ---
 name: video-script
-description: Generate structured scene-by-scene video scripts with production metadata (visuals, audio, sources, transitions, captions) ready to feed into the video-production pipeline (Sora, Kling, ElevenLabs, InfiniteTalk, Remotion, stock-footage, auto-captions, video-editor). Use when asked to "write a video script", "script for TikTok", "video outline", "plan a video", "storyboard", "scene breakdown", "video concept", "content brief for video", "shooting script", or whenever the video-production pipeline needs a structured script before production begins. Also trigger for "Reels script", "Shorts script", "YouTube script", "video idea with scenes", or any request that implies breaking a video concept into timed scenes with production directions.
+description: Generate structured scene-by-scene video scripts with production metadata (visuals, audio, sources, transitions, captions) ready to feed into the video-production pipeline (Sora, Kling, ElevenLabs, InfiniteTalk, Remotion, stock-footage, video-editor). Use when asked to "write a video script", "script for TikTok", "video outline", "plan a video", "storyboard", "scene breakdown", "video concept", "content brief for video", "shooting script", or whenever the video-production pipeline needs a structured script before production begins. Also trigger for "Reels script", "Shorts script", "YouTube script", "video idea with scenes", or any request that implies breaking a video concept into timed scenes with production directions.
 ---
 
 # Video Script Generator
 
-Takes a topic, hook, or concept and produces a scene-by-scene video script with production metadata. Every field in the output is designed to be machine-readable by downstream pipeline skills (Sora for AI video, stock-footage for B-roll, ElevenLabs/InfiniteTalk for voiceover, auto-captions for subtitle highlights, Remotion/video-editor for assembly).
+Takes a topic, hook, or concept and produces a scene-by-scene video script with production metadata. Every field in the output is designed to be machine-readable by downstream pipeline skills (Sora for AI video, stock-footage for B-roll, ElevenLabs/InfiniteTalk for voiceover, Remotion/video-editor for assembly).
 
 ## Output Format
 
@@ -63,7 +63,7 @@ Save each script as a markdown file. The header block captures global metadata; 
 | **Source** | How to produce the visual | `stock-footage "query"`, `sora "prompt"`, `kling "prompt"`, `screen-recording`, `image overlay`, `talking-head` |
 | **Audio** | Voiceover line or sound description | Quoted dialogue, or sound direction like "[upbeat music kicks in]" |
 | **Voice** | Voice synthesis method | elevenlabs, character-voice, none |
-| **Caption highlight** | Words to emphasize in auto-captions | Comma-separated quoted words/phrases for karaoke-style highlighting |
+| **Caption highlight** | Words to emphasize in captions | Comma-separated quoted words/phrases for karaoke-style highlighting |
 | **Transition** | Scene-to-scene transition | cut, crossfade Xs, zoom, fade-out Xs, wipe |
 
 ## How to Write a Good Script
@@ -136,7 +136,7 @@ Choose the source type based on what the visual demands:
 
 ### Caption highlights
 
-Pick 1-3 words per scene that carry the emotional or informational weight. These become the karaoke-highlight words in auto-captions.
+Pick 1-3 words per scene that carry the emotional or informational weight. These become the karaoke-highlight words in captions.
 
 Good highlights: the surprising word, the number, the action verb, the brand name.
 Bad highlights: articles, prepositions, filler words.

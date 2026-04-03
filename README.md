@@ -35,12 +35,20 @@ This repo is my personal skills directory. Skills are prompt templates that Open
 | Skill | Description |
 |-------|-------------|
 | [aso](aso/) | App Store Optimization: keyword research, audits, metadata, competitor analysis via DataForSEO |
+| [cold-email](cold-email/) | B2B cold email writing and follow-up sequences |
 | [competitive-analysis](competitive-analysis/) | Research competitors and build interactive battlecards |
 | [content-performance-report](content-performance-report/) | Weekly content pillar performance report (cron) |
+| [copywriting](copywriting/) | Write or improve marketing copy for any surface: pages, ads, app stores, landing pages, video scripts, push notifications. Combines page copy frameworks with direct response principles. |
 | [dogfood](dogfood/) | QA and exploratory test web applications, produce structured reports |
+| [launch-strategy](launch-strategy/) | Product launches, feature announcements, Product Hunt, go-to-market |
 | [market-daily-briefing](market-daily-briefing/) | Daily market briefing: earnings, macro, notable moves (cron) |
+| [marketing-psychology](marketing-psychology/) | Psychological principles, mental models, and behavioral science for marketing |
 | [meta-ads](meta-ads/) | Daily Meta ad operations via Marketing API |
 | [optimize-prompt](optimize-prompt/) | Iteratively optimize system prompts via autoresearch loop |
+| [paid-ads](paid-ads/) | Paid advertising strategy: platform selection, targeting, creative, optimization |
+| [pricing-strategy](pricing-strategy/) | Pricing decisions, tier packaging, value metrics, monetization strategy |
+| [product-marketing-context](product-marketing-context/) | Create product marketing context doc referenced by all marketing skills |
+| [referral-program](referral-program/) | Referral and affiliate program design, optimization, and measurement |
 | [synthetic-userstudies](synthetic-userstudies/) | Run synthetic user research sessions with AI personas |
 | [typefully](typefully/) | Create, schedule, and manage social posts via Typefully |
 | [whop-content-rewards](whop-content-rewards/) | Set up and manage UGC campaigns on Whop |
@@ -203,7 +211,6 @@ These started from other open-source projects. I've modified and extended them f
 | [growth](growth/) | Full-funnel growth: CRO, onboarding, paywalls, churn, launches, pricing |
 | [churn-prevention](churn-prevention/) | Subscription retention, cancel flows, save offers, dunning |
 | [email-sequence](email-sequence/) | Email sequences, drip campaigns, lifecycle messaging |
-| [ad-copy](ad-copy/) | Direct response copy for any platform |
 | [positioning-angles](positioning-angles/) | Product positioning, strategic angles, value propositions |
 
 ### From Other Projects
@@ -233,7 +240,7 @@ git clone https://github.com/exiao/skills ~/clawd/skills
 Or grab individual skills:
 
 ```bash
-cp -r ~/path/to/skills/ad-copy ~/clawd/skills/
+cp -r ~/path/to/skills/copywriting ~/clawd/skills/
 ```
 
 Each skill is a folder with a `SKILL.md` file. OpenClaw auto-discovers them at startup.

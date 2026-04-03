@@ -143,11 +143,7 @@ export BLOOM_MCP_API_KEY=<api-key>               # Bloom MCP bearer token (separ
 After Signal, create a public-facing tweet of the sharpest single data point:
 
 ```bash
-# SKILLS_DIR must point to the directory containing skill folders (e.g. /Users/yourname/clawd/skills).
-# TYPEFULLY_SOCIAL_SET_ID is the Typefully social set ID for @investwithbloom (set as an env var;
-# do not hardcode the numeric ID here — store it in the gateway env or .env file).
-# Do NOT use $(dirname "$0") — in agent context $0 is the shell interpreter, not this file.
-node "$(cd "$SKILLS_DIR/typefully" && pwd)/scripts/typefully.js" drafts:create "$TYPEFULLY_SOCIAL_SET_ID" \
+node "$SKILLS_DIR/typefully/scripts/typefully.js" drafts:create "$TYPEFULLY_SOCIAL_SET_ID" \
   --platform x \
   --text "<post text>"
 # Do NOT add --schedule. Save as unscheduled draft only — Eric reviews before posting.

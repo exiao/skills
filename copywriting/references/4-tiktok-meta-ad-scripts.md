@@ -29,7 +29,7 @@ Yahoo Finance, Seeking Alpha, Reddit, earnings transcripts...
 by the time I had a thesis, the stock already moved."
 
 SOLUTION (7-17s):
-"Then I found Bloom. You search any stock and it gives you
+"Then I found [YourApp]. You search any stock and it gives you
 EVERYTHING: analyst ratings, insider trades, earnings breakdowns,
 bull case, bear case. In like 30 seconds."
 [Show app UI: search stock → AI analysis appearing]
@@ -40,7 +40,7 @@ And the AI actually shows you WHERE it got the information."
 
 CTA (22-27s):
 "It's free to download. Link is in my bio."
-[Text overlay: "Download Bloom — Free"]
+[Text overlay: "Download [YourApp] — Free"]
 ```
 
 #### Template 2: "Did You Know?" (Information Gap)
@@ -56,7 +56,7 @@ PROBLEM (2-6s):
 It's all public data. But most people don't know where to find it."
 
 SOLUTION (6-16s):
-"This app is called Bloom. It tracks every insider trade and
+"This app is called [YourApp]. It tracks every insider trade and
 sends you an alert when an executive makes a big buy."
 [Show app: insider trading screen with real data]
 
@@ -66,7 +66,7 @@ All three are up double digits."
 
 CTA (20-25s):
 "Free download, link in bio."
-[Text overlay: "Bloom — Free Stock Research"]
+[Text overlay: "[YourApp] — Free Stock Research"]
 ```
 
 #### Template 3: "Hot Take / Contrarian" (Opinion-Led)
@@ -91,7 +91,7 @@ PROOF (15-19s):
 "4.8 stars. Over 50,000 investors."
 
 CTA (19-23s):
-"Download Bloom free. Link in bio."
+"Download [YourApp] free. Link in bio."
 ```
 
 #### Template 4: "Screen Recording" (Product Demo)
@@ -103,7 +103,7 @@ HOOK (0-2s):
 
 DEMO (2-20s):
 [Record actual app usage]:
-- Open Bloom
+- Open [YourApp]
 - Search "NVDA"  
 - Show AI analysis loading
 - Scroll through analyst ratings
@@ -116,8 +116,8 @@ right here. Insider trades. Earnings surprises.
 This would've taken me an hour on Yahoo Finance."
 
 CTA (20-25s):
-"App is called Bloom. Free download."
-[Text overlay: "Bloom — Link in Bio"]
+"App is called [YourApp]. Free download."
+[Text overlay: "[YourApp] — Link in Bio"]
 ```
 
 ### Viral Hook Principles (validated: 18M views, zero audience, zero budget)
@@ -126,7 +126,7 @@ These four rules override any template when there's a conflict. A solo dev appli
 
 **1. The hook is about the viewer, not the product.**
 Every ad that flops opens with the product's features. Every ad that goes viral opens with something the viewer experiences, fears, wants, or wonders about themselves.
-- ❌ "Bloom's AI analyzes every stock for you" (about the product)
+- ❌ "[YourApp]'s AI analyzes every stock for you" (about the product)
 - ✅ "I let an AI pick my stocks for 30 days and I wasn't ready for what it found" (about the experience)
 
 **2. Broad angle > niche angle.**
@@ -186,7 +186,7 @@ the stock moves, and it cites every source so I can verify"
 
 BEAT 5: RECOMMENDATION (28-35s) — Warm, direct, slightly lower
 "if you do any kind of stock research, just try it.
-it's called Bloom. free download. you can thank me later"
+it's called [YourApp]. free download. you can thank me later"
 [Friendly but confident. Natural conclusion, not a hard sell.]
 ```
 
