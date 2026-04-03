@@ -167,9 +167,9 @@ If the file doesn't exist, create it:
 }
 ```
 
-### Step 11 — Report to Signal
+### Step 11 — Output Report
 
-Send to the Signal group configured via the `$SIGNAL_GROUP_ID` environment variable:
+Do NOT send via the message tool. Just output the report as your reply. Cron delivery handles routing.
 
 ```
 📊 Investing Log trade posted:

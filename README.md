@@ -68,6 +68,7 @@ This repo is my personal skills directory. Skills are prompt templates that Open
 | [design-review](design-review/) | Product design review: 13 questions + Nielsen Norman heuristic eval |
 | [nano-banana-pro](nano-banana-pro/) | Generate or edit images via Gemini native image generation |
 | [excalidraw-mcp](excalidraw-mcp/) | Create hand-drawn style diagrams via Excalidraw MCP |
+| [impeccable](impeccable/) | Design quality layer: 21 commands (audit, critique, polish, animate, etc.) with 10 reference files for systematic frontend QA |
 
 ### Video Production
 
@@ -115,6 +116,7 @@ This repo is my personal skills directory. Skills are prompt templates that Open
 | Skill | Description |
 |-------|-------------|
 | [agent-browser](agent-browser/) | Automate browsers via agent-browser CLI |
+| [babysit-pr](babysit-pr/) | Monitor a PR through CI, reviews, and fixes until it's ready to merge |
 | [bloom-cli](bloom-cli/) | Fetch stock data, fundamentals, earnings, SEC filings via Bloom CLI |
 | [claude-md-management](claude-md-management/) | Audit, improve, and maintain CLAUDE.md files across repos |
 | [coding-agent](coding-agent/) | Run coding agents (Codex, Claude Code, etc.) via ACP |
@@ -189,6 +191,7 @@ These started from other open-source projects. I've modified and extended them f
 | [documents](documents/) | [anthropics/skills](https://github.com/anthropics/skills) |
 | [wealth-management](wealth-management/) | [anthropics/financial-services-plugins](https://github.com/anthropics/financial-services-plugins) |
 | [skill-creator](skill-creator/) | [anthropics/claude-code](https://github.com/anthropics/claude-code/tree/main/plugins/plugin-dev) |
+| [skill-audit](skill-audit/) | Original (inspired by Anthropic's skill patterns) |
 | [skill-improver](skill-improver/) | [anthropics/claude-code](https://github.com/anthropics/claude-code/tree/main/plugins/plugin-dev) |
 | [visual-design/frontend-design](visual-design/frontend-design/) | [anthropics/claude-code](https://github.com/anthropics/claude-code/tree/main/plugins/frontend-design) |
 | [ralph-mode](ralph-mode/) | [anthropics/claude-code](https://github.com/anthropics/claude-code/tree/main/plugins/ralph-wiggum) |

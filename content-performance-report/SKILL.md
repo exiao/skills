@@ -107,9 +107,9 @@ Score each pillar against its monthly target:
 
 Apply judgment: if content is high-quality but volume is low, note that. If Earnings is seasonal and we're not in earnings season, note that context.
 
-### Step 5 — Send Report to Signal
+### Step 5 — Output Report
 
-Send to `group:5TgLlI8NfnETVAzVvUi0rJ0WKz2Pz2Flj5i2/VAcFSY=`:
+Do NOT send via the message tool. Just output the report as your reply. Cron delivery handles routing.
 
 ```
 📊 Weekly Content Report — [Mon DD, YYYY]

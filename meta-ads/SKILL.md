@@ -12,7 +12,7 @@ Daily 4am routine: audit running ads via Meta Marketing API, kill underperformer
 ## API Credentials
 
 ```bash
-TOKEN="${FACEBOOK_ACCESS_TOKEN:-$META_ACCESS_TOKEN}"  # Meta Marketing API token (supports both env var names)
+TOKEN="$META_ACCESS_TOKEN"  # Meta Marketing API token
 ACCOUNT="$BLOOM_AD_ACCOUNT_ID"    # Bloom ad account (act_...)
 API="https://graph.facebook.com/v22.0"
 PAGE_ID="$BLOOM_PAGE_ID"           # Facebook Page ID
@@ -34,7 +34,7 @@ ADSET_ANDROID="$BLOOM_ANDROID_ADSET_ID"   # General, Android (ACTIVE)
 | `trend-research` skill | Find what investing/finance content is trending today |
 | `web-search` skill | Serper for trending finance content |
 | `nano-banana-pro` skill | Generate 1080×1080 ad creatives |
-| `message` tool | Report + send creatives to Signal group |
+| Reply output | Report + creative summaries (cron delivery handles Signal routing) |
 
 ---
 
@@ -191,9 +191,9 @@ Repeat 6a-6c for Android ad set (`$ADSET_ANDROID`) using the Android app link, s
 
 ⚠️ **If any API call returns an error with `payment` or `billing`: STOP and notify Eric.**
 
-### Step 7 — Report to Signal
+### Step 7 — Output Report
 
-Send to `group:5TgLlI8NfnETVAzVvUi0rJ0WKz2Pz2Flj5i2/VAcFSY=`:
+Do NOT send via the message tool. Just output the report as your reply. Cron delivery handles routing to Signal (Marketing group).
 
 ```
 🎯 Meta Ads Daily Run — [date]
@@ -304,7 +304,7 @@ Quality filter after each wave:
 
 ## Delivery
 
-- Signal group: `group:5TgLlI8NfnETVAzVvUi0rJ0WKz2Pz2Flj5i2/VAcFSY=`
+- Signal group: `group:VEsNr2at9GMf41l5TiBLXc++af4v+/M61r844tgZITE=` (Marketing) — cron delivery handles routing, do NOT send via message tool
 - Performance log: `ads/iteration/[date]_performance.md`
 - Kills log: `ads/iteration/[date]_kills.log`
 - Promotions log: `ads/iteration/[date]_promotions.log`
@@ -342,7 +342,7 @@ For iOS app campaigns, use Apple Custom Product Pages (CPPs) as the ad destinati
 
 ## Common Mistakes
 
-1. **Token not set** — always use `$FACEBOOK_ACCESS_TOKEN` from env (also accepts `$META_ACCESS_TOKEN` as fallback). Never hardcode.
+1. **Token not set** — always use `$META_ACCESS_TOKEN` from env. Never hardcode.
 2. **Wrong budget units** — daily_budget is in cents. $5/day = 500, $6/day = 600.
 3. **Repeating a hook/format/concept combo** — always audit exclusion list first.
 4. **Forgetting Android ad set** — each creative should get two ads (iOS + Android ad sets).
