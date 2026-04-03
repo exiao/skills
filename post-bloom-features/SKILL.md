@@ -43,16 +43,16 @@ From the JSON output, pick the **single most visually interesting PR** — prefe
 xcrun simctl list devices booted
 
 # If none booted:
-python $SKILLS_DIR/ios-simulator/scripts/simctl_boot.py \
+python ~/clawd/skills/ios-simulator/scripts/simctl_boot.py \
   --name 'iPhone 16 Pro' \
   --wait-ready
 
 # Launch Bloom app
-python $SKILLS_DIR/ios-simulator/scripts/app_launcher.py \
+python ~/clawd/skills/ios-simulator/scripts/app_launcher.py \
   --launch com.bloom.invest
 
 # Set clean status bar (no carrier noise, full battery, 9:41)
-python $SKILLS_DIR/ios-simulator/scripts/status_bar.py \
+python ~/clawd/skills/ios-simulator/scripts/status_bar.py \
   --preset clean
 
 sleep 5
@@ -62,13 +62,13 @@ sleep 5
 
 ```bash
 # Get a map of the app's current screen
-python $SKILLS_DIR/ios-simulator/scripts/screen_mapper.py
+python ~/clawd/skills/ios-simulator/scripts/screen_mapper.py
 
 # Navigate to the feature screen based on the PR content
 # Use navigator.py for screen navigation, gesture.py for taps/swipes
-python $SKILLS_DIR/ios-simulator/scripts/navigator.py --screen <target_screen>
+python ~/clawd/skills/ios-simulator/scripts/navigator.py --screen <target_screen>
 # OR
-python $SKILLS_DIR/ios-simulator/scripts/gesture.py --tap <x> <y>
+python ~/clawd/skills/ios-simulator/scripts/gesture.py --tap <x> <y>
 
 sleep 2
 
@@ -119,11 +119,11 @@ Wait for the script to complete before proceeding.
 
 **If video was rendered:**
 ```bash
-# Upload video (note: no account ID for this account — 22264 is the Bloom brand account)
-node $SKILLS_DIR/typefully/scripts/typefully.js media:upload /tmp/bloom-feature-video.mp4
+# Upload video
+node ~/clawd/skills/typefully/scripts/typefully.js media:upload /tmp/bloom-feature-video.mp4
 # → returns media_id
 
-node $SKILLS_DIR/typefully/scripts/typefully.js drafts:create \
+node ~/clawd/skills/typefully/scripts/typefully.js drafts:create $TYPEFULLY_BLOOM_SET_ID \
   --platform x \
   --text "<copy_text>" \
   --media <media_id> \
@@ -133,7 +133,7 @@ node $SKILLS_DIR/typefully/scripts/typefully.js drafts:create \
 
 **If screenshot invalid (text-only):**
 ```bash
-node $SKILLS_DIR/typefully/scripts/typefully.js drafts:create \
+node ~/clawd/skills/typefully/scripts/typefully.js drafts:create $TYPEFULLY_BLOOM_SET_ID \
   --platform x \
   --text "<copy_text>" \
   --tags bloom-features
@@ -152,7 +152,7 @@ PR: [PR title]
 
 Copy: [post copy]
 
-Typefully draft: https://typefully.com/?a=22264&d=[draft_id]
+Typefully draft: https://typefully.com/?a=$TYPEFULLY_BLOOM_SET_ID&d=[draft_id]
 [video: attached / text-only: no screenshot available]
 ```
 
@@ -161,7 +161,7 @@ Typefully draft: https://typefully.com/?a=22264&d=[draft_id]
 ## Delivery
 
 - Signal group: `$SIGNAL_MARKETING_GROUP` — cron delivery handles routing, do NOT send via message tool
-- Typefully account: 22264 (Bloom brand account), tag: `bloom-features`
+- Typefully account: `$TYPEFULLY_BLOOM_SET_ID` (Bloom brand account), tag: `bloom-features`
 - Draft is **NOT scheduled** — Eric reviews and publishes manually
 - Screenshot: `/tmp/bloom-shot-1.png`
 - Video: `/tmp/bloom-feature-video.mp4`

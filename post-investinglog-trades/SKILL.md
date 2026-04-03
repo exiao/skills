@@ -206,7 +206,7 @@ Scheduled: [time]
 
 1. **Posting NOACTION/SCENARIO files** — always filter these out in Step 1.
 2. **Skipping dedup check** — always read il-pipeline-state.json first; repeating a tweet is embarrassing.
-3. **Wrong Typefully account** — use account ID `$TYPEFULLY_SOCIAL_SET_ID` (not 22264 which is Eric's personal).
+3. **Wrong Typefully account** — use account ID `$TYPEFULLY_SOCIAL_SET_ID` (not `$TYPEFULLY_PERSONAL_SET_ID` which is Eric's personal).
 4. **PIL fallback** — never use PIL/Pillow. Only Nano Banana Pro for image generation.
 5. **State file not updated** — always write back after successful post; otherwise same trade posts again tomorrow.
 6. **Overwriting old state** — keep last 50 entries, don't truncate to just the new one.
