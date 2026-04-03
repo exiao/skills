@@ -28,7 +28,7 @@ skill-name/
 ## PR Guidelines
 
 - One logical change per PR. Don't stack unrelated changes.
-- Branch from `main`. Don't stack branches on other feature branches.
+- Branch from `main`. Don't stack branches on other feature branches. Use git worktrees for feature work, placed in `.worktrees/` at the repo root.
 - If CI (claude-review) flags issues, fix them before requesting merge.
 - Check all three comment sources for review feedback: inline comments, issue comments, and review verdicts.
 
