@@ -398,6 +398,10 @@ Retired pillars aren't deleted. Keep `tiktok-marketing/pillar-bench.json` and re
 | `references/ad-formats-library.md` | All ad formats with structure templates, best uses, and examples |
 | `references/6-elements-framework.md` | The 6 elements of Meta ad creative with best practices and optimization |
 | `references/copywriting-formulas.md` | Copy structures for writing Meta ad primary text, headlines, and descriptions |
+| `references/content-formats.md` | Content format types, templates, and selection criteria |
+| `references/distribution.md` | Distribution channels, cross-posting strategy, amplification |
+| `references/geo-targeting.md` | Geo-targeting strategy for content localization |
+| `references/interactive-content.md` | Interactive content types, quizzes, calculators, assessments |
 
 ---
 

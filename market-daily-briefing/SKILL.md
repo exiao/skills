@@ -13,6 +13,7 @@ Delivers a concise, narrative market briefing covering earnings results, economi
 
 | Tool | Purpose |
 |------|---------|
+| **Bloom CLI** (`bloom`) | Pull real-time price data, top movers, sentiment scores. Auth: bloom-cli reads API keys from `~/.bloom/config.json` or env vars (`BLOOM_API_KEY`). Run `bloom auth` to configure. |
 | **Serper** (`web-search` skill, `SERPER_API_KEY`) | Search for earnings results, analyst reactions, market news |
 | **Firecrawl** (`FIRECRAWL_API_KEY`) | Scrape full articles when Serper snippets cut off before the numbers |
 | **Bloom MCP** (`https://api.getbloom.app/mcp/`, Bearer: `${BLOOM_MCP_API_KEY}`) | Check what stocks Bloom users are watching — front-load coverage of these. Note: `BLOOM_MCP_API_KEY` is a separate credential from bloom-cli's `BLOOM_API_KEY`. |
@@ -93,6 +94,11 @@ Keep these numbers in context. Every stock percentage you write must come from t
 
 ## What to Cover
 
+### 0. Verified Numbers Rule
+Every stock percentage mentioned MUST be verified against bloom-cli price data. If bloom-cli shows a different number than a news article, use bloom-cli's number. Never estimate or round aggressively.
+
+If bloom-cli returned null or was unavailable for a field, fall back to the article's number but mark it as unverified: e.g., "~+2.3% (unverified — source: article)". Never silently use null as a percentage.
+
 ### 1. Earnings Results (Today + Last Night)
 For each notable company that reported:
 - Beat or miss (EPS and revenue vs. consensus)
@@ -167,4 +173,4 @@ Tweet guidelines:
 3. **Skipping stock reaction** — A beat/miss means nothing without the stock's actual % move. Always include both.
 4. **Too long** — Under 2000 characters. If it's longer, cut. Quiet days = 2-3 sentences.
 5. **Copying Signal verbatim to Typefully** — Public post needs to be distilled to one sharp point, not a copy-paste.
-6. **Unverified numbers** — Article snippets often cite stale or approximate % moves. Verify price moves against a live source (Serper, Firecrawl on earnings release) before including specific figures.
+6. **Hallucinated percentages** — News article snippets often don't contain exact current-day % moves. The model fills in plausible-sounding numbers that are wrong. Always pull from bloom-cli first (Step 0), then narrate around verified numbers.

@@ -473,8 +473,6 @@ Use these for faster reviews when a full seven-sweep process isn't needed.
 | Seamless | Smooth |
 | Cutting-edge | New/Modern |
 
-> **Load on-demand:** `references/plain-english-alternatives.md` for the full plain English word substitution table.
-
 **Watch for:**
 - Adverbs (usually unnecessary)
 - Passive voice (switch to active)
