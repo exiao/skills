@@ -304,7 +304,7 @@ Quality filter after each wave:
 
 ## Delivery
 
-- Signal group: `group:VEsNr2at9GMf41l5TiBLXc++af4v+/M61r844tgZITE=` (Marketing) — cron delivery handles routing, do NOT send via message tool
+- Signal group: `$SIGNAL_MARKETING_GROUP` — cron delivery handles routing, do NOT send via message tool
 - Performance log: `ads/iteration/[date]_performance.md`
 - Kills log: `ads/iteration/[date]_kills.log`
 - Promotions log: `ads/iteration/[date]_promotions.log`

@@ -35,13 +35,13 @@ Every Monday morning, audits Bloom's content output across 4 pillars against tar
 ### Step 1 — Pull Published Posts (Last 30 Days)
 
 ```bash
-cd /Users/testuser/clawd/skills/typefully
+cd ~/clawd/skills/typefully
 
 # Bloom brand account
-node scripts/typefully.js drafts:list 286685 --status published
+node scripts/typefully.js drafts:list $TYPEFULLY_SOCIAL_SET_ID --status published
 
 # Eric's personal account
-node scripts/typefully.js drafts:list 22264 --status published
+node scripts/typefully.js drafts:list $TYPEFULLY_PERSONAL_SET_ID --status published
 ```
 
 Collect all posts with their text, publish date, and platform.
@@ -129,7 +129,7 @@ Trend vs prior week: [+/-X%]
 
 ## Delivery
 
-- Signal group: `group:5TgLlI8NfnETVAzVvUi0rJ0WKz2Pz2Flj5i2/VAcFSY=`
+- Signal group: `$SIGNAL_MARKETING_GROUP`
 - No files saved — report is sent directly to Signal
 
 ---
