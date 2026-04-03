@@ -63,7 +63,7 @@ Save each script as a markdown file. The header block captures global metadata; 
 | **Source** | How to produce the visual | `stock-footage "query"`, `sora "prompt"`, `kling "prompt"`, `screen-recording`, `image overlay`, `talking-head` |
 | **Audio** | Voiceover line or sound description | Quoted dialogue, or sound direction like "[upbeat music kicks in]" |
 | **Voice** | Voice synthesis method | elevenlabs, character-voice, none |
-| **Caption highlight** | Words to emphasize in auto-captions | Comma-separated quoted words/phrases for karaoke-style highlighting |
+| **Caption highlight** | Words to emphasize in captions | Comma-separated quoted words/phrases for karaoke-style highlighting |
 | **Transition** | Scene-to-scene transition | cut, crossfade Xs, zoom, fade-out Xs, wipe |
 
 ## How to Write a Good Script
@@ -136,7 +136,7 @@ Choose the source type based on what the visual demands:
 
 ### Caption highlights
 
-Pick 1-3 words per scene that carry the emotional or informational weight. These become the karaoke-highlight words in auto-captions.
+Pick 1-3 words per scene that carry the emotional or informational weight. These become the karaoke-highlight words in captions.
 
 Good highlights: the surprising word, the number, the action verb, the brand name.
 Bad highlights: articles, prepositions, filler words.
