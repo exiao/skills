@@ -1,19 +1,25 @@
 # Eric's Skills
 
-90+ [OpenClaw](https://github.com/openclaw/openclaw) skills I use daily for content, marketing, development, investing, and growth. Some are original, some are adapted from great open-source projects. All are battle-tested.
+90+ skills for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) covering content, marketing, design, development, investing, and growth. Battle-tested daily.
 
-## What's Here
+> **New to skills?** Skills are prompt templates that Claude Code invokes on demand. Each skill is a folder with a `SKILL.md` file. Learn more: [Intro](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview) | [Free course](https://anthropic.skilljar.com/introduction-to-agent-skills) | [Complete guide](https://resources.anthropic.com/hubfs/The-Complete-Guide-to-Building-Skill-for-Claude.pdf)
 
-This repo is my personal skills directory. Skills are prompt templates that OpenClaw (or any Claude Code-compatible agent) invokes on demand. Each skill is a folder with a `SKILL.md` file.
+## Install
 
-**Looking for more skills?**
-- [OpenClaw native skills](https://github.com/openclaw/openclaw/tree/main/skills) ship with the platform (GitHub, Slack, Apple Notes, weather, etc.)
-- [ClawHub](https://clawhub.ai) is the community skill marketplace
-- [skills.sh](https://skills.sh) has third-party skills from tool vendors
+**Install everything** — open Claude Code and say:
+
+```
+Install the skills from https://github.com/exiao/skills
+```
+
+**Pick and choose** — follow the [Interactive Install Guide](INSTALL.md) to select only the categories you need.
+
+**Find more skills:**
+[OpenClaw native skills](https://github.com/openclaw/openclaw/tree/main/skills) | [ClawHub](https://clawhub.ai) | [skills.sh](https://skills.sh)
 
 ---
 
-## My Original Skills
+## Skills
 
 ### Content & Writing
 
@@ -226,24 +232,6 @@ These started from other open-source projects. I've modified and extended them f
 | [stably-cli](stably-cli/) | [skills.sh/stablyai](https://skills.sh/stablyai/agent-skills/stably-cli) |
 | [stably-sdk-rules](stably-sdk-rules/) | [skills.sh/stablyai](https://skills.sh/stablyai/agent-skills/stably-sdk-rules) |
 | [sahil-office-hours](sahil-office-hours/) | [slavingia/skills](https://github.com/slavingia/skills) |
-
----
-
-## Installation
-
-Skills live in your OpenClaw skills directory. Clone and point your config:
-
-```bash
-git clone https://github.com/exiao/skills ~/clawd/skills
-```
-
-Or grab individual skills:
-
-```bash
-cp -r ~/path/to/skills/copywriting ~/clawd/skills/
-```
-
-Each skill is a folder with a `SKILL.md` file. OpenClaw auto-discovers them at startup.
 
 ## License
 
