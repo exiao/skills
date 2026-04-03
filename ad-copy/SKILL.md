@@ -1,6 +1,7 @@
 ---
 name: ad-copy
-description: "Write direct response copy for any platform — App Store, Google Ads, landing pages, TikTok, Meta, push, email."
+description: >-
+  Write direct response ad copy for any platform including App Store listings, Google Ads, landing pages, TikTok, Meta ads, push notifications, and email campaigns. Use when the user needs marketing copy, ad headlines, conversion-focused text, A/B test variants, or says "write ad copy", "create an ad", "marketing copy", "landing page text".
 ---
 # Direct Response Copy
 
