@@ -106,7 +106,7 @@ def main():
         "--model", "-m",
         choices=["pro", "flash"],
         default="flash",
-        help="Model to use: 'flash' (gemini-2.0-flash-preview-image-generation, default) or 'pro' (gemini-2.0-pro-exp-image-generation, best quality). Default: flash"
+        help="Model to use: 'flash' (gemini-3.1-flash-image-preview, fast, default) or 'pro' (gemini-3-pro-image-preview, best quality). Default: flash"
     )
     parser.add_argument(
         "--api-key", "-k",
@@ -185,7 +185,7 @@ def main():
             image_cfg_kwargs["aspect_ratio"] = args.aspect_ratio
 
         response = client.models.generate_content(
-            model="gemini-2.0-pro-exp-image-generation" if args.model == "pro" else "gemini-2.0-flash-preview-image-generation",
+            model="gemini-3-pro-image-preview" if args.model == "pro" else "gemini-3.1-flash-image-preview",
             contents=contents,
             config=types.GenerateContentConfig(
                 response_modalities=["TEXT", "IMAGE"],
