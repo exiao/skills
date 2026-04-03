@@ -100,10 +100,10 @@ No hashtags. No emojis. Confident and data-forward.
 cd ~/clawd/skills/typefully
 
 # For each company:
-node scripts/typefully.js media:upload 286685 /tmp/earnings-card-[TICKER]-$(date +%Y%m%d).png
+node scripts/typefully.js media:upload $TYPEFULLY_SOCIAL_SET_ID /tmp/earnings-card-[TICKER]-$(date +%Y%m%d).png
 # → returns media_id
 
-node scripts/typefully.js drafts:create 286685 \
+node scripts/typefully.js drafts:create $TYPEFULLY_SOCIAL_SET_ID \
   --platform x \
   --text "$[TICKER] reports [day]. Est: $[EPS] EPS / $[rev]. [Key watch]. [AI take]." \
   --media <media_id>
@@ -115,7 +115,7 @@ Process all companies sequentially (one at a time).
 
 ### Step 7 — Report to Signal
 
-Send to `group:5TgLlI8NfnETVAzVvUi0rJ0WKz2Pz2Flj5i2/VAcFSY=`:
+Send to `$SIGNAL_MARKETING_GROUP`:
 
 ```
 📅 Earnings cards queued for this week:
@@ -123,7 +123,7 @@ Send to `group:5TgLlI8NfnETVAzVvUi0rJ0WKz2Pz2Flj5i2/VAcFSY=`:
 [For each company:]
 $[TICKER] — [day] | Est: $[EPS] / $[rev]B
 Tweet: [text]
-Draft: https://typefully.com/?a=286685&d=[draft_id] | Scheduled: [time]
+Draft: https://typefully.com/?a=$TYPEFULLY_SOCIAL_SET_ID&d=[draft_id] | Scheduled: [time]
 
 [Note any Gemini/Nano Banana failures]
 ```
@@ -132,8 +132,8 @@ Draft: https://typefully.com/?a=286685&d=[draft_id] | Scheduled: [time]
 
 ## Delivery
 
-- Signal group: `group:VEsNr2at9GMf41l5TiBLXc++af4v+/M61r844tgZITE=` (Marketing) — cron delivery handles routing, do NOT send via message tool
-- Typefully account: 286685
+- Signal group: `$SIGNAL_MARKETING_GROUP` — cron delivery handles routing, do NOT send via message tool
+- Typefully account: `$TYPEFULLY_SOCIAL_SET_ID`
 - Cards: `/tmp/earnings-card-TICKER-YYYYMMDD.png`
 
 ---

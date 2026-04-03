@@ -127,11 +127,11 @@ After Substack drafts are saved, create Typefully drafts for each article:
 
 ```bash
 # X thread draft — unscheduled draft only
-cd ~/clawd/skills/typefully && node scripts/typefully.js drafts:create 286685 \
+cd ~/clawd/skills/typefully && node scripts/typefully.js drafts:create $TYPEFULLY_SOCIAL_SET_ID \
   --platform x --text "$(cat ~/marketing/substack/drafts/[slug]/x-thread.md)"
 
 # LinkedIn draft — unscheduled draft only
-node scripts/typefully.js drafts:create 286685 \
+node scripts/typefully.js drafts:create $TYPEFULLY_SOCIAL_SET_ID \
   --platform linkedin --text "$(cat ~/marketing/substack/drafts/[slug]/linkedin-post.md)"
 ```
 

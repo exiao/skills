@@ -43,16 +43,16 @@ From the JSON output, pick the **single most visually interesting PR** — prefe
 xcrun simctl list devices booted
 
 # If none booted:
-python /Users/testuser/clawd/skills/ios-simulator/scripts/simctl_boot.py \
+python $SKILLS_DIR/ios-simulator/scripts/simctl_boot.py \
   --name 'iPhone 16 Pro' \
   --wait-ready
 
 # Launch Bloom app
-python /Users/testuser/clawd/skills/ios-simulator/scripts/app_launcher.py \
+python $SKILLS_DIR/ios-simulator/scripts/app_launcher.py \
   --launch com.bloom.invest
 
 # Set clean status bar (no carrier noise, full battery, 9:41)
-python /Users/testuser/clawd/skills/ios-simulator/scripts/status_bar.py \
+python $SKILLS_DIR/ios-simulator/scripts/status_bar.py \
   --preset clean
 
 sleep 5
@@ -62,13 +62,13 @@ sleep 5
 
 ```bash
 # Get a map of the app's current screen
-python /Users/testuser/clawd/skills/ios-simulator/scripts/screen_mapper.py
+python $SKILLS_DIR/ios-simulator/scripts/screen_mapper.py
 
 # Navigate to the feature screen based on the PR content
 # Use navigator.py for screen navigation, gesture.py for taps/swipes
-python /Users/testuser/clawd/skills/ios-simulator/scripts/navigator.py --screen <target_screen>
+python $SKILLS_DIR/ios-simulator/scripts/navigator.py --screen <target_screen>
 # OR
-python /Users/testuser/clawd/skills/ios-simulator/scripts/gesture.py --tap <x> <y>
+python $SKILLS_DIR/ios-simulator/scripts/gesture.py --tap <x> <y>
 
 sleep 2
 
@@ -120,10 +120,10 @@ Wait for the script to complete before proceeding.
 **If video was rendered:**
 ```bash
 # Upload video (note: no account ID for this account — 22264 is the Bloom brand account)
-node /Users/testuser/clawd/skills/typefully/scripts/typefully.js media:upload /tmp/bloom-feature-video.mp4
+node $SKILLS_DIR/typefully/scripts/typefully.js media:upload /tmp/bloom-feature-video.mp4
 # → returns media_id
 
-node /Users/testuser/clawd/skills/typefully/scripts/typefully.js drafts:create \
+node $SKILLS_DIR/typefully/scripts/typefully.js drafts:create \
   --platform x \
   --text "<copy_text>" \
   --media <media_id> \
@@ -133,7 +133,7 @@ node /Users/testuser/clawd/skills/typefully/scripts/typefully.js drafts:create \
 
 **If screenshot invalid (text-only):**
 ```bash
-node /Users/testuser/clawd/skills/typefully/scripts/typefully.js drafts:create \
+node $SKILLS_DIR/typefully/scripts/typefully.js drafts:create \
   --platform x \
   --text "<copy_text>" \
   --tags bloom-features
@@ -143,7 +143,7 @@ node /Users/testuser/clawd/skills/typefully/scripts/typefully.js drafts:create \
 
 ### Step 7 — Report to Signal
 
-Send to `group:5TgLlI8NfnETVAzVvUi0rJ0WKz2Pz2Flj5i2/VAcFSY=`:
+Send to `$SIGNAL_MARKETING_GROUP`:
 
 ```
 🍎 Feature thread ready for review:
@@ -160,7 +160,7 @@ Typefully draft: https://typefully.com/?a=22264&d=[draft_id]
 
 ## Delivery
 
-- Signal group: `group:VEsNr2at9GMf41l5TiBLXc++af4v+/M61r844tgZITE=` (Marketing) — cron delivery handles routing, do NOT send via message tool
+- Signal group: `$SIGNAL_MARKETING_GROUP` — cron delivery handles routing, do NOT send via message tool
 - Typefully account: 22264 (Bloom brand account), tag: `bloom-features`
 - Draft is **NOT scheduled** — Eric reviews and publishes manually
 - Screenshot: `/tmp/bloom-shot-1.png`
@@ -183,7 +183,7 @@ Typefully draft: https://typefully.com/?a=22264&d=[draft_id]
 2. **Auto-publishing** — this draft is always for human review. Never add `--schedule` to the Typefully command.
 3. **Small screenshot** — a screenshot under 100KB is blank or a stub. Retry navigation; use a real populated screen as fallback.
 4. **Dev language in copy** — "we shipped a refactor" is bad. "Portfolio charts now load instantly" is good.
-5. **Wrong Typefully account** — this uses account 22264 (Bloom brand), NOT 286685.
+5. **Wrong Typefully account** — this uses account `$TYPEFULLY_BLOOM_SET_ID` (Bloom brand), NOT `$TYPEFULLY_SOCIAL_SET_ID`.
 6. **Render timeout** — the Remotion render can take up to 4 minutes. Don't kill it early.
 7. **Simulator not ready** — always use `--wait-ready` when booting; launching too fast crashes the app.
 

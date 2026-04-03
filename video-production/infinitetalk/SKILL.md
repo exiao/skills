@@ -54,7 +54,7 @@ Bad prompts: vague descriptions like "a person talking" give generic results.
 
 Prints the saved path on completion:
 ```
-VIDEO: /Users/testuser/clawd/characters/max/videos/2026-03-03-episode-1.mp4
+VIDEO: ~/clawd/characters/max/videos/2026-03-03-episode-1.mp4
 ```
 
 ---

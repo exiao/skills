@@ -112,11 +112,11 @@ Example format:
 cd ~/clawd/skills/typefully
 
 # Upload media
-node scripts/typefully.js media:upload 286685 /tmp/insider-trade-card-$(date +%Y%m%d).png
+node scripts/typefully.js media:upload $TYPEFULLY_SOCIAL_SET_ID /tmp/insider-trade-card-$(date +%Y%m%d).png
 # → returns media_id
 
 # Create draft with media + scheduled slot
-node scripts/typefully.js drafts:create 286685 --platform x --text "<tweet_text>" --media <media_id>
+node scripts/typefully.js drafts:create $TYPEFULLY_SOCIAL_SET_ID --platform x --text "<tweet_text>" --media <media_id>
 # Do NOT add --schedule. Save as unscheduled draft only — Eric reviews before posting.
 # → returns draft_id and scheduled time
 ```
@@ -133,7 +133,7 @@ Filed: [date]
 Stock: $[current] | YTD: [+/-X%]
 
 Tweet: [tweet text]
-Typefully: https://typefully.com/?a=286685&d=[draft_id]
+Typefully: https://typefully.com/?a=$TYPEFULLY_SOCIAL_SET_ID&d=[draft_id]
 ```
 
 ---
@@ -141,7 +141,7 @@ Typefully: https://typefully.com/?a=286685&d=[draft_id]
 ## Delivery
 
 - Cron delivery: announces to Marketing Signal group automatically
-- Typefully account: 286685 (Bloom @invest.with.bloom)
+- Typefully account: `$TYPEFULLY_SOCIAL_SET_ID` (Bloom @invest.with.bloom)
 - Card saved to: `/tmp/insider-trade-card-YYYYMMDD.png`
 
 ---

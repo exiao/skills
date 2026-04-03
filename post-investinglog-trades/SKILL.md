@@ -133,14 +133,14 @@ YTD: +18.3%
 cd ~/clawd/skills/typefully
 
 # Ensure 'investing-log' tag exists (safe to run even if it already exists)
-node scripts/typefully.js tags:create 286685 --name 'investing-log' 2>/dev/null || true
+node scripts/typefully.js tags:create $TYPEFULLY_SOCIAL_SET_ID --name 'investing-log' 2>/dev/null || true
 
 # Upload card
-node scripts/typefully.js media:upload 286685 /tmp/trade-card-[TICKER]-$(date +%Y%m%d).png
+node scripts/typefully.js media:upload $TYPEFULLY_SOCIAL_SET_ID /tmp/trade-card-[TICKER]-$(date +%Y%m%d).png
 # → returns media_id
 
 # Create draft
-node scripts/typefully.js drafts:create 286685 \
+node scripts/typefully.js drafts:create $TYPEFULLY_SOCIAL_SET_ID \
   --platform x \
   --text "<tweet_text>" \
   --media <media_id> \
@@ -178,7 +178,7 @@ Allocation: [X]% | YTD: [+/-X%]
 Model: [claude/openai/gemini]
 
 Tweet: [tweet text]
-Typefully: https://typefully.com/?a=286685&d=[draft_id]
+Typefully: https://typefully.com/?a=$TYPEFULLY_SOCIAL_SET_ID&d=[draft_id]
 Scheduled: [time]
 ```
 
@@ -187,7 +187,7 @@ Scheduled: [time]
 ## Delivery
 
 - Signal group: `$SIGNAL_GROUP_ID`
-- Typefully account: 286685 with `investing-log` tag
+- Typefully account: `$TYPEFULLY_SOCIAL_SET_ID` with `investing-log` tag
 - State file: `~/clawd/memory/il-pipeline-state.json`
 - Card: `/tmp/trade-card-TICKER-YYYYMMDD.png`
 
@@ -206,7 +206,7 @@ Scheduled: [time]
 
 1. **Posting NOACTION/SCENARIO files** — always filter these out in Step 1.
 2. **Skipping dedup check** — always read il-pipeline-state.json first; repeating a tweet is embarrassing.
-3. **Wrong Typefully account** — use account ID `286685` (not 22264 which is Eric's personal).
+3. **Wrong Typefully account** — use account ID `$TYPEFULLY_SOCIAL_SET_ID` (not 22264 which is Eric's personal).
 4. **PIL fallback** — never use PIL/Pillow. Only Nano Banana Pro for image generation.
 5. **State file not updated** — always write back after successful post; otherwise same trade posts again tomorrow.
 6. **Overwriting old state** — keep last 50 entries, don't truncate to just the new one.

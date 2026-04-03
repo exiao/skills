@@ -45,7 +45,7 @@ Pick the voice that matches your character's archetype. Store the chosen voice n
 
 The script prints the saved path on completion:
 ```
-AUDIO: /Users/testuser/clawd/characters/max/audio/2026-03-03-episode-1.mp3
+AUDIO: ~/clawd/characters/max/audio/2026-03-03-episode-1.mp3
 ```
 
 ---
