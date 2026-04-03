@@ -13,17 +13,17 @@
 ### 1. Content & Writing
 Write articles, generate headlines, build content pipelines, and publish to Substack.
 
-**Skills:** article-writer, brand-identity, content-pipeline, content-strategy, editor-in-chief, evaluate-content, hooks, outline-generator, substack-draft, tweet-ideas
+**Skills:** article-writer, brand-identity, content-pipeline, content-strategy, editor-in-chief, evaluate-content, hooks, outline-generator, substack-draft, tweet-ideas, writer
 
 ### 2. Marketing & Growth
 ASO, competitor research, synthetic user studies, ad operations, and growth optimization.
 
-**Skills:** aso, competitive-analysis, content-performance-report, dogfood, growth, churn-prevention, email-sequence, copywriting, cold-email, positioning-angles, referral-program, meta-ads, optimize-prompt, synthetic-userstudies, typefully, whop-content-rewards, paid-ads, launch-strategy, marketing-psychology, pricing-strategy, product-marketing-context
+**Skills:** aso, competitive-analysis, dogfood, growth, churn-prevention, email-sequence, copywriting, cold-email, positioning-angles, referral-program, optimize-prompt, synthetic-userstudies, typefully, whop-content-rewards, paid-ads, launch-strategy, marketing-psychology, pricing-strategy, product-marketing-context
 
 ### 3. Design & Visual
 Generate images, create diagrams, run design reviews, and build polished frontends.
 
-**Skills:** visual-design, design-review, nano-banana-pro, excalidraw-mcp, impeccable, app-store-screenshots, frontend-design
+**Skills:** visual-design, design-review, nano-banana-pro, excalidraw-mcp, impeccable, app-store-screenshots
 
 ### 4. Video Production
 AI video generation, voiceovers, screen recording, and video editing.
@@ -43,12 +43,12 @@ Manage campaigns on Google, Apple, and Meta.
 ### 7. Development & Coding
 TDD workflows, PR management, deploy verification, browser automation, and more.
 
-**Skills:** agent-browser, babysit-pr, claude-md-management, coding-agent, context7, demo-pr-feature, deploy-bloom, documents, fix-bloom-prs, fix-sentry-issues, app-store-connect, ios-simulator, ralph-mode, serena, stably-cli, stably-sdk-rules, superpowers-coding, superpowers-planning, superpowers-reviews, verify-deploy, run-tests, codex, security-audit
+**Skills:** agent-browser, babysit-pr, claude-md-management, context7, demo-pr-feature, deploy-bloom, document-release, documents, fix-bloom-prs, fix-sentry-issues, app-store-connect, ios-simulator, last30days, ralph-mode, serena, stably-cli, stably-sdk-rules, superpowers-coding, superpowers-planning, superpowers-reviews, verify-deploy, codex, security-audit
 
 ### 8. Strategy & Business
 Trading, domain management, cloud ops, and decision-making frameworks.
 
-**Skills:** alpaca, another-perspective, cloud-migration, porkbun, railway, sahil-office-hours, yc-office-hours, wealth-management
+**Skills:** alpaca, another-perspective, cloud-migration, porkbun, railway, yc-office-hours, wealth-management
 
 ### 9. Infrastructure & Tooling
 Skill creation, OpenClaw setup, and system maintenance.
@@ -63,4 +63,4 @@ Scheduled content and social media automation. These run on a schedule — only 
 ### 11. UI/UX Reference
 Best practices for animations, CSS, typography, and UX patterns.
 
-**Skills:** userinterface-wiki, style-fix
+**Skills:** userinterface-wiki
