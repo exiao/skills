@@ -61,6 +61,36 @@ Line 2 (≤55 chars): "It found what 3 years of manual research missed."
 
 ---
 
+## UGC Ad Hooks
+
+Hook patterns optimized for AI-generated UGC ads (TikTok/Instagram). These are paid ad formats — uploaded directly to TikTok Ads Manager, not posted organically.
+
+### "this is ur reminder that..." format
+
+Casual, direct, creates urgency without being pushy. 1.3M views on @simonecanciello's example. Best for AI talking-head UGC where the vibe is relaxed and authentic.
+
+**Working examples for Bloom:**
+- "this is ur reminder that you don't need a financial advisor"
+- "this is ur reminder that checking your portfolio 10x a day isn't a strategy"
+- "this is ur reminder that your savings account is losing to inflation"
+- "this is ur reminder that you can research stocks without a Bloomberg terminal"
+
+Template: `this is ur reminder that [pain point everyone ignores] [and optional solution hint]`
+
+### Before/After Transformation (visual-only hook)
+
+No words in the first 3 seconds. The visual transformation IS the hook. Highest-performing TikTok ad format for app installs per @athcanft ($5-10 CPA, $0 production cost).
+
+**Format:** "before" (3-5s) → cut → "after" (3-5s) → app screenshot CTA (2s). 12s total.
+
+**Bloom example:** confused investor staring at phone → transition → same person calm and confident with Bloom open, portfolio up.
+
+**Production pipeline:** Generate "before" face (nano-banana-pro or similar) → enhance with fal.ai face-enhancement for "after" glow-up → animate both with Kling motion control using same reference video → assemble with video-editor.
+
+See also: [VISUAL-HOOKS.md](~/clawd/skills/video-production/VISUAL-HOOKS.md) Sources 7 & 8 for full visual hook breakdowns.
+
+---
+
 ## References
 
 This skill content is modularized into reference docs for readability.

@@ -169,6 +169,80 @@ ffmpeg -y -i demo.mp4 \
 
 ---
 
+## Before/After Transformation Ad (AI UGC)
+
+Assemble a before/after transformation ad from two Kling motion-control clips + an app screenshot overlay. Target: 12s, 9:16, ready for TikTok Ads Manager upload.
+
+**Ingredients:** before_clip.mp4 (5s, from Kling), after_clip.mp4 (5s, from Kling), app_screenshot.png (Bloom App Store page or in-app screenshot), background music track, optional caption text.
+
+```bash
+# Set EDIT to the absolute path, e.g. {baseDir}/scripts/edit.sh
+EDIT="{baseDir}/scripts/edit.sh"
+
+# 1. Trim both clips to exactly 5s (Kling output may vary slightly)
+$EDIT trim -i before_clip.mp4 -ss 00:00:00 -to 00:00:05 -o before_5s.mp4
+$EDIT trim -i after_clip.mp4 -ss 00:00:00 -to 00:00:05 -o after_5s.mp4
+
+# 2. Create the app CTA card (2s still image as video)
+ffmpeg -y -loop 1 -i app_screenshot.png -t 2 \
+  -vf "scale=1080:1920:force_original_aspect_ratio=decrease,pad=1080:1920:(ow-iw)/2:(oh-ih)/2:black" \
+  -c:v libx264 -pix_fmt yuv420p cta_card.mp4
+
+# 3. Concat: before (5s) → after (5s) → CTA (2s) with quick crossfade
+$EDIT crossfade -i "before_5s.mp4,after_5s.mp4,cta_card.mp4" \
+  --duration 0.3 --transition fade -o assembled.mp4
+
+# 4. Add background music at low volume
+$EDIT add-audio -i assembled.mp4 --audio music.mp3 --volume 0.3 -o with_music.mp4
+
+# 5. Add hook text overlay (optional — for "reminder" format)
+$EDIT text -i with_music.mp4 \
+  --text "this is ur reminder that you don't need a financial advisor" \
+  --position bottom-center --fontsize 38 --fontcolor white --bg-color "black@0.5" \
+  --from 0 --to 4 -o with_text.mp4
+
+# 6. Add CTA text on the final card
+$EDIT text -i with_text.mp4 \
+  --text "Download Bloom — Free" \
+  --position bottom-center --fontsize 48 --fontcolor white --bg-color "black@0.7" \
+  --from 10 --to 12 -o final_ad.mp4
+
+# 7. Fade out
+$EDIT fade -i final_ad.mp4 --fade-out 1 -o final_ad_faded.mp4
+```
+
+### Split-Screen Variant (Side-by-Side)
+
+For a simultaneous before/after comparison instead of sequential:
+
+```bash
+# Both clips side by side (each 540px wide in 1080px frame)
+ffmpeg -y -i before_5s.mp4 -i after_5s.mp4 \
+  -filter_complex "[0:v]scale=540:960[l];[1:v]scale=540:960[r];[l][r]hstack[out]" \
+  -map "[out]" -t 5 split_comparison.mp4
+
+# Add "BEFORE" / "AFTER" labels
+ffmpeg -y -i split_comparison.mp4 \
+  -vf "drawtext=text='BEFORE':fontsize=36:fontcolor=white:x=135:y=50:box=1:boxcolor=black@0.5:boxborderw=8,\
+drawtext=text='AFTER':fontsize=36:fontcolor=white:x=405:y=50:box=1:boxcolor=black@0.5:boxborderw=8" \
+  -c:a copy labeled_split.mp4
+
+# Then concat with CTA card + music as above
+```
+
+### App Screenshot Overlay (PiP)
+
+Instead of a full CTA card, overlay the app screenshot as picture-in-picture during the "after" segment:
+
+```bash
+# Overlay app screenshot in bottom-right corner during seconds 6-10
+ffmpeg -y -i assembled_no_cta.mp4 -i app_screenshot.png \
+  -filter_complex "[1:v]scale=270:480[pip];[0:v][pip]overlay=W-w-40:H-h-200:enable='between(t,6,10)'[out]" \
+  -map "[out]" -map "0:a" -c:a copy with_pip.mp4
+```
+
+---
+
 ## Quick One-Liners
 
 These are standalone commands for common tasks that don't need a full recipe.
