@@ -19,7 +19,8 @@ This skill routes video tasks to the correct sub-skill. Read the task, pick the 
 | **browser-animation-video** | Motion graphics via Framer Motion + GSAP, runs in-browser | High-fidelity motion piece that lives on the web, plays in-page, or needs to be screen-recorded; no file output required |
 | **demo-video** | Records real browser interactions via Playwright CDP | Walkthrough or product demo of an actual running web app; capturing real UI |
 | **gemini-svg** | AI-generated interactive SVG animations (Gemini) | Small UI components, decorative animations, data viz, icons, or anything SVG-sized and interactive in a browser |
-| **thumbnail** | Generate video cover frames and thumbnails | YouTube/TikTok/Reels thumbnails, cover frames, or extracting stills from video |
+| **thumbnail** | Generate video cover frames / thumbnails | User asks for a video thumbnail, cover frame, YouTube thumbnail, or needs to extract a still from a video |
+| **AI UGC ad** | Before/after transformation ads with AI-generated faces + Kling motion control. $0 production cost pipeline. | "make me a UGC ad" / "before after video" / "transformation ad" / "TikTok ad" / "AI UGC" |
 
 ## Routing Logic
 
@@ -38,6 +39,18 @@ This skill routes video tasks to the correct sub-skill. Read the task, pick the 
 - "record a demo" / "walkthrough video" / "screen-record the app" → **demo-video**
 - "SVG animation" / "animated icon" / "Gemini SVG" → **gemini-svg**
 - "thumbnail" / "cover frame" / "video cover" / "extract frame" / "YouTube thumbnail" → **thumbnail**
+
+**AI UGC ad pipeline (multi-skill chain):**
+- "make me a UGC ad" / "before after ad" / "transformation ad" / "TikTok ad with AI" → **AI UGC ad**
+- This is a chained workflow, not a single sub-skill. The full pipeline:
+  1. Generate "before" face image → **nano-banana-pro** (or Kling image)
+  2. Enhance to "after" glow-up → fal.ai face-enhancement API (uses `$FAL_KEY`, call via `curl` or fal SDK)
+  3. Animate both faces with reference motion → **kling** (motion control — see "Recipe: Motion Control for AI UGC Ads" in klingai SKILL.md)
+  4. Assemble before + after + CTA overlay → **video-editor** (see "Before/After Transformation Ad" recipe in recipes.md)
+  5. Add captions → auto-captions or manual text overlay
+- Target output: 12s, 9:16 vertical MP4, ready for TikTok Ads Manager upload
+- Read VISUAL-HOOKS.md Sources 7 & 8 for hook guidance specific to this format
+- Key constraint: avoid hand-to-face motions in reference video (Kling limitation)
 
 **Ambiguous cases — ask the user:**
 - "Make me a video" with no other context → ask: *Do you want (a) AI-generated footage, (b) a coded animation, or (c) a screen recording of a real app?*

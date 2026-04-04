@@ -494,6 +494,93 @@ The reel teaches about visual hooks, text hooks, and audio hooks while simultane
 
 ---
 
+---
+
+# Source 7: @athcanft — Before/After Transformation Ad (AI UGC, $0 Production)
+
+Source: X thread by @athcanft on winning TikTok ads with AI-generated UGC. $5-10 CPA, $1.50 CPI, $0 production cost.
+
+---
+
+## The Before/After Transformation Hook
+
+The visual transformation IS the hook. No spoken words needed in the first 3 seconds — the viewer watches to see the full reveal.
+
+**Format:** "before" state (3-5s) → quick cut → "after" state (3-5s) → app screenshot CTA (2s). 12s total, 9:16 vertical.
+
+**Why it works:** Transformation ads are the highest-performing format on TikTok for app installs. The curiosity gap is built into the format — the viewer needs to see what the "after" looks like. Combined with AI-generated faces and $0 production cost, this is the most cost-efficient ad format available.
+
+### The Full Pipeline
+
+```
+1. Record yourself doing the "action" (reference motion video)
+   → Simple head turns, talking, nodding. Avoid hand motions / covering mouth (inconsistent in Kling).
+2. Generate a face with AI (the "before")
+   → nano-banana-pro or any image generator. Prompt for a relatable, slightly stressed/confused look.
+3. Generate a better-looking version with fal.ai face-enhancement (the "after")
+   → Same face, enhanced. The glow-up IS the transformation.
+4. Use Kling motion control to animate both faces with the reference motion
+   → Upload still + reference video → Kling maps your motion onto the AI face.
+   → Settings: 5s duration, pro mode, 9:16 aspect.
+5. Edit: concat before + after clips, app screenshot overlay, music, captions
+   → See video-editor recipes for the assembly workflow.
+6. Upload directly to TikTok Ads Manager (not posted organically)
+```
+
+### Bloom Application
+
+- **Before:** Confused investor — furrowed brow, looking at phone with concern, dim lighting
+- **After:** Confident with Bloom — relaxed expression, slight smile, warm lighting, Bloom app visible on screen
+- **Hook text overlay (optional):** "this is ur reminder that you don't need a financial advisor"
+- **CTA (last 2s):** App Store screenshot with "Download Bloom" + App Store badge
+
+### Key Constraints
+
+- Hand motions / covering mouth = inconsistent output from Kling motion control
+- Simple head turns + talking = reliable, natural-looking results
+- 12s is the sweet spot for TikTok ad length
+- Upload to TikTok Ads Manager directly — don't post organically (athcanft's approach)
+- $1.50 CPI means this works at small budget scale
+
+---
+
+# Source 8: @simonecanciello — "this is ur reminder that..." Hook Format
+
+Source: X post by @simonecanciello. AI UGC ad promoting a fitness/wellness app. 1.3M views.
+
+---
+
+## The "Reminder" Hook
+
+**Template:** `this is ur reminder that [pain point everyone ignores]`
+
+A casual, direct hook that feels like a friend texting you, not an ad. The lowercase "ur" is intentional — it signals authenticity and native TikTok tone.
+
+**Why it works:** Direct address ("ur") + implied urgency ("reminder" = you should already know this) + universal pain point. The viewer feels called out in a non-aggressive way. The casual tone bypasses ad resistance because it doesn't look or sound like marketing.
+
+### Working Examples for Bloom
+
+- "this is ur reminder that you don't need a financial advisor"
+- "this is ur reminder that checking your portfolio 10x a day isn't a strategy"
+- "this is ur reminder that your savings account is losing to inflation"
+- "this is ur reminder that you can research stocks without a Bloomberg terminal"
+- "this is ur reminder that most people retire with less than they think"
+
+### Production Notes
+
+- Best paired with AI UGC talking-head — relaxed vibe, casual delivery, direct eye contact
+- The speaker should look like they're telling a friend, not presenting
+- Works in both organic and paid contexts
+- Can be combined with the before/after format: "reminder" text hook over the transformation visual hook
+
+### Broader Insight
+
+AI UGC for app promotion is wide open (simonecanciello's thesis). The combination of AI-generated talking heads + proven hook formats + direct TikTok ad upload creates a repeatable, zero-cost ad pipeline.
+
+---
+
+---
+
 ## Application by Sub-skill
 
 | Sub-skill | Hook application |
@@ -503,3 +590,4 @@ The reel teaches about visual hooks, text hooks, and audio hooks while simultane
 | **remotion-videos** | First scene = hook scene; bold text overlay enters within first 1-2s at full opacity; use power word in opening text. Color wash overlays (Source 5): `interpolateColors()` on full-screen div timed to concept changes. Word-by-word captions: `@remotion/captions` at word-level with single-word display. Zoom hook (Source 6): animate `scale` + `blur()` filter in first 0.3s. Two-speed text: persistent hero title + rotating caption layer |
 | **browser-animation-video** | First animation beat should be the visual hook; start mid-motion, not from static. Color overlays and zoom-blur transitions translate directly to CSS animations |
 | **demo-video** | Open with the most dramatic/surprising moment, not the beginning of the flow |
+| **AI UGC ads** | Before/after transformation (Source 7): generate before face → fal.ai face-enhancement for after → Kling motion control both with same reference → video-editor concat + overlay. "Reminder" hook (Source 8): casual talking-head + "this is ur reminder that..." text overlay |
