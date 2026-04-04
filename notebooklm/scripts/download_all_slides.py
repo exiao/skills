@@ -19,6 +19,7 @@ import sys
 import time
 from datetime import datetime
 from pathlib import Path
+from urllib.parse import urlparse
 
 from patchright.sync_api import sync_playwright, Download
 
@@ -56,7 +57,7 @@ def download_pdf_for_notebook(context, notebook: dict, output_dir: Path) -> Path
         print(f"  🌐 Opening: {notebook['title']}")
         page.goto(notebook["notebook_url"], wait_until="domcontentloaded", timeout=20000)
 
-        if "accounts.google.com" in page.url:
+        if urlparse(page.url).hostname == "accounts.google.com":
             print("  ❌ Session expired — re-auth needed")
             page.close()
             return None
