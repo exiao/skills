@@ -59,11 +59,11 @@ function pickCookieValue(cookies, name) {
     if (matches.length === 0) {
         return null;
     }
-    const preferred = matches.find((c) => (c.domain ?? '').endsWith('x.com'));
+    const preferred = matches.find((c) => { const d = (c.domain ?? ''); return d === 'x.com' || d === '.x.com' || d.endsWith('.x.com'); });
     if (preferred?.value) {
         return preferred.value;
     }
-    const twitter = matches.find((c) => (c.domain ?? '').endsWith('twitter.com'));
+    const twitter = matches.find((c) => { const d = (c.domain ?? ''); return d === 'twitter.com' || d === '.twitter.com' || d.endsWith('.twitter.com'); });
     if (twitter?.value) {
         return twitter.value;
     }

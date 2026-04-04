@@ -98,7 +98,7 @@ function makeJwt(accessKey, secretKey) {
     nbf: now - 5,
   }));
   const signature = base64url(
-    createHmac('sha256', secretKey).update(`${header}.${payload}`).digest()
+    createHmac('sha256', secretKey).update(`${header}.${payload}`).digest() // lgtm[js/insufficient-password-hash] HMAC-SHA256 is standard for JWT signing (RFC 7518), not password hashing
   );
   return `${header}.${payload}.${signature}`;
 }
