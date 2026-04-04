@@ -136,6 +136,7 @@ Install the skills from https://github.com/exiao/skills
 | [ios-simulator](ios-simulator/) | iOS simulator automation: builds, screenshots, device management |
 | [ralph-mode](ralph-mode/) | Autonomous dev loops with iteration gates and test validation |
 | [serena](serena/) | Navigate and edit complex codebases at the symbol level via Serena MCP |
+| [simplify](simplify/) | Review changed code for reuse, quality, and efficiency, then fix issues |
 | [stably-cli](stably-cli/) | Create, run, fix, and maintain Playwright tests via Stably CLI |
 | [stably-sdk-rules](stably-sdk-rules/) | Best practices for writing Stably AI-powered Playwright tests |
 | [superpowers-coding](superpowers-coding/) | TDD-first feature implementation and systematic debugging |

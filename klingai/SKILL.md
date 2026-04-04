@@ -227,7 +227,7 @@ node skills/klingai/scripts/kling.mjs video \
 **After face image prompt (nano-banana-pro):**
 > Same young adult, relaxed confident smile, warm golden lighting, slight glow, looking at camera, medium shot, 9:16 portrait
 
-Then enhance the "after" image with `fal-face-enhance.sh` for the glow-up effect before animating.
+Then enhance the "after" image with fal.ai face-enhancement API (uses `$FAL_KEY`) for the glow-up effect before animating.
 
 ## Reference
 

@@ -1,3 +1,8 @@
+---
+name: simplify
+description: Review changed code for reuse, quality, and efficiency, then fix any issues found. TRIGGER when user says "simplify", "clean up code", "review my changes", "code review and fix", or "/simplify".
+---
+
 # Simplify: Code Review and Cleanup
 
 Review all changed files for reuse, quality, and efficiency.
@@ -7,7 +12,7 @@ Fix any issues found.
 Run `git diff` (or `git diff HEAD` if staged) to see what changed.
 
 ## Phase 2: Launch Three Review Agents in Parallel
-Uses the SubAgent tool to run all three concurrently,
+Uses the Agent tool to run all three concurrently,
 each getting the full diff:
 
 Agent 1: Code Reuse Review

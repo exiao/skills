@@ -44,7 +44,7 @@ This skill routes video tasks to the correct sub-skill. Read the task, pick the 
 - "make me a UGC ad" / "before after ad" / "transformation ad" / "TikTok ad with AI" → **AI UGC ad**
 - This is a chained workflow, not a single sub-skill. The full pipeline:
   1. Generate "before" face image → **nano-banana-pro** (or Kling image)
-  2. Enhance to "after" glow-up → `skills/video-production/scripts/fal-face-enhance.sh` (fal.ai face-enhancement API, uses `$FAL_KEY`)
+  2. Enhance to "after" glow-up → fal.ai face-enhancement API (uses `$FAL_KEY`, call via `curl` or fal SDK)
   3. Animate both faces with reference motion → **kling** (motion control — see "Recipe: Motion Control for AI UGC Ads" in klingai SKILL.md)
   4. Assemble before + after + CTA overlay → **video-editor** (see "Before/After Transformation Ad" recipe in recipes.md)
   5. Add captions → auto-captions or manual text overlay

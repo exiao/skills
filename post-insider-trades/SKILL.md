@@ -37,13 +37,9 @@ Use `web_fetch` first. If that fails or returns empty/error, try `browser` with 
 
 **Source B (fallback): SEC EDGAR Form 4 scraper**
 
-If OpenInsider is unreachable on both HTTP and HTTPS:
-```bash
-python3 ~/clawd/skills/post-insider-trades/scripts/edgar_form4_scraper.py --days 1 --min-value 500000 --limit 50
-```
-This searches the SEC EDGAR full-text search API for Form 4 filings mentioning "open market", then parses each XML filing for purchase transactions >= $500k by officers/directors.
+If OpenInsider is unreachable on both HTTP and HTTPS, fall back to the SEC EDGAR full-text search API directly. Search for Form 4 filings mentioning "open market", then parse each XML filing for purchase transactions >= $500k by officers/directors.
 
-Output is a JSON array of qualifying trades with ticker, company, insider_name, title, shares, price, total_value, trade_date, filing_date, and sec_url.
+Output should be a JSON array of qualifying trades with ticker, company, insider_name, title, shares, price, total_value, trade_date, filing_date, and sec_url.
 
 **Source selection logic:**
 1. Try OpenInsider HTTP → if data returned, use it
