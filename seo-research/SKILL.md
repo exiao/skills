@@ -11,10 +11,10 @@ Unified SEO skill covering keyword research, AI search optimization, programmati
 
 | Task | Read This Reference |
 |------|-------------------|
-| Keyword research, competitor keywords, search volume, difficulty | This file (below) — uses DataForSEO skill |
+| Keyword research, competitor keywords, search volume, difficulty | This file (below) - uses DataForSEO skill |
 | AI search optimization, GEO, getting cited by LLMs | `references/ai-seo.md` |
 | Building SEO pages at scale from templates/data | `references/programmatic-seo.md` |
-| Technical SEO audit (crawlability, indexation, security, CWV) | `references/seo-technical.md` — use DataForSEO On-Page API (endpoint 13) for automated audits |
+| Technical SEO audit (crawlability, indexation, security, CWV) | `references/seo-technical.md` - use DataForSEO On-Page API (endpoint 13) for automated audits |
 | Schema.org structured data (JSON-LD) | `references/seo-schema.md` |
 | E-E-A-T analysis, content quality scoring | `references/seo-content-eeat.md` |
 | AI platform ranking factors | `references/platform-ranking-factors.md` |
@@ -40,15 +40,15 @@ THIS SKILL (what to write about) → hooks → outline-generator → article-wri
 ## Keyword Research Tools
 
 ### Primary: DataForSEO (API)
-Auth: Basic `$DATAFORSEO_AUTH_BASE64`  
-Skill: `dataforseo` — read it for full endpoint reference and cost table.
+Auth: Basic `$DATAFORSEO_AUTH_BASE64`
+Skill: `dataforseo` - read it for full endpoint reference and cost table.
 
 Key operations:
-1. **Search volume + CPC + competition** — up to 700 keywords per call, $0.075/batch
-2. **Keyword ideas from seeds** — 1000+ suggestions from 2–5 seed terms, $0.075/batch
-3. **Keyword difficulty** — bulk scoring (0–100), ~$0.003/keyword
-4. **SERP results** — who ranks on Google for a keyword, $0.002/query
-5. **App Store rankings** — where Bloom ranks in App Store search, $0.0012/keyword
+1. **Search volume + CPC + competition** - up to 700 keywords per call, $0.075/batch
+2. **Keyword ideas from seeds** - 1000+ suggestions from 2-5 seed terms, $0.075/batch
+3. **Keyword difficulty** - bulk scoring (0-100), ~$0.003/keyword
+4. **SERP results** - who ranks on Google for a keyword, $0.002/query
+5. **App Store rankings** - where Bloom ranks in App Store search, $0.0012/keyword
 
 ```bash
 # Volume for known keywords
@@ -77,10 +77,10 @@ DataForSEO returns current SERP positions but has no historical time series. For
 
 ## Keyword Research Process
 
-### Step 1 — Seed Keywords
+### Step 1 - Seed Keywords
 Start with broad seeds. Check `references/keyword-seeds.md` for the Bloom starter list.
 
-### Step 2 — Expand via DataForSEO
+### Step 2 - Expand via DataForSEO
 For each seed:
 1. Run keyword ideas endpoint → get 1000+ related keywords with volume + KD
 2. Filter: volume > 500, KD < 50 (sweet spot for new domains)
@@ -106,14 +106,14 @@ curl -s -X POST "https://api.dataforseo.com/v3/serp/google/organic/live/advanced
   -d '[{"keyword": "TARGET_KEYWORD", "location_code": 2840, "language_code": "en", "depth": 10}]'
 ```
 
-### Step 3 — Competitor Analysis
+### Step 3 - Competitor Analysis
 1. Use DataForSEO `competitors_domain` (endpoint 9) to find domains with keyword overlap
 2. Use DataForSEO `ranked_keywords` (endpoint 8) on those domains to see what they rank for
 3. Use SERP results from Step 2c to identify top-ranking content for target keywords
 4. Firecrawl to scrape top-ranking content
 5. Identify: What they cover, what they miss, where we can be better
 
-### Step 4 — Semantic Content Brief
+### Step 4 - Semantic Content Brief
 ```markdown
 # Content Brief: [Primary Keyword]
 
@@ -260,7 +260,7 @@ Link to conceptually related content, not just keyword-related. Example for a "H
 
 ## AI Search Quick Reference
 
-For full strategy, read `references/ai-seo.md`. To get actual AI search volume data for keywords, use the DataForSEO `dataforseo` skill (endpoint 8 — AI Search Volume). Tracks how often queries are asked in ChatGPT/Perplexity/etc. with 12-month trend. Key principles:
+For full strategy, read `references/ai-seo.md`. To get actual AI search volume data for keywords, use the DataForSEO `dataforseo` skill (endpoint 8 - AI Search Volume). Tracks how often queries are asked in ChatGPT/Perplexity/etc. with 12-month trend. Key principles:
 - Lead every section with direct answer (40-60 words)
 - Include statistics with cited sources (+37-40% citation boost)
 - Expert attribution and author bios
@@ -269,7 +269,8 @@ For full strategy, read `references/ai-seo.md`. To get actual AI search volume d
 - Don't block AI bots (GPTBot, PerplexityBot, ClaudeBot)
 - Optimal AI citation passage: 134-167 words
 - Brand mentions correlate 3x more with AI visibility than backlinks
-- **AI share buttons:** add “Summarize with AI” buttons that open ChatGPT/Perplexity with a brand-framed prompt
+- **AI share buttons:** add "Summarize with AI" buttons that open ChatGPT/Perplexity with a brand-framed prompt
+- **Machine-readable pricing:** add `/pricing.md` so AI agents can parse your plans without JS rendering
 - **LLMs.txt:** not a priority. Do standard SEO well before touching this
 - **Engagement signals:** high bounce and low session duration can suppress rankings. Fix UX before more content
 
@@ -324,7 +325,7 @@ For full audit checklist, read `references/seo-technical.md`. Critical items:
 
 ## Related Skills
 
-- **trend-scout** — viral content signals (complements SEO)
-- **hooks** — turns keyword research into titles
-- **content-calendar** — tracks research → written → published
-- **competitive-analysis** — competitor comparison pages (see references/seo-competitor-pages.md)
+- **trend-scout** - viral content signals (complements SEO)
+- **hooks** - turns keyword research into titles
+- **content-calendar** - tracks research → written → published
+- **competitive-analysis** - competitor comparison pages (see references/seo-competitor-pages.md)
