@@ -118,14 +118,14 @@ If the user stated dietary preferences, scan all meal items for violations:
 
 | Preference | Flag if description contains |
 |-----------|------------------------------|
-| Vegetarian | steak, beef, pork, chicken, lamb, duck, bacon, ribs, fish, seafood, shrimp, sushi, sashimi |
-| Vegan | All vegetarian flags + cheese, cream, butter, egg, milk, yogurt, honey, kaiseki |
+| Vegetarian | steak, beef, pork, chicken, lamb, duck, bacon, ribs, fish, seafood, shrimp, sashimi, nigiri |
+| Vegan | All vegetarian flags + cheese, cream, butter, egg, milk, yogurt, honey |
 | Halal | pork, bacon, ham, prosciutto, salami, lard |
 | Kosher | pork, bacon, ham, shellfish, shrimp, lobster, crab |
 | Gluten-free | ramen, pasta, bread, pizza, noodle, soba, udon |
 
 ### Proximity Check
-Flag any consecutive items on the same day that are more than ~8km apart (use your knowledge of the city's geography). Include a ⚠️ warning with the estimated distance.
+Flag any consecutive items on the same day that appear to require significant cross-city transit (best-effort heuristic based on known neighborhoods/landmarks). Include a ⚠️ warning noting the items may be far apart.
 
 ### Timing Checks
 - If notes mention "late start" / "sleep in" / "not a morning person" → warn about Morning items
