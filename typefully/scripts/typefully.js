@@ -67,14 +67,14 @@ const fmt = {
 // Utilities
 // ============================================================================
 
-const SENSITIVE_KEYS = new Set(['apiKey', 'api_key', 'token', 'secret', 'password', 'authorization']);
+const SENSITIVE_KEYS = new Set(['apikey', 'api_key', 'token', 'secret', 'password', 'authorization']);
 
 function redactSensitive(obj) {
   if (typeof obj !== 'object' || obj === null) return obj;
   if (Array.isArray(obj)) return obj.map(redactSensitive);
   const result = {};
   for (const [key, value] of Object.entries(obj)) {
-    if (SENSITIVE_KEYS.has(key)) {
+    if (SENSITIVE_KEYS.has(key.toLowerCase())) {
       result[key] = '***REDACTED***';
     } else {
       result[key] = redactSensitive(value);

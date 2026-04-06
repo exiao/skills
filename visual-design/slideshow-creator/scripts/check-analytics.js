@@ -99,7 +99,7 @@ function extractTikTokVideoId(platformUrl) {
   // Filter to TikTok posts only
   posts = posts.filter(p => {
     if ((p.platform || '').toLowerCase() === 'tiktok') return true;
-    try { return new URL(p.platform_url || '').hostname.endsWith('.tiktok.com') || new URL(p.platform_url || '').hostname === 'tiktok.com'; }
+    try { const h = new URL(p.platform_url || '').hostname; return h === 'tiktok.com' || h.endsWith('.tiktok.com'); }
     catch { return false; }
   });
 
