@@ -492,10 +492,6 @@ The reel teaches about visual hooks, text hooks, and audio hooks while simultane
 
 ---
 
----
-
----
-
 # Source 7: @athcanft — Before/After Transformation Ad (AI UGC, $0 Production)
 
 Source: X thread by @athcanft on winning TikTok ads with AI-generated UGC. $5-10 CPA, $1.50 CPI, $0 production cost.
@@ -576,8 +572,6 @@ A casual, direct hook that feels like a friend texting you, not an ad. The lower
 ### Broader Insight
 
 AI UGC for app promotion is wide open (simonecanciello's thesis). The combination of AI-generated talking heads + proven hook formats + direct TikTok ad upload creates a repeatable, zero-cost ad pipeline.
-
----
 
 ---
 
