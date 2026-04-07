@@ -1,134 +1,157 @@
----
-name: ralph-mode
-description: "Use when running Ralph Mode, autonomous coding loops, iterative build-test-fix cycles, or hands-off development. Also use for 'let the agent code autonomously', 'auto-iterate until it works', 'autonomous development', or 'build loop with iteration gates'."
----
-# Ralph Mode - Autonomous Development Loops
+# Ralph Loop
 
-Ralph Mode implements the Ralph Wiggum technique adapted for OpenClaw: autonomous task completion through continuous iteration with backpressure gates, completion criteria, and structured planning.
+Implementation of the Ralph Wiggum technique for iterative, self-referential AI development loops in Claude Code.
+
+## What It Is
+
+Ralph Loop is a development methodology: a simple `while true` that repeatedly feeds the same prompt to Claude Code, letting it iteratively improve its work until completion. Named after the Ralph Wiggum coding technique by Geoffrey Huntley.
+
+This skill implements Ralph using a **Stop hook** that intercepts Claude's exit attempts inside the current session. No external bash loops needed.
+
+## How It Works
+
+```
+/ralph-loop "Your task description" --completion-promise "DONE"
+
+# Claude Code automatically:
+# 1. Works on the task
+# 2. Tries to exit
+# 3. Stop hook blocks exit, feeds SAME prompt back
+# 4. Claude sees its previous work in files + git history
+# 5. Repeat until completion
+```
+
+The prompt never changes between iterations. Claude improves by reading its own past work in files.
+
+## Setup
+
+The plugin files live in this skill directory. To use Ralph in a project, install the official Claude Code plugin:
+
+```bash
+# In Claude Code, run:
+/install-plugin https://github.com/anthropics/claude-plugins-official/tree/main/plugins/ralph-loop
+```
+
+Or manually copy the hooks/commands/scripts directories into the project's `.claude/` directory.
+
+## Commands
+
+### /ralph-loop
+
+Start a Ralph loop in the current session.
+
+```
+/ralph-loop "<prompt>" --max-iterations <n> --completion-promise "<text>"
+```
+
+Options:
+- `--max-iterations <n>`: Stop after N iterations (default: unlimited)
+- `--completion-promise <text>`: Phrase that signals completion
+
+### /cancel-ralph
+
+Cancel the active Ralph loop (removes `.claude/ralph-loop.local.md`).
+
+## Completion Promises
+
+To signal completion, Claude outputs a `<promise>` tag:
+
+```
+<promise>TASK COMPLETE</promise>
+```
+
+The stop hook uses exact string matching. Always use `--max-iterations` as a safety net.
+
+## Prompt Best Practices
+
+### Clear Completion Criteria
+
+Bad: "Build a todo API and make it good."
+
+Good:
+```
+Build a REST API for todos.
+
+When complete:
+- All CRUD endpoints working
+- Input validation in place
+- Tests passing (coverage > 80%)
+- README with API docs
+- Output: <promise>COMPLETE</promise>
+```
+
+### Incremental Goals
+
+```
+Phase 1: User authentication (JWT, tests)
+Phase 2: Product catalog (list/search, tests)
+Phase 3: Shopping cart (add/remove, tests)
+
+Output <promise>COMPLETE</promise> when all phases done.
+```
+
+### Self-Correction (TDD)
+
+```
+Implement feature X following TDD:
+1. Write failing tests
+2. Implement feature
+3. Run tests
+4. If any fail, debug and fix
+5. Refactor if needed
+6. Repeat until all green
+7. Output: <promise>COMPLETE</promise>
+```
+
+### Escape Hatches
+
+Always set `--max-iterations`. In the prompt, include what to do if stuck:
+```
+After 15 iterations, if not complete:
+- Document what's blocking progress
+- List what was attempted
+- Suggest alternative approaches
+```
 
 ## When to Use
 
-- Building features that require multiple iterations and refinement
-- Complex projects with acceptance criteria to validate
-- Need automated testing, linting, or typecheck gates between iterations
-- Want to track progress across many iterations systematically
-- Prefer autonomous loops over manual turn-by-turn guidance
+Good for:
+- Well-defined tasks with clear success criteria
+- Tasks requiring iteration and refinement (e.g., getting tests to pass)
+- Greenfield projects where you can walk away
+- Tasks with automatic verification (tests, linters)
 
-## Core Workflow: Three Phases
+Not good for:
+- Tasks requiring human judgment or design decisions
+- One-shot operations
+- Tasks with unclear success criteria
+- Production debugging (use targeted debugging instead)
 
-### Phase 1 — Requirements Definition
-- Document specs in `specs/` (one file per topic of concern)
-- Define acceptance criteria: observable, verifiable outcomes
-- Create prioritized `IMPLEMENTATION_PLAN.md`
+## OpenClaw Integration
 
-### Phase 2 — Planning (no implementation)
-- Gap analysis: compare specs against existing code
-- Generate `IMPLEMENTATION_PLAN.md` with prioritized tasks
-- No code written during this phase
-
-### Phase 3 — Building (iterative loop)
-- Pick one task per iteration
-- Implement → validate → update plan → commit
-- Repeat until all tasks complete or criteria met
-
-## Loop Mechanics
-
-### Outer Loop (You coordinate)
-- Spawn sub-agents for each iteration — don't allocate work to main context
-- Let the LLM self-identify and self-correct ("Let Ralph Ralph")
-- Plan is disposable — regenerate when wrong/stale; don't salvage
-- Sit outside the loop and observe; don't micromanage
-
-### Inner Loop (Sub-agent per iteration)
-1. **Study** — Read plan, specs, relevant code
-2. **Select** — Pick most important uncompleted task
-3. **Implement** — Write code for that one task only
-4. **Validate** — Run backpressure gates (tests, lint, typecheck)
-5. **Update** — Mark task done, note discoveries, commit
-6. **Exit** — Next iteration starts fresh with clean context
-
-## Backpressure Gates
-
-**Programmatic (always use these):**
-- Tests: must pass before committing
-- Typecheck: catch type errors early
-- Lint: enforce code quality
-- Build: verify integration
-
-**Subjective (for UX/design quality):**
-- LLM-as-judge reviews: binary pass/fail
-- Only add after programmatic gates are reliable
-
-## Completion Criteria
-
-Define success upfront — avoid "seems done" ambiguity.
-
-**Programmatic:** All tests pass (exit 0), no TypeScript errors, build succeeds, coverage threshold met.
-
-**Subjective (LLM-as-judge):** For quality that resists automation — tone, aesthetics, usability. Binary pass/fail that converges through iteration.
-
-**Stopping conditions:**
-- ✅ All `IMPLEMENTATION_PLAN.md` tasks completed
-- ✅ All acceptance criteria met
-- ✅ Tests passing, no blocking issues
-- ⚠️ Max iterations reached
-- 🛑 Manual stop
-
-## Quick Start
+When spawning a Ralph loop via OpenClaw ACPX:
 
 ```
-"Start Ralph Mode for my project at ~/projects/my-app.
-I want to implement [feature]."
+sessions_spawn({
+  runtime: "acp",
+  agentId: "claude",
+  task: '/ralph-loop "Build X. Output <promise>DONE</promise> when complete." --completion-promise "DONE" --max-iterations 20',
+  cwd: "<repo>",
+  runTimeoutSeconds: 3600
+})
 ```
 
-Ralph Mode will:
-1. Create `IMPLEMENTATION_PLAN.md` with prioritized tasks
-2. Spawn sub-agents for iterative implementation
-3. Apply backpressure gates (test, lint, typecheck) each iteration
-4. Track progress and announce completion
+The plugin must be installed in the target project first.
 
-## Key Rules
+## Philosophy
 
-- **One task per iteration** — keeps context fresh, avoids drift
-- **Plans are disposable** — regenerate cheaply vs. salvage stale ones
-- **Lean prompts** — target ~40–60% context utilization ("smart zone")
-- **Spawn sub-agents for exploration** — protect main context
-
----
+1. **Iteration > Perfection**: Don't aim for perfect on first try. Let the loop refine.
+2. **Failures Are Data**: "Deterministically bad" means failures are predictable. Use them to tune prompts.
+3. **Operator Skill Matters**: Success depends on writing good prompts, not just having a good model.
+4. **Persistence Wins**: Keep trying until success.
 
 ## References
 
-This skill content is modularized into reference docs for readability.
-
-- [When to Use](references/when-to-use.md)
-- [Core Principles](references/core-principles.md)
-- [File Structure](references/file-structure.md)
-- [In Progress](references/in-progress.md)
-- [Completed](references/completed.md)
-- [Backlog](references/backlog.md)
-- [Build Commands](references/build-commands.md)
-- [Validation](references/validation.md)
-- [Operational Notes](references/operational-notes.md)
-- [Hats (Personas)](references/hats-personas.md)
-- [Loop Mechanics](references/loop-mechanics.md)
-- [Completion Criteria](references/completion-criteria.md)
-- [Completion Check - UX Quality](references/completion-check-ux-quality.md)
-- [Completion Check - Design Quality](references/completion-check-design-quality.md)
-- [Technology-Specific Patterns](references/technology-specific-patterns.md)
-- [Quick Start Command](references/quick-start-command.md)
-- [Operational Learnings](references/operational-learnings.md)
-- [Discovered Patterns](references/discovered-patterns.md)
-- [Escape Hatches](references/escape-hatches.md)
-- [Advanced: LLM-as-Judge Fixture](references/advanced-llm-as-judge-fixture.md)
-- [Critical Operational Requirements](references/critical-operational-requirements.md)
-- [Iteration [N] - [Timestamp]](references/iteration-n-timestamp.md)
-- [Status: COMPLETE ✅](references/status-complete.md)
-- [Operational Parameters](references/operational-parameters.md)
-- [Memory Updates](references/memory-updates.md)
-- [[Date] Ralph Mode Session](references/date-ralph-mode-session.md)
-- [Appendix: Hall of Failures](references/appendix-hall-of-failures.md)
-- [NEW: Session Initialization Best Practices (2025-02-07)](references/new-session-initialization-best-practices-2025-02-07.md)
-- [Task: [ONE specific thing]](references/task-one-specific-thing.md)
-- [Rules](references/rules.md)
-- [Iteration [N] - [Timestamp]](references/iteration-n-timestamp-2.md)
-- [Summary](references/summary.md)
+- Original technique: https://ghuntley.com/ralph/
+- Official plugin: https://github.com/anthropics/claude-plugins-official/tree/main/plugins/ralph-loop
+- Ralph Orchestrator: https://github.com/mikeyobrien/ralph-orchestrator
