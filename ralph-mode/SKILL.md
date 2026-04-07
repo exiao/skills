@@ -21,6 +21,8 @@ This skill implements Ralph using a **Stop hook** that intercepts Claude's exit 
 # 5. Repeat until completion
 ```
 
+**Always quote the prompt.** Unquoted prompts with special characters (parentheses, `$`, backticks, etc.) will break in the shell before the script sees them.
+
 The prompt never changes between iterations. Claude improves by reading its own past work in files.
 
 ## Setup
@@ -43,6 +45,8 @@ Start a Ralph loop in the current session.
 ```
 /ralph-loop "<prompt>" --max-iterations <n> --completion-promise "<text>"
 ```
+
+Always wrap `<prompt>` in quotes to avoid shell interpretation of special characters.
 
 Options:
 - `--max-iterations <n>`: Stop after N iterations (default: unlimited)
