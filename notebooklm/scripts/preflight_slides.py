@@ -28,6 +28,7 @@ import sys
 import time
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+from urllib.parse import urlparse
 
 from patchright.sync_api import sync_playwright
 from patchright.async_api import async_playwright as async_patchright
@@ -279,7 +280,7 @@ def scrape_notebooks_with_slides(headless: bool = True) -> list[dict]:
         page.goto(NOTEBOOKLM_HOME, wait_until="domcontentloaded", timeout=30000)
         time.sleep(2)
 
-        if "accounts.google.com" in get_current_url(page):
+        if urlparse(get_current_url(page)).hostname == "accounts.google.com":
             print("❌ Not authenticated. Run: python scripts/run.py auth_manager.py setup", file=sys.stderr)
             return []
 

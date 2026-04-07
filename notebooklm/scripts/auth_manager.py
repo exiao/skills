@@ -13,6 +13,7 @@ See: https://github.com/microsoft/playwright/issues/36139
 import json
 import time
 import argparse
+from urllib.parse import urlparse
 import shutil
 import re
 import sys
@@ -114,7 +115,8 @@ class AuthManager:
             page.goto("https://notebooklm.google.com", wait_until="domcontentloaded")
 
             # Check if already authenticated
-            if "notebooklm.google.com" in page.url and "accounts.google.com" not in page.url:
+            parsed = urlparse(page.url)
+            if parsed.hostname == "notebooklm.google.com":
                 print("  ✅ Already authenticated!")
                 self._save_browser_state(context)
                 return True
@@ -260,7 +262,8 @@ class AuthManager:
             page.goto("https://notebooklm.google.com", wait_until="domcontentloaded", timeout=30000)
 
             # Check if we can access NotebookLM
-            if "notebooklm.google.com" in page.url and "accounts.google.com" not in page.url:
+            parsed = urlparse(page.url)
+            if parsed.hostname == "notebooklm.google.com":
                 print("  ✅ Authentication is valid")
                 return True
             else:

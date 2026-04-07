@@ -298,6 +298,48 @@ Add “Summarize with AI” buttons that open ChatGPT, Perplexity, or Claude wit
 - Keep it user-first. If it feels spammy, skip it
 - Track clicks and AI referral traffic as a KPI
 
+### Machine-Readable Files for AI Agents
+
+AI agents are becoming buyers. When an agent evaluates tools on behalf of a user, it needs structured, parseable information. If your pricing is locked in a JS-rendered page or a "contact sales" wall, agents skip you and recommend competitors whose information they can read.
+
+Add these machine-readable files to your site root:
+
+**`/pricing.md` or `/pricing.txt`**
+
+```markdown
+# Pricing — [Your Product Name]
+
+## Free
+- Price: $0/month
+- Limits: [specific limits]
+- Features: [list]
+
+## Pro
+- Price: $29/month (billed annually) | $35/month (billed monthly)
+- Limits: [specific limits]
+- Features: [list]
+
+## Enterprise
+- Price: Custom — contact sales@example.com
+- Limits: Unlimited
+- Features: [list]
+```
+
+**Why this matters:**
+- AI agents increasingly compare products programmatically before a human visits your site
+- Opaque pricing gets filtered out of AI-mediated buying journeys
+- A markdown file is trivially parseable by any LLM: no rendering, no JavaScript, no login walls
+- Same principle as `robots.txt` (crawlers), `llms.txt` (AI context), and `AGENTS.md` (agent capabilities)
+
+**Best practices:**
+- Consistent units (monthly vs. annual, per-seat vs. flat)
+- Specific limits and thresholds, not just feature names
+- List what's included at each tier, not just what's different
+- Keep it updated: stale pricing is worse than no file
+- Link from your sitemap and main pricing page
+
+**`/llms.txt`** — Context file for AI systems (see llmstxt.org). Quick overview of product, audience, and links to key pages. Not a priority over standard SEO, but low effort to add.
+
 ### Schema Markup for AI
 
 Structured data helps AI systems understand your content. Key schemas:
