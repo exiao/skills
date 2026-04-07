@@ -227,6 +227,7 @@ These started from other open-source projects. I've modified and extended them f
 | [codex](codex/) | [garrytan/gstack](https://github.com/garrytan/gstack) (MIT) |
 | [impeccable](impeccable/) | [pbakaus/impeccable](https://github.com/pbakaus/impeccable) |
 | [app-store-screenshots](app-store-screenshots/) | [ParthJadhav/app-store-screenshots](https://github.com/ParthJadhav/app-store-screenshots) |
+| [remotion-best-practices](remotion-best-practices/) | [remotion-dev/skills](https://github.com/remotion-dev/skills) |
 | [video-production/remotion-videos](video-production/remotion-videos/) | [remotion-dev/skills](https://github.com/remotion-dev/skills) |
 | [visual-design/frontend-slides](visual-design/frontend-slides/) | [zarazhangrui/frontend-slides](https://github.com/zarazhangrui/frontend-slides) |
 | [last30days](last30days/) | [mvanhorn/last30days-skill](https://github.com/mvanhorn/last30days-skill) |
