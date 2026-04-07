@@ -25,22 +25,23 @@ Produces 3 article drafts per run: research once, then spawn 3 parallel sub-agen
 
 Read `~/marketing/WRITING-STYLE.md` first.
 
-### 1a. Gather source material
+### 1a. Gather engagement data
 
-- **Bird** (`/bird`): Pull @exiao3's last 30 posts. Note which topics/angles got most engagement.
-- **Appfigures** (`/appfigures`): Current Bloom downloads, MRR, recent 1–3 star reviews. These are data points to use in articles.
+- **X/Twitter**: Pull @exiao3's last 30 posts via `bird`. Note which topics/angles got most engagement (likes, replies, retweets).
+- **Grok X search**: Run `/grok-search` with `--x` to find what's trending in Eric's niches (AI, investing, indie dev, fintech).
+- **Trend research**: Run `/trend-research` across YouTube, X, Reddit, and Substack to find viral formats, hooks, and topics with momentum.
 
 ### 1b. Find 3 topics
 
-Use `/web-search` + `/trend-research` to find 3 topics, one per theme:
+Topics should come from what's actually resonating on social, not from a fixed theme list. Look for:
 
-| Theme | Focus |
-|-------|-------|
-| AI tools | Claude Code, coding agents, building with AI |
-| AI investing | AI-native hedge funds, Bloom, AI stock analysis |
-| Product design | Shipping fast, indie dev, UX decisions |
+- **High-engagement angles** from Eric's own X data (what got traction in the last 30 days)
+- **Trending conversations** where Eric has a unique perspective (builder, investor, AI power user, solo founder)
+- **Viral formats** that can be adapted (data tables, outrage comparisons, contrarian takes, build-in-public threads)
 
-**Pick topics where Eric has unique credibility** — Bloom builder, Claude Code daily user, solo founder. Avoid angles anyone could write. Use X engagement data from Step 1a to validate.
+Not every article needs to be about Bloom. Pick topics because they're genuinely interesting and Eric has something real to say. Bloom integration only if it's natural and adds to the piece.
+
+**Pick topics where Eric has unique credibility.** Avoid angles anyone could write. Validate with X engagement data from Step 1a.
 
 ### 1c. Competitive gap check
 
@@ -50,7 +51,7 @@ For each topic: quick web search for what's already been written. Find the contr
 
 Write all findings to `~/marketing/substack/drafts/[YYYY-MM-DD]-research.md`:
 - X engagement patterns (which topics resonated)
-- Appfigures metrics to reference
+- Trending topics and viral formats found
 - 3 chosen topics with positioning angle for each
 - Key SEO keywords per topic
 
@@ -63,7 +64,6 @@ Spawn 3 sub-agents in parallel using `sessions_spawn`, one per topic. Each sub-a
 ```
 Topic: [topic]
 Positioning angle: [angle from research]
-Appfigures data to use: [specific numbers from Phase 1]
 X engagement insight: [what angle resonated with Eric's audience]
 Output directory: ~/marketing/substack/drafts/[slug]/
 
@@ -71,7 +71,7 @@ Your job:
 1. Read ~/marketing/WRITING-STYLE.md
 2. Run /hooks — generate 5 options, pick strongest → hooks.md
 3. Run /outline-generator → outline.md
-4. Run /article-writer → draft.md (must pass "only Eric could write this" test: use Bloom-specific numbers, named frameworks, personal tool experience)
+4. Run /article-writer → draft.md (must pass "only Eric could write this" test: use specific numbers, named frameworks, personal experience. Reference Bloom only if naturally relevant to the topic.)
 5. Run /editor-in-chief — max 5 iterations → editing-log.md + draft-final.md
 6. Run /image-generator — hero image → hero.png
 7. Write LinkedIn post directly → linkedin-post.md
@@ -145,4 +145,4 @@ Include:
 - 3 topics chosen (one line each with positioning angle)
 - Substack draft URLs (one per article — ready to review and publish)
 - Typefully draft links (LinkedIn + X thread, unscheduled)
-- Appfigures metrics used as data points
+- Source data and trending topics that informed each article
