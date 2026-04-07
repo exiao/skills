@@ -184,6 +184,7 @@ Install the skills from https://github.com/exiao/skills
 | Skill | Description |
 |-------|-------------|
 | [document-release](document-release/) | Document release processes |
+| [trip-planner](trip-planner/) | Generate day-by-day travel itineraries with neighborhood routing and budget scaling |
 
 ---
 
