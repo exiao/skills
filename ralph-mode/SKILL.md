@@ -89,7 +89,7 @@ Ralph Mode will:
 
 ## Self-Loop Protocol (OpenClaw)
 
-OCPlatform doesn't have post-completion hooks like Claude Code. Instead, the loop lives in the agent's behavior. When Ralph Mode is active, follow this protocol at the end of every turn:
+OpenClaw doesn't have post-completion hooks like Claude Code. Instead, the loop lives in the agent's behavior. When Ralph Mode is active, follow this protocol at the end of every turn:
 
 ### After completing any work:
 
