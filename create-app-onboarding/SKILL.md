@@ -1,6 +1,10 @@
 ---
-name: app-onboarding-questionnaire
-description: Design and build a high-converting questionnaire-style onboarding flow for your app, modelled on proven conversion patterns from top subscription apps.
+name: create-app-onboarding
+description: >-
+  TRIGGER when the user asks to design, build, or improve an app onboarding flow,
+  onboarding questionnaire, first-run experience, or signup funnel. Also trigger
+  on "conversion optimization for onboarding", "reduce onboarding drop-off",
+  "questionnaire-style onboarding", or "subscription app onboarding".
 user-invocable: true
 ---
 
