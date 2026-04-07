@@ -29,7 +29,7 @@ Finds the most compelling recent insider buy (CEO/CFO/Director, >$500k, filed la
 
 Try HTTP first (HTTPS is unreliable):
 ```
-http://openinsider.com/screener?s=&o=&pl=500&ph=&ll=&lh=&fd=1&fdr=&td=0&tdr=&feession=&cession=at&t2=1&xp=1&ic1ceo=1&ic2cfo=1&ic3cob=1&ic5=1&hft=0&grp=0&cnt=100&page=1
+http://openinsider.com/screener?s=&o=&pl=500000&ph=&ll=&lh=&fd=1&fdr=&td=0&tdr=&fession=&cession=at&t2=1&xp=1&ic1ceo=1&ic2cfo=1&ic3cob=1&ic5=1&hft=0&grp=0&cnt=100&page=1
 ```
 This filters: P-Purchase only, >$500k value, filed in last 24h, CEO/CFO/COB/Director, excludes 10b5-1 plans.
 

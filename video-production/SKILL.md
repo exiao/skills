@@ -20,7 +20,7 @@ This skill routes video tasks to the correct sub-skill. Read the task, pick the 
 | **demo-video** | Records real browser interactions via Playwright CDP | Walkthrough or product demo of an actual running web app; capturing real UI |
 | **gemini-svg** | AI-generated interactive SVG animations (Gemini) | Small UI components, decorative animations, data viz, icons, or anything SVG-sized and interactive in a browser |
 | **thumbnail** | Generate video cover frames / thumbnails | User asks for a video thumbnail, cover frame, YouTube thumbnail, or needs to extract a still from a video |
-| **AI UGC ad** | Before/after transformation ads with AI-generated faces + Kling motion control. $0 production cost pipeline. | "make me a UGC ad" / "before after video" / "transformation ad" / "TikTok ad" / "AI UGC" |
+| **AI UGC ad** (pipeline) | Before/after transformation ads with AI-generated faces + Kling motion control. $0 production cost pipeline. Multi-skill chain, not a sub-skill directory. | "make me a UGC ad" / "before after video" / "transformation ad" / "TikTok ad" / "AI UGC" |
 
 ## Routing Logic
 
