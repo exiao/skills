@@ -33,8 +33,8 @@ Here's where we left off:
 
 ✅ App profile: Fitness tracking app (SwiftUI)
 ✅ User transformation: "Confused about what to eat" → "Confident meal planner"
-✅ Blueprint: 11-screen flow confirmed
-⏳ Screen content: 6 of 11 screens drafted
+✅ Blueprint: 9-screen flow confirmed
+⏳ Screen content: 6 of 9 screens drafted
 ◻️ Implementation: not started
 
 Ready to continue drafting screen 7, or would you like to change anything?
