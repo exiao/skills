@@ -18,11 +18,6 @@ Create Meta ad creative that converts using **research-driven development**, the
 - Generate multiple variations for A/B testing
 - Transform testimonials into ad creative
 
-**Related Skills:**
-- `hook-and-headline-writing` - Optimizing Primary Text hooks
-- `opened-identity` - Brand voice alignment
-- `social-content-creation` - Organic content that can be boosted
-
 ---
 
 ## The Value Formula
@@ -90,7 +85,7 @@ Every Meta ad has 6 elements:
 
 The hook is 80% of performance. Types: Stated (what you SAY), Visual (what they SEE), Audio (what they HEAR).
 
-> **Load on-demand:** `hook-and-headline-writing` skill has 15+ proven hook formulas with examples.
+> **Load on-demand:** `references/copywriting-formulas.md` has proven hook formulas with examples.
 
 #### Body Copy Formulas
 
@@ -214,17 +209,5 @@ Before finalizing any concept:
 | `references/copywriting-formulas.md` | PAS, AIDA, hooks, headlines |
 | `references/creative-research-methods.md` | Research process |
 | `references/audience-segments.md` | OpenEd segment mapping |
-
----
-
-## Related Skills
-
-- `dude-with-sign-writer` - One-liners for text-only ads (12 punchy patterns)
-- `hook-and-headline-writing` - Hook formulas (extensive overlap, use for hook optimization)
-- `social-content-creation` - Organic content that can become ads
-- `opened-identity` - Brand voice framework
-- `ghostwriter` - Authentic voice guidelines
-
----
 
 *v1.1 (2026-01-23): Refactored for progressive disclosure. Detailed content moved to references.*
