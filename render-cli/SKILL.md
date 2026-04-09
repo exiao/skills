@@ -235,19 +235,19 @@ Two methods:
 2. **API key** (automation/CI): Set `RENDER_API_KEY` env var. Keys don't expire. Takes precedence over CLI tokens.
 
 ```bash
-export RENDER_API_KEY=rnd_RUExip...
+export RENDER_API_KEY=rnd_xxxYourKeyHerexxx
 ```
 
 ## Multi-Workspace Setup
 
-To switch between workspaces (e.g., Bloom vs Fintary), set `RENDER_API_KEY` per-command:
+To switch between workspaces (e.g., team-staging vs team-production), set `RENDER_API_KEY` per-command:
 
 ```bash
-# Bloom workspace
-RENDER_API_KEY=rnd_tate... render services -o json --confirm
+# Staging workspace
+RENDER_API_KEY=rnd_xxxStagingKeyxxx render services -o json --confirm
 
-# Fintary workspace
-RENDER_API_KEY=rnd_lDST... render services -o json --confirm
+# Production workspace
+RENDER_API_KEY=rnd_xxxProductionKeyxxx render services -o json --confirm
 ```
 
 Or set the active workspace once and use the default key:
