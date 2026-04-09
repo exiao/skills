@@ -135,7 +135,7 @@ Now design the screen-by-screen flow. The blueprint follows a proven psychologic
 
 ### The Onboarding Framework
 
-The flow uses 11 screen archetypes. You MUST include screens marked [REQUIRED]. Others are [RECOMMENDED] or [OPTIONAL] based on fit.
+The flow uses 14 screen archetypes. You MUST include screens marked [REQUIRED]. Others are [RECOMMENDED] or [OPTIONAL] based on fit.
 
 #### Screen 1: WELCOME [REQUIRED]
 **Objective:** Hook — show the end state, create desire.
