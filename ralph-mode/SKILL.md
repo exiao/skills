@@ -1,3 +1,8 @@
+---
+name: ralph-mode
+description: "Run iterative self-referential development loops using the Ralph Wiggum technique. Use when tasks need repeated iteration, TDD cycles, greenfield builds, or autonomous refinement until tests pass or completion criteria are met. Triggers on ralph loop, ralph mode, iterative loop, autonomous loop."
+---
+
 # Ralph Loop
 
 Implementation of the Ralph Wiggum technique for iterative, self-referential AI development loops in Claude Code.

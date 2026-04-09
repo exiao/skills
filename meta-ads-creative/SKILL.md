@@ -1,6 +1,6 @@
 ---
 name: meta-ads-creative
-description: Create high-converting Meta (Facebook/Instagram) ad creative using the 6 Elements framework, proven ad formats, and research-driven copywriting. Optimized for lo-fi, native-feeling ads that don't look like ads.
+description: "Create high-converting Meta (Facebook/Instagram) ad creative using the 6 Elements framework, proven ad formats, and research-driven copywriting. Use when creating Facebook ads, Instagram ad creative, writing ad copy for Meta campaigns, A/B testing ad variations, or optimizing ad performance. Triggers on Meta ads, Facebook ads, Instagram ads, ad creative, ad copy."
 ---
 
 # Meta Ads Creative Skill
@@ -214,7 +214,6 @@ Before finalizing any concept:
 | `references/copywriting-formulas.md` | PAS, AIDA, hooks, headlines |
 | `references/creative-research-methods.md` | Research process |
 | `references/audience-segments.md` | OpenEd segment mapping |
-| `examples/` | Existing OpenEd concepts |
 
 ---
 

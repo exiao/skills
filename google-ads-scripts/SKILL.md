@@ -77,12 +77,6 @@ function pauseLowQualityKeywords() {
 
 See [references/best-practices.md](references/best-practices.md) for detailed code examples of each practice.
 
-## Integration with Other Skills
-
-- **google-apps-script** - Use for Google Sheets reporting, Gmail notifications, Drive file management, and trigger setup
-- **ga4-measurement-protocol** - Combine with GA4 for tracking script-triggered events
-- **gtm-api** - Coordinate with GTM configurations for holistic tracking
-
 ## Validation & Testing
 
 Use the validation scripts in `scripts/` for pre-deployment checks:
