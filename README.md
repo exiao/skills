@@ -115,6 +115,8 @@ Install the skills from https://github.com/exiao/skills
 | Skill | Description |
 |-------|-------------|
 | [google-ads](google-ads/) | Manage Google Ads campaigns: performance, keywords, optimization |
+| [google-ads-scripts](google-ads-scripts/) | Google Ads Script development: AdsApp API, campaign automation, bid optimization, reporting |
+| [meta-ads-creative](meta-ads-creative/) | Create high-converting Meta ad creative using the 6 Elements framework and proven formats |
 | [apple-search-ads](apple-search-ads/) | Apple Search Ads campaigns with API automation and bid strategy |
 
 ### Development & Coding
@@ -135,6 +137,7 @@ Install the skills from https://github.com/exiao/skills
 | [app-store-connect](app-store-connect/) | App Store Connect via `asc` CLI: releases, TestFlight, builds, metadata, subscriptions |
 | [ios-simulator](ios-simulator/) | iOS simulator automation: builds, screenshots, device management |
 | [ralph-mode](ralph-mode/) | Autonomous dev loops with iteration gates and test validation |
+| [react-doctor](react-doctor/) | Diagnose and fix React codebase health issues: performance, security, code quality |
 | [serena](serena/) | Navigate and edit complex codebases at the symbol level via Serena MCP |
 | [stably-cli](stably-cli/) | Create, run, fix, and maintain Playwright tests via Stably CLI |
 | [stably-sdk-rules](stably-sdk-rules/) | Best practices for writing Stably AI-powered Playwright tests |
