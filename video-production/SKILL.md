@@ -58,3 +58,7 @@ Once routed:
 2. Read `~/clawd/skills/video-production/<sub-skill>/SKILL.md` fully.
 3. Follow its workflow exactly — do not improvise around its conventions.
 4. Sub-skill files are authoritative; this router is just dispatch.
+
+## Remotion Best Practices
+
+When working with Remotion code (compositions, animations, captions, audio, etc.), also load the `remotion-best-practices` skill at `~/clawd/skills/remotion-best-practices/SKILL.md`. It contains 30+ rule files covering animations, timing, sequencing, captions, charts, 3D, audio visualization, FFmpeg, fonts, Tailwind, and more. Load individual rule files on demand based on the task.

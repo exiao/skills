@@ -19,6 +19,7 @@ import argparse
 import sys
 import time
 from pathlib import Path
+from urllib.parse import urlparse
 
 from patchright.sync_api import sync_playwright
 
@@ -182,7 +183,7 @@ def main():
         time.sleep(2)
 
         # Check auth
-        if "accounts.google.com" in page.evaluate("() => window.location.href"):
+        if urlparse(page.evaluate("() => window.location.href")).hostname == "accounts.google.com":
             print("❌ Not authenticated. Run: python scripts/run.py auth_manager.py setup")
             return 1
 
