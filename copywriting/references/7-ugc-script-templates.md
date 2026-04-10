@@ -4,7 +4,7 @@ Script structures for AI-generated UGC testimonials.
 
 ## AI UGC Production Stack
 
-Before scripting, build the production infrastructure. For the full UGC campaign setup (creator sourcing, content rewards, distribution), see the `whop-content-rewards` skill. Summary:
+Before scripting, build the production infrastructure. Summary:
 
 **1. Find a reference ad first**
 - Use [Meta Ad Library](https://facebook.com/ads/library) or [GetHooked.ai](https://gethooked.ai) — find ads in your category running 30+ days (run duration = proof of return)
