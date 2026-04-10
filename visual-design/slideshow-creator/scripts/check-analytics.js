@@ -97,7 +97,11 @@ function extractTikTokVideoId(platformUrl) {
   }
 
   // Filter to TikTok posts only
-  posts = posts.filter(p => (p.platform || '').toLowerCase() === 'tiktok' || (p.platform_url || '').includes('tiktok.com'));
+  posts = posts.filter(p => {
+    if ((p.platform || '').toLowerCase() === 'tiktok') return true;
+    try { const h = new URL(p.platform_url || '').hostname; return h === 'tiktok.com' || h.endsWith('.tiktok.com'); }
+    catch { return false; }
+  });
 
   // Sort by publish date (oldest first)
   posts.sort((a, b) => new Date(a.published_at) - new Date(b.published_at));

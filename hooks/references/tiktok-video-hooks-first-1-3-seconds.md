@@ -59,6 +59,19 @@ Information is the reward at the end, not the structure. Anything that explains 
 - Show the before/after net worth, THEN tell the story
 - Why it works: The result IS the hook. No words needed for the first second.
 
+**"this is ur reminder that [pain point]"**
+- "this is ur reminder that you don't need a financial advisor"
+- "this is ur reminder that checking your portfolio 10x a day isn't a strategy"
+- Why it works: Casual tone + direct address + implied urgency. Feels like a friend texting, not an ad. @simonecanciello hit 1.3M views with this format. Pairs well with AI UGC talking-head — relaxed vibe, casual delivery. The lowercase "ur" is intentional; it signals authenticity.
+
+**Before/After Transformation** (visual hook — no words needed)
+- The visual transformation IS the hook. No spoken hook required in the first 3 seconds.
+- Format: "before" state (3-5s) → quick cut or morph → "after" state (3-5s) → app CTA (2s). Target 12s total.
+- Why it works: Transformation ads are the highest-performing format on TikTok for app installs. @athcanft reports $5-10 CPA and $1.50 CPI with $0 production cost using AI-generated faces + Kling motion control.
+- Production: AI-generate "before" face → fal.ai face-enhancement for "after" glow-up → Kling motion control to animate both with same reference motion → concat + app screenshot overlay.
+- Bloom angle: confused/overwhelmed investor → calm, confident with Bloom open on screen.
+- Key constraint: hand motions and covering mouth produce inconsistent results in Kling. Stick to simple head turns + talking.
+
 #### Tier 2 — Strong
 
 **"I was today years old when I learned..."**

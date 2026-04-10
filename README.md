@@ -115,6 +115,8 @@ Install the skills from https://github.com/exiao/skills
 | Skill | Description |
 |-------|-------------|
 | [google-ads](google-ads/) | Manage Google Ads campaigns: performance, keywords, optimization |
+| [google-ads-scripts](google-ads-scripts/) | Google Ads Script development: AdsApp API, campaign automation, bid optimization, reporting |
+| [meta-ads-creative](meta-ads-creative/) | Create high-converting Meta ad creative using the 6 Elements framework and proven formats |
 | [apple-search-ads](apple-search-ads/) | Apple Search Ads campaigns with API automation and bid strategy |
 
 ### Development & Coding
@@ -135,7 +137,9 @@ Install the skills from https://github.com/exiao/skills
 | [app-store-connect](app-store-connect/) | App Store Connect via `asc` CLI: releases, TestFlight, builds, metadata, subscriptions |
 | [ios-simulator](ios-simulator/) | iOS simulator automation: builds, screenshots, device management |
 | [ralph-mode](ralph-mode/) | Autonomous dev loops with iteration gates and test validation |
+| [react-doctor](react-doctor/) | Diagnose and fix React codebase health issues: performance, security, code quality |
 | [serena](serena/) | Navigate and edit complex codebases at the symbol level via Serena MCP |
+| [simplify](simplify/) | Review changed code for reuse, quality, and efficiency, then fix issues |
 | [stably-cli](stably-cli/) | Create, run, fix, and maintain Playwright tests via Stably CLI |
 | [stably-sdk-rules](stably-sdk-rules/) | Best practices for writing Stably AI-powered Playwright tests |
 | [superpowers-coding](superpowers-coding/) | TDD-first feature implementation and systematic debugging |
@@ -152,6 +156,7 @@ Install the skills from https://github.com/exiao/skills
 | [cloud-migration](cloud-migration/) | Full cloud provider migrations end-to-end |
 | [porkbun](porkbun/) | Manage domains, DNS, SSL via Porkbun API |
 | [railway](railway/) | Deploy and manage Railway projects via CLI and MCP |
+| [render-cli](render-cli/) | Deploy and manage Render services via official Render CLI |
 | [sahil-office-hours](sahil-office-hours/) | Startup advice frameworks from Sahil Lavingia (Gumroad) |
 | [yc-office-hours](yc-office-hours/) | YC office hours prep |
 
@@ -184,6 +189,7 @@ Install the skills from https://github.com/exiao/skills
 | Skill | Description |
 |-------|-------------|
 | [document-release](document-release/) | Document release processes |
+| [trip-planner](trip-planner/) | Generate day-by-day travel itineraries with neighborhood routing and budget scaling |
 
 ---
 
@@ -227,6 +233,7 @@ These started from other open-source projects. I've modified and extended them f
 | [codex](codex/) | [garrytan/gstack](https://github.com/garrytan/gstack) (MIT) |
 | [impeccable](impeccable/) | [pbakaus/impeccable](https://github.com/pbakaus/impeccable) |
 | [app-store-screenshots](app-store-screenshots/) | [ParthJadhav/app-store-screenshots](https://github.com/ParthJadhav/app-store-screenshots) |
+| [remotion-best-practices](remotion-best-practices/) | [remotion-dev/skills](https://github.com/remotion-dev/skills) |
 | [video-production/remotion-videos](video-production/remotion-videos/) | [remotion-dev/skills](https://github.com/remotion-dev/skills) |
 | [visual-design/frontend-slides](visual-design/frontend-slides/) | [zarazhangrui/frontend-slides](https://github.com/zarazhangrui/frontend-slides) |
 | [last30days](last30days/) | [mvanhorn/last30days-skill](https://github.com/mvanhorn/last30days-skill) |

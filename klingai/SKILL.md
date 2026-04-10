@@ -159,6 +159,76 @@ In `--prompt` you can reference inputs with `<<<>>>`:
 - **Retention**: Assets cleaned after 30 days; save in time.
 - **Sound**: v3/omni support `--sound`; with `--video` (reference video) only `off`; kling-video-o1 has no sound.
 
+## Recipe: Motion Control for AI UGC Ads
+
+Animate an AI-generated face using a reference motion video. The reference video is YOU doing the motion; Kling maps it onto the AI face. This is the core technique behind @athcanft's $5-10 CPA TikTok ads.
+
+### When to Use
+
+- Before/after transformation ads (animate both the "before" and "after" face with the same reference motion)
+- AI UGC talking-head ads (generate a face with nano-banana-pro, animate with your reference motion)
+- Any ad where you need a realistic AI person speaking/moving
+
+### The Workflow
+
+```bash
+# 1. Generate the AI face (use nano-banana-pro, Kling image, or any image generator)
+#    Save as: before_face.png, after_face.png
+
+# 2. Record your reference motion video
+#    - Simple head turns, nodding, talking — these work best
+#    - Avoid: hand motions near face, covering mouth (inconsistent results)
+#    - Keep it 5s, vertical (9:16)
+#    Save as: reference_motion.mp4
+
+# 3. Animate the "before" face with your reference motion
+node skills/klingai/scripts/kling.mjs video \
+  --image ./before_face.png \
+  --video ./reference_motion.mp4 \
+  --prompt "<<<image_1>>> person talking naturally, same motion as <<<video_1>>>" \
+  --duration 5 \
+  --mode pro \
+  --aspect_ratio 9:16 \
+  --output_dir ./output
+
+# 4. Animate the "after" face with the SAME reference motion
+node skills/klingai/scripts/kling.mjs video \
+  --image ./after_face.png \
+  --video ./reference_motion.mp4 \
+  --prompt "<<<image_1>>> person talking naturally, same motion as <<<video_1>>>" \
+  --duration 5 \
+  --mode pro \
+  --aspect_ratio 9:16 \
+  --output_dir ./output
+```
+
+### Recommended Settings
+
+| Setting | Value | Why |
+|---------|-------|-----|
+| Duration | 5s | Enough for one beat of the before/after; concat two for 10s + 2s CTA = 12s ad |
+| Mode | pro | 1080P output needed for TikTok ads |
+| Aspect ratio | 9:16 | Vertical for TikTok/Reels |
+| Model | kling-v3-omni | Required for `--video` reference (motion control) |
+
+### Tips
+
+- **Simple motions only.** Head turns, nodding, talking, looking at camera. These produce natural, consistent results.
+- **Hands near face = inconsistent.** Kling struggles with hand-to-face interactions. If your reference video has hand gestures, keep them below chest level.
+- **Same reference for both faces.** Use the identical reference motion video for the "before" and "after" faces so the movement matches perfectly when concatenated.
+- **Lighting in the still matters.** The AI face image sets the lighting/mood. Make the "before" slightly dim/cool, "after" warm/bright.
+- **5s + 5s + 2s = 12s.** The sweet spot for TikTok ads per @athcanft. Don't go longer.
+
+### Bloom Example Prompts
+
+**Before face image prompt (nano-banana-pro):**
+> Young adult looking at phone with furrowed brow, confused expression, dim cool lighting, casual clothes, plain background, medium shot, 9:16 portrait
+
+**After face image prompt (nano-banana-pro):**
+> Same young adult, relaxed confident smile, warm golden lighting, slight glow, looking at camera, medium shot, 9:16 portrait
+
+Then enhance the "after" image with fal.ai face-enhancement API (uses `$FAL_KEY`) for the glow-up effect before animating.
+
 ## Reference
 
 - `docs/kling3.0-server-api.md` — full API (fields, enums, capability matrix).

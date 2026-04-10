@@ -23,13 +23,29 @@ Finds the most compelling recent insider buy (CEO/CFO/Director, >$500k, filed la
 
 ## Workflow
 
-### Step 1 — Scrape OpenInsider
+### Step 1 — Scrape Insider Trade Data (multi-source)
 
-Fetch this URL (web_fetch or browser):
+**Source A (primary): OpenInsider via HTTP**
+
+Try HTTP first (HTTPS is unreliable):
 ```
-https://openinsider.com/screener?s=&o=&pl=500000&ph=&ll=&lh=&fd=2&fdr=&td=0&tdr=&fdlyl=&fdlyh=&daysago=1&xs=1&cnt=20&action=1
+http://openinsider.com/screener?s=&o=&pl=500000&ph=&ll=&lh=&fd=1&fdr=&td=0&tdr=&fession=&cession=at&t2=1&xp=1&ic1ceo=1&ic2cfo=1&ic3cob=1&ic5=1&hft=0&grp=0&cnt=100&page=1
 ```
-This filters: P-Purchase only, >$500k value, filed in last 24h, excludes 10b5-1 plans.
+This filters: P-Purchase only, >$500k value, filed in last 24h, CEO/CFO/COB/Director, excludes 10b5-1 plans.
+
+Use `web_fetch` first. If that fails or returns empty/error, try `browser` with the same URL. Parse the HTML table for trade data.
+
+**Source B (fallback): SEC EDGAR Form 4 scraper**
+
+If OpenInsider is unreachable on both HTTP and HTTPS, fall back to the SEC EDGAR full-text search API directly. Search for Form 4 filings mentioning "open market", then parse each XML filing for purchase transactions >= $500k by officers/directors.
+
+Output should be a JSON array of qualifying trades with ticker, company, insider_name, title, shares, price, total_value, trade_date, filing_date, and sec_url.
+
+**Source selection logic:**
+1. Try OpenInsider HTTP → if data returned, use it
+2. Try OpenInsider HTTPS → if data returned, use it
+3. Run EDGAR scraper → use its results
+4. If all fail, report the failure (don't silently skip)
 
 ### Step 2 — Pick the Best Trade
 
