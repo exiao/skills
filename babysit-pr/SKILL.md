@@ -70,9 +70,6 @@ gh pr view $PR --repo $REPO --json title,body,commits --jq '{title: .title, body
 # Get changed files with stats
 gh pr diff $PR --repo $REPO --stat
 
-# Get base branch for comparison
-BASE=$(gh pr view $PR --repo $REPO --json baseRefName -q '.baseRefName')
-
 # Get individual commit messages and their file lists
 for SHA in $(gh api "repos/$REPO/pulls/$PR/commits" --jq '.[].sha'); do
   echo "--- Commit ${SHA:0:8} ---"
@@ -195,7 +192,7 @@ After pushing (or deciding not to):
 
 ## Reporting
 
-Send progress updates to the parent agent via `sessions_send`. Do NOT try to send messages to Signal/Slack/etc directly (sub-agents don't have channel access). The parent agent handles delivery to the user.
+Send progress updates to the parent agent via `send_to_task`. Do NOT try to send messages to Signal/Slack/etc directly (sub-agents don't have channel access). The parent agent handles delivery to the user.
 
 If a parent session key was provided, use:
 ```

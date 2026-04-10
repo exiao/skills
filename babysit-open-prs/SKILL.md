@@ -61,13 +61,13 @@ For each fixable PR (max 5), spawn a sub-agent using the babysit-pr skill:
 sessions_spawn({
   task: "Use the babysit-pr skill. PR #<number>, repo <repo>. Max cycles: 5. Reasons flagged: <reasons>. Running via nightly cron (use pr-mark-skip.sh if escalating). Read the repo's CLAUDE.md/AGENTS.md first.",
   cwd: "<local-path>",
-  runTimeoutSeconds: 1800
+  run_timeout_seconds: 1800
 })
 ```
 
 Local paths:
 - bloom-invest/bloom → ~/bloom
-- bloom-invest/investing-log → ~/agentd/investing-log
+- bloom-invest/investing-log → ~/clawd/investing-log
 - exiao/skills → ~/clawd/skills
 - Fintary/ops-center → ~/fintary/ops-center
 - Other repos → check ~/clawd/<repo> or ~/<repo>, clone to /tmp/<repo> if not found
