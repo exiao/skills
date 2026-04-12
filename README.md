@@ -34,6 +34,9 @@ Install the skills from https://github.com/exiao/skills
 | [outline-generator](outline-generator/) | generate structured article outlines from approved headlines. |
 | [substack-draft](substack-draft/) | save finished articles to Substack as drafts. |
 | [tweet-ideas](tweet-ideas/) | generate standalone tweet ideas about a topic (Aaron Levie playbook). |
+| [video-script](video-script/) | Generate structured scene-by-scene video scripts with production metadata ready for the video-production pipeline. |
+| [writer](writer/) | Write content in Eric's voice — articles, blog posts, tweets, social media posts, marketing copy, newsletter drafts. |
+| [document-release](document-release/) | Update all project documentation to match what was just shipped — catch stale READMEs and drifted docs after a release. |
 
 ### Marketing & Growth
 
@@ -57,6 +60,12 @@ Install the skills from https://github.com/exiao/skills
 | [synthetic-userstudies](synthetic-userstudies/) | Run synthetic user research sessions with AI personas |
 | [typefully](typefully/) | Create, schedule, and manage social posts via Typefully |
 | [whop-content-rewards](whop-content-rewards/) | Set up and manage UGC campaigns on Whop |
+| [brand-identity](brand-identity/) | Build a complete brand identity from scratch or refresh an existing one — purpose, values, voice, visual identity system, and brand guidelines. |
+| [content-pipeline](content-pipeline/) | Orchestrator for the 3-article content pipeline — research phase, parallel article sub-agents, Typefully drafts. |
+| [post-bloom-features](post-bloom-features/) | Cron: screenshot Bloom feature PRs in iOS simulator, render Remotion video, create Typefully draft, report to Signal. |
+| [post-insider-trades](post-insider-trades/) | Cron: scrape OpenInsider for significant insider buys, generate trade card, write tweet, create Typefully draft. |
+| [post-investinglog-trades](post-investinglog-trades/) | Cron: pick best unposted trade from investing-log, generate trade card, create Typefully draft. |
+| [earnings-card-pipeline](earnings-card-pipeline/) | Cron: pull weekly major earnings events, generate sticker-style cards, create Typefully drafts, report to Signal. |
 
 ### Design & Visual
 
@@ -109,6 +118,9 @@ Install the skills from https://github.com/exiao/skills
 | [stock-research](stock-research/) | Stock/equity research, earnings analysis, daily market briefings |
 | [trend-research](trend-research/) | Find trending content across TikTok, YouTube, Instagram, X |
 | [web-search](web-search/) | Search the web via Serper (Google Search) API |
+| [another-perspective](another-perspective/) | Multi-perspective council analysis on any question, plan, or decision — spawns parallel cognitive perspectives and synthesizes via structured dialectical analysis. |
+| [last30days](last30days/) | Research what happened in the last 30 days on any topic. Sources: Reddit, X, YouTube, web. Produces expert-level summary. |
+| [trip-planner](trip-planner/) | Generate detailed day-by-day travel itineraries with neighborhood routing, budget scaling, and dietary-aware meal picks. |
 
 ### Advertising
 
@@ -145,7 +157,24 @@ Install the skills from https://github.com/exiao/skills
 | [superpowers-coding](superpowers-coding/) | TDD-first feature implementation and systematic debugging |
 | [superpowers-planning](superpowers-planning/) | Explore intent and create detailed plans before touching code |
 | [superpowers-reviews](superpowers-reviews/) | Code review, branch finishing, batch execution with checkpoints |
-| [verify-deploy](verify-deploy/) | Post-merge deploy verification and production benchmarking |
+| [verify-deploy](verify-deploy/) | Post-merge deploy verification and production benchmarking. |
+| [alpaca](alpaca/) | Trade stocks and crypto via Alpaca API — market data, quotes, orders, positions, portfolio management. Supports paper and live trading. |
+| [app-store-screenshots](app-store-screenshots/) | Generate production-ready App Store marketing screenshots for iOS apps using a Next.js generator at all 4 Apple-required sizes. |
+| [cloud-migration](cloud-migration/) | Execute full cloud provider migrations end-to-end — provision, migrate data, transfer secrets, deploy, verify, cut over DNS, and clean up. |
+| [codex](codex/) | Get a second opinion from OpenAI Codex CLI — code review, adversarial challenge, or open consultation. |
+| [openclaw-memory-setup](openclaw-memory-setup/) | Set up a complete memory system for an OpenClaw instance — workspace files, vector search, compaction, heartbeat memory maintenance. |
+| [openclaw-resiliency](openclaw-resiliency/) | Set up a gateway watchdog for OpenClaw health with auto-recovery — 3-tier health checks, exponential backoff, launchd/systemd integration. |
+| [porkbun](porkbun/) | Manage Porkbun domains, DNS records, SSL certificates, URL forwarding, and hosting blueprints via the Porkbun API. |
+| [railway](railway/) | Deploy, manage, and operate Railway projects via CLI and MCP — services, databases, env vars, logs, domains. |
+| [remotion-best-practices](remotion-best-practices/) | Best practices for writing Remotion code — compositions, animations, captions, audio, charts, 3D, fonts, transitions. |
+| [render-cli](render-cli/) | Manage Render.com services, deploys, databases, logs, and infrastructure using the official Render CLI. |
+| [security-audit](security-audit/) | Run a codebase security audit using OWASP Top 10 and STRIDE threat modeling. |
+| [skill-audit](skill-audit/) | Audit and score any skill against best practices — structure, content, patterns, scorecard with specific fixes. |
+| [skill-creator](skill-creator/) | Create and improve skills — TDD pre-flight, evals, benchmarking, performance analysis, description optimization. |
+| [skill-improver](skill-improver/) | Autonomously optimize any skill by running evals, scoring outputs, mutating the prompt, and keeping improvements. |
+| [stock-footage](stock-footage/) | Search and download free stock video footage from Pexels and Pixabay for B-roll and video production. |
+| [userinterface-wiki](userinterface-wiki/) | UI/UX best practices for web interfaces — animations, CSS, typography, UX patterns, prefetching, icons. |
+| [video-editor](video-editor/) | Programmatic video editing via ffmpeg CLI — trim, merge, overlay, crossfade, speed ramp, crop, scale, audio, text, GIF. |
 
 ### Strategy & Business
 
@@ -163,6 +192,8 @@ Install the skills from https://github.com/exiao/skills
 | [growth](growth/) | full-funnel growth: CRO, onboarding, paywalls, churn, launches, pricing. |
 | [positioning-angles](positioning-angles/) | define product positioning angles and strategic frames. |
 | [wealth-management](wealth-management/) | client reviews, financial plans, investment proposals, portfolio rebalancing, tax-loss harvesting. |
+| [sahil-office-hours](sahil-office-hours/) | Startup advice frameworks from Sahil Lavingia (Gumroad) — the minimalist entrepreneur lens for business decisions. |
+| [yc-office-hours](yc-office-hours/) | Product discovery via YC-style forcing questions and 10-star product thinking. Use when starting a new feature or evaluating an idea. |
 
 ## Installation
 
