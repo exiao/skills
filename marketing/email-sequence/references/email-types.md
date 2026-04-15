@@ -109,7 +109,7 @@ Reference for all lifecycle message types. Covers push notifications (available 
 **Trigger:** RevenueCat `BILLING_ISSUE` event
 **Goal:** Recover revenue, retain subscriber
 
-See [churn-prevention skill](../../churn-prevention/SKILL.md) for the full billing issue sequence.
+See [churn-prevention skill](../churn-prevention/SKILL.md) for the full billing issue sequence.
 
 **Key point:** Apple/Google send their own billing emails. Your messages supplement theirs.
 
