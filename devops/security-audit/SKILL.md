@@ -4,7 +4,7 @@ description: Run a codebase security audit using OWASP Top 10 and STRIDE threat 
 ---
 # Security Audit
 
-Codebase security audit using OWASP Top 10 and STRIDE threat modeling. Scans application code for vulnerabilities, not infrastructure (see `healthcheck` skill for host hardening).
+Codebase security audit using OWASP Top 10 and STRIDE threat modeling. Scans application code for vulnerabilities, not infrastructure.
 
 Use when: auditing a codebase for security issues, reviewing a feature branch before merge, preparing for a pentest, or when something feels off about how auth/data/access is handled.
 
@@ -256,6 +256,6 @@ The user can scope the audit:
 - Don't report low-confidence findings as definitive vulnerabilities
 - Don't flag dev-only code as production risks without checking
 - Don't recommend security theater (e.g., "add more encryption" without specifying what/where)
-- Don't audit infrastructure or hosting (that's the healthcheck skill)
+- Don't audit infrastructure or hosting (out of scope for this skill)
 - Don't run penetration tests or exploit code against live systems
 - Don't ignore framework-provided protections (ORMs, CSRF middleware, template escaping)

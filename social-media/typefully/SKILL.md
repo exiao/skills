@@ -465,7 +465,7 @@ When in doubt, create drafts for user review rather than publishing directly.
 
 ## Content Calendar Batching
 
-For full calendar strategy, batching rules, and queue management — see the **content-management** skill.
+For full calendar strategy, batching rules, and queue management — see the **content-strategy** skill.
 
 Short version: never schedule one post at a time. Batch at least 7 days per session, fill `next-free-slot` back-to-back, verify with `drafts:list --status scheduled --sort scheduled_date`. If queue < 3 days, refill now.
 
