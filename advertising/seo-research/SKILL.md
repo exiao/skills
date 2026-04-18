@@ -319,6 +319,7 @@ For full audit checklist, read `references/seo-technical.md`. Critical items:
 | `references/eeat-framework.md` | Detailed E-E-A-T criteria |
 | `references/quality-gates.md` | Content quality thresholds |
 | `references/cwv-thresholds.md` | Core Web Vitals thresholds |
+| `references/site-architecture.md` | Site architecture: page hierarchy, URL patterns, navigation, internal linking |
 | `references/keyword-seeds.md` | Bloom keyword seed list |
 
 ---

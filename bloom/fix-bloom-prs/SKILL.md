@@ -51,9 +51,6 @@ The #1 failure mode is pushing speculative fixes that trigger new CI runs, new r
 
 ## Circuit Breakers
 
-> **Note:** `$REPO` below refers to the repo slug from preflight output (e.g. `bloom-invest/bloom`). It is set explicitly in the Triage step.
-
-
 **Repeat fix detection:** Before fixing, check if the last commit on the PR was from a previous cron run (author = "claude" or commit message matches cron fix patterns). If the cron already pushed a fix and the issue persists, the fix didn't work. Comment explaining what you tried and what's still broken. Do not retry the same approach.
 
 **CI-only failures:** If the only issue is a CI failure that looks infrastructure-related (timeout, runner error, network issue, flaky test), re-request the check run instead of pushing code. Use: `gh api repos/$REPO/actions/runs/{run_id}/rerun-failed-jobs -X POST`

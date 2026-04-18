@@ -148,24 +148,14 @@ Study failed campaigns, not just successful ones. The viral hit you're copying h
 
 | Challenge | Models to Apply |
 |-----------|-----------------|
-| Low conversions | Hick's Law, Activation Energy, BJ Fogg, Friction |
+| Low conversions | BJ Fogg Behavior Model, Goal-Gradient Effect |
 | Price objections | Anchoring, Framing, Mental Accounting, Loss Aversion |
 | Building trust | Authority, Social Proof, Reciprocity, Pratfall Effect |
 | Increasing urgency | Scarcity, Loss Aversion, Zeigarnik Effect |
 | Retention/churn | Endowment Effect, Switching Costs, Status-Quo Bias |
-| Growth stalling | Theory of Constraints, Local vs Global Optima, Compounding |
-| Decision paralysis | Paradox of Choice, Default Effect, Nudge Theory |
+| Growth stalling | Theory of Constraints, Compounding, First Principles |
+| Decision paralysis | Paradox of Choice, Status-Quo Bias |
 | Onboarding | Goal-Gradient, IKEA Effect, Commitment & Consistency |
-
-## Model Definitions
-
-Brief descriptions for models referenced above without dedicated sections:
-
-- **Hick's Law**: More choices = longer decision time. Reduce options to speed up conversions.
-- **Activation Energy**: The effort required to start an action. Lower activation energy (fewer clicks, pre-filled forms) to increase uptake.
-- **Default Effect**: People stick with pre-selected defaults. Set smart defaults that serve both user and business goals.
-- **Nudge Theory**: Small environmental changes guide behavior without restricting choices. Surface the desired action where attention already is.
-- **Local vs Global Optima**: Optimizing one part of the funnel can hurt overall performance. Evaluate changes against the full-funnel metric, not just the step being changed.
 
 ---
 
