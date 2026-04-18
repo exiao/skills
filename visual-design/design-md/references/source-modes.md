@@ -121,7 +121,7 @@ def extract_design(url):
 
 **When:** Established product, user wants DESIGN.md to *describe what's already there* so future work stays consistent.
 
-**Engine:** Delegate to `visual-design/impeccable/extract`. It already scans for components, tokens, and patterns. Run it first, then translate its output into DESIGN.md structure.
+**Engine:** Delegate to `visual-design/impeccable/commands/extract`. It already scans for components, tokens, and patterns. Run it first, then translate its output into DESIGN.md structure.
 
 **Process:**
 
@@ -141,7 +141,7 @@ def extract_design(url):
    - Border radius / shadow / padding scale used
 4. **Check actual usage.** Grep for hex codes or color tokens in JSX — are tokens being used, or are there hardcoded colors sneaking in? Note inconsistencies.
 5. **Write DESIGN.md as a description of current reality** — not aspirational. If the codebase has 3 grays and no dedicated "placeholder" color, document that.
-6. Offer the user a follow-up: "Want me to run `visual-design/impeccable/audit` to flag gaps or inconsistencies against this DESIGN.md?"
+6. Offer the user a follow-up: "Want me to run `visual-design/impeccable/commands/audit` to flag gaps or inconsistencies against this DESIGN.md?"
 
 **Output quality check:** Every section should have a file citation. Example: `Typography from tailwind.config.js and src/styles/globals.css`.
 
@@ -156,12 +156,12 @@ def extract_design(url):
 1. **Show the gallery categories first** (not all 68 brands). From `references/gallery.md`:
    - AI & LLM Platforms (12)
    - Developer Tools & IDEs (7)
-   - Backend, Database & DevOps (11)
-   - Productivity & SaaS (8)
+   - Backend, Database & DevOps (8)
+   - Productivity & SaaS (7)
    - Design & Creative Tools (7)
-   - Fintech & Crypto (8)
-   - E-commerce & Retail (5)
-   - Media & Consumer Tech (11)
+   - Fintech & Crypto (7)
+   - E-commerce & Retail (4)
+   - Media & Consumer Tech (10)
    - Automotive (6)
 
 2. **Use the "Quick mental map"** at the top of `gallery.md` to narrow first:

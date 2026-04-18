@@ -45,7 +45,7 @@ Fill the DESIGN.md sections from what you measured, not what you guessed.
 
 User says "make a DESIGN.md for this project" and no brand doc exists.
 
-Use `visual-design/impeccable/extract` as the engine. It already walks the component library and design tokens. Feed its output into the DESIGN.md structure. This is the most accurate mode for established products.
+Use `visual-design/impeccable/commands/extract` as the engine. It already walks the component library and design tokens. Feed its output into the DESIGN.md structure. This is the most accurate mode for established products.
 
 ### 4. Pick from the VoltAgent gallery (fallback — when the user has no source)
 
@@ -99,7 +99,7 @@ Always write to the **project root** as `DESIGN.md` (all caps, matching conventi
 |-------|--------------|
 | `marketing/brand-identity` | Upstream. Strategy → DESIGN.md is the natural pipeline. |
 | `visual-design/frontend-design` | Downstream consumer. Reads DESIGN.md as project context. |
-| `visual-design/impeccable/extract` | Engine for source mode 3 (codebase extract). |
+| `visual-design/impeccable/commands/extract` | Engine for source mode 3 (codebase extract). |
 | `creative/popular-web-designs` | Sibling inspiration library — use for mood before picking a DESIGN.md. |
 
 ## Quick command reference
