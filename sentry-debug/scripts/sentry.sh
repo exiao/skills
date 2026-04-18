@@ -64,7 +64,11 @@ _flag_val() {
 
 # ── subcommands ────────────────────────────────────────────────────────
 cmd_issues_list() {
-    local query="${1:-is:unresolved}"
+    # If first arg starts with `--`, treat it as a flag (no explicit query → use default)
+    local query="is:unresolved"
+    if [[ -n "${1:-}" && "${1:0:2}" != "--" ]]; then
+        query="$1"
+    fi
     local limit; limit="$(_flag_val --limit "$@")"; limit="${limit:-25}"
     local sort; sort="$(_flag_val --sort "$@")"; sort="${sort:-date}"
     _call GET "/organizations/$SENTRY_ORG/issues/" \
@@ -154,7 +158,7 @@ cmd_issues_assign() {
     local id; id="$(_resolve_issue_id "$ref")"
     _call PUT "/organizations/$SENTRY_ORG/issues/$id/" \
         -H "Content-Type: application/json" \
-        -d "{\"assignedTo\":\"$who\"}" \
+        -d "$(jq -nc --arg a "$who" '{assignedTo: $a}')" \
         | _emit '{shortId, status, assignedTo: (.assignedTo.email // .assignedTo)}'
 }
 
@@ -221,7 +225,11 @@ cmd_orgs_list() {
 }
 
 cmd_whoami() {
-    _call GET "/" | _emit "{user: .user.email, scopes: .auth.scopes, org_default: \"$SENTRY_ORG\"}"
+    if [[ $RAW_JSON -eq 1 ]] || ! command -v jq >/dev/null 2>&1; then
+        _call GET "/"
+    else
+        _call GET "/" | jq --arg org "$SENTRY_ORG" '{user: .user.email, scopes: .auth.scopes, org_default: $org}'
+    fi
 }
 
 usage() {

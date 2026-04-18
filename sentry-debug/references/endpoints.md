@@ -9,7 +9,7 @@ All paths relative to `https://sentry.io/api/0`. Auth: `Authorization: Bearer $S
 | GET | `/organizations/` | `orgs list` |
 | GET | `/` | `whoami` — returns user + token scopes |
 | GET | `/organizations/{org}/projects/` | `projects list` |
-| GET | `/organizations/{org}/releases/?project={slug}&per_page=N` | `releases list` |
+| GET | `/organizations/{org}/releases/?project={numeric_id}&per_page=N` | `releases list` — script resolves `--project <slug>` to numeric ID |
 
 ## Issues
 
