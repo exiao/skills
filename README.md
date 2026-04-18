@@ -138,7 +138,6 @@ Install the skills from https://github.com/exiao/skills
 | [babysit-pr](babysit-pr/) | Monitor a PR through CI, reviews, and fixes until it's ready to merge |
 | [bloom-cli](bloom-cli/) | Fetch stock data, fundamentals, earnings, SEC filings via Bloom CLI |
 | [claude-md-management](claude-md-management/) | Audit, improve, and maintain CLAUDE.md files across repos |
-| [coding-agent](coding-agent/) | Run coding agents (Codex, Claude Code, etc.) via ACP |
 | [context7](context7/) | Fetch version-specific library docs via Context7 MCP |
 | [demo-pr-feature](demo-pr-feature/) | Capture PR demo screenshots, deploy to Surge.sh, post as PR comment |
 | [deploy-bloom](deploy-bloom/) | Deploy Bloom OTA updates via bloom-updater |
@@ -186,6 +185,54 @@ Install the skills from https://github.com/exiao/skills
 | [wealth-management](wealth-management/) | client reviews, financial plans, investment proposals, portfolio rebalancing, tax-loss harvesting. |
 | [sahil-office-hours](sahil-office-hours/) | Startup advice frameworks from Sahil Lavingia (Gumroad) — the minimalist entrepreneur lens for business decisions. |
 | [yc-office-hours](yc-office-hours/) | Product discovery via YC-style forcing questions and 10-star product thinking. Use when starting a new feature or evaluating an idea. |
+
+## Adapted Skills
+
+These started from other open-source projects. I've modified and extended them for my workflows. Links to the originals:
+
+### From [Anthropic](https://github.com/anthropics)
+
+| Skill | Original |
+|-------|----------|
+| [documents](documents/) | [anthropics/skills](https://github.com/anthropics/skills) |
+| [wealth-management](wealth-management/) | [anthropics/financial-services-plugins](https://github.com/anthropics/financial-services-plugins) |
+| [skill-creator](skill-creator/) | [anthropics/claude-code](https://github.com/anthropics/claude-code/tree/main/plugins/plugin-dev) |
+| [skill-audit](skill-audit/) | Original (inspired by Anthropic's skill patterns) |
+| [skill-improver](skill-improver/) | [anthropics/claude-code](https://github.com/anthropics/claude-code/tree/main/plugins/plugin-dev) |
+| [visual-design/frontend-design](visual-design/frontend-design/) | [anthropics/claude-code](https://github.com/anthropics/claude-code/tree/main/plugins/frontend-design) |
+| [ralph-mode](ralph-mode/) | [anthropics/claude-code](https://github.com/anthropics/claude-code/tree/main/plugins/ralph-wiggum) |
+
+### From [obra/superpowers](https://github.com/obra/superpowers)
+
+| Skill | Description |
+|-------|-------------|
+| [superpowers-coding](superpowers-coding/) | TDD-first feature implementation and systematic debugging |
+| [superpowers-planning](superpowers-planning/) | Explore intent and create detailed plans before touching code |
+| [superpowers-reviews](superpowers-reviews/) | Code review, branch finishing, batch execution with checkpoints |
+
+### From [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills)
+
+| Skill | Description |
+|-------|-------------|
+| [growth](growth/) | Full-funnel growth: CRO, onboarding, paywalls, churn, launches, pricing |
+| [churn-prevention](churn-prevention/) | Subscription retention, cancel flows, save offers, dunning |
+| [email-sequence](email-sequence/) | Email sequences, drip campaigns, lifecycle messaging |
+| [positioning-angles](positioning-angles/) | Product positioning, strategic angles, value propositions |
+
+### From Other Projects
+
+| Skill | Original |
+|-------|----------|
+| [codex](codex/) | [garrytan/gstack](https://github.com/garrytan/gstack) (MIT) |
+| [impeccable](impeccable/) | [pbakaus/impeccable](https://github.com/pbakaus/impeccable) |
+| [app-store-screenshots](app-store-screenshots/) | [ParthJadhav/app-store-screenshots](https://github.com/ParthJadhav/app-store-screenshots) |
+| [remotion-best-practices](remotion-best-practices/) | [remotion-dev/skills](https://github.com/remotion-dev/skills) |
+| [video-production/remotion-videos](video-production/remotion-videos/) | [remotion-dev/skills](https://github.com/remotion-dev/skills) |
+| [visual-design/frontend-slides](visual-design/frontend-slides/) | [zarazhangrui/frontend-slides](https://github.com/zarazhangrui/frontend-slides) |
+| [last30days](last30days/) | [mvanhorn/last30days-skill](https://github.com/mvanhorn/last30days-skill) |
+| [stably-cli](stably-cli/) | [skills.sh/stablyai](https://skills.sh/stablyai/agent-skills/stably-cli) |
+| [stably-sdk-rules](stably-sdk-rules/) | [skills.sh/stablyai](https://skills.sh/stablyai/agent-skills/stably-sdk-rules) |
+| [sahil-office-hours](sahil-office-hours/) | [slavingia/skills](https://github.com/slavingia/skills) |
 
 ## Installation
 
