@@ -106,6 +106,7 @@ node -c troubleshoot.js
   - `resolve_runtime_provider(requested='anthropic')`
   - confirm it returns `http://127.0.0.1:18801`
 - Once Hermes truly hits the proxy, inspect the processed outbound body, not just the raw request dump.
+- Do not assume the raw JSON is minified. Hermes requests sent through the Python Anthropic SDK include spaces like `"text": "..."`, so proxy markers that rely on exact substrings like `"text":"# ...` can silently fail. When stripping system blocks, search for the human marker text first, then walk backward to the enclosing `"text"` field.
 - In this case the processed Hermes payload still leaked two unsanitized tool names:
   - `mcp_mixture_of_agents`
   - `mcp_send_message`
@@ -121,8 +122,17 @@ node -c troubleshoot.js
   3. inspect the processed proxy body locally to confirm no leaked `mcp_*` names remain
   4. run `node --test tests/hermes-support.test.js`
   5. rerun the live `hermes chat -q ...` request and inspect proxy logs
-- Important lesson: live failure can move in stages. First failure was “Hermes never reached proxy.” Second failure was “proxy still saw leaked Hermes tool names.” Do not treat them as one bug.
-- The user preferred the narrowest proven fix: use live evidence to identify exactly which Hermes fields or tool names are still leaking, rather than blindly expanding the whole rename table.
+### Debugging Hermes-shaped payloads
+
+Three durable lessons from live debugging of the Hermes client:
+
+1. **Failures compound — isolate each stage.** A single symptom (400 extra-usage) can come from multiple bugs stacked: client not reaching proxy, proxy not renaming tool names, proxy not stripping the client's system prompt. Fix one at a time; re-verify after each.
+
+2. **Replay method.** Capture the fully assembled client request (e.g. from `~/.hermes/sessions/request_dump_*.json`), replay it directly through `http://127.0.0.1:18801/v1/messages`, then swap one major block at a time (system prompt, tool list, tool schemas) to identify which block flips the response from 200 → 400. Full-prompt replay beats file-by-file guessing because individual files pass in isolation.
+
+3. **Tool-count billing-shape trigger.** Max-subscription endpoints appear to accept payloads up to ~130 tools; at ~131 the request flips to extra-usage even when tool schemas are minified. Tool count itself is a likely trigger, not just total bytes. When `troubleshoot.js` shows a passing minimal payload plus a failing high-tool-count replay, cap forwarded tool count to ~120-130 before expanding fingerprint-stripping.
+
+Implementation hint: put pure helpers (`buildMinimalToolSubset`, `buildHermesDiagnosticCases`, `summarizeHermesDiagnostics`) in a `troubleshoot-helpers.js` module with node tests; keep `troubleshoot.js` focused on wiring them into live proxy requests and printing operator guidance.
 
 ## Pitfalls
 - This repo may already have a dirty worktree; check `git status` before editing and mention it to the user

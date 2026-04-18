@@ -132,6 +132,36 @@ task: "Fix Sentry issue <ID> in worktree /tmp/bloom-worktrees/sentry-<SHORT_ID>.
        Issue details: <paste details>. Create a PR with the fix."
 ```
 
+## Noise Reduction Patterns
+
+When issues aren't code bugs but create Sentry noise, apply these patterns:
+
+| Pattern | When | Fix |
+|---------|------|-----|
+| **Downgrade logger.error → logger.warning** | Expected failures (429 rate limits, timeouts on health checks) that return graceful defaults | Change log level; Sentry captures errors but not warnings by default |
+| **Remove capture_exception/capture_message** | Caller already handles error gracefully (e.g., returns default data to user) | Remove the explicit Sentry call; keep the warning log |
+| **Fix double-reporting** | Inner function calls capture_exception AND outer caller catches + reports | Remove from inner function; let caller decide |
+| **Add to before_send filter** | Worker signals (SIGABRT, SIGTERM), known infra noise | Add string match in `bloom_backend/settings.py` `before_send` |
+| **Frontend beforeSend filter** | Timeouts, network errors in `src/lib/sentry.ts` | Add to `beforeSend` callback to drop event |
+
+**Principle:** All failures still log at warning level for debugging — only Sentry issue creation is suppressed. True errors continue reporting normally.
+
+## Key Bloom Files
+
+- **Backend Sentry config:** `bloom_backend/settings.py` (has `before_send` filter)
+- **Frontend Sentry config:** `src/lib/sentry.ts` (has `beforeSend` + `ignoreErrors`)
+- **FMP client:** `bloom_backend/third-partys/fmp_client.py`
+- **Cerebras:** `bloom_backend/third-partys/cerebras.py` (uses Instructor for structured output)
+- **Content translator:** `bloom_backend/content_translator.py`
+- **Firecrawl:** `bloom_backend/third-partys/firecrawl_client.py`
+- **Fetch URL tool:** `bloom_backend/tools/fetch_url_tool.py`
+- **API tester:** `bloom_backend/management/commands/api_tester.py`
+
+## Available LLM Models (Cerebras)
+
+- `LLAMA_31_8B_MODEL` — too weak for structured JSON via Instructor
+- `QWEN3_32B_MODEL` — reliable for Instructor structured output (default in `create_llm_response`)
+
 ## Constraints
 
 - **Max 10 issues per run** (unless user specifies otherwise)
