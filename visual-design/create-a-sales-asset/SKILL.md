@@ -1,7 +1,6 @@
 ---
 name: create-a-sales-asset
-description: Use when generate sales assets (landing pages, decks, one-pagers)
-  from deal context.
+description: Use when generating sales assets (landing pages, decks, one-pagers) from deal context.
 ---
 # Create a Sales Asset
 
