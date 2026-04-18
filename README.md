@@ -25,7 +25,6 @@ Install the skills from https://github.com/exiao/skills
 
 | Skill | Description |
 |-------|-------------|
-| [copywriting](copywriting/) | Page copy frameworks + direct response for any platform (ads, App Store, landing pages, scripts). |
 | [article-writer](article-writer/) | write article drafts from approved outlines with SEO and brand voice. |
 | [content-strategy](content-strategy/) | Build content strategy from trending hooks, angles, and ideas across TikTok, X, YouTube, Meta, and LinkedIn. |
 | [editor-in-chief](editor-in-chief/) | autonomous editing orchestrator: diagnose, fix, and iterate drafts to quality. |
@@ -71,7 +70,7 @@ Install the skills from https://github.com/exiao/skills
 
 | Skill | Description |
 |-------|-------------|
-| [impeccable](impeccable/) | Run design quality commands on frontend code — audit, critique, polish, animate, normalize, and more. 21 steering commands and 7 reference files. |
+| [impeccable](impeccable/) | Run design quality commands on frontend code — audit, critique, polish, animate, normalize, and more. 21 steering commands and 10 reference files. |
 | [visual-design](visual-design/) | Router skill for all visual design tasks (dispatches to sub-skills below) |
 | [visual-design/canvas-design](visual-design/canvas-design/) | Create visual art and designs as .png/.pdf files |
 | [visual-design/create-a-sales-asset](visual-design/create-a-sales-asset/) | Generate sales assets: landing pages, decks, one-pagers |
@@ -83,7 +82,6 @@ Install the skills from https://github.com/exiao/skills
 | [design-review](design-review/) | Product design review: 13 questions + Nielsen Norman heuristic eval |
 | [nano-banana-pro](nano-banana-pro/) | Generate or edit images via Gemini native image generation |
 | [excalidraw-mcp](excalidraw-mcp/) | Create hand-drawn style diagrams via Excalidraw MCP |
-| [impeccable](impeccable/) | Design quality commands for frontend code: audit, critique, polish, animate, normalize |
 
 ### Video Production
 
