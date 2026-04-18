@@ -42,6 +42,7 @@ Tier 3: Deep channel health via CLI (openclaw health --json, ~3s)
 4. **Exponential backoff.** After repeated failures, the watchdog backs off to prevent restart storms. After 4 consecutive failures, it enters a 30-minute cooldown.
 5. **Warmup grace period.** If the gateway process started less than 90 seconds ago, all checks are skipped. This prevents the watchdog from fighting a gateway that's still booting.
 6. **Stale failure reset.** If the last restart attempt was more than 10 minutes ago and the failure count is nonzero, it resets. Old failures shouldn't penalize new checks.
+7. **Validate PIDs, don't just trust `kill -0`.** If you persist a PID file for a helper process like a billing proxy, confirm the PID is the actual target process, not a parent shell or wrapper. On macOS, `kill -0` can succeed for a live wrapper shell while the real `node proxy.js` listener is a child. In that case, a watchdog can appear to restart the service while actually killing only the wrapper. Prefer validating the process command with `ps`, and when the service owns a TCP port, prefer resolving the live listener PID with `lsof -tiTCP:<port> -sTCP:LISTEN` before restarting.
 
 ## Step 1: Create the Watchdog Script
 
