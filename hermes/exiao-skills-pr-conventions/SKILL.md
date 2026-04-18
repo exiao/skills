@@ -60,5 +60,5 @@ unset <TOKEN_VAR> && ./scripts/<skill>.sh <subcommand>  # clean failure
 
 ## Precedent
 
-- PR #92 — `sentry-debug` skill added 2026. Followed all rules above.
-- Migration note lives in the local Hermes patches directory.
+- [PR #92](https://github.com/exiao/skills/pull/92) — `sentry-debug` skill, added 2026. Followed all rules above.
+- Migration notes live in the local Hermes patches directory.

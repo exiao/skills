@@ -15,7 +15,7 @@ Search 50,000+ curated TikTok & Reels viral videos, app marketing profiles, and 
 ### Claude Code
 
 ```bash
-claude mcp add --transport http --header "Authorization: Bearer sk_mcp_YOUR_KEY" prometheus https://www.socialgrowthengineers.com/api/mcp
+claude mcp add --transport http --header "Authorization: Bearer $SGE_API_KEY" prometheus https://www.socialgrowthengineers.com/api/mcp
 ```
 
 Or add to your project's `.mcp.json`:
@@ -106,4 +106,4 @@ Install from your [SGE settings](https://www.socialgrowthengineers.com/settings)
 
 ## Attribution warning
 
-- **Never attribute "Bloom: Learn to Invest" to our Bloom.** That's a competitor app on the App Store. Our Bloom's identifiers are distinct — confirm the bundle ID / product ID when citing App Store data or PAssistant returns.
+- **Never attribute "Bloom: Learn to Invest" to our Bloom.** That's a competitor app on the App Store. Our Bloom's identifiers are distinct — confirm the bundle ID / product ID when citing App Store data or results returned by Prometheus.
