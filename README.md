@@ -75,6 +75,7 @@ Install the skills from https://github.com/exiao/skills
 | [visual-design/canvas-design](visual-design/canvas-design/) | Create visual art and designs as .png/.pdf files |
 | [visual-design/create-a-sales-asset](visual-design/create-a-sales-asset/) | Generate sales assets: landing pages, decks, one-pagers |
 | [visual-design/d3js-visualization](visual-design/d3js-visualization/) | Create interactive D3.js data visualizations |
+| [visual-design/frontend-design](visual-design/frontend-design/) | Build production-grade frontend interfaces with high design quality |
 | [visual-design/image-generator](visual-design/image-generator/) | Generate article visuals: diagrams, hero images, screenshots |
 | [visual-design/slideshow-creator](visual-design/slideshow-creator/) | Create and post TikTok slideshows via ReelFarm |
 | [visual-design/sticker-creator](visual-design/sticker-creator/) | Create die-cut sticker style cards via Nano Banana Pro |
@@ -178,15 +179,8 @@ Install the skills from https://github.com/exiao/skills
 
 | Skill | Description |
 |-------|-------------|
-| [marketing-psychology](marketing-psychology/) | Psychological principles, mental models, and behavioral science for marketing. |
-| [pricing-strategy](pricing-strategy/) | Pricing decisions, tier packaging, value metrics, monetization strategy. |
 | [launch-strategy](launch-strategy/) | Product launches, feature announcements, Product Hunt, go-to-market. |
-| [paid-ads](paid-ads/) | Paid advertising strategy: platform selection, targeting, creative, optimization. |
-| [referral-program](referral-program/) | Referral and affiliate program design, optimization, and measurement. |
 | [cold-email](cold-email/) | B2B cold email writing and follow-up sequences. |
-| [product-marketing-context](product-marketing-context/) | Create product marketing context doc referenced by all marketing skills. |
-| [create-a-sales-asset](visual-design/create-a-sales-asset/) | generate sales assets (landing pages, decks, one-pagers). |
-| [dogfood](dogfood/) | QA and exploratory test web applications, produce structured reports. |
 | [growth](growth/) | full-funnel growth: CRO, onboarding, paywalls, churn, launches, pricing. |
 | [positioning-angles](positioning-angles/) | define product positioning angles and strategic frames. |
 | [wealth-management](wealth-management/) | client reviews, financial plans, investment proposals, portfolio rebalancing, tax-loss harvesting. |

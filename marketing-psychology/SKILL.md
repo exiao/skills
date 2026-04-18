@@ -148,13 +148,13 @@ Study failed campaigns, not just successful ones. The viral hit you're copying h
 
 | Challenge | Models to Apply |
 |-----------|-----------------|
-| Low conversions | Hick's Law, Activation Energy, BJ Fogg, Friction |
+| Low conversions | BJ Fogg Behavior Model, Goal-Gradient Effect |
 | Price objections | Anchoring, Framing, Mental Accounting, Loss Aversion |
 | Building trust | Authority, Social Proof, Reciprocity, Pratfall Effect |
 | Increasing urgency | Scarcity, Loss Aversion, Zeigarnik Effect |
 | Retention/churn | Endowment Effect, Switching Costs, Status-Quo Bias |
-| Growth stalling | Theory of Constraints, Local vs Global Optima, Compounding |
-| Decision paralysis | Paradox of Choice, Default Effect, Nudge Theory |
+| Growth stalling | Theory of Constraints, Compounding, First Principles |
+| Decision paralysis | Paradox of Choice, Status-Quo Bias |
 | Onboarding | Goal-Gradient, IKEA Effect, Commitment & Consistency |
 
 ---
