@@ -124,7 +124,7 @@ Install the skills from https://github.com/exiao/skills
 | Skill | Description |
 |-------|-------------|
 | [agent-browser](agent-browser/) | Automate browsers via agent-browser CLI |
-| [babysit-open-prs](babysit-open-prs/) | Scan open PRs across tracked repos, triage, and spawn babysit-pr sub-agents |
+| [babysit-open-prs](coding/babysit-open-prs/) | Scan open PRs across tracked repos, triage, and spawn babysit-pr sub-agents |
 | [babysit-pr](babysit-pr/) | Monitor a PR through CI, reviews, and fixes until it's ready to merge |
 | [bloom-cli](bloom-cli/) | Fetch stock data, fundamentals, earnings, SEC filings via Bloom CLI |
 | [claude-md-management](claude-md-management/) | Audit, improve, and maintain CLAUDE.md files across repos |
