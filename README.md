@@ -71,6 +71,7 @@ Install the skills from https://github.com/exiao/skills
 | [visual-design/slideshow-creator](visual-design/slideshow-creator/) | Create and post TikTok slideshows via ReelFarm |
 | [visual-design/sticker-creator](visual-design/sticker-creator/) | Create die-cut sticker style cards via Nano Banana Pro |
 | [visual-design/apple-ux-guidelines](visual-design/apple-ux-guidelines/) | Apple HIG reference for UI/UX decisions |
+| [visual-design/design-mode](visual-design/design-mode/) | Design-artifact generator persona (HTML decks, prototypes, animations) — complement to frontend-design |
 | [design-review](design-review/) | Product design review: 13 questions + Nielsen Norman heuristic eval |
 | [nano-banana-pro](nano-banana-pro/) | Generate or edit images via Gemini native image generation |
 | [excalidraw-mcp](excalidraw-mcp/) | Create hand-drawn style diagrams via Excalidraw MCP |
@@ -242,6 +243,7 @@ These started from other open-source projects. I've modified and extended them f
 | [stably-cli](stably-cli/) | [skills.sh/stablyai](https://skills.sh/stablyai/agent-skills/stably-cli) |
 | [stably-sdk-rules](stably-sdk-rules/) | [skills.sh/stablyai](https://skills.sh/stablyai/agent-skills/stably-sdk-rules) |
 | [sahil-office-hours](sahil-office-hours/) | [slavingia/skills](https://github.com/slavingia/skills) |
+| [visual-design/design-mode](visual-design/design-mode/) | [elder-plinius/CL4R1T4S](https://github.com/elder-plinius/CL4R1T4S/blob/main/ANTHROPIC/Claude-Design-Sys-Prompt.txt) (Anthropic design-surface system prompt, verbatim) |
 
 ## License
 
