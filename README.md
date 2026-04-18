@@ -181,6 +181,7 @@ Install the skills from https://github.com/exiao/skills
 
 | Skill | Description |
 |-------|-------------|
+| [create-app-onboarding](marketing/create-app-onboarding/) | Design and build high-converting questionnaire-style app onboarding flows |
 | [userinterface-wiki](userinterface-wiki/) | UI/UX best practices: animations, CSS, typography, UX patterns |
 
 ### Other
