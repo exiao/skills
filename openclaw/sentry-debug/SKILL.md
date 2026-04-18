@@ -33,7 +33,7 @@ Generate a token at: `https://sentry.io/settings/account/api/auth-tokens/`.
 All commands go through `scripts/sentry.sh`:
 
 ```bash
-cd ~/clawd/skills/sentry-debug
+cd ~/clawd/skills/openclaw/sentry-debug
 
 # List unresolved issues across all projects
 ./scripts/sentry.sh issues list "is:unresolved" --limit 10
