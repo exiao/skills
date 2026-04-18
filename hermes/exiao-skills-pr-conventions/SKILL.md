@@ -9,9 +9,9 @@ Use when contributing a skill to the public `exiao/skills` GitHub repo. Does not
 
 ## Repo structure rules
 
-- Skills live at **repo root**, NOT nested under category subdirs. Example: `sentry-debug/SKILL.md`, not `software-development/sentry-debug/SKILL.md`.
+- Skills live in **category subdirectories** (e.g. `marketing/`, `coding/`, `software-development/`). Each category has a `DESCRIPTION.md` with a short category description. Example: `software-development/sentry-debug/SKILL.md`.
 - `README.md` at repo root lists every skill — must be updated with a row for the new skill.
-- Standard layout: `<skill>/SKILL.md`, `<skill>/scripts/*.sh`, `<skill>/references/*.md`.
+- Standard layout: `<category>/<skill>/SKILL.md`, `<category>/<skill>/scripts/*.sh`, `<category>/<skill>/references/*.md`.
 
 ## SKILL.md frontmatter
 

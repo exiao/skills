@@ -1,7 +1,6 @@
 ---
 name: hermes-signal-italic-fix
-description: Fix false-positive italics in Signal adapter caused by snake_case underscores
-category: hermes-patches
+description: Fix false-positive italics in Signal adapter caused by snake_case underscores. Use when Signal messages show random italics around snake_case identifiers like `config_file` or `OPENAI_API_KEY`. Trigger phrases include "signal italics", "snake_case italic", "Signal formatting bug", "underscore italic".
 ---
 
 # Signal Italic False-Positive Fix
@@ -26,6 +25,3 @@ The `\w` (word character) lookarounds enforce CommonMark-style word boundary sem
 
 ## Test
 All 65 Signal adapter tests pass after the change.
-
-## Patch Note Location
-`~/.hermes/plans/hermes-patches/signal-italic-false-positive-fix.md`

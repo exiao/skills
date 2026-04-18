@@ -1,6 +1,5 @@
 ---
 name: fastapi-piccolo-typer-testing
-category: coding
 description: Patterns for writing fast, DB-free pytest suites against FastAPI routers, Piccolo ORM queries, Typer CLI commands, and service-layer code. Use when adding test coverage to a FastAPI + Piccolo + Typer app, mocking async ORM query chains, or testing Typer commands that lazily import services. Proven at scale — grew a real-world suite from 270 → 442 passing tests in under 4 seconds.
 ---
 

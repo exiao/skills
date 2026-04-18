@@ -1,8 +1,6 @@
 ---
 name: hermes-context-files
-description: How Hermes discovers and loads context files (SOUL.md, AGENTS.md, etc.)
-version: 1
-tags: [hermes, config, context]
+description: How Hermes discovers and loads context files (SOUL.md, AGENTS.md, HERMES.md, CLAUDE.md). Use when asked how Hermes loads context, which files are auto-loaded vs on-demand, how SOUL.md/AGENTS.md discovery works, symlink patterns for context files, or how to configure cwd-based context file loading. Trigger phrases include "context files", "how does Hermes load", "SOUL.md", "AGENTS.md", "CLAUDE.md", "auto-loaded", "context file discovery".
 ---
 
 # Hermes Context File Discovery

@@ -52,6 +52,7 @@ Install the skills from https://github.com/exiao/skills
 | [meta-ads](meta-ads/) | Daily Meta ad operations via Marketing API |
 | [optimize-prompt](optimize-prompt/) | Iteratively optimize system prompts via autoresearch loop |
 | [paid-ads](paid-ads/) | Paid advertising strategy: platform selection, targeting, creative, optimization |
+| [prometheus](prometheus/) | Search TikTok viral videos, App Store rankings, hook analysis, and content research via SGE Prometheus MCP |
 | [pricing-strategy](pricing-strategy/) | Pricing decisions, tier packaging, value metrics, monetization strategy |
 | [product-marketing-context](product-marketing-context/) | Create product marketing context doc referenced by all marketing skills |
 | [referral-program](referral-program/) | Referral and affiliate program design, optimization, and measurement |
@@ -63,6 +64,7 @@ Install the skills from https://github.com/exiao/skills
 
 | Skill | Description |
 |-------|-------------|
+| [architecture-diagram](architecture-diagram/) | Dark-themed SVG architecture diagrams as standalone HTML files with semantic component colors |
 | [visual-design](visual-design/) | Router skill for all visual design tasks (dispatches to sub-skills below) |
 | [visual-design/canvas-design](visual-design/canvas-design/) | Create visual art and designs as .png/.pdf files |
 | [visual-design/create-a-sales-asset](visual-design/create-a-sales-asset/) | Generate sales assets: landing pages, decks, one-pagers |
@@ -132,6 +134,7 @@ Install the skills from https://github.com/exiao/skills
 | [demo-pr-feature](demo-pr-feature/) | Capture PR demo screenshots, deploy to Surge.sh, post as PR comment |
 | [deploy-bloom](deploy-bloom/) | Deploy Bloom OTA updates via bloom-updater |
 | [documents](documents/) | Work with .docx, .pdf, .pptx, .xlsx files |
+| [fastapi-piccolo-typer-testing](fastapi-piccolo-typer-testing/) | DB-free pytest patterns for FastAPI routers, Piccolo ORM, Typer CLI, and service-layer code |
 | [fix-bloom-prs](fix-bloom-prs/) | Fix CI failures, review code, and address review comments on PRs across tracked repos |
 | [fix-sentry-issues](fix-sentry-issues/) | Scan Sentry issues and create fix PRs |
 | [app-store-connect](app-store-connect/) | App Store Connect via `asc` CLI: releases, TestFlight, builds, metadata, subscriptions |
@@ -164,9 +167,17 @@ Install the skills from https://github.com/exiao/skills
 
 | Skill | Description |
 |-------|-------------|
+| [claude-auth-remote-login](claude-auth-remote-login/) | Remote Claude Code OAuth login flow when token expires |
+| [exiao-skills-pr-conventions](exiao-skills-pr-conventions/) | Conventions for contributing skills to this repo: layout, frontmatter, sanitization, PR workflow |
+| [hermes-context-files](hermes-context-files/) | How Hermes discovers and loads context files (SOUL.md, AGENTS.md, HERMES.md, CLAUDE.md) |
+| [hermes-signal-italic-fix](hermes-signal-italic-fix/) | Patch note: fix false-positive italics in Signal adapter caused by snake_case underscores |
+| [memory-gc](memory-gc/) | Daily memory garbage collection: decay rules, .pending.md drain, deduplication, session pruning |
 | [openclaw-memory-setup](openclaw-memory-setup/) | Set up a complete memory system for an OpenClaw instance |
 | [openclaw-resiliency](openclaw-resiliency/) | Gateway watchdog for health monitoring and auto-recovery |
+| [recall](recall/) | Retrieve memory from past sessions via progressive disclosure (hot → episodes → sessions) |
 | [security-audit](security-audit/) | Security audit for codebases and deployments |
+| [signal-table-render](signal-table-render/) | Auto-render markdown tables to PNG before sending on Signal |
+| [watchdog-status-cleanup](watchdog-status-cleanup/) | Inspect Hermes/OpenClaw watchdog LaunchAgents and clean up stale processes |
 
 ### Automated Pipelines (Cron)
 
@@ -188,6 +199,7 @@ Install the skills from https://github.com/exiao/skills
 | Skill | Description |
 |-------|-------------|
 | [document-release](document-release/) | Document release processes |
+| [hotel-price-research](hotel-price-research/) | Research hotel pricing across OTAs for booking decisions; documents known dead-end sites and working Booking.com flow |
 | [trip-planner](trip-planner/) | Generate day-by-day travel itineraries with neighborhood routing and budget scaling |
 
 ---

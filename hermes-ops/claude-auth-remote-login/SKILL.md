@@ -1,7 +1,6 @@
 ---
 name: claude-auth-remote-login
-description: Remote Claude Code OAuth login flow when token expires
-category: hermes-ops
+description: Remote Claude Code OAuth login flow when token expires. Use when `claude auth status` reports logged in but `claude -p` returns 401, or when needing to re-authenticate over SSH. Trigger phrases include "claude auth", "claude login", "token expired", "claude 401", "remote login", "oauth claude".
 ---
 
 # Claude Auth Remote Login Flow
@@ -28,6 +27,3 @@ Claude Code OAuth token expires and `claude auth status` falsely reports logged 
 - Check: `curl http://127.0.0.1:18801/health` — should NOT show token_expired
 - Run refresh watchdog: `bash ~/.hermes/watchdog/billing_proxy_refresh_watchdog.sh` — should exit 0
 
-## Status as of 2026-04-15
-- Auth login was in progress but not yet completed when session ended
-- Branch `fix/proxy-watchdog-stale-pid` has watchdog fixes staged but no PR opened

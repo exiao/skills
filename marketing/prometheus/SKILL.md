@@ -1,17 +1,14 @@
 ---
 name: prometheus
-description: Search TikTok viral videos, App Store rankings, hook analysis, app strategy, and content research via SGE Prometheus MCP
-homepage: https://www.socialgrowthengineers.com/prometheus
-metadata:
-  openclaw:
-    requires:
-      env:
-        - SGE_API_KEY
+description: Search TikTok viral videos, App Store rankings, hook analysis, app strategy, and content research via SGE Prometheus MCP. Requires SGE_API_KEY. Use when researching viral video hooks, benchmarking app rankings, analyzing content trends, or pulling App Store review data. Trigger phrases include "prometheus", "viral content", "app store rankings", "SGE", "TikTok research", "hook analysis".
 ---
 
 # Prometheus — SGE Viral Content Intelligence
 
 Search 50,000+ curated TikTok & Reels viral videos, app marketing profiles, and strategy articles. Live App Store rankings, reviews, and revenue estimates. Hook analysis and trend detection — all via MCP.
+
+**Homepage:** <https://www.socialgrowthengineers.com/prometheus>
+**Requires:** `SGE_API_KEY` environment variable.
 
 ## Setup
 
@@ -106,3 +103,7 @@ Tools fall into five categories:
 The same tools are available via the **Prometheus Slack Bot** — plus memory, scheduled reports, and app tracking.
 
 Install from your [SGE settings](https://www.socialgrowthengineers.com/settings) page.
+
+## Attribution warning
+
+- **Never attribute "Bloom: Learn to Invest" to our Bloom.** That's a competitor app on the App Store. Our Bloom's identifiers are distinct — confirm the bundle ID / product ID when citing App Store data or PAssistant returns.
