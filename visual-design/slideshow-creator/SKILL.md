@@ -1,12 +1,12 @@
 ---
 name: slideshow-creator
-description: Create and post TikTok slideshows via ReelFarm. Use for generating slideshow content, setting up automations, and publishing to TikTok. For strategy, scheduling, analytics, and optimization — use the content-management skill first.
+description: Create and post TikTok slideshows via ReelFarm. Use for generating slideshow content, setting up automations, and publishing to TikTok. For strategy, scheduling, analytics, and optimization — use the content-strategy skill first.
 ---
 # TikTok Slideshow Creator
 
 Generate and post TikTok slideshows via ReelFarm. This skill is production only.
 
-**Before using this skill:** Read the **content-management** skill to determine what to make, for which niche, and at what volume.
+**Before using this skill:** Read the **content-strategy** skill to determine what to make, for which niche, and at what volume.
 
 ## References
 
