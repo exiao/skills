@@ -122,35 +122,17 @@ node -c troubleshoot.js
   3. inspect the processed proxy body locally to confirm no leaked `mcp_*` names remain
   4. run `node --test tests/hermes-support.test.js`
   5. rerun the live `hermes chat -q ...` request and inspect proxy logs
-- Important lesson: live failure can move in stages. First failure was “Hermes never reached proxy.” Second failure was “proxy still saw leaked Hermes tool names.” Third failure was “proxy reached Anthropic, but Hermes' newer SOUL.md-based system prompt was no longer being stripped.” Do not treat them as one bug.
-- Newer Hermes builds may no longer send a `# Claude Code Persona` system block. They can send a large system block starting with `# SOUL.md - Who You Are` that includes SOUL, memory, and skills content.
-- The existing proxy strip logic that only looked for `# Claude Code Persona` was too narrow. In this failure mode, `processBody()` leaves the huge Hermes system block intact, and Anthropic returns the familiar `You're out of extra usage` error even though the proxy, billing header, headers, tool renames, and Opus model are otherwise working.
-- Proven isolation sequence that identified this:
-  1. Build real Hermes Anthropic kwargs locally from `AIAgent._build_system_prompt()` + `_build_api_kwargs()`.
-  2. Send the same payload directly to `http://127.0.0.1:18801/v1/messages`.
-  3. Remove variables systematically: base payload without full system prompt succeeds, reasoning also succeeds, adding the full system prompt flips the request to 400.
-  4. Replace only the large system block with the proxy paraphrase; if the request then succeeds, the strip logic is the root cause.
-- Narrow fix pattern:
-  - extend Layer 4 system stripping in `proxy.js` to recognize the SOUL.md marker in addition to `# Claude Code Persona`
-  - add a regression test in `tests/hermes-support.test.js` with a large `# SOUL.md - Who You Are` block and assert it gets paraphrased/stripped
-- Important lesson: live failure can move in stages. First failure was “Hermes never reached proxy.” Second failure was “proxy still saw leaked Hermes tool names.” Do not treat them as one bug.
-- Another proved failure mode: the proxy’s system-strip logic can silently miss newer Hermes prompt formats. In our case it only matched `# Claude Code Persona`, but Hermes was sending `# SOUL.md - Who You Are` as the large system block, so the full SOUL/memory/skills payload leaked through and Anthropic billed it as extra usage.
-- Do not assume the visible file title is the root cause. We tested `SOUL.md` alone, `AGENTS.md` alone, and both together through the proxy, and all passed. We also simplified both files aggressively and the full Hermes request still failed. That ruled out those files as the primary trigger.
-- The reusable debugging method is: capture the fully assembled Hermes system prompt, then replay it directly through the proxy while swapping one major block at a time. In our case, replacing the large second system block with the proxy paraphrase immediately flipped the result from 400 extra-usage to 200 OK.
-- Check whether `AGENTS.md` is even present in the failing prompt before editing it. Hermes only loads a cwd-level `AGENTS.md` via `build_context_files_prompt()`. In our CLI reproduction, `AGENTS.md` was not present in the assembled prompt at all, so changing it was irrelevant to the failure.
-- When testing hypotheses about prompt fingerprints, prefer full-prompt replay over file-by-file guessing. A single file may pass in isolation while the assembled prompt still fails because the real trigger is the combined memory/skills/context payload size or structure.
-- Add reusable diagnostics to `troubleshoot.js` when the failure only shows up with Hermes-sized payloads. A proven pattern is:
-  1. load the latest `~/.hermes/sessions/request_dump_*.json`
-  2. replay multiple variants through the local proxy, not directly to Anthropic
-  3. include at least: minimal user-only, small/full system prompt, one/five tools, full payload, full-minus-tools, full-minus-system, and minified large-tool-count probes
-  4. summarize the first failing minified tool count and whether system prompts change the status class
-- A good implementation split is:
-  - `troubleshoot-helpers.js` for pure helpers like `buildMinimalToolSubset()`, `buildHermesDiagnosticCases()`, and `summarizeHermesDiagnostics()`
-  - `tests/troubleshoot-helpers.test.js` for fast node tests
-  - `troubleshoot.js` only wires those helpers into live proxy requests and prints operator guidance
-- Durable finding from live replay on this machine: the Max-subscription path can accept large Hermes payloads up to about 130 tools, but the request flips into the extra-usage failure path at 131 tools even when tool schemas are aggressively minified. That means tool count itself is a likely billing-shape trigger, not just total bytes or descriptions.
-- Therefore, when `troubleshoot.js` shows a passing minimal payload plus a failing high-tool-count replay, a strong next fix is to cap forwarded tool count to roughly 120-130 before trying broader fingerprint-stripping changes.
-- The user preferred the narrowest proven fix: use live evidence to identify exactly which Hermes fields or tool names are still leaking, rather than blindly expanding the whole rename table.
+### Debugging Hermes-shaped payloads
+
+Three durable lessons from live debugging of the Hermes client:
+
+1. **Failures compound — isolate each stage.** A single symptom (400 extra-usage) can come from multiple bugs stacked: client not reaching proxy, proxy not renaming tool names, proxy not stripping the client's system prompt. Fix one at a time; re-verify after each.
+
+2. **Replay method.** Capture the fully assembled client request (e.g. from `~/.hermes/sessions/request_dump_*.json`), replay it directly through `http://127.0.0.1:18801/v1/messages`, then swap one major block at a time (system prompt, tool list, tool schemas) to identify which block flips the response from 200 → 400. Full-prompt replay beats file-by-file guessing because individual files pass in isolation.
+
+3. **Tool-count billing-shape trigger.** Max-subscription endpoints appear to accept payloads up to ~130 tools; at ~131 the request flips to extra-usage even when tool schemas are minified. Tool count itself is a likely trigger, not just total bytes. When `troubleshoot.js` shows a passing minimal payload plus a failing high-tool-count replay, cap forwarded tool count to ~120-130 before expanding fingerprint-stripping.
+
+Implementation hint: put pure helpers (`buildMinimalToolSubset`, `buildHermesDiagnosticCases`, `summarizeHermesDiagnostics`) in a `troubleshoot-helpers.js` module with node tests; keep `troubleshoot.js` focused on wiring them into live proxy requests and printing operator guidance.
 
 ## Pitfalls
 - This repo may already have a dirty worktree; check `git status` before editing and mention it to the user

@@ -96,8 +96,8 @@ def find_nearby(lat: float, lon: float, types: list[str], radius: int = 1500, li
             continue
 
         # Get coordinates (nodes have lat/lon directly, ways/relations use center)
-        plat = el.get("lat") or (el.get("center", {}) or {}).get("lat")
-        plon = el.get("lon") or (el.get("center", {}) or {}).get("lon")
+        plat = el.get("lat") if el.get("lat") is not None else (el.get("center") or {}).get("lat")
+        plon = el.get("lon") if el.get("lon") is not None else (el.get("center") or {}).get("lon")
         if plat is None or plon is None:
             continue
 
