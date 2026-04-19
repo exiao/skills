@@ -21,11 +21,28 @@ Unified skill for Phoenix AI observability: CLI debugging, evaluators, and traci
 
 ## Connection
 
+Phoenix CLI reads `PHOENIX_HOST`, `PHOENIX_API_KEY`, and `PHOENIX_PROJECT`
+from the environment (project can also be passed via `--project`).
+Set them in whatever env-management surface your agent runtime uses, e.g.:
+
 ```bash
-# PHOENIX_HOST and PHOENIX_API_KEY should be set in gateway env vars.
-# If not already in your environment, set them:
-#   openclaw config patch '{"env":{"vars":{"PHOENIX_HOST":"https://...","PHOENIX_API_KEY":"..."}}}'
+# Hermes
+echo 'PHOENIX_HOST=https://app.phoenix.arize.com/s/<workspace>' >> ~/.hermes/.env
+echo 'PHOENIX_API_KEY=...' >> ~/.hermes/.env
+echo 'PHOENIX_PROJECT=bloom_chat' >> ~/.hermes/.env
+
+# Plain shell
+export PHOENIX_HOST=https://app.phoenix.arize.com/s/<workspace>
+export PHOENIX_API_KEY=...
+export PHOENIX_PROJECT=bloom_chat
+
+# OpenClaw gateway
+openclaw config set env.vars.PHOENIX_HOST 'https://app.phoenix.arize.com/s/<workspace>'
+openclaw config set env.vars.PHOENIX_API_KEY '...'
+openclaw config set env.vars.PHOENIX_PROJECT 'bloom_chat'
 ```
+
+Verify: `px traces --limit 1` (or `px traces --limit 1 --project bloom_chat`).
 
 Projects: `bloom_chat` (prod), `bloom_chat_dev` (dev).
 

@@ -71,6 +71,11 @@ Notes
 - The script prints a `MEDIA:` line for OpenClaw to auto-attach on supported chat providers.
 - Do not read the image back; report the saved path only.
 
+## Runtime gotchas
+
+- **Timeout:** Pro quality runs slow. Use `timeout=300, yieldMs=280000` when invoking via exec/delegate.
+- **No `--thinking` flag.** The script does not accept it; Nano Banana Pro doesn't expose reasoning mode.
+
 ## Prompting Best Practices
 
 | Bad prompt | Good prompt |
