@@ -31,7 +31,7 @@ Install the skills from https://github.com/exiao/skills
 | [content-strategy](content-strategy/) | Build content strategy: hooks, angles, and ideas from what's trending now |
 | [editor-in-chief](editor-in-chief/) | Autonomous editing orchestrator: diagnose, fix, and iterate drafts to quality |
 | [evaluate-content](evaluate-content/) | Judge content quality: shareability, readability, voice, cuttability, angle |
-| [hooks](hooks/) | Generate headlines, titles, and scroll-stopping openers |
+| [hooks](marketing/hooks/) | Generate headlines, titles, and scroll-stopping openers |
 | [outline-generator](outline-generator/) | Generate structured article outlines from approved hooks |
 | [substack-draft](substack-draft/) | Save finished articles to Substack as drafts |
 | [tweet-ideas](tweet-ideas/) | Generate standalone tweet ideas (Aaron Levie playbook) |
@@ -134,12 +134,12 @@ Install the skills from https://github.com/exiao/skills
 | [deploy-bloom](deploy-bloom/) | Deploy Bloom OTA updates via bloom-updater |
 | [documents](documents/) | Work with .docx, .pdf, .pptx, .xlsx files |
 | [fix-bloom-prs](fix-bloom-prs/) | Fix CI failures, review code, and address review comments on PRs across tracked repos |
-| [fix-sentry-issues](fix-sentry-issues/) | Scan Sentry issues and create fix PRs |
+| [fix-sentry-issues](coding/fix-sentry-issues/) | Scan Sentry issues and create fix PRs |
 | [app-store-connect](app-store-connect/) | App Store Connect via `asc` CLI: releases, TestFlight, builds, metadata, subscriptions |
 | [ios-simulator](ios-simulator/) | iOS simulator automation: builds, screenshots, device management |
 | [ralph-mode](ralph-mode/) | Autonomous dev loops with iteration gates and test validation |
 | [react-doctor](react-doctor/) | Diagnose and fix React codebase health issues: performance, security, code quality |
-| [sentry-debug](openclaw/sentry-debug/) | Debug Sentry issues via REST API: list/search, stack traces, release impact, resolve/assign, Seer autofix |
+| [sentry-debug](coding/sentry-debug/) | Debug Sentry issues via REST API: list/search, stack traces, release impact, resolve/assign, Seer autofix |
 | [serena](serena/) | Navigate and edit complex codebases at the symbol level via Serena MCP |
 | [simplify](simplify/) | Review changed code for reuse, quality, and efficiency, then fix issues |
 | [stably-cli](stably-cli/) | Create, run, fix, and maintain Playwright tests via Stably CLI |
