@@ -31,7 +31,7 @@ Install the skills from https://github.com/exiao/skills
 | [content-strategy](content-strategy/) | Build content strategy: hooks, angles, and ideas from what's trending now |
 | [editor-in-chief](editor-in-chief/) | Autonomous editing orchestrator: diagnose, fix, and iterate drafts to quality |
 | [evaluate-content](evaluate-content/) | Judge content quality: shareability, readability, voice, cuttability, angle |
-| [hooks](hooks/) | Generate headlines, titles, and scroll-stopping openers |
+| [hooks](marketing/hooks/) | Generate headlines, titles, and scroll-stopping openers |
 | [outline-generator](outline-generator/) | Generate structured article outlines from approved hooks |
 | [substack-draft](substack-draft/) | Save finished articles to Substack as drafts |
 | [tweet-ideas](tweet-ideas/) | Generate standalone tweet ideas (Aaron Levie playbook) |
