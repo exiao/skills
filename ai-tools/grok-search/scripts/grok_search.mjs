@@ -28,19 +28,40 @@ function usage(msg) {
   process.exit(2);
 }
 
-function readKeyFromOpenclawConfig() {
+function readKey() {
   // Priority:
   // 1) env var
-  // 2) openclaw.json env.XAI_API_KEY
-  // 3) openclaw.json skills.entries.grok-search.apiKey
-  // 4) openclaw.json skills.entries.search-x.apiKey / skills.entries.xai.apiKey (fallback)
+  // 2) ~/.hermes/.env (XAI_API_KEY=...)
+  // 3) ~/.openclaw/openclaw.json (env.XAI_API_KEY or skills.entries.*.apiKey)
+  if (process.env.XAI_API_KEY) return process.env.XAI_API_KEY;
+
+  // Hermes .env file
+  try {
+    const p = path.join(os.homedir(), ".hermes", ".env");
+    const raw = fs.readFileSync(p, "utf8");
+    for (const line of raw.split("\n")) {
+      const m = line.match(/^\s*(?:export\s+)?XAI_API_KEY\s*=\s*(.+?)\s*$/);
+      if (m) {
+        let v = m[1];
+        if (
+          (v.startsWith('"') && v.endsWith('"')) ||
+          (v.startsWith("'") && v.endsWith("'"))
+        ) {
+          v = v.slice(1, -1);
+        }
+        if (v) return v;
+      }
+    }
+  } catch {
+    // fall through
+  }
+
+  // OCPlatform config
   try {
     const p = path.join(os.homedir(), ".openclaw", "openclaw.json");
     const raw = fs.readFileSync(p, "utf8");
     const j = JSON.parse(raw);
-
     return (
-      process.env.XAI_API_KEY ||
       j?.env?.XAI_API_KEY ||
       j?.env?.vars?.XAI_API_KEY ||
       j?.skills?.entries?.["grok-search"]?.apiKey ||
@@ -49,7 +70,7 @@ function readKeyFromOpenclawConfig() {
       null
     );
   } catch {
-    return process.env.XAI_API_KEY || null;
+    return null;
   }
 }
 
@@ -127,10 +148,10 @@ const query = queryParts.join(" ").trim();
 if (!query) usage("Missing <query>");
 if (!mode) usage("Must specify --web or --x");
 
-const apiKey = readKeyFromOpenclawConfig();
+const apiKey = readKey();
 if (!apiKey) {
   console.error(
-    "Missing XAI_API_KEY. Set env var or add env.XAI_API_KEY in ~/.openclaw/openclaw.json"
+    "Missing XAI_API_KEY. Set env var or add XAI_API_KEY=... to ~/.hermes/.env"
   );
   process.exit(1);
 }
