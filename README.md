@@ -145,6 +145,7 @@ Install the skills from https://github.com/exiao/skills
 | [ios-simulator](ios-simulator/) | iOS simulator automation: builds, screenshots, device management |
 | [ralph-mode](ralph-mode/) | Autonomous dev loops with iteration gates and test validation |
 | [react-doctor](react-doctor/) | Diagnose and fix React codebase health issues: performance, security, code quality |
+| [sentry-debug](openclaw/sentry-debug/) | Debug Sentry issues via REST API: list/search, stack traces, release impact, resolve/assign, Seer autofix |
 | [serena](serena/) | Navigate and edit complex codebases at the symbol level via Serena MCP |
 | [simplify](simplify/) | Review changed code for reuse, quality, and efficiency, then fix issues |
 | [stably-cli](stably-cli/) | Create, run, fix, and maintain Playwright tests via Stably CLI |
