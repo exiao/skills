@@ -77,6 +77,7 @@ Install the skills from https://github.com/exiao/skills
 | [nano-banana-pro](nano-banana-pro/) | Generate or edit images via Gemini native image generation |
 | [excalidraw-mcp](excalidraw-mcp/) | Create hand-drawn style diagrams via Excalidraw MCP |
 | [impeccable](impeccable/) | Design quality layer: 21 commands (audit, critique, polish, animate, etc.) with 10 reference files for systematic frontend QA |
+| [visual-design/design-mode](visual-design/design-mode/) | Anthropic design-surface system prompt: HTML artifacts, decks, prototypes, animations |
 
 ### Video Production
 
@@ -133,11 +134,13 @@ Install the skills from https://github.com/exiao/skills
 | [coding-agent](coding-agent/) | Run coding agents (Codex, Claude Code, etc.) via ACP |
 | [context7](context7/) | Fetch version-specific library docs via Context7 MCP |
 | [demo-pr-feature](demo-pr-feature/) | Capture PR demo screenshots, deploy to Surge.sh, post as PR comment |
+| [dependabot-stuck-pr-rebase](github/dependabot-stuck-pr-rebase/) | Manually rebase Dependabot PRs stuck in CONFLICTING when auto-rebase isn't firing |
 | [deploy-bloom](deploy-bloom/) | Deploy Bloom OTA updates via bloom-updater |
 | [documents](documents/) | Work with .docx, .pdf, .pptx, .xlsx files |
 | [fastapi-piccolo-typer-testing](coding/fastapi-piccolo-typer-testing/) | DB-free pytest patterns for FastAPI routers, Piccolo ORM, Typer CLI, and service-layer code |
 | [fix-bloom-prs](fix-bloom-prs/) | Fix CI failures, review code, and address review comments on PRs across tracked repos |
 | [fix-sentry-issues](fix-sentry-issues/) | Scan Sentry issues and create fix PRs |
+| [github-rulesets-bulk-apply](github/github-rulesets-bulk-apply/) | Bulk-apply branch-protection rulesets across every repo an account admins |
 | [app-store-connect](app-store-connect/) | App Store Connect via `asc` CLI: releases, TestFlight, builds, metadata, subscriptions |
 | [ios-simulator](ios-simulator/) | iOS simulator automation: builds, screenshots, device management |
 | [ralph-mode](ralph-mode/) | Autonomous dev loops with iteration gates and test validation |
@@ -177,6 +180,7 @@ Install the skills from https://github.com/exiao/skills
 | [openclaw-resiliency](openclaw-resiliency/) | Gateway watchdog for health monitoring and auto-recovery |
 | [recall](hermes/recall/) | Retrieve memory from past sessions via progressive disclosure (hot → episodes → sessions) |
 | [security-audit](security-audit/) | Security audit for codebases and deployments |
+| [signal-send-file](hermes/signal-send-file/) | Send files as native attachments on Signal/Telegram/Discord/Slack/WhatsApp via the MEDIA tag |
 | [signal-table-render](hermes/signal-table-render/) | Auto-render markdown tables to PNG before sending on Signal |
 | [watchdog-status-cleanup](hermes/watchdog-status-cleanup/) | Inspect Hermes/OpenClaw watchdog LaunchAgents and clean up stale processes |
 
