@@ -134,7 +134,7 @@ Install the skills from https://github.com/exiao/skills
 | [deploy-bloom](deploy-bloom/) | Deploy Bloom OTA updates via bloom-updater |
 | [documents](documents/) | Work with .docx, .pdf, .pptx, .xlsx files |
 | [fix-bloom-prs](fix-bloom-prs/) | Fix CI failures, review code, and address review comments on PRs across tracked repos |
-| [fix-sentry-issues](fix-sentry-issues/) | Scan Sentry issues and create fix PRs |
+| [fix-sentry-issues](coding/fix-sentry-issues/) | Scan Sentry issues and create fix PRs |
 | [app-store-connect](app-store-connect/) | App Store Connect via `asc` CLI: releases, TestFlight, builds, metadata, subscriptions |
 | [ios-simulator](ios-simulator/) | iOS simulator automation: builds, screenshots, device management |
 | [ralph-mode](ralph-mode/) | Autonomous dev loops with iteration gates and test validation |
