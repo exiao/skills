@@ -38,6 +38,16 @@ OpenAI's multilingual speech recognition model.
 
 ## Quick start
 
+### Local one-liner (whisper.cpp on macOS)
+
+If all you need is a fast local transcription, use `whisper-cli` (whisper.cpp) instead of the Python library. Eric's setup:
+
+```bash
+whisper-cli -m ~/.whisper-models/ggml-tiny.bin -f "audio.mp3" --no-timestamps
+```
+
+Use `ggml-tiny.bin` for quick voice-memo transcription (roughly 32x realtime, ~1GB RAM). Swap the model path for `ggml-base.bin`, `ggml-small.bin`, etc. if you need higher accuracy.
+
 ### Installation
 
 ```bash
