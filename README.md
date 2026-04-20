@@ -72,6 +72,7 @@ Install the skills from https://github.com/exiao/skills
 | [visual-design/sticker-creator](visual-design/sticker-creator/) | Create die-cut sticker style cards via Nano Banana Pro |
 | [visual-design/apple-ux-guidelines](visual-design/apple-ux-guidelines/) | Apple HIG reference for UI/UX decisions |
 | [design-review](design-review/) | Product design review: 13 questions + Nielsen Norman heuristic eval |
+| [architecture-diagram](creative/architecture-diagram/) | Generate dark-themed SVG architecture diagrams as standalone HTML files |
 | [nano-banana-pro](nano-banana-pro/) | Generate or edit images via Gemini native image generation |
 | [excalidraw-mcp](excalidraw-mcp/) | Create hand-drawn style diagrams via Excalidraw MCP |
 | [impeccable](impeccable/) | Design quality layer: 21 commands (audit, critique, polish, animate, etc.) with 10 reference files for systematic frontend QA |
