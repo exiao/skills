@@ -106,6 +106,7 @@ Install the skills from https://github.com/exiao/skills
 | [notebooklm](notebooklm/) | Query Google NotebookLM for source-grounded answers |
 | [phoenix-cli](phoenix-cli/) | Debug LLM apps with Phoenix CLI: traces, errors, experiments |
 | [polymarket](polymarket/) | Query Polymarket prediction markets |
+| [common-crawl-backlinks](common-crawl-backlinks/) | Pull backlinks for any domain for free using Common Crawl's web graph + DuckDB |
 | [seo-research](seo-research/) | SEO: keyword research, AI search optimization, technical audits |
 | [stock-research](stock-research/) | Stock/equity research, earnings analysis, daily market briefings |
 | [trend-research](trend-research/) | Find trending content across TikTok, YouTube, Instagram, X |
