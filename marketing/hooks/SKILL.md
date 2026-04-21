@@ -6,6 +6,33 @@ description: Use when generating hooks, headlines, titles, and scroll-stopping o
 
 Generate scroll-stopping titles, subtitles, and opening hooks for articles, posts, and videos.
 
+## The Concert Theory (Mental Model)
+
+Source: @aidan.melograna ([reel](https://www.instagram.com/reel/DUVgnmZDOSa/), credit @briarcochran for the idea).
+
+> Imagine you walk into a stadium with 25,000 people watching you. You have **5 seconds** to say one thing to the crowd. If what you say doesn't create an emotional reaction, they all turn around and leave.
+
+That's a hook. Not a sentence — a survival event.
+
+**Three jobs of every hook (in this order):**
+1. **Stop the scroll** — pattern interrupt, tension, or open loop
+2. **Make it obvious who it's for** — the right viewer should feel called out within 5 seconds
+3. **Create just enough curiosity to keep them listening** — withhold the payoff
+
+**The one question to ask before posting anything:**
+
+> *"If I said this on a stage, would anybody lean in to listen more — or would they just pull out their phone and scroll?"*
+
+If the answer is "scroll," the hook is dead. Rewrite it.
+
+**Two rules that fall out of this:**
+- **Don't open with context. Open with tension.** Context is what you owe the reader *after* they're listening, not before.
+- **First sentence must make them feel seen or challenged.** If it doesn't, you're already cooked. "Seen" = you named their secret. "Challenged" = you contradicted what they believe.
+
+Attention is leverage. If nobody stays, nothing else in the post matters — not the insight, not the CTA, not the proof. Content isn't about talking more. It's about saying the right thing first.
+
+---
+
 ## LinkedIn Hook Formula
 
 LinkedIn shows exactly 2 lines before the "…more" button. That cutoff is the only conversion that matters. If readers don't click "…more", nothing else counts.
