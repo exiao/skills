@@ -14,8 +14,6 @@ If `DESIGN.md` already exists at project root, the CLI saves to `./<brand>/DESIG
 npx getdesign@latest list
 ```
 
-**Preview any template in-browser:** `https://getdesign.md/<brand>/design-md` — shows color swatches, type scale, and component cards in light and dark.
-
 ---
 
 ## How to pick
