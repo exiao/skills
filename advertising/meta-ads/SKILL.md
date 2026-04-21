@@ -12,7 +12,7 @@ Daily 4am routine: audit running ads via Meta Marketing API, kill underperformer
 ## API Credentials
 
 ```bash
-TOKEN="$META_ACCESS_TOKEN"  # Meta Marketing API token
+TOKEN=$META_ACCESS_TOKEN           # Meta Marketing API token
 ACCOUNT="$BLOOM_AD_ACCOUNT_ID"    # Bloom ad account (act_...)
 API="https://graph.facebook.com/v22.0"
 PAGE_ID="$BLOOM_PAGE_ID"           # Facebook Page ID

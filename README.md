@@ -131,7 +131,6 @@ Install the skills from https://github.com/exiao/skills
 | [babysit-pr](babysit-pr/) | Monitor a PR through CI, reviews, and fixes until it's ready to merge |
 | [bloom-cli](bloom-cli/) | Fetch stock data, fundamentals, earnings, SEC filings via Bloom CLI |
 | [claude-md-management](claude-md-management/) | Audit, improve, and maintain CLAUDE.md files across repos |
-| [coding-agent](coding-agent/) | Run coding agents (Codex, Claude Code, etc.) via ACP |
 | [context7](context7/) | Fetch version-specific library docs via Context7 MCP |
 | [demo-pr-feature](demo-pr-feature/) | Capture PR demo screenshots, deploy to Surge.sh, post as PR comment |
 | [deploy-bloom](deploy-bloom/) | Deploy Bloom OTA updates via bloom-updater |

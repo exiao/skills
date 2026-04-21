@@ -1,8 +1,6 @@
 ---
 name: copywriting
-description: "Write or improve marketing copy for any surface: pages, ads, app stores, landing pages, Google Ads, TikTok/Meta scripts, push notifications, email campaigns, UGC. Use when the user needs ad copy, ad headlines, conversion-focused text, A/B test variants, landing page text, or page copy. Combines page copy frameworks with direct response principles."
-metadata:
-  version: 1.0.0
+description: "Write or improve marketing copy for any surface: pages, ads, app stores, landing pages, TikTok/Meta scripts, push notifications, UGC. Combines page copy frameworks with direct response principles."
 ---
 
 # Copywriting

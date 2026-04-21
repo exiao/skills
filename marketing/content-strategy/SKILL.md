@@ -174,7 +174,7 @@ Source: @thebranding.ai breakdown of multiple creators going viral with the same
 3. Deliver value through speech while the visual activity anchors attention
 4. Close with soft CTA or open loop
 
-**Example application:** Film hands writing stock tickers on a notepad, scrolling through [Your App], or organizing investment notes while delivering investing insights via voiceover.
+**Bloom application:** Film hands writing stock tickers on a notepad, scrolling through the Bloom app, or organizing investment notes while delivering investing insights via voiceover.
 
 | Audience Temp | Best Formats |
 |--------------|-------------|
@@ -272,7 +272,7 @@ This is a full account pillar — not a one-off format. Run it every week.
 
 Place labels at the moment you identify the tactic, not before. Let the source video play 2-3 seconds first, then drop the label as your "aha" moment. Use bold white or colored text, large enough to read on mobile, centered or near the source video panel.
 
-**Example (investing niche):**
+**Bloom-specific example:**
 - Source: viral TikTok of someone showing their Robinhood portfolio down 40% (2M+ views)
 - Labels you'd drop: "LOSS AVERSION" (the emotional hook), "ROUND NUMBER" (they lost exactly $10K, not $9,847), "SCREENSHOT FORMAT" (looks organic, not produced), "NO CTA" (the virality IS the content, no ask)
 - Your commentary: explain each label as an investing psychology + content strategy concept simultaneously. Double value for the viewer.
@@ -462,7 +462,56 @@ The hierarchy: **Posting > Targeting > Platform choice > Repurposing > Scripting
 
 ---
 
-> **Load on-demand:** `references/channel-playbook.md` for channel tier list, quiz funnel strategy, and SEO timing.
+## Channel Tier List (Bloom / B2C)
+
+What actually works for consumer apps vs. what sounds good but doesn't.
+
+**High-signal channels:**
+- TikTok / Instagram Reels — primary B2C organic discovery; recreate before recruiting creators
+- Influencer/creator marketing — TikTok/YouTube/Instagram. Lovable ($400M ARR) spends 10x more on influencer marketing than paid social and considers it their key growth driver. Validate formats with your own account first, then hand proven formats to creators. This should be the primary paid channel, not Meta ads.
+- Free credits / freemium as marketing — treat free tier as a marketing channel, not a cost center. "Our free giveaways are bigger than paid marketing spend." (Lovable CEO, 20VC March 2026)
+- Free SEO tools — high-value lead magnets, easier to rank than blog posts, builds backlinks
+- Email marketing — works if sequences are built correctly (see growth skill); people do read emails
+
+**Questionable-signal channels (test carefully):**
+- Meta/Facebook ads — Lovable's CEO at $400M ARR: "Meta ads have little incrementality; pass through views which don't materialize into anything. I haven't seen them work in a while." (Lenny's Podcast, Dec 2025). If running Meta ads, watch incrementality closely: are installs you're paying for ones that would have happened organically? Compare install lift when ads are paused vs. running.
+
+**Low-signal channels (avoid or deprioritize):**
+- Newsletter sponsorships — expensive and most clicks are bots
+- Twitter ads — worst targeting in the industry; not worth the spend
+- Google ads — more expensive than Facebook for consumer apps, higher irrelevant clicks
+- Referral programs — very hard to make work; only viable with stable conversion and large customer base
+- Reddit audience building — ban risk is high; answering long-tail questions can work, but building an audience there doesn't
+- Beta directories (BetaList, etc.) — mostly dead; not worth the setup
+
+**Alternative funnel: Quiz-based landing pages**
+
+Instead of Ad → App Store → Install, run Ad → Web Quiz → Personalized Results → App Store. A quiz between the ad and the offer warms cold traffic through micro-commitments. DTC benchmark: cold traffic conversion jumped from 1.2% to 4.7% with a quiz funnel (@DTC_Quizbuilder, $2M in 90 days).
+
+Why it works for apps:
+- Each question answered is a small "yes" that compounds (sunk cost)
+- Questions seed beliefs and pre-handle objections before the user sees pricing
+- Non-completers give you zero-party data for segmented retargeting (someone who answered "I struggle with timing the market" gets a different retargeting ad than someone who answered "I don't know what to invest in")
+- The loading/results screen is captive attention: 10-15s where you show testimonials, social proof, and app previews while "calculating their results"
+
+Quiz sequencing that converts:
+1. Q1-Q2: Low-friction demographics (age, experience level). Zero cognitive load, starts the yes-chain.
+2. Q3-Q4: Aspirational goals ("What's your investing goal?"). Emotional questions hit harder after they've committed.
+3. Q5-Q6: Pain points and struggles. Now they've told you their problems.
+4. Breather slide with social proof after Q4.
+5. Results page → personalized app recommendation → App Store link.
+
+Drop-off benchmarks: Q1 = 30-40% drop-off (normal, biggest filter). Remaining questions: under 15% each. Overall completion: aim for 25%+. If any single question has 10%+ drop-off, simplify it (fewer options, add "None of the above").
+
+Retargeting play: Everyone who takes the quiz but doesn't install gave you data. Segment retargeting by their answers: "tried other investing apps" → ad about why Bloom's AI is different. "Low confidence in stock picks" → ad about AI-powered research. Specific beats generic.
+
+Bloom application: The onboarding flow already asks risk tolerance and goals post-install. A pre-install web quiz version of this would warm traffic before the App Store page, and the data feeds retargeting even if they never install.
+
+Source: @DTC_Quizbuilder thread (https://x.com/DTC_Quizbuilder/status/2010379560769015885)
+
+**SEO timing:**
+- Don't prioritize SEO before your first customers — takes months to kick in, and if you pivot the product, the work goes to zero
+- When you do SEO: free tools first (easier to rank, more shareable, generate backlinks naturally), then long-tail blog posts with purchase intent, then programmatic data-driven pages
 
 ---
 
