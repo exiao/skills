@@ -24,14 +24,36 @@ function usage(msg) {
   process.exit(2);
 }
 
-function readKeyFromOpenclawConfig() {
+function readKey() {
+  if (process.env.XAI_API_KEY) return process.env.XAI_API_KEY;
+
+  // Hermes .env file
+  try {
+    const p = path.join(os.homedir(), ".hermes", ".env");
+    const raw = fs.readFileSync(p, "utf8");
+    for (const line of raw.split("\n")) {
+      const m = line.match(/^\s*(?:export\s+)?XAI_API_KEY\s*=\s*(.+?)\s*$/);
+      if (m) {
+        let v = m[1];
+        if (
+          (v.startsWith('"') && v.endsWith('"')) ||
+          (v.startsWith("'") && v.endsWith("'"))
+        ) {
+          v = v.slice(1, -1);
+        }
+        if (v) return v;
+      }
+    }
+  } catch {
+    // fall through
+  }
+
+  // OpenClaw config
   try {
     const p = path.join(os.homedir(), ".openclaw", "openclaw.json");
     const raw = fs.readFileSync(p, "utf8");
     const j = JSON.parse(raw);
-
     return (
-      process.env.XAI_API_KEY ||
       j?.env?.XAI_API_KEY ||
       j?.env?.vars?.XAI_API_KEY ||
       j?.skills?.entries?.["grok-search"]?.apiKey ||
@@ -39,7 +61,7 @@ function readKeyFromOpenclawConfig() {
       null
     );
   } catch {
-    return process.env.XAI_API_KEY || null;
+    return null;
   }
 }
 
@@ -107,9 +129,9 @@ for (let i = 0; i < args.length; i++) {
 const prompt = promptParts.join(" ").trim();
 if (!prompt) usage("Missing <prompt>");
 
-const apiKey = readKeyFromOpenclawConfig();
+const apiKey = readKey();
 if (!apiKey) {
-  console.error("Missing XAI_API_KEY.");
+  console.error("Missing XAI_API_KEY. Set env var or add XAI_API_KEY=... to ~/.hermes/.env");
   process.exit(1);
 }
 

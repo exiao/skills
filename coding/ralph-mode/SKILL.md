@@ -152,12 +152,64 @@ sessions_spawn({
 
 The plugin must be installed in the target project first.
 
-## Philosophy
+## Self-Loop Protocol (OpenClaw)
 
-1. **Iteration > Perfection**: Don't aim for perfect on first try. Let the loop refine.
-2. **Failures Are Data**: "Deterministically bad" means failures are predictable. Use them to tune prompts.
-3. **Operator Skill Matters**: Success depends on writing good prompts, not just having a good model.
-4. **Persistence Wins**: Keep trying until success.
+OpenClaw doesn't have post-completion hooks like Claude Code. Instead, the loop lives in the agent's behavior. When Ralph Mode is active, follow this protocol at the end of every turn:
+
+### After completing any work:
+
+1. **Re-read** `IMPLEMENTATION_PLAN.md`
+2. **Count** remaining incomplete tasks
+3. **If tasks remain AND iteration < max:**
+   - Pick the next highest-priority incomplete task
+   - Implement it (one task only)
+   - Run backpressure gates
+   - Update the plan
+   - Commit
+   - Go to step 1
+4. **If all tasks complete OR max iterations reached:**
+   - Run final validation (all gates)
+   - Emit the completion signal: `█RALPH_COMPLETE█`
+   - Stop
+
+### Completion signal
+
+The literal string `█RALPH_COMPLETE█` signals the loop is done. Do not emit it until:
+- Every task in `IMPLEMENTATION_PLAN.md` is marked done
+- All backpressure gates pass
+- No known blocking issues remain
+
+If you hit max iterations (default: 10) without completing, emit `█RALPH_TIMEOUT█` instead and list remaining tasks.
+
+### Why this works
+
+The agent continues working within a single turn, using tool calls to implement, test, and commit in sequence. Each "iteration" is a tool-call cycle within the same turn, not a separate session. Context stays fresh because each task is small. If context gets heavy, the agent spawns a sub-agent for the next batch.
+
+### For sub-agent mode (fresh context per iteration)
+
+When the task is large enough to exhaust context:
+
+```
+sessions_spawn({
+  runtime: "subagent",
+  task: "Read IMPLEMENTATION_PLAN.md at [path]. Pick the next incomplete task. Implement it. Run [gates]. Update the plan. Commit. If more tasks remain, say CONTINUE. If all done, say █RALPH_COMPLETE█.",
+  cwd: "[repo]",
+  runTimeoutSeconds: 1800
+})
+```
+
+The parent checks the sub-agent's output. If it says CONTINUE, spawn another. If `█RALPH_COMPLETE█`, stop.
+
+## Key Rules
+
+- **One task per iteration** — keeps context fresh, avoids drift
+- **Plans are disposable** — regenerate cheaply vs. salvage stale ones
+- **Lean prompts** — target ~40–60% context utilization ("smart zone")
+- **Spawn sub-agents for exploration** — protect main context
+- **Self-loop by default** — don't wait for the user between iterations
+- **█RALPH_COMPLETE█ is the only exit** — no "seems done", no early stops
+
+---
 
 ## References
 

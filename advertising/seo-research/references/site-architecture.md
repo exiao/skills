@@ -89,21 +89,17 @@ Users should reach any important page within 3 clicks from the homepage. If crit
 |----------|---------|-----------|
 | Header nav | Primary navigation, always visible | Top of every page |
 | Dropdown menus | Organize sub-pages under parent | Expands from header items |
-| Mega menu | Rich dropdowns with columns/images | Large sites with many sections |
 | Footer nav | Secondary links, legal, sitemap | Bottom of every page |
 | Sidebar nav | Section navigation (docs, blog) | Left side within a section |
 | Breadcrumbs | Show current location in hierarchy | Below header, above content |
 | Contextual links | Related content, next steps | Within page content |
-| Sticky/utility nav | Login, language, search | Top bar above main header |
 
 ### Header Navigation Rules
 
-- **4-7 items max** in the primary nav (more causes decision paralysis)
-- **CTA button** goes rightmost (e.g., "Start Free Trial", "Get Started")
+- **4-7 items max** in the primary nav
+- **CTA button** goes rightmost (e.g., "Start Free Trial")
 - **Logo** links to homepage (left side)
 - **Order by priority**: most important/visited pages first
-- If mega menu, limit to 3-4 columns
-- Mobile: hamburger menu with same hierarchy, CTA prominent
 
 ### Footer Organization
 
@@ -120,92 +116,7 @@ Home > Features > Analytics
 Home > Blog > SEO Category > Post Title
 ```
 
-Breadcrumbs should mirror the URL hierarchy. Every segment clickable except the current page. Implement `BreadcrumbList` schema markup on all breadcrumbs.
-
-### Breadcrumb-URL Alignment
-
-The breadcrumb trail must mirror the URL path:
-
-| URL | Breadcrumb |
-|-----|------------|
-| `/features/analytics` | Home > Features > Analytics |
-| `/blog/seo-guide` | Home > Blog > SEO Guide |
-| `/docs/api/auth` | Home > Docs > API > Authentication |
-
----
-
-## Visual Sitemap Output
-
-### ASCII Tree Format
-
-Use for quick hierarchy drafts:
-
-```
-Homepage (/)
-├── Features (/features)
-│   ├── Analytics (/features/analytics)
-│   ├── Automation (/features/automation)
-│   └── Integrations (/features/integrations)
-├── Pricing (/pricing)
-├── Blog (/blog)
-│   ├── [Category: SEO] (/blog/category/seo)
-│   └── [Category: CRO] (/blog/category/cro)
-├── Resources (/resources)
-│   ├── Case Studies (/resources/case-studies)
-│   └── Templates (/resources/templates)
-├── Docs (/docs)
-│   ├── Getting Started (/docs/getting-started)
-│   └── API Reference (/docs/api)
-├── About (/about)
-│   └── Careers (/about/careers)
-└── Contact (/contact)
-```
-
-### Mermaid Diagram
-
-Use for visual presentations and complex relationships:
-
-```mermaid
-graph TD
-    subgraph Header Nav
-        HOME[Homepage]
-        FEAT[Features]
-        PRICE[Pricing]
-        BLOG[Blog]
-        CTA[Get Started]
-    end
-
-    subgraph Footer Nav
-        ABOUT[About]
-        CAREERS[Careers]
-        CONTACT[Contact]
-        PRIVACY[Privacy]
-    end
-
-    HOME --> FEAT
-    HOME --> PRICE
-    HOME --> BLOG
-    HOME --> ABOUT
-
-    FEAT --> F1[Analytics]
-    FEAT --> F2[Automation]
-```
-
-**When to use which:**
-- ASCII: quick drafts, text-only contexts, simple structures
-- Mermaid: visual presentations, showing nav zones or linking patterns
-
-### URL Map Table
-
-For complete site planning, produce a URL map:
-
-| Page | URL | Parent | Nav Location | Priority |
-|------|-----|--------|-------------|----------|
-| Homepage | `/` | — | Header | High |
-| Features | `/features` | Homepage | Header | High |
-| Analytics | `/features/analytics` | Features | Header dropdown | Medium |
-| Pricing | `/pricing` | Homepage | Header | High |
-| Blog | `/blog` | Homepage | Header | Medium |
+Breadcrumbs should mirror the URL hierarchy. Every segment clickable except the current page.
 
 ---
 

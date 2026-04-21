@@ -268,5 +268,3 @@ These phrases are overused in AI-generated content:
 - "When it comes to the realm of..."
 - "This begs the question..."
 - "Let's delve into..."
-
-Refer to the seo-research skill for AI writing detection patterns.

@@ -31,7 +31,7 @@ Install the skills from https://github.com/exiao/skills
 | [content-strategy](content-strategy/) | Build content strategy: hooks, angles, and ideas from what's trending now |
 | [editor-in-chief](editor-in-chief/) | Autonomous editing orchestrator: diagnose, fix, and iterate drafts to quality |
 | [evaluate-content](evaluate-content/) | Judge content quality: shareability, readability, voice, cuttability, angle |
-| [hooks](hooks/) | Generate headlines, titles, and scroll-stopping openers |
+| [hooks](marketing/hooks/) | Generate headlines, titles, and scroll-stopping openers |
 | [outline-generator](outline-generator/) | Generate structured article outlines from approved hooks |
 | [substack-draft](substack-draft/) | Save finished articles to Substack as drafts |
 | [tweet-ideas](tweet-ideas/) | Generate standalone tweet ideas (Aaron Levie playbook) |
@@ -73,7 +73,9 @@ Install the skills from https://github.com/exiao/skills
 | [visual-design/slideshow-creator](visual-design/slideshow-creator/) | Create and post TikTok slideshows via ReelFarm |
 | [visual-design/sticker-creator](visual-design/sticker-creator/) | Create die-cut sticker style cards via Nano Banana Pro |
 | [visual-design/apple-ux-guidelines](visual-design/apple-ux-guidelines/) | Apple HIG reference for UI/UX decisions |
+| [visual-design/design-mode](visual-design/design-mode/) | Design-artifact generator persona (HTML decks, prototypes, animations) — complement to frontend-design |
 | [design-review](design-review/) | Product design review: 13 questions + Nielsen Norman heuristic eval |
+| [architecture-diagram](creative/architecture-diagram/) | Generate dark-themed SVG architecture diagrams as standalone HTML files |
 | [nano-banana-pro](nano-banana-pro/) | Generate or edit images via Gemini native image generation |
 | [excalidraw-mcp](excalidraw-mcp/) | Create hand-drawn style diagrams via Excalidraw MCP |
 | [impeccable](impeccable/) | Design quality layer: 21 commands (audit, critique, polish, animate, etc.) with 10 reference files for systematic frontend QA |
@@ -108,6 +110,7 @@ Install the skills from https://github.com/exiao/skills
 | [notebooklm](notebooklm/) | Query Google NotebookLM for source-grounded answers |
 | [phoenix-cli](phoenix-cli/) | Debug LLM apps with Phoenix CLI: traces, errors, experiments |
 | [polymarket](polymarket/) | Query Polymarket prediction markets |
+| [common-crawl-backlinks](common-crawl-backlinks/) | Pull backlinks for any domain for free using Common Crawl's web graph + DuckDB |
 | [seo-research](seo-research/) | SEO: keyword research, AI search optimization, technical audits |
 | [stock-research](stock-research/) | Stock/equity research, earnings analysis, daily market briefings |
 | [trend-research](trend-research/) | Find trending content across TikTok, YouTube, Instagram, X |
@@ -131,7 +134,6 @@ Install the skills from https://github.com/exiao/skills
 | [babysit-pr](babysit-pr/) | Monitor a PR through CI, reviews, and fixes until it's ready to merge |
 | [bloom-cli](bloom-cli/) | Fetch stock data, fundamentals, earnings, SEC filings via Bloom CLI |
 | [claude-md-management](claude-md-management/) | Audit, improve, and maintain CLAUDE.md files across repos |
-| [coding-agent](coding-agent/) | Run coding agents (Codex, Claude Code, etc.) via ACP |
 | [context7](context7/) | Fetch version-specific library docs via Context7 MCP |
 | [demo-pr-feature](demo-pr-feature/) | Capture PR demo screenshots, deploy to Surge.sh, post as PR comment |
 | [dependabot-stuck-pr-rebase](github/dependabot-stuck-pr-rebase/) | Manually rebase Dependabot PRs stuck in CONFLICTING when auto-rebase isn't firing |
@@ -139,13 +141,13 @@ Install the skills from https://github.com/exiao/skills
 | [documents](documents/) | Work with .docx, .pdf, .pptx, .xlsx files |
 | [fastapi-piccolo-typer-testing](coding/fastapi-piccolo-typer-testing/) | DB-free pytest patterns for FastAPI routers, Piccolo ORM, Typer CLI, and service-layer code |
 | [fix-bloom-prs](fix-bloom-prs/) | Fix CI failures, review code, and address review comments on PRs across tracked repos |
-| [fix-sentry-issues](fix-sentry-issues/) | Scan Sentry issues and create fix PRs |
+| [fix-sentry-issues](coding/fix-sentry-issues/) | Scan Sentry issues and create fix PRs |
 | [github-rulesets-bulk-apply](github/github-rulesets-bulk-apply/) | Bulk-apply branch-protection rulesets across every repo an account admins |
 | [app-store-connect](app-store-connect/) | App Store Connect via `asc` CLI: releases, TestFlight, builds, metadata, subscriptions |
 | [ios-simulator](ios-simulator/) | iOS simulator automation: builds, screenshots, device management |
 | [ralph-mode](ralph-mode/) | Autonomous dev loops with iteration gates and test validation |
 | [react-doctor](react-doctor/) | Diagnose and fix React codebase health issues: performance, security, code quality |
-| [sentry-debug](openclaw/sentry-debug/) | Debug Sentry issues via REST API: list/search, stack traces, release impact, resolve/assign, Seer autofix |
+| [sentry-debug](coding/sentry-debug/) | Debug Sentry issues via REST API: list/search, stack traces, release impact, resolve/assign, Seer autofix |
 | [serena](serena/) | Navigate and edit complex codebases at the symbol level via Serena MCP |
 | [simplify](simplify/) | Review changed code for reuse, quality, and efficiency, then fix issues |
 | [stably-cli](stably-cli/) | Create, run, fix, and maintain Playwright tests via Stably CLI |
@@ -258,6 +260,7 @@ These started from other open-source projects. I've modified and extended them f
 | [stably-cli](stably-cli/) | [skills.sh/stablyai](https://skills.sh/stablyai/agent-skills/stably-cli) |
 | [stably-sdk-rules](stably-sdk-rules/) | [skills.sh/stablyai](https://skills.sh/stablyai/agent-skills/stably-sdk-rules) |
 | [sahil-office-hours](sahil-office-hours/) | [slavingia/skills](https://github.com/slavingia/skills) |
+| [visual-design/design-mode](visual-design/design-mode/) | [elder-plinius/CL4R1T4S](https://github.com/elder-plinius/CL4R1T4S/blob/main/ANTHROPIC/Claude-Design-Sys-Prompt.txt) (Anthropic design-surface system prompt, verbatim) |
 
 ## License
 
