@@ -1,6 +1,6 @@
 ---
 name: revenuecat-catalog-sync
-description: Reconcile App Store Connect subscriptions and in-app purchases with RevenueCat products, entitlements, offerings, and packages using asc and RevenueCat MCP. Use when setting up or syncing subscription catalogs across ASC and RevenueCat.
+description: Reconcile App Store Connect subscriptions and in-app purchases with RevenueCat products, entitlements, offerings, and packages using the asc CLI and the revenuecat-cli skill (mcporter). Use when setting up or syncing subscription catalogs across ASC and RevenueCat.
 ---
 
 # asc RevenueCat catalog sync
@@ -15,13 +15,13 @@ Use this skill to keep App Store Connect (ASC) and RevenueCat aligned, including
 
 ## Preconditions
 - `asc` authentication is configured (`asc auth login` or `ASC_*` env vars).
-- RevenueCat MCP server is configured and authenticated.
-- In Cursor and VS Code, OAuth auth is available for RevenueCat MCP. API key auth is also supported.
+- `mcporter` is installed and the `revenuecat` server is registered in `~/.mcporter/mcporter.json` (see the `revenuecat-cli` skill for setup).
+- `REVENUECAT_API_KEY` is set in the agent environment for read operations via mcporter.
+- For write operations (create/update), `REVENUECAT_WRITE_API_KEY` (a v2 secret key with write scope) must be set — these go through the REST API directly, not mcporter.
 - You know:
   - ASC app ID (`APP_ID`)
-  - RevenueCat `project_id`
+  - RevenueCat `project_id` (Bloom = `proj2cab6270`)
   - target RevenueCat app type (`app_store` or `mac_app_store`) and bundle ID for create flows
-- Use a write-enabled RevenueCat API v2 key when applying changes.
 
 ## Safety defaults
 - Start in **audit mode** (read-only).
@@ -35,7 +35,8 @@ Use this skill to keep App Store Connect (ASC) and RevenueCat aligned, including
 - Do not use display names as unique identifiers.
 
 ## Scope boundary
-- RevenueCat MCP configures RevenueCat resources; it does not create App Store Connect products directly.
+- The `revenuecat-cli` skill (mcporter) is **read-only**: list/get for projects, apps, products, entitlements, offerings, packages, customers, subscriptions.
+- All **writes** (create/update products, attach entitlements, create offerings/packages) go through the RevenueCat v2 REST API directly via `curl`, using `REVENUECAT_WRITE_API_KEY`.
 - Use `asc` commands to create missing ASC subscription groups, subscriptions, and IAPs before RevenueCat mapping.
 
 ## Modes
@@ -68,15 +69,21 @@ asc iap list --app "APP_ID" --paginate --output json
 asc subscriptions list --group "GROUP_ID" --paginate --output json
 ```
 
-### Step B - Read current RevenueCat catalog (MCP)
+### Step B - Read current RevenueCat catalog (mcporter)
 
-Use these MCP tools (with `project_id` and pagination where applicable):
-- `mcp_RC_get_project`
-- `mcp_RC_list_apps`
-- `mcp_RC_list_products`
-- `mcp_RC_list_entitlements`
-- `mcp_RC_list_offerings`
-- `mcp_RC_list_packages`
+Use the `revenuecat-cli` skill via `mcporter call revenuecat.<tool>`. All tool names use **dashes**, not underscores. Pass `project_id` and paginate with `starting_after` where applicable.
+
+```bash
+mkdir -p /tmp/revenuecat
+mcporter call revenuecat.list-apps         project_id=proj2cab6270 --output json > /tmp/revenuecat/apps.json
+mcporter call revenuecat.list-products     project_id=proj2cab6270 limit:100 --output json > /tmp/revenuecat/products.json
+mcporter call revenuecat.list-entitlements project_id=proj2cab6270 --output json > /tmp/revenuecat/entitlements.json
+mcporter call revenuecat.list-offerings    project_id=proj2cab6270 --output json > /tmp/revenuecat/offerings.json
+# packages are per-offering:
+mcporter call revenuecat.list-packages     project_id=proj2cab6270 offering_id=default --output json > /tmp/revenuecat/packages.json
+```
+
+Note: `list-projects` replaces the old `get_project` for project discovery. There is no `get_project` in the current MCP.
 
 ### Step C - Build mapping plan
 
@@ -116,32 +123,84 @@ asc iap create \
 
 ### Step E - Ensure RevenueCat app and products
 
-Use MCP:
-- create app if missing: `mcp_RC_create_app`
-- create products: `mcp_RC_create_product`
-  - `store_identifier` = ASC `productId`
-  - `app_id` = RevenueCat app ID
-  - `type` from mapping above
+The current public RC MCP is read-only — these are write operations and must use the v2 REST API directly via `curl` with a write-scoped key (`REVENUECAT_WRITE_API_KEY`).
+
+```bash
+# Create app (if missing)
+curl -sS -X POST "https://api.revenuecat.com/v2/projects/proj2cab6270/apps" \
+  -H "Authorization: Bearer $REVENUECAT_WRITE_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"name": "Bloom iOS", "type": "app_store", "bundle_id": "com.bloom.invest"}'
+
+# Create product (per ASC product)
+curl -sS -X POST "https://api.revenuecat.com/v2/projects/proj2cab6270/products" \
+  -H "Authorization: Bearer $REVENUECAT_WRITE_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "store_identifier": "com.bloom.premium.monthly",
+    "type": "subscription",
+    "app_id": "<RC_APP_ID>"
+  }'
+```
+
+After creating, re-read with `mcporter call revenuecat.list-products` to confirm.
 
 ### Step F - Ensure entitlements and attachments
 
-Use MCP:
-- list/create entitlements: `mcp_RC_list_entitlements`, `mcp_RC_create_entitlement`
-- attach products: `mcp_RC_attach_products_to_entitlement`
-- verify attachments: `mcp_RC_get_products_from_entitlement`
+Read via mcporter; write via REST API:
+
+```bash
+# Read
+mcporter call revenuecat.list-entitlements project_id=proj2cab6270 --output json
+mcporter call revenuecat.get-products-from-entitlement \
+  project_id=proj2cab6270 entitlement_id=premium --output json
+
+# Write: create entitlement
+curl -sS -X POST "https://api.revenuecat.com/v2/projects/proj2cab6270/entitlements" \
+  -H "Authorization: Bearer $REVENUECAT_WRITE_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"lookup_key": "premium", "display_name": "Premium"}'
+
+# Write: attach products to entitlement
+curl -sS -X POST "https://api.revenuecat.com/v2/projects/proj2cab6270/entitlements/<ENT_ID>/actions/attach_products" \
+  -H "Authorization: Bearer $REVENUECAT_WRITE_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"product_ids": ["<RC_PRODUCT_ID>"]}'
+```
 
 ### Step G - Ensure offerings and packages (optional)
 
-Use MCP:
-- list/create/update offerings:
-  - `mcp_RC_list_offerings`
-  - `mcp_RC_create_offering`
-  - `mcp_RC_update_offering` (`is_current=true` only if requested)
-- list/create packages:
-  - `mcp_RC_list_packages`
-  - `mcp_RC_create_package`
-- attach products to packages:
-  - `mcp_RC_attach_products_to_package` with `eligibility_criteria: "all"`
+Read via mcporter; write via REST API:
+
+```bash
+# Read
+mcporter call revenuecat.list-offerings project_id=proj2cab6270 --output json
+mcporter call revenuecat.list-packages project_id=proj2cab6270 offering_id=default --output json
+
+# Write: create offering
+curl -sS -X POST "https://api.revenuecat.com/v2/projects/proj2cab6270/offerings" \
+  -H "Authorization: Bearer $REVENUECAT_WRITE_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"lookup_key": "default", "display_name": "Default"}'
+
+# Write: create package
+curl -sS -X POST "https://api.revenuecat.com/v2/projects/proj2cab6270/offerings/<OFF_ID>/packages" \
+  -H "Authorization: Bearer $REVENUECAT_WRITE_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"lookup_key": "$rc_monthly", "display_name": "Monthly", "position": 1}'
+
+# Write: attach products to package
+curl -sS -X POST "https://api.revenuecat.com/v2/projects/proj2cab6270/packages/<PKG_ID>/actions/attach_products" \
+  -H "Authorization: Bearer $REVENUECAT_WRITE_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"products": [{"product_id": "<RC_PRODUCT_ID>", "eligibility_criteria": "all"}]}'
+
+# Write: mark current offering
+curl -sS -X POST "https://api.revenuecat.com/v2/projects/proj2cab6270/offerings/<OFF_ID>" \
+  -H "Authorization: Bearer $REVENUECAT_WRITE_API_KEY" \
+  -H "Content-Type: application/json" \
+  -d '{"is_current": true}'
+```
 
 Recommended package keys:
 - `ONE_WEEK` -> `$rc_weekly`
