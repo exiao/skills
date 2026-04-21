@@ -12,6 +12,7 @@ Run xAI Grok locally via bundled scripts (search + chat + model listing). Defaul
 
 The script looks for an xAI API key in this order:
 - `XAI_API_KEY` env var
+- `~/.hermes/.env` → `XAI_API_KEY=...`
 - `~/.openclaw/openclaw.json` → `env.XAI_API_KEY`
 - `~/.openclaw/openclaw.json` → `skills.entries["grok-search"].apiKey`
 - fallback: `skills.entries["search-x"].apiKey` or `skills.entries.xai.apiKey`

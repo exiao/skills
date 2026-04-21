@@ -38,25 +38,28 @@ for DIR in ~/$REPO_DIR ~/clawd/$REPO_DIR /tmp/$REPO_DIR; do
   [ -d "$DIR/.git" ] && LOCAL_DIR="$DIR" && break
 done
 
-# Clone if not found locally
-if [ -z "$LOCAL_DIR" ]; then
-  git clone "git@github.com:$REPO.git" "/tmp/$REPO_DIR"
-  LOCAL_DIR="/tmp/$REPO_DIR"
+# Create worktree or clone directly to worktree path
+BRANCH=$(gh pr view $PR --repo $REPO --json headRefName -q '.headRefName')
+WORKTREE="/tmp/${REPO_DIR}-pr-${PR}"
+
+if [ -n "$LOCAL_DIR" ]; then
+  # Use existing clone to create a worktree
+  git -C "$LOCAL_DIR" fetch origin "$BRANCH"
+  git -C "$LOCAL_DIR" worktree add "$WORKTREE" "origin/$BRANCH" 2>/dev/null || \
+    git -C "$LOCAL_DIR" worktree add --detach "$WORKTREE" "origin/$BRANCH"
+  cd "$WORKTREE"
+  git checkout -B "$BRANCH" "origin/$BRANCH" || true
+else
+  # No local clone found — clone directly to the worktree path
+  git clone --branch "$BRANCH" "git@github.com:$REPO.git" "$WORKTREE"
+  LOCAL_DIR="$WORKTREE"
+  cd "$WORKTREE"
 fi
 
 # Read project rules
 for F in CLAUDE.md AGENTS.md; do
-  [ -f "$LOCAL_DIR/$F" ] && cat "$LOCAL_DIR/$F"
+  [ -f "$WORKTREE/$F" ] && cat "$WORKTREE/$F"
 done
-
-# Create worktree
-BRANCH=$(gh pr view $PR --repo $REPO --json headRefName -q '.headRefName')
-WORKTREE="/tmp/${REPO_DIR}-pr-${PR}"
-git -C "$LOCAL_DIR" fetch origin "$BRANCH"
-git -C "$LOCAL_DIR" worktree add "$WORKTREE" "origin/$BRANCH" 2>/dev/null || \
-  git -C "$LOCAL_DIR" worktree add --detach "$WORKTREE" "origin/$BRANCH"
-cd "$WORKTREE"
-git checkout -B "$BRANCH" "origin/$BRANCH" || true
 ```
 
 ## Scope Check (runs once, before the loop)
