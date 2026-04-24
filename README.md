@@ -52,6 +52,7 @@ Install the skills from https://github.com/exiao/skills
 | [meta-ads](meta-ads/) | Daily Meta ad operations via Marketing API |
 | [optimize-prompt](optimize-prompt/) | Iteratively optimize system prompts via autoresearch loop |
 | [paid-ads](paid-ads/) | Paid advertising strategy: platform selection, targeting, creative, optimization |
+| [prometheus](marketing/prometheus/) | Search TikTok viral videos, App Store rankings, hook analysis, and content research via SGE Prometheus MCP |
 | [pricing-strategy](pricing-strategy/) | Pricing decisions, tier packaging, value metrics, monetization strategy |
 | [product-marketing-context](product-marketing-context/) | Create product marketing context doc referenced by all marketing skills |
 | [referral-program](referral-program/) | Referral and affiliate program design, optimization, and measurement |
@@ -63,6 +64,7 @@ Install the skills from https://github.com/exiao/skills
 
 | Skill | Description |
 |-------|-------------|
+| [architecture-diagram](creative/architecture-diagram/) | Dark-themed SVG architecture diagrams as standalone HTML files with semantic component colors |
 | [visual-design](visual-design/) | Router skill for all visual design tasks (dispatches to sub-skills below) |
 | [visual-design/canvas-design](visual-design/canvas-design/) | Create visual art and designs as .png/.pdf files |
 | [visual-design/create-a-sales-asset](visual-design/create-a-sales-asset/) | Generate sales assets: landing pages, decks, one-pagers |
@@ -77,6 +79,7 @@ Install the skills from https://github.com/exiao/skills
 | [nano-banana-pro](nano-banana-pro/) | Generate or edit images via Gemini native image generation |
 | [excalidraw-mcp](excalidraw-mcp/) | Create hand-drawn style diagrams via Excalidraw MCP |
 | [impeccable](impeccable/) | Design quality layer: 21 commands (audit, critique, polish, animate, etc.) with 10 reference files for systematic frontend QA |
+| [visual-design/design-mode](visual-design/design-mode/) | Anthropic design-surface system prompt: HTML artifacts, decks, prototypes, animations |
 
 ### Video Production
 
@@ -133,10 +136,13 @@ Install the skills from https://github.com/exiao/skills
 | [claude-md-management](claude-md-management/) | Audit, improve, and maintain CLAUDE.md files across repos |
 | [context7](context7/) | Fetch version-specific library docs via Context7 MCP |
 | [demo-pr-feature](demo-pr-feature/) | Capture PR demo screenshots, deploy to Surge.sh, post as PR comment |
+| [dependabot-stuck-pr-rebase](github/dependabot-stuck-pr-rebase/) | Manually rebase Dependabot PRs stuck in CONFLICTING when auto-rebase isn't firing |
 | [deploy-bloom](deploy-bloom/) | Deploy Bloom OTA updates via bloom-updater |
 | [documents](documents/) | Work with .docx, .pdf, .pptx, .xlsx files |
+| [fastapi-piccolo-typer-testing](coding/fastapi-piccolo-typer-testing/) | DB-free pytest patterns for FastAPI routers, Piccolo ORM, Typer CLI, and service-layer code |
 | [fix-bloom-prs](fix-bloom-prs/) | Fix CI failures, review code, and address review comments on PRs across tracked repos |
 | [fix-sentry-issues](coding/fix-sentry-issues/) | Scan Sentry issues and create fix PRs |
+| [github-rulesets-bulk-apply](github/github-rulesets-bulk-apply/) | Bulk-apply branch-protection rulesets across every repo an account admins |
 | [app-store-connect](app-store-connect/) | App Store Connect via `asc` CLI: releases, TestFlight, builds, metadata, subscriptions |
 | [ios-simulator](ios-simulator/) | iOS simulator automation: builds, screenshots, device management |
 | [ralph-mode](ralph-mode/) | Autonomous dev loops with iteration gates and test validation |
@@ -168,9 +174,18 @@ Install the skills from https://github.com/exiao/skills
 
 | Skill | Description |
 |-------|-------------|
+| [claude-auth-remote-login](hermes-ops/claude-auth-remote-login/) | Remote Claude Code OAuth login flow when token expires |
+| [exiao-skills-pr-conventions](hermes/exiao-skills-pr-conventions/) | Conventions for contributing skills to this repo: layout, frontmatter, sanitization, PR workflow |
+| [hermes-context-files](hermes/hermes-context-files/) | How Hermes discovers and loads context files (SOUL.md, AGENTS.md, HERMES.md, CLAUDE.md) |
+| [hermes-signal-italic-fix](hermes-patches/hermes-signal-italic-fix/) | Patch note: fix false-positive italics in Signal adapter caused by snake_case underscores |
+| [memory-gc](hermes/memory-gc/) | Daily memory garbage collection: decay rules, .pending.md drain, deduplication, session pruning |
 | [openclaw-memory-setup](openclaw-memory-setup/) | Set up a complete memory system for an OpenClaw instance |
 | [openclaw-resiliency](openclaw-resiliency/) | Gateway watchdog for health monitoring and auto-recovery |
+| [recall](hermes/recall/) | Retrieve memory from past sessions via progressive disclosure (hot → episodes → sessions) |
 | [security-audit](security-audit/) | Security audit for codebases and deployments |
+| [signal-send-file](hermes/signal-send-file/) | Send files as native attachments on Signal/Telegram/Discord/Slack/WhatsApp via the MEDIA tag |
+| [signal-table-render](hermes/signal-table-render/) | Auto-render markdown tables to PNG before sending on Signal |
+| [watchdog-status-cleanup](hermes/watchdog-status-cleanup/) | Inspect Hermes/OpenClaw watchdog LaunchAgents and clean up stale processes |
 
 ### Automated Pipelines (Cron)
 
@@ -193,6 +208,7 @@ Install the skills from https://github.com/exiao/skills
 | Skill | Description |
 |-------|-------------|
 | [document-release](document-release/) | Document release processes |
+| [hotel-price-research](research/hotel-price-research/) | Research hotel pricing across OTAs for booking decisions; documents known dead-end sites and working Booking.com flow |
 | [trip-planner](trip-planner/) | Generate day-by-day travel itineraries with neighborhood routing and budget scaling |
 
 ---
