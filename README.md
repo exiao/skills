@@ -69,6 +69,7 @@ Install the skills from https://github.com/exiao/skills
 | [visual-design/canvas-design](visual-design/canvas-design/) | Create visual art and designs as .png/.pdf files |
 | [visual-design/create-a-sales-asset](visual-design/create-a-sales-asset/) | Generate sales assets: landing pages, decks, one-pagers |
 | [visual-design/d3js-visualization](visual-design/d3js-visualization/) | Create interactive D3.js data visualizations |
+| [visual-design/design-md](visual-design/design-md/) | Scaffold a root DESIGN.md (the visual sibling of AGENTS.md) — adapt from brand doc, scrape a URL, extract from codebase, or pick from the VoltAgent awesome-design-md gallery (68 templates) |
 | [visual-design/image-generator](visual-design/image-generator/) | Generate article visuals: diagrams, hero images, screenshots |
 | [visual-design/slideshow-creator](visual-design/slideshow-creator/) | Create and post TikTok slideshows via ReelFarm |
 | [visual-design/sticker-creator](visual-design/sticker-creator/) | Create die-cut sticker style cards via Nano Banana Pro |
@@ -260,6 +261,7 @@ These started from other open-source projects. I've modified and extended them f
 | [stably-cli](stably-cli/) | [skills.sh/stablyai](https://skills.sh/stablyai/agent-skills/stably-cli) |
 | [stably-sdk-rules](stably-sdk-rules/) | [skills.sh/stablyai](https://skills.sh/stablyai/agent-skills/stably-sdk-rules) |
 | [sahil-office-hours](sahil-office-hours/) | [slavingia/skills](https://github.com/slavingia/skills) |
+| [visual-design/design-md](visual-design/design-md/) | [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md) + [Google Stitch DESIGN.md spec](https://stitch.withgoogle.com/docs/design-md/overview/) |
 | [visual-design/design-mode](visual-design/design-mode/) | [elder-plinius/CL4R1T4S](https://github.com/elder-plinius/CL4R1T4S/blob/main/ANTHROPIC/Claude-Design-Sys-Prompt.txt) (Anthropic design-surface system prompt, verbatim) |
 
 ## License
