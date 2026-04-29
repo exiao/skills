@@ -32,11 +32,13 @@ Install the skills from https://github.com/exiao/skills
 | [**creative**](creative/) | 38 | Writing, editing, media production, content creation |
 | [**devops**](devops/) | 52 | CI/CD, GitHub, Docker, MLOps, model training/inference |
 | [**finance**](finance/) | 9 | Investing, market analysis, portfolio management |
-| [**runtime**](hermes/) | 23 | Runtime internals, patches, skill creation/auditing |
+| [**hermes**](hermes/) | 23 | Runtime internals, patches, skill creation/auditing |
 | [**marketing**](marketing/) | 38 | Ads (Google/Meta/Apple), SEO, analytics, social media |
 | [**productivity**](productivity/) | 16 | Apple apps, email, notes, smart home, local search, gaming |
 | [**research**](research/) | 12 | Deep research, competitive analysis, market intelligence |
 | [**visual-design**](visual-design/) | 37 | UI/UX design, diagrams, image generation, frontend |
+
+---
 
 ## Skill Structure
 
@@ -52,8 +54,6 @@ category/
 ```
 
 See [CLAUDE.md](CLAUDE.md) for full conventions.
-
----
 
 ---
 

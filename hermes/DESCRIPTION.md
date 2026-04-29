@@ -1,3 +1,1 @@
----
-description: Hermes agent operations — context management, signal rendering, watchdog status.
----
+Assistant Runtime internals, runtime patches, skill creation/auditing/improvement, and platform operations.
