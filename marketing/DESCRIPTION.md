@@ -1,3 +1,1 @@
----
-description:Marketing strategy — brand, copywriting, content, growth, pricing, competitive analysis
----
+Advertising (Google, Meta, Apple Search Ads), SEO, analytics, social media management, email marketing, and growth.
