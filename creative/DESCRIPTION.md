@@ -1,3 +1,1 @@
----
-description: Creative content generation — ASCII art, hand-drawn style diagrams, and visual design tools.
----
+Writing, editing, content pipelines, media production (video, audio, GIFs), and content evaluation.

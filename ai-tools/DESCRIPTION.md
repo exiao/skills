@@ -1,3 +1,1 @@
----
-description:AI-powered tools — browser automation, search, web extraction
----
+AI agents (Claude Code, Codex, OpenCode), MCP integrations, web search tools, and LLM-powered utilities.
