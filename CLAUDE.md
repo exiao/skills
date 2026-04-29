@@ -25,10 +25,11 @@ category-name/
 | **creative** | Writing, editing, media production, content creation |
 | **devops** | CI/CD, GitHub workflows, Docker, MLOps, model training/inference |
 | **finance** | Investing, market analysis, portfolio management |
-| **hermes** | Runtime internals, patches, skill creation/auditing |
 | **marketing** | Ads (Google/Meta/Apple), SEO, analytics, social media |
+| **memory** | Memory management — GC, setup, and recall from past sessions |
 | **productivity** | Apple apps, email, notes, smart home, local search, gaming |
 | **research** | Deep research, competitive analysis, market intelligence |
+| **skills-meta** | Skills about skills — creating, auditing, improving, testing |
 | **visual-design** | UI/UX design, diagrams, image generation, frontend design |
 
 ## Skill Conventions

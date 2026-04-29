@@ -6,3 +6,6 @@ __pycache__/
 .worktrees/
 .bundled_manifest
 internal/
+
+# Private runtime/platform skills (kept locally only)
+hermes/
