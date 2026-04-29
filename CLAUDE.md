@@ -1,16 +1,37 @@
 # Skills Repo Conventions
 
-This is a public repo of OpenClaw skills. Every directory at root is a skill (except `.github/`).
+This is a public repo of OpenClaw skills. Every directory at root is a **category** containing related skills (except `.github/`).
 
-## Skill Structure
+## Repo Structure
 
 ```
-skill-name/
-├── SKILL.md              # Entry point (required)
-├── references/           # Detailed docs, checklists, examples
-├── scripts/              # Deterministic code (Python, JS, bash)
-└── assets/               # Templates, images, static resources
+category-name/
+├── DESCRIPTION.md            # Category description
+└── skill-name/
+    ├── SKILL.md              # Entry point (required)
+    ├── references/           # Detailed docs, checklists, examples
+    ├── scripts/              # Deterministic code (Python, JS, bash)
+    └── assets/               # Templates, images, static resources
 ```
+
+## Categories
+
+| Category | What's inside |
+|----------|--------------|
+| **ai-tools** | AI agents, MCP integrations, web search, LLM tooling |
+| **app-store** | App Store tools, RevenueCat, Prometheus, ReelFarm |
+| **bloom** | Bloom product-specific skills |
+| **coding** | Programming, debugging, testing, code review, web scraping |
+| **creative** | Writing, editing, media production, content creation |
+| **devops** | CI/CD, GitHub workflows, Docker, MLOps, model training/inference |
+| **finance** | Investing, market analysis, portfolio management |
+| **runtime** | Hermes Agent internals, runtime patches, skill management |
+| **marketing** | Ads (Google/Meta/Apple), SEO, analytics, social media |
+| **productivity** | Apple apps, email, notes, smart home, local search, gaming |
+| **research** | Deep research, competitive analysis, market intelligence |
+| **visual-design** | UI/UX design, diagrams, image generation, frontend design |
+
+## Skill Conventions
 
 - `SKILL.md` must have YAML frontmatter with `name` and `description`.
 - `description` is a routing instruction for the model, not a human summary. Include trigger phrases.
@@ -36,4 +57,3 @@ skill-name/
 
 - `claude-code-review.yml` runs on every PR. It checks frontmatter, hardcoded secrets, broken references, and accuracy.
 - CI failures from bad credentials (401) are infra issues. Retry the run.
-

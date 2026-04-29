@@ -25,17 +25,16 @@ Install the skills from https://github.com/exiao/skills
 
 | Category | Skills | Description |
 |----------|--------|-------------|
-| [**ai-tools**](ai-tools/) | 11 | AI agents, MCP integrations, web search, LLM tooling |
+| [**ai-tools**](ai-tools/) | 10 | AI agents, MCP integrations, web search, LLM tooling |
 | [**app-store**](app-store/) | 28 | App Store tools, RevenueCat, Prometheus, ReelFarm |
-| [**apple**](apple/) | 4 | Apple ecosystem (Shortcuts, UX guidelines, notarization) |
 | [**bloom**](bloom/) | 3 | Bloom product-specific skills |
-| [**coding**](coding/) | 24 | Programming, debugging, testing, code review, PR management |
+| [**coding**](coding/) | 25 | Programming, debugging, testing, code review, web scraping |
 | [**creative**](creative/) | 38 | Writing, editing, media production, content creation |
 | [**devops**](devops/) | 52 | CI/CD, GitHub, Docker, MLOps, model training/inference |
 | [**finance**](finance/) | 9 | Investing, market analysis, portfolio management |
 | [**hermes**](hermes/) | 23 | Runtime internals, patches, skill creation/auditing |
 | [**marketing**](marketing/) | 38 | Ads (Google/Meta/Apple), SEO, analytics, social media |
-| [**productivity**](productivity/) | 12 | Email, notes, smart home, local search, gaming |
+| [**productivity**](productivity/) | 16 | Apple apps, email, notes, smart home, local search, gaming |
 | [**research**](research/) | 12 | Deep research, competitive analysis, market intelligence |
 | [**visual-design**](visual-design/) | 37 | UI/UX design, diagrams, image generation, frontend |
 
