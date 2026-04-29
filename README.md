@@ -32,10 +32,11 @@ Install the skills from https://github.com/exiao/skills
 | [**creative**](creative/) | 38 | Writing, editing, media production, content creation |
 | [**devops**](devops/) | 52 | CI/CD, GitHub, Docker, MLOps, model training/inference |
 | [**finance**](finance/) | 9 | Investing, market analysis, portfolio management |
-| [**hermes**](hermes/) | 23 | Runtime internals, patches, skill creation/auditing |
 | [**marketing**](marketing/) | 38 | Ads (Google/Meta/Apple), SEO, analytics, social media |
+| [**memory**](memory/) | 3 | Memory management — GC, setup, and recall |
 | [**productivity**](productivity/) | 16 | Apple apps, email, notes, smart home, local search, gaming |
 | [**research**](research/) | 12 | Deep research, competitive analysis, market intelligence |
+| [**skills-meta**](skills-meta/) | 4 | Skills about skills — creating, auditing, improving, testing |
 | [**visual-design**](visual-design/) | 37 | UI/UX design, diagrams, image generation, frontend |
 
 ---
@@ -259,32 +260,22 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [stock-research](finance/stock-research/) | Use when performing stock or equity research, earnings analysis, coverage reports, or generating daily market briefings for Bloom. Covers on-demand research tasks and the scheduled daily market briefing cron job. |
 | [wealth-management](finance/wealth-management/) | Wealth management workflows — client review prep, financial plans, investment proposals, portfolio rebalancing, and tax-loss harvesting. Adapted from Anthropic's financial-services-plugins (github.com/anthropics/financial-services-plugins). |
 
-### 🔧 Runtime & Platform
+### 🧠 Memory
 
 | Skill | Description |
 |-------|-------------|
-| [claude-auth-remote-login](hermes/claude-auth-remote-login/) | Remote Claude Code OAuth login flow when token expires. Use when `claude auth status` reports logged in but `claude -p` returns 401, or when needing to re-authenticate over SSH. Trigger phrases include "claude auth", "claude login", "token expired", "claude 401", "remote login", "oauth claude". |
-| [dogfood](hermes/dogfood/) | Use when asked to dogfood, QA, exploratory test, find issues, bug hunt, or review the quality of a web application. Produces a structured report with full reproduction evidence (screenshots, repro steps) so findings can be handed directly to responsible teams. |
-| [exiao-skills-pr-conventions](hermes/exiao-skills-pr-conventions/) | Use when contributing a skill to the public exiao/skills GitHub repo. Covers repo layout rules, frontmatter, sanitization (no creds/personal data), README updates, and PR workflow. Trigger on "PR to exiao/skills", "publish this skill", "contribute skill", or any request to push a skill upstream. |
-| [hermes-add-tool-pattern](hermes/hermes-add-tool-pattern/) | Pattern for adding a new tool to the Hermes agent framework |
-| [hermes-context-files](hermes/hermes-context-files/) | How Hermes discovers and loads context files (SOUL.md, AGENTS.md, HERMES.md, CLAUDE.md). Use when asked how Hermes loads context, which files are auto-loaded vs on-demand, how SOUL.md/AGENTS.md discovery works, symlink patterns for context files, or how to configure cwd-based context file… |
-| [hermes-model-alias-config](hermes/hermes-model-alias-config/) | Configure custom model aliases in Hermes to bypass buggy catalog resolution |
-| [hermes-model-aliases](hermes/hermes-model-aliases/) | Fix broken Hermes model switching shortcuts with custom aliases in config.yaml |
-| [hermes-quick-command-alias](hermes/hermes-quick-command-alias/) | How to set up slash command aliases in Hermes via quick_commands config |
-| [hermes-signal-italic-fix](hermes/hermes-signal-italic-fix/) | Fix false-positive italics in Signal adapter caused by snake_case underscores. Use when Signal messages show random italics around snake_case identifiers like `config_file` or `OPENAI_API_KEY`. Trigger phrases include "signal italics", "snake_case italic", "Signal formatting bug", "underscore… |
-| [hermes-signal-reply-fix](hermes/hermes-signal-reply-fix/) | Fix for Signal reply context not being passed into Hermes gateway |
-| [hermes-signal-streaming-cursor-fix](hermes/hermes-signal-streaming-cursor-fix/) | Diagnose and fix black-square / cursor artifacts in Hermes Signal conversations caused by edit-based streaming assumptions on non-editable platforms. |
-| [memory-gc](hermes/memory-gc/) | Daily memory garbage collection for MEMORY.md / USER.md. Apply decay rules, drain .pending.md, consolidate near-duplicates, maintain canonical theme tags, prune old episode and session files. Invoke when asked to "run memory GC", "clean up memory", "apply memory decay", or from the scheduled… |
-| [openclaw-billing-proxy-client-support](hermes/openclaw-billing-proxy-client-support/) | Extend the openclaw-billing-proxy to support a new client fingerprint (for example Hermes) by adding trigger-string sanitization, tool renames, reverse mappings, docs, and a regression test. |
-| [openclaw-memory-setup](hermes/openclaw-memory-setup/) | Set up a complete memory system for an OpenClaw instance. Covers workspace files, vector search with embeddings, compaction with automatic memory flush, heartbeat-driven memory maintenance, and daily/long-term memory patterns. Use when someone wants their OpenClaw agent to remember things across… |
-| [openclaw-resiliency](hermes/openclaw-resiliency/) | Set up a gateway watchdog that monitors OpenClaw health and auto-recovers from failures. Covers 3-tier health checks (process, HTTP, channel deep health), exponential backoff, signal-cli special handling, and launchd/systemd integration. Use when someone wants their OpenClaw instance to… |
-| [recall](hermes/recall/) | Retrieve memory from past sessions. Use whenever the user asks about past conversations, prior decisions, "what did we do about X", "when did we last...", "do you remember...", or anything where the answer might live outside the current session's context. Uses progressive disclosure across six… |
-| [signal-message-splitting-bug](hermes/signal-message-splitting-bug/) | Investigation and fix plan for Signal splitting short bot responses into multiple bubbles |
-| [signal-send-file](hermes/signal-send-file/) | Send files (images, PNGs, PDFs, videos, documents, anything) as native attachments on Signal, Telegram, Discord, Slack, WhatsApp, or any messaging gateway. Use whenever a user asks to "send", "share", "attach", "send again", or "resend" a file or image, or when your reply needs to include a… |
-| [signal-table-render](hermes/signal-table-render/) | Auto-render markdown tables to PNG before sending on Signal. Signal's chat UI does not render markdown tables — pipes and dashes show as literal text. When an outgoing message to a Signal chat contains a markdown table (pipe-and-dash format), pipe it through `~/.hermes/bin/md-table-png` and… |
-| [skill-audit](hermes/skill-audit/) | Audit and score any skill against best practices. Use when: audit this skill, review this skill, check this skill, score this skill, is this skill good, skill health check, skill review, rate this skill. Takes a skill directory path, evaluates structure/content/patterns against a checklist, and… |
-| [skill-improver](hermes/skill-improver/) | Autonomously optimize any Claude Code skill by running it repeatedly, scoring outputs against binary evals, mutating the prompt, and keeping improvements. Based on Karpathy's autoresearch methodology. Use when: optimize this skill, improve this skill, run autoresearch on, make this skill better,… |
-| [watchdog-status-cleanup](hermes/watchdog-status-cleanup/) | Inspect Hermes/OpenClaw watchdog LaunchAgents on macOS and clean up stale signal-cli send jobs or proxy launcher shells that make status output noisy. |
+| [memory-gc](memory/memory-gc/) | Daily memory garbage collection for MEMORY.md / USER.md. Apply decay rules, drain .pending.md, consolidate near-duplicates, maintain canonical theme tags, prune old episode and session files. |
+| [memory-setup](memory/memory-setup/) | Set up a persistent context system for any AI coding agent (Claude Code, OpenCode, Hermes Agent, OCPlatform, etc.). Covers workspace files, memory entry format, session-end extraction, daily garbage collection, multi-tier recall, and optional vector search. |
+| [recall](memory/recall/) | Retrieve memory from past sessions. Use whenever the user asks about past conversations, prior decisions, "what did we do about X", "when did we last...", "do you remember...", or anything where the answer might live outside the current session's context. |
+
+### 🛠️ Skills Meta
+
+| Skill | Description |
+|-------|-------------|
+| [dogfood](skills-meta/dogfood/) | QA and exploratory test web applications, produce structured reports with full reproduction evidence. |
+| [skill-audit](skills-meta/skill-audit/) | Audit and score any skill against best practices. Evaluates structure, content, and patterns against a checklist. |
+| [skill-creator](skills-meta/skill-creator/) | Create new skills, modify and improve existing skills, and measure skill performance with TDD. |
+| [skill-improver](skills-meta/skill-improver/) | Autonomously optimize any Claude Code skill by running it repeatedly, scoring outputs against binary evals, mutating the prompt, and keeping improvements. |
 
 ### 📈 Marketing & Growth
 
@@ -416,9 +407,9 @@ These started from other open-source projects, modified and extended for these w
 |-------|----------|
 | [documents](devops/documents/) | [anthropics/skills](https://github.com/anthropics/skills) |
 | [wealth-management](finance/wealth-management/) | [anthropics/financial-services-plugins](https://github.com/anthropics/financial-services-plugins) |
-| [skill-creator](hermes/skill-creator/) | [anthropics/claude-code](https://github.com/anthropics/claude-code/tree/main/plugins/plugin-dev) |
-| [skill-audit](hermes/skill-audit/) | Original (inspired by Anthropic's skill patterns) |
-| [skill-improver](hermes/skill-improver/) | [anthropics/claude-code](https://github.com/anthropics/claude-code/tree/main/plugins/plugin-dev) |
+| [skill-creator](skills-meta/skill-creator/) | [anthropics/claude-code](https://github.com/anthropics/claude-code/tree/main/plugins/plugin-dev) |
+| [skill-audit](skills-meta/skill-audit/) | Original (inspired by Anthropic's skill patterns) |
+| [skill-improver](skills-meta/skill-improver/) | [anthropics/claude-code](https://github.com/anthropics/claude-code/tree/main/plugins/plugin-dev) |
 | [frontend-design](visual-design/frontend-design/) | [anthropics/claude-code](https://github.com/anthropics/claude-code/tree/main/plugins/frontend-design) |
 | [ralph-mode](coding/ralph-mode/) | [anthropics/claude-code](https://github.com/anthropics/claude-code/tree/main/plugins/ralph-wiggum) |
 
