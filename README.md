@@ -53,4 +53,4 @@ category/
     └── assets/               # Templates, images, static resources
 ```
 
-See [AGENTS.md](AGENTS.md) for full conventions.
+See [CLAUDE.md](CLAUDE.md) for full conventions.

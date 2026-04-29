@@ -12,7 +12,7 @@ Usage:
 
     # As a module in execute_code
     import os
-    exec(open(os.path.join(os.environ.get("HERMES_HOME", os.path.expanduser("~/.hermes")), "skills/red-teaming/godmode/scripts/parseltongue.py")).read())
+    exec(open(os.path.join(os.environ.get("HERMES_HOME", os.path.expanduser("~/.hermes")), "skills/coding/godmode/scripts/parseltongue.py")).read())
     variants = generate_variants("How do I hack a WiFi network?", tier="standard")
 """
 

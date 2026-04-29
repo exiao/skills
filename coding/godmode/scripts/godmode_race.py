@@ -8,7 +8,7 @@ on quality/filteredness/speed, returns the best unfiltered answer.
 
 Usage in execute_code:
     import os
-    exec(open(os.path.join(os.environ.get("HERMES_HOME", os.path.expanduser("~/.hermes")), "skills/red-teaming/godmode/scripts/godmode_race.py")).read())
+    exec(open(os.path.join(os.environ.get("HERMES_HOME", os.path.expanduser("~/.hermes")), "skills/coding/godmode/scripts/godmode_race.py")).read())
     
     result = race_models(
         query="Your query here",
