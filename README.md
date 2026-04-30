@@ -29,13 +29,12 @@ Install the skills from https://github.com/exiao/skills
 | [**app-store**](app-store/) | 28 | App Store tools, RevenueCat, Prometheus, ReelFarm |
 | [**coding**](coding/) | 23 | Programming, debugging, testing, code review, web scraping |
 | [**creative**](creative/) | 38 | Writing, editing, media production, content creation |
-| [**devops**](devops/) | 51 | CI/CD, GitHub, Docker, MLOps, model training/inference |
-| [**external-services**](external-services/) | 12 | External service CLIs and API integrations |
+| [**devops**](devops/) | 55 | CI/CD, GitHub, Docker, MLOps, model training/inference |
 | [**finance**](finance/) | 9 | Investing, market analysis, portfolio management |
 | [**marketing**](marketing/) | 38 | Ads (Google/Meta/Apple), SEO, analytics, social media |
 | [**memory**](memory/) | 3 | Memory management — GC, setup, and recall |
 | [**productivity**](productivity/) | 16 | Apple apps, email, notes, smart home, local search, gaming |
-| [**research**](research/) | 12 | Deep research, competitive analysis, market intelligence |
+| [**research**](research/) | 10 | Deep research, competitive analysis, market intelligence |
 | [**skills-meta**](skills-meta/) | 6 | Skills about skills — creating, auditing, improving, testing |
 | [**visual-design**](visual-design/) | 37 | UI/UX design, diagrams, image generation, frontend |
 
@@ -266,6 +265,8 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [skill-audit](skills-meta/skill-audit/) | Audit and score any skill against best practices. Evaluates structure, content, and patterns against a checklist. |
 | [skill-creator](skills-meta/skill-creator/) | Create new skills, modify and improve existing skills, and measure skill performance with TDD. |
 | [skill-improver](skills-meta/skill-improver/) | Autonomously optimize any Claude Code skill by running it repeatedly, scoring outputs against binary evals, mutating the prompt, and keeping improvements. |
+| [skill-preloading](skills-meta/skill-preloading/) | Reference for the two-tier skill loading system — preloaded vs category-gated skills, how to add/remove preloaded skills, and the external-services category layout. |
+| [skills-cleanup](skills-meta/skills-cleanup/) | How to clean up duplicate/untracked skills in the skills repo. |
 
 ### 📈 Marketing & Growth
 
