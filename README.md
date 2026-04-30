@@ -27,15 +27,16 @@ Install the skills from https://github.com/exiao/skills
 |----------|--------|-------------|
 | [**ai-tools**](ai-tools/) | 10 | AI agents, MCP integrations, web search, LLM tooling |
 | [**app-store**](app-store/) | 28 | App Store tools, RevenueCat, Prometheus, ReelFarm |
-| [**coding**](coding/) | 24 | Programming, debugging, testing, code review, web scraping |
+| [**coding**](coding/) | 23 | Programming, debugging, testing, code review, web scraping |
 | [**creative**](creative/) | 38 | Writing, editing, media production, content creation |
-| [**devops**](devops/) | 52 | CI/CD, GitHub, Docker, MLOps, model training/inference |
+| [**devops**](devops/) | 51 | CI/CD, GitHub, Docker, MLOps, model training/inference |
+| [**external-services**](external-services/) | 12 | External service CLIs and API integrations |
 | [**finance**](finance/) | 9 | Investing, market analysis, portfolio management |
 | [**marketing**](marketing/) | 38 | Ads (Google/Meta/Apple), SEO, analytics, social media |
 | [**memory**](memory/) | 3 | Memory management — GC, setup, and recall |
 | [**productivity**](productivity/) | 16 | Apple apps, email, notes, smart home, local search, gaming |
 | [**research**](research/) | 12 | Deep research, competitive analysis, market intelligence |
-| [**skills-meta**](skills-meta/) | 4 | Skills about skills — creating, auditing, improving, testing |
+| [**skills-meta**](skills-meta/) | 6 | Skills about skills — creating, auditing, improving, testing |
 | [**visual-design**](visual-design/) | 37 | UI/UX design, diagrams, image generation, frontend |
 
 ---
@@ -114,7 +115,6 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [babysit-open-prs](coding/babysit-open-prs/) | Scan all open PRs across tracked repos, triage them, check for scope drift, and spawn babysit-pr sub-agents for fixable ones. Use when: babysit all PRs, check all open PRs, nightly PR review. |
 | [babysit-pr](coding/babysit-pr/) | Monitor a PR until it's ready to merge. Watches CI, reads reviews, checks scope, fixes issues, and repeats. Use when: babysit this PR, watch this PR, monitor PR, fix and watch PR, keep this PR green. |
 | [claude-md-management](coding/claude-md-management/) | Use when asked to audit, improve, or maintain CLAUDE.md files across repos. Triggers on "audit my CLAUDE.md", "check if my CLAUDE.md is up to date", capturing session learnings, or keeping project memory current. |
-| [codex](coding/codex/) | Get a second opinion from OpenAI Codex CLI — code review (pass/fail), adversarial challenge, or open consultation. Use when asked for "codex review", "second opinion", or "ask codex". |
 | [context7](coding/context7/) | Use when writing code that uses a specific library or framework and you need accurate, current API docs — not year-old training data. Fetches version-specific documentation via Context7 MCP. |
 | [fastapi-piccolo-typer-testing](coding/fastapi-piccolo-typer-testing/) | Patterns for writing fast, DB-free pytest suites against FastAPI routers, Piccolo ORM queries, Typer CLI commands, and service-layer code. Use when adding test coverage to a FastAPI + Piccolo + Typer app, mocking async ORM query chains, or testing Typer commands that lazily import services.… |
 | [firecrawl](coding/firecrawl/) | Scrape, crawl, search, and interact with web pages using Firecrawl CLI and API. Use when the user mentions "firecrawl", "scrape a website", "crawl a site", "map a site", "web scraping", "extract web data", "interact with a page", or needs richer web extraction than WebExtract (JS-rendered pages,… |
@@ -339,7 +339,6 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [blogwatcher](research/blogwatcher/) | Monitor blogs and RSS/Atom feeds for updates using the blogwatcher-cli tool. Add blogs, scan for new articles, track read status, and filter by category. |
 | [hotel-price-research](research/hotel-price-research/) | Research hotel pricing across OTAs for a booking decision. Use when the user is comparing hotels for specific dates and wants real prices (not fabricated). Covers known OTA blockers (Trip.com, IHG.com, Google Hotels) and the Booking.com interactive-form workflow that actually works. Trigger on… |
 | [llm-wiki](research/llm-wiki/) | Karpathy's LLM Wiki — build and maintain a persistent, interlinked markdown knowledge base. Ingest sources, query compiled knowledge, and lint for consistency. |
-| [polymarket](research/polymarket/) | Query Polymarket prediction market data — search markets, get prices, orderbooks, and price history. Read-only via public REST APIs, no API key needed. |
 | [research-paper-writing](research/research-paper-writing/) | End-to-end pipeline for writing ML/AI research papers — from experiment design through analysis, drafting, revision, and submission. Covers NeurIPS, ICML, ICLR, ACL, AAAI, COLM. Integrates automated experiment monitoring, statistical analysis, iterative writing, and citation verification. |
 | [sahil-office-hours](research/sahil-office-hours/) | Startup advice frameworks from Sahil Lavingia (Gumroad) based on The Minimalist Entrepreneur. Use when someone is starting a business, validating an idea, finding customers, setting prices, building an MVP, creating a marketing plan, defining company values, or making any business decision… |
 | [synthetic-userstudies](research/synthetic-userstudies/) | Run synthetic user research sessions natively — no backend required. The agent plays an AI-generated persona and simulates a user interview based on the 4 Ps framework (Persona, Problem, Promise, Product). Use when a user wants to run a user research session, interview a synthetic persona,… |
@@ -424,7 +423,6 @@ These started from other open-source projects, modified and extended for these w
 
 | Skill | Original |
 |-------|----------|
-| [codex](coding/codex/) | [garrytan/gstack](https://github.com/garrytan/gstack) (MIT) |
 | [impeccable](visual-design/impeccable/) | [pbakaus/impeccable](https://github.com/pbakaus/impeccable) |
 | [app-store-screenshots](app-store/app-store-screenshots/) | [ParthJadhav/app-store-screenshots](https://github.com/ParthJadhav/app-store-screenshots) |
 | [remotion-best-practices](creative/remotion-best-practices/) | [remotion-dev/skills](https://github.com/remotion-dev/skills) |
