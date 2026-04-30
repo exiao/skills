@@ -1,0 +1,11 @@
+[
+  {
+    "text": "investing app",
+    "matchType": "EXACT",
+    "bidAmount": {
+      "amount": "1.50",
+      "currency": "USD"
+    },
+    "status": "ACTIVE"
+  }
+]

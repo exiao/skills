@@ -1,5 +1,6 @@
 ---
 name: recall
+preloaded: true
 description: |
   Retrieve memory from past sessions. Use whenever the user asks about past
   conversations, prior decisions, "what did we do about X", "when did we

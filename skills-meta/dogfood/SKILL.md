@@ -1,5 +1,6 @@
 ---
 name: dogfood
+preloaded: true
 description: Use when asked to dogfood, QA, exploratory test, find issues, bug hunt, or review the quality of a web application. Produces a structured report with full reproduction evidence (screenshots, repro steps) so findings can be handed directly to responsible teams.
 ---
 

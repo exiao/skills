@@ -1,0 +1,21 @@
+{
+  "startTime": "2026-01-01",
+  "endTime": "2026-01-31",
+  "timeZone": "UTC",
+  "granularity": "DAILY",
+  "selector": {
+    "conditions": [],
+    "orderBy": [
+      {
+        "field": "localSpend",
+        "sortOrder": "DESCENDING"
+      }
+    ],
+    "pagination": {
+      "offset": 0,
+      "limit": 100
+    }
+  },
+  "returnRowTotals": true,
+  "returnGrandTotals": true
+}

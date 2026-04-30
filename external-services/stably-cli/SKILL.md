@@ -1,5 +1,6 @@
 ---
 name: stably-cli
+preloaded: true
 description: Use the Stably CLI to create, run, fix, and maintain Playwright tests in the bloom-tests repo. Use when running tests (stably test), auto-fixing failures (stably fix), or generating new tests from a prompt (stably create).
 ---
 

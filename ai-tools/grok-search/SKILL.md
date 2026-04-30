@@ -1,5 +1,6 @@
 ---
 name: grok-search
+preloaded: true
 description: Search the web or X/Twitter using xAI Grok server-side tools (web_search, x_search) via the xAI Responses API. Use when you need tweets/threads/users from X, want Grok as an alternative to Brave, or you need structured JSON + citations.
 homepage: https://docs.x.ai/docs/guides/tools/search-tools
 triggers: ["grok", "xai", "search x", "search twitter", "find tweets", "x search", "twitter search", "web_search", "x_search"]

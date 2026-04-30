@@ -1,5 +1,6 @@
 ---
 name: Apple Search Ads
+preloaded: true
 slug: apple-search-ads
 version: 2.0.0
 homepage: https://github.com/exiao/skills/tree/main/apple-search-ads
