@@ -1,3 +1,3 @@
 ---
-description: Skills for academic research, paper discovery, literature review, domain reconnaissance, market data, content monitoring, and scientific knowledge retrieval.
+description: Academic research (arXiv, paper writing), brainstorming, blog/content monitoring, LLM knowledge base, synthetic user studies, hotel/trip planning, and office hours frameworks (YC, Sahil).
 ---
