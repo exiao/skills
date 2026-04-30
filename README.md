@@ -27,8 +27,7 @@ Install the skills from https://github.com/exiao/skills
 |----------|--------|-------------|
 | [**ai-tools**](ai-tools/) | 10 | AI agents, MCP integrations, web search, LLM tooling |
 | [**app-store**](app-store/) | 28 | App Store tools, RevenueCat, Prometheus, ReelFarm |
-| [**bloom**](bloom/) | 3 | Bloom product-specific skills |
-| [**coding**](coding/) | 25 | Programming, debugging, testing, code review, web scraping |
+| [**coding**](coding/) | 24 | Programming, debugging, testing, code review, web scraping |
 | [**creative**](creative/) | 38 | Writing, editing, media production, content creation |
 | [**devops**](devops/) | 52 | CI/CD, GitHub, Docker, MLOps, model training/inference |
 | [**finance**](finance/) | 9 | Investing, market analysis, portfolio management |
@@ -108,14 +107,6 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [ios-simulator](app-store/ios-simulator/) | Use when automating iOS Simulator tasks with 21 accessibility-driven scripts: building and running iOS apps, device lifecycle management, screenshot capture, UI navigation via accessibility, gesture replay, app install/launch, status bar configuration, and health checks. Also use for iOS testing… |
 | [revenuecat-cli](app-store/revenuecat-cli/) | Use when querying RevenueCat for projects, apps, products, entitlements, offerings, packages, customers, subscriptions, purchases, webhooks, or overview metrics via mcporter. Triggers on "revenuecat", "RC project", "list RC products", "check customer entitlement", "RC offering", "subscription… |
 
-### 🌸 Bloom
-
-| Skill | Description |
-|-------|-------------|
-| [bloom-cli](bloom/bloom-cli/) | Use when fetching stock data, company fundamentals, market data, earnings, SEC filings, price history, analyst ratings, peer comparisons, or financial research via the Bloom CLI. Use for 'what's AAPL trading at', 'show me TSLA earnings', 'compare tech stocks', or 'get market data'. |
-| [demo-pr-feature](bloom/demo-pr-feature/) | Capture a demo screenshot or video of a Bloom PR's feature, deploy to Surge.sh, and post the URL as a GitHub PR comment. Use after pushing a fix to a frontend PR. |
-| [fix-bloom-prs](bloom/fix-bloom-prs/) | Use when fixing CI failures, reviewing code, or addressing review comments on open PRs. Scans all tracked repos (Bloom, investing-log, skills), not just Bloom. |
-
 ### 💻 Coding & Development
 
 | Skill | Description |
@@ -126,7 +117,6 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [codex](coding/codex/) | Get a second opinion from OpenAI Codex CLI — code review (pass/fail), adversarial challenge, or open consultation. Use when asked for "codex review", "second opinion", or "ask codex". |
 | [context7](coding/context7/) | Use when writing code that uses a specific library or framework and you need accurate, current API docs — not year-old training data. Fetches version-specific documentation via Context7 MCP. |
 | [fastapi-piccolo-typer-testing](coding/fastapi-piccolo-typer-testing/) | Patterns for writing fast, DB-free pytest suites against FastAPI routers, Piccolo ORM queries, Typer CLI commands, and service-layer code. Use when adding test coverage to a FastAPI + Piccolo + Typer app, mocking async ORM query chains, or testing Typer commands that lazily import services.… |
-| [fintary-ops-center-context](coding/fintary-ops-center-context/) | Context and backlog for Fintary ops-center project |
 | [firecrawl](coding/firecrawl/) | Scrape, crawl, search, and interact with web pages using Firecrawl CLI and API. Use when the user mentions "firecrawl", "scrape a website", "crawl a site", "map a site", "web scraping", "extract web data", "interact with a page", or needs richer web extraction than WebExtract (JS-rendered pages,… |
 | [fix-sentry-issues](coding/fix-sentry-issues/) | Use when scanning Sentry issues for Bloom and creating fix PRs. |
 | [godmode](coding/godmode/) | Jailbreak API-served LLMs using G0DM0D3 techniques — Parseltongue input obfuscation (33 techniques), GODMODE CLASSIC system prompt templates, ULTRAPLINIAN multi-model racing, encoding escalation, and Hermes-native prefill/system prompt integration. Use when a user wants to bypass safety filters,… |
