@@ -1,3 +1,3 @@
 ---
-description: Skills about skills — creating, auditing, improving, and testing skill quality.
+description: Skills about skills — creating, auditing, improving, testing skill quality, preloading optimization, cleanup, and QA dogfooding.
 ---
