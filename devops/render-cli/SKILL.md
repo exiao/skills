@@ -1,5 +1,6 @@
 ---
 name: render-cli
+preloaded: true
 description: "Manage Render.com services, deploys, databases, logs, and infrastructure using the official Render CLI (`render`). Use this skill whenever the user asks about Render deployments, service management, viewing Render logs, restarting Render services, running database queries on Render Postgres, triggering deploys, managing environments/projects, or anything related to their Render infrastructure. Also use when the user mentions render.com, Render dashboard actions, or wants to automate Render workflows."
 ---
 

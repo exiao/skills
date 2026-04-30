@@ -1,5 +1,6 @@
 ---
 name: sentry-debug
+preloaded: true
 description: Use when debugging production errors via Sentry — listing and searching issues, inspecting events and stack traces, checking release distribution, running Seer root-cause analysis, or resolving/assigning issues. Trigger phrases include "sentry", "production error", "what's crashing", "recent crashes", "error in <project>", "resolve sentry issue", "sentry autofix".
 ---
 

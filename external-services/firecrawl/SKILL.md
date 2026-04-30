@@ -1,5 +1,6 @@
 ---
 name: firecrawl
+preloaded: true
 description: "Scrape, crawl, search, and interact with web pages using Firecrawl CLI and API. Use when the user mentions \"firecrawl\", \"scrape a website\", \"crawl a site\", \"map a site\", \"web scraping\", \"extract web data\", \"interact with a page\", or needs richer web extraction than WebExtract (JS-rendered pages, full site crawls, sitemaps, form interaction, login-required pages)."
 ---
 

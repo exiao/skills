@@ -1,5 +1,6 @@
 ---
 name: web-search
+preloaded: true
 description: Search the web via Serper (Google Search) API. Default web search tool — use this first for recent releases, news, and general queries.
 ---
 

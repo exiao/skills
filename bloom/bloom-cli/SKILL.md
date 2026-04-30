@@ -1,5 +1,6 @@
 ---
 name: bloom-cli
+preloaded: true
 description: "Use when fetching stock data, company fundamentals, market data, earnings, SEC filings, price history, analyst ratings, peer comparisons, or financial research via the Bloom CLI. Use for 'what's AAPL trading at', 'show me TSLA earnings', 'compare tech stocks', or 'get market data'."
 ---
 

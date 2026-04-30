@@ -1,5 +1,6 @@
 ---
 name: bird-twitter
+preloaded: true
 description: Read X/Twitter timelines, tweets, and threads using the bird CLI (cookie-based GraphQL). Use when the user mentions "bird", wants to read their Following/For You timeline, fetch tweets, search X, or pull timeline data for summarization. Prefer over xitter (x-cli) for read-heavy workflows — bird uses browser cookies (zero API cost) while x-cli uses the paid official API.
 version: 1.0.0
 author: Hermes Agent

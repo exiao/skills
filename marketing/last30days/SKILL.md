@@ -1,5 +1,6 @@
 ---
 name: last30days
+preloaded: true
 version: "2.1"
 description: "Use when researching what happened in the last 30 days on a topic. Also triggered by 'last30'. Sources: Reddit, X, YouTube, web. Produces expert-level summary with copy-paste-ready prompts."
 argument-hint: 'last30 AI video tools, last30 best project management tools'

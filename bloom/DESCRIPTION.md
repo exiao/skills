@@ -1,3 +1,3 @@
 ---
-description:Bloom app skills — CLI, PR fixes, demo features
+description: Bloom app skills — CLI, PR fixes, demo features
 ---

@@ -1,5 +1,6 @@
 ---
 name: writer
+preloaded: true
 description: Write content in Eric's voice — articles, blog posts, tweets, social media posts, marketing copy, newsletter drafts. Loads WRITING-STYLE.md and enforces kill phrases.
 ---
 # Writer Skill

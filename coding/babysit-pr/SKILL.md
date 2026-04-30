@@ -1,5 +1,6 @@
 ---
 name: babysit-pr
+preloaded: true
 description: "Monitor a PR until it's ready to merge. Watches CI, reads reviews, checks scope, fixes issues, and repeats. Use when: babysit this PR, watch this PR, monitor PR, fix and watch PR, keep this PR green."
 ---
 

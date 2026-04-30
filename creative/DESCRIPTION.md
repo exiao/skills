@@ -1,1 +1,3 @@
-Writing, editing, content pipelines, media production (video, audio, GIFs), and content evaluation.
+---
+description: Writing, editing, content pipelines, media production (video, audio, GIFs), and content evaluation.
+---

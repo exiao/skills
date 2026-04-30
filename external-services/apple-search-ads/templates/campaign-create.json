@@ -1,0 +1,18 @@
+{
+  "name": "App {APP_ID} - {COUNTRY} - {TYPE}",
+  "adamId": 0,
+  "countriesOrRegions": ["US"],
+  "budgetAmount": {
+    "amount": "1000",
+    "currency": "USD"
+  },
+  "dailyBudgetAmount": {
+    "amount": "50",
+    "currency": "USD"
+  },
+  "supplySources": ["APPSTORE_SEARCH_RESULTS"],
+  "billingEvent": "TAPS",
+  "status": "ENABLED",
+  "startTime": null,
+  "endTime": null
+}
