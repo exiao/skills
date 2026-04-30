@@ -7,5 +7,11 @@ __pycache__/
 .bundled_manifest
 internal/
 
-# Private runtime/platform skills (kept locally only)
+# Private/local-only skills (kept locally, never pushed)
 hermes/
+hermes-ops/
+hermes-patches/
+openclaw/
+bloom/
+runtime/
+runtime-patches/
