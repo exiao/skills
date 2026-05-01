@@ -143,9 +143,100 @@ HEAD=$(gh pr view $PR --repo $REPO --json headRefOid -q '.headRefOid')
 
 **Triage review findings:** For each actionable issue flagged by reviewers (human or automated), classify it as AUTO-FIX or ESCALATE per step 3. Informational observations or style suggestions that don't affect correctness can be noted but don't block the PR.
 
+**Resolve handled comments:** After triaging, resolve any review threads that are outdated or already addressed. See step 2b.
+
 **If CI green + no actionable unaddressed findings → PR is ready. Report success and stop.**
 
 **If there are actionable findings → go to step 3.**
+
+### 2b. Resolve Outdated / Addressed Comments
+
+After reading all comments, check each unresolved review thread to determine if it's been addressed by subsequent commits or is no longer applicable. Use the GraphQL API to fetch threads and resolve them.
+
+```bash
+# Fetch all unresolved review threads with their comments
+gh api graphql \
+  -f query='query($owner: String!, $name: String!, $number: Int!) {
+    repository(owner: $owner, name: $name) {
+      pullRequest(number: $number) {
+        reviewThreads(first: 100) {
+          nodes {
+            id
+            isResolved
+            isOutdated
+            path
+            line
+            comments(last: 50) {
+              nodes {
+                body
+                author { login }
+                createdAt
+                originalCommit { oid }
+              }
+            }
+          }
+        }
+      }
+    }
+  }' \
+  -f owner="$(echo $REPO | cut -d/ -f1)" \
+  -f name="$(echo $REPO | cut -d/ -f2)" \
+  -F number=$PR
+```
+
+Note: `first: 100` covers the vast majority of PRs. For exceptionally large PRs with 100+ threads, add `pageInfo { hasNextPage endCursor }` and paginate with `after:` cursor.
+
+**For each unresolved thread, evaluate:**
+
+1. **Already fixed:** The issue raised in the comment has been addressed by a subsequent commit. Read the current file at that path/line and confirm the fix is present.
+2. **Outdated by refactor:** The file or lines the comment refers to no longer exist or have been substantially rewritten.
+3. **Not applicable:** The comment was informational, a question that's been answered, or a suggestion that was intentionally declined.
+4. **Still open:** The issue persists in the current code. Leave unresolved and either auto-fix (step 3) or escalate.
+
+**For threads that are addressed or outdated:**
+
+1. Reply to the thread explaining why it's resolved (be specific, cite the commit or line change):
+```bash
+# Reply to the review thread
+gh api graphql \
+  -f query='mutation($threadId: ID!, $body: String!) {
+    addPullRequestReviewThreadReply(input: {
+      pullRequestReviewThreadId: $threadId,
+      body: $body
+    }) {
+      comment { id }
+    }
+  }' \
+  -f threadId="<THREAD_ID>" \
+  -f body="Resolved: <brief explanation of what changed>"
+```
+
+2. Resolve the thread:
+```bash
+# Resolve the review thread
+gh api graphql \
+  -f query='mutation($threadId: ID!) {
+    resolveReviewThread(input: {
+      threadId: $threadId
+    }) {
+      thread { isResolved }
+    }
+  }' \
+  -f threadId="<THREAD_ID>"
+```
+
+**Reply templates:**
+- Fixed by commit: `"Resolved -- fixed in {short_sha}: {what changed}"`
+- Outdated by refactor: `"Resolved -- this code was refactored/removed in {short_sha}"`
+- Informational/acknowledged: `"Acknowledged -- {brief response to the observation}"`
+- Already correct: `"Resolved -- verified this is already handled: {evidence}"`
+
+**Rules for resolving:**
+- Only resolve threads where you have high confidence the issue is addressed. When in doubt, leave it open.
+- Never resolve threads from human reviewers that are asking questions. Those need a human answer.
+- Always reply before resolving so there's a paper trail of why it was closed.
+- Bot/automated reviewer threads (claude-review, Seer, Bugbot, etc.) can be resolved freely if the issue is demonstrably fixed.
+- Keep replies concise. One sentence with the commit SHA or evidence.
 
 ### 3. Analyze and Decide
 
@@ -218,6 +309,7 @@ If no parent session key was provided, include status in your final output text 
 
 Scope: ✅ clean | ⚠️ minor (details) | 🚫 major (details)
 Fixed: <what you fixed>
+Resolved: <N threads resolved with reasons>
 Waiting: <what CI is running>
 Needs attention: <what you can't fix and why>
 Status: <monitoring | ready | blocked | scope-drift>
@@ -267,7 +359,7 @@ git -C "$LOCAL_DIR" worktree remove "$WORKTREE" --force 2>/dev/null
 
 ## Do NOT
 
-- Post PR comments (triggers claude-review re-runs, wastes tokens)
+- Post top-level PR comments (triggers claude-review re-runs, wastes tokens). Replying to existing review threads in step 2b is fine — those don't trigger CI.
 - Merge the PR (the repo owner merges)
 - Force push or rewrite history
 - Make changes unrelated to the PR's purpose
