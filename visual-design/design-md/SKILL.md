@@ -1,6 +1,14 @@
 ---
 name: design-md
-description: Create a DESIGN.md file at the project root — a plain-text design system document that AI coding agents read to produce consistent, on-brand UI. Follows the Google Stitch DESIGN.md format (visual theme, color palette, typography, components, layout, depth, do's and don'ts, responsive, agent prompts). Supports four source modes, in order of preference when the user hasn't specified one: (1) adapt an existing brand-identity or brand document in the project, (2) scrape a live URL the user names, (3) extract from an existing codebase, (4) let the user pick from the VoltAgent awesome-design-md gallery of 68 curated templates (Vercel, Claude, Stripe, Linear, Apple, etc.). Trigger on "create DESIGN.md", "set up design system", "scaffold design doc", "design.md", "make my UI look like <brand>", "design system for AI agents", "awesome-design-md", "getdesign".
+description: >
+  Create a DESIGN.md file at the project root — a plain-text design system document
+  that AI coding agents read to produce consistent, on-brand UI. Follows the Google
+  Stitch DESIGN.md format. Supports five source modes: (1) adapt existing brand doc,
+  (2) scrape a live URL, (3) extract from codebase, (4) browse Refero Styles gallery
+  at styles.refero.design for rich measured design tokens, (5) VoltAgent awesome-design-md
+  CLI gallery of 68 curated templates. Trigger on "create DESIGN.md", "set up design
+  system", "scaffold design doc", "design.md", "make my UI look like <brand>", "design
+  system for AI agents", "awesome-design-md", "getdesign", "refero styles".
 ---
 
 # DESIGN.md Generator
@@ -15,7 +23,7 @@ Create a `DESIGN.md` at the root of a project — the visual counterpart to `AGE
 - After `marketing/brand-identity` produces a brand doc, to translate strategy into an agent-readable design system.
 - Before calling `visual-design/frontend-design`, to satisfy its Context Gathering Protocol with a written source of truth.
 
-## Four source modes (pick in this order)
+## Five source modes (pick in this order)
 
 Ask the user which source they want. If they don't care or don't have one, walk them through the list below.
 
@@ -47,11 +55,32 @@ User says "make a DESIGN.md for this project" and no brand doc exists.
 
 Use `visual-design/impeccable/commands/extract` as the engine. It already walks the component library and design tokens. Feed its output into the DESIGN.md structure. This is the most accurate mode for established products.
 
-### 4. Pick from the VoltAgent gallery (fallback — when the user has no source)
+### 4. Browse Refero Styles (richest gallery — preferred for brand-matching)
 
-If none of the above apply, show the user the 68 curated templates from [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md). See `references/gallery.md` for the full categorized list with one-line descriptions.
+[Refero Styles](https://styles.refero.design) is a curated library of real-product design systems. Each style page includes: color palette (accent + neutrals with named tokens), full typography scale (fonts, weights, sizes, line heights, letter spacing), spacing & shape (density, max width, gaps, border radius, elevation/shadows), Do's and Don'ts guidelines, and component previews.
 
-Ask: **"Which of these 68 brands is closest to the aesthetic you want?"** Show the categories first (AI, Developer Tools, Fintech, E-commerce, Automotive, etc.) so they can narrow down. Then list the brands in that category with descriptions.
+**How to use:**
+1. Browse https://styles.refero.design — search by brand name, mood, color, typography, or paste a URL
+2. Open a style page to see the full extracted design system
+3. Copy the design tokens directly into a DESIGN.md following the Stitch spec
+
+Each style page gives you everything needed for a complete DESIGN.md: colors with semantic names, type scale with precise values, spacing tokens, border radius per element type, elevation/shadow definitions, and curated Do/Don't guardrails. Richer than VoltAgent templates because it includes measured values from actual live sites.
+
+**Refero also offers:**
+- **Refero MCP** ($17/mo Pro plan) — gives AI agents direct access to 130K+ screens and 10K+ user flows for design research. See https://refero.design/mcp
+- **Refero Skill** — a design methodology that installs into agents: `npx skills add https://github.com/referodesign/refero_skill`
+
+**When to prefer Refero Styles over VoltAgent:**
+- You want precise, measured token values (not approximations)
+- The brand exists on Refero but not in VoltAgent's 68 templates
+- You want Do/Don't guidelines extracted from the actual product
+- You need typography details like letter-spacing and line-height per size step
+
+### 5. Pick from the VoltAgent gallery (CLI install — quick template)
+
+If the user wants a fast one-command install, use the 68 curated templates from [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md). See `references/gallery.md` for the full categorized list with one-line descriptions.
+
+Ask: **"Which of these brands is closest to the aesthetic you want?"** Show the categories first (AI, Developer Tools, Fintech, E-commerce, Automotive, etc.) so they can narrow down.
 
 Once they pick:
 
@@ -60,9 +89,9 @@ Once they pick:
 npx getdesign@latest add <brand>
 ```
 
-That's it — `getdesign` is a zero-dependency CLI that copies the curated DESIGN.md into the project root. No API keys, no config.
+Zero-dependency CLI that copies the curated DESIGN.md into the project root. No API keys, no config.
 
-If `DESIGN.md` already exists at root, the CLI saves to `./<brand>/DESIGN.md` instead. Tell the user how to activate:
+If `DESIGN.md` already exists at root, the CLI saves to `./<brand>/DESIGN.md` instead. To activate:
 ```bash
 cp <brand>/DESIGN.md ./DESIGN.md
 ```
