@@ -351,7 +351,7 @@ git -C "$LOCAL_DIR" worktree remove "$WORKTREE" --force 2>/dev/null
 
 ## Do NOT
 
-- Post PR comments (triggers claude-review re-runs, wastes tokens)
+- Post top-level PR comments (triggers claude-review re-runs, wastes tokens). Replying to existing review threads in step 2b is fine — those don't trigger CI.
 - Merge the PR (the repo owner merges)
 - Force push or rewrite history
 - Make changes unrelated to the PR's purpose
