@@ -155,10 +155,10 @@ After reading all comments, check each unresolved review thread to determine if 
 
 ```bash
 # Fetch all unresolved review threads with their comments
-gh api graphql -f query='
-  query {
-    repository(owner: "'$(echo $REPO | cut -d/ -f1)'", name: "'$(echo $REPO | cut -d/ -f2)'") {
-      pullRequest(number: '$PR') {
+gh api graphql \
+  -f query='query($owner: String!, $name: String!, $number: Int!) {
+    repository(owner: $owner, name: $name) {
+      pullRequest(number: $number) {
         reviewThreads(first: 100) {
           nodes {
             id
@@ -166,7 +166,7 @@ gh api graphql -f query='
             isOutdated
             path
             line
-            comments(first: 10) {
+            comments(last: 50) {
               nodes {
                 body
                 author { login }
@@ -178,8 +178,13 @@ gh api graphql -f query='
         }
       }
     }
-  }'
+  }' \
+  -f owner="$(echo $REPO | cut -d/ -f1)" \
+  -f name="$(echo $REPO | cut -d/ -f2)" \
+  -F number=$PR
 ```
+
+Note: `first: 100` covers the vast majority of PRs. For exceptionally large PRs with 100+ threads, add `pageInfo { hasNextPage endCursor }` and paginate with `after:` cursor.
 
 **For each unresolved thread, evaluate:**
 
@@ -193,28 +198,31 @@ gh api graphql -f query='
 1. Reply to the thread explaining why it's resolved (be specific, cite the commit or line change):
 ```bash
 # Reply to the review thread
-gh api graphql -f query='
-  mutation {
-    addPullRequestReviewComment(input: {
-      pullRequestReviewThreadId: "<THREAD_ID>",
-      body: "Resolved: <brief explanation of what changed>"
+gh api graphql \
+  -f query='mutation($threadId: ID!, $body: String!) {
+    addPullRequestReviewThreadReply(input: {
+      pullRequestReviewThreadId: $threadId,
+      body: $body
     }) {
       comment { id }
     }
-  }'
+  }' \
+  -f threadId="<THREAD_ID>" \
+  -f body="Resolved: <brief explanation of what changed>"
 ```
 
 2. Resolve the thread:
 ```bash
 # Resolve the review thread
-gh api graphql -f query='
-  mutation {
+gh api graphql \
+  -f query='mutation($threadId: ID!) {
     resolveReviewThread(input: {
-      threadId: "<THREAD_ID>"
+      threadId: $threadId
     }) {
       thread { isResolved }
     }
-  }'
+  }' \
+  -f threadId="<THREAD_ID>"
 ```
 
 **Reply templates:**
