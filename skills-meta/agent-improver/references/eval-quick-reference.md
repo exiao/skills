@@ -58,7 +58,7 @@ target_tokens by task type:
   - Explanation/analysis: 500-1000 tokens
   - Long-form (article, report): 1000-2000 tokens
 
-penalty = max(0, (actual - target) / target) * 0.1
+penalty = min(0.3, max(0, (actual - target) / max(1, target)) * 0.1)
 ```
 
 Penalty kicks in only when output exceeds target. Being under target is fine
@@ -150,11 +150,11 @@ Scan session files quickly using grep. Cast a wide net.
 
 ```bash
 # Search sessions
-grep -rl "skill-name\|trigger-phrase\|domain-term" ~/.hermes/sessions/ \
+grep -rlE "skill-name|trigger-phrase|domain-term" ~/.hermes/sessions/ \
   | head -30 > /tmp/candidate_sessions.txt
 
 # Search episodes (faster, less detail)
-grep -rl "skill-name\|trigger-phrase" ~/.hermes/episodes/ \
+grep -rlE "skill-name|trigger-phrase" ~/.hermes/episodes/ \
   | head -20 >> /tmp/candidate_sessions.txt
 ```
 

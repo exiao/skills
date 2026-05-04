@@ -68,7 +68,7 @@ Each dimension: 0.0 to 1.0. Final score formula:
 
 ```
 raw = (correctness * 0.5) + (procedure * 0.3) + (conciseness * 0.2)
-length_penalty = max(0, (actual_tokens - target_tokens) / target_tokens) * 0.1
+length_penalty = min(0.3, max(0, (actual_tokens - target_tokens) / max(1, target_tokens)) * 0.1)
 fitness = max(0, raw - length_penalty)
 ```
 
@@ -216,7 +216,7 @@ Every mutation must pass ALL constraints before evaluation. Reject immediately i
 import yaml, os
 
 def check_constraints(skill_path, baseline_size):
-    content = open(skill_path).read()
+    content = open(skill_path, encoding='utf-8').read()
     size = os.path.getsize(skill_path)
 
     # Size limit
@@ -312,7 +312,7 @@ Continue the loop until any stopping condition:
 
 ### Final Report
 
-When the loop terminates, run holdout evaluation and produce `eval_results/final_report.md`:
+When the loop terminates, run holdout evaluation (if holdout split exists) and produce `eval_results/final_report.md`:
 
 ```markdown
 ## Improvement Summary
@@ -356,7 +356,7 @@ Scan session files for the skill name, related keywords, and trigger phrases fro
 the skill's description. Extract candidate snippets (the user prompt + agent response).
 
 ```bash
-grep -rl "skill-name\|keyword1\|keyword2" ~/.hermes/sessions/ | head -20
+grep -rlE "skill-name|keyword1|keyword2" ~/.hermes/sessions/ | head -20
 ```
 
 **Stage 2: LLM Relevance Judge (accurate, costs tokens)**
