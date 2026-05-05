@@ -19,12 +19,11 @@ _get_search_terms() {
   body=$(jq -n --arg s "$start" --arg e "$end" '{
     startTime: $s,
     endTime: $e,
-    timeZone: "UTC",
-    granularity: "DAILY",
+    timeZone: "ORTZ",
     selector: {
-      conditions: [{"field":"impressions","operator":"GREATER_THAN","values":["5"]}],
-      orderBy: [{"field":"localSpend","sortOrder":"DESCENDING"}],
-      pagination: {"offset": 0, "limit": 1000}
+      conditions: [],
+      orderBy: [{field: "localSpend", sortOrder: "DESCENDING"}],
+      pagination: {offset: 0, limit: 1000}
     },
     returnRowTotals: true
   }')
