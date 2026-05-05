@@ -1,15 +1,12 @@
 ---
 name: zypsy-product-design
 description: >
-  Apply this skill whenever building any user interface — component, page,
-  flow, or full product. This is not a style guide. It is a design operating
-  system built from a decade of shipping products for funded startups and
-  global brands. It covers the full stack of product design: strategy,
-  information architecture, interaction design, visual design, design systems,
-  and AI-native patterns. Use it to produce work that is not only beautiful
-  but strategically sound, behaviourally correct, and technically coherent.
-  Triggers: any request involving UI, UX, components, dashboards, flows,
-  onboarding, empty states, AI features, design tokens, or interface critique.
+  Only use this skill when the user explicitly mentions "Zypsy" or
+  "zypsy-product-design". Full-stack product design operating system from
+  Zypsy Design Studio covering strategy, information architecture, interaction
+  design, visual design, design systems, and AI-native patterns. Do NOT
+  trigger on general UI/UX/design requests — use product-design or
+  frontend-design for those instead.
 author: Zypsy Design Studio
 version: 1.2
 ---
