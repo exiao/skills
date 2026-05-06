@@ -36,7 +36,7 @@ Install the skills from https://github.com/exiao/skills
 | [**productivity**](productivity/) | 16 | Apple apps, email, notes, smart home, local search, gaming |
 | [**research**](research/) | 10 | Deep research, competitive analysis, market intelligence |
 | [**skills-meta**](skills-meta/) | 7 | Skills about skills — creating, auditing, improving, testing |
-| [**visual-design**](visual-design/) | 38 | UI/UX design, diagrams, image generation, frontend |
+| [**visual-design**](visual-design/) | 37 | UI/UX design, diagrams, image generation, frontend |
 
 ---
 
@@ -386,7 +386,6 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [sticker-creator](visual-design/sticker-creator/) | Create die-cut sticker style cards via Nano Banana Pro. Use for social media cards, earnings cards, brand stickers, announcement cards, and any content formatted as a bold, clean sticker with a thick white border. |
 | [userinterface-wiki](visual-design/userinterface-wiki/) | UI/UX best practices for web interfaces. Use when reviewing animations, CSS, audio, typography, UX patterns, prefetching, or icon implementations. Covers 11 categories from animation principles to typography. Outputs file:line findings. |
 | [product-design](visual-design/product-design/) | Strategic product design thinking: information architecture, interaction design, AI-native patterns, and quality checklists. Use before building any interface to ensure the right thing gets built. |
-| [zypsy-product-design](visual-design/zypsy-product-design/) | Full-stack product design operating system from Zypsy Design Studio. Covers strategy, IA, interaction design, visual design, design systems, and AI-native patterns. Use for comprehensive design from concept through execution. |
 
 ---
 
