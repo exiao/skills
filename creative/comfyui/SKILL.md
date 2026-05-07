@@ -23,7 +23,7 @@ metadata:
       - creative
       - generative-ai
       - video-generation
-    related_skills: [nano-banana]
+    related_skills: [nano-banana-pro]
     category: creative
 ---
 
