@@ -8,7 +8,7 @@ description: Create equity research earnings update reports analyzing quarterly 
 Create **earnings update reports** analyzing quarterly results, following institutional standards.
 
 **Key Characteristics:**
-- Length: 6-10 pages (2,000-3,000 words)
+- Length: 8-12 pages (2,000-3,000 words)
 - Tables: 1-3 summary tables
 - Charts: 8-12 figures
 - Focus: What's NEW: beat/miss, updated estimates, thesis impact
