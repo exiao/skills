@@ -180,7 +180,7 @@ Based on the actual Bloom migration:
 5. Fix Procfile: `bloom.wsgi` → `bloom.asgi` (ASGI required for UvicornWorker)
 6. Fix gunicorn.conf.py: unix socket → `0.0.0.0:$PORT`
 7. Deploy via `railway up`
-8. Update DNS: `api.getbloom.app` CNAME → `tmnv267w.up.railway.app` (DNS only, no CF proxy)
+8. Update DNS: `$BLOOM_API_DOMAIN` CNAME → `tmnv267w.up.railway.app` (DNS only, no CF proxy)
 9. Verify API responding on new domain
 
 Total time: ~2 hours from discovery to live.

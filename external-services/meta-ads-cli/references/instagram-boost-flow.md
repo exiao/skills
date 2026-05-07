@@ -5,7 +5,7 @@ Browser-based ad workflow for running ads **without a Facebook ad account** — 
 ## Context
 
 - **Account:** invest.with.bloom on Instagram
-- **Login:** admin@getbloom.app (password in ads/iteration/config.json)
+- **Login:** $META_ADS_LOGIN (password in ads/iteration/config.json)
 - **Budget per ad:** $5/day, run until paused
 - **Destination:** App Store link for Bloom
 - **Browser profile:** clawd
