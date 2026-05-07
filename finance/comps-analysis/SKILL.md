@@ -106,7 +106,7 @@ As of [Date] | All figures in USD Millions
 
 ## Sanity Checks
 
-- Gross margin > EBITDA margin > Net margin (always true)
+- Gross margin > EBITDA margin > Net margin (typically true)
 - EV/Revenue: typically 0.5-20x
 - EV/EBITDA: typically 8-25x
 - P/E: typically 10-50x

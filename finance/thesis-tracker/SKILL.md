@@ -9,7 +9,7 @@ Maintain and update investment theses for portfolio positions and watchlist name
 
 ## Storage
 
-Theses are stored as markdown files in `~/Documents/investing/theses/TICKER.md`. Create the directory if it doesn't exist.
+Theses are stored as markdown files in `theses/TICKER.md` (relative to the current workspace). Create the directory if it doesn't exist.
 
 ## Workflow
 
@@ -27,7 +27,7 @@ Theses are stored as markdown files in `~/Documents/investing/theses/TICKER.md`.
 - **Stop-loss trigger**: What would cause an exit
 - **Entry date and price**
 
-**Existing thesis:** Load from `~/Documents/investing/theses/TICKER.md`
+**Existing thesis:** Load from `theses/TICKER.md`
 
 ### Step 2: Update Log
 
