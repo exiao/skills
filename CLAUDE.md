@@ -1,6 +1,6 @@
 # Skills Repo Conventions
 
-A public repo of skills for [Hermes Agent](https://github.com/NousResearch/hermes-agent) and other skill-aware agents (Claude Code, Codex, OpenClaw). Every directory at root is a **category** containing related skills (except `.github/` and `last30days/`).
+A public repo of skills for [Hermes Agent](https://github.com/NousResearch/hermes-agent) and other skill-aware agents (Claude Code, Codex, OpenClaw). Every directory at root is a **category** containing related skills (except `.github/`).
 
 ## Repo Structure
 
@@ -61,7 +61,7 @@ The nested metadata key can be either `runtime:` or `openclaw:` (both are valid 
 2. **No personal data.** No emails, phone numbers, account balances, or internal URLs.
 3. **Update README.md** when adding, removing, or renaming skills. Every skill directory must appear in the README under the correct category.
 4. **Don't rename product names.** "Hermes Agent", "OpenClaw", "Claude Code", "Codex" etc. are real product names. Use them as-is in skill content. Don't bulk-rename references to match a metadata convention.
-5. **Prefer portable paths.** Use workspace-relative paths or well-known config paths (`~/.hermes/`, `~/.openclaw/`). Avoid paths to personal directories (e.g. `~/Documents/personal/...`).
+5. **Prefer portable paths.** Use workspace-relative paths or well-known config paths (`~/.hermes/`, `~/.openclaw/`, `~/clawd/`). Avoid paths to personal directories (e.g. `~/Documents/personal/...`).
 
 ## PR Guidelines
 
