@@ -22,7 +22,7 @@ category-name/
 | **app-store** | App Store Connect, ASO, RevenueCat, screenshots, simulators |
 | **coding** | Programming, debugging, testing, code review, PR workflows |
 | **creative** | Writing, editing, media production, video (Kling, Seedance, Remotion), content creation |
-| **devops** | CI/CD, GitHub workflows, Docker, MLOps, model training/inference, cloud deployment, OCPlatform debugging |
+| **devops** | CI/CD, GitHub workflows, Docker, MLOps, model training/inference, cloud deployment, OpenClaw debugging |
 | **external-services** | External service CLIs and API integrations (Porkbun, Appfigures, DataForSEO, Firecrawl, Higgsfield, etc.) |
 | **finance** | Investing, market analysis, portfolio management, earnings, comps |
 | **marketing** | Ads (Google/Meta/Apple), SEO, analytics, social media, content strategy, last30days research |
@@ -45,15 +45,37 @@ category-name/
 ---
 name: my-skill
 description: What this skill does and when to invoke it. Include trigger phrases.
-version: 1.0.0
-metadata:
-  runtime:
-    tags: [relevant, tags]
-    related_skills: [other-skill]
 ---
 ```
 
-The nested metadata key can be either `runtime:` or `openclaw:` (both are valid in this repo). Most skills omit the metadata block entirely, which is fine.
+Only `name` and `description` are required. No metadata block needed.
+
+## Writing Good Descriptions
+
+The `description` field is the primary routing signal. When a user says "help me with X," the agent picks a skill based on description match. Bad descriptions cause misroutes or skills that never get invoked.
+
+**Do:**
+- Start with what the skill does, then when to use it
+- Include literal trigger phrases ("Use when: babysit this PR, watch PR, monitor PR")
+- Mention the specific tools/CLIs involved ("via the Serper API", "using bloom-cli")
+- Be specific about scope boundaries ("For visual execution, use frontend-design instead")
+
+**Don't:**
+- Write marketing copy ("A powerful toolkit for...")
+- Be vague ("Helps with development tasks")
+- Duplicate another skill's trigger phrases
+
+## Cross-Referencing Other Skills or CLIs
+
+When a skill references third-party tools or CLIs, verify the commands actually exist. Common mistakes:
+
+- `bloom quote` → doesn't exist, use `bloom info` (includes price, ratings, peers)
+- `bloom peers` → doesn't exist, use `bloom info`
+- `bloom ratings` → doesn't exist, use `bloom info`
+
+Valid bloom-cli commands: `bloom info`, `bloom price`, `bloom financials`, `bloom screen`, `bloom earnings`, `bloom technicals`, `bloom news`, `bloom search`
+
+When referencing another skill, use its exact `name` from frontmatter (not folder name or a guess).
 
 ## Rules
 
@@ -72,5 +94,14 @@ The nested metadata key can be either `runtime:` or `openclaw:` (both are valid 
 
 ## CI
 
-- `claude-code-review.yml` runs on every PR. It checks frontmatter, hardcoded secrets, broken references, and accuracy.
-- CI failures from bad credentials (401) are infra issues. Retry the run.
+`claude-code-review.yml` runs on every PR. It checks:
+
+- Frontmatter validity (name + description present, description is a routing instruction)
+- Hardcoded secrets or personal data
+- Broken internal references (referenced files that don't exist)
+- Accuracy of CLI commands and tool references
+- Scope and coherence (does the PR do one thing?)
+
+CI failures from bad credentials (401) are infra issues — retry the run, don't change code.
+
+The reviewer posts as `github-actions[bot]`. It may request changes. Fix real issues; dismiss stale reviews after fixing.
