@@ -162,7 +162,7 @@ SEC Form 4 URLs are typically ~95 chars. Budget accordingly. Test with `echo -n 
 
 ### Step 8 — Upload Card + Create Typefully Draft
 
-The Bloom Typefully social set ID is **$TYPEFULLY_SOCIAL_SET_ID** (username: `investwithbloom`).
+The Bloom Typefully social set ID is **$TYPEFULLY_SOCIAL_SET_ID**.
 
 ```bash
 cd ~/.hermes/skills/marketing/typefully

@@ -32,7 +32,7 @@ description: "Reference notes for Fintary ops-center dashboard rebuild — Alpin
 - Chart.js x-axis: `autoSkip: true`, `maxTicksLimit: 12` (was showing every label at 45° rotation)
 - Firebase auth race fix: `getFirebaseToken()` now waits for `onAuthStateChanged` instead of checking `currentUser` immediately (was null on page load, causing silent API failures requiring manual Refresh click)
 
-## PR #N — closed (stale, superseded by #71 + #72)
+## PR #N — closed (stale, superseded by later PRs)
 
 ## PR #N (2026-05-01) — open
 - 30 JS unit tests (vitest) for analytics utils: fmtDateLabel, fmtMonth, fmtCurrency, fmtCompact, escHtml, findCol, ReportClassifier, NUMERIC_TYPES, DATE_TYPES
