@@ -1,6 +1,6 @@
 # Skills Repo Conventions
 
-A public repo of skills for [Hermes Agent](https://github.com/NousResearch/hermes-agent) (also compatible with Claude Code, Codex, and other skill-aware agents). Every directory at root is a **category** containing related skills (except `.github/`).
+A public repo of skills for [Hermes Agent](https://github.com/NousResearch/hermes-agent) and other skill-aware agents (Claude Code, Codex, OpenClaw). Every directory at root is a **category** containing related skills (except `.github/` and `last30days/`).
 
 ## Repo Structure
 
@@ -22,11 +22,10 @@ category-name/
 | **app-store** | App Store Connect, ASO, RevenueCat, screenshots, simulators |
 | **coding** | Programming, debugging, testing, code review, PR workflows |
 | **creative** | Writing, editing, media production, video (Kling, Seedance, Remotion), content creation |
-| **devops** | CI/CD, GitHub workflows, Docker, MLOps, model training/inference, cloud deployment |
+| **devops** | CI/CD, GitHub workflows, Docker, MLOps, model training/inference, cloud deployment, OCPlatform debugging |
 | **external-services** | External service CLIs and API integrations (Porkbun, Appfigures, DataForSEO, Firecrawl, Higgsfield, etc.) |
 | **finance** | Investing, market analysis, portfolio management, earnings, comps |
-| **last30days** | 30-day topic research across Reddit, X, YouTube, web |
-| **marketing** | Ads (Google/Meta/Apple), SEO, analytics, social media, content strategy |
+| **marketing** | Ads (Google/Meta/Apple), SEO, analytics, social media, content strategy, last30days research |
 | **memory** | Memory management — GC, setup, and recall from past sessions |
 | **productivity** | Apple apps, email, notes, smart home, local search, gaming |
 | **research** | Deep research, competitive analysis, market intelligence |
@@ -54,15 +53,15 @@ metadata:
 ---
 ```
 
-The metadata key is `runtime:` (not `openclaw` or `clawdbot`). Product names like "Hermes Agent" are correct as-is. Do not rename product/project names to match metadata keys.
+The nested metadata key can be either `runtime:` or `openclaw:` (both are valid in this repo). Most skills omit the metadata block entirely, which is fine.
 
 ## Rules
 
 1. **No hardcoded credentials.** Use `$ENV_VAR_NAME` for tokens, API keys, auth strings, product IDs. This repo is public.
 2. **No personal data.** No emails, phone numbers, account balances, or internal URLs.
 3. **Update README.md** when adding, removing, or renaming skills. Every skill directory must appear in the README under the correct category.
-4. **No hardcoded absolute paths.** Use relative paths or `$ENV_VAR` references. Paths like `~/Documents/personal/...` are not portable. Workspace-relative paths (e.g. `theses/TICKER.md`) or well-known config paths (e.g. `~/.hermes/config.yaml`) are fine.
-5. **Don't rename product names.** "Hermes Agent", "Claude Code", "Codex" etc. are real product names. Use them as-is. This rule exists because past CI reviews over-zealously renamed all "hermes" or "runtime" references to match old platform metadata conventions.
+4. **Don't rename product names.** "Hermes Agent", "OpenClaw", "Claude Code", "Codex" etc. are real product names. Use them as-is in skill content. Don't bulk-rename references to match a metadata convention.
+5. **Prefer portable paths.** Use workspace-relative paths or well-known config paths (`~/.hermes/`, `~/.openclaw/`). Avoid paths to personal directories (e.g. `~/Documents/personal/...`).
 
 ## PR Guidelines
 
