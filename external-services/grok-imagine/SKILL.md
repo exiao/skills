@@ -3,14 +3,12 @@ name: grok-imagine
 description: "Generate or edit images via xAI Grok Imagine (Aurora). Use when asked to generate images with Grok, Aurora, or xAI. Supports text-to-image, single-image editing, and multi-image composition (up to 3). Also use for 'grok imagine', 'aurora image', 'xai generate image'."
 homepage: https://docs.x.ai/developers/model-capabilities/images
 metadata:
-  {
-    "openclaw":
-      {
-        "emoji": "🎨",
-        "requires": { "bins": ["uv"], "env": ["XAI_API_KEY"] },
-        "primaryEnv": "XAI_API_KEY",
-      },
-  }
+  openclaw:
+    emoji: "🎨"
+    requires:
+      bins: ["uv"]
+      env: ["XAI_API_KEY"]
+    primaryEnv: "XAI_API_KEY"
 ---
 
 # Grok Imagine (xAI Aurora)
@@ -49,7 +47,7 @@ uv run {baseDir}/scripts/generate_image.py --prompt "combine these" --filename "
 ## Notes
 
 - Models: `--model default` (`grok-imagine-image`, fast) or `--model quality` (`grok-imagine-image-quality`, best).
-- `grok-imagine-image-pro` is deprecated as of May 15 2026. Use `quality` instead.
+- `grok-imagine-image-pro` is scheduled for deprecation on May 15, 2026. Use `quality` instead.
 - Resolutions: `1k` (default), `2k`.
 - Aspect ratios: `1:1`, `16:9`, `9:16`, `4:3`, `3:4`, `3:2`, `2:3`, `2:1`, `1:2`, `auto`.
 - Use timestamps in filenames: `yyyy-mm-dd-hh-mm-ss-name.png`.
@@ -57,6 +55,7 @@ uv run {baseDir}/scripts/generate_image.py --prompt "combine these" --filename "
 - The script prints a `MEDIA:` line for gateway auto-attachment.
 - Do not read the image back; report the saved path only.
 - Max 10 images per request via `-n`.
+- `-n` is ignored for image edits (only 1 output per edit request).
 - Image edits are billed for both input and output images.
 
 ## Prompting Best Practices

@@ -3,7 +3,6 @@
 # requires-python = ">=3.10"
 # dependencies = [
 #     "requests>=2.31.0",
-#     "pillow>=10.0.0",
 # ]
 # ///
 """
@@ -82,28 +81,6 @@ def download_image(url: str, output_path: Path) -> bool:
         return False
 
 
-def save_b64_image(b64_data: str, output_path: Path) -> bool:
-    """Decode base64 image data and save to file."""
-    try:
-        from PIL import Image
-        from io import BytesIO
-
-        image_data = base64.b64decode(b64_data)
-        image = Image.open(BytesIO(image_data))
-        output_path.parent.mkdir(parents=True, exist_ok=True)
-
-        if image.mode == "RGBA":
-            rgb = Image.new("RGB", image.size, (255, 255, 255))
-            rgb.paste(image, mask=image.split()[3])
-            rgb.save(str(output_path), "PNG")
-        else:
-            image.convert("RGB").save(str(output_path), "PNG")
-        return True
-    except Exception as e:
-        print(f"Error saving base64 image: {e}", file=sys.stderr)
-        return False
-
-
 def make_output_path(base_path: Path, index: int, total: int) -> Path:
     """Generate output path, appending -N suffix when generating multiple images."""
     if total <= 1:
@@ -111,6 +88,51 @@ def make_output_path(base_path: Path, index: int, total: int) -> Path:
     stem = base_path.stem
     suffix = base_path.suffix
     return base_path.parent / f"{stem}-{index}{suffix}"
+
+
+def process_response_images(data: dict, output_base: Path) -> int:
+    """Process API response images: download URLs or decode b64, print MEDIA: lines.
+
+    Returns the count of successfully saved images.
+    """
+    images = data.get("data", [])
+    if not images:
+        print("Error: No images returned in response.", file=sys.stderr)
+        sys.exit(1)
+
+    saved = 0
+    for i, img in enumerate(images):
+        out_path = make_output_path(output_base, i + 1, len(images))
+        url = img.get("url")
+        b64 = img.get("b64_json")
+
+        if url:
+            if download_image(url, out_path):
+                saved += 1
+                full = out_path.resolve()
+                print(f"\nImage saved: {full}")
+                print(f"MEDIA:{full}")
+        elif b64:
+            try:
+                image_data = base64.b64decode(b64)
+                out_path.parent.mkdir(parents=True, exist_ok=True)
+                with open(out_path, "wb") as f:
+                    f.write(image_data)
+                saved += 1
+                full = out_path.resolve()
+                print(f"\nImage saved: {full}")
+                print(f"MEDIA:{full}")
+            except Exception as e:
+                print(f"Error saving base64 image: {e}", file=sys.stderr)
+        else:
+            print(f"Warning: Image {i + 1} has no url or b64_json.", file=sys.stderr)
+
+    if saved == 0:
+        print("Error: Failed to save any images.", file=sys.stderr)
+        sys.exit(1)
+
+    print(f"\nDone. {saved}/{len(images)} image(s) saved.")
+    return saved
 
 
 def generate_images(api_key: str, args: argparse.Namespace) -> None:
@@ -154,39 +176,7 @@ def generate_images(api_key: str, args: argparse.Namespace) -> None:
             print(f"  {resp.text}", file=sys.stderr)
         sys.exit(1)
 
-    data = resp.json()
-    images = data.get("data", [])
-    if not images:
-        print("Error: No images returned in response.", file=sys.stderr)
-        sys.exit(1)
-
-    output_base = Path(args.filename)
-    saved = 0
-    for i, img in enumerate(images):
-        out_path = make_output_path(output_base, i + 1, len(images))
-        url = img.get("url")
-        b64 = img.get("b64_json")
-
-        if url:
-            if download_image(url, out_path):
-                saved += 1
-                full = out_path.resolve()
-                print(f"\nImage saved: {full}")
-                print(f"MEDIA:{full}")
-        elif b64:
-            if save_b64_image(b64, out_path):
-                saved += 1
-                full = out_path.resolve()
-                print(f"\nImage saved: {full}")
-                print(f"MEDIA:{full}")
-        else:
-            print(f"Warning: Image {i + 1} has no url or b64_json.", file=sys.stderr)
-
-    if saved == 0:
-        print("Error: Failed to save any images.", file=sys.stderr)
-        sys.exit(1)
-
-    print(f"\nDone. {saved}/{len(images)} image(s) saved.")
+    process_response_images(resp.json(), Path(args.filename))
 
 
 def edit_images(api_key: str, args: argparse.Namespace) -> None:
@@ -244,39 +234,7 @@ def edit_images(api_key: str, args: argparse.Namespace) -> None:
             print(f"  {resp.text}", file=sys.stderr)
         sys.exit(1)
 
-    data = resp.json()
-    images = data.get("data", [])
-    if not images:
-        print("Error: No images returned in response.", file=sys.stderr)
-        sys.exit(1)
-
-    output_base = Path(args.filename)
-    saved = 0
-    for i, img in enumerate(images):
-        out_path = make_output_path(output_base, i + 1, len(images))
-        url = img.get("url")
-        b64 = img.get("b64_json")
-
-        if url:
-            if download_image(url, out_path):
-                saved += 1
-                full = out_path.resolve()
-                print(f"\nImage saved: {full}")
-                print(f"MEDIA:{full}")
-        elif b64:
-            if save_b64_image(b64, out_path):
-                saved += 1
-                full = out_path.resolve()
-                print(f"\nImage saved: {full}")
-                print(f"MEDIA:{full}")
-        else:
-            print(f"Warning: Image {i + 1} has no url or b64_json.", file=sys.stderr)
-
-    if saved == 0:
-        print("Error: Failed to save any images.", file=sys.stderr)
-        sys.exit(1)
-
-    print(f"\nDone. {saved}/{len(images)} image(s) saved.")
+    process_response_images(resp.json(), Path(args.filename))
 
 
 def main():
@@ -340,6 +298,11 @@ def main():
     if args.input_images and len(args.input_images) > 3:
         print(f"Error: Too many input images ({len(args.input_images)}). Maximum is 3.", file=sys.stderr)
         sys.exit(1)
+
+    # Warn if -n > 1 with edits (edits don't support batch)
+    if args.input_images and args.n > 1:
+        print("Warning: -n is ignored for image edits, generating 1 image.", file=sys.stderr)
+        args.n = 1
 
     # Get API key
     api_key = get_api_key(args.api_key)
