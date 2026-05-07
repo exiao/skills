@@ -130,7 +130,7 @@ Compositions have fixed dimensions (`data-width`/`data-height`), so responsive b
 ## Don't Do
 
 - `repeat: -1` anywhere — breaks the capture engine.
-- `Math.random()`, `Date.now()`, performance.now()` inside tween values — non-deterministic.
+- `Math.random()`, `Date.now()`, `performance.now()` inside tween values — non-deterministic.
 - `async` / `setTimeout` / `Promise` around timeline construction — the capture engine reads `window.__timelines` synchronously.
 - Animate `visibility` or `display` directly — use `autoAlpha`.
 - `gsap.set()` on clip elements that enter later in the timeline — they don't exist in the DOM at page-load. Use `tl.set(sel, vars, time)` inside the timeline.
