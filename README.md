@@ -30,6 +30,7 @@ Install the skills from https://github.com/exiao/skills
 | [**coding**](coding/) | 23 | Programming, debugging, testing, code review, web scraping |
 | [**creative**](creative/) | 38 | Writing, editing, media production, content creation |
 | [**devops**](devops/) | 55 | CI/CD, GitHub, Docker, MLOps, model training/inference |
+| [**external-services**](external-services/) | 13 | External service CLIs and API integrations |
 | [**finance**](finance/) | 13 | Investing, market analysis, portfolio management |
 | [**marketing**](marketing/) | 38 | Ads (Google/Meta/Apple), SEO, analytics, social media |
 | [**memory**](memory/) | 3 | Memory management — GC, setup, and recall |
@@ -315,6 +316,24 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [typefully](marketing/typefully/) | Use when creating, scheduling, or managing social posts via Typefully. |
 | [whop-content-rewards](marketing/whop-content-rewards/) | Set up and manage Content Rewards UGC campaigns on Whop for Bloom. Use when launching new campaigns, adding budget, reviewing submissions, or checking campaign performance. |
 | [xitter](marketing/xitter/) | Interact with X/Twitter via the x-cli terminal client using official X API credentials. Use for posting, reading timelines, searching tweets, liking, retweeting, bookmarks, mentions, and user lookups. |
+
+### 🔌 External Services
+
+| Skill | Description |
+|-------|-------------|
+| [appfigures-cli](external-services/appfigures-cli/) | Use when querying Appfigures for app store analytics (downloads, revenue, reviews, rankings). |
+| [apple-search-ads](external-services/apple-search-ads/) | Create, optimize, and scale Apple Search Ads campaigns with API automation, attribution integration, and bid strategy recommendations. |
+| [bird-twitter](external-services/bird-twitter/) | Read X/Twitter timelines, tweets, and threads using the bird CLI (cookie-based GraphQL). Use when the user mentions "bird", wants to read their Following/For You timeline, fetch tweets, search X, or pull timeline data for summarization. |
+| [copilot-money-cli](external-services/copilot-money-cli/) | Use when querying Copilot Money for finances, transactions, net worth, and holdings. |
+| [dataforseo-cli](external-services/dataforseo-cli/) | Use when doing keyword research (volume, difficulty, ideas), checking App Store or Google Play rankings, or looking up Google SERP rankings for content/landing pages. |
+| [firecrawl](external-services/firecrawl/) | Scrape, crawl, search, and interact with web pages using Firecrawl CLI and API. Use for JS-rendered pages, full site crawls, sitemaps, form interaction, and login-required pages. |
+| [google-ads-cli](external-services/google-ads-cli/) | Use when managing Google Ads campaigns: performance checks, keyword pausing, report downloads, or campaign optimization via browser or API. |
+| [grok-imagine](external-services/grok-imagine/) | Generate or edit images via xAI Grok Imagine (Aurora). Supports text-to-image, single-image editing, and multi-image composition (up to 3). |
+| [higgsfield](external-services/higgsfield/) | Use the Higgsfield MCP for AI image and video generation (30+ models including Seedance, Kling, Veo, Flux, Soul, Minimax Hailuo). |
+| [meta-ads-cli](external-services/meta-ads-cli/) | Daily Meta ad operations via Marketing API: check performance, kill losers, promote winners, generate fresh creatives, upload as new ads. |
+| [porkbun-cli](external-services/porkbun-cli/) | Manage Porkbun domains, DNS records, SSL certificates, URL forwarding, and hosting blueprints via the Porkbun API. |
+| [prometheus-cli](external-services/prometheus-cli/) | Search TikTok viral videos, App Store rankings, hook analysis, app strategy, and content research via SGE Prometheus MCP. |
+| [stably-cli](external-services/stably-cli/) | Use the Stably CLI to create, run, fix, and maintain Playwright tests. Use for running tests, auto-fixing failures, or generating new tests from a prompt. |
 
 ### 📋 Productivity
 
