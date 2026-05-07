@@ -210,6 +210,201 @@ This is the cleanest iOS attribution signal available post-ATT. Server-side, no 
 4. **Checking UI before waiting for tables** — The Google Ads UI is heavy and loads data asynchronously. Taking a snapshot too early captures loading spinners, not data. Wait for tables to fully render.
 5. **`proto-plus CopyFrom` errors on create** — Assign resource fields directly (e.g., `operation.create = campaign`) rather than using `CopyFrom` on create operations; `CopyFrom` is for updates only.
 
+---
+
+## Weekly Creative Asset Generation
+
+Run weekly (Mondays) to refresh ad assets. Separate from the daily performance report.
+
+### Asset Specs (Google App Campaigns)
+
+| Asset Type | Specs | Max per campaign |
+|---|---|---|
+| Headline | Max 30 chars | 5 |
+| Description | Max 90 chars | 5 |
+| Landscape Image | 1200x628px, <5MB, PNG/JPG | 20 |
+| Square Image | 1200x1200px, <5MB, PNG/JPG | 20 |
+| Video | YouTube URL, 10-30s preferred | 20 |
+
+### Step W1 — Analyze Existing Asset Performance
+
+```python
+# Query asset performance for App Campaigns
+query = """
+    SELECT asset.id, asset.name, asset.type,
+           asset.text_asset.text, asset.image_asset.full_size.url,
+           asset_field_type_view.field_type,
+           metrics.impressions, metrics.clicks, metrics.conversions,
+           metrics.cost_micros
+    FROM asset_group_asset
+    WHERE segments.date DURING LAST_30_DAYS
+    ORDER BY metrics.conversions DESC
+"""
+```
+
+Identify:
+- Top performing headlines (by CTR and conversion rate)
+- Top performing descriptions
+- Top performing images
+- Underperformers to flag for removal (high impressions, zero conversions)
+
+### Step W2 — Competitor Copy Research (via DataForSEO)
+
+```bash
+# Get competitor App Store listings for copy inspiration
+export BASE="https://api.dataforseo.com/v3"
+export DFS_AUTH="Authorization: Basic $DATAFORSEO_AUTH_BASE64"
+
+# Get keywords competitors rank for
+curl -s -X POST "$BASE/dataforseo_labs/apple/app_competitors/live" \
+  -H "$DFS_AUTH" -H "Content-Type: application/json" \
+  -d '[{"app_id": "$BLOOM_APP_STORE_ID", "location_code": 2840, "language_code": "en", "limit": 10}]'
+
+# Get keyword ideas for ad copy inspiration
+curl -s -X POST "$BASE/keywords_data/google_ads/keywords_for_keywords/live" \
+  -H "$DFS_AUTH" -H "Content-Type: application/json" \
+  -d '[{"keywords": ["ai investing app", "stock research", "portfolio tracker", "ai stock picks"], "location_code": 2840, "language_code": "en", "limit": 50}]'
+```
+
+Use high-volume keyword phrases to inform headline and description copy.
+
+### Step W3 — Generate Headlines + Descriptions
+
+Generate **5 new headlines** (max 30 chars each) and **3 new descriptions** (max 90 chars each).
+
+**Headline principles:**
+- Include high-volume keywords naturally
+- Benefit-focused, not feature-focused
+- Numbers when possible ("500+ stocks", "24/7")
+- Must be EXACTLY ≤30 characters (count carefully)
+
+**Description principles:**
+- Expand on the headline's promise
+- Include a soft CTA ("Start free", "Try today")
+- Social proof if fits ("100K+ downloads")
+- Must be EXACTLY ≤90 characters
+
+**Informed by:**
+- Winning patterns from Step W1 (double down)
+- Competitor keyword themes from Step W2
+- Bloom value props: AI stock picks, 500+ stocks monitored, no experience needed, free to start
+
+### Step W4 — Generate Image Assets (2 images)
+
+Generate using the tri-model approach. Sizes needed:
+
+1. **Landscape (1200x628)** — for display network, YouTube placements
+2. **Square (1200x1200)** — for feed placements, discovery
+
+```bash
+# Higgsfield (landscape)
+higgsfield generate create seedream_v5_lite \
+  --prompt "..." \
+  --aspect_ratio 2:1 \
+  --wait --json
+
+# Nano Banana Pro or gpt-image-2 (square)
+# Use same approach as meta-ads-cli skill
+```
+
+**Creative direction for Google App Campaign images:**
+- Show the app in action (phone mockup with Bloom UI)
+- Clean, professional, not meme-style (Google is stricter than Meta)
+- Include the app name "Bloom" visually
+- No misleading financial claims or specific return promises
+- Bright, optimistic color palette matching brand (teal #28B5BD, navy #0f172a)
+
+### Step W5 — Generate Video Asset (1 video, 15-30s)
+
+Use Higgsfield Marketing Studio for a polished app ad video:
+
+```bash
+# Fetch Bloom as webproduct (App Store URL)
+higgsfield marketing-studio products fetch --url "https://apps.apple.com/app/id$BLOOM_APP_STORE_ID" --wait
+
+# Generate video ad (UGC or Product Showcase preset)
+higgsfield generate create marketing_studio_video \
+  --url "https://apps.apple.com/app/id$BLOOM_APP_STORE_ID" \
+  --mode product_showcase \
+  --duration 15 \
+  --aspect_ratio 16:9 \
+  --wait --json
+```
+
+**Video requirements for Google:**
+- Must be uploaded to YouTube first (Google Ads references YouTube URLs)
+- 10-30 seconds preferred
+- 16:9 (landscape) or 9:16 (vertical/Shorts) or 1:1 (square)
+- After generation, upload to YouTube as unlisted → use YouTube URL as asset
+
+**Alternative if Higgsfield video auth fails:**
+- Generate a static image + use it as a YouTube Short with Ken Burns effect
+- Or skip video for this week and note in report
+
+### Step W6 — Visual QA Gate
+
+Same as Meta: inspect each generated image for:
+1. Text legibility and correct spelling
+2. No wrong logos
+3. No AI artifacts
+4. Google Ads policy compliance (no misleading claims)
+
+### Step W7 — Report with Confirmation
+
+Output the report with all generated assets. DO NOT upload automatically.
+
+```
+🎯 Google Ads Weekly Creative Refresh — [date]
+
+## Asset Performance (Last 30 Days)
+Top headline: "..." — X conv, Y% CTR
+Top description: "..." — X conv
+Weakest asset: "..." — 0 conv, $X spend → recommend removal
+
+## New Headlines (5)
+1. "AI picks. You profit." (22 chars)
+2. ...
+
+## New Descriptions (3)
+1. "Bloom's AI monitors 500+ stocks daily..." (87 chars)
+2. ...
+
+## New Images (2)
+[attached]
+
+## New Video (1)
+[YouTube URL or attached]
+
+Reply "upload" to add all assets to campaign [name].
+Reply "upload headlines only" / "upload images only" for partial.
+```
+
+### Step W8 — Upload on Confirmation (manual trigger)
+
+```python
+# Create text asset (headline)
+asset_op = client.get_type("AssetOperation")
+asset = asset_op.create
+asset.text_asset.text = "AI picks. You profit."
+asset.name = f"Bloom Headline {date}"
+
+asset_service.mutate_assets(customer_id=CUSTOMER_ID, operations=[asset_op])
+
+# Create image asset
+asset_op = client.get_type("AssetOperation")
+asset = asset_op.create
+asset.image_asset.data = image_bytes  # raw bytes
+asset.image_asset.file_size = len(image_bytes)
+asset.image_asset.mime_type = client.enums.MimeTypeEnum.IMAGE_PNG
+asset.name = f"Bloom Landscape {date}"
+
+# Link asset to campaign asset group
+campaign_asset_op = client.get_type("AssetGroupAssetOperation")
+...
+```
+
+---
+
 ## Troubleshooting
 
 ### Browser Mode Issues

@@ -193,3 +193,26 @@ No regressions detected. Deploy is healthy.
 - Don't skip the canary phase even if benchmark looks clean. Bugs surface under real traffic.
 - Don't silently swallow console errors. Report everything, let the user decide what matters.
 - Don't run longer than requested. If the user says 5 minutes, stop at 5 minutes.
+
+---
+
+## Scheduled Mode (`--scheduled`)
+
+When invoked by the daily cron job, skip Phases 1-3 and run a lighter health-check flow:
+
+1. Curl every endpoint in the **Apps monitored** table below, record HTTP status + latency.
+2. Deploy detection: `gh api` to count commits in the last 24h for each repo.
+3. If recent commits exist, browser-benchmark that app's frontend (load time, TTFB, console errors, failed requests). Skip CWV/resource breakdowns.
+4. No canary. Sentry handles that.
+
+Output the "🏥 App Health Check" report format (table of endpoints + flags + optional "🆕 Recent deploys" section).
+
+### Apps monitored
+
+| App | Frontend URL | API URL | Endpoints | Repo |
+|-----|-------------|---------|-----------|------|
+| **Bloom** | `bloom.onrender.com` | `bloom.onrender.com` | `/api/health`, `/`, `/portfolios`, `/chat` | `Bloom-Invest/bloom` |
+| **Bible Genius** | `app.genius.bible` | `prompt-pm--bible-fastapi-app.modal.run` | API: `/`, `/api/get_chapter?book=John&chapter=1`, `/api/search_bible?query=love` · Frontend: `/` | `prompt-pm/bible-app` |
+| **InvestingArena** | `investingarena.ai` | `ai-portfolio-arena.onrender.com` | API: `/health`, `/api/portfolios`, `/api/activity` · Frontend: `/` | `Bloom-Invest/investing-log` |
+
+**Use these URLs exactly. Do not substitute or discover alternatives.**

@@ -401,6 +401,7 @@ Retired pillars aren't deleted. Keep `tiktok-marketing/pillar-bench.json` and re
 | `references/content-formats.md` | Content format types, templates, and selection criteria |
 | `references/distribution.md` | Distribution channels, cross-posting strategy, amplification |
 | `references/geo-targeting.md` | Geo-targeting strategy for content localization |
+| `references/geo-llm-discovery.md` | GEO (Generative Engine Optimization): getting cited by AI chatbots via Reddit, LinkedIn, Substack. Includes sycophancy research context. |
 | `references/interactive-content.md` | Interactive content types, quizzes, calculators, assessments |
 
 ---
@@ -438,6 +439,33 @@ What a complete strategy card looks like after running this skill. Use this as t
 - Tweets → `tweet-ideas`
 - TikTok → `slideshow-creator`
 - Scheduling → `typefully`
+
+---
+
+## Social Comms Personality
+
+How you show up matters as much as what you post. These principles govern tone and presence across all social channels.
+
+**Voice principles:**
+- Simple announcements, human language — no corporate press-release energy
+- Socially aware humor and joy — be a person, not a brand account
+- Spontaneity — not everything needs to be polished or scheduled
+- Generosity — give away value freely, don't gate everything
+- Positive about the future and about builders
+- Let the product speak for itself — don't oversell
+- Let the audience be your champion — amplify them, don't just broadcast
+- "Thinking out loud" energy — share process, not just outcomes
+- Engage with people (especially small accounts) — don't just talk at the crowd
+- Engage with discourse if it's good faith — don't hide from conversation
+- Cater to the very online (in moderation)
+- Tactful honesty about flaws — acknowledge what's broken, don't pretend
+- Tasteful jabs at competitors are fine
+- Cringe is better than corporate — if you have to pick, pick human
+- Above all, show your humanity
+
+**Anti-patterns:** Overthought announcements. Jargon-heavy feature drops. Ignoring replies. Only engaging with big accounts. Hiding behind brand voice when a real voice would land better.
+
+Source: @anuatluru analysis of OpenAI's comms shift (May 2026)
 
 ---
 

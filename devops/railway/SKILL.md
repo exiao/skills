@@ -16,7 +16,61 @@ mcporter call railway.check-railway-status
 railway whoami
 ```
 
-## Common Operations
+## Direct GraphQL API (when CLI/MCP unavailable)
+
+Use the Railway GraphQL API at `https://backboard.railway.app/graphql/v2` when the CLI isn't installed or MCP isn't configured. Auth via `Authorization: Bearer <token>`.
+
+### Auth pitfalls
+
+- The CLI env var is `RAILWAY_TOKEN` (not `RAILWAY_API_TOKEN`). But even with the right var, `railway whoami` rejects UUID-format API tokens in non-interactive mode — it expects tokens from `railway login`.
+- `railway login --browserless` also fails in non-interactive shells ("Cannot login in non-interactive mode").
+- For headless/non-interactive use, skip the CLI entirely and use the GraphQL API directly with curl.
+- Generate API tokens at railway.com/account/tokens. They look like UUIDs.
+
+### Verify auth
+
+```bash
+curl -s -X POST https://backboard.railway.app/graphql/v2 \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $RAILWAY_TOKEN" \
+  -d '{"query":"{ me { name email } }"}'
+```
+
+### List workspace projects and services
+
+```bash
+curl -s -X POST https://backboard.railway.app/graphql/v2 \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $RAILWAY_TOKEN" \
+  -d '{"query":"{ workspace(workspaceId: \"<WORKSPACE_ID>\") { id name projects { edges { node { id name services { edges { node { id name } } } } } } } }"}'
+```
+
+### Delete a service
+
+```bash
+curl -s -X POST https://backboard.railway.app/graphql/v2 \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $RAILWAY_TOKEN" \
+  -d '{"query":"mutation { serviceDelete(id: \"<SERVICE_ID>\") }"}'
+```
+
+### Delete a project
+
+```bash
+curl -s -X POST https://backboard.railway.app/graphql/v2 \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer $RAILWAY_TOKEN" \
+  -d '{"query":"mutation { projectDelete(id: \"<PROJECT_ID>\") }"}'
+```
+
+### GraphQL schema notes
+
+- Use `workspaceId` (not `id`) as the argument name for `workspace()` queries.
+- `projects` at the root query level (with `teamId` arg) returns "Problem processing request" — query through `workspace()` instead.
+- Projects are under `workspace.projects.edges[].node`, services under `project.services.edges[].node`.
+- Relay-style pagination: all collections use `edges { node { ... } }` pattern.
+
+## Common Operations (CLI)
 
 ### Link a directory to a project + service
 ```bash

@@ -326,6 +326,87 @@ for i in json.load(sys.stdin):
 
 5. **Comment with triage notes** if needed
 
+## 5. Staleness Validation (Was This Fixed?)
+
+When asked to validate whether open issues are stale or still real, follow this sequence. The goal is to determine whether the reported problem still exists or was already fixed by a subsequent commit/PR.
+
+### Step 1: Identify the root cause from the issue body
+
+Read each issue and extract the specific failure: what broke, which file/component, what the bad output was. Group issues that report the same underlying bug (automated validators often open duplicates per run).
+
+### Step 2: Check for subsequent fixes
+
+```bash
+# Search commit history for fixes related to the issue's symptoms
+git log --oneline --all -- <affected-files>
+git log --oneline --grep="<keyword from issue>" --since="<issue-creation-date>"
+
+# Check if a PR explicitly fixed the issue
+gh issue view <N> --json body -q '.body' | grep -i "fix\|resolve\|close"
+```
+
+### Step 3: Verify the fix addresses the root cause
+
+Don't just confirm a fix was merged. Read the fix diff and confirm it actually addresses the specific failure mode described in the issue:
+
+```bash
+git show <fix-commit> --stat    # What files changed?
+git show <fix-commit>           # Does the change address the root cause?
+```
+
+### Step 4: Check if newer runs still exhibit the problem
+
+This is the most important step. A fix in code doesn't guarantee the problem stopped:
+
+```bash
+# List recent workflow runs
+gh run list --limit 10 -w "<workflow-name>"
+
+# Check job-level pass/fail
+gh run view <run-id> --json jobs -q '.jobs[] | "\(.name): \(.conclusion)"'
+
+# Read logs for the specific failing step
+gh run view <run-id> --log | grep -A5 "<error-pattern>"
+
+# Check if newer output files exist (for data pipeline issues)
+ls <output-dir>/<date>_*
+git log --oneline -- <output-dir>/<date>_*
+```
+
+### Step 5: Check for new failure modes
+
+A fix may have resolved the original issue but introduced a different failure. Read the latest run logs end-to-end for the affected component:
+
+```bash
+# Example: validation passed but push failed (different issue)
+gh run view <run-id> --log | grep -A3 "error\|FAIL\|failed"
+```
+
+### Decision matrix
+
+| Fix merged? | Newer runs pass? | Action |
+|------------|-----------------|--------|
+| Yes | Yes | Close as stale with comment citing the fix commit/PR |
+| Yes | No (same error) | Keep open, the fix didn't work |
+| Yes | No (different error) | Close original, open new issue for the new failure |
+| No | N/A | Keep open, still real |
+
+### Closing stale issues
+
+```bash
+# Close with context so the history is useful
+gh issue close <N> --comment "Fixed by <commit/PR>. Verified: <date> run passed validation."
+
+# For duplicates, close referencing the canonical issue
+gh issue close <N> --comment "Duplicate of #<canonical>. Same root cause (describe), fixed by <commit/PR>."
+```
+
+### Pitfalls
+
+- **Automated validators create duplicates.** Multiple issues from the same validation run often report the same root cause. Group them and close all but one (or all if fixed).
+- **"Validation passed" doesn't mean "problem solved."** The run may have passed validation but failed at a later step (e.g., git push race condition). Read the full log.
+- **Don't close issues for model behavior problems** (e.g., "AI claims chart is working when it isn't") unless the prompt/workflow was updated to prevent it. Code fixes for data pipelines don't fix model hallucinations.
+
 ## 5. Bulk Operations
 
 For batch operations, combine API calls with shell scripting:

@@ -19,14 +19,13 @@ _get_search_terms() {
   body=$(jq -n --arg s "$start" --arg e "$end" '{
     startTime: $s,
     endTime: $e,
-    timeZone: "UTC",
-    granularity: "DAILY",
+    timeZone: "ORTZ",
     selector: {
-      conditions: [{"field":"impressions","operator":"GREATER_THAN","values":["5"]}],
-      orderBy: [{"field":"localSpend","sortOrder":"DESCENDING"}],
+      orderBy: [{"field": "impressions", "sortOrder": "DESCENDING"}],
       pagination: {"offset": 0, "limit": 1000}
     },
-    returnRowTotals: true
+    returnRowTotals: true,
+    returnGrandTotals: true
   }')
 
   asa_api POST "/reports/campaigns/${cid}/searchterms" "$body"
@@ -52,9 +51,9 @@ cmd_report() {
   echo "$response" | jq -r '
     .data.reportingDataResponse.row[]? |
     [.metadata.searchTermText, .metadata.keyword, .metadata.matchType,
-     .total.localSpend.amount, .total.impressions, .total.taps, .total.installs,
-     (if .total.installs > 0 then
-       ((.total.localSpend.amount | tonumber) / .total.installs * 100 | round / 100 | tostring)
+     .total.localSpend.amount, .total.impressions, .total.taps, .total.totalInstalls,
+     (if .total.totalInstalls > 0 then
+       ((.total.localSpend.amount | tonumber) / .total.totalInstalls * 100 | round / 100 | tostring)
       else "N/A" end)] |
     @tsv' | column -t -s $'\t' | {
       echo "SEARCH_TERM  KEYWORD  MATCH  SPEND  IMPRESSIONS  TAPS  INSTALLS  CPA"
@@ -85,13 +84,13 @@ cmd_winners() {
   echo ""
   echo "$response" | jq -r --arg mi "$min_installs" --arg mc "$max_cpa" '
     [.data.reportingDataResponse.row[]? |
-     select(.total.installs >= ($mi | tonumber)) |
-     select(.total.installs > 0) |
-     select(((.total.localSpend.amount | tonumber) / .total.installs) <= ($mc | tonumber))] |
-    sort_by(-.total.installs)[] |
+     select(.total.totalInstalls >= ($mi | tonumber)) |
+     select(.total.totalInstalls > 0) |
+     select(((.total.localSpend.amount | tonumber) / .total.totalInstalls) <= ($mc | tonumber))] |
+    sort_by(-.total.totalInstalls)[] |
     [.metadata.searchTermText,
-     .total.installs,
-     ((.total.localSpend.amount | tonumber) / .total.installs * 100 | round / 100 | tostring),
+     .total.totalInstalls,
+     ((.total.localSpend.amount | tonumber) / .total.totalInstalls * 100 | round / 100 | tostring),
      .total.localSpend.amount,
      .total.taps,
      .metadata.matchType] |
@@ -128,13 +127,13 @@ cmd_losers() {
   echo "$response" | jq -r --arg ms "$min_spend" --arg mi "$max_installs" '
     [.data.reportingDataResponse.row[]? |
      select((.total.localSpend.amount | tonumber) >= ($ms | tonumber)) |
-     select(.total.installs <= ($mi | tonumber))] |
+     select(.total.totalInstalls <= ($mi | tonumber))] |
     sort_by(-(.total.localSpend.amount | tonumber))[] |
     [.metadata.searchTermText,
      .total.localSpend.amount,
      .total.impressions,
      .total.taps,
-     .total.installs] |
+     .total.totalInstalls] |
     @tsv' | column -t -s $'\t' | {
       echo "SEARCH_TERM  SPEND  IMPRESSIONS  TAPS  INSTALLS"
       cat
@@ -172,9 +171,9 @@ cmd_harvest() {
   local winners
   winners=$(echo "$response" | jq -r --arg mc "$cpa_threshold" '
     [.data.reportingDataResponse.row[]? |
-     select(.total.installs >= 2) |
-     select(.total.installs > 0) |
-     select(((.total.localSpend.amount | tonumber) / .total.installs) <= ($mc | tonumber))] |
+     select(.total.totalInstalls >= 2) |
+     select(.total.totalInstalls > 0) |
+     select(((.total.localSpend.amount | tonumber) / .total.totalInstalls) <= ($mc | tonumber))] |
     .[].metadata.searchTermText')
 
   # Extract losers (spent > $20, zero installs)
@@ -182,7 +181,7 @@ cmd_harvest() {
   losers=$(echo "$response" | jq -r '
     [.data.reportingDataResponse.row[]? |
      select((.total.localSpend.amount | tonumber) >= 20) |
-     select(.total.installs == 0)] |
+     select(.total.totalInstalls == 0)] |
     .[].metadata.searchTermText')
 
   local winner_count loser_count

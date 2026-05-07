@@ -202,6 +202,11 @@ Scheduled: [time]
 
 ---
 
+## Related References
+
+- `references/infrastructure.md` — Cron and delivery config
+- `references/investing-log-architecture.md` — Full repo architecture, pipeline phases, model assignments, context sizes, cost profile, and OpenAI prompt caching strategies
+
 ## Common Mistakes
 
 1. **Posting NOACTION/SCENARIO files** — always filter these out in Step 1.

@@ -354,6 +354,12 @@ git push -u origin HEAD
 # 8. Merge when green (see Section 6)
 ```
 
+## Worktree Sync Pattern
+
+When a repo's main checkout has accumulated uncommitted changes (common with skills, config, scripts), use the worktree sync pattern to PR them cleanly without committing to main directly. See `references/worktree-sync-pattern.md` for the full script and cron setup.
+
+Key idea: create a clean worktree from `origin/main`, copy dirty files from the main checkout into it, commit + push + PR from the worktree.
+
 ## Useful PR Commands Reference
 
 | Action | gh | git + curl |

@@ -26,23 +26,18 @@ cmd_list() {
   done
 
   local response
+  response=$(asa_api GET "/campaigns") || return 1
+
+  local filter='.data[]?'
   if [[ -n "$status" ]]; then
-    response=$(asa_api POST "/campaigns/find" "$(jq -n --arg s "$status" '{
-      "selector": {
-        "conditions": [{"field":"status","operator":"EQUALS","values":[$s]}],
-        "orderBy": [{"field":"id","sortOrder":"ASCENDING"}],
-        "pagination": {"offset":0,"limit":100}
-      }
-    }')") || return 1
-  else
-    response=$(asa_api GET "/campaigns") || return 1
+    filter=".data[]? | select(.status == \"$status\")"
   fi
 
-  echo "$response" | jq -r '
-    .data[]? | [.id, .name, .status, .supplySources[0] // "N/A",
-      (.dailyBudgetAmount.amount // "N/A"),
-      (.budgetAmount.amount // "N/A")] |
-    @tsv' | column -t -s $'\t' | {
+  echo "$response" | jq -r "
+    $filter | [.id, .name, .status, .supplySources[0] // \"N/A\",
+      (.dailyBudgetAmount.amount // \"N/A\"),
+      (.budgetAmount.amount // \"N/A\")] |
+    @tsv" | column -t -s $'\t' | {
       echo "ID  NAME  STATUS  SUPPLY_SOURCE  DAILY_BUDGET  TOTAL_BUDGET"
       cat
     }
@@ -113,7 +108,10 @@ cmd_update() {
     esac
   done
 
-  asa_api PUT "/campaigns/${campaign_id}" "$updates" | jq '.data'
+  # v5 requires a {"campaign": {...}} envelope
+  local body
+  body=$(jq -n --argjson updates "$updates" '{campaign: $updates}')
+  asa_api PUT "/campaigns/${campaign_id}" "$body" | jq '.data'
 }
 
 cmd_pause() {

@@ -325,6 +325,10 @@ Bug found? Write failing test reproducing it. Follow TDD cycle. The test proves 
 
 Never fix bugs without a test.
 
+## Property-Based Testing
+
+For Hypothesis/property-based testing patterns (deterministic simulation, fault injection, non-tautological assertions), see `references/property-based-testing.md`.
+
 ## Testing Anti-Patterns
 
 - **Testing mock behavior instead of real behavior** — mocks should verify interactions, not replace the system under test
