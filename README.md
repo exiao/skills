@@ -30,13 +30,14 @@ Install the skills from https://github.com/exiao/skills
 | [**coding**](coding/) | 23 | Programming, debugging, testing, code review, web scraping |
 | [**creative**](creative/) | 38 | Writing, editing, media production, content creation |
 | [**devops**](devops/) | 55 | CI/CD, GitHub, Docker, MLOps, model training/inference |
-| [**finance**](finance/) | 9 | Investing, market analysis, portfolio management |
+| [**external-services**](external-services/) | 13 | External service CLIs and API integrations |
+| [**finance**](finance/) | 13 | Investing, market analysis, portfolio management |
 | [**marketing**](marketing/) | 38 | Ads (Google/Meta/Apple), SEO, analytics, social media |
 | [**memory**](memory/) | 3 | Memory management — GC, setup, and recall |
 | [**productivity**](productivity/) | 16 | Apple apps, email, notes, smart home, local search, gaming |
 | [**research**](research/) | 10 | Deep research, competitive analysis, market intelligence |
 | [**skills-meta**](skills-meta/) | 7 | Skills about skills — creating, auditing, improving, testing |
-| [**visual-design**](visual-design/) | 37 | UI/UX design, diagrams, image generation, frontend |
+| [**visual-design**](visual-design/) | 38 | UI/UX design, diagrams, image generation, frontend |
 | [**external-services**](external-services/) | 16 | External service CLIs and API integrations |
 | [**media**](media/) | 1 | Media content tools (Spotify, audio) |
 | [**ops-center**](ops-center/) | 1 | Ops center codebase review and reference |
@@ -274,6 +275,10 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [post-investinglog-trades](finance/post-investinglog-trades/) | Use when the cron fires at 4pm ET on weekdays — picks the best unposted trade from the investing-log repo, generates a trade card, creates a Typefully draft, and reports to Signal. |
 | [stock-research](finance/stock-research/) | Use when performing stock or equity research, earnings analysis, coverage reports, or generating daily market briefings for Bloom. Covers on-demand research tasks and the scheduled daily market briefing cron job. |
 | [wealth-management](finance/wealth-management/) | Wealth management workflows — client review prep, financial plans, investment proposals, portfolio rebalancing, and tax-loss harvesting. Adapted from Anthropic's financial-services-plugins (github.com/anthropics/financial-services-plugins). |
+| [earnings-analysis](finance/earnings-analysis/) | Create equity research earnings update reports analyzing quarterly results. Covers beat/miss analysis, key metrics, updated estimates, guidance changes, and revised thesis. Adapted from Anthropic's financial-services-plugins. |
+| [idea-generation](finance/idea-generation/) | Systematic stock screening and investment idea sourcing. Combines quantitative screens, thematic research, and pattern recognition to surface new long and short ideas. Adapted from Anthropic's financial-services-plugins. |
+| [thesis-tracker](finance/thesis-tracker/) | Maintain and update investment theses for portfolio positions and watchlist names. Track key data points, catalysts, and thesis milestones over time. Adapted from Anthropic's financial-services-plugins. |
+| [comps-analysis](finance/comps-analysis/) | Build comparable company analyses with operating metrics, valuation multiples, and statistical benchmarking. Adapted from Anthropic's financial-services-plugins. |
 
 ### 🧠 Memory
 
@@ -338,6 +343,24 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [summarize-timeline](marketing/summarize-timeline/) | Summarize an X/Twitter timeline into a themed daily digest for Signal delivery. |
 | [xurl](marketing/xurl/) | Interact with X/Twitter via xurl, the official X API CLI. Posting, replying, quoting, searching, timelines, mentions, likes, bookmarks, follows, DMs. |
 | [xitter](marketing/xitter/) | Interact with X/Twitter via the x-cli terminal client using official X API credentials. Use for posting, reading timelines, searching tweets, liking, retweeting, bookmarks, mentions, and user lookups. |
+
+### 🔌 External Services
+
+| Skill | Description |
+|-------|-------------|
+| [appfigures-cli](external-services/appfigures-cli/) | Use when querying Appfigures for app store analytics (downloads, revenue, reviews, rankings). |
+| [apple-search-ads](external-services/apple-search-ads/) | Create, optimize, and scale Apple Search Ads campaigns with API automation, attribution integration, and bid strategy recommendations. |
+| [bird-twitter](external-services/bird-twitter/) | Read X/Twitter timelines, tweets, and threads using the bird CLI (cookie-based GraphQL). Use when the user mentions "bird", wants to read their Following/For You timeline, fetch tweets, search X, or pull timeline data for summarization. |
+| [copilot-money-cli](external-services/copilot-money-cli/) | Use when querying Copilot Money for finances, transactions, net worth, and holdings. |
+| [dataforseo-cli](external-services/dataforseo-cli/) | Use when doing keyword research (volume, difficulty, ideas), checking App Store or Google Play rankings, or looking up Google SERP rankings for content/landing pages. |
+| [firecrawl](external-services/firecrawl/) | Scrape, crawl, search, and interact with web pages using Firecrawl CLI and API. Use for JS-rendered pages, full site crawls, sitemaps, form interaction, and login-required pages. |
+| [google-ads-cli](external-services/google-ads-cli/) | Use when managing Google Ads campaigns: performance checks, keyword pausing, report downloads, or campaign optimization via browser or API. |
+| [grok-imagine](external-services/grok-imagine/) | Generate or edit images via xAI Grok Imagine (Aurora). Supports text-to-image, single-image editing, and multi-image composition (up to 3). |
+| [higgsfield](external-services/higgsfield/) | Use the Higgsfield MCP for AI image and video generation (30+ models including Seedance, Kling, Veo, Flux, Soul, Minimax Hailuo). |
+| [meta-ads-cli](external-services/meta-ads-cli/) | Daily Meta ad operations via Marketing API: check performance, kill losers, promote winners, generate fresh creatives, upload as new ads. |
+| [porkbun-cli](external-services/porkbun-cli/) | Manage Porkbun domains, DNS records, SSL certificates, URL forwarding, and hosting blueprints via the Porkbun API. |
+| [prometheus-cli](external-services/prometheus-cli/) | Search TikTok viral videos, App Store rankings, hook analysis, app strategy, and content research via SGE Prometheus MCP. |
+| [stably-cli](external-services/stably-cli/) | Use the Stably CLI to create, run, fix, and maintain Playwright tests. Use for running tests, auto-fixing failures, or generating new tests from a prompt. |
 
 ### 📋 Productivity
 
@@ -415,6 +438,7 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [slideshow-creator](visual-design/slideshow-creator/) | Create and post TikTok slideshows via ReelFarm. Use for generating slideshow content, setting up automations, and publishing to TikTok. For strategy, scheduling, analytics, and optimization — use the content-strategy skill first. |
 | [sticker-creator](visual-design/sticker-creator/) | Create die-cut sticker style cards via Nano Banana Pro. Use for social media cards, earnings cards, brand stickers, announcement cards, and any content formatted as a bold, clean sticker with a thick white border. |
 | [userinterface-wiki](visual-design/userinterface-wiki/) | UI/UX best practices for web interfaces. Use when reviewing animations, CSS, audio, typography, UX patterns, prefetching, or icon implementations. Covers 11 categories from animation principles to typography. Outputs file:line findings. |
+| [product-design](visual-design/product-design/) | Strategic product design thinking: information architecture, interaction design, AI-native patterns, and quality checklists. Use before building any interface to ensure the right thing gets built. |
 
 ### 🔌 External Services
 
@@ -484,6 +508,10 @@ These started from other open-source projects, modified and extended for these w
 |-------|----------|
 | [documents](devops/documents/) | [anthropics/skills](https://github.com/anthropics/skills) |
 | [wealth-management](finance/wealth-management/) | [anthropics/financial-services-plugins](https://github.com/anthropics/financial-services-plugins) |
+| [earnings-analysis](finance/earnings-analysis/) | [anthropics/financial-services-plugins](https://github.com/anthropics/financial-services-plugins) |
+| [idea-generation](finance/idea-generation/) | [anthropics/financial-services-plugins](https://github.com/anthropics/financial-services-plugins) |
+| [thesis-tracker](finance/thesis-tracker/) | [anthropics/financial-services-plugins](https://github.com/anthropics/financial-services-plugins) |
+| [comps-analysis](finance/comps-analysis/) | [anthropics/financial-services-plugins](https://github.com/anthropics/financial-services-plugins) |
 | [skill-creator](skills-meta/skill-creator/) | [anthropics/claude-code](https://github.com/anthropics/claude-code/tree/main/plugins/plugin-dev) |
 | [skill-audit](skills-meta/skill-audit/) | Original (inspired by Anthropic's skill patterns) |
 | [agent-improver](skills-meta/agent-improver/) | Original (inspired by [NousResearch/hermes-agent-self-evolution](https://github.com/NousResearch/hermes-agent-self-evolution) GEPA methodology) |
