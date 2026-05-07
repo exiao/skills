@@ -7,7 +7,7 @@ description: "Fintary ops-center v2 architecture, API proxy pattern, infrastruct
 
 ## Architecture (v2 - May 2026)
 - **Stack**: FastAPI + Jinja2 + HTMX, Python backend
-- **Hosting**: Render (service ID: `srv-d7amjbs50q8c73bssufg`)
+- **Hosting**: Render (service ID: `$RENDER_SERVICE_ID`)
 - **Deploy URL**: `$OPS_CENTER_URL`
 - **Auth**: Firebase (`env-configured` project), env vars for config (not hardcoded)
 - **No database**: All data from Fintary OpenAPI (`$FINTARY_API_HOST`)

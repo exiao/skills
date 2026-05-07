@@ -42,8 +42,8 @@ Key: OpenAI trade execution uses `openai/codex-action@v1` with `--model gpt-5.4`
 - Total context per run: ~150KB+ (~50K+ tokens)
 
 ## Cost Drivers (as of May 2026)
-- OpenAI API: $264 over 2 weeks (Apr 21 - May 6)
-- Breakdown: gpt-5.4 (input $77, cached $73, output $75), gpt-5.5 ($13)
+- OpenAI API: $XXX over recent period
+- Breakdown: gpt-5.4 (majority), gpt-5.5 (small portion)
 - The gpt-5.4 spend is from Codex Action (trade execution), NOT Deep Agents research
 - Each model runs the full pipeline daily on weekdays
 

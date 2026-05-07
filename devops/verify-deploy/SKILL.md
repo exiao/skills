@@ -212,7 +212,7 @@ Output the "🏥 App Health Check" report format (table of endpoints + flags + o
 | App | Frontend URL | API URL | Endpoints | Repo |
 |-----|-------------|---------|-----------|------|
 | **Bloom** | `$BLOOM_DEPLOY_URL` | `$BLOOM_DEPLOY_URL` | `/api/health`, `/`, `/portfolios`, `/chat` | `Bloom-Invest/bloom` |
-| **Bible Genius** | `app.genius.bible` | `prompt-pm--bible-fastapi-app.modal.run` | API: `/`, `/api/get_chapter?book=John&chapter=1`, `/api/search_bible?query=love` · Frontend: `/` | `prompt-pm/bible-app` |
-| **InvestingArena** | `investingarena.ai` | `$ARENA_DEPLOY_URL` | API: `/health`, `/api/portfolios`, `/api/activity` · Frontend: `/` | `Bloom-Invest/investing-log` |
+| **Bible Genius** | `$BIBLE_APP_URL` | `$BIBLE_DEPLOY_URL` | API: `/`, `/api/get_chapter?book=John&chapter=1`, `/api/search_bible?query=love` · Frontend: `/` | `$BIBLE_REPO` |
+| **InvestingArena** | `$ARENA_PUBLIC_URL` | `$ARENA_DEPLOY_URL` | API: `/health`, `/api/portfolios`, `/api/activity` · Frontend: `/` | `Bloom-Invest/investing-log` |
 
 **Use these URLs exactly. Do not substitute or discover alternatives.**

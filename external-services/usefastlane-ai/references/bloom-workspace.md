@@ -6,11 +6,11 @@ Last updated: 2026-05-05
 
 | Platform | Username | Connection ID | Notes |
 |----------|----------|---------------|-------|
-| TikTok | @invest.with.bloom | mn74v7k5gb02xyvqfxek42myb5865sjq | Bloom brand |
-| TikTok | @madsmoneyflow | mn72myer8k22j72shnhw68eqt1864g8h | Personal finance creator |
-| Instagram | invest.with.bloom | mn77hpwzse9p2jpb46zw6eqaq9865v01 | Bloom brand |
-| Instagram | madsmakesmoney_ | mn7f6kw7fzset52f0t1a6bp8w9864cp2 | Personal finance creator |
-| YouTube | Eric Invests | mn7ctv270k7pz53zyzcaacftk9865cz5 | UCiouo56rRnfAQlJNnKImYBg |
+| TikTok | $TIKTOK_BRAND_HANDLE | $TIKTOK_BRAND_CONNECTION_ID | Bloom brand |
+| TikTok | $TIKTOK_CREATOR_HANDLE | $TIKTOK_CREATOR_CONNECTION_ID | Personal finance creator |
+| Instagram | $IG_BRAND_HANDLE | $IG_BRAND_CONNECTION_ID | Bloom brand |
+| Instagram | $IG_CREATOR_HANDLE | $IG_CREATOR_CONNECTION_ID | Personal finance creator |
+| YouTube | $YOUTUBE_CHANNEL_NAME | $YOUTUBE_CONNECTION_ID | $YOUTUBE_CHANNEL_ID |
 
 ## Active Angles (as of setup)
 
@@ -30,7 +30,7 @@ All format weights at 25% even split. 50% remix, 50% own media, 50% product ment
 - Schedule: daily at 10am ET (`0 10 * * *`)
 - Script: `~/.hermes/scripts/fastlane-daily.sh`
 - Delivers to: signal:Skills Admin
-- Behavior: generates 3 pieces via Blitz, polls until rendered, sends preview. Does NOT auto-schedule. Eric approves before anything posts.
+- Behavior: generates 3 pieces via Blitz, polls until rendered, sends preview. Does NOT auto-schedule. The user approves before anything posts.
 - Batch size controlled by `FASTLANE_BATCH_SIZE` env var (default 3).
 
 ## Open Questions (from setup session)

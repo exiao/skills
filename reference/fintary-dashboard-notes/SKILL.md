@@ -18,23 +18,23 @@ description: "Reference notes for Fintary ops-center dashboard rebuild — Alpin
 - `agent_dashboard-10.html` — 6 agent sub-tabs, hardcoded data
 - Map raw OpenAPI report rows → pre-aggregated structures via DataAggregator class.
 
-## PR #70 (2026-04-30) — merged
+## PR #N (2026-04-30) — merged
 - Branch: `fix/dashboard-match-reference`, repo: Fintary/ops-center
 - 8 business tabs + 7 agent sub-tabs implemented
-- Plan: `~/.hermes/plans/dashboard-fix-plan.md`
+- Plan: `$PLAN_PATH`
 
-## PR #71 (2026-05-01) — merged
+## PR #N (2026-05-01) — merged
 - Chart rendering fixes: ReportClassifier now scans column names (not just report names), fallback searches ALL loaded reports when classified groups are empty, wider NUMERIC_TYPES set, debug logging throughout
-- Plan: `~/.hermes/plans/dashboard-charts-fix.md`
+- Plan: `$PLAN_PATH`
 
-## PR #72 (2026-05-01) — merged
+## PR #N (2026-05-01) — merged
 - Date label formatting: `fmtDateLabel()` converts raw BigQuery dates (YYYY-MM-DD, ISO timestamps) to "Jan '24" style short labels
 - Chart.js x-axis: `autoSkip: true`, `maxTicksLimit: 12` (was showing every label at 45° rotation)
 - Firebase auth race fix: `getFirebaseToken()` now waits for `onAuthStateChanged` instead of checking `currentUser` immediately (was null on page load, causing silent API failures requiring manual Refresh click)
 
-## PR #73 — closed (stale, superseded by #71 + #72)
+## PR #N — closed (stale, superseded by #71 + #72)
 
-## PR #74 (2026-05-01) — open
+## PR #N (2026-05-01) — open
 - 30 JS unit tests (vitest) for analytics utils: fmtDateLabel, fmtMonth, fmtCurrency, fmtCompact, escHtml, findCol, ReportClassifier, NUMERIC_TYPES, DATE_TYPES
 - `make test` now runs both Python (pytest) and JS (vitest)
 
