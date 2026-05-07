@@ -19,15 +19,15 @@ description: Import skills from a GitHub repository (like $SKILLS_REPO or any sk
 ## Step-by-step workflow
 
 ### Step 1 — Clone the repo
-1. Use `rm -rf /tmp/exiao-skills` first (or matching dir name) to clear any stale directory from previous attempts
+1. Use `rm -rf /tmp/skills-import` first (or matching dir name) to clear any stale directory from previous attempts
    - Note: The rm may require approval — if blocked, ask the user to approve or try a different temp location
-2. `git clone <repo-url> /tmp/exiao-skills`
+2. `git clone <repo-url> /tmp/skills-import`
    - Always use `workdir` and provide an absolute path to avoid "cd: permission denied" issues
 
 ### Step 2 — Discover all skills
 ```bash
-find /tmp/exiao-skills -name "SKILL.md" | wc -l
-find /tmp/exiao-skills -name "SKILL.md" -exec dirname {} \;
+find /tmp/skills-import -name "SKILL.md" | wc -l
+find /tmp/skills-import -name "SKILL.md" -exec dirname {} \;
 ```
 This gives you the count and all skill directory paths (preserves nested sub-skills).
 

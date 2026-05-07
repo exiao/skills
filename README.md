@@ -171,7 +171,7 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [stock-footage](creative/stock-footage/) | Search and download free stock video footage from Pexels and Pixabay for B-roll and video production. Use when the user mentions "stock footage", "B-roll", "b-roll", "stock video", "find clips", "Pexels", "background footage", "video clips for", "find me a video of", "download stock video", or… |
 | [substack-draft](creative/substack-draft/) | Use when saving a finished article to Substack as a draft for manual review and publishing. Does NOT publish automatically — always saves as draft. |
 | [video-editor](creative/video-editor/) | Programmatic video editing via ffmpeg CLI. Handles trimming clips, merging/concatenating videos, overlays (picture-in-picture, watermarks, logos), crossfade transitions between clips, speed ramping (speed up/slow motion), cropping to aspect ratios (16:9 to 9:16), scaling/resizing, adding or… |
-| [video-production](creative/video-production/) | Use when making videos, creating clips, voiceovers, talking avatars, AI video generation, text-to-video, lip sync, motion graphics, screen recordings, or video editing. Covers Sora, Kling, ElevenLabs, InfiniteTalk, Remotion, and ffmpeg workflows. Use for any request involving video creation,… |
+| **video-production** (category) | Video creation sub-skills: AI video generation, voiceover, talking avatars, motion graphics, screen recordings, and video editing. |
 | [browser-animation-video](creative/video-production/browser-animation-video/) | Use when create browser-based motion graphics with Framer Motion, GSAP, and Tailwind. |
 | [demo-video](creative/video-production/demo-video/) | Create product demo videos by automating browser interactions and capturing frames. Use when the user wants to record a demo, walkthrough, product showcase, or interactive video of a web application. Supports Playwright CDP screencast for high-quality capture and FFmpeg for video encoding. |
 | [elevenlabs](creative/video-production/elevenlabs/) | Generate voiceover audio from a script using ElevenLabs v3 via Fal.ai. Outputs an MP3 file for use with InfiniteTalk or standalone audio. |
@@ -248,7 +248,6 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [render-cli](devops/render-cli/) | Manage Render.com services, deploys, databases, logs, and infrastructure using the official Render CLI (`render`). Use this skill whenever the user asks about Render deployments, service management, viewing Render logs, restarting Render services, running database queries on Render Postgres,… |
 | [dspy](devops/research/dspy/) | Build complex AI systems with declarative programming, optimize prompts automatically, create modular RAG systems and agents with DSPy - Stanford NLP's framework for systematic LM programming |
 | [security-audit](devops/security-audit/) | Run a codebase security audit using OWASP Top 10 and STRIDE threat modeling. Use when auditing code for vulnerabilities or preparing for a pentest. |
-| [stably-cli](devops/stably-cli/) | Use the Stably CLI to create, run, fix, and maintain Playwright tests in the bloom-tests repo. Use when running tests (stably test), auto-fixing failures (stably fix), or generating new tests from a prompt (stably create). |
 | [stably-sdk-rules](devops/stably-sdk-rules/) | Best practices for writing Stably AI-powered Playwright tests. Use when writing, reviewing, or debugging tests in bloom-tests that use @stablyai/playwright-test — covers when to use aiAssert vs raw Playwright, agent.act, extract, getLocatorsByAI, and email flows. |
 | [axolotl](devops/training/axolotl/) | Expert guidance for fine-tuning LLMs with Axolotl - YAML configs, 100+ models, LoRA/QLoRA, DPO/KTO/ORPO/GRPO, multimodal support |
 | [grpo-rl-training](devops/training/grpo-rl-training/) | Expert guidance for GRPO/RL fine-tuning with TRL for reasoning and task-specific model training |
@@ -519,7 +518,6 @@ These started from other open-source projects, modified and extended for these w
 | [remotion-videos](creative/video-production/remotion-videos/) | [remotion-dev/skills](https://github.com/remotion-dev/skills) |
 | [frontend-slides](visual-design/frontend-slides/) | [zarazhangrui/frontend-slides](https://github.com/zarazhangrui/frontend-slides) |
 | [last30days](marketing/last30days/) | [mvanhorn/last30days-skill](https://github.com/mvanhorn/last30days-skill) |
-| [stably-cli](devops/stably-cli/) | [skills.sh/stablyai](https://skills.sh/stablyai/agent-skills/stably-cli) |
 | [stably-sdk-rules](devops/stably-sdk-rules/) | [skills.sh/stablyai](https://skills.sh/stablyai/agent-skills/stably-sdk-rules) |
 | [sahil-office-hours](research/sahil-office-hours/) | [slavingia/skills](https://github.com/slavingia/skills) |
 | [design-md](visual-design/design-md/) | [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md) + [Google Stitch DESIGN.md spec](https://stitch.withgoogle.com/docs/design-md/overview/) |

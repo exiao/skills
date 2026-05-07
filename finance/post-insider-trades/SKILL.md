@@ -162,22 +162,22 @@ SEC Form 4 URLs are typically ~95 chars. Budget accordingly. Test with `echo -n 
 
 ### Step 8 — Upload Card + Create Typefully Draft
 
-The Bloom Typefully social set ID is **286685** (username: `investwithbloom`).
+The Bloom Typefully social set ID is **$TYPEFULLY_SOCIAL_SET_ID** (username: `investwithbloom`).
 
 ```bash
 cd ~/.hermes/skills/marketing/typefully
 
 # Upload media
-TYPEFULLY_API_KEY=<key> node scripts/typefully.js media:upload 286685 /tmp/insider-trade-card-$(date +%Y%m%d).png
+TYPEFULLY_API_KEY=<key> node scripts/typefully.js media:upload $TYPEFULLY_SOCIAL_SET_ID /tmp/insider-trade-card-$(date +%Y%m%d).png
 # → returns media_id
 
 # Create draft with media (unscheduled)
-TYPEFULLY_API_KEY=<key> node scripts/typefully.js drafts:create 286685 --platform x --text "<tweet_text>" --media <media_id>
+TYPEFULLY_API_KEY=<key> node scripts/typefully.js drafts:create $TYPEFULLY_SOCIAL_SET_ID --platform x --text "<tweet_text>" --media <media_id>
 # Do NOT add --schedule. Save as unscheduled draft only — Eric reviews before posting.
 # → returns draft_id
 ```
 
-**Note:** `TYPEFULLY_SOCIAL_SET_ID` is not set in .env. Use the hardcoded value `286685` for Bloom. The API key is `TYPEFULLY_API_KEY` from .env.
+**Note:** `TYPEFULLY_SOCIAL_SET_ID` is not set in .env. Use `$TYPEFULLY_SOCIAL_SET_ID` for Bloom. The API key is `TYPEFULLY_API_KEY` from .env.
 
 ### Step 9 — Report
 
@@ -191,7 +191,7 @@ Filed: [date]
 Stock: $[current] | YTD: [+/-X%]
 
 Tweet: [tweet text]
-Typefully: https://typefully.com/?d=[draft_id]&a=286685
+Typefully: https://typefully.com/?d=[draft_id]&a=$TYPEFULLY_SOCIAL_SET_ID
 ```
 
 ---
@@ -199,14 +199,14 @@ Typefully: https://typefully.com/?d=[draft_id]&a=286685
 ## Delivery
 
 - Cron delivery: announces to Marketing Signal group automatically
-- Typefully account: social_set_id `286685` (Bloom @investwithbloom)
+- Typefully account: social_set_id `$TYPEFULLY_SOCIAL_SET_ID` (Bloom the configured Typefully account)
 - Card saved to: `/tmp/insider-trade-card-YYYYMMDD.png`
 
 ---
 
 ## Cron Config
 
-- **ID:** `76392017-245d-43bd-a6a5-899ea211467c`
+- **ID:** `$CRON_JOB_ID`
 - **Schedule:** `0 9,14 * * 1-5` (9am + 2pm ET, Mon–Fri)
 - **Model:** default (claude-sonnet)
 - **Target:** isolated
@@ -223,7 +223,7 @@ Typefully: https://typefully.com/?d=[draft_id]&a=286685
 6. **Scheduling without checking** — use `next-free-slot` to avoid stacking tweets; Typefully handles spacing.
 7. **Reporting when no trade found** — if Step 2 yields nothing, NO_REPLY silently. Don't send a "nothing found" message.
 8. **Using screener URL as primary source** — it frequently returns empty HTML. Always start with `insider-purchases-25k` page and filter client-side.
-9. **TYPEFULLY_SOCIAL_SET_ID not in .env** — it's not there. Bloom's social set ID is hardcoded: `286685`.
+9. **TYPEFULLY_SOCIAL_SET_ID not in .env** — set it via env or discover with `social-sets:list`.
 10. **Not detecting cluster buys** — when multiple insiders buy the same ticker on the same day, that's the strongest signal. Always check for this pattern and highlight it in the tweet.
 
 ## Constitutional Rules
