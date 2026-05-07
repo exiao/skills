@@ -248,36 +248,9 @@ One file per episode: `$CHARACTERS_DIR/<slug>/scripts/YYYY-MM-DD-episode-title.m
 
 ## Step 2d: Viral Breakdown Pillar
 
-This is a full account pillar — not a one-off format. Run it every week.
+A full account pillar — not a one-off format. Run it every week: pick 1-3 viral posts in your niche, react in dual-screen format, explain the specific mechanics of why they worked.
 
-**How it works:**
-- Pick 1–3 viral posts in your niche each week
-- React to + annotate them in dual-screen format (your face/commentary + the source post side by side)
-- Explain the *specific mechanics* of why it worked — not "it's good," but "the credibility drop at 0:08 + the stacked loop at 0:14 are why retention holds past 30 seconds"
-- Label every piece "pt 1" even if there's no pt 2 yet — it signals series, invites return visits, and the algorithm treats it as episodic
-
-**Why it compounds:**
-| Benefit | Mechanism |
-|---------|-----------|
-| Borrowed traffic | Your content surfaces in searches and feeds for the source post's audience |
-| Authority positioning | You're the person who understands the craft, not just a consumer |
-| Series architecture | Built-in return reason; viewers expect more installments |
-
-**Format:** Dual-screen reaction (split-screen or side-by-side layout). If screen recording isn't possible, show the source clip and annotate with on-screen text labels while reacting verbally.
-
-**On-screen keyword labels (retention device):** As you narrate your breakdown, flash bold single-word or short-phrase labels on screen that name the tactic being used: "HOOK", "AVATAR", "MESSAGING", "OPEN LOOP", "SOCIAL PROOF", etc. This serves three purposes:
-1. Viewers feel like they're learning a *system*, not just watching a reaction
-2. Labels create visual rhythm that sustains attention through the middle of the video (the retention dead zone)
-3. Each label is a micro-open-loop: the viewer wants to understand *why* you labeled it that, so they keep watching
-
-Place labels at the moment you identify the tactic, not before. Let the source video play 2-3 seconds first, then drop the label as your "aha" moment. Use bold white or colored text, large enough to read on mobile, centered or near the source video panel.
-
-**Bloom-specific example:**
-- Source: viral TikTok of someone showing their Robinhood portfolio down 40% (2M+ views)
-- Labels you'd drop: "LOSS AVERSION" (the emotional hook), "ROUND NUMBER" (they lost exactly $10K, not $9,847), "SCREENSHOT FORMAT" (looks organic, not produced), "NO CTA" (the virality IS the content, no ask)
-- Your commentary: explain each label as an investing psychology + content strategy concept simultaneously. Double value for the viewer.
-
-**Sourcing:** Use `last30days`, `grok-search`, or `trend-research` to find viral posts in the investing/personal finance niche weekly. Look for 50K+ views, especially from accounts under 10K followers (pre-algo signal).
+> **Load on-demand:** `references/viral-breakdown-pillar.md` for full format details, on-screen label technique, and Bloom-specific examples.
 
 ---
 
@@ -320,27 +293,9 @@ Batch at least 7 days per session. Never schedule one post at a time. If queue d
 
 ### Geo-Targeting (Instagram / Reels)
 
-Most brands compete in the same saturated metros. Regional markets have lower CPMs, less competition, and engaged audiences who see far less branded content.
+Regional markets have lower CPMs, less competition, and engaged audiences. Use native location tags for specific business districts, not just city names.
 
-**Layer 1 — Native location tags (fully compliant):**
-- Use Instagram's existing location tag library; attach regional business district tags (not just city name) when posting
-- Target specific coworking hubs, financial districts, tech clusters — not "New York City"
-- Surfaces content in location-specific story feeds and Explore pages at zero additional media spend
-
-**Layer 2 — Custom location tags (gray area):**
-- Create new tags via Facebook check-in + VPN to target underserved areas with no existing tag
-- Carries account-level risk if pattern is detectable; vary IP patterns, ensure content is genuinely relevant
-
-**Localization rules (content must feel native, not just tagged):**
-- Adapt industry context reference in the hook to match dominant industry in target city
-- Adapt business size + operational framing to local business profile
-- Adjust tone register: warmer/relationship-oriented in southern markets, direct/efficiency-focused in northern/western
-
-**4-Phase Regional Batch Framework:**
-1. **Market selection** — use Instagram Insights for existing follower geography + check location tag feed competition. Pick 8–12 test markets.
-2. **Production** — write base script, adapt 2–3 localization elements per variant (hook industry ref, operational framing, pain point language). Tag to specific business districts. Schedule at local peak hours (6:30–8:30am, 12–1:30pm, 6:30–9pm local time).
-3. **Evaluate (weeks 2–4)** — rank markets by organic discovery rate + engagement quality. Top 3–5 markets get paid amplification.
-4. **Deepen** — produce second-generation content for winning markets with deeper localization; expand test cohort using learnings.
+> **Load on-demand:** `references/geo-targeting.md` for the full 4-phase regional batch framework, localization rules, and custom location tag strategy.
 
 ---
 
@@ -492,54 +447,9 @@ The hierarchy: **Posting > Targeting > Platform choice > Repurposing > Scripting
 
 ## Channel Tier List (Bloom / B2C)
 
-What actually works for consumer apps vs. what sounds good but doesn't.
+What actually works for consumer apps vs. what sounds good but doesn't. Covers high-signal channels (TikTok, influencer marketing, free tools, email), questionable channels (Meta ads), low-signal channels (newsletter sponsorships, Twitter ads, referral programs), and the quiz-based landing page funnel.
 
-**High-signal channels:**
-- TikTok / Instagram Reels — primary B2C organic discovery; recreate before recruiting creators
-- Influencer/creator marketing — TikTok/YouTube/Instagram. Lovable ($400M ARR) spends 10x more on influencer marketing than paid social and considers it their key growth driver. Validate formats with your own account first, then hand proven formats to creators. This should be the primary paid channel, not Meta ads.
-- Free credits / freemium as marketing — treat free tier as a marketing channel, not a cost center. "Our free giveaways are bigger than paid marketing spend." (Lovable CEO, 20VC March 2026)
-- Free SEO tools — high-value lead magnets, easier to rank than blog posts, builds backlinks
-- Email marketing — works if sequences are built correctly (see growth skill); people do read emails
-
-**Questionable-signal channels (test carefully):**
-- Meta/Facebook ads — Lovable's CEO at $400M ARR: "Meta ads have little incrementality; pass through views which don't materialize into anything. I haven't seen them work in a while." (Lenny's Podcast, Dec 2025). If running Meta ads, watch incrementality closely: are installs you're paying for ones that would have happened organically? Compare install lift when ads are paused vs. running.
-
-**Low-signal channels (avoid or deprioritize):**
-- Newsletter sponsorships — expensive and most clicks are bots
-- Twitter ads — worst targeting in the industry; not worth the spend
-- Google ads — more expensive than Facebook for consumer apps, higher irrelevant clicks
-- Referral programs — very hard to make work; only viable with stable conversion and large customer base
-- Reddit audience building — ban risk is high; answering long-tail questions can work, but building an audience there doesn't
-- Beta directories (BetaList, etc.) — mostly dead; not worth the setup
-
-**Alternative funnel: Quiz-based landing pages**
-
-Instead of Ad → App Store → Install, run Ad → Web Quiz → Personalized Results → App Store. A quiz between the ad and the offer warms cold traffic through micro-commitments. DTC benchmark: cold traffic conversion jumped from 1.2% to 4.7% with a quiz funnel (@DTC_Quizbuilder, $2M in 90 days).
-
-Why it works for apps:
-- Each question answered is a small "yes" that compounds (sunk cost)
-- Questions seed beliefs and pre-handle objections before the user sees pricing
-- Non-completers give you zero-party data for segmented retargeting (someone who answered "I struggle with timing the market" gets a different retargeting ad than someone who answered "I don't know what to invest in")
-- The loading/results screen is captive attention: 10-15s where you show testimonials, social proof, and app previews while "calculating their results"
-
-Quiz sequencing that converts:
-1. Q1-Q2: Low-friction demographics (age, experience level). Zero cognitive load, starts the yes-chain.
-2. Q3-Q4: Aspirational goals ("What's your investing goal?"). Emotional questions hit harder after they've committed.
-3. Q5-Q6: Pain points and struggles. Now they've told you their problems.
-4. Breather slide with social proof after Q4.
-5. Results page → personalized app recommendation → App Store link.
-
-Drop-off benchmarks: Q1 = 30-40% drop-off (normal, biggest filter). Remaining questions: under 15% each. Overall completion: aim for 25%+. If any single question has 10%+ drop-off, simplify it (fewer options, add "None of the above").
-
-Retargeting play: Everyone who takes the quiz but doesn't install gave you data. Segment retargeting by their answers: "tried other investing apps" → ad about why Bloom's AI is different. "Low confidence in stock picks" → ad about AI-powered research. Specific beats generic.
-
-Bloom application: The onboarding flow already asks risk tolerance and goals post-install. A pre-install web quiz version of this would warm traffic before the App Store page, and the data feeds retargeting even if they never install.
-
-Source: @DTC_Quizbuilder thread (https://x.com/DTC_Quizbuilder/status/2010379560769015885)
-
-**SEO timing:**
-- Don't prioritize SEO before your first customers — takes months to kick in, and if you pivot the product, the work goes to zero
-- When you do SEO: free tools first (easier to rank, more shareable, generate backlinks naturally), then long-tail blog posts with purchase intent, then programmatic data-driven pages
+> **Load on-demand:** `references/channel-tier-list.md` for full channel analysis, quiz funnel sequencing, and SEO timing.
 
 ---
 
@@ -548,6 +458,8 @@ Source: @DTC_Quizbuilder thread (https://x.com/DTC_Quizbuilder/status/2010379560
 | File | Contents |
 |------|----------|
 | `references/social-content.md` | Social media strategy: content pillars, hook formulas, calendars, engagement, repurposing, analytics |
+| `references/channel-tier-list.md` | Channel tier list (B2C), quiz funnel strategy, SEO timing |
+| `references/viral-breakdown-pillar.md` | Weekly viral breakdown pillar format, on-screen labels, sourcing |
 | `references/free-tool-strategy.md` | Engineering-as-marketing: tool types, ideation, evaluation scorecard, lead capture |
 | `references/lead-magnets.md` | Lead magnet types, buyer stage matching, gating strategy, distribution, benchmarks |
 | `references/marketing-ideas.md` | 139 SaaS marketing ideas catalog organized by category, stage, and budget |
