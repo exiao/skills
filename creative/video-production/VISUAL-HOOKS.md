@@ -39,6 +39,17 @@ The test: if someone could skip the first 3 seconds without missing any value, y
 
 ---
 
+## Paid Video Ad Rules
+
+For paid video ads (TikTok Ads Manager, Meta, etc.), these rules layer on top of the No-Intro Rule:
+
+- **Don't show the app/product in the first 3 seconds.** The hook is about emotion, curiosity, or a pattern interrupt. The product reveal comes after.
+- **Maximum 4-5 seconds of app-in-use footage** in the entire ad. The ad is about the problem/outcome, not the product. App footage is proof, not the pitch.
+- **Use viral/trending music.** Check TikTok Creative Center for current trending sounds. Audio is a major retention driver. For paid ads, verify the sound is commercially licensed or use royalty-free alternatives (trending sounds are often not cleared for ad use).
+- **Make it feel like organic content, not a produced ad.** Lo-fi, meme-like, native to the platform. If it looks like an ad, it's already lost.
+
+Sources: @athcanft (May 2026)
+
 ---
 
 ## 5 Spoken/Text Hook Types
