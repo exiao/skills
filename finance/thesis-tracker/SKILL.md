@@ -114,4 +114,4 @@ Thesis summary formatted for:
 - Track disconfirming evidence as rigorously as confirming evidence.
 - Review theses at least quarterly, even when nothing dramatic happened.
 - If managing multiple positions, offer a full portfolio thesis review.
-- Use `bloom earnings TICKER` and `bloom quote TICKER` for latest data when updating.
+- Use `bloom earnings TICKER` and `bloom info TICKER` for latest data when updating.

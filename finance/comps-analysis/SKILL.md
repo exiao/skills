@@ -14,7 +14,7 @@ Build comparable company analyses with operating metrics, valuation multiples, a
 
 ## Data Sources
 
-1. **bloom-cli**: `bloom quote TICKER`, `bloom financials TICKER`, `bloom peers TICKER`, `bloom ratings TICKER`
+1. **bloom-cli**: `bloom info TICKER`, `bloom financials TICKER`
 2. **Web search**: For consensus estimates, recent multiples, sector benchmarks
 3. Mark all figures with source. If a figure can't be sourced, mark it `[UNSOURCED]`.
 

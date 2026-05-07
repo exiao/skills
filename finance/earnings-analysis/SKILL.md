@@ -8,7 +8,7 @@ description: Create equity research earnings update reports analyzing quarterly 
 Create **earnings update reports** analyzing quarterly results, following institutional standards.
 
 **Key Characteristics:**
-- Length: 8-12 pages (3,000-5,000 words)
+- Length: 6-10 pages (2,000-3,000 words)
 - Tables: 1-3 summary tables
 - Charts: 8-12 figures
 - Focus: What's NEW: beat/miss, updated estimates, thesis impact
@@ -22,7 +22,7 @@ Create **earnings update reports** analyzing quarterly results, following instit
 
 ## Data Sources
 
-1. **bloom-cli**: `bloom earnings TICKER`, `bloom financials TICKER`, `bloom quote TICKER`
+1. **bloom-cli**: `bloom earnings TICKER`, `bloom financials TICKER`, `bloom info TICKER`
 2. **Web search**: Latest earnings release, transcript, guidance
 3. **SEC EDGAR**: 10-Q/10-K filings for detail
 

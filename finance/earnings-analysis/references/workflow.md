@@ -111,7 +111,7 @@ Many companies state their fiscal year in the earnings release header. Search `[
 
 **IF ANY RED FLAGS PRESENT**: STOP and search again. Do not proceed with outdated data.
 
-**Step 1c: Handle Naming Variations**
+**Step 1d: Handle Naming Variations**
 
 Companies use different terminology - recognize these patterns:
 

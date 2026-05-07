@@ -9,7 +9,7 @@ Systematic stock screening and investment idea sourcing.
 
 ## Data Sources
 
-1. **bloom-cli**: `bloom screen`, `bloom quote TICKER`, `bloom peers TICKER`, `bloom financials TICKER`
+1. **bloom-cli**: `bloom screen`, `bloom info TICKER`, `bloom financials TICKER`
 2. **Web search**: Sector trends, insider buying, recent IPOs, activist activity
 3. **Serper/Grok**: News, sentiment, social chatter
 
