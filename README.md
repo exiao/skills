@@ -36,7 +36,7 @@ Install the skills from https://github.com/exiao/skills
 | [**productivity**](productivity/) | 16 | Apple apps, email, notes, smart home, local search, gaming |
 | [**research**](research/) | 10 | Deep research, competitive analysis, market intelligence |
 | [**skills-meta**](skills-meta/) | 7 | Skills about skills — creating, auditing, improving, testing |
-| [**visual-design**](visual-design/) | 37 | UI/UX design, diagrams, image generation, frontend |
+| [**visual-design**](visual-design/) | 38 | UI/UX design, diagrams, image generation, frontend |
 
 ---
 
