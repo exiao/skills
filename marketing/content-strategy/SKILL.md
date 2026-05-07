@@ -190,7 +190,7 @@ Source: @thebranding.ai breakdown of multiple creators going viral with the same
 
 **Recreate before you recruit.** Prove a format works on your own account before committing creator budget to it.
 
-1. **Warm up the account** in the niche — follow the 5-day TikTok warmup process: 2 days as a viewer (no posting, train the algorithm by scrolling 10min 2x/day, liking 20-30 niche videos, watching 10 to the end, leaving 5 genuine comments, following up to 5 accounts), day 3 slideshow diagnostic (500+ impressions AND 20-30+ likes in 5hrs to pass), then 2+ videos/day with daily engagement maintained. Warmup is daily, not one-time: stop engaging and the account goes cold. If 6 consecutive videos stay under 300 views, try 3 native TikTok videos (no CapCut), then abandon and restart if still dead (costs 2 days, not a loss). Target 42%+ watch-through retention. (Sources: @rossark0, @alexcooldev, May 2026)
+1. **Warm up the account** in the niche — follow the 5-day TikTok warmup process: 2 days as a viewer (no posting, train the algorithm by scrolling 10min 2x/day, liking 20-30 niche videos, watching 10 to the end, leaving 5 genuine comments, following up to 5 accounts), day 3 slideshow diagnostic (500+ impressions AND 20-30+ likes in 5hrs to pass), then 2+ videos/day with daily engagement maintained. Warmup is daily, not one-time: stop engaging and the account goes cold. If 6 consecutive videos stay under 300 views, try 3 native TikTok videos (no CapCut), then abandon and restart if still dead (costs 2 days, not a loss). Target 42%+ watch-through retention. Use an existing email for new accounts (brand new emails get shadowbanned). Username should look normal ("justinworksout" not "fitapp_promo_23"). (Sources: @rossark0, @alexcooldev, @lucaspatiri_, May 2026)
 2. **Save viral videos** from <1k follower accounts; these are pre-algo signals of what's actually resonating
 3. **Analyze why they worked** — hook structure, comment sentiment, format, pacing
 4. **Recreate the format yourself** — don't copy, match the structure and emotional beat
@@ -358,6 +358,21 @@ Most brands compete in the same saturated metros. Regional markets have lower CP
 | 10K-50K | Good — keep in rotation, test small tweaks |
 | 1K-10K | Okay — try 1 variation before dropping |
 | <1K (twice) | DROP — radically different approach needed |
+
+**Volume math (creator programs):** You can't predict which video goes viral. But out of 500 videos, 3-5 will break through. Out of 1,800 videos/month, 15-20 cross 100K views and 3-5 cross 1M. The app at $2.7M MRR got there from 15,000+ videos over 18 months. This is math, not luck. (Source: @lucaspatiri_, May 2026)
+
+### Weekly Creator Review
+
+Run this every week when managing creator programs:
+
+1. **Views per creator** — who's performing, who's stalling
+2. **Views per hook** — which hooks drive views across all creators
+3. **Views per format** — talking head vs POV vs reaction vs demo
+4. **Account health** — which accounts are growing vs plateauing
+
+Actions: Rotate out underperformers after 2 weeks. Send winning hooks to ALL creators. When one creator cracks a viral format, every other creator copies it by end of week.
+
+Source: @lucaspatiri_ (May 2026)
 
 ### Two-Axis Diagnostic
 
