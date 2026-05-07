@@ -190,13 +190,15 @@ Source: @thebranding.ai breakdown of multiple creators going viral with the same
 
 **Recreate before you recruit.** Prove a format works on your own account before committing creator budget to it.
 
-1. **Warm up one account** in the niche — watch and engage with niche content for a few days before posting
+1. **Warm up the account** in the niche — follow the 5-day TikTok warmup process: 2 days as a viewer (no posting, train the algorithm by scrolling 10min 2x/day, liking 20-30 niche videos, watching 10 to the end, leaving 5 genuine comments, following up to 5 accounts), day 3 slideshow diagnostic (500+ impressions AND 20-30+ likes in 5hrs to pass), then 2+ videos/day with daily engagement maintained. Warmup is daily, not one-time: stop engaging and the account goes cold. If 6 consecutive videos stay under 300 views, try 3 native TikTok videos (no CapCut), then abandon and restart if still dead (costs 2 days, not a loss). Target 42%+ watch-through retention. (Sources: @rossark0, @alexcooldev, May 2026)
 2. **Save viral videos** from <1k follower accounts; these are pre-algo signals of what's actually resonating
 3. **Analyze why they worked** — hook structure, comment sentiment, format, pacing
 4. **Recreate the format yourself** — don't copy, match the structure and emotional beat
 5. **See early traction** before sourcing any paid creators
 
 Once a format proves out, hand it to creators via `whop-content-rewards` (managed tier). Skip this step only if you're scaling a format already validated in a prior batch.
+
+**Localization:** Use ChatGPT to translate hooks and overlays into Spanish, Portuguese, French, Arabic for international markets. Same content, 4-5x the reach. (Source: @alexcooldev, May 2026)
 
 ---
 
@@ -315,6 +317,8 @@ Don't write here. Route to the right skill.
 | Threads | 7 posts | 1/day |
 
 Batch at least 7 days per session. Never schedule one post at a time. If queue drops below 3 days, refill immediately.
+
+**TikTok at scale:** Batch-create 10-30 pieces per session. Source visuals from Pinterest/Freepik, generate hooks via ChatGPT, assemble in Canva, schedule via Postiz (open-source). For new accounts, use Postiz for drafts only and post manually from the phone. Automate posting only on trusted, established accounts. Run 20-30 accounts per app targeting different niches/markets. (Source: @alexcooldev, May 2026)
 
 > **Load on-demand:** `references/calendar-batching.md` for scheduling strategy and optimal posting times.
 
