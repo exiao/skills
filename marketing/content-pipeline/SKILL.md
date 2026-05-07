@@ -15,7 +15,7 @@ Produces 3 article drafts per run: research once, then spawn 3 parallel sub-agen
 
 1. Read `~/clawd/memory/content-published.md` — topics already covered are off-limits
 2. Run `bird tweets --user $TWITTER_USER -n 30 --plain` — note angles Eric published in the last 30 days
-3. Check recent Substack: `web_fetch https://mycrystalball.substack.com` — find recent post titles
+3. Check recent Substack: `web_fetch https://$SUBSTACK_URL` — find recent post titles
 4. Build an EXCLUSION LIST. Do not pick any topic overlapping with it.
 5. After picking topics, append them to `~/clawd/memory/content-published.md`
 
@@ -111,7 +111,7 @@ After all 3 sub-agents complete, for each article save a Substack draft using th
 
 Steps per article:
 1. Read `~/marketing/substack/drafts/[slug]/substack-ready.md` for title, subtitle, and body
-2. Open Substack editor: `browser action=open targetUrl="https://mycrystalball.substack.com/publish/post" profile=clawd`
+2. Open Substack editor: `browser action=open targetUrl="https://$SUBSTACK_URL/publish/post" profile=clawd`
 3. Paste title, subtitle, body
 4. Upload `hero.png` as the cover image
 5. Save as draft (never publish)

@@ -185,14 +185,11 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [video-script](creative/video-production/video-script/) | Generate structured scene-by-scene video scripts with production metadata (visuals, audio, sources, transitions, captions) ready to feed into the video-production pipeline (Sora, Kling, ElevenLabs, InfiniteTalk, Remotion, stock-footage, video-editor). Use when asked to "write a video script",… |
 | [claude-design](creative/claude-design/) | Design one-off HTML artifacts (landing pages, decks, prototypes) with high visual quality. |
 | [comfyui](creative/comfyui/) | Generate images, video, and audio with ComfyUI. Install, launch, manage nodes/models, run workflows with parameter injection via comfy-cli and REST/WebSocket API. |
-| [creative-ideation](creative/creative-ideation/) | Generate project ideas through creative constraints. Use when the user says "I want to build something", "give me a project idea", "inspire me". |
 | [design-md](creative/design-md/) | Create and manage DESIGN.md files following Google Stitch spec for design documentation. |
 | [humanizer](creative/humanizer/) | Humanize text: strip AI-isms and add real voice. Detects and fixes 29 common AI writing patterns. |
 | [hyperframes](creative/hyperframes/) | Create HTML-based video compositions, animated title cards, social overlays, captioned talking-head videos, audio-reactive visuals using HyperFrames. |
-| [popular-web-designs](creative/popular-web-designs/) | 54 production-quality design systems extracted from real websites. Load a template to generate HTML/CSS matching sites like Stripe, Linear, Vercel. |
 | [pretext](creative/pretext/) | Build creative browser demos with @chenglou/pretext for DOM-free text layout, ASCII art, typographic flow, kinetic typography. |
 | [sketch](creative/sketch/) | Quick visual sketches and comparison page patterns for rapid prototyping. |
-| [songwriting-and-ai-music](creative/songwriting-and-ai-music/) | Songwriting craft, AI music generation prompts (Suno focus), parody/adaptation techniques, phonetic tricks. |
 | [touchdesigner-mcp](creative/touchdesigner-mcp/) | Control a running TouchDesigner instance via twozero MCP. Create operators, set parameters, wire connections, build real-time visuals. |
 | [clipify](creative/video-production/clipify/) | Find funniest moments in a video, cut standalone clips, reformat 16:9 to 9:16 (face-pan or split-screen), burn word-by-word captions. |
 | [youtube-scriptwriting](creative/video-production/youtube-scriptwriting/) | Write retention-optimized long-form YouTube scripts through a checkpoint workflow (research, hook, structure, body, editing). |

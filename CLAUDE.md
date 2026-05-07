@@ -20,7 +20,6 @@ category-name/
 |----------|--------------|
 | **ai-tools** | AI agents (Claude Code, Codex, OpenCode, Hermes Agent), MCP integrations, web search, LLM tooling |
 | **app-store** | App Store Connect, ASO, RevenueCat, screenshots, simulators |
-| **bloom** | Bloom product-specific skills |
 | **coding** | Programming, debugging, testing, code review, PR workflows |
 | **creative** | Writing, editing, media production, video (Kling, Seedance, Remotion), content creation |
 | **devops** | CI/CD, GitHub workflows, Docker, MLOps, model training/inference, cloud deployment, OpenClaw debugging |
