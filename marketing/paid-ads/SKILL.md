@@ -53,7 +53,7 @@ Gather this context (ask if not provided):
 Account
 ├── Campaign 1: [Objective] - [Audience/Product]
 │   ├── Ad Set 1: [Targeting variation]
-│   │   ├── Ad 1-3: [Creative variations]
+│   │   ├── Ad 1-6: [Creative variations — minimum 6 per ad set]
 │   └── Ad Set 2: [Targeting variation]
 └── Campaign 2...
 ```
@@ -68,7 +68,11 @@ META_Conv_Lookalike-Customers_FreeTrial_YYYY_Q1
 
 **Testing phase (first 2-4 weeks):** 70% proven/safe, 30% testing new audiences/creative.
 
-**Scaling phase:** Consolidate into winners. Increase budgets 20-30% at a time. Wait 3-5 days between increases.
+**Scaling phase:** Consolidate into winners. Increase budgets 20-30% at a time. Wait 3-5 days between increases. When you find a winning creative, don't just bump budget: make 20-30 variants of the winning concept (same angle/hook, vary visual treatment, copy phrasing, format). Creative scaling > budget scaling. (Source: @athcanft, May 2026)
+
+**TikTok-specific scaling:** Never scale more than 20% every 3 days or the campaign re-enters learning phase and you torch performance. Use Smart+ campaigns. When a creative starts spending hard, clone it before it fatigues: same hook different video, same video different hook, same script different creator. Stretches every winner's lifespan ~10x. (Source: @timoxkoehler, May 2026)
+
+**The metric that matters: ARPU (revenue per download).** Not installs, not paying users, not even ROAS in isolation. If ARPU > blended ad cost per download, you have a money printer. If ARPU is below your cost per install, no amount of "more ads" saves you. ARPU is the single number that tells you if you have a business. (Source: @timoxkoehler, May 2026)
 
 ---
 
@@ -93,6 +97,8 @@ META_Conv_Lookalike-Customers_FreeTrial_YYYY_Q1
 - **Lookalikes**: Base on best customers (by LTV), not all customers
 - **Retargeting**: Segment by funnel stage
 - **Exclusions**: Exclude existing customers and recent converters
+- **App installs default**: Super broad targeting (USA, English-speaking). Don't over-segment. Let the algorithm find your audience. Narrow only after you have conversion data. (Source: @athcanft, May 2026)
+- **Geo-strategy for TikTok ads**: Don't start in the USA. CPMs are brutal and competition is highest in the world. Start in Tier 1 Europe (Germany, Switzerland, Scandinavia): same buying power, fraction of the cost, way less competition. Win there first, then bring the proven funnel to the US. (Source: @timoxkoehler, May 2026)
 
 ---
 

@@ -92,6 +92,13 @@ Line 2 (≤55 chars): "It found what 3 years of manual research missed."
 
 Hook patterns optimized for AI-generated UGC ads (TikTok/Instagram). These are paid ad formats — uploaded directly to TikTok Ads Manager, not posted organically.
 
+### Core Rules for Paid Ad Hooks
+
+- **Never show the app/product in the first 3 seconds.** Hook with emotion, curiosity, or a pattern interrupt first. The product reveal comes after the hook lands.
+- **Pattern-interrupt visuals:** Use provocative or unexpected imagery in the first frame to stop the scroll (within platform ad policies). The goal is comment bait — visuals that make people react, argue, or tag someone.
+
+Source: @athcanft (May 2026)
+
 ### "this is ur reminder that..." format
 
 Casual, direct, creates urgency without being pushy. 1.3M views on @simonecanciello's example. Best for AI talking-head UGC where the vibe is relaxed and authentic.

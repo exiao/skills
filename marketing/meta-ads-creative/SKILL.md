@@ -9,7 +9,7 @@ description: "Create high-converting Meta (Facebook/Instagram) ad creative using
 
 Create Meta ad creative that converts using **research-driven development**, the **6 Elements framework**, and **format fitting** - matching your message to proven ad formats.
 
-**Core Philosophy:** The best Meta ads don't look like ads. Lo-fi > polished. Authentic > produced. Native > interruptive.
+**Core Philosophy:** The best Meta ads don't look like ads. Lo-fi > polished. Authentic > produced. Native > interruptive. Ads should feel like memes or organic content. If it looks like an ad, it's already lost.
 
 ## When to Use
 
@@ -114,6 +114,8 @@ The hook is 80% of performance. Types: Stated (what you SAY), Visual (what they 
 | Instagram Comment | Dialogue/Q&A feel | Addressing objections |
 | Meme Formats | Culturally native | Contrasts, humor |
 | Testimonial Card | Direct social proof | Warm audiences |
+
+**App footage rule:** Maximum 4-5 seconds showing the app in use. The ad is about the problem/outcome, not the product. App footage is proof, not the pitch. (Source: @athcanft, May 2026)
 
 #### Format-Audience Matrix
 
