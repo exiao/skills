@@ -150,16 +150,29 @@ For scaling beyond open campaigns. Run this alongside or instead of the open Who
 - Find creators from saved viral content with **<1k followers** — not agencies or open applications
 - Source 5 to start. Watch their content cadence and comment engagement before reaching out.
 - Each creator sets up a **fresh ambassador account** (e.g. investingwithsarah, moneywithjake)
+- **Account setup rules:** Use an existing email (brand new emails get shadowbanned). Username must look normal ("justinworksout" not "fitapp_promo_23"). Bio only tags the main app account. (Source: @lucaspatiri_, May 2026)
+
+### Creator Briefs: Hooks, Not Scripts
+
+Never give creators a full script. Scripted content dies on TikTok — viewers can smell it in the first second. Instead, give each creator:
+
+1. **A hook bank** — 15-20 tested hooks that drive views (pull from top performers weekly)
+2. **Content rules** — what to show, what NOT to show (e.g., never show the app in the first 3 seconds)
+3. **Reference videos** — "make something that feels like this"
+
+When a hook works for one creator, send it to ALL creators immediately. When a creator cracks a viral format, every other creator copies it by end of week.
+
+Source: @lucaspatiri_ (May 2026)
 
 ### Compensation Structure
 
 | Component | Amount |
 |-----------|--------|
-| Monthly retainer | $500/m for 1 video per day |
-| Bonus — 10k views | Tiered payout |
-| Bonus — 100k views | Tiered payout |
-| Bonus — 1M views | Tiered payout |
-| Max payout cap | Set per video |
+| Base rate per video | $15-25 |
+| Bonus — 50K views | $50 |
+| Bonus — 100K views | $150 |
+| Bonus — 500K views | $500 |
+| Bonus — 1M views | $800 |
 | Eligibility window | 7 days per video |
 
 Cap total payout per video to control downside on breakout posts. Eligibility window prevents paying on views that trickle in months later.

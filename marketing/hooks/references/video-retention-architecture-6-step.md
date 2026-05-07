@@ -92,3 +92,21 @@ The hook formulas in this skill (TikTok hooks, hook rules, etc.) are all about S
 - **Dumping all value at once.** Space it out. Each piece of value should feel like a mini-reveal.
 - **Generic CTA.** "Like and follow" is invisible. Tie the CTA to the specific content: "Save this shade name" or "Send this to your friend who needs this."
 - **Being too scripted during the agitation phase.** This step needs personality and tangents. If it sounds rehearsed, the tension doesn't build.
+
+---
+
+## Retention Benchmarks (TikTok)
+
+Source: @rossark0 (May 2026), based on 1.6M view case study. https://x.com/rossark0/status/2051062012696821987
+
+**Target: 42%+ viewers watching to the end.** Below this threshold, distribution waves stop early. At or above it, they keep compounding.
+
+**How distribution waves work:**
+1. You post. TikTok shows to a small test batch (few hundred people in your niche).
+2. If that batch watches all the way through, TikTok shows to a bigger batch.
+3. If that batch also retains, pushes to an even bigger one. Each wave is larger than the last.
+4. If the first batch scrolls away after 3 seconds, the video dies. No second wave. No recovery.
+
+**Key insight:** Likes and comments are secondary signals. They are consequences of retention, not drivers. Even "controversy virality" (people arguing in comments) works because it makes people rewatch or stay to read replies, which raises retention indirectly. The mechanism is always retention.
+
+**"Every second that bleeds retention is a ceiling on how far the video can go."**

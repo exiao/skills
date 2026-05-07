@@ -153,6 +153,22 @@ Identifies which features customers value most. Show sets of features, ask most/
 
 ---
 
+## Consumer App Subscription Pricing (Mobile)
+
+Proven pricing structure for subscription apps on App Store / Google Play. The weekly price is intentionally aggressive to anchor the longer-term option as the obvious deal.
+
+| Tier | Price | Purpose |
+|------|-------|---------|
+| Weekly | $12.99/week | Anchor (makes everything else look cheap) |
+| 6-month | $59.99/6mo | Target (most users land here) |
+| Exit offer | $39.99/6mo + 3-day free trial | Catches users trying to bail at the paywall |
+
+The exit offer alone can 2x your ARPU vs the "$9.99/month" trap. Always split-test: different prices, paywalls, onboarding screens, value props. Every week the funnel should get sharper.
+
+Source: @timoxkoehler (May 2026, $40K MRR, 85K+ downloads)
+
+---
+
 ## Related Skills
 
 - **churn-prevention**: Cancel flows, save offers, revenue churn
