@@ -1,6 +1,6 @@
 # Skills Repo Conventions
 
-A public repo of skills for [Hermes Agent](https://github.com/NousResearch/hermes-agent) and other skill-aware agents (Claude Code, Codex, OpenClaw). Every directory at root is a **category** containing related skills (except `.github/`).
+A public repo of skills for Claude Code, [Hermes Agent](https://github.com/NousResearch/hermes-agent), and other skill-aware agents (Codex, OpenClaw). Every directory at root is a **category** containing related skills (except `.github/`).
 
 ## Repo Structure
 
@@ -73,7 +73,7 @@ When a skill references third-party tools or CLIs, verify the commands actually 
 - `bloom peers` → doesn't exist, use `bloom info`
 - `bloom ratings` → doesn't exist, use `bloom info`
 
-For the full bloom-cli command list, see `finance/bloom-cli/SKILL.md`. Commonly used: `bloom info`, `bloom price`, `bloom financials`, `bloom screen`, `bloom earnings`, `bloom technicals`, `bloom news`, `bloom search`.
+For the full bloom-cli command list, see `finance/bloom-cli/SKILL.md`. Common commands include: `bloom info`, `bloom price`, `bloom financials`, `bloom screen`, `bloom earnings`, `bloom technicals`, `bloom news`, `bloom sentiment`.
 
 When referencing another skill, use its exact `name` from frontmatter (not folder name or a guess).
 
