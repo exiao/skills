@@ -49,7 +49,7 @@ uv run {baseDir}/scripts/generate_image.py --prompt "combine these" --filename "
 - Models: `--model default` (`grok-imagine-image`, fast) or `--model quality` (`grok-imagine-image-quality`, best).
 - `grok-imagine-image-pro` is scheduled for deprecation on May 15, 2026. Use `quality` instead.
 - Resolutions: `1k` (default), `2k`.
-- Aspect ratios: `1:1`, `16:9`, `9:16`, `4:3`, `3:4`, `3:2`, `2:3`, `2:1`, `1:2`, `auto`.
+- Aspect ratios: `1:1`, `16:9`, `9:16`, `4:3`, `3:4`, `3:2`, `2:3`, `2:1`, `1:2`, `19.5:9`, `9:19.5`, `20:9`, `9:20`, `auto`.
 - Use timestamps in filenames: `yyyy-mm-dd-hh-mm-ss-name.png`.
 - Generated URLs are **temporary**; the script downloads automatically.
 - The script prints a `MEDIA:` line for gateway auto-attachment.
