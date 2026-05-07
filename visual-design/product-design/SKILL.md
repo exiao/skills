@@ -15,7 +15,7 @@ description: >
 
 Strategic design thinking before pixels. This skill answers "what to build and why" so that execution skills (frontend-design, impeccable) can answer "how to build it."
 
-For specific brand tokens (EB Garamond headlines, General Sans body, terracotta/parchment palette, base-8 spacing), reference `~/.hermes/VISUAL-IDENTITY.md` if it exists. If unavailable, use sensible defaults or ask the user for brand guidance.
+For specific brand tokens (fonts, colors, spacing scale), reference `~/.hermes/VISUAL-IDENTITY.md` if it exists. If unavailable, use sensible defaults or ask the user for brand guidance.
 
 ---
 
@@ -278,4 +278,3 @@ Run this checklist before any interface is considered complete.
 | Design token spec file (DESIGN.md) | design-md |
 | Apple platform conventions | apple-ux-guidelines |
 | Design QA and polish | impeccable |
-| Full Zypsy methodology (strategy through execution) | zypsy-product-design |
