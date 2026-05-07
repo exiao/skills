@@ -30,7 +30,7 @@ Install the skills from https://github.com/exiao/skills
 | [**coding**](coding/) | 23 | Programming, debugging, testing, code review, web scraping |
 | [**creative**](creative/) | 38 | Writing, editing, media production, content creation |
 | [**devops**](devops/) | 55 | CI/CD, GitHub, Docker, MLOps, model training/inference |
-| [**finance**](finance/) | 9 | Investing, market analysis, portfolio management |
+| [**finance**](finance/) | 13 | Investing, market analysis, portfolio management |
 | [**marketing**](marketing/) | 38 | Ads (Google/Meta/Apple), SEO, analytics, social media |
 | [**memory**](memory/) | 3 | Memory management — GC, setup, and recall |
 | [**productivity**](productivity/) | 16 | Apple apps, email, notes, smart home, local search, gaming |
@@ -248,6 +248,10 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [post-investinglog-trades](finance/post-investinglog-trades/) | Use when the cron fires at 4pm ET on weekdays — picks the best unposted trade from the investing-log repo, generates a trade card, creates a Typefully draft, and reports to Signal. |
 | [stock-research](finance/stock-research/) | Use when performing stock or equity research, earnings analysis, coverage reports, or generating daily market briefings for Bloom. Covers on-demand research tasks and the scheduled daily market briefing cron job. |
 | [wealth-management](finance/wealth-management/) | Wealth management workflows — client review prep, financial plans, investment proposals, portfolio rebalancing, and tax-loss harvesting. Adapted from Anthropic's financial-services-plugins (github.com/anthropics/financial-services-plugins). |
+| [earnings-analysis](finance/earnings-analysis/) | Create equity research earnings update reports analyzing quarterly results. Covers beat/miss analysis, key metrics, updated estimates, guidance changes, and revised thesis. Adapted from Anthropic's financial-services-plugins. |
+| [idea-generation](finance/idea-generation/) | Systematic stock screening and investment idea sourcing. Combines quantitative screens, thematic research, and pattern recognition to surface new long and short ideas. Adapted from Anthropic's financial-services-plugins. |
+| [thesis-tracker](finance/thesis-tracker/) | Maintain and update investment theses for portfolio positions and watchlist names. Track key data points, catalysts, and thesis milestones over time. Adapted from Anthropic's financial-services-plugins. |
+| [comps-analysis](finance/comps-analysis/) | Build comparable company analyses with operating metrics, valuation multiples, and statistical benchmarking. Adapted from Anthropic's financial-services-plugins. |
 
 ### 🧠 Memory
 
@@ -398,6 +402,10 @@ These started from other open-source projects, modified and extended for these w
 |-------|----------|
 | [documents](devops/documents/) | [anthropics/skills](https://github.com/anthropics/skills) |
 | [wealth-management](finance/wealth-management/) | [anthropics/financial-services-plugins](https://github.com/anthropics/financial-services-plugins) |
+| [earnings-analysis](finance/earnings-analysis/) | [anthropics/financial-services-plugins](https://github.com/anthropics/financial-services-plugins) |
+| [idea-generation](finance/idea-generation/) | [anthropics/financial-services-plugins](https://github.com/anthropics/financial-services-plugins) |
+| [thesis-tracker](finance/thesis-tracker/) | [anthropics/financial-services-plugins](https://github.com/anthropics/financial-services-plugins) |
+| [comps-analysis](finance/comps-analysis/) | [anthropics/financial-services-plugins](https://github.com/anthropics/financial-services-plugins) |
 | [skill-creator](skills-meta/skill-creator/) | [anthropics/claude-code](https://github.com/anthropics/claude-code/tree/main/plugins/plugin-dev) |
 | [skill-audit](skills-meta/skill-audit/) | Original (inspired by Anthropic's skill patterns) |
 | [agent-improver](skills-meta/agent-improver/) | Original (inspired by [NousResearch/hermes-agent-self-evolution](https://github.com/NousResearch/hermes-agent-self-evolution) GEPA methodology) |
