@@ -8,7 +8,7 @@ description: Reference notes from full ops-center codebase review (2026-04-30)
 # Ops-Center Codebase Review (2026-04-30)
 
 ## Summary
-Full codebase review of github.com/Fintary/ops-center completed. PR #64 updated all docs.
+Full codebase review of github.com/$OPS_CENTER_REPO completed. PR #64 updated all docs.
 
 ## Actual Counts (verified from source)
 - **19 tables** + **10 enums** in app/models/tables.py

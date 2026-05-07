@@ -19,7 +19,7 @@ description: "Reference notes for Fintary ops-center dashboard rebuild — Alpin
 - Map raw OpenAPI report rows → pre-aggregated structures via DataAggregator class.
 
 ## PR #N (2026-04-30) — merged
-- Branch: `fix/dashboard-match-reference`, repo: Fintary/ops-center
+- Branch: `fix/dashboard-match-reference`, repo: $OPS_CENTER_REPO
 - 8 business tabs + 7 agent sub-tabs implemented
 - Plan: `$PLAN_PATH`
 

@@ -1,6 +1,6 @@
 ---
 name: bulk-import-skills-from-git
-description: Import skills from a GitHub repository (like exiao/skills or any skills bundle) into ~/.hermes/skills/, resolving naming conflicts and preserving directory structure. Use when a user shares a skills repo URL or wants to install a skills pack.
+description: Import skills from a GitHub repository (like $SKILLS_REPO or any skills bundle) into ~/.hermes/skills/, resolving naming conflicts and preserving directory structure. Use when a user shares a skills repo URL or wants to install a skills pack.
 ---
 
 # Bulk Import Skills from Git Repository
@@ -14,7 +14,7 @@ description: Import skills from a GitHub repository (like exiao/skills or any sk
 - "download all skills from <repo>"
 - "import skills from <url>"
 - "clone <repo> and add the skills"
-- "add all skills from exiao/skills"
+- "add all skills from $SKILLS_REPO"
 
 ## Step-by-step workflow
 
@@ -74,6 +74,6 @@ rm -rf /tmp/<repo-dir>
 - Use `cp -rn` for safe non-destructive copy: the `-n` flag never overwrite existing files, giving an extra safety layer beyond the directory-name collision check
 
 ## Related knowledge
-- External skills repos: exiao/skills, hermes-agent/skills (bundled)
+- External skills repos: $SKILLS_REPO, hermes-agent/skills (bundled)
 - Skills live in `~/.hermes/skills/` with optional category subdirectories
 - After copying, skills are discovered automatically — no restart needed

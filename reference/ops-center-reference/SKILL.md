@@ -11,7 +11,7 @@ description: "Fintary ops-center v2 architecture, API proxy pattern, infrastruct
 - **Deploy URL**: `$OPS_CENTER_URL`
 - **Auth**: Firebase (`env-configured` project), env vars for config (not hardcoded)
 - **No database**: All data from Fintary OpenAPI (`$FINTARY_API_HOST`)
-- **Repo**: `Fintary/ops-center`
+- **Repo**: `$OPS_CENTER_REPO`
 
 ## API Proxy Pattern
 - Frontend calls `/api/fintary/*` (same-origin, no CORS)
@@ -38,5 +38,5 @@ description: "Fintary ops-center v2 architecture, API proxy pattern, infrastruct
 - PR #68: claude-code-review.yml cleanup (open)
 
 ## Related Repos
-- `Fintary/fintary`: Main app (Next.js monorepo, api/ + web/)
+- `$FINTARY_REPO`: Main app (Next.js monorepo, api/ + web/)
 - `Fintary/cs_solutions_apps`: Agent portal (proxy pattern reference)

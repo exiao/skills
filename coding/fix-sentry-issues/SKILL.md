@@ -163,7 +163,7 @@ git commit -m "fix: <brief description> (<SENTRY_ISSUE_ID>)"
 git push origin fix/sentry-<SHORT_ID>
 
 gh pr create \
-  --repo Bloom-Invest/bloom \
+  --repo $BLOOM_REPO \
   --title "fix: <brief description> (<SENTRY_ISSUE_ID>)" \
   --body "## Sentry Issue
 - **Issue:** <SENTRY_ISSUE_ID>

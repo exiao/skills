@@ -1,6 +1,6 @@
 # investing-log Infrastructure & API Usage
 
-## Repo: bloom-invest/investing-log
+## Repo: $INVESTING_LOG_REPO
 
 ### Models by Provider (as of 2026-05-06)
 | Provider | Model | Workflows |

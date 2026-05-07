@@ -1,7 +1,7 @@
 # investing-log Repo Architecture & Cost Profile
 
 ## Pipeline Overview
-The investing-log repo (bloom-invest/investing-log) runs a 4-phase automated investing pipeline via GitHub Actions across 4 AI models (Claude, OpenAI, Gemini, Grok).
+The investing-log repo ($INVESTING_LOG_REPO) runs a 4-phase automated investing pipeline via GitHub Actions across 4 AI models (Claude, OpenAI, Gemini, Grok).
 
 ```
 Phase 1a: Sector Analysis      Phase 1b: Portfolio Review

@@ -14,7 +14,7 @@ Produces 3 article drafts per run: research once, then spawn 3 parallel sub-agen
 ## Phase 0 — Deduplication Check (MANDATORY FIRST)
 
 1. Read `~/clawd/memory/content-published.md` — topics already covered are off-limits
-2. Run `bird tweets --user exiao3 -n 30 --plain` — note angles Eric published in the last 30 days
+2. Run `bird tweets --user $TWITTER_USER -n 30 --plain` — note angles Eric published in the last 30 days
 3. Check recent Substack: `web_fetch https://mycrystalball.substack.com` — find recent post titles
 4. Build an EXCLUSION LIST. Do not pick any topic overlapping with it.
 5. After picking topics, append them to `~/clawd/memory/content-published.md`
@@ -27,7 +27,7 @@ Read `~/marketing/WRITING-STYLE.md` first.
 
 ### 1a. Gather engagement data
 
-- **X/Twitter**: Pull @exiao3's last 30 posts via `bird`. Note which topics/angles got most engagement (likes, replies, retweets).
+- **X/Twitter**: Pull @$TWITTER_USER's last 30 posts via `bird`. Note which topics/angles got most engagement (likes, replies, retweets).
 - **Grok X search**: Run `/grok-search` with `--x` to find what's trending in Eric's niches (AI, investing, indie dev, fintech).
 - **Trend research**: Run `/trend-research` across YouTube, X, Reddit, and Substack to find viral formats, hooks, and topics with momentum.
 

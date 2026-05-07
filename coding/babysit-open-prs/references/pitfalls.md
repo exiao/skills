@@ -5,10 +5,10 @@
 The skill references `~/clawd/scripts/pr-preflight.sh`. If it doesn't exist, fall back to manually querying each tracked repo:
 
 ```bash
-# Scan tracked repos for open PRs by exiao
-gh pr list --repo bloom-invest/bloom --author exiao --state open --json number,title,headRefName
-gh pr list --repo bloom-invest/investing-log --author exiao --state open --json number,title,headRefName
-gh pr list --repo exiao/skills --author exiao --state open --json number,title,headRefName
+# Scan tracked repos for open PRs by $GH_USER
+gh pr list --repo $BLOOM_REPO --author $GH_USER --state open --json number,title,headRefName
+gh pr list --repo $INVESTING_LOG_REPO --author $GH_USER --state open --json number,title,headRefName
+gh pr list --repo $SKILLS_REPO --author $GH_USER --state open --json number,title,headRefName
 ```
 
 ## `gh pr diff --stat` does not exist
@@ -40,7 +40,7 @@ gh pr view <N> --repo <repo> --json mergeable,reviewDecision,statusCheckRollup |
 
 Eric prefers doing PR fixes directly rather than spawning sub-agents for skills repo PRs (markdown-only, quick fixes). Sub-agents are acceptable for larger repos (bloom, investing-log) with code changes that need test verification.
 
-## exiao/skills worktrees
+## $SKILLS_REPO worktrees
 
 Existing worktrees are frequently at:
 - `~/projects/_worktrees/<branch-name>`
