@@ -20,7 +20,7 @@ Full codebase review of github.com/Fintary/ops-center completed. PR #64 updated 
 - **20 data helper functions** in app/page_data.py (872 lines)
 
 ## Pre-existing Security Bug
-DELETE /api/agent-hierarchy/{hierarchy_id} doesn't filter by account_id — cross-tenant deletion risk. Flagged for separate fix.
+Known security issues exist. Details tracked privately.
 
 ## Key Architecture Notes
 - Feature flags: RECONCILE_BULK, RECONCILE_SUGGESTIONS
