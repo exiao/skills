@@ -1,6 +1,6 @@
 # Skills Repo Conventions
 
-This is a public repo of OpenClaw skills. Every directory at root is a **category** containing related skills (except `.github/`).
+A public repo of skills for [Hermes Agent](https://github.com/NousResearch/hermes-agent) (also compatible with Claude Code, Codex, and other skill-aware agents). Every directory at root is a **category** containing related skills (except `.github/`).
 
 ## Repo Structure
 
@@ -18,14 +18,15 @@ category-name/
 
 | Category | What's inside |
 |----------|--------------|
-| **ai-tools** | AI agents, MCP integrations, web search, LLM tooling |
-| **app-store** | App Store tools, RevenueCat, Prometheus, ReelFarm |
-| **bloom** | Bloom product-specific skills |
-| **coding** | Programming, debugging, testing, code review, web scraping |
-| **creative** | Writing, editing, media production, content creation |
-| **devops** | CI/CD, GitHub workflows, Docker, MLOps, model training/inference |
-| **finance** | Investing, market analysis, portfolio management |
-| **marketing** | Ads (Google/Meta/Apple), SEO, analytics, social media |
+| **ai-tools** | AI agents (Claude Code, Codex, OpenCode, Hermes Agent), MCP integrations, web search, LLM tooling |
+| **app-store** | App Store Connect, ASO, RevenueCat, screenshots, simulators |
+| **coding** | Programming, debugging, testing, code review, PR workflows |
+| **creative** | Writing, editing, media production, video (Kling, Seedance, Remotion), content creation |
+| **devops** | CI/CD, GitHub workflows, Docker, MLOps, model training/inference, cloud deployment |
+| **external-services** | External service CLIs and API integrations (Porkbun, Appfigures, DataForSEO, Firecrawl, Higgsfield, etc.) |
+| **finance** | Investing, market analysis, portfolio management, earnings, comps |
+| **last30days** | 30-day topic research across Reddit, X, YouTube, web |
+| **marketing** | Ads (Google/Meta/Apple), SEO, analytics, social media, content strategy |
 | **memory** | Memory management — GC, setup, and recall from past sessions |
 | **productivity** | Apple apps, email, notes, smart home, local search, gaming |
 | **research** | Deep research, competitive analysis, market intelligence |
@@ -39,18 +40,34 @@ category-name/
 - Keep `SKILL.md` under 500 lines. Move details to `references/`.
 - No README.md, CHANGELOG.md, or human-facing docs inside skill directories.
 
+## Frontmatter Format
+
+```yaml
+---
+name: my-skill
+description: What this skill does and when to invoke it. Include trigger phrases.
+version: 1.0.0
+metadata:
+  runtime:
+    tags: [relevant, tags]
+    related_skills: [other-skill]
+---
+```
+
+The metadata key is `runtime:` (not `openclaw` or `clawdbot`). Product names like "Hermes Agent" are correct as-is. Do not rename product/project names to match metadata keys.
+
 ## Rules
 
 1. **No hardcoded credentials.** Use `$ENV_VAR_NAME` for tokens, API keys, auth strings, product IDs. This repo is public.
 2. **No personal data.** No emails, phone numbers, account balances, or internal URLs.
 3. **Update README.md** when adding, removing, or renaming skills. Every skill directory must appear in the README under the correct category.
-4. **Use `openclaw` naming** (not `clawdbot`). Config path: `~/.openclaw/openclaw.json`. Metadata key: `openclaw`.
-5. **Paths use `~/clawd/skills/`** for workspace references (not `/opt/homebrew/lib/node_modules/`).
+4. **No hardcoded absolute paths.** Use relative paths or `$ENV_VAR` references. Paths like `~/Documents/personal/...` are not portable. Workspace-relative paths (e.g. `theses/TICKER.md`) or well-known config paths (e.g. `~/.hermes/config.yaml`) are fine.
+5. **Don't rename product names.** "Hermes Agent", "Claude Code", "Codex" etc. are real product names. Use them as-is. This rule exists because past CI reviews over-zealously renamed all "hermes" or "runtime" references to match old platform metadata conventions.
 
 ## PR Guidelines
 
 - One logical change per PR. Don't stack unrelated changes.
-- Branch from `main`. Don't stack branches on other feature branches. Use git worktrees for feature work, placed in `~/.hermes/.worktrees/skills/` (outside the repo to avoid duplicating repo content).
+- Branch from `main`. Don't stack branches on other feature branches.
 - If CI (claude-review) flags issues, fix them before requesting merge.
 - Check all three comment sources for review feedback: inline comments, issue comments, and review verdicts.
 
