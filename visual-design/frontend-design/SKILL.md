@@ -45,9 +45,9 @@ Remember: Claude is capable of extraordinary creative work. Don't hold back, sho
 
 For any design that requires visual iteration (layout, spacing, colors, typography, component feel), use the live browser prototyping technique instead of rebuilding on each change:
 
-1. Open the target in browser — local file or the app's production site
+1. Open the target in browser — local file or the app's production site (check TOOLS.md for the URL)
 2. Write initial HTML/CSS or navigate to the target page
-3. Use browser evaluate to apply changes live via JS
+3. Use `browser action=act request={kind:evaluate, fn:"() => { /* JS to patch styles/DOM */ }"}` to apply changes live
 4. Screenshot to validate — iterate until it looks right
 5. Write only the final confirmed values back to the source file / PR
 

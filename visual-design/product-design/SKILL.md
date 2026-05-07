@@ -8,14 +8,14 @@ description: >
   "product design", "information architecture", "design thinking", "UX strategy",
   "app concept", "feature design", "what screens do we need", "user flow",
   "how should this work". For visual execution (code, CSS, motion), use
-  frontend-design instead. For brand tokens, load ~/.hermes/VISUAL-IDENTITY.md.
+  frontend-design instead. For brand tokens, load ~/.hermes/VISUAL-IDENTITY.md if available.
 ---
 
 # Product Design
 
 Strategic design thinking before pixels. This skill answers "what to build and why" so that execution skills (frontend-design, impeccable) can answer "how to build it."
 
-For specific brand tokens (EB Garamond headlines, General Sans body, terracotta/parchment palette, base-8 spacing), reference `~/.hermes/VISUAL-IDENTITY.md`.
+For specific brand tokens (EB Garamond headlines, General Sans body, terracotta/parchment palette, base-8 spacing), reference `~/.hermes/VISUAL-IDENTITY.md` if it exists. If unavailable, use sensible defaults or ask the user for brand guidance.
 
 ---
 
@@ -274,7 +274,7 @@ Run this checklist before any interface is considered complete.
 | Need | Skill |
 |------|-------|
 | Build the UI (code, CSS, motion) | frontend-design |
-| Brand tokens (fonts, colors, spacing) | ~/.hermes/VISUAL-IDENTITY.md |
+| Brand tokens (fonts, colors, spacing) | ~/.hermes/VISUAL-IDENTITY.md (optional) |
 | Design token spec file (DESIGN.md) | design-md |
 | Apple platform conventions | apple-ux-guidelines |
 | Design QA and polish | impeccable |
