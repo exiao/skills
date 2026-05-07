@@ -190,7 +190,7 @@ Source: @thebranding.ai breakdown of multiple creators going viral with the same
 
 **Recreate before you recruit.** Prove a format works on your own account before committing creator budget to it.
 
-1. **Warm up the account** in the niche — follow the 5-day TikTok warmup process: 2 days as a viewer (no posting, train the algorithm by scrolling 10min 2x/day, liking 20-30 niche videos, watching 10 to the end, leaving 5 genuine comments, following up to 5 accounts), day 3 slideshow diagnostic (500+ impressions AND 20-30+ likes in 5hrs to pass), then 2+ videos/day with daily engagement maintained. Warmup is daily, not one-time: stop engaging and the account goes cold. If 6 consecutive videos stay under 300 views, try 3 native TikTok videos (no CapCut), then abandon and restart if still dead (costs 2 days, not a loss). Target 42%+ watch-through retention. Use an existing email for new accounts (brand new emails get shadowbanned). Username should look normal ("justinworksout" not "fitapp_promo_23"). (Sources: @rossark0, @alexcooldev, @lucaspatiri_, May 2026)
+1. **Warm up the account** in the niche — follow the 5-day TikTok warmup process before posting any content. See `references/tiktok-warmup.md` for the full checklist, retention benchmarks (42%+ watch-through), and account abandonment rules. (Sources: @rossark0, @alexcooldev, @lucaspatiri_, May 2026)
 2. **Save viral videos** from <1k follower accounts; these are pre-algo signals of what's actually resonating
 3. **Analyze why they worked** — hook structure, comment sentiment, format, pacing
 4. **Recreate the format yourself** — don't copy, match the structure and emotional beat
@@ -318,7 +318,7 @@ Don't write here. Route to the right skill.
 
 Batch at least 7 days per session. Never schedule one post at a time. If queue drops below 3 days, refill immediately.
 
-**TikTok at scale:** Batch-create 10-30 pieces per session. Source visuals from Pinterest/Freepik, generate hooks via ChatGPT, assemble in Canva, schedule via Postiz (open-source). For new accounts, use Postiz for drafts only and post manually from the phone. Automate posting only on trusted, established accounts. Run 20-30 accounts per app targeting different niches/markets. (Source: @alexcooldev, May 2026)
+**TikTok at scale:** Batch-create 10-30 pieces per session. Source visuals from Pinterest/Freepik, generate hooks via ChatGPT, assemble in Canva, schedule via Postiz (open-source). For new accounts, use Postiz for drafts only and post manually from the phone. Automate posting only on trusted, established accounts. Some operators run multiple accounts per app targeting different niches/markets; note that coordinated multi-account strategies may violate TikTok's TOS on inauthentic behavior, so evaluate risk and maintain genuine, distinct content per account. (Source: @alexcooldev, May 2026)
 
 > **Load on-demand:** `references/calendar-batching.md` for scheduling strategy and optimal posting times.
 
@@ -370,7 +370,7 @@ Run this every week when managing creator programs:
 3. **Views per format** — talking head vs POV vs reaction vs demo
 4. **Account health** — which accounts are growing vs plateauing
 
-Actions: Rotate out underperformers after 2 weeks. Send winning hooks to ALL creators. When one creator cracks a viral format, every other creator copies it by end of week.
+Actions: Rotate out underperformers after 2 weeks. Send winning hooks to ALL creators. When one creator cracks a viral format, every other creator copies it by end of week. See `whop-content-rewards` skill for the full creator briefing method (hooks not scripts).
 
 Source: @lucaspatiri_ (May 2026)
 
@@ -421,6 +421,7 @@ Retired pillars aren't deleted. Keep `tiktok-marketing/pillar-bench.json` and re
 | `references/distribution.md` | Distribution channels, cross-posting strategy, amplification |
 | `references/geo-targeting.md` | Geo-targeting strategy for content localization |
 | `references/interactive-content.md` | Interactive content types, quizzes, calculators, assessments |
+| `references/tiktok-warmup.md` | 5-day TikTok account warmup process, retention benchmarks, account abandonment rules |
 
 ---
 
