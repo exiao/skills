@@ -16,9 +16,9 @@ Last updated: 2026-05-05
 
 | Angle | ID | Target Audience |
 |-------|----|-----------------|
-| Second Opinion Investing | ts702fzxzdkj66b4r69wark6bd864md3 | Active retail investors wanting validation |
-| Information Overload Fatigue | ts77qv54k0b2wwxg297qantzn186455y | Self-directed investors struggling with noise |
-| Beginner Investing Anxiety | ts7faca7aprwbcptxt8feybtg986517m | First-time investors feeling overwhelmed |
+| Second Opinion Investing | $ANGLE_ID_1 | Active retail investors wanting validation |
+| Information Overload Fatigue | $ANGLE_ID_2 | Self-directed investors struggling with noise |
+| Beginner Investing Anxiety | $ANGLE_ID_3 | First-time investors feeling overwhelmed |
 
 ## Preferences (defaults at setup)
 
@@ -26,7 +26,7 @@ All format weights at 25% even split. 50% remix, 50% own media, 50% product ment
 
 ## Cron
 
-- Job: `fastlane-daily` (ID: d21431bbea17)
+- Job: `fastlane-daily` (ID: $CRON_JOB_ID)
 - Schedule: daily at 10am ET (`0 10 * * *`)
 - Script: `~/.hermes/scripts/fastlane-daily.sh`
 - Delivers to: signal:Skills Admin

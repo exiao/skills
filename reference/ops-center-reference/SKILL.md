@@ -16,7 +16,7 @@ description: "Fintary ops-center v2 architecture, API proxy pattern, infrastruct
 ## API Proxy Pattern
 - Frontend calls `/api/fintary/*` (same-origin, no CORS)
 - `app/api/proxy.py` forwards GET requests to `$FINTARY_API_HOST` server-side
-- Same pattern as `Fintary/cs_solutions_apps` agent portal
+- Same pattern as `$CS_SOLUTIONS_REPO` agent portal
 - GET only, path allowlisted (`/openapi/*`, `/api/admin/analytics/*`), Firebase Bearer token forwarded
 - Module-level httpx client with connection pooling, lifespan shutdown cleanup
 
@@ -39,4 +39,4 @@ description: "Fintary ops-center v2 architecture, API proxy pattern, infrastruct
 
 ## Related Repos
 - `$FINTARY_REPO`: Main app (Next.js monorepo, api/ + web/)
-- `Fintary/cs_solutions_apps`: Agent portal (proxy pattern reference)
+- `$CS_SOLUTIONS_REPO`: Agent portal (proxy pattern reference)
