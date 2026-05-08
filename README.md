@@ -28,7 +28,7 @@ Install the skills from https://github.com/exiao/skills
 | [**ai-tools**](ai-tools/) | 10 | AI agents, MCP integrations, web search, LLM tooling |
 | [**app-store**](app-store/) | 28 | App Store tools, RevenueCat, Prometheus, ReelFarm |
 | [**coding**](coding/) | 23 | Programming, debugging, testing, code review, web scraping |
-| [**creative**](creative/) | 38 | Writing, editing, media production, content creation |
+| [**creative**](creative/) | 37 | Writing, editing, media production, content creation |
 | [**devops**](devops/) | 55 | CI/CD, GitHub, Docker, MLOps, model training/inference |
 | [**finance**](finance/) | 13 | Investing, market analysis, portfolio management |
 | [**marketing**](marketing/) | 38 | Ads (Google/Meta/Apple), SEO, analytics, social media |
@@ -37,7 +37,8 @@ Install the skills from https://github.com/exiao/skills
 | [**research**](research/) | 10 | Deep research, competitive analysis, market intelligence |
 | [**skills-meta**](skills-meta/) | 7 | Skills about skills — creating, auditing, improving, testing |
 | [**visual-design**](visual-design/) | 38 | UI/UX design, diagrams, image generation, frontend |
-| [**external-services**](external-services/) | 16 | External service CLIs and API integrations |
+| [**video-production**](video-production/) | 1 | Video production workflows and clip generation |
+| [**external-services**](external-services/) | 17 | External service CLIs and API integrations |
 | [**media**](media/) | 1 | Media content tools (Spotify, audio) |
 | [**ops-center**](ops-center/) | 1 | Ops center codebase review and reference |
 | [**reference**](reference/) | 2 | Reference notes for specific projects |
@@ -183,17 +184,18 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [thumbnail](creative/video-production/thumbnail/) | Generate video cover frames and thumbnails for YouTube, TikTok, Reels, and social media. Use when asked for a video thumbnail, cover frame, YouTube thumbnail, or to extract a still from a video. |
 | [video-script](creative/video-production/video-script/) | Generate structured scene-by-scene video scripts with production metadata (visuals, audio, sources, transitions, captions) ready to feed into the video-production pipeline (Sora, Kling, ElevenLabs, InfiniteTalk, Remotion, stock-footage, video-editor). Use when asked to "write a video script",… |
 | [claude-design](creative/claude-design/) | Design one-off HTML artifacts (landing pages, decks, prototypes) with high visual quality. |
+| [design-md](creative/design-md/) | Create, edit, and validate DESIGN.md specs, design tokens, and design system docs. |
 | [comfyui](creative/comfyui/) | Generate images, video, and audio with ComfyUI. Install, launch, manage nodes/models, run workflows with parameter injection via comfy-cli and REST/WebSocket API. |
 | [humanizer](creative/humanizer/) | Humanize text: strip AI-isms and add real voice. Detects and fixes 29 common AI writing patterns. |
 | [hyperframes](creative/hyperframes/) | Create HTML-based video compositions, animated title cards, social overlays, captioned talking-head videos, audio-reactive visuals using HyperFrames. |
 | [pretext](creative/pretext/) | Build creative browser demos with @chenglou/pretext for DOM-free text layout, ASCII art, typographic flow, kinetic typography. |
 | [sketch](creative/sketch/) | Quick visual sketches and comparison page patterns for rapid prototyping. |
 | [touchdesigner-mcp](creative/touchdesigner-mcp/) | Control a running TouchDesigner instance via twozero MCP. Create operators, set parameters, wire connections, build real-time visuals. |
-| [clipify](creative/video-production/clipify/) | Find funniest moments in a video, cut standalone clips, reformat 16:9 to 9:16 (face-pan or split-screen), burn word-by-word captions. |
 | [youtube-scriptwriting](creative/video-production/youtube-scriptwriting/) | Write retention-optimized long-form YouTube scripts through a checkpoint workflow (research, hook, structure, body, editing). |
 | [youtube-title-creator](creative/video-production/youtube-title-creator/) | Generate high-CTR YouTube titles and thumbnail concepts using 119 proven frameworks ranked by performance score. |
 | [writer](creative/writer/) | Write content in the author's voice — articles, blog posts, tweets, social media posts, marketing copy, newsletter drafts. Loads WRITING-STYLE.md and enforces kill phrases. |
 | [youtube-content](creative/video-production/youtube-content/) | Fetch YouTube video transcripts and transform them into structured content (chapters, summaries, threads, blog posts). Use when the user shares a YouTube URL or video link, asks to summarize a video, requests a transcript, or wants to extract and reformat content from any YouTube video. |
+
 
 ### ⚙️ DevOps & Infrastructure
 
@@ -350,6 +352,7 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [dataforseo-cli](external-services/dataforseo-cli/) | Use when doing keyword research (volume, difficulty, ideas), checking App Store or Google Play rankings, or looking up Google SERP rankings for content/landing pages. |
 | [firecrawl](external-services/firecrawl/) | Scrape, crawl, search, and interact with web pages using Firecrawl CLI and API. Use for JS-rendered pages, full site crawls, sitemaps, form interaction, and login-required pages. |
 | [google-ads-cli](external-services/google-ads-cli/) | Use when managing Google Ads campaigns: performance checks, keyword pausing, report downloads, or campaign optimization via browser or API. |
+| [gsc-cli](external-services/gsc-cli/) | Query Google Search Console data via MCP and mcporter for verified properties. |
 | [grok-imagine](external-services/grok-imagine/) | Generate or edit images via xAI Grok Imagine (Aurora). Supports text-to-image, single-image editing, and multi-image composition (up to 3). |
 | [meta-ads-cli](external-services/meta-ads-cli/) | Daily Meta ad operations via Marketing API: check performance, kill losers, promote winners, generate fresh creatives, upload as new ads. |
 | [porkbun-cli](external-services/porkbun-cli/) | Manage Porkbun domains, DNS records, SSL certificates, URL forwarding, and hosting blueprints via the Porkbun API. |
@@ -393,6 +396,12 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [synthetic-userstudies](research/synthetic-userstudies/) | Run synthetic user research sessions natively — no backend required. The agent plays an AI-generated persona and simulates a user interview based on the 4 Ps framework (Persona, Problem, Promise, Product). Use when a user wants to run a user research session, interview a synthetic persona,… |
 | [trip-planner](research/trip-planner/) | Generate detailed day-by-day travel itineraries with neighborhood-by-neighborhood routing, budget scaling, dietary-aware meal picks, proximity checks, and post-generation quality validation. Use when: plan a trip, travel itinerary, trip to [destination], vacation planning, travel planner. |
 | [yc-office-hours](research/yc-office-hours/) | Product discovery via YC-style forcing questions and 10-star product thinking. Use when starting a new feature, evaluating a product idea, or reframing a request into its most ambitious version. |
+
+### 🎬 Video Production
+
+| Skill | Description |
+|-------|-------------|
+| [clipify](video-production/clipify/) | Find funny moments in videos, cut clips, reframe vertical, and burn word-by-word captions. |
 
 ### 🎯 Visual Design
 
@@ -542,7 +551,7 @@ These started from other open-source projects, modified and extended for these w
 | [last30days](marketing/last30days/) | [mvanhorn/last30days-skill](https://github.com/mvanhorn/last30days-skill) |
 | [stably-sdk-rules](devops/stably-sdk-rules/) | [skills.sh/stablyai](https://skills.sh/stablyai/agent-skills/stably-sdk-rules) |
 | [sahil-office-hours](research/sahil-office-hours/) | [slavingia/skills](https://github.com/slavingia/skills) |
-| [design-md](visual-design/design-md/) | [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md) + [Google Stitch DESIGN.md spec](https://stitch.withgoogle.com/docs/design-md/overview/) |
+| [design-md](creative/design-md/) | [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md) + [Google Stitch DESIGN.md spec](https://stitch.withgoogle.com/docs/design-md/overview/) |
 | [design-mode](visual-design/design-mode/) | [elder-plinius/CL4R1T4S](https://github.com/elder-plinius/CL4R1T4S/blob/main/ANTHROPIC/Claude-Design-Sys-Prompt.txt) (Anthropic design-surface system prompt) |
 
 ## License
