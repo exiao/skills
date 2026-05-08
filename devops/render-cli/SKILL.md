@@ -268,18 +268,18 @@ source ~/.hermes/.env
 
 # Set/update a single env var (PUT creates or overwrites)
 curl -s -X PUT "https://api.render.com/v1/services/<SERVICE_ID>/env-vars/<KEY>" \
-  -H "Authorization: Bearer $RENDER_API_KEY_BLOOM" \
+  -H "Authorization: Bearer $RENDER_API_KEY_APP1" \
   -H "Content-Type: application/json" \
   -d '{"value": "my-value"}'
 
 # List all env vars
 curl -s "https://api.render.com/v1/services/<SERVICE_ID>/env-vars" \
-  -H "Authorization: Bearer $RENDER_API_KEY_BLOOM"
+  -H "Authorization: Bearer $RENDER_API_KEY_APP1"
 ```
 
 Pitfalls:
 - POST to `/env-vars` (bulk create) may silently return empty. Use PUT to `/env-vars/<KEY>` for reliable single-key operations.
-- No generic `RENDER_API_KEY` exists in .env. Use workspace-specific keys: `RENDER_API_KEY_BLOOM` or `RENDER_API_KEY_FINTARY`.
+- No generic `RENDER_API_KEY` exists in .env. Use workspace-specific keys: `RENDER_API_KEY_<WORKSPACE>` (for example `RENDER_API_KEY_APP1` or `RENDER_API_KEY_APP2`).
 
 ## Common Patterns
 

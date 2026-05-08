@@ -97,7 +97,7 @@ Hook patterns optimized for AI-generated UGC ads (TikTok/Instagram). These are p
 - **Never show the app/product in the first 3 seconds.** Hook with emotion, curiosity, or a pattern interrupt first. The product reveal comes after the hook lands.
 - **Pattern-interrupt visuals:** Use provocative or unexpected imagery in the first frame to stop the scroll (within platform ad policies). The goal is comment bait — visuals that make people react, argue, or tag someone.
 
-Source: @athcanft (May 2026)
+Source: paid-social creative benchmark (May 2026)
 
 ### "this is ur reminder that..." format
 
@@ -113,7 +113,7 @@ Template: `this is ur reminder that [pain point everyone ignores] [and optional 
 
 ### Before/After Transformation (visual-only hook)
 
-No words in the first 3 seconds. The visual transformation IS the hook. Highest-performing TikTok ad format for app installs per @athcanft ($5-10 CPA, $0 production cost).
+No words in the first 3 seconds. The visual transformation IS the hook. Highest-performing TikTok ad format for app installs per paid-social creative benchmark ($5-10 CPA, $0 production cost).
 
 **Format:** "before" (3-5s) → cut → "after" (3-5s) → app screenshot CTA (2s). 12s total.
 
@@ -127,7 +127,7 @@ See also: [VISUAL-HOOKS.md](/creative/video-production/VISUAL-HOOKS.md) Sources 
 
 ## Familiar Brand as Villain (Product Test Reveal)
 
-Source: @oasishealthapp — 30M views across 232 Reels, $23K/month MRR, 100K+ followers. Solo founder, identical format every video.
+Source: Product Test Reveal case study — 30M views across 232 Reels, $23K/month MRR, 100K+ followers. Solo founder, identical format every video.
 
 The formula: take a brand everyone knows, reveal a hidden problem using data, position your product as the tool that exposed it.
 

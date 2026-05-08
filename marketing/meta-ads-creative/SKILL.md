@@ -116,7 +116,7 @@ The hook is 80% of performance. Types: Stated (what you SAY), Visual (what they 
 | Testimonial Card | Direct social proof | Warm audiences |
 | Product Test Reveal | Data-driven exposé feels like journalism | Cold audiences, skeptical users |
 
-**App footage rule:** Maximum 4-5 seconds showing the app in use. The ad is about the problem/outcome, not the product. App footage is proof, not the pitch. (Source: @athcanft, May 2026)
+**App footage rule:** Maximum 4-5 seconds showing the app in use. The ad is about the problem/outcome, not the product. App footage is proof, not the pitch. (Source: paid-social creative benchmark, May 2026)
 
 #### Format-Audience Matrix
 
@@ -128,7 +128,7 @@ The hook is 80% of performance. Types: Stated (what you SAY), Visual (what they 
 
 #### Product Test Reveal Format
 
-Source: @oasishealthapp (30M views, $23K MRR, identical format across 232 Reels).
+Source: Product Test Reveal case study (30M views, $23K MRR, identical format across 232 Reels).
 
 **Structure (15s total):**
 - **0-2s:** Show the familiar brand (the "villain") — instant recognition stops scroll

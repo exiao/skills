@@ -287,7 +287,7 @@ Place labels at the moment you identify the tactic, not before. Let the source v
 
 Most creators chase variety. The highest-growth accounts do the opposite: one format, repeated daily, with only the subject changing.
 
-**Case study:** @oasishealthapp — 30M views, 232 Reels, $23K/month MRR. Every single video follows the same structure: test a popular water brand, reveal contaminants, show a score, recommend alternatives. The format never changes. The brand being tested changes.
+**Case study:** Product Test Reveal case study — 30M views, 232 Reels, $23K/month MRR. Every single video follows the same structure: test a popular water brand, reveal contaminants, show a score, recommend alternatives. The format never changes. The brand being tested changes.
 
 **Why repetition beats variety:**
 - The algorithm rewards predictable quality over creative range
@@ -571,7 +571,7 @@ What actually works for consumer apps vs. what sounds good but doesn't.
 
 **Alternative funnel: Quiz-based landing pages**
 
-Instead of Ad → App Store → Install, run Ad → Web Quiz → Personalized Results → App Store. A quiz between the ad and the offer warms cold traffic through micro-commitments. DTC benchmark: cold traffic conversion jumped from 1.2% to 4.7% with a quiz funnel (@DTC_Quizbuilder, $2M in 90 days).
+Instead of Ad → App Store → Install, run Ad → Web Quiz → Personalized Results → App Store. A quiz between the ad and the offer warms cold traffic through micro-commitments. DTC benchmark: cold traffic conversion jumped from 1.2% to 4.7% with a quiz funnel (DTC quiz funnel case study, $2M in 90 days).
 
 Why it works for apps:
 - Each question answered is a small "yes" that compounds (sunk cost)
@@ -592,7 +592,7 @@ Retargeting play: Everyone who takes the quiz but doesn't install gave you data.
 
 Bloom application: The onboarding flow already asks risk tolerance and goals post-install. A pre-install web quiz version of this would warm traffic before the App Store page, and the data feeds retargeting even if they never install.
 
-Source: @DTC_Quizbuilder thread (https://x.com/DTC_Quizbuilder/status/2010379560769015885)
+Source: DTC quiz funnel case study
 
 **SEO timing:**
 - Don't prioritize SEO before your first customers — takes months to kick in, and if you pivot the product, the work goes to zero

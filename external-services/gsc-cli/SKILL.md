@@ -130,7 +130,7 @@ mcporter call gsc.search_analytics \
   startDate="2026-04-01" \
   endDate="2026-05-01" \
   dimensions="date" \
-  queryFilter="bloom investing app" \
+  queryFilter="$APP_SEARCH_QUERY" \
   --output json
 ```
 
