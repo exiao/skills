@@ -59,12 +59,12 @@ _add_negative() {
 
 cmd_add_campaign() {
   local cid="$1"; shift
-  _add_negative "/campaigns/${cid}/negativekeywords" "$@"
+  _add_negative "/campaigns/${cid}/negativekeywords/bulk" "$@"
 }
 
 cmd_add_adgroup() {
   local cid="$1" agid="$2"; shift 2
-  _add_negative "/campaigns/${cid}/adgroups/${agid}/negativekeywords" "$@"
+  _add_negative "/campaigns/${cid}/adgroups/${agid}/negativekeywords/bulk" "$@"
 }
 
 cmd_add_bulk_campaign() {
@@ -97,7 +97,7 @@ cmd_add_bulk_campaign() {
   count=$(echo "$negatives_json" | jq 'length')
   echo "Adding $count negative keywords to campaign $cid..." >&2
 
-  asa_api POST "/campaigns/${cid}/negativekeywords" "$negatives_json" | jq '.data | length | tostring + " negatives added"'
+  asa_api POST "/campaigns/${cid}/negativekeywords/bulk" "$negatives_json" | jq '.data | length | tostring + " negatives added"'
 }
 
 cmd_delete_campaign() {

@@ -38,7 +38,7 @@ railway domain api.myapp.com
 
 # Railway also provides the CNAME target:
 # Format: <hash>.up.railway.app
-# Example: tmnv267w.up.railway.app  (from the Bloom migration)
+# Example: $RAILWAY_PUBLIC_DOMAIN  (from the Bloom migration)
 ```
 
 DNS record to set:
@@ -193,7 +193,7 @@ Proxy status:
 ```
 
 For the Bloom migration (Render → Railway):
-- `api.getbloom.app` → CNAME `tmnv267w.up.railway.app`
+- `$BLOOM_API_DOMAIN` → CNAME `$RAILWAY_PUBLIC_DOMAIN`
 - **DNS only (grey cloud)** — not proxied
 - Railway provisioned SSL automatically within ~10 minutes
 

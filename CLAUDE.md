@@ -26,11 +26,16 @@ category-name/
 | **external-services** | External service CLIs and API integrations (Porkbun, Appfigures, DataForSEO, Firecrawl, Higgsfield, etc.) |
 | **finance** | Investing, market analysis, portfolio management, earnings, comps |
 | **marketing** | Ads (Google/Meta/Apple), SEO, analytics, social media, content strategy, last30days research |
+| **media** | Media content tools |
 | **memory** | Memory management — GC, setup, and recall from past sessions |
+| **ops-center** | Ops center codebase review and reference |
 | **productivity** | Apple apps, email, notes, smart home, local search, gaming |
+| **reference** | Reference notes for specific projects |
 | **research** | Deep research, competitive analysis, market intelligence |
 | **skills-meta** | Skills about skills — creating, auditing, improving, testing |
+| **software-development** | Frameworks, debugging, architecture patterns |
 | **visual-design** | UI/UX design, diagrams, image generation, frontend design |
+| **yuanbao** | Yuanbao group management |
 
 ## Skill Conventions
 

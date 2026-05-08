@@ -251,6 +251,29 @@ After the 48-hour confidence window:
 
 ---
 
+## De-Platforming (Serverless Wrapper Removal)
+
+Sometimes a migration isn't between two equivalent cloud providers — it's removing a serverless platform wrapper (Modal, Vercel Serverless Functions, AWS Lambda/SAM, Google Cloud Functions) from the application code itself and deploying the now-standard app to a simpler host.
+
+**Pattern:**
+1. Strip platform-specific imports and decorators (e.g., Modal's `@asgi_app()`, `modal.Image`, `modal.Volume`, `modal.Secret`)
+2. Replace platform volumes/secrets with env vars and local/mounted storage
+3. Replace platform-specific LLM provider clients with generic ones (e.g., swap Groq/Cerebras with Gemini via OpenAI-compatible client)
+4. Remove platform-specific observability (Phoenix tracing, platform-specific Sentry init) if not needed on target
+5. Clean requirements.txt of platform packages
+6. Add deployment config for target (render.yaml, railway.json, Dockerfile, Procfile)
+7. Add `if __name__ == "__main__"` block with `uvicorn.run(host="0.0.0.0", port=int(os.environ.get("PORT", 7000)))`
+
+**Pitfall: don't move frontend if you don't have to.**
+If the frontend is already deployed separately and calls the backend via a configurable `baseUrl`, just deploy the backend to the new host and update the frontend's API URL. This avoids DNS changes, CORS complexity, and static file serving setup. Only bundle frontend + backend when simplifying to a single service is an explicit goal.
+
+**Pitfall: hardcoded API URLs in frontend.**
+Search frontend source for the old platform URL (e.g., `grep -r "modal.run\|railway.app\|onrender.com" frontend/src/`). These need to change to the new backend URL or relative paths.
+
+See `references/de-platforming-modal.md` for a Modal-specific checklist.
+
+---
+
 ## Common Failure Modes
 
 | Problem | Cause | Fix |

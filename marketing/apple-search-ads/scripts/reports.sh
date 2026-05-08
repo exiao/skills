@@ -70,7 +70,7 @@ cmd_campaigns() {
      .total.localSpend.amount,
      .total.impressions,
      .total.taps,
-     (.total.tapInstalls // .total.installs // 0),
+     (.total.tapInstalls // .total.totalInstalls // 0),
      (.total.totalInstalls // 0),
      (.total.tapInstallCPI.amount // "N/A"),
      (.total.totalAvgCPI.amount // "N/A"),
@@ -103,6 +103,12 @@ cmd_keywords() {
     esac
   done
 
+  # Normalize common sort aliases to v5 field names
+  case "$sort_field" in
+    spend) sort_field="localSpend" ;;
+    impressions|taps|ttr) ;; # already valid
+  esac
+
   if [[ -z "$start" || -z "$end" ]]; then
     echo "ERROR: --start and --end are required" >&2
     return 1
@@ -122,7 +128,7 @@ cmd_keywords() {
      .total.localSpend.amount,
      .total.impressions,
      .total.taps,
-     (.total.tapInstalls // .total.installs // 0),
+     (.total.tapInstalls // .total.totalInstalls // 0),
      (.total.totalInstalls // 0),
      (.total.tapInstallCPI.amount // "N/A"),
      (.total.totalAvgCPI.amount // "N/A"),
@@ -164,7 +170,7 @@ cmd_search_terms() {
     '{
       startTime: $start,
       endTime: $end,
-      timeZone: "UTC",
+      timeZone: "ORTZ",
       selector: {
         conditions: $conditions,
         orderBy: [{field: "localSpend", sortOrder: "DESCENDING"}],
@@ -186,7 +192,7 @@ cmd_search_terms() {
      .total.localSpend.amount,
      .total.impressions,
      .total.taps,
-     (.total.tapInstalls // .total.installs // 0),
+     (.total.tapInstalls // .total.totalInstalls // 0),
      (.total.totalInstalls // 0),
      (.total.tapInstallCPI.amount // "N/A"),
      (.total.totalAvgCPI.amount // "N/A")] |
@@ -226,9 +232,9 @@ cmd_adgroups() {
      .total.localSpend.amount,
      .total.impressions,
      .total.taps,
-     .total.installs,
-     (if .total.installs > 0 then
-       ((.total.localSpend.amount | tonumber) / .total.installs * 100 | round / 100 | tostring)
+     .total.totalInstalls,
+     (if .total.totalInstalls > 0 then
+       ((.total.localSpend.amount | tonumber) / .total.totalInstalls * 100 | round / 100 | tostring)
       else "N/A" end)] |
     @tsv' | column -t -s $'\t' | {
       echo "AD_GROUP  SPEND  IMPRESSIONS  TAPS  INSTALLS  CPA"
@@ -268,15 +274,15 @@ cmd_wasted_spend() {
     local body
     body=$(_build_report_body "$start" "$end" "DAILY" "localSpend" "1000")
     local response
-    response=$(asa_api POST "/reports/campaigns/${cid}/keywords" "$body") 2>/dev/null || continue
+    response=$(asa_api POST "/reports/campaigns/${cid}/keywords" "$body" 2>/dev/null) || continue
 
     echo "$response" | jq -r --arg ms "$min_spend" --argjson mi "$max_installs" '
       .data.reportingDataResponse.row[]? |
       select((.total.localSpend.amount | tonumber) >= ($ms | tonumber)) |
-      select((.total.tapInstalls // .total.installs // 0) <= $mi) |
+      select((.total.tapInstalls // .total.totalInstalls // 0) <= $mi) |
       [.metadata.keyword, .metadata.matchType,
        .total.localSpend.amount, .total.impressions,
-       .total.taps, (.total.tapInstalls // .total.installs // 0)] |
+       .total.taps, (.total.tapInstalls // .total.totalInstalls // 0)] |
       @tsv'
   done | column -t -s $'\t' | {
     echo "KEYWORD  MATCH  SPEND  IMPRESSIONS  TAPS  INSTALLS"

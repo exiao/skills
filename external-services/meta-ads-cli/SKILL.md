@@ -1,7 +1,7 @@
 ---
 name: meta-ads-cli
 preloaded: true
-description: Daily Meta ad operations via Marketing API — check performance, kill losers, promote winners, generate 6 fresh creatives via Nano Banana Pro, upload as new ads, and report to Signal. Runs as cron at 4am ET.
+description: Daily Meta ad operations via Marketing API — competitor research via Ad Library, check performance, kill losers, promote winners, generate 6 fresh creatives via Nano Banana Pro + gpt-image-2 + Higgsfield MCP, upload as new ads, and report to Signal. Runs as cron at 2am ET.
 ---
 
 # Meta Ads Iteration
@@ -32,6 +32,8 @@ ADSET_ANDROID="$BLOOM_ANDROID_ADSET_ID"   # General, Android (ACTIVE)
 | Tool | Purpose |
 |------|---------|
 | `curl` + Meta Marketing API v22.0 | All ad management (read, pause, budget, create) |
+| `curl` + Meta Ad Library API | Competitor creative research |
+| `higgsfield` CLI | Higgsfield AI image generation (seedream, gpt_image_2, marketing_studio_image) |
 | `trend-research` skill | Find what investing/finance content is trending today |
 | `web-search` skill | Serper for trending finance content |
 | `nano-banana-pro` skill | Generate 1080×1080 ad creatives |
@@ -57,12 +59,13 @@ Save to `ads/iteration/$(date +%Y-%m-%d)_performance.md`:
 ### Step 2 — Classify Ads
 
 Only classify ads with **1,000+ impressions** (insufficient data below this).
+Ads with <1,000 impressions are still ramping — never kill or score them.
 
 Calculate median CPM across all qualifying ads.
 
 | Decision | Criteria |
 |----------|----------|
-| **KILL** | CPM > 2× median CPM, OR CTR < 0.5% |
+| **KILL** | CPM > 2× median CPM, OR CTR < 0.5% (among ads with 1,000+ imps only) |
 | **PROMOTE** | CPM < 0.7× median CPM AND CTR > 2% |
 | **KEEP** | Everything else |
 
@@ -94,124 +97,43 @@ curl -s -X POST "$API/$ADSET_ID" \
 
 Log each promotion to `ads/iteration/$(date +%Y-%m-%d)_promotions.log`.
 
-### Step 5 — Generate 6 New Creatives
+### Step 4.5 — Competitor Ad Library Research
 
-**Always generate exactly 6 new creatives per run.**
+Research what competitors are running on Meta to inform creative ideation.
 
-#### 5a — Build Exclusion List
-
-Audit all `ads/iteration/creatives/*/manifest.md` files. Build list of used `hook_type + format + concept` combos. No repeats.
-
-#### 5b — Research Trending Content
-
-Use trend-research skill + web-search:
-- "investing finance content trending [today's date]"
-- Look for viral formats, hot tickers, news-driven hooks
-
-#### 5c — Pick 6 Novel Concepts
-
-- All 6 hooks must differ from exclusion list
-- At least 2 from fresh trend research
-- At least 1 format not previously tested
-
-**Available formats:**
-iOS Notes App screenshot, Reddit post mockup, Twitter/X screenshot, Meme comparison, Testimonial card, Dark stat card, Text-over-chart, Founder video caption card, News headline mockup, App Store screenshot mock, Bold typographic, Phone mockup, WhatsApp group chat, Court/legal parody, Weather app card, Bank statement, Review split card, CVS receipt, Glassdoor card, Earnings card
-
-#### 5d — Generate Each Creative
-
+**Method: Scrape public Ad Library via firecrawl**
 ```bash
-GEMINI_API_KEY=$(python3 -c "import json, os; d=json.load(open(os.path.expanduser('~/.openclaw/openclaw.json'))); print(d.get('skills',{}).get('entries',{}).get('nano-banana-pro',{}).get('apiKey','') or d['env']['vars'].get('GEMINI_API_KEY',''))" 2>/dev/null)
-export GEMINI_API_KEY
-
-uv run ~/clawd/skills/nano-banana-pro/scripts/generate_image.py \
-  --prompt "..." \
-  --filename "ads/iteration/creatives/$(date +%Y-%m-%d)/creative-N.png" \
-  --resolution 2K --thinking high
+# Scrape competitor ads from the public Meta Ad Library (JS-heavy, needs wait)
+# Key competitors: Robinhood, Acorns, Wealthfront, Public, Stash, SoFi
+firecrawl scrape --wait-for 5000 "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=US&q=robinhood"
+firecrawl scrape --wait-for 5000 "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=US&q=acorns%20investing"
+firecrawl scrape --wait-for 5000 "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=US&q=wealthfront"
+firecrawl scrape --wait-for 5000 "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=US&q=sofi%20invest"
+firecrawl scrape --wait-for 5000 "https://www.facebook.com/ads/library/?active_status=active&ad_type=all&country=US&q=public.com%20investing"
 ```
 
-**Design requirements:**
-- 1080×1080 pixels (square for feed)
-- Bloom brand colors: `#28B5BD` teal, `#0f172a` navy, `#F5A623` amber
-- High contrast, thumb-stopping in 0.5s
-- Bloom logo: 3 teal circles (light top-right, medium left, dark small bottom-right)
+Extract from each page: ad copy text, creative descriptions, start dates, and any visible format patterns.
 
-**Output filename:** Use a short slug describing the format:
-- Pattern: `creative-N-<format-slug>.png` (e.g. `creative-1-whatsapp-chat.png`, `creative-3-weather-card.png`)
-- Slug: 2–3 words, lowercase, hyphenated. Makes files scannable without opening them.
+**Analyze and save to `ads/iteration/$(date +%Y-%m-%d)_competitor_research.md`:**
 
-#### 5e — Save Manifest
+1. **Longest-running ads** (oldest `ad_delivery_start_time`) = proven winners. Note their hooks, formats, CTAs.
+2. **Newest ads** (last 7 days) = what competitors are testing now. Note emerging patterns.
+3. **Hook patterns** — extract the first line of each `ad_creative_bodies`. Group by type (question, stat, pain point, social proof).
+4. **Format patterns** — what visual styles dominate? (UGC, product shots, charts, testimonials, memes)
+5. **Gaps** — what are competitors NOT doing that Bloom could own?
 
-Write `ads/iteration/creatives/$(date +%Y-%m-%d)/manifest.md` with format/hook/concept table. Use the labeled filenames (with slug) in the File column.
+**Output a brief (10-15 line) summary with:**
+- Top 3 competitor patterns to remix
+- Top 2 gaps/opportunities
+- 1 format to explicitly avoid (oversaturated)
 
-### Step 6 — Upload New Ads via API
-
-For each of the 6 creatives, run this 3-step sequence:
-
-**Step 6a: Upload image**
-```bash
-UPLOAD=$(curl -s -X POST "$API/$ACCOUNT/adimages" \
-  -F "filename=@/path/to/creative-N.png" \
-  -F "access_token=$TOKEN")
-
-IMAGE_HASH=$(echo $UPLOAD | python3 -c "import sys,json; d=json.load(sys.stdin); print(list(d['images'].values())[0]['hash'])")
-```
-
-**Step 6b: Create ad creative**
-```bash
-CREATIVE=$(curl -s -X POST "$API/$ACCOUNT/adcreatives" \
-  -F "name=Bloom Creative $(date +%Y-%m-%d) N" \
-  -F "object_story_spec={
-    \"page_id\": \"$PAGE_ID\",
-    \"instagram_user_id\": \"$INSTAGRAM_ID\",
-    \"link_data\": {
-      \"link\": \"$IOS_APP_LINK\",
-      \"message\": \"[ad copy — the hook text]\",
-      \"image_hash\": \"$IMAGE_HASH\",
-      \"call_to_action\": {
-        \"type\": \"LEARN_MORE\",
-        \"value\": {\"link\": \"$IOS_APP_LINK\"}
-      }
-    }
-  }" \
-  -F "access_token=$TOKEN")
-
-CREATIVE_ID=$(echo $CREATIVE | python3 -c "import sys,json; print(json.load(sys.stdin)['id'])")
-```
-
-**Step 6c: Create ad in iOS ad set**
-```bash
-curl -s -X POST "$API/$ACCOUNT/ads" \
-  -F "name=Bloom $(date +%Y-%m-%d) Creative N" \
-  -F "adset_id=$ADSET_IOS" \
-  -F "creative={\"creative_id\": \"$CREATIVE_ID\"}" \
-  -F "status=ACTIVE" \
-  -F "access_token=$TOKEN"
-```
-
-Repeat 6a-6c for Android ad set (`$ADSET_ANDROID`) using the Android app link, so each creative gets two ads (iOS + Android).
-
-⚠️ **If any API call returns an error with `payment` or `billing`: STOP and notify Eric.**
-
-### Step 7 — Output Report
-
-Do NOT send via the message tool. Just output the report as your reply. Cron delivery handles routing to Signal (Marketing group).
-
-```
-🎯 Meta Ads Daily Run — [date]
-
-X ads analyzed | Y killed | Z promoted | 12 new ads uploaded (6 iOS + 6 Android)
-
-Best performer: [ad name] — CPM $X, CTR X%
-Worst performer: [ad name] — CPM $X, CTR X%
-
-6 new concepts:
-1. [format] — [hook]
-...
-```
-
-Then send each of the 6 creative images one at a time with a caption.
+This feeds directly into Step 5c ideation.
 
 ---
+
+
+See [references/creative-workflow.md](references/creative-workflow.md) for the full creative generation workflow (4-phase process, run summary template, and upload steps).
+
 
 ## Ad Creative Generation Framework
 
@@ -316,7 +238,7 @@ Quality filter after each wave:
 
 ## Cron Config
 
-- **ID:** `f0c3f833-36d6-4781-b2ff-e5ab8e4129a4`
+- **ID:** `$CRON_JOB_ID`
 - **Schedule:** `0 4 * * *` (4am ET, daily)
 - **Model:** default (claude-sonnet)
 - **Target:** isolated
@@ -327,7 +249,7 @@ Quality filter after each wave:
 
 **NEVER attempt to log into Meta Ads Manager or Facebook via browser.** Browser login can trigger a security lockout on the ad account. All Meta ad management must go through the Marketing API only (`graph.facebook.com/v22.0`).
 
-If the API returns `code=31` ("pending action" / security hold), **stop and notify Eric** — he must resolve it manually from his own browser. Do not attempt browser automation to fix it.
+If the API returns `code=31` ("pending action" / security hold), **stop and notify the account owner** — they must resolve it manually from their own browser. Do not attempt browser automation to fix it.
 
 Always use `$BLOOM_APP_STORE_ID` for iOS ad links (the current App Store ID). The adset's `promoted_object.object_store_url` is the ground truth — verify it matches before creating creatives.
 
@@ -352,6 +274,9 @@ For iOS app campaigns, use Apple Custom Product Pages (CPPs) as the ad destinati
 7. **Not sending creative images** — Signal report must include all 6 images.
 8. **Forgetting the manifest** — required for future exclusion list audits.
 9. **Wrong App Store URL** — always use `$BLOOM_APP_STORE_ID` for ad links. Verify against adset `promoted_object.object_store_url`.
+10. **Higgsfield auth expired** — if `higgsfield account status` shows `Session expired`, skip Higgsfield creatives. Don't attempt browser login. Alert in report.
+11. **Skipping competitor research** — Step 4.5 must run before ideation. Without it, creatives are generated in a vacuum.
+12. **Firecrawl fails on Ad Library** — if firecrawl can't scrape the page (JS-heavy rendering), fall back to web search for "[competitor] facebook ads 2026" and extract what you can.
 
 ## Constitutional Rules
 - NEVER pause or kill an ad without reporting which ad, current spend, and ROAS first.

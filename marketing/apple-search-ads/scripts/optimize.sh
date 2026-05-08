@@ -55,12 +55,12 @@ cmd_audit() {
   echo "$response" | jq -r '
     [.data.reportingDataResponse.row[]? |
      select((.total.localSpend.amount | tonumber) > 10) |
-     select(.total.installs > 0) |
-     select(((.total.localSpend.amount | tonumber) / .total.installs) > 10)] |
-    sort_by(-((.total.localSpend.amount | tonumber) / .total.installs))[] |
+     select(.total.totalInstalls > 0) |
+     select(((.total.localSpend.amount | tonumber) / .total.totalInstalls) > 10)] |
+    sort_by(-((.total.localSpend.amount | tonumber) / .total.totalInstalls))[] |
     [.metadata.keyword, .metadata.matchType,
-     ((.total.localSpend.amount | tonumber) / .total.installs * 100 | round / 100 | tostring),
-     .total.localSpend.amount, .total.installs] |
+     ((.total.localSpend.amount | tonumber) / .total.totalInstalls * 100 | round / 100 | tostring),
+     .total.localSpend.amount, .total.totalInstalls] |
     @tsv' | column -t -s $'\t' | {
       echo "KEYWORD  MATCH  CPA  SPEND  INSTALLS"
       cat
@@ -72,7 +72,7 @@ cmd_audit() {
   echo "$response" | jq -r '
     [.data.reportingDataResponse.row[]? |
      select((.total.localSpend.amount | tonumber) > 5) |
-     select(.total.installs == 0)] |
+     select(.total.totalInstalls == 0)] |
     sort_by(-(.total.localSpend.amount | tonumber))[] |
     [.metadata.keyword, .metadata.matchType,
      .total.localSpend.amount, .total.impressions, .total.taps] |
@@ -101,11 +101,11 @@ cmd_audit() {
   echo "--- TOP PERFORMERS (installs > 0, sorted by CPA ascending) ---"
   echo "$response" | jq -r '
     [.data.reportingDataResponse.row[]? |
-     select(.total.installs > 0)] |
-    sort_by((.total.localSpend.amount | tonumber) / .total.installs)[:10][] |
+     select(.total.totalInstalls > 0)] |
+    sort_by((.total.localSpend.amount | tonumber) / .total.totalInstalls)[:10][] |
     [.metadata.keyword, .metadata.matchType,
-     ((.total.localSpend.amount | tonumber) / .total.installs * 100 | round / 100 | tostring),
-     .total.localSpend.amount, .total.installs, .total.taps] |
+     ((.total.localSpend.amount | tonumber) / .total.totalInstalls * 100 | round / 100 | tostring),
+     .total.localSpend.amount, .total.totalInstalls, .total.taps] |
     @tsv' | column -t -s $'\t' | {
       echo "KEYWORD  MATCH  CPA  SPEND  INSTALLS  TAPS"
       cat
@@ -145,10 +145,10 @@ cmd_bids() {
        kwId: .metadata.keywordId,
        spend: (.total.localSpend.amount | tonumber),
        taps: .total.taps,
-       installs: .total.installs,
+       installs: .total.totalInstalls,
        cpt: ((.total.localSpend.amount | tonumber) / .total.taps),
-       cpa: (if .total.installs > 0 then (.total.localSpend.amount | tonumber) / .total.installs else 999 end),
-       cvr: (if .total.taps > 0 then .total.installs / .total.taps else 0 end)
+       cpa: (if .total.totalInstalls > 0 then (.total.localSpend.amount | tonumber) / .total.totalInstalls else 999 end),
+       cvr: (if .total.taps > 0 then .total.totalInstalls / .total.taps else 0 end)
      }] |
     sort_by(-.spend)[] |
     # Recommendation logic:
@@ -209,14 +209,14 @@ cmd_auto_bid() {
   changes=$(echo "$response" | jq --arg tc "$target_cpa" --arg maxb "$max_bid" --arg minb "$min_bid" '
     [.data.reportingDataResponse.row[]? |
      select(.total.taps >= 5) |
-     select(.total.installs > 0) |
+     select(.total.totalInstalls > 0) |
      {
        kwId: .metadata.keywordId,
        adGroupId: .metadata.adGroupId,
        keyword: .metadata.keyword,
        cpt: ((.total.localSpend.amount | tonumber) / .total.taps),
-       cpa: ((.total.localSpend.amount | tonumber) / .total.installs),
-       cvr: (.total.installs / .total.taps)
+       cpa: ((.total.localSpend.amount | tonumber) / .total.totalInstalls),
+       cvr: (.total.totalInstalls / .total.taps)
      } |
      # Calculate new bid: target_cpa * conversion_rate (what CPT should be for target CPA)
      .idealCpt = (($tc | tonumber) * .cvr) |

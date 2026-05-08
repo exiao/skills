@@ -25,17 +25,16 @@ cmd_list() {
     esac
   done
 
-  local response
+  # Use POST /find for server-side filtering + pagination (GET defaults to ~20 results)
+  local payload='{"pagination":{"limit":1000,"offset":0}'
   if [[ -n "$status" ]]; then
-    response=$(asa_api POST "/campaigns/${cid}/adgroups/${agid}/targetingkeywords/find" "$(jq -n --arg s "$status" '{
-      "selector": {
-        "conditions": [{"field":"status","operator":"EQUALS","values":[$s]}],
-        "pagination": {"offset":0,"limit":1000}
-      }
-    }')") || return 1
+    payload='{"pagination":{"limit":1000,"offset":0},"conditions":[{"field":"status","operator":"EQUALS","values":["'"$status"'"]}]}'
   else
-    response=$(asa_api GET "/campaigns/${cid}/adgroups/${agid}/targetingkeywords") || return 1
+    payload='{"pagination":{"limit":1000,"offset":0}}'
   fi
+
+  local response
+  response=$(asa_api POST "/campaigns/${cid}/adgroups/${agid}/targetingkeywords/find" "$payload") || return 1
 
   echo "$response" | jq -r '
     .data[]? | [.id, .text, .matchType, .status,
@@ -76,7 +75,7 @@ cmd_add() {
     }
     + (if $bid != "" then {bidAmount: {amount: $bid, currency: "USD"}} else {} end)]')
 
-  asa_api POST "/campaigns/${cid}/adgroups/${agid}/targetingkeywords" "$body" | jq '.data'
+  asa_api POST "/campaigns/${cid}/adgroups/${agid}/targetingkeywords/bulk" "$body" | jq '.data'
 }
 
 cmd_add_bulk() {
@@ -131,7 +130,7 @@ cmd_add_bulk() {
     batch_count=$(echo "$batch" | jq 'length')
 
     echo "Sending batch: $batch_count keywords (offset $offset)..." >&2
-    asa_api POST "/campaigns/${cid}/adgroups/${agid}/targetingkeywords" "$batch" | jq '.data | length | tostring + " keywords added"'
+    asa_api POST "/campaigns/${cid}/adgroups/${agid}/targetingkeywords/bulk" "$batch" | jq '.data | length | tostring + " keywords added"'
 
     offset=$(( offset + batch_size ))
   done
@@ -157,21 +156,21 @@ cmd_bid() {
   body=$(jq -n --arg id "$kwid" --arg amt "$amount" \
     '[{"id": ($id | tonumber), "bidAmount": {"amount": $amt, "currency": "USD"}}]')
 
-  asa_api PUT "/campaigns/${cid}/adgroups/${agid}/targetingkeywords" "$body" | jq '.data'
+  asa_api PUT "/campaigns/${cid}/adgroups/${agid}/targetingkeywords/bulk" "$body" | jq '.data'
 }
 
 cmd_pause() {
   local cid="$1" agid="$2" kwid="$3"
   local body
   body=$(jq -n --arg id "$kwid" '[{"id": ($id | tonumber), "status": "PAUSED"}]')
-  asa_api PUT "/campaigns/${cid}/adgroups/${agid}/targetingkeywords" "$body" | jq '.data'
+  asa_api PUT "/campaigns/${cid}/adgroups/${agid}/targetingkeywords/bulk" "$body" | jq '.data'
 }
 
 cmd_enable() {
   local cid="$1" agid="$2" kwid="$3"
   local body
   body=$(jq -n --arg id "$kwid" '[{"id": ($id | tonumber), "status": "ACTIVE"}]')
-  asa_api PUT "/campaigns/${cid}/adgroups/${agid}/targetingkeywords" "$body" | jq '.data'
+  asa_api PUT "/campaigns/${cid}/adgroups/${agid}/targetingkeywords/bulk" "$body" | jq '.data'
 }
 
 # Main dispatch

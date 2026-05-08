@@ -159,3 +159,4 @@ API reference: https://www.revenuecat.com/reference/api-v2-overview
 - `environment` defaults to all; specify `production` or `sandbox` to filter.
 - Bloom's project ID: `proj2cab6270` (cached here so we don't need to look it up every time).
 - This skill is the recommended interface to RevenueCat reads. The native `mcp_revenuecat_*` MCP tools have been deactivated.
+- For Apple Retention Messaging API setup (cancel-flow offers via RC), see `references/retention-messaging-api.md`.

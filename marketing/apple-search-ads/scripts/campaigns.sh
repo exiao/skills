@@ -25,18 +25,16 @@ cmd_list() {
     esac
   done
 
-  local response
+  # Use POST /find for server-side filtering + pagination (GET defaults to ~20 results)
+  local payload='{"pagination":{"limit":100,"offset":0}'
   if [[ -n "$status" ]]; then
-    response=$(asa_api POST "/campaigns/find" "$(jq -n --arg s "$status" '{
-      "selector": {
-        "conditions": [{"field":"status","operator":"EQUALS","values":[$s]}],
-        "orderBy": [{"field":"id","sortOrder":"ASCENDING"}],
-        "pagination": {"offset":0,"limit":100}
-      }
-    }')") || return 1
+    payload='{"pagination":{"limit":100,"offset":0},"conditions":[{"field":"status","operator":"EQUALS","values":["'"$status"'"]}]}'
   else
-    response=$(asa_api GET "/campaigns") || return 1
+    payload='{"pagination":{"limit":100,"offset":0}}'
   fi
+
+  local response
+  response=$(asa_api POST "/campaigns/find" "$payload") || return 1
 
   echo "$response" | jq -r '
     .data[]? | [.id, .name, .status, .supplySources[0] // "N/A",
@@ -113,7 +111,10 @@ cmd_update() {
     esac
   done
 
-  asa_api PUT "/campaigns/${campaign_id}" "$updates" | jq '.data'
+  # v5 requires a {"campaign": {...}} envelope
+  local body
+  body=$(jq -n --argjson updates "$updates" '{campaign: $updates}')
+  asa_api PUT "/campaigns/${campaign_id}" "$body" | jq '.data'
 }
 
 cmd_pause() {

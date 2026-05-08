@@ -1,6 +1,6 @@
 ---
 name: bulk-import-skills-from-git
-description: Import skills from a GitHub repository (like exiao/skills or any skills bundle) into ~/.hermes/skills/, resolving naming conflicts and preserving directory structure. Use when a user shares a skills repo URL or wants to install a skills pack.
+description: Import skills from a GitHub repository (like $SKILLS_REPO or any skills bundle) into ~/.hermes/skills/, resolving naming conflicts and preserving directory structure. Use when a user shares a skills repo URL or wants to install a skills pack.
 ---
 
 # Bulk Import Skills from Git Repository
@@ -14,20 +14,20 @@ description: Import skills from a GitHub repository (like exiao/skills or any sk
 - "download all skills from <repo>"
 - "import skills from <url>"
 - "clone <repo> and add the skills"
-- "add all skills from exiao/skills"
+- "add all skills from $SKILLS_REPO"
 
 ## Step-by-step workflow
 
 ### Step 1 — Clone the repo
-1. Use `rm -rf /tmp/exiao-skills` first (or matching dir name) to clear any stale directory from previous attempts
+1. Use `rm -rf /tmp/skills-import` first (or matching dir name) to clear any stale directory from previous attempts
    - Note: The rm may require approval — if blocked, ask the user to approve or try a different temp location
-2. `git clone <repo-url> /tmp/exiao-skills`
+2. `git clone <repo-url> /tmp/skills-import`
    - Always use `workdir` and provide an absolute path to avoid "cd: permission denied" issues
 
 ### Step 2 — Discover all skills
 ```bash
-find /tmp/exiao-skills -name "SKILL.md" | wc -l
-find /tmp/exiao-skills -name "SKILL.md" -exec dirname {} \;
+find /tmp/skills-import -name "SKILL.md" | wc -l
+find /tmp/skills-import -name "SKILL.md" -exec dirname {} \;
 ```
 This gives you the count and all skill directory paths (preserves nested sub-skills).
 
@@ -74,6 +74,6 @@ rm -rf /tmp/<repo-dir>
 - Use `cp -rn` for safe non-destructive copy: the `-n` flag never overwrite existing files, giving an extra safety layer beyond the directory-name collision check
 
 ## Related knowledge
-- External skills repos: exiao/skills, hermes-agent/skills (bundled)
+- External skills repos: $SKILLS_REPO, hermes-agent/skills (bundled)
 - Skills live in `~/.hermes/skills/` with optional category subdirectories
 - After copying, skills are discovered automatically — no restart needed

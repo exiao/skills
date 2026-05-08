@@ -21,6 +21,23 @@ for MEMORY.md / USER.md mutations; use the terminal for filesystem pruning.
   [YYYY-MM-DD][cat] content
   ```
 
+## Tool availability
+
+The `memory` tool (MemoryStore) may not be available in all environments (e.g.,
+cron jobs). If it returns "Memory is not available", fall back to direct file
+editing via `FilePatch` on `~/.hermes/memories/MEMORY.md`. When using FilePatch:
+- Remove entries by replacing the entry text AND its trailing `§` separator
+  line together in one replacement (match `<entry text>\n§` → empty string).
+  This avoids orphaned separators.
+- If the entry is the LAST in the file (no trailing `§`), remove just the entry
+  text and the preceding `\n§\n` from the entry above it.
+- Clean up resulting blank lines with `sed -i '' '/^$/d'` afterward.
+- The same safety rails apply: never touch `[rule]` or `[meta]` entries.
+
+**Pitfall — multibyte characters:** MEMORY.md may contain unicode (arrows,
+special chars in old entries). Use Python for age computation rather than
+awk, which chokes on multibyte sequences in some locales.
+
 ## Decay rules (from the `[meta] Memory format` entry)
 
 | cat                    | action                                              |
@@ -110,7 +127,29 @@ find ~/.hermes/episodes -name "*.md" -mtime +90 -delete
 find ~/.hermes/sessions -name "*.jsonl" -mtime +180 -delete
 ```
 
-### 8. Log and report
+### 8. Enforce 80% capacity target
+
+After all removals and drains, check the current size of MEMORY.md:
+
+```bash
+wc -c ~/.hermes/memories/MEMORY.md
+```
+
+The configured limit is 6000 chars. The target is 80% = 4800 chars.
+
+If the file exceeds 4800 chars, you MUST evict entries to get below the target.
+Eviction priority (evict from top priority first):
+1. `[env]` entries older than 21 days (even if still accurate; they can be re-added if needed)
+2. `[proj:*]` entries older than 14 days
+3. `[fact]` entries older than 45 days
+4. Longest entries first (within the same priority tier)
+
+Before removing, copy evicted entries to `~/.hermes/episodes/.pending.md` in
+the format `MemoryStore\t<content>` so they can potentially be restored later.
+
+Keep evicting until the file is at or below 4800 chars, or only `[rule]` and `[meta]` entries remain.
+
+### 9. Log and report
 
 Append a one-line summary to `~/.hermes/episodes/.gc.log`:
 

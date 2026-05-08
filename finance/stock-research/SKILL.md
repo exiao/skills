@@ -19,15 +19,16 @@ Two modes: **on-demand equity research** (analyze a company, generate ideas, wri
 | DCF sanity check | "DCF for [ticker]", "is [company] overvalued" |
 | Morning note (on-demand) | "morning note", "what's moving today", "market briefing" |
 | Idea generation | "screen for ideas in [sector]", "high conviction ideas" |
-| Daily briefing (auto) | Cron: 3pm ET Mon-Fri → Signal DM to Eric |
+| Daily briefing (auto) | Cron: 3pm ET Mon-Fri → configured Signal destination |
 
 ---
 
 ## Tools
 
-- **Serper** (`web-search` skill, `SERPER_API_KEY`): Search for earnings, analyst commentary, news, filings
+- **bloom-cli** (preloaded skill): Primary data source. `bloom info`, `bloom earnings`, `bloom financials`, `bloom price`, `bloom screen`, `bloom transcript`, `bloom catalysts`. Always try bloom-cli first before web search.
+- **Serper** (`web-search` skill, `SERPER_API_KEY`): Search for earnings releases, analyst commentary, news, filings
 - **Firecrawl** (`FIRECRAWL_API_KEY`): Scrape full articles, earnings releases, SEC filings when search snippets aren't enough
-- **Bloom MCP** (`https://api.getbloom.app/mcp/`, Bearer: `$BLOOM_MCP_API_KEY`): Check what stocks Bloom users are watching; prioritize coverage accordingly
+- **Bloom MCP** (`$BLOOM_MCP_URL`, Bearer: `$BLOOM_MCP_API_KEY`): Check what stocks Bloom users are watching; prioritize coverage accordingly
 
 ---
 
@@ -51,6 +52,13 @@ Structure:
 - **Valuation**: Current multiple vs. peers, historical range, rough DCF sanity check
 - **Bull/Bear**: 3 bull points, 3 bear points
 - **Verdict**: Rating (Buy/Hold/Sell equivalent) with price target rationale
+
+### Morningstar-Quality Report (investing-log)
+Triggered by: "generate report for [TICKER]", "Morningstar report", "stock report"
+
+Uses the investing-log `generate_ondemand.py` script with DeepAgents. Reports must conform to schema v2.0 with these Morningstar-signature sections: economic moat (none/narrow/wide with ROIC evidence), fair value estimate (explicit DCF with stated assumptions), capital allocation rating, 5+ year financial history table, and management assessment.
+
+See **[references/morningstar-report-framework.md](references/morningstar-report-framework.md)** for full schema, methodology, template rendering details, and common mistakes.
 
 ### Comps Analysis
 Triggered by: "run comps for [company]", "how does [ticker] compare to peers"
@@ -85,10 +93,10 @@ Triggered by: "screen for ideas in [sector]", "high conviction ideas", "what's i
 
 ## Daily Market Briefing (Cron Job)
 
-**Cron ID:** `b04e6814-7840-4927-b529-feb052cadbfc`
+**Cron ID:** `$CRON_JOB_ID`
 **Schedule:** `0 15 * * 1-5` (3pm ET, Mon-Fri)
 **Model:** Sonnet
-**Delivery:** Signal DM to Eric
+**Delivery:** Configured Signal destination
 
 Runs automatically every weekday at 3pm ET. Covers:
 
@@ -106,6 +114,10 @@ Runs automatically every weekday at 3pm ET. Covers:
 3. **DCF overconfidence** — Presenting DCF output as a target price without flagging assumptions. These are sanity checks, not Bloomberg models. Always show sensitivity on key assumptions.
 4. **Market briefing too long** — Daily briefings should be under 2000 characters, conversational, no tables. Bullet dumps and tables belong in research notes, not the cron delivery to Signal.
 5. **Missing the stock reaction** — For earnings analysis, reporting EPS beat/miss without the stock's actual price reaction (% change, after-hours vs. open) is incomplete. Both numbers are required.
+
+## Reference Material
+
+- **[Anthropic FSI Plugins](references/anthropic-fsi-plugins.md)** — Index of institutional-grade skill templates cloned from github.com/anthropics/financial-services-plugins and knowledge-work-plugins. Contains prompt patterns, workflow sequences, and output templates for earnings analysis, comps, DCF, idea generation, thesis tracking, and sector overviews. Consult when you need institutional framing beyond what this skill covers.
 
 ## Notes
 

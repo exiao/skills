@@ -13,7 +13,7 @@ Pulls recent AI model trades from the Bloom investing-log repo, picks the most c
 
 | Tool | Purpose |
 |------|---------|
-| `gh` CLI | Fetch trade files from bloom-invest/investing-log repo |
+| `gh` CLI | Fetch trade files from $INVESTING_LOG_REPO repo |
 | `web-search` skill | Enrich with current price + YTD % |
 | `nano-banana-pro` skill | Generate 1080×1080 trade card |
 | `typefully` skill | Upload card + create scheduled tweet draft |
@@ -29,15 +29,15 @@ Fetch the 5 most recent trades from each model folder:
 
 ```bash
 # Claude
-gh api 'repos/bloom-invest/investing-log/contents/trades/claude' \
+gh api 'repos/$INVESTING_LOG_REPO/contents/trades/claude' \
   --jq '[.[] | {name: .name, download_url: .download_url}] | sort_by(.name) | reverse | .[0:5]'
 
 # OpenAI
-gh api 'repos/bloom-invest/investing-log/contents/trades/openai' \
+gh api 'repos/$INVESTING_LOG_REPO/contents/trades/openai' \
   --jq '[.[] | {name: .name, download_url: .download_url}] | sort_by(.name) | reverse | .[0:5]'
 
 # Gemini
-gh api 'repos/bloom-invest/investing-log/contents/trades/gemini' \
+gh api 'repos/$INVESTING_LOG_REPO/contents/trades/gemini' \
   --jq '[.[] | {name: .name, download_url: .download_url}] | sort_by(.name) | reverse | .[0:5]'
 ```
 
@@ -145,7 +145,7 @@ node scripts/typefully.js drafts:create $TYPEFULLY_SOCIAL_SET_ID \
   --text "<tweet_text>" \
   --media <media_id> \
   --tags investing-log
-# Do NOT add --schedule. Save as unscheduled draft only — Eric reviews before posting.
+# Do NOT add --schedule. Save as unscheduled draft only — the repo owner reviews before posting.
 # → returns draft_id + scheduled time
 ```
 
@@ -195,18 +195,23 @@ Scheduled: [time]
 
 ## Cron Config
 
-- **ID:** `117fc1e3-86a7-48d7-8a4b-541cf053e715`
+- **ID:** `$CRON_JOB_ID`
 - **Schedule:** `0 16 * * 1-5` (4pm ET, Mon–Fri)
 - **Model:** default (claude-sonnet)
 - **Target:** isolated
 
 ---
 
+## Related References
+
+- `references/infrastructure.md` — Cron and delivery config
+- `references/investing-log-architecture.md` — Full repo architecture, pipeline phases, model assignments, context sizes, cost profile, and OpenAI prompt caching strategies
+
 ## Common Mistakes
 
 1. **Posting NOACTION/SCENARIO files** — always filter these out in Step 1.
 2. **Skipping dedup check** — always read il-pipeline-state.json first; repeating a tweet is embarrassing.
-3. **Wrong Typefully account** — use account ID `$TYPEFULLY_SOCIAL_SET_ID` (not `$TYPEFULLY_PERSONAL_SET_ID` which is Eric's personal).
+3. **Wrong Typefully account** — use account ID `$TYPEFULLY_SOCIAL_SET_ID` (not `$TYPEFULLY_PERSONAL_SET_ID`, which is for personal posts).
 4. **PIL fallback** — never use PIL/Pillow. Only Nano Banana Pro for image generation.
 5. **State file not updated** — always write back after successful post; otherwise same trade posts again tomorrow.
 6. **Overwriting old state** — keep last 50 entries, don't truncate to just the new one.

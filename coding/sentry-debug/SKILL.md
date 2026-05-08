@@ -6,121 +6,113 @@ description: Use when debugging production errors via Sentry — listing and sea
 
 # Sentry Debug
 
-Thin `curl` wrapper around the Sentry REST API. Covers the full debug loop — list, drill in, triage, resolve — without running an MCP server.
+Uses the official `sentry` CLI (v0.31.0+, installed via cli.sentry.dev). Authenticated via SENTRY_AUTH_TOKEN env var.
 
-## When to use
+## Org context
 
-- **Triage:** "what's crashing in production", "recent errors in <project>"
-- **Drill-in:** "show me the stack trace for `<SHORT-ID>`"
-- **Impact:** "how many users affected", "which release introduced this"
-- **Resolve:** "mark this issue as resolved", "assign this to <user>"
-- **AI analysis:** "run Seer on this issue" (Sentry's hosted root-cause AI)
+- Org slug: `$SENTRY_ORG`
+- Projects: `invest` (Django backend), `bloom-frontend-web` (React), `bloom-updater` (FastAPI), `whatsgpt` (BloomBot), `choices-dev`, `bible-app`, `jotter`, `user-studies`, `userstudies-frontend`
+- Default target for most commands: `$SENTRY_ORG/$SENTRY_PROJECT`
 
-## Setup
-
-One-time:
+## Key commands
 
 ```bash
-export SENTRY_AUTH_TOKEN=<sentry user auth token with event:read/write, project:read, alerts:write>
-export SENTRY_ORG=<your-org-slug>   # optional; required if you don't want to pass it every call
+# List unresolved issues
+sentry issue list $SENTRY_ORG/$SENTRY_PROJECT --limit 10
+
+# View a specific issue
+sentry issue view INVEST-5PY
+
+# Get latest event (stack trace + breadcrumbs)
+sentry issue events INVEST-5PY
+
+# AI root cause analysis (Seer)
+sentry issue explain INVEST-5PY
+
+# AI fix plan
+sentry issue plan INVEST-5PY
+
+# Resolve / unresolve / archive
+sentry issue resolve INVEST-5PY
+sentry issue unresolve INVEST-5PY
+sentry issue archive INVEST-5PY
+
+# Merge duplicate issues
+sentry issue merge INVEST-5PY INVEST-4SR
+
+# List projects
+sentry project list $SENTRY_ORG/
+
+# Releases
+sentry release list $SENTRY_ORG/$SENTRY_PROJECT --limit 5
+
+# Traces and spans
+sentry trace list $SENTRY_ORG/$SENTRY_PROJECT --period 1h
+sentry trace view <trace-id>
+sentry span list <trace-id>
+
+# Logs
+sentry log list $SENTRY_ORG/$SENTRY_PROJECT --period 1h
+
+# Explore (aggregate queries)
+sentry explore $SENTRY_ORG/$SENTRY_PROJECT --query count --period 24h
+
+# Dashboards
+sentry dashboard list $SENTRY_ORG/
+sentry dashboard view $SENTRY_ORG/<dashboard-id>
+
+# Raw API access (for anything the CLI doesn't cover)
+sentry api /api/0/organizations/$SENTRY_ORG/issues/ --method GET
+
+# Browse API schema
+sentry schema issues
 ```
 
-Required token scopes: `event:read` and `project:read` at minimum. Add `event:write` / `alerts:write` for resolve/assign, `org:read` for `orgs list`.
-
-Generate a token at: `https://sentry.io/settings/account/api/auth-tokens/`.
-
-## Quick start
-
-All commands go through `scripts/sentry.sh`:
-
-```bash
-cd ~/clawd/skills/openclaw/sentry-debug
-
-# List unresolved issues across all projects
-./scripts/sentry.sh issues list "is:unresolved" --limit 10
-
-# Filter to one project (by slug)
-./scripts/sentry.sh issues list "is:unresolved project:<project-slug>"
-
-# Get details for one issue (by shortId or numeric id)
-./scripts/sentry.sh issues get <SHORT-ID>
-
-# Latest event — full stack trace + breadcrumbs
-./scripts/sentry.sh issues events <SHORT-ID> --latest
-
-# Release distribution — which version is this happening on?
-./scripts/sentry.sh issues tags <SHORT-ID> release
-
-# Resolve / assign
-./scripts/sentry.sh issues resolve <SHORT-ID>
-./scripts/sentry.sh issues assign <SHORT-ID> <username-or-email>
-
-# Seer root-cause AI (kicks off analysis; poll with --status)
-./scripts/sentry.sh autofix <SHORT-ID>
-./scripts/sentry.sh autofix <SHORT-ID> --status
-
-# Admin / scope
-./scripts/sentry.sh whoami
-./scripts/sentry.sh orgs list
-./scripts/sentry.sh projects list
-./scripts/sentry.sh releases list --project <project-slug> --limit 5
-./scripts/sentry.sh trace <trace_id>
-```
-
-## Query syntax
-
-The `query` argument is raw Sentry search syntax. Most common patterns:
+## Query syntax (for --query flag on issue list)
 
 | Query | Meaning |
 |-------|---------|
 | `is:unresolved` | Open issues |
 | `is:resolved` | Closed issues |
-| `project:<slug>` | Scope to one project |
 | `assigned:me` / `assigned:<email>` | Assignment filter |
 | `release:<version>` | Specific release |
 | `environment:production` | Production only |
 | `firstSeen:-24h` | Seen in the last 24h |
 | `error.type:TypeError` | By exception class |
-| `has:stack` | Only events with stack traces |
 
-Combine with spaces (AND): `is:unresolved project:<slug> firstSeen:-7d`.
+Combine with spaces (AND): `is:unresolved firstSeen:-7d`.
 
-See `references/query-syntax.md` for the full cheatsheet and `references/endpoints.md` for the raw endpoint map (if `sentry.sh` is missing something).
+## Tips
 
-## Output shape
-
-By default, output is pretty-printed JSON through `jq`. Add `--json` to any command to get the raw API response for piping or parsing.
+- Use `--json` for machine-readable output, pipe through `jq`
+- Use `--fields` to select specific fields and reduce output
+- Use `-w` / `--web` to open in browser
+- Use `--period` / `-t` for time filtering (e.g. `1h`, `24h`, `7d`)
+- The CLI auto-detects org/project from env/DSN, but always pass `$SENTRY_ORG/<project>` explicitly for reliability
+- Short IDs like `INVEST-5PY` work as issue identifiers everywhere
+- `sentry schema <resource>` to discover API endpoints without third-party docs
 
 ## Common playbooks
 
-**"What's crashing?"** →
+**"What's crashing?"**
 ```bash
-./scripts/sentry.sh issues list "is:unresolved" --limit 10 --sort freq
+sentry issue list $SENTRY_ORG/$SENTRY_PROJECT --limit 10
 ```
 
-**"Top issue with full context"** →
+**"Debug a specific issue"**
 ```bash
-ID=$(./scripts/sentry.sh issues list "is:unresolved" --limit 1 --json | jq -r '.[0].shortId')
-./scripts/sentry.sh issues get $ID
-./scripts/sentry.sh issues events $ID --latest
-./scripts/sentry.sh issues tags $ID release
+sentry issue view INVEST-XXX
+sentry issue events INVEST-XXX
+sentry issue explain INVEST-XXX
+sentry issue plan INVEST-XXX
 ```
 
-**"Debug this specific issue"** →
+**"Which release introduced this?"**
 ```bash
-./scripts/sentry.sh issues events <SHORT-ID> --latest   # stack trace
-./scripts/sentry.sh autofix <SHORT-ID>                  # kick off Seer analysis
-./scripts/sentry.sh autofix <SHORT-ID> --status         # poll
+sentry issue view INVEST-XXX --json | jq '.firstRelease'
+sentry release list $SENTRY_ORG/$SENTRY_PROJECT --limit 5
 ```
 
-## Notes
+## Legacy
 
-- `shortId` (e.g. `MY-PROJECT-42`) resolves to numeric ID via a dedicated `shortids/{id}/` endpoint — single hop, unambiguous.
-- Seer (`autofix`) returns a run handle immediately. Poll with `--status`. Typical analysis time: 30s–3min. If your org doesn't have Seer billing enabled, Sentry responds with `"No budget for Seer Autofix."`
-- Releases list requires numeric project ID internally; the script resolves `--project <slug>` for you.
-- Every command is a single HTTP call. No subprocess, no npx, no MCP boot cost.
-
-## References
-
-- `references/query-syntax.md` — Sentry search DSL cheatsheet
-- `references/endpoints.md` — endpoint → subcommand map
+The old curl-based `scripts/sentry.sh` wrapper still exists in the skill directory but is deprecated. Use the `sentry` CLI for everything.

@@ -156,6 +156,11 @@ This skill content is modularized into reference docs for readability.
 - [Video Retention Architecture: 6-Step Framework](references/video-retention-architecture-6-step.md)
 - [Usage](references/usage.md)
 - [References](references/references.md)
+- [Hook Types Expanded (6 types with formulas)](references/hook-types-expanded.md)
+- [Headline Formulas Library (15 formulas)](references/headline-formulas-library.md)
+- [Thread Hook Templates (20+ templates)](references/thread-hook-templates.md)
+- [Sticky Sentence Techniques](references/sticky-sentence-techniques.md)
+- [Power Words Library](references/power-words-library.md)
 
 ## Output Format
 

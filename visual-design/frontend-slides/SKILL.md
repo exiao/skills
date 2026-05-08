@@ -139,3 +139,4 @@ This skill content is modularized into reference docs for readability.
 - [Related Skills](references/related-skills.md)
 - [Example Session Flow](references/example-session-flow.md)
 - [Conversion Session Flow](references/conversion-session-flow.md)
+- [Adding Slides from Images](references/adding-slides-from-images.md) — recreating screenshot visuals as inline SVG/HTML, slide critique workflow, Surge deploy tips

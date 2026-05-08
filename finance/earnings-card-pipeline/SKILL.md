@@ -25,22 +25,16 @@ Every Monday, pulls up to 5 major companies reporting earnings that week, writes
 
 ### Step 1 — Pull This Week's Earnings
 
-**Benzinga API:**
-```bash
-source ~/bloom/.env  # loads BENZINGA_TOKEN
+**Primary: Serper web search** (reliable, no API key expiration issues):
+1. `"most anticipated earnings week [Month] [day] [Year]"` — EarningsWhispers posts weekly lists
+2. `"earnings calendar this week [Month] [Year]"` — broader coverage
+3. For day/company specifics: `"[TICKER] Q[N] [Year] earnings estimate EPS revenue"`
 
-curl -s "https://api.benzinga.com/api/v2.1/calendar/earnings?\
-token=$BENZINGA_TOKEN\
-&date_from=$(date +%Y-%m-%d)\
-&date_to=$(date -v+5d +%Y-%m-%d)\
-&importance=3" | python3 -m json.tool
-```
-(importance=3 filters to major companies only)
+Then use `bloom earnings [TICKER]` for per-company EPS/revenue estimates and history.
 
-**Serper supplement** (if Benzinga returns thin results):
-Use web-search skill with query: `"earnings calendar this week [Month] [Year]"`
+From the combined results, select up to **5 mega-cap or widely-held names** (Apple, Google, Meta, Amazon, Netflix, NVDA, AMD, etc. — names retail investors recognize). Skip micro-caps. **Skip companies that already reported** (e.g., Sunday evening releases like PLTR) even if they appear in the week's calendar.
 
-From the combined results, select up to **5 mega-cap or widely-held names** (Apple, Google, Meta, Amazon, Netflix, NVDA, etc. — names retail investors recognize). Skip micro-caps.
+**Do NOT use Benzinga API** — the token expires frequently and returns 401. Serper + bloom CLI covers everything needed.
 
 ### Step 2 — Research Each Company
 
@@ -54,19 +48,26 @@ Write a **2-3 sentence AI take** for each:
 - The key thing to watch
 - What a beat or miss would signal
 
-### Step 3 — Resolve GEMINI_API_KEY
+### Step 3 — Resolve Environment Variables
 
 ```bash
-GEMINI_API_KEY=$(python3 -c "import json,os; d=json.load(open(os.path.expanduser('~/.openclaw/openclaw.json'))); print(d.get('skills',{}).get('entries',{}).get('nano-banana-pro',{}).get('apiKey','') or d['env']['vars'].get('GEMINI_API_KEY',''))" 2>/dev/null)
-export GEMINI_API_KEY
+source ~/.hermes/.env
+export GEMINI_API_KEY  # MUST export — the Python script reads os.environ, not shell vars
 ```
+
+**Important:** `source` alone loads vars into the shell but doesn't export them. The Nano Banana Pro script spawns a subprocess that needs exported env vars.
 
 ### Step 4 — Generate Earnings Card per Company
 
 **ONLY use Nano Banana Pro. Never fall back to PIL.**
 
 ```bash
-uv run ~/clawd/skills/nano-banana-pro/scripts/generate_image.py
+source ~/.hermes/.env && export GEMINI_API_KEY && uv run ~/.hermes/skills/creative/nano-banana-pro/scripts/generate_image.py \
+  --prompt "..." \
+  --filename "/tmp/earnings-card-[TICKER]-$(date +%Y%m%d).png" \
+  --resolution 1K \
+  --aspect-ratio 1:1 \
+  --model pro
 ```
 
 **Design spec per card (1080×1080):**
@@ -83,7 +84,22 @@ uv run ~/clawd/skills/nano-banana-pro/scripts/generate_image.py
 
 Output: `/tmp/earnings-card-[TICKER]-$(date +%Y%m%d).png`
 
-**exec timeout: 300s minimum** — image generation at 2K takes 60–120s; use `timeout=300, yieldMs=280000`
+**exec timeout: 300s minimum** — image generation takes 60–120s; use `timeout=300, yieldMs=280000`
+
+**Batch generation via script file (required):** ShellExec interprets `&&` as shell backgrounding and rejects chained commands. Instead of running each card as a separate ShellExec call, write all generation commands into a single bash script (e.g., `/tmp/gen-earnings-cards.sh`) and execute it once with `timeout=600`. This avoids the `&&` error and reduces round-trips from 5+ calls to 1. Same pattern works for Typefully uploads and draft creation.
+
+```bash
+#!/bin/bash
+set -e
+source ~/.hermes/.env
+export GEMINI_API_KEY
+SCRIPT=~/.hermes/skills/creative/nano-banana-pro/scripts/generate_image.py
+
+echo "=== Generating TICKER card ==="
+uv run "$SCRIPT" --prompt "..." --filename "/tmp/earnings-card-TICKER-YYYYMMDD.png" \
+  --resolution 1K --aspect-ratio 1:1 --model pro
+# repeat for each ticker...
+```
 
 ### Step 5 — Write Tweet per Company
 
@@ -94,24 +110,38 @@ $[TICKER] reports [day]. Est: $[EPS] EPS / $[rev]B rev. [Key watch point]. [1-se
 
 No hashtags. No emojis. Confident and data-forward.
 
-### Step 6 — Upload + Schedule Each Card
+### Step 6 — Upload + Create Each Draft
+
+**Typefully account:** Bloom = social_set_id `$TYPEFULLY_SOCIAL_SET_ID` (discovered via `social-sets:list`). `TYPEFULLY_SOCIAL_SET_ID` is set via env. Discover with `social-sets:list` if needed.
 
 ```bash
-cd ~/clawd/skills/typefully
+source ~/.hermes/.env && export TYPEFULLY_API_KEY
 
 # For each company:
-node scripts/typefully.js media:upload $TYPEFULLY_SOCIAL_SET_ID /tmp/earnings-card-[TICKER]-$(date +%Y%m%d).png
-# → returns media_id
+# 1. Upload the card image
+node ~/.hermes/skills/marketing/typefully/scripts/typefully.js media:upload $TYPEFULLY_SOCIAL_SET_ID /tmp/earnings-card-[TICKER]-$(date +%Y%m%d).png
+# → returns JSON with media_id field
 
-node scripts/typefully.js drafts:create $TYPEFULLY_SOCIAL_SET_ID \
+# 2. Parse the media_id from the JSON output (use jq)
+MEDIA_ID=$(node ~/.hermes/skills/marketing/typefully/scripts/typefully.js media:upload $TYPEFULLY_SOCIAL_SET_ID /tmp/earnings-card-[TICKER]-$(date +%Y%m%d).png | jq -r '.media_id')
+
+# 3. Create draft WITH media attached in the same call
+node ~/.hermes/skills/marketing/typefully/scripts/typefully.js drafts:create $TYPEFULLY_SOCIAL_SET_ID \
   --platform x \
-  --text "$[TICKER] reports [day]. Est: $[EPS] EPS / $[rev]. [Key watch]. [AI take]." \
-  --media <media_id>
-# Do NOT add --schedule. Save as unscheduled draft only — Eric reviews before posting.
-# → returns draft_id + scheduled time
+  --text "..." \
+  --media "$MEDIA_ID"
+# Do NOT add --schedule. Save as unscheduled draft only — the repo owner reviews before posting.
+# → returns draft_id, private_url
 ```
 
-Process all companies sequentially (one at a time).
+**IMPORTANT: --media requires --text in drafts:update.** If you need to attach media to an existing draft after creation, you MUST pass `--text` with the existing tweet text alongside `--media`. The `drafts:update` command requires at least one content flag. Example:
+```bash
+node ~/.hermes/skills/marketing/typefully/scripts/typefully.js drafts:update $TYPEFULLY_SOCIAL_SET_ID <draft_id> \
+  --text "<existing tweet text>" \
+  --media "<media_id>"
+```
+
+**Best practice:** Upload media FIRST, then pass the media_id to `drafts:create` in a single call. This avoids the update workaround entirely.
 
 ### Step 7 — Report to Signal
 
@@ -123,9 +153,9 @@ Send to `$SIGNAL_MARKETING_GROUP`:
 [For each company:]
 $[TICKER] — [day] | Est: $[EPS] / $[rev]B
 Tweet: [text]
-Draft: https://typefully.com/?a=$TYPEFULLY_SOCIAL_SET_ID&d=[draft_id] | Scheduled: [time]
+Draft: https://typefully.com/?d=[draft_id]&a=$TYPEFULLY_SOCIAL_SET_ID | Status: unscheduled
 
-[Note any Gemini/Nano Banana failures]
+[Note any Benzinga/Gemini/Nano Banana failures]
 ```
 
 ---
@@ -133,14 +163,14 @@ Draft: https://typefully.com/?a=$TYPEFULLY_SOCIAL_SET_ID&d=[draft_id] | Schedule
 ## Delivery
 
 - Signal group: `$SIGNAL_MARKETING_GROUP` — cron delivery handles routing, do NOT send via message tool
-- Typefully account: `$TYPEFULLY_SOCIAL_SET_ID`
+- Typefully account: Bloom = `$TYPEFULLY_SOCIAL_SET_ID` (from env or `social-sets:list`)
 - Cards: `/tmp/earnings-card-TICKER-YYYYMMDD.png`
 
 ---
 
 ## Cron Config
 
-- **ID:** `0400d7b1-679c-40da-8772-def88fbb7824`
+- **ID:** `$CRON_JOB_ID`
 - **Schedule:** `0 8 * * 1` (8am ET, Mondays)
 - **Model:** default (claude-sonnet)
 - **Target:** isolated
@@ -151,9 +181,14 @@ Draft: https://typefully.com/?a=$TYPEFULLY_SOCIAL_SET_ID&d=[draft_id] | Schedule
 
 1. **Tilted cards** — always include "perfectly upright, 0° rotation, no tilt, no skew" in the image prompt. Gemini interprets "sticker" as slightly rotated; override it explicitly.
 2. **PIL fallback** — ONLY use Nano Banana Pro. If it fails, log the failure and skip that card; do not generate a PIL fallback.
-3. **Missing GEMINI_API_KEY** — always resolve from openclaw.json before calling Nano Banana Pro.
+3. **Missing GEMINI_API_KEY export** — `source ~/.hermes/.env` loads the var but does NOT export it. Always follow with `export GEMINI_API_KEY`. The Python script uses `os.environ` which only sees exported vars.
 4. **Including micro-caps** — stick to names retail investors know. If you've never heard of it, skip it.
 5. **Wrong date math on macOS** — macOS `date` uses `-v+5d` not `--date=+5days`. Use: `$(date -v+5d +%Y-%m-%d)`.
 6. **Overloading the queue** — use `next-free-slot` for each card to spread them out throughout the week.
 7. **Vague AI take** — "could move the stock" is not useful. Be specific: "margin guidance matters more than EPS beat."
 8. **Not reporting failures** — if Nano Banana Pro fails for one ticker, still process the others and report the failure in Signal.
+9. **Benzinga 401** — Token expires periodically. Don't waste time debugging; go straight to Serper fallback. The Serper path (EarningsWhispers + individual ticker searches) is fully sufficient.
+10. **TYPEFULLY_SOCIAL_SET_ID not in .env** — Set via `$TYPEFULLY_SOCIAL_SET_ID` env var. Discover with `social-sets:list` if needed.
+11. **Already-reported companies** — Some mega-caps report Sunday evening (e.g., PLTR on May 4) or Monday after close. When searching for each ticker, check snippets for past-tense language like "reported", "beat", "missed", "revenue was", "EPS of $X" to detect companies that already reported. In the May 2026 run, PLTR, AMD, SHOP, and RIVN had all reported by the time the cron executed on Wednesday — only DIS, UBER, NVO, APP, and COIN were still upcoming.
+12. **Mid-week re-runs** — The cron is scheduled for Monday 8am ET, but may fire late or be re-triggered mid-week. If running on a non-Monday, use the actual current date to determine which companies have already reported vs. are still upcoming. Tweet text should reference the actual reporting day ("reports tomorrow", "reports Thursday") relative to the current date, not relative to Monday.
+13. **Serper script path** — The correct path is `~/.hermes/skills/ai-tools/web-search/scripts/serper.sh` (not `skills/serper-search/`). The web-search skill's script directory moved; always use the path from the web-search skill.
