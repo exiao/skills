@@ -27,8 +27,8 @@ These values were looked up and confirmed. Use them directly without re-querying
 | Constant | Value | Notes |
 |----------|-------|-------|
 | Typefully social set ID ($TYPEFULLY_USERNAME) | `$TYPEFULLY_SOCIAL_SET_ID` | From `social-sets:list` |
-| Typefully script path | `~/projects/skills/marketing/typefully/scripts/typefully.js` | Canonical location |
-| Serper script path | `~/projects/skills/ai-tools/web-search/scripts/serper.sh` | Full absolute path required |
+| Typefully script path | `~/.hermes/skills/marketing/typefully/scripts/typefully.js` | Runtime skill location |
+| Serper script path | `~/.hermes/skills/ai-tools/web-search/scripts/serper.sh` | Runtime skill location |
 
 ---
 
@@ -116,10 +116,10 @@ If `BLOOM_API_KEY` is not set (bloom commands return "No API key found"), skip S
 5. **Mark all percentages with `~` prefix** (e.g. "~-3%") since they come from article snippets, not live API data. Don't use the verbose "(unverified — source: article)" to save character budget.
 
 **Effective search patterns (confirmed working):**
-- `bash ~/projects/skills/ai-tools/web-search/scripts/serper.sh "earnings results today [date]" --type news --num 5`
-- `bash ~/projects/skills/ai-tools/web-search/scripts/serper.sh "stock market movers today [date] premarket" --num 5`
-- `bash ~/projects/skills/ai-tools/web-search/scripts/serper.sh "[TICKER] stock price premarket [date]" --num 3`
-- `bash ~/projects/skills/ai-tools/web-search/scripts/serper.sh "[Company] Q1 2026 earnings EPS revenue" --type news --num 3`
+- `bash ~/.hermes/skills/ai-tools/web-search/scripts/serper.sh "earnings results today [date]" --type news --num 5`
+- `bash ~/.hermes/skills/ai-tools/web-search/scripts/serper.sh "stock market movers today [date] premarket" --num 5`
+- `bash ~/.hermes/skills/ai-tools/web-search/scripts/serper.sh "[TICKER] stock price premarket [date]" --num 3`
+- `bash ~/.hermes/skills/ai-tools/web-search/scripts/serper.sh "[Company] Q1 2026 earnings EPS revenue" --type news --num 3`
 
 This produces a usable briefing but with lower confidence on exact intraday numbers.
 
@@ -169,7 +169,7 @@ Do NOT send via the message tool. The cron delivery handles Signal routing autom
 After Signal, create a public-facing tweet of the sharpest single data point:
 
 ```bash
-node ~/projects/skills/marketing/typefully/scripts/typefully.js drafts:create $TYPEFULLY_SOCIAL_SET_ID \
+node ~/.hermes/skills/marketing/typefully/scripts/typefully.js drafts:create $TYPEFULLY_SOCIAL_SET_ID \
   --platform x \
   --text "<post text>"
 # Do NOT add --schedule. Save as unscheduled draft only — the account owner reviews before posting.

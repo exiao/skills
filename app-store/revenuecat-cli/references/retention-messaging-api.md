@@ -4,7 +4,7 @@ Setup guide for configuring Apple's cancel-flow retention offers through Revenue
 
 ## Prerequisites
 - Apple must approve your access (request at https://developer.apple.com/contact/request/retention-messaging-api/)
-- Need: App Name, Apple ID (numeric, e.g. 1436348671), endpoint URL from RevenueCat
+- Need: App Name, Apple ID (numeric, e.g. `$APP_STORE_APP_ID`), endpoint URL from RevenueCat
 - Only account holder can submit the form
 - Approval timing is unpredictable (weeks to months)
 

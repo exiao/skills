@@ -271,4 +271,4 @@ Use `sc-domain:` format when available as it captures all traffic.
 - `dataState="all"` includes preliminary data that may change.
 - Max 25,000 rows per request. For high-volume sites, use filters to segment.
 - Service account must be added as **Owner/Full** user in GSC, not just viewer.
-- Service account credential file at `~/.config/gsc-credentials.json` (email: `gsc-reader@api-project-338116004413.iam.gserviceaccount.com`).
+- Service account credential file at `~/.config/gsc-credentials.json` (email configured during setup).

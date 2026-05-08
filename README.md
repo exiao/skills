@@ -1,8 +1,8 @@
-# Skills — 90+ Claude Code Skill Templates
+# Skills — 340+ Claude Code Skill Templates
 
 > **Source:** [github.com/exiao/skills](https://github.com/exiao/skills) | **License:** MIT
 
-A battle-tested collection of **90+ prompt-template skills** for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) spanning content, marketing, design, development, investing, growth, and infrastructure.
+A battle-tested collection of **340+ prompt-template skills** for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) spanning content, marketing, design, development, investing, growth, and infrastructure.
 
 > **Skills are prompt templates that Claude Code invokes on demand.** Each skill is a folder with a `SKILL.md` file. Resources: [Intro](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview) | [Free course](https://anthropic.skilljar.com/introduction-to-agent-skills) | [Complete guide](https://resources.anthropic.com/hubfs/The-Complete-Guide-to-Building-Skill-for-Claude.pdf)
 
@@ -27,17 +27,17 @@ Install the skills from https://github.com/exiao/skills
 |----------|--------|-------------|
 | [**ai-tools**](ai-tools/) | 10 | AI agents, MCP integrations, web search, LLM tooling |
 | [**app-store**](app-store/) | 28 | App Store tools, RevenueCat, Prometheus, ReelFarm |
-| [**coding**](coding/) | 23 | Programming, debugging, testing, code review, web scraping |
-| [**creative**](creative/) | 39 | Writing, editing, media production, content creation |
-| [**devops**](devops/) | 55 | CI/CD, GitHub, Docker, MLOps, model training/inference |
-| [**finance**](finance/) | 13 | Investing, market analysis, portfolio management |
-| [**marketing**](marketing/) | 38 | Ads (Google/Meta/Apple), SEO, analytics, social media |
+| [**coding**](coding/) | 24 | Programming, debugging, testing, code review, web scraping |
+| [**creative**](creative/) | 47 | Writing, editing, media production, content creation |
+| [**devops**](devops/) | 54 | CI/CD, GitHub, Docker, MLOps, model training/inference |
+| [**finance**](finance/) | 16 | Investing, market analysis, portfolio management |
+| [**marketing**](marketing/) | 39 | Ads (Google/Meta/Apple), SEO, analytics, social media |
 | [**memory**](memory/) | 3 | Memory management — GC, setup, and recall |
-| [**productivity**](productivity/) | 16 | Apple apps, email, notes, smart home, local search, gaming |
-| [**research**](research/) | 10 | Deep research, competitive analysis, market intelligence |
+| [**productivity**](productivity/) | 17 | Apple apps, email, notes, smart home, local search, gaming |
+| [**research**](research/) | 12 | Deep research, competitive analysis, market intelligence |
 | [**skills-meta**](skills-meta/) | 7 | Skills about skills — creating, auditing, improving, testing |
-| [**visual-design**](visual-design/) | 39 | UI/UX design, diagrams, image generation, frontend |
-| [**external-services**](external-services/) | 17 | External service CLIs and API integrations |
+| [**visual-design**](visual-design/) | 38 | UI/UX design, diagrams, image generation, frontend |
+| [**external-services**](external-services/) | 18 | External service CLIs and API integrations |
 | [**media**](media/) | 1 | Media content tools (Spotify, audio) |
 | [**ops-center**](ops-center/) | 1 | Ops center codebase review and reference |
 | [**reference**](reference/) | 2 | Reference notes for specific projects |
@@ -151,7 +151,6 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [ascii-art](creative/ascii-art/) | Generate ASCII art using pyfiglet (571 fonts), cowsay, boxes, toilet, image-to-ascii, remote APIs (asciified, ascii.co.uk), and LLM fallback. No API keys required. |
 | [ascii-video](creative/ascii-video/) | Production pipeline for ASCII art video — any format. Converts video/audio/images/generative input into colored ASCII character video output (MP4, GIF, image sequence). Covers: video-to-ASCII conversion, audio-reactive music visualizers, generative ASCII art animations, hybrid video+audio… |
 | [character-creation](creative/character-creation/) | Create and manage consistent AI video characters — define the persona, generate the portrait with Nano Banana, and store the config for reuse across all videos in the series. |
-| [design-md](creative/design-md/) | Author, validate, and export Google DESIGN.md token specs for agent-readable design systems. |
 | [creative-ideation](creative/creative-ideation/) | Generate project ideas through creative constraints. Use when the user says 'I want to build something', 'give me a project idea', 'I'm bored', 'what should I make', 'inspire me', or any variant of 'I have tools but no direction'. Works for code, art, hardware, writing, tools, and anything that… |
 | [editor-in-chief](creative/editor-in-chief/) | Use when a first draft is complete and all Phase 1 gates are done: topic selected (seo-research), title approved (hooks), outline approved (outline-generator), draft written (article-writer). Runs autonomous diagnosis-prescribe-rewrite loop before Substack. |
 | [evaluate-content](creative/evaluate-content/) | Use when judging content quality OR editing/improving existing copy: shareability, readability, voice, cuttability, angle, copy sweeps. |
@@ -492,7 +491,7 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 
 | Skill | Description |
 |-------|-------------|
-| [yuanbao](yuanbao/) | Yuanbao (元宝) groups: @mention users, query info/members. |
+| [yuanbao](yuanbao/yuanbao-group/) | Yuanbao (元宝) groups: @mention users, query info/members. |
 
 ---
 
@@ -546,7 +545,6 @@ These started from other open-source projects, modified and extended for these w
 | [last30days](marketing/last30days/) | [mvanhorn/last30days-skill](https://github.com/mvanhorn/last30days-skill) |
 | [stably-sdk-rules](devops/stably-sdk-rules/) | [skills.sh/stablyai](https://skills.sh/stablyai/agent-skills/stably-sdk-rules) |
 | [sahil-office-hours](research/sahil-office-hours/) | [slavingia/skills](https://github.com/slavingia/skills) |
-| [design-md](creative/design-md/) | [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md) + [Google Stitch DESIGN.md spec](https://stitch.withgoogle.com/docs/design-md/overview/) |
 | [design-mode](visual-design/design-mode/) | [elder-plinius/CL4R1T4S](https://github.com/elder-plinius/CL4R1T4S/blob/main/ANTHROPIC/Claude-Design-Sys-Prompt.txt) (Anthropic design-surface system prompt) |
 
 ## License

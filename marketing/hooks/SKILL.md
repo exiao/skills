@@ -121,7 +121,7 @@ No words in the first 3 seconds. The visual transformation IS the hook. Highest-
 
 **Production pipeline:** Generate "before" face (nano-banana-pro or similar) → enhance with fal.ai face-enhancement for "after" glow-up → animate both with Kling motion control using same reference video → assemble with video-editor.
 
-See also: [VISUAL-HOOKS.md](~/clawd/skills/video-production/VISUAL-HOOKS.md) Sources 7 & 8 for full visual hook breakdowns.
+See also: [VISUAL-HOOKS.md](~/clawd/skills/creative/video-production/VISUAL-HOOKS.md) Sources 7 & 8 for full visual hook breakdowns.
 
 ---
 

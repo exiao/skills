@@ -12,7 +12,7 @@ Scan open PRs across tracked repos, triage each one (scope check + CI + reviews)
 ```bash
 for REPO in $BLOOM_REPO $INVESTING_LOG_REPO $SKILLS_REPO; do
   echo "=== $REPO ==="
-  gh pr list --repo "$REPO" --author exiao --state open --json number,title,headRefName
+  gh pr list --repo "$REPO" --author "$GH_USER" --state open --json number,title,headRefName
 done
 ```
 
@@ -75,7 +75,7 @@ Compare the changed files and commit messages against the PR title and descripti
 
 ### Resolving Merge Conflicts
 
-Force-push is blocked by the git wrapper. **Do not rebase** — use merge commits instead:
+Force-push is blocked by the git wrapper. For local fix commits, `git pull --rebase origin <branch>` is fine because it replays your own unpublished work on top of remote. For merge conflicts against `main`, prefer a normal merge commit so review history stays intact:
 
 ```bash
 cd <worktree>
@@ -87,7 +87,7 @@ git commit --no-edit -m "merge: resolve conflicts with main (<brief description>
 git push origin <branch>
 ```
 
-If you accidentally rebased: `git reset --hard origin/<branch>` to restore remote state, then merge.
+If you accidentally create a messy local rebase state, stop and inspect `git status` before changing history. Do not force-push.
 
 For `GIT_EDITOR` errors in non-interactive shells: use `GIT_EDITOR=true git rebase --continue` or just `git commit -m "..."`.
 

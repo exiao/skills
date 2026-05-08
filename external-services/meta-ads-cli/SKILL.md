@@ -19,7 +19,8 @@ GRAPH_URL="https://graph.facebook.com/v22.0"
 PAGE_ID="$BLOOM_PAGE_ID"           # Facebook Page ID
 INSTAGRAM_ID="$BLOOM_INSTAGRAM_ID" # Instagram user ID for creatives
 IOS_APP_LINK="http://itunes.apple.com/app/id${BLOOM_APP_STORE_ID}"
-ANDROID_APP_LINK="http://play.google.com/store/apps/details?id=com.bloom.invest"
+ANDROID_APP_PACKAGE="${BLOOM_ANDROID_PACKAGE_ID}"
+ANDROID_APP_LINK="http://play.google.com/store/apps/details?id=${ANDROID_APP_PACKAGE}"
 ADSET_IOS="$BLOOM_IOS_ADSET_ID"       # General, iOS (ACTIVE)
 ADSET_ANDROID="$BLOOM_ANDROID_ADSET_ID"   # General, Android (ACTIVE)
 # All BLOOM_* vars set in gateway env.
@@ -211,7 +212,7 @@ curl -s -X POST "$GRAPH_URL/$ACCOUNT/ads" \
 
 Repeat 6a-6c for Android ad set (`$ADSET_ANDROID`) using the Android app link, so each creative gets two ads (iOS + Android).
 
-⚠️ **If any API call returns an error with `payment` or `billing`: STOP and notify Eric.**
+⚠️ **If any API call returns an error with `payment` or `billing`: STOP and notify the account owner.**
 
 ### Step 7 — Output Report
 
@@ -348,7 +349,7 @@ Quality filter after each wave:
 
 **NEVER attempt to log into Meta Ads Manager or Facebook via browser.** Browser login can trigger a security lockout on the ad account. All Meta ad management must go through the Marketing API only (`graph.facebook.com/v22.0`).
 
-If the API returns `code=31` ("pending action" / security hold), **stop and notify Eric** — he must resolve it manually from his own browser. Do not attempt browser automation to fix it.
+If the API returns `code=31` ("pending action" / security hold), **stop and notify the account owner** — the account owner must resolve it manually from their own browser. Do not attempt browser automation to fix it.
 
 Always use `$BLOOM_APP_STORE_ID` for iOS ad links (the current App Store ID). The adset's `promoted_object.object_store_url` is the ground truth — verify it matches before creating creatives.
 
@@ -367,16 +368,16 @@ For iOS app campaigns, use Apple Custom Product Pages (CPPs) as the ad destinati
 1. **Token not set** — always use `$META_ACCESS_TOKEN` from env. Never hardcode.
 2. **Cron scanner false positives** — this skill is loaded into scheduled cron prompts, and Hermes scans the fully assembled prompt before execution. Avoid single-line examples where `curl` contains `$API`, `$TOKEN`, `$KEY`, `$SECRET`, or similar on the same line. Use neutral variable names like `GRAPH_URL` instead of `API`, and put auth form fields or headers on continuation lines. Verify with `tools.cronjob_tools._scan_cron_prompt(skill_text)` after editing.
 3. **Wrong budget units** — daily_budget is in cents. $5/day = 500, $6/day = 600.
-3. **Repeating a hook/format/concept combo** — always audit exclusion list first.
-4. **Forgetting Android ad set** — each creative should get two ads (iOS + Android ad sets).
-5. **Not checking impressions threshold** — don't classify ads with <1000 impressions.
-6. **Missing GEMINI_API_KEY** — resolve from openclaw.json before Nano Banana Pro.
-7. **Not sending creative images** — Signal report must include all 6 images.
-8. **Forgetting the manifest** — required for future exclusion list audits.
-9. **Wrong App Store URL** — always use `$BLOOM_APP_STORE_ID` for ad links. Verify against adset `promoted_object.object_store_url`.
-10. **Higgsfield auth expired** — if `higgsfield account status` shows `Session expired`, skip Higgsfield creatives. Don't attempt browser login. Alert in report.
-11. **Skipping competitor research** — Step 4.5 must run before ideation. Without it, creatives are generated in a vacuum.
-12. **Firecrawl fails on Ad Library** — if firecrawl can't scrape the page (JS-heavy rendering), fall back to web search for "[competitor] facebook ads 2026" and extract what you can.
+4. **Repeating a hook/format/concept combo** — always audit exclusion list first.
+5. **Forgetting Android ad set** — each creative should get two ads (iOS + Android ad sets).
+6. **Not checking impressions threshold** — don't classify ads with <1000 impressions.
+7. **Missing GEMINI_API_KEY** — resolve from openclaw.json before Nano Banana Pro.
+8. **Not sending creative images** — Signal report must include all 6 images.
+9. **Forgetting the manifest** — required for future exclusion list audits.
+10. **Wrong App Store URL** — always use `$BLOOM_APP_STORE_ID` for ad links. Verify against adset `promoted_object.object_store_url`.
+11. **Higgsfield auth expired** — if `higgsfield account status` shows `Session expired`, skip Higgsfield creatives. Don't attempt browser login. Alert in report.
+12. **Skipping competitor research** — Step 4.5 must run before ideation. Without it, creatives are generated in a vacuum.
+13. **Firecrawl fails on Ad Library** — if firecrawl can't scrape the page (JS-heavy rendering), fall back to web search for "[competitor] facebook ads 2026" and extract what you can.
 
 ## Constitutional Rules
 - NEVER pause or kill an ad without reporting which ad, current spend, and ROAS first.

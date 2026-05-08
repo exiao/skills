@@ -5,7 +5,7 @@ description: Use when the cron fires at 8am ET on Mondays — pulls the week's m
 
 # Earnings Card Pipeline
 
-Every Monday, pulls up to 5 major companies reporting earnings that week, writes an analyst-perspective take for each, generates a styled earnings card via Nano Banana Pro, and creates unscheduled Typefully drafts for Eric review.
+Every Monday, pulls up to 5 major companies reporting earnings that week, writes an analyst-perspective take for each, generates a styled earnings card via Nano Banana Pro, and creates unscheduled Typefully drafts for account-owner review.
 
 ---
 
@@ -32,7 +32,10 @@ Every Monday, pulls up to 5 major companies reporting earnings that week, writes
 **Data: bloom CLI** (get estimates and dates for discovered tickers):
 ```bash
 # Confirm earnings dates and get EPS/revenue estimates
-bloom earnings-calendar AAPL MSFT GOOG AMZN NVDA --days 7
+# bloom-cli does not expose a bulk earnings-calendar command; query candidate tickers one at a time.
+for TICKER in AAPL MSFT GOOG AMZN NVDA; do
+  bloom earnings "$TICKER" -f json
+done
 # Returns: symbol, earnings_date, eps_estimate, market_cap
 
 # For deeper estimates and history per ticker
