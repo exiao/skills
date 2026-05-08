@@ -19,7 +19,7 @@ Two modes: **on-demand equity research** (analyze a company, generate ideas, wri
 | DCF sanity check | "DCF for [ticker]", "is [company] overvalued" |
 | Morning note (on-demand) | "morning note", "what's moving today", "market briefing" |
 | Idea generation | "screen for ideas in [sector]", "high conviction ideas" |
-| Daily briefing (auto) | Cron: 3pm ET Mon-Fri → Signal DM to Eric |
+| Daily briefing (auto) | Cron: 3pm ET Mon-Fri → configured Signal destination |
 
 ---
 
@@ -96,7 +96,7 @@ Triggered by: "screen for ideas in [sector]", "high conviction ideas", "what's i
 **Cron ID:** `b04e6814-7840-4927-b529-feb052cadbfc`
 **Schedule:** `0 15 * * 1-5` (3pm ET, Mon-Fri)
 **Model:** Sonnet
-**Delivery:** Signal DM to Eric
+**Delivery:** Configured Signal destination
 
 Runs automatically every weekday at 3pm ET. Covers:
 

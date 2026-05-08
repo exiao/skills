@@ -173,7 +173,7 @@ TYPEFULLY_API_KEY=<key> node scripts/typefully.js media:upload $TYPEFULLY_SOCIAL
 
 # Create draft with media (unscheduled)
 TYPEFULLY_API_KEY=<key> node scripts/typefully.js drafts:create $TYPEFULLY_SOCIAL_SET_ID --platform x --text "<tweet_text>" --media <media_id>
-# Do NOT add --schedule. Save as unscheduled draft only — Eric reviews before posting.
+# Do NOT add --schedule. Save as unscheduled draft only — the repo owner reviews before posting.
 # → returns draft_id
 ```
 

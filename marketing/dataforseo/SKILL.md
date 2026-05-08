@@ -169,7 +169,7 @@ curl -s -X POST "$BASE/ai_optimization/ai_keyword_data/keywords_search_volume/li
 # Step 1 — Queue
 curl -s -X POST "$BASE/on_page/task_post" \
   -H "$DFS_AUTH" -H "Content-Type: application/json" \
-  -d '[{"target": "https://mycrystalball.substack.com/p/your-slug", "max_crawl_pages": 1, "calculate_keyword_density": true, "enable_browser_rendering": true}]'
+  -d '[{"target": "https://$SUBSTACK_DOMAIN/p/your-slug", "max_crawl_pages": 1, "calculate_keyword_density": true, "enable_browser_rendering": true}]'
 
 # Step 2 — Summary
 curl -s "$BASE/on_page/summary/<TASK_ID>" -H "$DFS_AUTH"

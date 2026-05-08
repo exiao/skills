@@ -249,7 +249,7 @@ Quality filter after each wave:
 
 **NEVER attempt to log into Meta Ads Manager or Facebook via browser.** Browser login can trigger a security lockout on the ad account. All Meta ad management must go through the Marketing API only (`graph.facebook.com/v22.0`).
 
-If the API returns `code=31` ("pending action" / security hold), **stop and notify Eric** — he must resolve it manually from his own browser. Do not attempt browser automation to fix it.
+If the API returns `code=31` ("pending action" / security hold), **stop and notify the account owner** — they must resolve it manually from their own browser. Do not attempt browser automation to fix it.
 
 Always use `$BLOOM_APP_STORE_ID` for iOS ad links (the current App Store ID). The adset's `promoted_object.object_store_url` is the ground truth — verify it matches before creating creatives.
 

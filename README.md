@@ -1,4 +1,4 @@
-# Eric's Skills — 90+ Claude Code Skill Templates
+# Skills — 90+ Claude Code Skill Templates
 
 > **Source:** [github.com/exiao/skills](https://github.com/exiao/skills) | **License:** MIT
 
@@ -193,7 +193,7 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [clipify](creative/video-production/clipify/) | Find funniest moments in a video, cut standalone clips, reformat 16:9 to 9:16 (face-pan or split-screen), burn word-by-word captions. |
 | [youtube-scriptwriting](creative/video-production/youtube-scriptwriting/) | Write retention-optimized long-form YouTube scripts through a checkpoint workflow (research, hook, structure, body, editing). |
 | [youtube-title-creator](creative/video-production/youtube-title-creator/) | Generate high-CTR YouTube titles and thumbnail concepts using 119 proven frameworks ranked by performance score. |
-| [writer](creative/writer/) | Write content in Eric's voice — articles, blog posts, tweets, social media posts, marketing copy, newsletter drafts. Loads WRITING-STYLE.md and enforces kill phrases. |
+| [writer](creative/writer/) | Write content in the author's voice — articles, blog posts, tweets, social media posts, marketing copy, newsletter drafts. Loads WRITING-STYLE.md and enforces kill phrases. |
 | [youtube-content](creative/video-production/youtube-content/) | Fetch YouTube video transcripts and transform them into structured content (chapters, summaries, threads, blog posts). Use when the user shares a YouTube URL or video link, asks to summarize a video, requests a transcript, or wants to extract and reformat content from any YouTube video. |
 
 ### ⚙️ DevOps & Infrastructure
