@@ -38,7 +38,7 @@ gh pr view <N> --repo <repo> --json mergeable,reviewDecision,statusCheckRollup |
 
 ## User preference: do work directly for skills repo
 
-Eric prefers doing PR fixes directly rather than spawning sub-agents for skills repo PRs (markdown-only, quick fixes). Sub-agents are acceptable for larger repos (bloom, investing-log) with code changes that need test verification.
+The repo owner prefers doing PR fixes directly rather than spawning sub-agents for skills repo PRs (markdown-only, quick fixes). Sub-agents are acceptable for larger repos listed in `$TRACKED_REPOS` with code changes that need test verification.
 
 ## $SKILLS_REPO worktrees
 

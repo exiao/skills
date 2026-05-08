@@ -223,7 +223,7 @@ curl -s -X POST "$API/$ACCOUNT/ads" \
 
 Repeat 6a-6c for Android ad set (`$ADSET_ANDROID`) using the Android app link, so each creative gets two ads (iOS + Android).
 
-⚠️ **If any API call returns an error with `payment` or `billing`: STOP and notify Eric.**
+⚠️ **If any API call returns an error with `payment` or `billing`: STOP and notify the account owner.**
 
 ### Step 7 — Output Report
 

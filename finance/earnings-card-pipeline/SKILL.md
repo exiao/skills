@@ -130,7 +130,7 @@ node ~/.hermes/skills/marketing/typefully/scripts/typefully.js drafts:create $TY
   --platform x \
   --text "..." \
   --media "$MEDIA_ID"
-# Do NOT add --schedule. Save as unscheduled draft only — Eric reviews before posting.
+# Do NOT add --schedule. Save as unscheduled draft only — the repo owner reviews before posting.
 # → returns draft_id, private_url
 ```
 
