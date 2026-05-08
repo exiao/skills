@@ -238,7 +238,7 @@ Quality filter after each wave:
 
 ## Cron Config
 
-- **ID:** `f0c3f833-36d6-4781-b2ff-e5ab8e4129a4`
+- **ID:** `$CRON_JOB_ID`
 - **Schedule:** `0 4 * * *` (4am ET, daily)
 - **Model:** default (claude-sonnet)
 - **Target:** isolated

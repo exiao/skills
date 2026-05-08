@@ -186,7 +186,7 @@ Tweet guidelines:
 
 ## Cron Config
 
-- **ID:** `b04e6814-7840-4927-b529-feb052cadbfc`
+- **ID:** `$CRON_JOB_ID`
 - **Schedule:** `0 10 * * 1-5` (10am ET, Mon-Fri)
 - **Model:** `sonnet`
 

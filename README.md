@@ -30,7 +30,6 @@ Install the skills from https://github.com/exiao/skills
 | [**coding**](coding/) | 23 | Programming, debugging, testing, code review, web scraping |
 | [**creative**](creative/) | 38 | Writing, editing, media production, content creation |
 | [**devops**](devops/) | 55 | CI/CD, GitHub, Docker, MLOps, model training/inference |
-| [**external-services**](external-services/) | 13 | External service CLIs and API integrations |
 | [**finance**](finance/) | 13 | Investing, market analysis, portfolio management |
 | [**marketing**](marketing/) | 38 | Ads (Google/Meta/Apple), SEO, analytics, social media |
 | [**memory**](memory/) | 3 | Memory management — GC, setup, and recall |
@@ -352,7 +351,6 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [firecrawl](external-services/firecrawl/) | Scrape, crawl, search, and interact with web pages using Firecrawl CLI and API. Use for JS-rendered pages, full site crawls, sitemaps, form interaction, and login-required pages. |
 | [google-ads-cli](external-services/google-ads-cli/) | Use when managing Google Ads campaigns: performance checks, keyword pausing, report downloads, or campaign optimization via browser or API. |
 | [grok-imagine](external-services/grok-imagine/) | Generate or edit images via xAI Grok Imagine (Aurora). Supports text-to-image, single-image editing, and multi-image composition (up to 3). |
-| [higgsfield](external-services/higgsfield/) | Use the Higgsfield MCP for AI image and video generation (30+ models including Seedance, Kling, Veo, Flux, Soul, Minimax Hailuo). |
 | [meta-ads-cli](external-services/meta-ads-cli/) | Daily Meta ad operations via Marketing API: check performance, kill losers, promote winners, generate fresh creatives, upload as new ads. |
 | [porkbun-cli](external-services/porkbun-cli/) | Manage Porkbun domains, DNS records, SSL certificates, URL forwarding, and hosting blueprints via the Porkbun API. |
 | [prometheus-cli](external-services/prometheus-cli/) | Search TikTok viral videos, App Store rankings, hook analysis, app strategy, and content research via SGE Prometheus MCP. |

@@ -195,7 +195,7 @@ Scheduled: [time]
 
 ## Cron Config
 
-- **ID:** `117fc1e3-86a7-48d7-8a4b-541cf053e715`
+- **ID:** `$CRON_JOB_ID`
 - **Schedule:** `0 16 * * 1-5` (4pm ET, Mon–Fri)
 - **Model:** default (claude-sonnet)
 - **Target:** isolated
