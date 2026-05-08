@@ -121,3 +121,16 @@ mcporter emit-ts <server> --mode types
 - Use `--output json` for structured output that's easier to parse
 - Ad-hoc servers (HTTP URL or `--stdio` command) work without any config — useful for one-off calls
 - OAuth auth may require interactive browser flow — use `terminal(command="mcporter auth <server>", pty=true)` if needed
+
+## Pitfalls
+
+- **`mcporter config add` writes to project-local config** (`./config/mcporter.json` in CWD), not the system config (`~/.mcporter/mcporter.json`). If you want a server available globally, either `cd ~/.mcporter` first or edit `~/.mcporter/mcporter.json` directly with FilePatch.
+- System config: `~/.mcporter/mcporter.json`. Project config: `./config/mcporter.json` (relative to CWD).
+- For stdio servers needing env vars, add them under `"env": {}` in the server's JSON entry:
+  ```json
+  "myserver": {
+    "command": "npx",
+    "args": ["-y", "some-mcp-server"],
+    "env": { "API_KEY": "/path/to/key" }
+  }
+  ```

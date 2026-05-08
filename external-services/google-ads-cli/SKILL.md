@@ -158,6 +158,25 @@ For recurring automation tasks, use Google Ads Scripts (JavaScript running in Go
 
 ---
 
+## Report-only daily optimization review
+
+Use this workflow for scheduled or recurring optimization reviews where the user explicitly says not to mutate campaigns.
+
+1. Confirm API access with `~/.google-ads.yaml`; install the Python package if needed with `python -m pip install google-ads`.
+2. Query all enabled campaigns for `YESTERDAY`, `LAST_7_DAYS`, and `LAST_30_DAYS`.
+3. Include `campaign_budget.amount_micros`, `campaign.bidding_strategy_type`, `campaign.target_cpa.target_cpa_micros`, `campaign.maximize_conversions.target_cpa_micros`, `campaign.target_roas.target_roas`, and `campaign.maximize_conversion_value.target_roas` so recommendations can cite current vs proposed values.
+4. Pull App Campaign asset performance from `ad_group_ad_asset_view`, not `asset_group_asset`.
+5. Score campaigns on CPA vs tCPA, ROAS vs tROAS, spend pacing against daily budget, and conversion volume.
+6. Only recommend actions. Do not call mutate services, pause assets, change budgets, or edit bids in report-only mode.
+
+Recommendation thresholds to start from:
+- **PAUSE**: zero conversions plus meaningful spend over 7-30 days.
+- **BUDGET UP**: CPA well below target or ROAS above target, high conversion volume, and daily spend near budget.
+- **BUDGET DOWN**: sustained overspend with weak conversion signal.
+- **BID ADJUST**: tCPA/tROAS mismatch persists across 7d and 30d windows.
+- **REMOVE ASSET**: 1000+ impressions and zero conversions.
+- **INVESTIGATE**: value tracking is zero on tROAS campaigns, sudden conversion/value drops, or policy/status issues.
+
 ## Audit Checklist
 
 Quick health check for any Google Ads account:
@@ -208,7 +227,7 @@ This is the cleanest iOS attribution signal available post-ATT. Server-side, no 
 2. **RSA character limits ignored** — Headlines max 30 chars, descriptions max 90 chars. Exceeding these silently truncates or rejects ads. Always count before submitting.
 3. **Developer token in test mode** — A test-mode developer token can query the API but can't modify campaigns. If mutations silently fail, verify the token is approved for production.
 4. **Checking UI before waiting for tables** — The Google Ads UI is heavy and loads data asynchronously. Taking a snapshot too early captures loading spinners, not data. Wait for tables to fully render.
-5. **`proto-plus CopyFrom` errors on create** — Assign resource fields directly (e.g., `operation.create = campaign`) rather than using `CopyFrom` on create operations; `CopyFrom` is for updates only.
+6. **`asset_group_asset` is not reliable for App Campaign asset reporting** — legacy App Campaigns may return zero rows. Use `ad_group_ad_asset_view` with `campaign.status` in the SELECT clause. If you see `PROHIBITED_RESOURCE_TYPE_IN_SELECT_CLAUSE` from `asset_field_type_view`, switch views instead of fighting the field list.
 
 ---
 
@@ -228,25 +247,39 @@ Run weekly (Mondays) to refresh ad assets. Separate from the daily performance r
 
 ### Step W1 — Analyze Existing Asset Performance
 
+For App Campaigns, prefer `ad_group_ad_asset_view`. `asset_group_asset` often returns zero rows for legacy App Campaigns, and `asset_field_type_view` can reject direct `asset.*` fields as incompatible.
+
 ```python
 # Query asset performance for App Campaigns
 query = """
-    SELECT asset.id, asset.name, asset.type,
-           asset.text_asset.text, asset.image_asset.full_size.url,
-           asset_field_type_view.field_type,
-           metrics.impressions, metrics.clicks, metrics.conversions,
-           metrics.cost_micros
-    FROM asset_group_asset
-    WHERE segments.date DURING LAST_30_DAYS
+    SELECT
+      campaign.status,
+      campaign.id,
+      campaign.name,
+      asset.id,
+      asset.name,
+      asset.type,
+      asset.text_asset.text,
+      asset.image_asset.full_size.url,
+      asset.youtube_video_asset.youtube_video_title,
+      ad_group_ad_asset_view.field_type,
+      metrics.impressions,
+      metrics.clicks,
+      metrics.cost_micros,
+      metrics.conversions
+    FROM ad_group_ad_asset_view
+    WHERE campaign.status = 'ENABLED'
+      AND segments.date DURING LAST_30_DAYS
+      AND metrics.impressions > 0
     ORDER BY metrics.conversions DESC
+    LIMIT 500
 """
 ```
 
 Identify:
-- Top performing headlines (by CTR and conversion rate)
-- Top performing descriptions
-- Top performing images
-- Underperformers to flag for removal (high impressions, zero conversions)
+- Top performing headlines, descriptions, images, and videos by conversion rate, with CTR as secondary context
+- Bottom performers by conversion rate once they have meaningful impressions
+- Removal candidates: assets with 1000+ impressions and zero conversions
 
 ### Step W2 — Competitor Copy Research (via DataForSEO)
 
@@ -348,6 +381,7 @@ Same as Meta: inspect each generated image for:
 2. No wrong logos
 3. No AI artifacts
 4. Google Ads policy compliance (no misleading claims)
+5. If video/UGC looks too synthetic, apply light finishing: grain 25-40, sharpness +10-20, brightness -5 to -10, vignette 5-15. Keep finance ads credible, not over-filtered.
 
 ### Step W7 — Report with Confirmation
 

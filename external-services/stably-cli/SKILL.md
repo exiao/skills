@@ -28,6 +28,8 @@ Requires Node.js 20+, Playwright, and a Stably account.
 | Run tests | `stably test` |
 | Run tests with remote env | `stably --env staging test` |
 | Fix failing tests | `stably fix [runId]` |
+| List recent runs | `stably runs list` |
+| View run details | `stably runs view <runId>` |
 | Initialize project | `stably init` |
 | Install browsers | `stably install [--with-deps]` |
 | List remote environments | `stably env list` |
@@ -47,7 +49,18 @@ Requires Node.js 20+, Playwright, and a Stably account.
 | `--verbose` / `-v` | Verbose logging |
 | `--no-telemetry` | Disable telemetry |
 
-Env var precedence (highest → lowest): Stably auth (`STABLY_API_KEY`) → `--env` → `--env-file` → `process.env`
+Env var precedence (highest to lowest): Stably auth (`STABLY_API_KEY`) > `--env` > `--env-file` > `process.env`
+
+## Inspecting Runs
+
+Use `stably runs` to investigate failures without browser auth (dashboard requires login we can't automate):
+
+```bash
+stably runs list                    # recent runs with status
+stably runs view <runId>            # details: status, branch, commit, pass/fail/timeout counts, failed test names + errors
+```
+
+The run ID is the slug from the dashboard URL (e.g. `ss8xdbaac1rcwm3ikcnkge0u` from `.../history/ss8xdbaac1rcwm3ikcnkge0u`).
 
 ## Core Commands
 
@@ -77,14 +90,22 @@ stably --env staging test --headed
 
 Fixes failing tests using AI analysis of traces, screenshots, logs, and DOM state.
 
-Run ID resolution: explicit arg → CI env (`GITHUB_RUN_ID`) → `.stably/last-run.json` (24h cache). Requires git repo.
+Run ID resolution: explicit arg > CI env (`GITHUB_RUN_ID`) > `.stably/last-run.json` (24h cache). Requires git repo.
 
 ```bash
 stably fix           # auto-detect last run
 stably fix abc123    # explicit run ID
 ```
 
-Typical workflow: `stably test` → (failures?) → `stably fix` → `stably test`
+Typical workflow: `stably test` > (failures?) > `stably fix` > `stably test`
+
+**Agent fix workflow (recommended):**
+1. `stably runs view <runId>` to understand failures before fixing
+2. `git pull origin main` to ensure you're on latest (stably fix edits files in-place)
+3. `stably fix <runId>` with 600s+ timeout (can take 10+ min; output is mostly spinner noise)
+4. Check `git diff` to see what stably actually changed. The terminal output is too noisy to parse
+5. If main was updated since the failing run, stably's edits may conflict. Create a worktree from origin/main, manually apply the relevant changes, and PR from there
+6. Review the diff critically: stably sometimes uses brittle selectors (`.nth(5)`, `.first()`) or overly generic `aiAssert`. Prefer explicit selectors (ticker symbols, role+name) over AI-driven assertions when possible
 
 ## Long-Running Commands (Important for Agents)
 
@@ -95,7 +116,8 @@ Typical workflow: `stably test` → (failures?) → `stably fix` → `stably tes
 ## Bloom-Specific Setup
 
 ```bash
-cd /tmp/bloom-tests-fix   # or wherever the repo is cloned
+cd ~/projects/bloom-tests
+source ~/.hermes/.env
 STABLY_API_KEY=$STABLY_API_KEY \
 STABLY_PROJECT_ID=$STABLY_PROJECT_ID \
 BASE_URL=https://bloom.onrender.com \
@@ -104,8 +126,60 @@ stably test
 
 To fix after a failing run:
 ```bash
+source ~/.hermes/.env
 STABLY_API_KEY=$STABLY_API_KEY STABLY_PROJECT_ID=$STABLY_PROJECT_ID stably fix
 ```
+
+## Playwright Pitfalls
+
+**`isVisible({ timeout })` does NOT wait.** Playwright's `locator.isVisible()` returns immediately regardless of any timeout option passed. The timeout is silently ignored. To wait for an optional element, use `locator.waitFor({ state: 'visible', timeout: 3000 })` inside a try/catch. This is the #1 cause of race conditions in modal dismissal guards.
+
+```ts
+// WRONG — returns immediately, modal may not have rendered yet
+if (await modal.isVisible({ timeout: 3000 })) { ... }
+
+// RIGHT — actually waits up to 3s for the element
+try {
+  await modal.waitFor({ state: 'visible', timeout: 3000 });
+  await page.keyboard.press('Escape');
+  try {
+    await modal.waitFor({ state: 'hidden', timeout: 1000 });
+  } catch {
+    await modal.locator('..').locator('button').first().click({ force: true });
+  }
+} catch {
+  // Modal never appeared — nothing to do
+}
+```
+
+**Strict mode violations with `getByRole('button')`.** If a row or container has multiple buttons, `getByRole('button')` without `.first()` or a name filter throws a strict mode error. Always scope: `.getByRole('button').first()` or `.getByRole('button', { name: 'Bookmark' })`.
+
+**afterAll cleanup is mandatory for state-mutating tests.** Tests that bookmark stocks, create portfolios, or modify user state MUST have an `afterAll` hook to undo those changes. Watchlist/bookmark state persists across runs and causes cascading failures in other tests. Pattern:
+
+```ts
+test.afterAll(async ({ browser }) => {
+  const page = await browser.newPage();
+  try {
+    // Navigate and undo state changes
+  } catch {
+    // Cleanup target doesn't exist — nothing to do
+  } finally {
+    await page.close();
+  }
+});
+```
+
+## Bloom Test Failure Patterns
+
+Common failure modes in bloom-tests and fixes:
+
+**Feedback Modal Overlay:** A "Bloom experience" feedback modal overlays form elements (portfolio creation, edit flows), causing timeouts. Dismiss early using the waitFor pattern above with `page.getByRole('heading', { name: /Bloom experience/i })`.
+
+**Company Name vs Ticker Selectors:** Bloom UI renders ticker symbols (GOOGL, MSFT) as link text, not company names. Use `{ name: /GOOGL/ }` not `{ name: 'Alphabet' }`.
+
+**agent.act() Failures:** Replace with explicit Playwright selectors when possible. Reserve `agent.act()` for genuinely dynamic interactions where the exact selector isn't predictable.
+
+**Back Button Fragility:** `.getByRole('button').first()` is brittle. Use name or aria-label selectors instead.
 
 ## Required Env Vars
 
@@ -142,6 +216,7 @@ export default defineConfig({
 | Missing browser | `stably install --with-deps` |
 | Traces not uploading | Set `trace: 'on'` in `playwright.config.ts` |
 | "Run ID not found" | Run `stably test` first, then `stably fix` |
+| Dashboard URL but no browser auth | Use `stably runs view <runId>` via CLI instead |
 
 ## Links
 

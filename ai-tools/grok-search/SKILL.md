@@ -81,5 +81,6 @@ X-only filters (server-side via x_search tool params):
 
 ## Notes
 
-- `citations` are merged/validated from xAI response annotations where possible (more reliable than trusting the model’s JSON blindly).
+- `citations` are merged/validated from xAI response annotations where possible (more reliable than trusting the model's JSON blindly).
 - Prefer `--x` for tweets/threads, `--web` for general research.
+- For image generation with xAI, use the `grok-imagine` skill instead (separate API endpoint, same XAI_API_KEY).

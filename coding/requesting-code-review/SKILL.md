@@ -260,6 +260,31 @@ element.innerHTML = userInput;
 element.textContent = userInput;
 ```
 
+## Post-Push PR Review via Subagent
+
+When a PR is already pushed and you want an independent review (e.g. user says "review with subagent"), delegate the review as a read-only task:
+
+```python
+delegate_task(
+    goal="""Review the code changes in PR #N on owner/repo (branch <branch>).
+Use `gh pr diff N --repo owner/repo` to get the full diff.
+Also read the changed files directly from the worktree at ~/projects/_worktrees/<branch>/.
+
+Review for:
+1. Correctness: does the logic work in all code paths?
+2. Edge cases: None values, missing keys, type mismatches
+3. Test coverage: gaps? Do tests exercise real code or just mocks?
+4. Style: matches codebase conventions?
+5. Bugs or issues?
+
+Be critical. Report findings as a structured review.""",
+    context="Independent code review of an already-pushed PR.",
+    toolsets=["terminal", "file"]
+)
+```
+
+After the review, address findings as a **new commit on top** (never amend pushed commits when force-push is blocked; see github-pr-workflow pitfalls).
+
 ## Integration with Other Skills
 
 **subagent-driven-development:** Run this after EACH task as the quality gate.

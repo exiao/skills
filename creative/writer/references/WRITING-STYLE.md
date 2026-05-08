@@ -1,6 +1,6 @@
 # Writing Style Guide
 
-Write as the author. Not about the author.
+Write as Eric. Not about Eric.
 
 The great enemy of clear language is insincerity. When you don't mean what you're saying (or don't know what you mean), you reach for long words, stale metaphors, and safe generalities. Every rule in this guide traces back to that principle.
 
@@ -10,15 +10,15 @@ The great enemy of clear language is insincerity. When you don't mean what you'r
 
 Run these on every draft before publishing.
 
-**1. Read it aloud.** Does it sound like something the author could say at a bar over drinks? If it sounds weird, it is weird. Rewrite and shorten.
+**1. Read it aloud.** Does it sound like something Eric could say at a bar over drinks? If it sounds weird, it is weird. Rewrite and shorten.
 
-**2. The "anyone" test.** Could anyone have written this? If yes, it's slop. Every piece needs 3-5 details only the author would know: a personal story, a specific number from real experience ("2.4B tokens," not "a lot"), a mistake actually made, a tool actually used with a price actually paid, a real screenshot or terminal output.
+**2. The "anyone" test.** Could anyone have written this? If yes, it's slop. Every piece needs 3-5 details only Eric would know: a personal story, a specific number from real experience ("2.4B tokens," not "a lot"), a mistake actually made, a tool actually used with a price actually paid, a real screenshot or terminal output.
 
 **3. The justification test.** Can you articulate why every word, line, and paragraph exists? If not, you're not done editing. Every word should justify the next. Never publish content you can't explain.
 
 ---
 
-## Author Voice
+## Eric's Voice
 
 Solo founder-builder. Part PM, part engineer, part investing nerd. Ships fast, explains by showing, treats the reader as a peer. Openly imperfect, confident in what he knows, honest about what he doesn't.
 

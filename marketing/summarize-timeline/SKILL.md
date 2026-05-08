@@ -53,32 +53,39 @@ Common theme areas (adapt to what's actually present):
 
 **Header:**
 ```
-Twitter Reader, last 24h digest from Following timeline.
-
-Pulled via bird successfully. [N] timeline items fetched, [M] top-level items inside the last 24h.
+📱 X/Twitter Timeline Digest — [Day of week] [Month] [Date], [Year]
+[N] tweets from your Following feed, last 24h.
 ```
+
+Followed by a `---` separator.
 
 **Theme sections:**
 
-Use `## Top themes` as the section header, then `###` for each theme.
+Use emoji + bold title for each theme section. Use broad, recognizable category names:
+- 🏦 **Markets & Macro**
+- 🤖 **AI & Tech**
+- 💼 **Business, Strategy & Career**
+- 🚀 **Building & Startups**
+- 🌍 **Culture & Notable**
+- 📈 **Earnings & Sectors**
 
-For each theme:
-- **Theme title** should be a specific, opinionated one-liner (not just "AI & Tech"). Good: "AI compute is the feed's main character". Bad: "Technology updates".
-- **Bullet points** for each notable tweet/thread. Include @handle and core take in 1-2 sentences.
-- Add engagement counts (likes) when notably high (500+) to signal what resonated.
-- **Notable links** at the end of each theme section: include 2-4 direct tweet URLs (`https://x.com/handle/status/id`) for the most interesting items. These let the reader click through.
+Adapt categories to what's present. 3-6 sections typical.
 
-**Footer sections:**
+For each tweet:
+- Start with **@handle** in bold, followed by engagement in parentheses when notable: `(2.1k❤)`
+- Colon, then the core take in 1-2 sentences
+- Use `$TICKER` format for stocks
+- Separate entries with line breaks
+
+**Footer:**
+
+End with a single italic line showing top engagement:
 
 ```
-## Best individual reads
-
-Numbered list of 3-5 tweets worth reading in full. One sentence each explaining why.
-
-## One-line read
-
-Single paragraph (2-3 sentences max) capturing the day's feed in a snapshot. What was the dominant mood, narrative, or signal?
+*Top engagement: @handle1 topic (Nk❤), @handle2 topic (Nk❤), @handle3 (N❤)*
 ```
+
+**No "Best individual reads" section. No "One-line read" section. No "Notable links" blocks.**
 
 ### 5. Quality checks
 
@@ -98,35 +105,39 @@ If the feed had fewer than 5 substantive items in 24h, respond with `[SILENT]` t
 ## Example output structure
 
 ```
-Twitter Reader, last 24h digest from Following timeline.
+📱 X/Twitter Timeline Digest — Mon May 5, 2026
+55 tweets from your Following feed, last 24h.
 
-Pulled via bird successfully. 500 timeline items fetched, 312 top-level items inside the last 24h.
+---
 
-## Top themes
+🏦 Markets & Macro
 
-### Samsung pulls forward HBM fab construction, memory supercycle narrative intensifies
-- @handle1: core take in 1-2 sentences
-- @handle2: related angle or counter-take
+- @citrini (2k❤): "This is the part of the cycle where you screen semiconductors, find the last names that haven't tripled yet." Sector rotation call into lagging semis.
+- @compound248 (1.1k❤): Deep breakdown of why the $GME proposed acquisition of $EBAY is nonsensical. Cohen refused to answer Sorkin's basic questions.
+- @TheLongInvest: $GRAB back at 200 WMA, consolidation breakout at $3.88. PT $10.
 
-Notable links:
-- https://x.com/handle1/status/123
-- https://x.com/handle2/status/456
+---
 
-### OpenAI internal texts surface from the 2023 firing crisis
-- @handle3: what the texts revealed
-- @handle4: reaction/analysis
+🤖 AI & Tech
 
-Notable links:
-- https://x.com/handle3/status/789
+- @emollick (62❤): "The unreasonable effectiveness of LLMs is what makes them so weird. Labs don't need to decide what kind of AI to build because better LLMs do better at most things."
+- @neilpatel: Brand hijacking running hot on ChatGPT. Competitors advertising when people compare products in AI search.
 
-[... more themes ...]
+---
 
-## Best individual reads
+💼 Business, Strategy & Career
 
-1. @handle on [topic]: why it's worth reading in full.
-2. ...
+- @FundamentEdge (2.2k❤): Powerful thread on career identity crisis. "My career as a hedge fund guy was functionally over at 32." Full pivot story.
+- @SahilBloom (64❤): "Your income scales proportional to excellence you demonstrate."
 
-## One-line read
+---
 
-The feed was dominated by [X]. The most actionable signal was [Y].
+🌍 Culture & Notable
+
+- @rickygervais (1.3k❤): "No tennis today then" (weather photo).
+- @dollarsanddata: "My wife and I just had our first child." New post on The Great Filter.
+
+---
+
+*Top engagement: @FundamentEdge career pivot (2.2k❤), @citrini semi rotation (2k❤), @rickygervais (1.3k❤), @compound248 GME/EBAY (1.1k❤)*
 ```

@@ -125,6 +125,39 @@ See also: [VISUAL-HOOKS.md](~/clawd/skills/video-production/VISUAL-HOOKS.md) Sou
 
 ---
 
+## Familiar Brand as Villain (Product Test Reveal)
+
+Source: @oasishealthapp — 30M views across 232 Reels, $23K/month MRR, 100K+ followers. Solo founder, identical format every video.
+
+The formula: take a brand everyone knows, reveal a hidden problem using data, position your product as the tool that exposed it.
+
+**Structure:**
+```
+Familiar Brand (0-2s) → Hidden Problem with Data (2-8s) → Score/Rating Reveal (8-12s) → "Here's what I use instead" (12-15s)
+```
+
+**Why it works:**
+- Familiar brand = instant recognition = scroll stop
+- Data as drama: the score reveal IS the content
+- Educational framing bypasses ad fatigue ("I tested X" reads as journalism, not promotion)
+- The product is discovered as "the tool I used," never pitched directly
+- Identical structure scales infinitely: same format, different brands, daily
+
+**Bloom applications:**
+- "I tested ChatGPT's stock picks" → bad performance data → "here's what real AI analysis looks like"
+- "I ran Robinhood's top picks through Bloom's AI" → missed signals → AI confidence scores
+- "I asked Jim Cramer's top pick to Bloom" → what the AI flagged that he didn't
+- "WallStreetBets said buy [ticker]" → what the data actually shows
+
+**The villain shortlist (brands everyone has an opinion on):**
+ChatGPT, Robinhood, WallStreetBets, Jim Cramer, Mad Money, Motley Fool, Yahoo Finance, CNBC
+
+**Key principle:** the villain must be something the audience currently trusts or uses. The cognitive dissonance between "I use this" and "it's actually bad" is what drives engagement.
+
+**Self-sustaining loop:** Content generates app usage → usage generates data → data generates more content. Oasis runs lab tests that become videos. Bloom runs AI analysis that becomes videos.
+
+---
+
 ## References
 
 This skill content is modularized into reference docs for readability.

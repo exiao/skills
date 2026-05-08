@@ -5,7 +5,7 @@ description: Use when the cron fires at 9am or 2pm ET on weekdays — scrapes Op
 
 # Insider Trades Pipeline
 
-Finds the most compelling recent insider buy (CEO/CFO/Director, >$500k, filed last 24h), generates a visual trade receipt card, schedules a tweet via Typefully, and reports to Signal.
+Finds the most compelling recent insider buy (CEO/CFO/Director, >$500k, filed last 24h), generates a visual trade receipt card, creates an unscheduled Typefully draft for Eric to review, and reports to Signal.
 
 ---
 
@@ -16,7 +16,7 @@ Finds the most compelling recent insider buy (CEO/CFO/Director, >$500k, filed la
 | `web_fetch` / `browser` | Scrape OpenInsider screener |
 | `web-search` skill | Enrich with current price, YTD %, news, SEC Form 4 URL |
 | `nano-banana-pro` skill | Generate 1080×1080 trade receipt card image |
-| `typefully` skill | Upload card + create scheduled tweet draft |
+| `typefully` skill | Upload card + create unscheduled draft |
 | `message` tool | Report to Signal group |
 
 ---
@@ -85,11 +85,16 @@ If no qualifying trades are found: **NO_REPLY** (stop, send nothing).
 
 ### Step 3 — Enrich
 
-Using web-search skill, gather:
+Using web-search skill and Bloom CLI, gather:
 - Current stock price
 - YTD % change
 - Recent news (1-2 headlines)
 - SEC Form 4 URL (search "TICKER insider Form 4 SEC EDGAR [name]")
+
+Bloom CLI notes:
+- `bloom info TICKER --fields basic_metadata` usually gives `latest_price` and `change_percent_ytd` in one call.
+- `bloom price` accepts one ticker at a time. Loop over tickers instead of calling `bloom price GEHC SRAD ...`.
+- If Bloom news is sparse, use web-search for issuer news and SEC filing links.
 
 ### Step 4 — Fetch Company Logo
 
@@ -101,7 +106,16 @@ curl -sL "[logo_url]" -o /tmp/insider-logo.png
 # Validate: must be >5KB
 wc -c /tmp/insider-logo.png
 ```
-If logo fetch fails or file is <5KB, skip the logo (proceed without it).
+Validate both size and file type before using a logo:
+```bash
+file /tmp/insider-logo.png
+python3 - <<'PY'
+from PIL import Image
+Image.open('/tmp/insider-logo.png').verify()
+print('image ok')
+PY
+```
+If logo fetch fails, file is <5KB, `file` reports HTML/text, or PIL cannot identify it, skip the logo (proceed without it). Clearbit and similar logo endpoints can return large HTML error pages that pass a size-only check.
 
 ### Step 5 — Resolve GEMINI_API_KEY
 
@@ -162,22 +176,28 @@ SEC Form 4 URLs are typically ~95 chars. Budget accordingly. Test with `echo -n 
 
 ### Step 8 — Upload Card + Create Typefully Draft
 
-The Bloom Typefully social set ID is **$TYPEFULLY_SOCIAL_SET_ID**.
+The Bloom Typefully social set ID is **286685** (username: `investwithbloom`).
 
 ```bash
 cd ~/.hermes/skills/marketing/typefully
 
 # Upload media
-TYPEFULLY_API_KEY=<key> node scripts/typefully.js media:upload $TYPEFULLY_SOCIAL_SET_ID /tmp/insider-trade-card-$(date +%Y%m%d).png
+TYPEFULLY_API_KEY=<key> node scripts/typefully.js media:upload 286685 /tmp/insider-trade-card-$(date +%Y%m%d).png
 # → returns media_id
 
 # Create draft with media (unscheduled)
-TYPEFULLY_API_KEY=<key> node scripts/typefully.js drafts:create $TYPEFULLY_SOCIAL_SET_ID --platform x --text "<tweet_text>" --media <media_id>
-# Do NOT add --schedule. Save as unscheduled draft only — the repo owner reviews before posting.
+# Prefer --file for multiline tweets to avoid shell quoting issues.
+printf '%s' "<tweet_text>" > /tmp/insider-tweet-$(date +%Y%m%d).txt
+TYPEFULLY_API_KEY=<key> node scripts/typefully.js drafts:create 286685 --platform x --file /tmp/insider-tweet-$(date +%Y%m%d).txt --media <media_id>
+# Do NOT add --schedule. Save as unscheduled draft only — Eric reviews before posting.
 # → returns draft_id
+
+# Verify it stayed unscheduled and media is attached.
+TYPEFULLY_API_KEY=<key> node scripts/typefully.js drafts:get 286685 <draft_id> > /tmp/typefully-draft-<draft_id>.json
+jq '{status, scheduled_date, private_url, media: .platforms.x.posts[0].media_ids, text: .platforms.x.posts[0].text}' /tmp/typefully-draft-<draft_id>.json
 ```
 
-**Note:** `TYPEFULLY_SOCIAL_SET_ID` is not set in .env. Use `$TYPEFULLY_SOCIAL_SET_ID` for Bloom. The API key is `TYPEFULLY_API_KEY` from .env.
+**Note:** `TYPEFULLY_SOCIAL_SET_ID` is not set in .env. Use the hardcoded value `286685` for Bloom. The API key is `TYPEFULLY_API_KEY` from .env.
 
 ### Step 9 — Report
 
@@ -191,7 +211,7 @@ Filed: [date]
 Stock: $[current] | YTD: [+/-X%]
 
 Tweet: [tweet text]
-Typefully: https://typefully.com/?d=[draft_id]&a=$TYPEFULLY_SOCIAL_SET_ID
+Typefully: https://typefully.com/?d=[draft_id]&a=286685
 ```
 
 ---
@@ -199,14 +219,14 @@ Typefully: https://typefully.com/?d=[draft_id]&a=$TYPEFULLY_SOCIAL_SET_ID
 ## Delivery
 
 - Cron delivery: announces to Marketing Signal group automatically
-- Typefully account: social_set_id `$TYPEFULLY_SOCIAL_SET_ID` (Bloom the configured Typefully account)
+- Typefully account: social_set_id `286685` (Bloom @investwithbloom)
 - Card saved to: `/tmp/insider-trade-card-YYYYMMDD.png`
 
 ---
 
 ## Cron Config
 
-- **ID:** `$CRON_JOB_ID`
+- **ID:** `76392017-245d-43bd-a6a5-899ea211467c`
 - **Schedule:** `0 9,14 * * 1-5` (9am + 2pm ET, Mon–Fri)
 - **Model:** default (claude-sonnet)
 - **Target:** isolated
@@ -220,10 +240,10 @@ Typefully: https://typefully.com/?d=[draft_id]&a=$TYPEFULLY_SOCIAL_SET_ID
 3. **Logo too small** — always validate logo file is >5KB before using. Placeholder/icon files are useless.
 4. **Tweet over 260 chars** — count carefully; SEC Form 4 URLs are ~95 chars. Use `echo -n | wc -c` to verify.
 5. **Missing GEMINI_API_KEY** — must pass inline: `GEMINI_API_KEY="$GEMINI_API_KEY" uv run ...`. Just sourcing .env isn't enough.
-6. **Scheduling without checking** — use `next-free-slot` to avoid stacking tweets; Typefully handles spacing.
+6. **Scheduling instead of drafting** — do not schedule insider-trade posts. Create an unscheduled Typefully draft only; Eric reviews before posting.
 7. **Reporting when no trade found** — if Step 2 yields nothing, NO_REPLY silently. Don't send a "nothing found" message.
 8. **Using screener URL as primary source** — it frequently returns empty HTML. Always start with `insider-purchases-25k` page and filter client-side.
-9. **TYPEFULLY_SOCIAL_SET_ID not in .env** — set it via env or discover with `social-sets:list`.
+9. **TYPEFULLY_SOCIAL_SET_ID not in .env** — it's not there. Bloom's social set ID is hardcoded: `286685`.
 10. **Not detecting cluster buys** — when multiple insiders buy the same ticker on the same day, that's the strongest signal. Always check for this pattern and highlight it in the tweet.
 
 ## Constitutional Rules

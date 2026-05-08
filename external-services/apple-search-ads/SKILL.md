@@ -3,7 +3,7 @@ name: Apple Search Ads
 preloaded: true
 slug: apple-search-ads
 version: 2.0.0
-homepage: https://github.com/$SKILLS_REPO/tree/main/apple-search-ads
+homepage: https://github.com/exiao/skills/tree/main/apple-search-ads
 description: Create, optimize, and scale Apple Search Ads campaigns with API automation, attribution integration, and bid strategy recommendations.
 metadata: {"openclaw":{"emoji":"🍎","requires":{"bins":["curl","jq","python3","bc"],"env":["ASA_CLIENT_ID","ASA_TEAM_ID","ASA_KEY_ID","ASA_ORG_ID","ASA_PRIVATE_KEY_PATH"]},"os":["linux","darwin"]}}
 ---
@@ -53,6 +53,7 @@ Or call the agent with natural language: "show me ASA campaign performance for l
 4. [Strategy Playbook](#strategy-playbook)
 5. [Attribution Guide](#attribution-guide)
 6. [Common Traps](#common-traps)
+7. [Daily Optimization Passes](#daily-optimization-passes)
 
 ---
 
@@ -159,6 +160,15 @@ asa_api_all /campaigns
 ```
 
 Features: auto-auth via asa-auth.sh, token caching (1hr TTL), exponential backoff on 429s, auto-refresh on 401.
+
+### Daily Optimization Passes
+
+For scheduled recommendation-only optimization passes, read `references/daily-optimization.md` before running scripts. It captures strict CPA guardrails, report format, and current API/script quirks:
+
+- `campaigns.sh list --status ENABLED` can fail on `selector`; run `campaigns.sh list` and filter `ENABLED` rows if needed.
+- Keyword report sorting should use `localSpend`, not `spend`.
+- If `optimize.sh bids` hits null-metric `jq` errors, continue with raw `asa_api` JSON and compute recommendations from `localSpend`, taps, installs, keyword IDs, and ad group IDs.
+- Search-term reports should use `timeZone:"ORTZ"` in raw API fallbacks.
 
 ---
 

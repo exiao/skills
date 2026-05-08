@@ -108,8 +108,35 @@ Use this skill for:
 
 Do not use this skill for pure DESIGN.md token authoring unless the user specifically asks for a DESIGN.md file. Use `design-md` for that.
 
+## Design Principle: Start From Context, Not Vibes
 
-See [references/design-principles.md](references/design-principles.md) for design principles, typography, color, layout, and motion guidelines.
+Good high-fidelity design does not start from scratch.
+
+Before designing, look for source context:
+
+1. brand docs
+2. existing product screenshots
+3. current repo components
+4. design tokens
+5. UI kits
+6. prior mockups
+7. reference models
+8. copy docs
+9. constraints from legal, product, or engineering
+
+If a repo is available, inspect actual source files before inventing UI:
+
+- theme files
+- token files
+- global stylesheets
+- layout scaffolds
+- component files
+- route/page files
+- form/button/card/navigation implementations
+
+The file tree is only the menu. Read the files that define the visual vocabulary before designing.
+
+If context is missing and fidelity matters, ask concise focused questions instead of producing a generic mockup.
 
 ## Asking Questions
 
@@ -375,9 +402,92 @@ Avoid common AI design sludge:
 
 Minimal is not automatically good. Dense is not automatically cluttered. Choose intentionally.
 
+## Typography
 
-See [references/design-principles.md](references/design-principles.md) for typography, color, layout, and motion guidelines.
+Use the existing type system if one exists.
 
+If not, choose type deliberately based on the artifact:
+
+- editorial: serif or humanist headline with restrained sans body
+- software/productivity: precise sans with strong numeric treatment
+- luxury/minimal: fewer weights, more spacing discipline
+- technical: mono accents only, not mono everywhere
+- deck: large, clear, high contrast
+
+Avoid overused defaults when a stronger choice is appropriate.
+
+If using web fonts, keep the number of families and weights low.
+
+Use type as hierarchy before adding boxes, icons, or color.
+
+## Color
+
+Use brand/design-system colors first.
+
+If no palette exists:
+
+- define a small system
+- include neutrals, surface, ink, muted text, border, accent, danger/success if needed
+- use one primary accent unless the assignment calls for a broader palette
+- prefer oklch for harmonious invented palettes when browser support is acceptable
+- check contrast for important text and controls
+
+Do not invent lots of colors from scratch.
+
+## Layout and Composition
+
+Design with rhythm:
+
+- scale
+- whitespace
+- density
+- alignment
+- repetition
+- contrast
+- interruption
+
+Avoid making every section the same card grid.
+
+For product UIs, prioritize speed of comprehension over decoration.
+
+For marketing surfaces, make one idea land per section.
+
+For dashboards, avoid “data slop.” Only show data that helps the user decide or act.
+
+## Motion
+
+Use motion as discipline, not theater.
+
+Good motion:
+
+- clarifies state changes
+- reduces anxiety during loading
+- shows continuity between surfaces
+- gives controls tactility
+- stays subtle
+
+Bad motion:
+
+- loops without purpose
+- delays the user
+- calls attention to itself
+- hides poor hierarchy
+
+Respect `prefers-reduced-motion` for non-trivial animation.
+
+## Images and Icons
+
+Use real supplied imagery when available.
+
+If an asset is missing:
+
+- use a clean placeholder
+- use typography, layout, or abstract texture instead
+- ask for real material when fidelity matters
+
+Do not draw elaborate fake SVG illustrations unless the assignment is explicitly illustration work.
+
+Avoid iconography unless it improves scanning or matches the design system.
 
 ## Source-Code Fidelity
 

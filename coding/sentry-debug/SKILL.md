@@ -10,15 +10,15 @@ Uses the official `sentry` CLI (v0.31.0+, installed via cli.sentry.dev). Authent
 
 ## Org context
 
-- Org slug: `$SENTRY_ORG`
-- Projects: `invest` (Django backend), `bloom-frontend-web` (React), `bloom-updater` (FastAPI), `whatsgpt` (BloomBot), `choices-dev`, `bible-app`, `jotter`, `user-studies`, `userstudies-frontend`
-- Default target for most commands: `$SENTRY_ORG/$SENTRY_PROJECT`
+- Org slug: `getbloom`
+- Projects: `invest` (Django backend), `bloom-frontend-web` (React), `bloom-updater` (FastAPI), `whatsgpt` (BloomBot), `choices-dev`, `bible-app`, `jotter`, `user-studies`, `userstudies-frontend`, `investing-arena` (FastAPI, investingarena.ai), `investing-log-pipeline` (GitHub Actions pipeline)
+- Default target for most commands: `getbloom/invest`
 
 ## Key commands
 
 ```bash
 # List unresolved issues
-sentry issue list $SENTRY_ORG/$SENTRY_PROJECT --limit 10
+sentry issue list getbloom/invest --limit 10
 
 # View a specific issue
 sentry issue view INVEST-5PY
@@ -41,28 +41,28 @@ sentry issue archive INVEST-5PY
 sentry issue merge INVEST-5PY INVEST-4SR
 
 # List projects
-sentry project list $SENTRY_ORG/
+sentry project list getbloom/
 
 # Releases
-sentry release list $SENTRY_ORG/$SENTRY_PROJECT --limit 5
+sentry release list getbloom/invest --limit 5
 
 # Traces and spans
-sentry trace list $SENTRY_ORG/$SENTRY_PROJECT --period 1h
+sentry trace list getbloom/invest --period 1h
 sentry trace view <trace-id>
 sentry span list <trace-id>
 
 # Logs
-sentry log list $SENTRY_ORG/$SENTRY_PROJECT --period 1h
+sentry log list getbloom/invest --period 1h
 
 # Explore (aggregate queries)
-sentry explore $SENTRY_ORG/$SENTRY_PROJECT --query count --period 24h
+sentry explore getbloom/invest --query count --period 24h
 
 # Dashboards
-sentry dashboard list $SENTRY_ORG/
-sentry dashboard view $SENTRY_ORG/<dashboard-id>
+sentry dashboard list getbloom/
+sentry dashboard view getbloom/<dashboard-id>
 
 # Raw API access (for anything the CLI doesn't cover)
-sentry api /api/0/organizations/$SENTRY_ORG/issues/ --method GET
+sentry api /api/0/organizations/getbloom/issues/ --method GET
 
 # Browse API schema
 sentry schema issues
@@ -88,7 +88,7 @@ Combine with spaces (AND): `is:unresolved firstSeen:-7d`.
 - Use `--fields` to select specific fields and reduce output
 - Use `-w` / `--web` to open in browser
 - Use `--period` / `-t` for time filtering (e.g. `1h`, `24h`, `7d`)
-- The CLI auto-detects org/project from env/DSN, but always pass `$SENTRY_ORG/<project>` explicitly for reliability
+- The CLI auto-detects org/project from env/DSN, but always pass `getbloom/<project>` explicitly for reliability
 - Short IDs like `INVEST-5PY` work as issue identifiers everywhere
 - `sentry schema <resource>` to discover API endpoints without third-party docs
 
@@ -96,7 +96,7 @@ Combine with spaces (AND): `is:unresolved firstSeen:-7d`.
 
 **"What's crashing?"**
 ```bash
-sentry issue list $SENTRY_ORG/$SENTRY_PROJECT --limit 10
+sentry issue list getbloom/invest --limit 10
 ```
 
 **"Debug a specific issue"**
@@ -110,8 +110,34 @@ sentry issue plan INVEST-XXX
 **"Which release introduced this?"**
 ```bash
 sentry issue view INVEST-XXX --json | jq '.firstRelease'
-sentry release list $SENTRY_ORG/$SENTRY_PROJECT --limit 5
+sentry release list getbloom/invest --limit 5
 ```
+
+## Creating new Sentry projects
+
+Use the REST API via `sentry api`:
+
+```bash
+# Create a project (team slug required)
+sentry api /api/0/teams/getbloom/bloom/projects/ --method POST \
+  --data '{"name": "my-project", "platform": "python-fastapi"}'
+
+# Get the DSN for the new project
+sentry api /api/0/projects/getbloom/my-project/keys/ --method GET
+# Look for .dsn.public in the response — that's what goes in sentry_sdk.init(dsn=...)
+```
+
+Platform values: `python-django`, `python-fastapi`, `python`, `javascript-react`, `javascript`, etc.
+
+## Adding Sentry to GitHub Actions
+
+For CI/CD pipeline error tracking, use the `getsentry/action-setup-sentry-cli@v2` action (never `curl -sL https://sentry.io/get-cli/ | bash`). Create a composite action that calls `sentry-cli send-event` on failure.
+
+Key pitfall: `if: ${{ failure() }}` on a dependent job does NOT run when upstream jobs are skipped or cancelled. Use `if: ${{ always() && contains(needs.*.result, 'failure') }}` instead.
+
+Another pitfall: `${{ github.job }}` in a `report-failure` job resolves to `"report-failure"`, not the name of the job that actually failed. Don't use it as a tag; `workflow` + `run_id` are sufficient.
+
+See `references/sentry-gha-setup.md` for the full composite action template.
 
 ## Legacy
 

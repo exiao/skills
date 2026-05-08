@@ -93,4 +93,4 @@ Flash/mini: $0.01-0.03/scenario. Pro: $0.05-0.15. Opus: $0.15-0.30.
 
 ## Reference Implementation
 
-See $INVESTING_LOG_REPO: tests/evals/run_eval.py, tests/evals/claude_eval.py, tests/evals/simulator_backend.py, .github/workflows/eval_ci.yml
+See Bloom-Invest/investing-log: tests/evals/run_eval.py, tests/evals/claude_eval.py, tests/evals/simulator_backend.py, .github/workflows/eval_ci.yml

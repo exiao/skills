@@ -259,6 +259,28 @@ render workspace set <WORKSPACE_ID> -o json --confirm
 
 The workspace persists in `~/.render/cli.yaml` across commands.
 
+## Environment Variables (REST API only)
+
+The Render CLI does NOT support env var management. Use the REST API:
+
+```bash
+source ~/.hermes/.env
+
+# Set/update a single env var (PUT creates or overwrites)
+curl -s -X PUT "https://api.render.com/v1/services/<SERVICE_ID>/env-vars/<KEY>" \
+  -H "Authorization: Bearer $RENDER_API_KEY_BLOOM" \
+  -H "Content-Type: application/json" \
+  -d '{"value": "my-value"}'
+
+# List all env vars
+curl -s "https://api.render.com/v1/services/<SERVICE_ID>/env-vars" \
+  -H "Authorization: Bearer $RENDER_API_KEY_BLOOM"
+```
+
+Pitfalls:
+- POST to `/env-vars` (bulk create) may silently return empty. Use PUT to `/env-vars/<KEY>` for reliable single-key operations.
+- No generic `RENDER_API_KEY` exists in .env. Use workspace-specific keys: `RENDER_API_KEY_BLOOM` or `RENDER_API_KEY_FINTARY`.
+
 ## Common Patterns
 
 ### Deploy and verify

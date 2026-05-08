@@ -48,7 +48,24 @@ Only use local extraction when: the file is local, web_extract fails, or you nee
 | **Install size** | ~25MB | ~3-5GB (PyTorch + models) |
 | **Speed** | Instant | ~1-14s/page (CPU), ~0.2s/page (GPU) |
 
-**Decision**: Use pymupdf unless you need OCR, equations, forms, or complex layout analysis.
+**Decision**: Use pymupdf unless you need OCR, equations, forms, or complex layout analysis. If the PDF is image-based (no text layer) and marker-pdf isn't installed, use the **Vision fallback** below.
+
+### Vision Fallback (image-based PDFs without marker)
+
+When pymupdf returns empty text and marker-pdf isn't available, convert pages to images and read them with VisionInspect:
+
+```bash
+# macOS: sips converts PDF pages to PNGs
+mkdir -p /tmp/pdf_pages
+sips -s format png --resampleWidth 1600 document.pdf --out /tmp/pdf_pages/
+```
+
+Then call `VisionInspect` on each page image with a specific extraction question. This is often **preferred over OCR** when you need understanding, not just text: the vision model can interpret diagrams, charts, tables, and layouts that OCR would mangle.
+
+**Pitfalls:**
+- `sips` may not extract all pages from multi-page PDFs (e.g., 7 of 12). For complete extraction, use `pdftoppm -png -r 200 doc.pdf /tmp/pdf_pages/page` (from poppler) or ImageMagick (requires ghostscript).
+- Very large images may hit VisionInspect size limits. Resize to ~1200-1600px width.
+- Batch all independent VisionInspect calls in parallel for speed.
 
 If the user needs marker capabilities but the system lacks ~5GB free disk:
 > "This document needs OCR/advanced extraction (marker-pdf), which requires ~5GB for PyTorch and models. Your system has [X]GB free. Options: free up space, provide a URL so I can use web_extract, or I can try pymupdf which works for text-based PDFs but not scanned documents or equations."

@@ -29,7 +29,6 @@ from __future__ import annotations
 
 import argparse
 import json
-import re
 import struct
 import sys
 from pathlib import Path
@@ -152,8 +151,7 @@ def main(argv: list[str] | None = None) -> int:
         preview_dir.mkdir(parents=True, exist_ok=True)
         log(f"Saving previews to {preview_dir}")
 
-    safe_url = re.sub(r'token=[^&]+', 'token=***', ws_url)
-    log(f"Connecting to {safe_url} (client_id={client_id})")
+    log(f"Connecting to {ws_url} (client_id={client_id})")
     if args.prompt_id:
         log(f"Filtering messages to prompt_id={args.prompt_id}")
 

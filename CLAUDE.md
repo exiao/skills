@@ -1,6 +1,6 @@
 # Skills Repo Conventions
 
-A public repo of skills for Claude Code, [Hermes Agent](https://github.com/NousResearch/hermes-agent), and other skill-aware agents (Codex, OpenClaw). Every directory at root is a **category** containing related skills (except `.github/`).
+This is a public repo of OpenClaw skills. Every directory at root is a **category** containing related skills (except `.github/`).
 
 ## Repo Structure
 
@@ -18,24 +18,19 @@ category-name/
 
 | Category | What's inside |
 |----------|--------------|
-| **ai-tools** | AI agents (Claude Code, Codex, OpenCode, Hermes Agent), MCP integrations, web search, LLM tooling |
-| **app-store** | App Store Connect, ASO, RevenueCat, screenshots, simulators |
-| **coding** | Programming, debugging, testing, code review, PR workflows |
-| **creative** | Writing, editing, media production, video (Kling, Seedance, Remotion), content creation |
-| **devops** | CI/CD, GitHub workflows, Docker, MLOps, model training/inference, cloud deployment, OpenClaw debugging |
-| **external-services** | External service CLIs and API integrations (Porkbun, Appfigures, DataForSEO, Firecrawl, Higgsfield, etc.) |
-| **finance** | Investing, market analysis, portfolio management, earnings, comps |
-| **marketing** | Ads (Google/Meta/Apple), SEO, analytics, social media, content strategy, last30days research |
-| **media** | Media content tools |
+| **ai-tools** | AI agents, MCP integrations, web search, LLM tooling |
+| **app-store** | App Store tools, RevenueCat, Prometheus, ReelFarm |
+| **bloom** | Bloom product-specific skills |
+| **coding** | Programming, debugging, testing, code review, web scraping |
+| **creative** | Writing, editing, media production, content creation |
+| **devops** | CI/CD, GitHub workflows, Docker, MLOps, model training/inference |
+| **finance** | Investing, market analysis, portfolio management |
+| **marketing** | Ads (Google/Meta/Apple), SEO, analytics, social media |
 | **memory** | Memory management — GC, setup, and recall from past sessions |
-| **ops-center** | Ops center codebase review and reference |
 | **productivity** | Apple apps, email, notes, smart home, local search, gaming |
-| **reference** | Reference notes for specific projects |
 | **research** | Deep research, competitive analysis, market intelligence |
 | **skills-meta** | Skills about skills — creating, auditing, improving, testing |
-| **software-development** | Frameworks, debugging, architecture patterns |
 | **visual-design** | UI/UX design, diagrams, image generation, frontend design |
-| **yuanbao** | Yuanbao group management |
 
 ## Skill Conventions
 
@@ -44,69 +39,22 @@ category-name/
 - Keep `SKILL.md` under 500 lines. Move details to `references/`.
 - No README.md, CHANGELOG.md, or human-facing docs inside skill directories.
 
-## Frontmatter Format
-
-```yaml
----
-name: my-skill
-description: What this skill does and when to invoke it. Include trigger phrases.
----
-```
-
-Only `name` and `description` are required. No metadata block needed.
-
-## Writing Good Descriptions
-
-The `description` field is the primary routing signal. When a user says "help me with X," the agent picks a skill based on description match. Bad descriptions cause misroutes or skills that never get invoked.
-
-**Do:**
-- Start with what the skill does, then when to use it
-- Include literal trigger phrases ("Use when: babysit this PR, watch PR, monitor PR")
-- Mention the specific tools/CLIs involved ("via the Serper API", "using bloom-cli")
-- Be specific about scope boundaries ("For visual execution, use frontend-design instead")
-
-**Don't:**
-- Write marketing copy ("A powerful toolkit for...")
-- Be vague ("Helps with development tasks")
-- Duplicate another skill's trigger phrases
-
-## Cross-Referencing Other Skills or CLIs
-
-When a skill references third-party tools or CLIs, verify the commands actually exist. Common mistakes:
-
-- `bloom quote` → doesn't exist, use `bloom info` (includes price, ratings, peers)
-- `bloom peers` → doesn't exist, use `bloom info`
-- `bloom ratings` → doesn't exist, use `bloom info`
-
-For the full bloom-cli command list, see `finance/bloom-cli/SKILL.md`. Common commands include: `bloom info`, `bloom price`, `bloom financials`, `bloom screen`, `bloom earnings`, `bloom technicals`, `bloom news`, `bloom sentiment`.
-
-When referencing another skill, use its exact `name` from frontmatter (not folder name or a guess).
-
 ## Rules
 
 1. **No hardcoded credentials.** Use `$ENV_VAR_NAME` for tokens, API keys, auth strings, product IDs. This repo is public.
 2. **No personal data.** No emails, phone numbers, account balances, or internal URLs.
 3. **Update README.md** when adding, removing, or renaming skills. Every skill directory must appear in the README under the correct category.
-4. **Don't rename product names.** "Hermes Agent", "OpenClaw", "Claude Code", "Codex" etc. are real product names. Use them as-is in skill content. Don't bulk-rename references to match a metadata convention.
-5. **Prefer portable paths.** Use workspace-relative paths or well-known config paths (`~/.hermes/`, `~/.openclaw/`, `~/clawd/`). Avoid paths to personal directories (e.g. `~/Documents/personal/...`).
+4. **Use `openclaw` naming** (not `clawdbot`). Config path: `~/.openclaw/openclaw.json`. Metadata key: `openclaw`.
+5. **Paths use `~/clawd/skills/`** for workspace references (not `/opt/homebrew/lib/node_modules/`).
 
 ## PR Guidelines
 
 - One logical change per PR. Don't stack unrelated changes.
-- Branch from `main`. Don't stack branches on other feature branches.
+- Branch from `main`. Don't stack branches on other feature branches. Use git worktrees for feature work, placed in `~/.hermes/.worktrees/skills/` (outside the repo to avoid duplicating repo content).
 - If CI (claude-review) flags issues, fix them before requesting merge.
 - Check all three comment sources for review feedback: inline comments, issue comments, and review verdicts.
 
 ## CI
 
-`claude-code-review.yml` runs on every PR. It checks:
-
-- Frontmatter validity (name + description present, description is a routing instruction)
-- Hardcoded secrets or personal data
-- Broken internal references (referenced files that don't exist)
-- Accuracy of CLI commands and tool references
-- Scope and coherence (does the PR do one thing?)
-
-CI failures from bad credentials (401) are infra issues — retry the run, don't change code.
-
-The reviewer posts as `github-actions[bot]`. It may request changes. Fix real issues; dismiss stale reviews after fixing.
+- `claude-code-review.yml` runs on every PR. It checks frontmatter, hardcoded secrets, broken references, and accuracy.
+- CI failures from bad credentials (401) are infra issues. Retry the run.

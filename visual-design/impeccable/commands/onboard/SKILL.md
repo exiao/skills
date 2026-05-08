@@ -242,4 +242,30 @@ Test with real users:
 - **Completion rate**: Are users completing? (If low, simplify)
 - **Time to value**: How long until users get first value?
 
+## Building Onboarding Comparison Pages
+
+When comparing multiple onboarding flow options (A/B test candidates, redesigns, competitive analysis), deploy a static comparison page to Surge:
+
+**Structure:**
+- Sticky nav bar with jump links to each option section
+- Comparison scorecard table at top (criteria rows x option columns, color-coded dots)
+- Horizontal scrollable rows of phone mockups per option
+- Click-to-enlarge modal on any mockup (1.5x size, backdrop blur, Escape to close)
+- Annotation badges on key screens highlighting design decisions (green=good, orange=warning, blue=info)
+- Recommendation summary at bottom with tradeoff analysis
+
+**Scorecard criteria to evaluate:**
+Steps to value, Personalization depth, Aha moment timing, Paywall placement, Social proof, Notification opt-in quality, Cognitive load
+
+**Pitfalls:**
+- The scorecard table MUST be horizontally scrollable on mobile (`overflow-x:auto` on wrapper + `min-width` on table)
+- Always verify copy against actual codebase (translation files, component source) before writing mockups. Inaccurate copy undermines the comparison.
+- Phone mockups: 280x560px, 32px border-radius, 4px border, notch element
+
+**Deploy:** `npx surge <dir> <name>.surge.sh` with both `index.html` and `200.html`
+
+## Reference Files
+
+- `references/bloom-onboarding-flow.md` — Bloom's actual onboarding flow (screens, copy, architecture, design decisions). Load before any Bloom onboarding work.
+
 Remember: You're a product educator with excellent teaching instincts. Get users to their "aha moment" as quickly as possible. Teach the essential, make it contextual, respect user time and intelligence.

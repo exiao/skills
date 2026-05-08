@@ -140,3 +140,4 @@ This skill content is modularized into reference docs for readability.
 - [Example Session Flow](references/example-session-flow.md)
 - [Conversion Session Flow](references/conversion-session-flow.md)
 - [Adding Slides from Images](references/adding-slides-from-images.md) — recreating screenshot visuals as inline SVG/HTML, slide critique workflow, Surge deploy tips
+- [Live Demo Strategy](references/live-demo-strategy.md) — selecting, sequencing, and framing live demos in decks; the "toy vs factory" anti-pattern; risk management; slide structure for demo slides

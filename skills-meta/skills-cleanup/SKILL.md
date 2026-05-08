@@ -7,7 +7,7 @@ tags: [skills, maintenance, cleanup]
 ## Skills Repo Cleanup
 
 ### Key Facts
-- Skills repo: `~/.hermes/skills/` (git: `$SKILLS_REPO`)
+- Skills repo: `~/.hermes/skills/` (git: `exiao/skills`)
 - Automated skill creation nudge is **disabled** (`creation_nudge_interval: 0` in config.yaml)
 - Agent scans `~/.hermes/skills/` and `skills.external_dirs` (currently empty) — nothing else
 - Archive of removed duplicates/untracked skills: `~/.hermes/skills-archive/`
@@ -22,7 +22,7 @@ tags: [skills, maintenance, cleanup]
 2. Identify duplicates (same skill name, different category) and local-only skills
 3. Move duplicates to `~/.hermes/skills-archive/` (recoverable)
 4. For genuinely new local-only skills worth keeping: branch, commit, PR
-5. The repo owner merges — never push to main directly
+5. Eric merges — never push to main directly
 
 ### Categories That Were Full Duplicates (removed 2026-05-01)
 github/, autonomous-ai-agents/, software-development/, mlops/, media/, mcp/, leisure/, red-teaming/, note-taking/, email/, smart-home/, gaming/, analytics/, diagramming/, domain/, feeds/, gifs/, inference-sh/, dogfood/

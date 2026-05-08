@@ -282,6 +282,7 @@ When performing a code review (local or PR), systematically check:
 
 ### Correctness
 - Does the code do what it claims?
+- Compare the PR's claimed scope against the exact condition in code. If the PR says "explicitly enabled" but the code checks a resolved/available state (`valid_*`, `loaded_*`, `effective_*`), look for silent scope widening. For this class of bug, read `references/semantic-scope-regression.md`.
 - Edge cases handled (empty inputs, nulls, large data, concurrent access)?
 - Error paths handled gracefully?
 
@@ -301,6 +302,13 @@ When performing a code review (local or PR), systematically check:
 - New code paths tested?
 - Happy path and error cases covered?
 - Tests readable and maintainable?
+
+### Regression boundary checks
+For narrow bug-fix PRs, review the boundary between the claimed fix and adjacent behavior. Do not only verify the positive repro. Look for places where the implementation uses a resolved/effective state that is broader than the user's intent.
+
+Common pattern: a fix says "when X is explicitly enabled," but the code checks "X is available after default expansion." That can accidentally widen behavior for default/all-tool paths, batch jobs, ignore-rules sessions, or delegated agents. Require at least one negative regression test for the closest adjacent path that should remain unchanged.
+
+Example review question: "Does this condition mean explicitly requested, or merely present after defaults/plugins expanded it?"
 
 ### Performance
 - No N+1 queries or unnecessary loops
@@ -399,7 +407,7 @@ ruff check . 2>&1 | head -30
 
 ### Step 6: Apply the review checklist (Section 3)
 
-Go through each category: Correctness, Security, Code Quality, Testing, Performance, Documentation.
+Go through each category: Correctness, Security, Code Quality, Testing, Regression boundary checks, Performance, Documentation. For bug-fix PRs, explicitly compare the PR's stated scope against the condition used in code, then ask for one negative test that proves nearby behavior did not change.
 
 ### Step 7: Post the review to GitHub
 
