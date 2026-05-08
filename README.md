@@ -185,7 +185,6 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [video-script](creative/video-production/video-script/) | Generate structured scene-by-scene video scripts with production metadata (visuals, audio, sources, transitions, captions) ready to feed into the video-production pipeline (Sora, Kling, ElevenLabs, InfiniteTalk, Remotion, stock-footage, video-editor). Use when asked to "write a video script",… |
 | [claude-design](creative/claude-design/) | Design one-off HTML artifacts (landing pages, decks, prototypes) with high visual quality. |
 | [comfyui](creative/comfyui/) | Generate images, video, and audio with ComfyUI. Install, launch, manage nodes/models, run workflows with parameter injection via comfy-cli and REST/WebSocket API. |
-| [design-md](creative/design-md/) | Create and manage DESIGN.md files following Google Stitch spec for design documentation. |
 | [humanizer](creative/humanizer/) | Humanize text: strip AI-isms and add real voice. Detects and fixes 29 common AI writing patterns. |
 | [hyperframes](creative/hyperframes/) | Create HTML-based video compositions, animated title cards, social overlays, captioned talking-head videos, audio-reactive visuals using HyperFrames. |
 | [pretext](creative/pretext/) | Build creative browser demos with @chenglou/pretext for DOM-free text layout, ASCII art, typographic flow, kinetic typography. |
@@ -491,7 +490,7 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 
 | Skill | Description |
 |-------|-------------|
-| [yuanbao](yuanbao/) | Yuanbao (元宝) groups: @mention users, query info/members. |
+| [yuanbao](yuanbao/yuanbao-group/) | Yuanbao (元宝) groups: @mention users, query info/members. |
 
 ---
 

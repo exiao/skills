@@ -10,7 +10,6 @@ description: "Use when building content strategy: hooks, angles, and ideas from 
 Turn zeitgeist signals into content that connects — then delegate creation, distribution, and optimization to the right tools.
 
 **The flow:** Zeitgeist → Angles & Hooks → Create (via other skills) → Distribute → Analyze
-
 **NOT this skill:**
 - Writing tweets or posts → `tweet-ideas`
 - Generating images → `image-generator` or `nano-banana-pro`
@@ -484,12 +483,9 @@ What actually works for consumer apps vs. what sounds good but doesn't. Covers h
 | `references/lead-magnets.md` | Lead magnet types, buyer stage matching, gating strategy, distribution, benchmarks |
 | `references/marketing-ideas.md` | 139 SaaS marketing ideas catalog organized by category, stage, and budget |
 | `references/blog-seo-planning.md` | Searchable vs shareable, content pillars, topic clusters, buyer stage keywords, ideation sources |
-
-
 ---
 
 ## Related Skills
-
 - `hooks` — hook formulas and title generation
 - `copywriting` — page copy, direct response, brand voice, A/B testing blitz
 - `tweet-ideas` — standalone tweet content
