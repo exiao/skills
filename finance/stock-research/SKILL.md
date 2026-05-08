@@ -28,7 +28,7 @@ Two modes: **on-demand equity research** (analyze a company, generate ideas, wri
 - **bloom-cli** (preloaded skill): Primary data source. `bloom info`, `bloom earnings`, `bloom financials`, `bloom price`, `bloom screen`, `bloom transcript`, `bloom catalysts`. Always try bloom-cli first before web search.
 - **Serper** (`web-search` skill, `SERPER_API_KEY`): Search for earnings releases, analyst commentary, news, filings
 - **Firecrawl** (`FIRECRAWL_API_KEY`): Scrape full articles, earnings releases, SEC filings when search snippets aren't enough
-- **Bloom MCP** (`https://api.getbloom.app/mcp/`, Bearer: `$BLOOM_MCP_API_KEY`): Check what stocks Bloom users are watching; prioritize coverage accordingly
+- **Bloom MCP** (`${BLOOM_MCP_URL}`, Bearer: `$BLOOM_MCP_API_KEY`): Check what stocks Bloom users are watching; prioritize coverage accordingly
 
 ---
 
@@ -93,7 +93,7 @@ Triggered by: "screen for ideas in [sector]", "high conviction ideas", "what's i
 
 ## Daily Market Briefing (Cron Job)
 
-**Cron ID:** `b04e6814-7840-4927-b529-feb052cadbfc`
+**Cron ID:** `$CRON_JOB_ID`
 **Schedule:** `0 15 * * 1-5` (3pm ET, Mon-Fri)
 **Model:** Sonnet
 **Delivery:** Signal DM to Eric

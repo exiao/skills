@@ -33,7 +33,7 @@ AI video generation, voiceovers, screen recording, and video editing.
 ### 5. Analytics & Research
 App analytics, keyword research, stock research, web search, and trend tracking.
 
-**Skills:** appfigures, copilot-money, dataforseo, grok-search, notebooklm, phoenix-cli, polymarket, seo-research, stock-research, trend-research, web-search, bloom-cli
+**Skills:** appfigures, copilot-money, dataforseo, grok-search, notebooklm, phoenix-cli, polymarket, seo-research, stock-research, trend-research, web-search
 
 ### 6. Advertising
 Manage campaigns on Google, Apple, and Meta.
@@ -43,7 +43,7 @@ Manage campaigns on Google, Apple, and Meta.
 ### 7. Development & Coding
 TDD workflows, PR management, deploy verification, browser automation, and more.
 
-**Skills:** agent-browser, babysit-pr, claude-md-management, context7, demo-pr-feature, deploy-bloom, document-release, documents, fix-bloom-prs, fix-sentry-issues, app-store-connect, ios-simulator, last30days, ralph-mode, serena, stably-cli, stably-sdk-rules, superpowers-coding, superpowers-planning, superpowers-reviews, verify-deploy, codex, security-audit
+**Skills:** agent-browser, babysit-pr, claude-md-management, context7, deploy-bloom, document-release, documents, fix-sentry-issues, app-store-connect, ios-simulator, last30days, ralph-mode, serena, stably-cli, stably-sdk-rules, superpowers-coding, superpowers-planning, superpowers-reviews, verify-deploy, codex, security-audit
 
 ### 8. Strategy & Business
 Trading, domain management, cloud ops, and decision-making frameworks.

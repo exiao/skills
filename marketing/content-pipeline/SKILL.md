@@ -14,8 +14,8 @@ Produces 3 article drafts per run: research once, then spawn 3 parallel sub-agen
 ## Phase 0 — Deduplication Check (MANDATORY FIRST)
 
 1. Read `~/clawd/memory/content-published.md` — topics already covered are off-limits
-2. Run `bird tweets --user exiao3 -n 30 --plain` — note angles Eric published in the last 30 days
-3. Check recent Substack: `web_fetch https://mycrystalball.substack.com` — find recent post titles
+2. Run `bird tweets --user $TWITTER_USER -n 30 --plain` — note angles the author published in the last 30 days
+3. Check recent Substack: `web_fetch https://$SUBSTACK_URL` — find recent post titles
 4. Build an EXCLUSION LIST. Do not pick any topic overlapping with it.
 5. After picking topics, append them to `~/clawd/memory/content-published.md`
 
@@ -27,21 +27,21 @@ Read `~/marketing/WRITING-STYLE.md` first.
 
 ### 1a. Gather engagement data
 
-- **X/Twitter**: Pull @exiao3's last 30 posts via `bird`. Note which topics/angles got most engagement (likes, replies, retweets).
-- **Grok X search**: Run `/grok-search` with `--x` to find what's trending in Eric's niches (AI, investing, indie dev, fintech).
+- **X/Twitter**: Pull @$TWITTER_USER's last 30 posts via `bird`. Note which topics/angles got most engagement (likes, replies, retweets).
+- **Grok X search**: Run `/grok-search` with `--x` to find what's trending in the author's niches (AI, investing, indie dev, fintech).
 - **Trend research**: Run `/trend-research` across YouTube, X, Reddit, and Substack to find viral formats, hooks, and topics with momentum.
 
 ### 1b. Find 3 topics
 
 Topics should come from what's actually resonating on social, not from a fixed theme list. Look for:
 
-- **High-engagement angles** from Eric's own X data (what got traction in the last 30 days)
-- **Trending conversations** where Eric has a unique perspective (builder, investor, AI power user, solo founder)
+- **High-engagement angles** from the author's own X data (what got traction in the last 30 days)
+- **Trending conversations** where the author has a unique perspective (builder, investor, AI power user, solo founder)
 - **Viral formats** that can be adapted (data tables, outrage comparisons, contrarian takes, build-in-public threads)
 
-Not every article needs to be about Bloom. Pick topics because they're genuinely interesting and Eric has something real to say. Bloom integration only if it's natural and adds to the piece.
+Not every article needs to be about Bloom. Pick topics because they're genuinely interesting and the author has something real to say. Bloom integration only if it's natural and adds to the piece.
 
-**Pick topics where Eric has unique credibility.** Avoid angles anyone could write. Validate with X engagement data from Step 1a.
+**Pick topics where the author has unique credibility.** Avoid angles anyone could write. Validate with X engagement data from Step 1a.
 
 ### 1c. Competitive gap check
 
@@ -64,14 +64,14 @@ Spawn 3 sub-agents in parallel using `sessions_spawn`, one per topic. Each sub-a
 ```
 Topic: [topic]
 Positioning angle: [angle from research]
-X engagement insight: [what angle resonated with Eric's audience]
+X engagement insight: [what angle resonated with the author's audience]
 Output directory: ~/marketing/substack/drafts/[slug]/
 
 Your job:
 1. Read ~/marketing/WRITING-STYLE.md
 2. Run /hooks — generate 5 options, pick strongest → hooks.md
 3. Run /outline-generator → outline.md
-4. Run /article-writer → draft.md (must pass "only Eric could write this" test: use specific numbers, named frameworks, personal experience. Reference Bloom only if naturally relevant to the topic.)
+4. Run /article-writer → draft.md (must pass "only the author could write this" test: use specific numbers, named frameworks, personal experience. Reference Bloom only if naturally relevant to the topic.)
 5. Run /editor-in-chief — max 5 iterations → editing-log.md + draft-final.md
 6. Run /image-generator — hero image → hero.png
 7. Write LinkedIn post directly → linkedin-post.md
@@ -111,7 +111,7 @@ After all 3 sub-agents complete, for each article save a Substack draft using th
 
 Steps per article:
 1. Read `~/marketing/substack/drafts/[slug]/substack-ready.md` for title, subtitle, and body
-2. Open Substack editor: `browser action=open targetUrl="https://mycrystalball.substack.com/publish/post" profile=clawd`
+2. Open Substack editor: `browser action=open targetUrl="https://$SUBSTACK_URL/publish/post" profile=clawd`
 3. Paste title, subtitle, body
 4. Upload `hero.png` as the cover image
 5. Save as draft (never publish)

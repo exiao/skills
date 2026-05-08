@@ -13,7 +13,7 @@ Pulls recent AI model trades from the Bloom investing-log repo, picks the most c
 
 | Tool | Purpose |
 |------|---------|
-| `gh` CLI | Fetch trade files from bloom-invest/investing-log repo |
+| `gh` CLI | Fetch trade files from $INVESTING_LOG_REPO repo |
 | `web-search` skill | Enrich with current price + YTD % |
 | `nano-banana-pro` skill | Generate 1080×1080 trade card |
 | `typefully` skill | Upload card + create scheduled tweet draft |
@@ -29,15 +29,15 @@ Fetch the 5 most recent trades from each model folder:
 
 ```bash
 # Claude
-gh api 'repos/bloom-invest/investing-log/contents/trades/claude' \
+gh api 'repos/$INVESTING_LOG_REPO/contents/trades/claude' \
   --jq '[.[] | {name: .name, download_url: .download_url}] | sort_by(.name) | reverse | .[0:5]'
 
 # OpenAI
-gh api 'repos/bloom-invest/investing-log/contents/trades/openai' \
+gh api 'repos/$INVESTING_LOG_REPO/contents/trades/openai' \
   --jq '[.[] | {name: .name, download_url: .download_url}] | sort_by(.name) | reverse | .[0:5]'
 
 # Gemini
-gh api 'repos/bloom-invest/investing-log/contents/trades/gemini' \
+gh api 'repos/$INVESTING_LOG_REPO/contents/trades/gemini' \
   --jq '[.[] | {name: .name, download_url: .download_url}] | sort_by(.name) | reverse | .[0:5]'
 ```
 
@@ -145,7 +145,7 @@ node scripts/typefully.js drafts:create $TYPEFULLY_SOCIAL_SET_ID \
   --text "<tweet_text>" \
   --media <media_id> \
   --tags investing-log
-# Do NOT add --schedule. Save as unscheduled draft only — Eric reviews before posting.
+# Do NOT add --schedule. Save as unscheduled draft only — the account owner reviews before posting.
 # → returns draft_id + scheduled time
 ```
 
@@ -195,7 +195,7 @@ Scheduled: [time]
 
 ## Cron Config
 
-- **ID:** `117fc1e3-86a7-48d7-8a4b-541cf053e715`
+- **ID:** `$CRON_JOB_ID`
 - **Schedule:** `0 16 * * 1-5` (4pm ET, Mon–Fri)
 - **Model:** default (claude-sonnet)
 - **Target:** isolated

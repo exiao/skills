@@ -1,4 +1,4 @@
-# Eric's Skills — 90+ Claude Code Skill Templates
+# Skills — 90+ Claude Code Skill Templates
 
 > **Source:** [github.com/exiao/skills](https://github.com/exiao/skills) | **License:** MIT
 
@@ -28,15 +28,21 @@ Install the skills from https://github.com/exiao/skills
 | [**ai-tools**](ai-tools/) | 10 | AI agents, MCP integrations, web search, LLM tooling |
 | [**app-store**](app-store/) | 28 | App Store tools, RevenueCat, Prometheus, ReelFarm |
 | [**coding**](coding/) | 23 | Programming, debugging, testing, code review, web scraping |
-| [**creative**](creative/) | 38 | Writing, editing, media production, content creation |
+| [**creative**](creative/) | 39 | Writing, editing, media production, content creation |
 | [**devops**](devops/) | 55 | CI/CD, GitHub, Docker, MLOps, model training/inference |
-| [**finance**](finance/) | 9 | Investing, market analysis, portfolio management |
+| [**finance**](finance/) | 13 | Investing, market analysis, portfolio management |
 | [**marketing**](marketing/) | 38 | Ads (Google/Meta/Apple), SEO, analytics, social media |
 | [**memory**](memory/) | 3 | Memory management — GC, setup, and recall |
 | [**productivity**](productivity/) | 16 | Apple apps, email, notes, smart home, local search, gaming |
 | [**research**](research/) | 10 | Deep research, competitive analysis, market intelligence |
-| [**skills-meta**](skills-meta/) | 6 | Skills about skills — creating, auditing, improving, testing |
-| [**visual-design**](visual-design/) | 37 | UI/UX design, diagrams, image generation, frontend |
+| [**skills-meta**](skills-meta/) | 7 | Skills about skills — creating, auditing, improving, testing |
+| [**visual-design**](visual-design/) | 39 | UI/UX design, diagrams, image generation, frontend |
+| [**external-services**](external-services/) | 17 | External service CLIs and API integrations |
+| [**media**](media/) | 1 | Media content tools (Spotify, audio) |
+| [**ops-center**](ops-center/) | 1 | Ops center codebase review and reference |
+| [**reference**](reference/) | 2 | Reference notes for specific projects |
+| [**software-development**](software-development/) | 5 | Frameworks, debugging, architecture patterns |
+| [**yuanbao**](yuanbao/) | 1 | Yuanbao group management |
 
 ---
 
@@ -116,7 +122,6 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [claude-md-management](coding/claude-md-management/) | Use when asked to audit, improve, or maintain CLAUDE.md files across repos. Triggers on "audit my CLAUDE.md", "check if my CLAUDE.md is up to date", capturing session learnings, or keeping project memory current. |
 | [context7](coding/context7/) | Use when writing code that uses a specific library or framework and you need accurate, current API docs — not year-old training data. Fetches version-specific documentation via Context7 MCP. |
 | [fastapi-piccolo-typer-testing](coding/fastapi-piccolo-typer-testing/) | Patterns for writing fast, DB-free pytest suites against FastAPI routers, Piccolo ORM queries, Typer CLI commands, and service-layer code. Use when adding test coverage to a FastAPI + Piccolo + Typer app, mocking async ORM query chains, or testing Typer commands that lazily import services.… |
-| [firecrawl](coding/firecrawl/) | Scrape, crawl, search, and interact with web pages using Firecrawl CLI and API. Use when the user mentions "firecrawl", "scrape a website", "crawl a site", "map a site", "web scraping", "extract web data", "interact with a page", or needs richer web extraction than WebExtract (JS-rendered pages,… |
 | [fix-sentry-issues](coding/fix-sentry-issues/) | Use when scanning Sentry issues for Bloom and creating fix PRs. |
 | [godmode](coding/godmode/) | Jailbreak API-served LLMs using G0DM0D3 techniques — Parseltongue input obfuscation (33 techniques), GODMODE CLASSIC system prompt templates, ULTRAPLINIAN multi-model racing, encoding escalation, and Hermes-native prefill/system prompt integration. Use when a user wants to bypass safety filters,… |
 | [jupyter-live-kernel](coding/jupyter-live-kernel/) | Use a live Jupyter kernel for stateful, iterative Python execution via hamelnb. Load this skill when the task involves exploration, iteration, or inspecting intermediate results — data science, ML experimentation, API exploration, or building up complex code step-by-step. Uses terminal to run… |
@@ -132,6 +137,8 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [superpowers-planning](coding/superpowers-planning/) | You MUST use this before any creative work, feature, or implementation — explores intent and requirements first, creates detailed plans before touching code. Also use when establishing how to find and use skills at session start. |
 | [superpowers-reviews](coding/superpowers-reviews/) | Use when requesting or receiving code review, verifying work before claiming it's done, finishing a development branch (merge/PR/discard), executing written plans with batch checkpoints, or dispatching parallel agents for independent tasks. |
 | [systematic-debugging](coding/systematic-debugging/) | Use when encountering any bug, test failure, or unexpected behavior. 4-phase root cause investigation — NO fixes without understanding the problem first. |
+| [ci-evals-llm-agents](coding/ci-evals-llm-agents/) | Build CI eval pipelines for LLM agent systems. Use when adding evals to repos with LLM agents, creating SimulatorBackend patterns, setting up multi-model CI matrices. |
+| [subagent-driven-development](coding/subagent-driven-development/) | Execute implementation plans with independent tasks via delegate_task with two-stage review (spec compliance then code quality). |
 | [test-driven-development](coding/test-driven-development/) | Use when implementing any feature or bugfix, before writing implementation code. Enforces RED-GREEN-REFACTOR cycle with test-first approach. |
 | [writing-plans](coding/writing-plans/) | Use when you have a spec or requirements for a multi-step task. Creates comprehensive implementation plans with bite-sized tasks, exact file paths, and complete code examples. |
 
@@ -144,6 +151,7 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [ascii-art](creative/ascii-art/) | Generate ASCII art using pyfiglet (571 fonts), cowsay, boxes, toilet, image-to-ascii, remote APIs (asciified, ascii.co.uk), and LLM fallback. No API keys required. |
 | [ascii-video](creative/ascii-video/) | Production pipeline for ASCII art video — any format. Converts video/audio/images/generative input into colored ASCII character video output (MP4, GIF, image sequence). Covers: video-to-ASCII conversion, audio-reactive music visualizers, generative ASCII art animations, hybrid video+audio… |
 | [character-creation](creative/character-creation/) | Create and manage consistent AI video characters — define the persona, generate the portrait with Nano Banana, and store the config for reuse across all videos in the series. |
+| [design-md](creative/design-md/) | Author, validate, and export Google DESIGN.md token specs for agent-readable design systems. |
 | [creative-ideation](creative/creative-ideation/) | Generate project ideas through creative constraints. Use when the user says 'I want to build something', 'give me a project idea', 'I'm bored', 'what should I make', 'inspire me', or any variant of 'I have tools but no direction'. Works for code, art, hardware, writing, tools, and anything that… |
 | [editor-in-chief](creative/editor-in-chief/) | Use when a first draft is complete and all Phase 1 gates are done: topic selected (seo-research), title approved (hooks), outline approved (outline-generator), draft written (article-writer). Runs autonomous diagnosis-prescribe-rewrite loop before Substack. |
 | [evaluate-content](creative/evaluate-content/) | Use when judging content quality OR editing/improving existing copy: shareability, readability, voice, cuttability, angle, copy sweeps. |
@@ -164,7 +172,7 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [stock-footage](creative/stock-footage/) | Search and download free stock video footage from Pexels and Pixabay for B-roll and video production. Use when the user mentions "stock footage", "B-roll", "b-roll", "stock video", "find clips", "Pexels", "background footage", "video clips for", "find me a video of", "download stock video", or… |
 | [substack-draft](creative/substack-draft/) | Use when saving a finished article to Substack as a draft for manual review and publishing. Does NOT publish automatically — always saves as draft. |
 | [video-editor](creative/video-editor/) | Programmatic video editing via ffmpeg CLI. Handles trimming clips, merging/concatenating videos, overlays (picture-in-picture, watermarks, logos), crossfade transitions between clips, speed ramping (speed up/slow motion), cropping to aspect ratios (16:9 to 9:16), scaling/resizing, adding or… |
-| [video-production](creative/video-production/) | Use when making videos, creating clips, voiceovers, talking avatars, AI video generation, text-to-video, lip sync, motion graphics, screen recordings, or video editing. Covers Sora, Kling, ElevenLabs, InfiniteTalk, Remotion, and ffmpeg workflows. Use for any request involving video creation,… |
+| **video-production** (category) | Video creation sub-skills: AI video generation, voiceover, talking avatars, motion graphics, screen recordings, and video editing. |
 | [browser-animation-video](creative/video-production/browser-animation-video/) | Use when create browser-based motion graphics with Framer Motion, GSAP, and Tailwind. |
 | [demo-video](creative/video-production/demo-video/) | Create product demo videos by automating browser interactions and capturing frames. Use when the user wants to record a demo, walkthrough, product showcase, or interactive video of a web application. Supports Playwright CDP screencast for high-quality capture and FFmpeg for video encoding. |
 | [elevenlabs](creative/video-production/elevenlabs/) | Generate voiceover audio from a script using ElevenLabs v3 via Fal.ai. Outputs an MP3 file for use with InfiniteTalk or standalone audio. |
@@ -174,9 +182,19 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [remotion-videos](creative/video-production/remotion-videos/) | Use when create animated marketing videos with Remotion (renders to MP4). |
 | [sora](creative/video-production/sora/) | Use when generate, remix, and manage Sora AI videos. |
 | [thumbnail](creative/video-production/thumbnail/) | Generate video cover frames and thumbnails for YouTube, TikTok, Reels, and social media. Use when asked for a video thumbnail, cover frame, YouTube thumbnail, or to extract a still from a video. |
-| [video-script](creative/video-script/) | Generate structured scene-by-scene video scripts with production metadata (visuals, audio, sources, transitions, captions) ready to feed into the video-production pipeline (Sora, Kling, ElevenLabs, InfiniteTalk, Remotion, stock-footage, video-editor). Use when asked to "write a video script",… |
-| [writer](creative/writer/) | Write content in Eric's voice — articles, blog posts, tweets, social media posts, marketing copy, newsletter drafts. Loads WRITING-STYLE.md and enforces kill phrases. |
-| [youtube-content](creative/youtube-content/) | Fetch YouTube video transcripts and transform them into structured content (chapters, summaries, threads, blog posts). Use when the user shares a YouTube URL or video link, asks to summarize a video, requests a transcript, or wants to extract and reformat content from any YouTube video. |
+| [video-script](creative/video-production/video-script/) | Generate structured scene-by-scene video scripts with production metadata (visuals, audio, sources, transitions, captions) ready to feed into the video-production pipeline (Sora, Kling, ElevenLabs, InfiniteTalk, Remotion, stock-footage, video-editor). Use when asked to "write a video script",… |
+| [claude-design](creative/claude-design/) | Design one-off HTML artifacts (landing pages, decks, prototypes) with high visual quality. |
+| [comfyui](creative/comfyui/) | Generate images, video, and audio with ComfyUI. Install, launch, manage nodes/models, run workflows with parameter injection via comfy-cli and REST/WebSocket API. |
+| [humanizer](creative/humanizer/) | Humanize text: strip AI-isms and add real voice. Detects and fixes 29 common AI writing patterns. |
+| [hyperframes](creative/hyperframes/) | Create HTML-based video compositions, animated title cards, social overlays, captioned talking-head videos, audio-reactive visuals using HyperFrames. |
+| [pretext](creative/pretext/) | Build creative browser demos with @chenglou/pretext for DOM-free text layout, ASCII art, typographic flow, kinetic typography. |
+| [sketch](creative/sketch/) | Quick visual sketches and comparison page patterns for rapid prototyping. |
+| [touchdesigner-mcp](creative/touchdesigner-mcp/) | Control a running TouchDesigner instance via twozero MCP. Create operators, set parameters, wire connections, build real-time visuals. |
+| [clipify](creative/video-production/clipify/) | Find funniest moments in a video, cut standalone clips, reformat 16:9 to 9:16 (face-pan or split-screen), burn word-by-word captions. |
+| [youtube-scriptwriting](creative/video-production/youtube-scriptwriting/) | Write retention-optimized long-form YouTube scripts through a checkpoint workflow (research, hook, structure, body, editing). |
+| [youtube-title-creator](creative/video-production/youtube-title-creator/) | Generate high-CTR YouTube titles and thumbnail concepts using 119 proven frameworks ranked by performance score. |
+| [writer](creative/writer/) | Write content in the author's voice — articles, blog posts, tweets, social media posts, marketing copy, newsletter drafts. Loads WRITING-STYLE.md and enforces kill phrases. |
+| [youtube-content](creative/video-production/youtube-content/) | Fetch YouTube video transcripts and transform them into structured content (chapters, summaries, threads, blog posts). Use when the user shares a YouTube URL or video link, asks to summarize a video, requests a transcript, or wants to extract and reformat content from any YouTube video. |
 
 ### ⚙️ DevOps & Infrastructure
 
@@ -192,6 +210,9 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [documents](devops/documents/) | Use when working with any office document format: .docx Word files (creating, editing, tracked changes, reports, memos, templates); PDF files (reading, merging, splitting, OCR, watermarks, form filling, creating); .pptx presentations (decks, slides, editing templates, speaker notes); .xlsx… |
 | [lm-evaluation-harness](devops/evaluation/lm-evaluation-harness/) | Evaluates LLMs across 60+ academic benchmarks (MMLU, HumanEval, GSM8K, TruthfulQA, HellaSwag). Use when benchmarking model quality, comparing models, reporting academic results, or tracking training progress. Industry standard used by EleutherAI, HuggingFace, and major labs. Supports… |
 | [weights-and-biases](devops/evaluation/weights-and-biases/) | Track ML experiments with automatic logging, visualize training in real-time, optimize hyperparameters with sweeps, and manage model registry with W&B - collaborative MLOps platform |
+| [github-actions-workflow-audit](devops/github-actions-workflow-audit/) | Deep-inspect GitHub Actions workflow chains for correctness: trigger names, workflow_run chains, cron schedules, concurrency groups. |
+| [kanban-orchestrator](devops/kanban-orchestrator/) | Decomposition playbook and specialist-roster conventions for orchestrator profiles routing work through Kanban. |
+| [kanban-worker](devops/kanban-worker/) | Pitfalls, examples, and edge cases for Hermes Agent Kanban workers. |
 | [github-auth](devops/github-auth/) | Set up GitHub authentication for the agent using git (universally available) or the gh CLI. Covers HTTPS tokens, SSH keys, credential helpers, and gh auth — with a detection flow to pick the right method automatically. |
 | [github-code-review](devops/github-code-review/) | Review code changes by analyzing git diffs, leaving inline comments on PRs, and performing thorough pre-push review. Works with gh CLI or falls back to git + GitHub REST API via curl. |
 | [github-issues](devops/github-issues/) | Create, manage, triage, and close GitHub issues. Search existing issues, add labels, assign people, and link to PRs. Works with gh CLI or falls back to git + GitHub REST API via curl. |
@@ -224,7 +245,6 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [render-cli](devops/render-cli/) | Manage Render.com services, deploys, databases, logs, and infrastructure using the official Render CLI (`render`). Use this skill whenever the user asks about Render deployments, service management, viewing Render logs, restarting Render services, running database queries on Render Postgres,… |
 | [dspy](devops/research/dspy/) | Build complex AI systems with declarative programming, optimize prompts automatically, create modular RAG systems and agents with DSPy - Stanford NLP's framework for systematic LM programming |
 | [security-audit](devops/security-audit/) | Run a codebase security audit using OWASP Top 10 and STRIDE threat modeling. Use when auditing code for vulnerabilities or preparing for a pentest. |
-| [stably-cli](devops/stably-cli/) | Use the Stably CLI to create, run, fix, and maintain Playwright tests in the bloom-tests repo. Use when running tests (stably test), auto-fixing failures (stably fix), or generating new tests from a prompt (stably create). |
 | [stably-sdk-rules](devops/stably-sdk-rules/) | Best practices for writing Stably AI-powered Playwright tests. Use when writing, reviewing, or debugging tests in bloom-tests that use @stablyai/playwright-test — covers when to use aiAssert vs raw Playwright, agent.act, extract, getLocatorsByAI, and email flows. |
 | [axolotl](devops/training/axolotl/) | Expert guidance for fine-tuning LLMs with Axolotl - YAML configs, 100+ models, LoRA/QLoRA, DPO/KTO/ORPO/GRPO, multimodal support |
 | [grpo-rl-training](devops/training/grpo-rl-training/) | Expert guidance for GRPO/RL fine-tuning with TRL for reasoning and task-specific model training |
@@ -240,6 +260,9 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | Skill | Description |
 |-------|-------------|
 | [alpaca](finance/alpaca/) | Trade stocks and crypto via Alpaca API. Use for market data (quotes, bars, news), placing orders (market, limit, stop), checking positions, portfolio management, and account info. Supports both paper and live trading. Use when user asks about stock prices, wants to buy/sell securities, check… |
+| [bloom-cli](finance/bloom-cli/) | Fetch stock data, company fundamentals, market data, earnings, SEC filings, price history, analyst ratings, and peer comparisons via the Bloom CLI. |
+| [investing-log-evals](finance/investing-log-evals/) | Run and debug LLM-agent-vs-simulator evals for the investing-log repo. |
+| [investing-log-ops](finance/investing-log-ops/) | Manage the investing-log trading system: update trading philosophy, memory files, skill configurations, review performance. |
 | [copilot-money](finance/copilot-money/) | Use when querying Copilot Money for finances, transactions, net worth, and holdings. |
 | [earnings-card-pipeline](finance/earnings-card-pipeline/) | Use when the cron fires at 8am ET on Mondays — pulls the week's major earnings events, generates a die-cut sticker style card for each, creates Typefully drafts, and reports to Signal. |
 | [market-daily-briefing](finance/market-daily-briefing/) | Use when delivering a daily market briefing — covering earnings results, macro news, and notable stock moves. Runs automatically at 10am ET Mon-Fri via cron, or on-demand when asked for a market update. |
@@ -248,6 +271,10 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [post-investinglog-trades](finance/post-investinglog-trades/) | Use when the cron fires at 4pm ET on weekdays — picks the best unposted trade from the investing-log repo, generates a trade card, creates a Typefully draft, and reports to Signal. |
 | [stock-research](finance/stock-research/) | Use when performing stock or equity research, earnings analysis, coverage reports, or generating daily market briefings for Bloom. Covers on-demand research tasks and the scheduled daily market briefing cron job. |
 | [wealth-management](finance/wealth-management/) | Wealth management workflows — client review prep, financial plans, investment proposals, portfolio rebalancing, and tax-loss harvesting. Adapted from Anthropic's financial-services-plugins (github.com/anthropics/financial-services-plugins). |
+| [earnings-analysis](finance/earnings-analysis/) | Create equity research earnings update reports analyzing quarterly results. Covers beat/miss analysis, key metrics, updated estimates, guidance changes, and revised thesis. Adapted from Anthropic's financial-services-plugins. |
+| [idea-generation](finance/idea-generation/) | Systematic stock screening and investment idea sourcing. Combines quantitative screens, thematic research, and pattern recognition to surface new long and short ideas. Adapted from Anthropic's financial-services-plugins. |
+| [thesis-tracker](finance/thesis-tracker/) | Maintain and update investment theses for portfolio positions and watchlist names. Track key data points, catalysts, and thesis milestones over time. Adapted from Anthropic's financial-services-plugins. |
+| [comps-analysis](finance/comps-analysis/) | Build comparable company analyses with operating metrics, valuation multiples, and statistical benchmarking. Adapted from Anthropic's financial-services-plugins. |
 
 ### 🧠 Memory
 
@@ -264,6 +291,7 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [dogfood](skills-meta/dogfood/) | QA and exploratory test web applications, produce structured reports with full reproduction evidence. |
 | [skill-audit](skills-meta/skill-audit/) | Audit and score any skill against best practices. Evaluates structure, content, and patterns against a checklist. |
 | [skill-creator](skills-meta/skill-creator/) | Create new skills, modify and improve existing skills, and measure skill performance with TDD. |
+| [agent-improver](skills-meta/agent-improver/) | Improve any AI agent skill via eval-driven mutation loops with multi-dimensional scoring, population mutations, constraint guardrails, session mining, and train/val/holdout splits. Works with ADK, LangChain, CrewAI, AutoGen, HTTP API, and CLI agents. |
 | [skill-improver](skills-meta/skill-improver/) | Autonomously optimize any Claude Code skill by running it repeatedly, scoring outputs against binary evals, mutating the prompt, and keeping improvements. |
 | [skill-preloading](skills-meta/skill-preloading/) | Reference for the two-tier skill loading system — preloaded vs category-gated skills, how to add/remove preloaded skills, and the external-services category layout. |
 | [skills-cleanup](skills-meta/skills-cleanup/) | How to clean up duplicate/untracked skills in the skills repo. |
@@ -273,7 +301,6 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | Skill | Description |
 |-------|-------------|
 | [appfigures](marketing/appfigures/) | Use when querying Appfigures for app store analytics (downloads, revenue, reviews, rankings). |
-| [apple-search-ads](marketing/apple-search-ads/) | Create, optimize, and scale Apple Search Ads campaigns with API automation, attribution integration, and bid strategy recommendations. |
 | [brand-identity](marketing/brand-identity/) | Build a complete brand identity from scratch or refresh an existing one — for solopreneurs, apps, and consumer products. Covers brand purpose, values, personality, voice and tone, visual identity system (colors, typography, logo direction, imagery style), and brand guidelines. Includes a… |
 | [churn-prevention](marketing/churn-prevention/) | When the user wants to reduce churn, build cancellation flows, set up save offers, improve retention, or recover failed payments. Also use when the user mentions 'churn,' 'cancel flow,' 'offboarding,' 'save offer,' 'dunning,' 'failed payment recovery,' 'win-back,' 'retention,' 'exit survey,'… |
 | [cold-email](marketing/cold-email/) | Write B2B cold emails and follow-up sequences that get replies. Use when someone wants cold outreach, prospecting emails, SDR emails, or says 'nobody's replying to my emails.' |
@@ -309,12 +336,33 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [tweet-ideas](marketing/tweet-ideas/) | Use when generating 10-20 standalone tweets to build topical authority on a subject. Not for threads or promos. Uses the Aaron Levie playbook. |
 | [typefully](marketing/typefully/) | Use when creating, scheduling, or managing social posts via Typefully. |
 | [whop-content-rewards](marketing/whop-content-rewards/) | Set up and manage Content Rewards UGC campaigns on Whop for Bloom. Use when launching new campaigns, adding budget, reviewing submissions, or checking campaign performance. |
+| [summarize-timeline](marketing/summarize-timeline/) | Summarize an X/Twitter timeline into a themed daily digest for Signal delivery. |
+| [xurl](marketing/xurl/) | Interact with X/Twitter via xurl, the official X API CLI. Posting, replying, quoting, searching, timelines, mentions, likes, bookmarks, follows, DMs. |
 | [xitter](marketing/xitter/) | Interact with X/Twitter via the x-cli terminal client using official X API credentials. Use for posting, reading timelines, searching tweets, liking, retweeting, bookmarks, mentions, and user lookups. |
+
+### 🔌 External Services
+
+| Skill | Description |
+|-------|-------------|
+| [appfigures-cli](external-services/appfigures-cli/) | Use when querying Appfigures for app store analytics (downloads, revenue, reviews, rankings). |
+| [apple-search-ads](external-services/apple-search-ads/) | Create, optimize, and scale Apple Search Ads campaigns with API automation, attribution integration, and bid strategy recommendations. |
+| [bird-twitter](external-services/bird-twitter/) | Read X/Twitter timelines, tweets, and threads using the bird CLI (cookie-based GraphQL). Use when the user mentions "bird", wants to read their Following/For You timeline, fetch tweets, search X, or pull timeline data for summarization. |
+| [copilot-money-cli](external-services/copilot-money-cli/) | Use when querying Copilot Money for finances, transactions, net worth, and holdings. |
+| [dataforseo-cli](external-services/dataforseo-cli/) | Use when doing keyword research (volume, difficulty, ideas), checking App Store or Google Play rankings, or looking up Google SERP rankings for content/landing pages. |
+| [firecrawl](external-services/firecrawl/) | Scrape, crawl, search, and interact with web pages using Firecrawl CLI and API. Use for JS-rendered pages, full site crawls, sitemaps, form interaction, and login-required pages. |
+| [gsc-cli](external-services/gsc-cli/) | Query Google Search Console data via MCP: search performance, clicks, impressions, rankings, indexing, and sitemaps. |
+| [google-ads-cli](external-services/google-ads-cli/) | Use when managing Google Ads campaigns: performance checks, keyword pausing, report downloads, or campaign optimization via browser or API. |
+| [grok-imagine](external-services/grok-imagine/) | Generate or edit images via xAI Grok Imagine (Aurora). Supports text-to-image, single-image editing, and multi-image composition (up to 3). |
+| [meta-ads-cli](external-services/meta-ads-cli/) | Daily Meta ad operations via Marketing API: check performance, kill losers, promote winners, generate fresh creatives, upload as new ads. |
+| [porkbun-cli](external-services/porkbun-cli/) | Manage Porkbun domains, DNS records, SSL certificates, URL forwarding, and hosting blueprints via the Porkbun API. |
+| [prometheus-cli](external-services/prometheus-cli/) | Search TikTok viral videos, App Store rankings, hook analysis, app strategy, and content research via SGE Prometheus MCP. |
+| [stably-cli](external-services/stably-cli/) | Use the Stably CLI to create, run, fix, and maintain Playwright tests. Use for running tests, auto-fixing failures, or generating new tests from a prompt. |
 
 ### 📋 Productivity
 
 | Skill | Description |
 |-------|-------------|
+| [airtable](productivity/airtable/) | Airtable REST API via curl. Records CRUD, filters, upserts. |
 | [apple-notes](productivity/apple-notes/) | Manage Apple Notes via the memo CLI on macOS (create, view, search, edit). |
 | [apple-reminders](productivity/apple-reminders/) | Manage Apple Reminders via remindctl CLI (list, add, complete, delete). |
 | [find-nearby](productivity/find-nearby/) | Find nearby places (restaurants, cafes, bars, pharmacies, etc.) using OpenStreetMap. Works with coordinates, addresses, cities, zip codes, or Telegram location pins. No API keys needed. |
@@ -336,6 +384,8 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 
 | Skill | Description |
 |-------|-------------|
+| [another-perspective](research/another-perspective/) | Run multi-perspective council analysis on any question, plan, or decision. Spawns parallel cognitive perspectives and synthesizes findings. |
+| [quick-brainstorm](research/quick-brainstorm/) | Lightweight brainstorm: 5 versions with estimated probabilities and assumption surfacing. |
 | [arxiv](research/arxiv/) | Search and retrieve academic papers from arXiv using their free REST API. No API key needed. Search by keyword, author, category, or ID. Combine with web_extract or the ocr-and-documents skill to read full paper content. |
 | [blogwatcher](research/blogwatcher/) | Monitor blogs and RSS/Atom feeds for updates using the blogwatcher-cli tool. Add blogs, scan for new articles, track read status, and filter by category. |
 | [hotel-price-research](research/hotel-price-research/) | Research hotel pricing across OTAs for a booking decision. Use when the user is comparing hotels for specific dates and wants real prices (not fabricated). Covers known OTA blockers (Trip.com, IHG.com, Google Hotels) and the Booking.com interactive-form workflow that actually works. Trigger on… |
@@ -350,6 +400,7 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 
 | Skill | Description |
 |-------|-------------|
+| [visual-design](visual-design/) | Router for visual artifacts: charts, slides, diagrams, generated images, frontend UI, and design assets. |
 | [apple-ux-guidelines](visual-design/apple-ux-guidelines/) | Use when apple HIG reference for UI/UX decisions on Apple platforms. |
 | [canvas-design](visual-design/canvas-design/) | Use when create visual art and designs as .png/.pdf files. |
 | [create-a-sales-asset](visual-design/create-a-sales-asset/) | Use when generating sales assets (landing pages, decks, one-pagers) from deal context. |
@@ -384,6 +435,64 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [slideshow-creator](visual-design/slideshow-creator/) | Create and post TikTok slideshows via ReelFarm. Use for generating slideshow content, setting up automations, and publishing to TikTok. For strategy, scheduling, analytics, and optimization — use the content-strategy skill first. |
 | [sticker-creator](visual-design/sticker-creator/) | Create die-cut sticker style cards via Nano Banana Pro. Use for social media cards, earnings cards, brand stickers, announcement cards, and any content formatted as a bold, clean sticker with a thick white border. |
 | [userinterface-wiki](visual-design/userinterface-wiki/) | UI/UX best practices for web interfaces. Use when reviewing animations, CSS, audio, typography, UX patterns, prefetching, or icon implementations. Covers 11 categories from animation principles to typography. Outputs file:line findings. |
+| [product-design](visual-design/product-design/) | Strategic product design thinking: information architecture, interaction design, AI-native patterns, and quality checklists. Use before building any interface to ensure the right thing gets built. |
+
+### 🔌 External Services
+
+| Skill | Description |
+|-------|-------------|
+| [appfigures-cli](external-services/appfigures-cli/) | Query Appfigures for app store analytics (downloads, revenue, reviews, rankings). |
+| [apple-search-ads](external-services/apple-search-ads/) | Create, optimize, and scale Apple Search Ads campaigns with API automation. |
+| [bird-twitter](external-services/bird-twitter/) | Read X/Twitter timelines, tweets, and threads using the bird CLI (cookie-based GraphQL). |
+| [copilot-money-cli](external-services/copilot-money-cli/) | Query Copilot Money for finances, transactions, net worth, and holdings. |
+| [dataforseo-cli](external-services/dataforseo-cli/) | Keyword research (volume, difficulty, ideas), App Store/Google Play rankings, Google SERP rankings. |
+| [firecrawl](external-services/firecrawl/) | Scrape, crawl, search, and interact with web pages using Firecrawl CLI and API. |
+| [gsc-cli](external-services/gsc-cli/) | Query Google Search Console data via MCP: search performance, clicks, impressions, rankings, indexing, and sitemaps. |
+| [google-ads-cli](external-services/google-ads-cli/) | Manage Google Ads campaigns: performance checks, keyword pausing, report downloads, campaign optimization. |
+| [higgsfield-generate](external-services/higgsfield-generate/) | Generate AI videos and images using Higgsfield. |
+| [higgsfield-marketplace-cards](external-services/higgsfield-marketplace-cards/) | Create marketplace-style product cards with Higgsfield. |
+| [higgsfield-product-photoshoot](external-services/higgsfield-product-photoshoot/) | AI product photoshoot generation with Higgsfield. |
+| [higgsfield-soul-id](external-services/higgsfield-soul-id/) | Manage Soul ID character consistency for Higgsfield generations. |
+| [meta-ads-cli](external-services/meta-ads-cli/) | Daily Meta ad operations via Marketing API: Ad Library research, performance checks, creative generation, and reporting. |
+| [porkbun-cli](external-services/porkbun-cli/) | Manage Porkbun domains, DNS records, SSL certificates, URL forwarding, and hosting blueprints. |
+| [prometheus-cli](external-services/prometheus-cli/) | Search TikTok viral videos, App Store rankings, hook analysis via SGE Prometheus MCP. |
+| [stably-cli](external-services/stably-cli/) | Create, run, fix, and maintain Playwright tests using the Stably CLI. |
+| [usefastlane-ai](external-services/usefastlane-ai/) | Short-form content platform and REST API for generating, remixing, scheduling TikTok, Reels, and Shorts. |
+
+### 🎵 Media
+
+| Skill | Description |
+|-------|-------------|
+| [spotify](media/spotify/) | Spotify: play, search, queue, manage playlists and devices. |
+
+### 🏢 Ops Center
+
+| Skill | Description |
+|-------|-------------|
+| [ops-center-codebase-review](ops-center/ops-center-codebase-review/) | Reference notes from full ops-center codebase review. |
+
+### 📚 Reference
+
+| Skill | Description |
+|-------|-------------|
+| [fintary-dashboard-notes](reference/fintary-dashboard-notes/) | Reference notes for Fintary ops-center dashboard rebuild. |
+| [ops-center-reference](reference/ops-center-reference/) | Fintary ops-center v2 architecture, API proxy pattern, infrastructure, env vars, and related repos. |
+
+### 🛠️ Software Development
+
+| Skill | Description |
+|-------|-------------|
+| [debugging-hermes-tui-commands](software-development/debugging-hermes-tui-commands/) | Debug Hermes Agent TUI slash commands: Python, gateway, Ink UI. |
+| [hermes-agent-skill-authoring](software-development/hermes-agent-skill-authoring/) | Author in-repo SKILL.md: frontmatter, validator, structure. |
+| [node-inspect-debugger](software-development/node-inspect-debugger/) | Debug Node.js via --inspect + Chrome DevTools Protocol CLI. |
+| [python-debugpy](software-development/python-debugpy/) | Debug Python: pdb REPL + debugpy remote (DAP). |
+| [spike](software-development/spike/) | Throwaway experiments to validate an idea before building. |
+
+### 🀄 Yuanbao
+
+| Skill | Description |
+|-------|-------------|
+| [yuanbao](yuanbao/) | Yuanbao (元宝) groups: @mention users, query info/members. |
 
 ---
 
@@ -397,8 +506,13 @@ These started from other open-source projects, modified and extended for these w
 |-------|----------|
 | [documents](devops/documents/) | [anthropics/skills](https://github.com/anthropics/skills) |
 | [wealth-management](finance/wealth-management/) | [anthropics/financial-services-plugins](https://github.com/anthropics/financial-services-plugins) |
+| [earnings-analysis](finance/earnings-analysis/) | [anthropics/financial-services-plugins](https://github.com/anthropics/financial-services-plugins) |
+| [idea-generation](finance/idea-generation/) | [anthropics/financial-services-plugins](https://github.com/anthropics/financial-services-plugins) |
+| [thesis-tracker](finance/thesis-tracker/) | [anthropics/financial-services-plugins](https://github.com/anthropics/financial-services-plugins) |
+| [comps-analysis](finance/comps-analysis/) | [anthropics/financial-services-plugins](https://github.com/anthropics/financial-services-plugins) |
 | [skill-creator](skills-meta/skill-creator/) | [anthropics/claude-code](https://github.com/anthropics/claude-code/tree/main/plugins/plugin-dev) |
 | [skill-audit](skills-meta/skill-audit/) | Original (inspired by Anthropic's skill patterns) |
+| [agent-improver](skills-meta/agent-improver/) | Original (inspired by [NousResearch/hermes-agent-self-evolution](https://github.com/NousResearch/hermes-agent-self-evolution) GEPA methodology) |
 | [skill-improver](skills-meta/skill-improver/) | [anthropics/claude-code](https://github.com/anthropics/claude-code/tree/main/plugins/plugin-dev) |
 | [frontend-design](visual-design/frontend-design/) | [anthropics/claude-code](https://github.com/anthropics/claude-code/tree/main/plugins/frontend-design) |
 | [ralph-mode](coding/ralph-mode/) | [anthropics/claude-code](https://github.com/anthropics/claude-code/tree/main/plugins/ralph-wiggum) |
@@ -430,10 +544,9 @@ These started from other open-source projects, modified and extended for these w
 | [remotion-videos](creative/video-production/remotion-videos/) | [remotion-dev/skills](https://github.com/remotion-dev/skills) |
 | [frontend-slides](visual-design/frontend-slides/) | [zarazhangrui/frontend-slides](https://github.com/zarazhangrui/frontend-slides) |
 | [last30days](marketing/last30days/) | [mvanhorn/last30days-skill](https://github.com/mvanhorn/last30days-skill) |
-| [stably-cli](devops/stably-cli/) | [skills.sh/stablyai](https://skills.sh/stablyai/agent-skills/stably-cli) |
 | [stably-sdk-rules](devops/stably-sdk-rules/) | [skills.sh/stablyai](https://skills.sh/stablyai/agent-skills/stably-sdk-rules) |
 | [sahil-office-hours](research/sahil-office-hours/) | [slavingia/skills](https://github.com/slavingia/skills) |
-| [design-md](visual-design/design-md/) | [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md) + [Google Stitch DESIGN.md spec](https://stitch.withgoogle.com/docs/design-md/overview/) |
+| [design-md](creative/design-md/) | [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md) + [Google Stitch DESIGN.md spec](https://stitch.withgoogle.com/docs/design-md/overview/) |
 | [design-mode](visual-design/design-mode/) | [elder-plinius/CL4R1T4S](https://github.com/elder-plinius/CL4R1T4S/blob/main/ANTHROPIC/Claude-Design-Sys-Prompt.txt) (Anthropic design-surface system prompt) |
 
 ## License

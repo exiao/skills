@@ -16,7 +16,7 @@ Delivers a concise, narrative market briefing covering earnings results, economi
 | **Bloom CLI** (`bloom`) | Pull real-time price data, top movers, sentiment scores. Auth: bloom-cli reads API keys from `~/.bloom/config.json` or env vars (`BLOOM_API_KEY`). Run `bloom auth` to configure. |
 | **Serper** (`web-search` skill, `SERPER_API_KEY`) | Search for earnings results, analyst reactions, market news |
 | **Firecrawl** (`FIRECRAWL_API_KEY`) | Scrape full articles when Serper snippets cut off before the numbers |
-| **Bloom MCP** (`https://api.getbloom.app/mcp/`, Bearer: `${BLOOM_MCP_API_KEY}`) | Check what stocks Bloom users are watching — front-load coverage of these. Note: `BLOOM_MCP_API_KEY` is a separate credential from bloom-cli's `BLOOM_API_KEY`. |
+| **Bloom MCP** (`${BLOOM_MCP_URL}`, Bearer: `${BLOOM_MCP_API_KEY}`) | Check what stocks Bloom users are watching — front-load coverage of these. Note: `BLOOM_MCP_API_KEY` is a separate credential from bloom-cli's `BLOOM_API_KEY`. |
 
 ---
 
@@ -26,7 +26,7 @@ These values were looked up and confirmed. Use them directly without re-querying
 
 | Constant | Value | Notes |
 |----------|-------|-------|
-| Typefully social set ID (@investwithbloom) | `286685` | From `social-sets:list` |
+| Typefully social set ID ($TYPEFULLY_USERNAME) | `$TYPEFULLY_SOCIAL_SET_ID` | From `social-sets:list` |
 | Typefully script path | `~/projects/skills/marketing/typefully/scripts/typefully.js` | Canonical location |
 | Serper script path | `~/projects/skills/ai-tools/web-search/scripts/serper.sh` | Full absolute path required |
 
@@ -165,14 +165,14 @@ Prioritize: mega-caps, widely-held names, dramatic movers (>5%), anything popula
 ### Signal (primary)
 Do NOT send via the message tool. The cron delivery handles Signal routing automatically. Just output the briefing text as your reply.
 
-### Typefully (secondary — @investwithbloom)
+### Typefully (secondary — $TYPEFULLY_USERNAME)
 After Signal, create a public-facing tweet of the sharpest single data point:
 
 ```bash
-node ~/projects/skills/marketing/typefully/scripts/typefully.js drafts:create 286685 \
+node ~/projects/skills/marketing/typefully/scripts/typefully.js drafts:create $TYPEFULLY_SOCIAL_SET_ID \
   --platform x \
   --text "<post text>"
-# Do NOT add --schedule. Save as unscheduled draft only — Eric reviews before posting.
+# Do NOT add --schedule. Save as unscheduled draft only — the account owner reviews before posting.
 ```
 
 Tweet guidelines:
@@ -186,7 +186,7 @@ Tweet guidelines:
 
 ## Cron Config
 
-- **ID:** `b04e6814-7840-4927-b529-feb052cadbfc`
+- **ID:** `$CRON_JOB_ID`
 - **Schedule:** `0 10 * * 1-5` (10am ET, Mon-Fri)
 - **Model:** `sonnet`
 

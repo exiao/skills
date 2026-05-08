@@ -10,8 +10,8 @@ Scan recent Sentry issues for Bloom (last 24h, all statuses), analyze root cause
 
 ## Prerequisites
 
-- Sentry MCP configured via mcporter (org: `getbloom`, region: `https://us.sentry.io`)
-- GitHub CLI (`gh`) authenticated with Bloom-Invest org access
+- Sentry MCP configured via mcporter (org: `$SENTRY_ORG`, region: `https://us.sentry.io`)
+- GitHub CLI (`gh`) authenticated with $GITHUB_ORG access
 - Git worktrees for isolated branches
 
 ## Workflow
@@ -21,7 +21,7 @@ Scan recent Sentry issues for Bloom (last 24h, all statuses), analyze root cause
 ```bash
 # Get 10 most recent issues sorted by frequency
 mcporter call sentry.list_issues \
-  organizationSlug=getbloom \
+  organizationSlug=$SENTRY_ORG \
   query='last_seen:+12h' \
   sort=freq \
   limit=10 \
@@ -36,7 +36,7 @@ Also fetch issues resolved in the last 7 days to verify fixes are real:
 
 ```bash
 # Get recently resolved issues
-sentry issue list getbloom/invest --limit 10 -t 7d --query 'is:resolved'
+sentry issue list $SENTRY_ORG/$SENTRY_PROJECT --limit 10 -t 7d --query 'is:resolved'
 ```
 
 For each resolved issue:
@@ -65,7 +65,7 @@ For EACH of the 10 issues, get full details:
 
 ```bash
 mcporter call sentry.get_issue_details \
-  organizationSlug=getbloom \
+  organizationSlug=$SENTRY_ORG \
   issueId=<ISSUE_ID> \
   regionUrl='https://us.sentry.io'
 ```
@@ -74,7 +74,7 @@ Also get latest event for full stack trace context:
 
 ```bash
 mcporter call sentry.get_latest_event \
-  organizationSlug=getbloom \
+  organizationSlug=$SENTRY_ORG \
   issueId=<ISSUE_ID> \
   regionUrl='https://us.sentry.io'
 ```
@@ -163,13 +163,13 @@ git commit -m "fix: <brief description> (<SENTRY_ISSUE_ID>)"
 git push origin fix/sentry-<SHORT_ID>
 
 gh pr create \
-  --repo Bloom-Invest/bloom \
+  --repo $BLOOM_REPO \
   --title "fix: <brief description> (<SENTRY_ISSUE_ID>)" \
   --body "## Sentry Issue
 - **Issue:** <SENTRY_ISSUE_ID>
 - **Error:** <error message>
 - **Frequency:** <events/users count>
-- **Link:** https://getbloom.sentry.io/issues/<ISSUE_NUMBER>/
+- **Link:** https://$SENTRY_ORG.sentry.io/issues/<ISSUE_NUMBER>/
 
 ## Root Cause
 <explanation of why this error occurs>

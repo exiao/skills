@@ -10,13 +10,13 @@ Scan open PRs across tracked repos, triage each one (scope check + CI + reviews)
 ## Step 1: Discover Open PRs
 
 ```bash
-for REPO in bloom-invest/bloom bloom-invest/investing-log exiao/skills; do
+for REPO in $BLOOM_REPO $INVESTING_LOG_REPO $SKILLS_REPO; do
   echo "=== $REPO ==="
   gh pr list --repo "$REPO" --author exiao --state open --json number,title,headRefName
 done
 ```
 
-Tracked repos: bloom-invest/bloom, bloom-invest/investing-log, exiao/skills. Add Fintary/ops-center or other repos if they have open PRs.
+Tracked repos: $BLOOM_REPO, $INVESTING_LOG_REPO, $SKILLS_REPO. Add $OPS_CENTER_REPO or other repos if they have open PRs.
 
 If no output: no PRs need attention. Reply NO_REPLY.
 

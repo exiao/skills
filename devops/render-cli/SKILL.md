@@ -48,7 +48,7 @@ render services instances <SERVICE_ID> -o json --confirm
 render services create --name my-api --type web_service --repo https://github.com/org/repo -o json --confirm
 
 # Clone from existing service
-render services create --from srv-abc123 --name my-api-clone -o json --confirm
+render services create --from $SOURCE_SERVICE_ID --name my-api-clone -o json --confirm
 
 # Update a service
 render services update <SERVICE_ID> -o json --confirm

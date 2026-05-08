@@ -301,7 +301,7 @@ python3 scripts/linear_api.py get-document 38359beef67c
 curl -s -X POST https://api.linear.app/graphql \
   -H "Authorization: $LINEAR_API_KEY" \
   -H "Content-Type: application/json" \
-  -d '{"query": "{ document(id: \"11700cff-b514-4db3-afcc-3ed1afacba1c\") { title content url } }"}' \
+  -d '{"query": "{ document(id: \"$DOCUMENT_ID\") { title content url } }"}' \
   | python3 -m json.tool
 ```
 

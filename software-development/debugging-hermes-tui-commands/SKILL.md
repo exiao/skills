@@ -133,7 +133,7 @@ After fixing:
 
 1. Rebuild the TUI:
    ```bash
-   cd /home/bb/hermes-agent && npm --prefix ui-tui run build
+   cd $HERMES_AGENT_DIR && npm --prefix ui-tui run build
    ```
 
 2. Run the TUI and test the command:

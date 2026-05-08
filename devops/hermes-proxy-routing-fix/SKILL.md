@@ -75,6 +75,6 @@ The "Failed to get summary response" 400s in the agent log have the same root ca
 - Hermes Agent test: ~/.hermes/hermes-agent/tests/hermes_cli/test_runtime_provider_resolution.py
 - Gateway: ~/.hermes/hermes-agent/gateway/run.py (btw handler)
 - Gateway agent: ~/.hermes/hermes-agent/hermes_cli/run_agent.py
-- Proxy: /Users/testuser/openclaw-billing-proxy/proxy.js
-- Proxy test: /Users/testuser/openclaw-billing-proxy/tests/hermes-support.test.js
+- Proxy: $HERMES_HOME/proxy/proxy.js
+- Proxy test: $HERMES_HOME/proxy/tests/hermes-support.test.js
 - Patch notes: ~/.hermes/plans/hermes-patches/btw-quota-retry.md

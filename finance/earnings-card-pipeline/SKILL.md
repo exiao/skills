@@ -121,31 +121,31 @@ No hashtags. No emojis. Confident and data-forward.
 
 ### Step 6 — Upload + Create Each Draft
 
-**Typefully account:** Bloom = social_set_id `286685` (discovered via `social-sets:list`). `TYPEFULLY_SOCIAL_SET_ID` is NOT in .env — use `286685` directly.
+**Typefully account:** Bloom = social_set_id `$TYPEFULLY_SOCIAL_SET_ID` (discovered via `social-sets:list`). `TYPEFULLY_SOCIAL_SET_ID` is NOT in .env — use `$TYPEFULLY_SOCIAL_SET_ID` directly.
 
 ```bash
 source ~/.hermes/.env && export TYPEFULLY_API_KEY
 
 # For each company:
 # 1. Upload the card image
-node ~/.hermes/skills/marketing/typefully/scripts/typefully.js media:upload 286685 /tmp/earnings-card-[TICKER]-$(date +%Y%m%d).png
+node ~/.hermes/skills/marketing/typefully/scripts/typefully.js media:upload $TYPEFULLY_SOCIAL_SET_ID /tmp/earnings-card-[TICKER]-$(date +%Y%m%d).png
 # → returns JSON with media_id field
 
 # 2. Parse the media_id from the JSON output (use jq)
-MEDIA_ID=$(node ~/.hermes/skills/marketing/typefully/scripts/typefully.js media:upload 286685 /tmp/earnings-card-[TICKER]-$(date +%Y%m%d).png | jq -r '.media_id')
+MEDIA_ID=$(node ~/.hermes/skills/marketing/typefully/scripts/typefully.js media:upload $TYPEFULLY_SOCIAL_SET_ID /tmp/earnings-card-[TICKER]-$(date +%Y%m%d).png | jq -r '.media_id')
 
 # 3. Create draft WITH media attached in the same call
-node ~/.hermes/skills/marketing/typefully/scripts/typefully.js drafts:create 286685 \
+node ~/.hermes/skills/marketing/typefully/scripts/typefully.js drafts:create $TYPEFULLY_SOCIAL_SET_ID \
   --platform x \
   --text "..." \
   --media "$MEDIA_ID"
-# Do NOT add --schedule. Save as unscheduled draft only — Eric reviews before posting.
+# Do NOT add --schedule. Save as unscheduled draft only — the account owner reviews before posting.
 # → returns draft_id, private_url
 ```
 
 **IMPORTANT: --media requires --text in drafts:update.** If you need to attach media to an existing draft after creation, you MUST pass `--text` with the existing tweet text alongside `--media`. The `drafts:update` command requires at least one content flag. Example:
 ```bash
-node ~/.hermes/skills/marketing/typefully/scripts/typefully.js drafts:update 286685 <draft_id> \
+node ~/.hermes/skills/marketing/typefully/scripts/typefully.js drafts:update $TYPEFULLY_SOCIAL_SET_ID <draft_id> \
   --text "<existing tweet text>" \
   --media "<media_id>"
 ```
@@ -162,7 +162,7 @@ Send to `$SIGNAL_MARKETING_GROUP`:
 [For each company:]
 $[TICKER] — [day] | Est: $[EPS] / $[rev]B
 Tweet: [text]
-Draft: https://typefully.com/?d=[draft_id]&a=286685 | Status: unscheduled
+Draft: https://typefully.com/?d=[draft_id]&a=$TYPEFULLY_SOCIAL_SET_ID | Status: unscheduled
 
 [Note any Benzinga/Gemini/Nano Banana failures]
 ```
@@ -172,14 +172,14 @@ Draft: https://typefully.com/?d=[draft_id]&a=286685 | Status: unscheduled
 ## Delivery
 
 - Signal group: `$SIGNAL_MARKETING_GROUP` — cron delivery handles routing, do NOT send via message tool
-- Typefully account: Bloom = `286685` (hardcoded, not in .env)
+- Typefully account: Bloom = `$TYPEFULLY_SOCIAL_SET_ID` (hardcoded, not in .env)
 - Cards: `/tmp/earnings-card-TICKER-YYYYMMDD.png`
 
 ---
 
 ## Cron Config
 
-- **ID:** `0400d7b1-679c-40da-8772-def88fbb7824`
+- **ID:** `$CRON_JOB_ID`
 - **Schedule:** `0 8 * * 1` (8am ET, Mondays)
 - **Model:** default (claude-sonnet)
 - **Target:** isolated
@@ -197,7 +197,7 @@ Draft: https://typefully.com/?d=[draft_id]&a=286685 | Status: unscheduled
 7. **Vague AI take** — "could move the stock" is not useful. Be specific: "margin guidance matters more than EPS beat."
 8. **Not reporting failures** — if Nano Banana Pro fails for one ticker, still process the others and report the failure in Signal.
 9. **Benzinga 401** — Token expires periodically. Don't waste time debugging; go straight to Serper fallback. The Serper path (EarningsWhispers + individual ticker searches) is fully sufficient.
-10. **TYPEFULLY_SOCIAL_SET_ID not in .env** — The Bloom account ID is `286685`. Discover with `social-sets:list` if unsure, but it's stable.
+10. **TYPEFULLY_SOCIAL_SET_ID not in .env** — The Bloom account ID is `$TYPEFULLY_SOCIAL_SET_ID`. Discover with `social-sets:list` if unsure, but it's stable.
 11. **Already-reported companies** — Some mega-caps report Sunday evening (e.g., PLTR on May 4) or Monday after close. When searching for each ticker, check snippets for past-tense language like "reported", "beat", "missed", "revenue was", "EPS of $X" to detect companies that already reported. In the May 2026 run, PLTR, AMD, SHOP, and RIVN had all reported by the time the cron executed on Wednesday — only DIS, UBER, NVO, APP, and COIN were still upcoming.
 12. **Mid-week re-runs** — The cron is scheduled for Monday 8am ET, but may fire late or be re-triggered mid-week. If running on a non-Monday, use the actual current date to determine which companies have already reported vs. are still upcoming. Tweet text should reference the actual reporting day ("reports tomorrow", "reports Thursday") relative to the current date, not relative to Monday.
 13. **Serper script path** — The correct path is `~/.hermes/skills/ai-tools/web-search/scripts/serper.sh` (not `skills/serper-search/`). The web-search skill's script directory moved; always use the path from the web-search skill.
