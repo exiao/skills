@@ -1,11 +1,6 @@
 ---
 name: yuanbao
-description: "Yuanbao (元宝) groups: @mention users, query info/members."
-version: 1.0.0
-metadata:
-  hermes:
-    tags: [yuanbao, mention, at, group, members, 元宝, 派, 艾特]
-    related_skills: []
+description: Use when working with Yuanbao (元宝) groups: @mention users, 艾特 someone, query group info, list group members, find users, send DMs/private messages, or handle Yuanbao group interactions.
 ---
 
 # Yuanbao Group Interaction
@@ -38,7 +33,7 @@ Example: user says "帮我艾特元宝"
 
 Step 1 — tool call:
 ```json
-{ "group_code": "328306697", "action": "find", "name": "元宝", "mention": true }
+{ "group_code": "$YUANBAO_GROUP_CODE", "action": "find", "name": "元宝", "mention": true }
 ```
 
 Step 2 — your reply (this gets sent to the group with a working @mention):
@@ -65,14 +60,14 @@ When someone asks to send a private message / 私信 / DM to a user:
 Example: user says "给 @用户aea3 私信发一个 hello"
 
 ```json
-yb_send_dm({ "group_code": "535168412", "name": "用户aea3", "message": "hello" })
+yb_send_dm({ "group_code": "$YUANBAO_GROUP_CODE", "name": "用户aea3", "message": "hello" })
 ```
 
 Example with media: user says "给 @用户aea3 私信发一张图片"
 
 ```json
 yb_send_dm({
-  "group_code": "535168412",
+  "group_code": "$YUANBAO_GROUP_CODE",
   "name": "用户aea3",
   "message": "Here is the image",
   "media_files": [{"path": "/tmp/photo.jpg"}]
@@ -80,7 +75,7 @@ yb_send_dm({
 ```
 
 **Rules:**
-- Extract `group_code` from the current chat_id (e.g. `group:535168412` → `535168412`)
+- Extract `group_code` from the current chat_id (e.g. `group:123456789` → `123456789`)
 - If you already know the user_id, pass it directly via the `user_id` parameter to skip lookup
 - If multiple users match the name, the tool returns candidates — ask the user to clarify
 - Do NOT use `send_message` tool for Yuanbao DMs — use `yb_send_dm` instead
@@ -89,7 +84,7 @@ yb_send_dm({
 ## Query Group Info
 
 ```json
-yb_query_group_info({ "group_code": "328306697" })
+yb_query_group_info({ "group_code": "$YUANBAO_GROUP_CODE" })
 ```
 
 ## Query Members
@@ -102,6 +97,6 @@ yb_query_group_info({ "group_code": "328306697" })
 
 ## Notes
 
-- `group_code` comes from chat_id: `group:328306697` → `328306697`
+- `group_code` comes from chat_id: `group:123456789` → `123456789`
 - Groups are called "派 (Pai)" in the Yuanbao app
 - Member roles: `user`, `yuanbao_ai`, `bot`

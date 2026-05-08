@@ -4,7 +4,7 @@
 
 When delegating babysit-pr to a sub-agent via `delegate_task`, you MUST include `"terminal"` in the toolsets array.
 
-**The toolset name is `"terminal"`, NOT `"mcp_terminal"` or `"mcp_terminal"`.**
+**The toolset name is `"terminal"`, NOT `"mcp_terminal"`.**
 
 Without terminal access the sub-agent has no shell and will immediately fail. This has caused 3+ wasted spawns in a single session.
 

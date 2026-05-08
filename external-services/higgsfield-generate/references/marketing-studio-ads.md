@@ -135,7 +135,7 @@ higgsfield generate create marketing_studio_image \
 
 ## Pricing Context
 
-Eric has a Creator subscription. Credit costs vary by model:
+Check your subscription tier and credit balance before generating. Credit costs vary by model:
 - 1,000 credits ≈ 500 Nano Banana Pro images ≈ ~114 Kling 3.0 videos
 - Marketing Studio videos cost more credits than static images
 - Check balance: `higgsfield account status`

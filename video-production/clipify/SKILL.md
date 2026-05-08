@@ -7,7 +7,7 @@ description: Find the funniest moments in a video, cut them as standalone clips,
 
 Find the funniest moments in a video, cut them as standalone clips, optionally reformat 16:9 → 9:16 (face-pan or split-screen), and burn opus-style word-by-word captions.
 
-Source repo: ~/projects/clipify (cloned from github.com/louisedesadeleer/clipify)
+Source repo: clone github.com/louisedesadeleer/clipify locally and set `CLIPIFY_DIR` to that checkout.
 
 ## Inputs
 
@@ -19,7 +19,7 @@ Source repo: ~/projects/clipify (cloned from github.com/louisedesadeleer/clipify
 
 - **Whisper:** `whisper --model tiny.en --word_timestamps True --output_format json` (fast; for non-English use `--model base`)
 - **ffmpeg:** add `-hwaccel videotoolbox` on macOS for decode, `-preset ultrafast` for renders. Final: `-c:v libx264 -crf 20`
-- **Scripts:** `~/projects/clipify/scripts/`
+- **Scripts:** `$CLIPIFY_DIR/scripts/`
   - `analyze.py` — speaker timeline from two ROI motion files
   - `build_pan.py` — ffmpeg crop x-expression with hard cuts
   - `build_ass.py` — opus-style ASS captions from whisper JSON
@@ -59,9 +59,9 @@ Ask: "9:16 (TikTok/Reels), 16:9 (YouTube), or 1:1 (Insta feed)?"
 
 1. Sample one frame, eyeball face ROIs (mouth+chin area as x,y,w,h)
 2. Extract per-frame motion energy in each ROI via ffmpeg tblend+signalstats
-3. Build speaker timeline: `python3 ~/projects/clipify/scripts/analyze.py /tmp/clipify/L.txt /tmp/clipify/R.txt 1.0 > /tmp/clipify/segments.json`
+3. Build speaker timeline: `python3 "$CLIPIFY_DIR/scripts/analyze.py" /tmp/clipify/L.txt /tmp/clipify/R.txt 1.0 > /tmp/clipify/segments.json`
 4. Pick pan x-coordinates for vertical strip (crop width = 608 for 1920 source)
-5. Generate x expression and render: `python3 ~/projects/clipify/scripts/build_pan.py /tmp/clipify/segments.json $LEFT_X $RIGHT_X`
+5. Generate x expression and render: `python3 "$CLIPIFY_DIR/scripts/build_pan.py" /tmp/clipify/segments.json $LEFT_X $RIGHT_X`
 
 #### 4b — Split-screen
 
@@ -73,7 +73,7 @@ Three styles: **opus** (big bold, yellow active-word), **karaoke** (4-word chunk
 
 ```bash
 whisper /tmp/clipify/clip_panned.mp4 --model tiny.en --word_timestamps True --output_format json --output_dir /tmp/clipify --language en
-python3 ~/projects/clipify/scripts/build_ass.py /tmp/clipify/clip_panned.json /tmp/clipify/captions.ass opus
+python3 "$CLIPIFY_DIR/scripts/build_ass.py" /tmp/clipify/clip_panned.json /tmp/clipify/captions.ass opus
 ffmpeg -y -i /tmp/clipify/clip_panned.mp4 -vf "subtitles=/tmp/clipify/captions.ass" -c:v libx264 -preset fast -crf 20 -c:a copy "$OUTPUT.mp4"
 ```
 
