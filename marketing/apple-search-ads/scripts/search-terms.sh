@@ -21,7 +21,6 @@ _get_search_terms() {
     endTime: $e,
     timeZone: "ORTZ",
     selector: {
-      conditions: [],
       orderBy: [{field: "localSpend", sortOrder: "DESCENDING"}],
       pagination: {offset: 0, limit: 1000}
     },
