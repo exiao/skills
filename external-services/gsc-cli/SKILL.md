@@ -2,7 +2,6 @@
 name: gsc-cli
 description: Query Google Search Console data via MCP (mcporter). Use when checking search performance, impressions, clicks, CTR, rankings for $APP_DOMAIN or any verified property. Also use for finding SEO quick wins, checking indexing status, or managing sitemaps.
 version: 1.1.0
-author: exiao
 metadata:
   runtime:
     tags: [SEO, Google, Search Console, GSC, Analytics, Rankings]

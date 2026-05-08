@@ -46,7 +46,7 @@ SCRIPT=$(dirname "$(find ~/.hermes -path '*skills/productivity/linear/scripts/li
 python3 "$SCRIPT" whoami
 python3 "$SCRIPT" list-teams
 python3 "$SCRIPT" get-issue ENG-42
-python3 "$SCRIPT" get-document 38359beef67c      # fetch a doc by slugId from the URL
+python3 "$SCRIPT" get-document a1b2c3d4e5f6      # fetch a doc by slugId from the URL
 python3 "$SCRIPT" raw 'query { viewer { name } }'
 ```
 
@@ -274,7 +274,7 @@ Document URLs look like:
 https://linear.app/<workspace>/document/<slug>-<hexSlugId>
 ```
 
-The trailing hex segment is the `slugId`. Example: `https://linear.app/nousresearch/document/rfc-hermes-permission-gateway-discord-38359beef67c` → `slugId` is `38359beef67c`.
+The trailing hex segment is the `slugId`. Example: `https://linear.app/<workspace>/document/my-document-title-a1b2c3d4e5f6` → `slugId` is `a1b2c3d4e5f6`.
 
 **Important schema detail:** the Markdown body is in the `content` field. The ProseMirror JSON is in `contentState` (not `contentData` — that field does not exist and the API returns 400).
 
@@ -286,13 +286,13 @@ The trailing hex segment is the `slugId`. Example: `https://linear.app/nousresea
 curl -s -X POST https://api.linear.app/graphql \
   -H "Authorization: $LINEAR_API_KEY" \
   -H "Content-Type: application/json" \
-  -d '{"query": "query($s: String!) { documents(filter: { slugId: { eq: $s } }, first: 1) { nodes { id title content contentState slugId url creator { name } project { name } updatedAt } } }", "variables": {"s": "38359beef67c"}}' \
+  -d '{"query": "query($s: String!) { documents(filter: { slugId: { eq: $s } }, first: 1) { nodes { id title content contentState slugId url creator { name } project { name } updatedAt } } }", "variables": {"s": "a1b2c3d4e5f6"}}' \
   | python3 -m json.tool
 ```
 
 Or via the Python helper:
 ```bash
-python3 scripts/linear_api.py get-document 38359beef67c
+python3 scripts/linear_api.py get-document a1b2c3d4e5f6
 ```
 
 ### Fetch a document by UUID

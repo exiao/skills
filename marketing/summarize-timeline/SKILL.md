@@ -53,8 +53,41 @@ Common theme areas (adapt to what's actually present):
 
 **Header:**
 ```
-📱 X/Twitter Timeline Digest — [Day of week] [Month] [Date], [Year]
-[N] tweets from your Following feed, last 24h.
+📱 X/Twitter Timeline Digest — Mon May 5, 2026
+55 tweets from your Following feed, last 24h.
+
+---
+
+🏦 Markets & Macro
+
+- @macroexample (2k❤): Semiconductors are lagging the broader AI trade. Watch for second-order rotation into suppliers.
+- @fundexample (1.1k❤): Thread explaining why a rumored acquisition would destroy shareholder value. Main issue: no strategic overlap.
+- @chartexample: $ABC reclaiming its 200 WMA after a three-month base. Breakout level: $42.
+
+---
+
+🤖 AI & Tech
+
+- @aiexample (620❤): LLM quality keeps improving across unrelated tasks, which makes narrow product roadmaps harder to defend.
+- @searchexample: Brands are buying competitor comparison queries inside AI search results. Distribution is moving upstream.
+
+---
+
+💼 Business, Strategy & Career
+
+- @careerexample (2.2k❤): Career identity thread: the painful moment when a prestigious path stops fitting.
+- @founderexample (640❤): Your income eventually tracks the quality of proof you can show, not the claims you make.
+
+---
+
+🌍 Culture & Notable
+
+- @cultureexample (1.3k❤): Rainy-day joke paired with a photo from a canceled outdoor event.
+- @writingexample: New essay on market cycles and how people mistake luck for strategy.
+
+---
+
+*Top engagement: @careerexample identity pivot (2.2k❤), @macroexample semi rotation (2k❤), @cultureexample rainy-day joke (1.3k❤), @fundexample acquisition critique (1.1k❤)*
 ```
 
 Followed by a `---` separator.
@@ -112,32 +145,32 @@ If the feed had fewer than 5 substantive items in 24h, respond with `[SILENT]` t
 
 🏦 Markets & Macro
 
-- @citrini (2k❤): "This is the part of the cycle where you screen semiconductors, find the last names that haven't tripled yet." Sector rotation call into lagging semis.
-- @compound248 (1.1k❤): Deep breakdown of why the $GME proposed acquisition of $EBAY is nonsensical. Cohen refused to answer Sorkin's basic questions.
-- @TheLongInvest: $GRAB back at 200 WMA, consolidation breakout at $3.88. PT $10.
+- @macroexample (2k❤): Semiconductors are lagging the broader AI trade. Watch for second-order rotation into suppliers.
+- @fundexample (1.1k❤): Thread explaining why a rumored acquisition would destroy shareholder value. Main issue: no strategic overlap.
+- @chartexample: $ABC reclaiming its 200 WMA after a three-month base. Breakout level: $42.
 
 ---
 
 🤖 AI & Tech
 
-- @emollick (62❤): "The unreasonable effectiveness of LLMs is what makes them so weird. Labs don't need to decide what kind of AI to build because better LLMs do better at most things."
-- @neilpatel: Brand hijacking running hot on ChatGPT. Competitors advertising when people compare products in AI search.
+- @aiexample (620❤): LLM quality keeps improving across unrelated tasks, which makes narrow product roadmaps harder to defend.
+- @searchexample: Brands are buying competitor comparison queries inside AI search results. Distribution is moving upstream.
 
 ---
 
 💼 Business, Strategy & Career
 
-- @FundamentEdge (2.2k❤): Powerful thread on career identity crisis. "My career as a hedge fund guy was functionally over at 32." Full pivot story.
-- @SahilBloom (64❤): "Your income scales proportional to excellence you demonstrate."
+- @careerexample (2.2k❤): Career identity thread: the painful moment when a prestigious path stops fitting.
+- @founderexample (640❤): Your income eventually tracks the quality of proof you can show, not the claims you make.
 
 ---
 
 🌍 Culture & Notable
 
-- @rickygervais (1.3k❤): "No tennis today then" (weather photo).
-- @dollarsanddata: "My wife and I just had our first child." New post on The Great Filter.
+- @cultureexample (1.3k❤): Rainy-day joke paired with a photo from a canceled outdoor event.
+- @writingexample: New essay on market cycles and how people mistake luck for strategy.
 
 ---
 
-*Top engagement: @FundamentEdge career pivot (2.2k❤), @citrini semi rotation (2k❤), @rickygervais (1.3k❤), @compound248 GME/EBAY (1.1k❤)*
+*Top engagement: @careerexample identity pivot (2.2k❤), @macroexample semi rotation (2k❤), @cultureexample rainy-day joke (1.3k❤), @fundexample acquisition critique (1.1k❤)*
 ```
