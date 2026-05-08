@@ -28,7 +28,7 @@ Install the skills from https://github.com/exiao/skills
 | [**ai-tools**](ai-tools/) | 10 | AI agents, MCP integrations, web search, LLM tooling |
 | [**app-store**](app-store/) | 28 | App Store tools, RevenueCat, Prometheus, ReelFarm |
 | [**coding**](coding/) | 23 | Programming, debugging, testing, code review, web scraping |
-| [**creative**](creative/) | 38 | Writing, editing, media production, content creation |
+| [**creative**](creative/) | 37 | Writing, editing, media production, content creation |
 | [**devops**](devops/) | 55 | CI/CD, GitHub, Docker, MLOps, model training/inference |
 | [**finance**](finance/) | 13 | Investing, market analysis, portfolio management |
 | [**marketing**](marketing/) | 38 | Ads (Google/Meta/Apple), SEO, analytics, social media |
@@ -191,7 +191,6 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [pretext](creative/pretext/) | Build creative browser demos with @chenglou/pretext for DOM-free text layout, ASCII art, typographic flow, kinetic typography. |
 | [sketch](creative/sketch/) | Quick visual sketches and comparison page patterns for rapid prototyping. |
 | [touchdesigner-mcp](creative/touchdesigner-mcp/) | Control a running TouchDesigner instance via twozero MCP. Create operators, set parameters, wire connections, build real-time visuals. |
-| [clipify](creative/video-production/clipify/) | Find funniest moments in a video, cut standalone clips, reformat 16:9 to 9:16 (face-pan or split-screen), burn word-by-word captions. |
 | [youtube-scriptwriting](creative/video-production/youtube-scriptwriting/) | Write retention-optimized long-form YouTube scripts through a checkpoint workflow (research, hook, structure, body, editing). |
 | [youtube-title-creator](creative/video-production/youtube-title-creator/) | Generate high-CTR YouTube titles and thumbnail concepts using 119 proven frameworks ranked by performance score. |
 | [writer](creative/writer/) | Write content in the author's voice — articles, blog posts, tweets, social media posts, marketing copy, newsletter drafts. Loads WRITING-STYLE.md and enforces kill phrases. |
