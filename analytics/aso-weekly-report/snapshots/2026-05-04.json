@@ -1,0 +1,44 @@
+{
+  "week": "2026-04-28 to 2026-05-04",
+  "downloads": {"total": 22620, "prev_week": 4760},
+  "uninstalls": {"total": 8109, "prev_week": 2114},
+  "net_downloads": {"total": 14511, "prev_week": 2646},
+  "subscriptions": {
+    "active_subs": 905,
+    "active_trials": 419,
+    "all_active": 1324,
+    "paying": 905,
+    "mrr": 2825.28,
+    "gross_mrr": 3580.34,
+    "churn_pct": 39.4,
+    "prev_week_active_subs": 704,
+    "prev_week_mrr": 2720.30,
+    "prev_week_churn_pct": 26.8
+  },
+  "revenue": {
+    "weekly_net": 1041.13,
+    "weekly_gross": 1475.73,
+    "prev_week_net": 435.75,
+    "prev_week_gross": 926.76
+  },
+  "new_subs": 293,
+  "cancelled_subs": 101,
+  "new_trials": 397,
+  "trial_conversions": 6,
+  "ratings": {
+    "ios_us": {"1": 3, "2": 0, "3": 5, "4": 4, "5": 150, "total": 162, "avg": 4.81},
+    "android_en": {"1": 14, "2": 33, "3": 42, "4": 103, "5": 665, "total": 857, "avg": 4.60}
+  },
+  "rankings": {
+    "finance_topgrossing_tablet": {"latest": 200, "range": "136-200"}
+  },
+  "app_store_keywords": {
+    "total_ranked": 1680,
+    "top_10": [
+      "bloom trading (#1)", "bloom investing (#2)", "bloom ai (#2)",
+      "bloom investing app (#2)", "bloom stock (#3)", "bloom investments (#3)",
+      "bloom stocks (#4)", "smartinvesting (#5)", "investment alerts (#7)",
+      "good investment for beginners (#9)"
+    ]
+  }
+}
