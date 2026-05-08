@@ -384,7 +384,7 @@ gh pr create --body-file /tmp/pr-body.md
 
 ### `gh pr edit` silently failing on some repos
 
-On some org repos (seen on `$BLOOM_REPO`) `gh pr edit --title` and `gh pr edit --body-file` exit 0 with a stderr warning about "Projects (classic) being deprecated" but the title/body are NOT updated. The underlying GraphQL mutation fails on `repository.pullRequest.projectCards` and the rest of the mutation never runs. You'll only notice if you re-fetch the PR and see the old title.
+On some organization repos (for example `$YOUR_REPO`) `gh pr edit --title` and `gh pr edit --body-file` exit 0 with a stderr warning about "Projects (classic) being deprecated" but the title/body are NOT updated. The underlying GraphQL mutation fails on `repository.pullRequest.projectCards` and the rest of the mutation never runs. You'll only notice if you re-fetch the PR and see the old title.
 
 Workaround: skip `gh pr edit` and patch via REST API directly. This always works:
 

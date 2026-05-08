@@ -8,18 +8,16 @@ Setup guide for configuring Apple's cancel-flow retention offers through Revenue
 - Only account holder can submit the form
 - Approval timing is unpredictable (weeks to months)
 
-## Bloom-Specific: Existing Custom Endpoint (PITFALL)
+## Existing Custom Endpoint Pitfall
 
-Bloom has a custom retention endpoint at `$BLOOM_API_DOMAIN/retention-api/` (code: `bloom_backend/views/retention.py`). This was built before the RevenueCat integration and is a **stub** that returns a hardcoded dummy `messageId`. If Apple's notification URL is pointed here instead of RevenueCat's URL, retention messaging silently fails because:
+Some apps already have a custom subscription-retention endpoint, for example `$APP_API_DOMAIN/retention-api/`. If Apple points to a stub endpoint instead of RevenueCat, retention messaging silently fails because:
 
 1. Apple sends the cancellation request to your backend
-2. Your backend returns `"default-retention-message-id"` (not a real message)
+2. Your backend returns a placeholder `messageId`
 3. No retention offer is shown to the user
-4. RevenueCat never sees the request (can't verify setup or track saves)
+4. RevenueCat never sees the request, so setup verification and save tracking fail
 
-**Resolution**: Ensure Apple's notification URL points to RevenueCat's endpoint (provided in Lifecycle > Retention setup wizard, step 1). The custom endpoint can be kept as a fallback or removed.
-
-The same file also contains a Google Play RTDN webhook (`google_play_rtdn_webhook`) for tracking subscription lifecycle events via PostHog. Win-back notifications for Android are stubbed out (TODO).
+**Resolution**: Ensure Apple's notification URL points to RevenueCat's endpoint (provided in Lifecycle > Retention setup wizard, step 1). Keep any custom endpoint only as a deliberate fallback.
 
 ## Promotional Offers in App Store Connect
 
@@ -88,24 +86,26 @@ Equalized prices are in LOCAL currencies (INR 1499, JPY 2200, etc.), not USD.
 4. **Promotional Messages**: Map Active product → Offered product → Promotion identifier. Eligibility rules (e.g., first seen >14 days).
 5. **Production**: After perf test passes, connect prod URL, recreate messages. Apple reviews per locale.
 
-## Offers Created for Bloom (May 2026)
+## Example Offer Mapping
+
+Use placeholders in public docs. Replace these with your real App Store Connect product IDs, offer codes, and prices in private config.
 
 | Product | Offer Code | Type | Details |
 |---------|-----------|------|---------|
-| monthly_10 ($19.99) | m_30_off_ppp | 30% off, PPP-equalized | PAY_AS_YOU_GO, 1 period |
-| monthly_10 ($19.99) | retain_free_monthly | 1 month free | FREE_TRIAL |
-| annual_60 ($104.99) | a_30_off_ppp | 30% off, PPP-equalized | PAY_AS_YOU_GO, 1 period |
-| annual_60 ($104.99) | retain_free_annual | 1 month free | FREE_TRIAL |
-| weekly_5 ($4.99) | retain_30_weekly | 30% off, PPP-equalized | PAY_AS_YOU_GO, 1 period |
-| weekly_5 ($4.99) | retain_free_weekly | 1 week free | FREE_TRIAL |
+| `$PRODUCT_ID_MONTHLY` | `$OFFER_CODE_MONTHLY_DISCOUNT` | Percentage discount | PAY_AS_YOU_GO, 1 period |
+| `$PRODUCT_ID_MONTHLY` | `$OFFER_CODE_MONTHLY_FREE` | Free period | FREE_TRIAL |
+| `$PRODUCT_ID_ANNUAL` | `$OFFER_CODE_ANNUAL_DISCOUNT` | Percentage discount | PAY_AS_YOU_GO, 1 period |
+| `$PRODUCT_ID_ANNUAL` | `$OFFER_CODE_ANNUAL_FREE` | Free period | FREE_TRIAL |
+| `$PRODUCT_ID_WEEKLY` | `$OFFER_CODE_WEEKLY_DISCOUNT` | Percentage discount | PAY_AS_YOU_GO, 1 period |
+| `$PRODUCT_ID_WEEKLY` | `$OFFER_CODE_WEEKLY_FREE` | Free period | FREE_TRIAL |
 
-RevenueCat messages configured:
-- **Default**: "Don't go!" (all products, all locales, Active/Approved)
-- **Promotional**: "30% Off Retention" (monthly/annual/weekly, eligibility: first seen >14 days)
+RevenueCat messages to configure:
+- **Default**: Generic cancellation-save message for all products/locales
+- **Promotional**: Discount or free-period message with eligibility rules such as first seen >14 days
 
 ## Remaining Setup Steps
 
-1. Verify Apple's notification URL points to RevenueCat (not `$BLOOM_API_DOMAIN/retention-api/`)
+1. Verify Apple's notification URL points to RevenueCat, not a legacy custom endpoint
 2. Make a sandbox purchase to complete step 3 of 4 in RC wizard
 3. Pass the performance test (~1 hour)
 4. Connect production URL, recreate messages for production

@@ -200,4 +200,4 @@ Tweet guidelines:
 4. **Too long** — Under 2000 characters. If it's longer, cut. Quiet days = 2-3 sentences.
 5. **Copying Signal verbatim to Typefully** — Public post needs to be distilled to one sharp point, not a copy-paste.
 6. **Hallucinated percentages** — News article snippets often don't contain exact current-day % moves. The model fills in plausible-sounding numbers that are wrong. Always pull from bloom-cli first (Step 0), then narrate around verified numbers.
-7. **bloom-cli auth missing** — As of 2026-05-05, `BLOOM_API_KEY` is NOT in `~/.hermes/.env` or `~/.bloom/config.json`. The cron model must use the fallback path until this is fixed. Don't waste tool calls retrying bloom commands that will fail.
+7. **bloom-cli auth missing** — If `BLOOM_API_KEY` is absent or `bloom` reports "No API key found", use the fallback path. Do not retry failed bloom commands in a loop; either run `bloom auth` once when interactive setup is appropriate or switch to web-search sources for the briefing.
