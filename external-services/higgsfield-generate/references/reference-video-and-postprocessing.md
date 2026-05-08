@@ -42,7 +42,7 @@ For ad-style remixes, prefer Marketing Studio Ad Reference over raw video models
 ```bash
 # reference can be a local path or previous job/upload id
 higgsfield generate create marketing_studio_video \
-  --prompt "Recreate this winning ad format for Bloom AI investing app" \
+  --prompt "Recreate this winning ad format for $APP_NAME" \
   --ad_reference_id "<reference_video_id>" \
   --product_ids @"$PRODUCT_IDS_JSON" \
   --mode ugc \
@@ -80,7 +80,7 @@ If the result looks too synthetic, apply light smartphone-style processing:
 
 Do not overdo it. Finance ads still need to look credible.
 
-## Bloom-Specific Guidance
+## App Ad Guidance
 
 Use this for:
 - UGC testimonial ads

@@ -217,29 +217,27 @@ def cmd_search_issues(args: argparse.Namespace) -> None:
     emit(gql(q, {"term": args.query, "first": args.limit}).get("searchIssues", {}).get("nodes", []))
 
 
-def _resolve_issue_id(identifier: str) -> str:
-    q = """query($id: String!) {
-      issue(id: $id) { id }
-    }"""
-    issue = gql(q, {"id": identifier}).get("issue")
-    if not issue:
-        sys.stderr.write(f"Issue not found: {identifier}\n")
-        sys.exit(1)
-    return issue["id"]
-
-
 def cmd_create_issue(args: argparse.Namespace) -> None:
     tid = _resolve_team_id(args.team)
     if not tid:
         sys.stderr.write(f"Team not found: {args.team}\n")
         sys.exit(1)
     inp: dict[str, Any] = {"title": args.title, "teamId": tid}
-    if args.description:
+    if args.description is not None:
         inp["description"] = args.description
     if args.priority is not None:
         inp["priority"] = args.priority
     if args.parent:
         inp["parentId"] = args.parent
+    unsupported = [name for name in ("label", "assignee") if getattr(args, name) is not None]
+    if unsupported:
+        sys.stderr.write(
+            "Unsupported create-issue option(s): "
+            f"{', '.join('--' + name for name in unsupported)}. "
+            "Use update commands or raw GraphQL until name-to-id lookup is implemented.\n"
+        )
+        sys.exit(2)
+
     q = """mutation($input: IssueCreateInput!) {
       issueCreate(input: $input) {
         success issue { id identifier title url }
@@ -252,7 +250,7 @@ def cmd_update_issue(args: argparse.Namespace) -> None:
     inp: dict[str, Any] = {}
     if args.title:
         inp["title"] = args.title
-    if args.description:
+    if args.description is not None:
         inp["description"] = args.description
     if args.priority is not None:
         inp["priority"] = args.priority
@@ -299,8 +297,7 @@ def cmd_add_comment(args: argparse.Namespace) -> None:
         success comment { id body createdAt }
       }
     }"""
-    issue_id = _resolve_issue_id(args.identifier)
-    emit(gql(q, {"input": {"issueId": issue_id, "body": args.body}}).get("commentCreate"))
+    emit(gql(q, {"input": {"issueId": args.identifier, "body": args.body}}).get("commentCreate"))
 
 
 # ---- Documents ----
@@ -402,6 +399,8 @@ def build_parser() -> argparse.ArgumentParser:
     ci.add_argument("--team", required=True)
     ci.add_argument("--description")
     ci.add_argument("--priority", type=int, choices=[0, 1, 2, 3, 4])
+    ci.add_argument("--label")
+    ci.add_argument("--assignee")
     ci.add_argument("--parent")
     ci.set_defaults(func=cmd_create_issue)
 

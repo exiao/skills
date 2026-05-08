@@ -11,9 +11,9 @@ grep -rn "HARDCODED_VALUE" --include="*.md" . 2>/dev/null | grep -v node_modules
 ```
 
 Common patterns to scan for:
-- Domain names ($BLOOM_API_DOMAIN, $APP_DOMAIN)
+- Domain names (example.com, api.example.com)
 - Email addresses (admin@domain.com)
-- Account/set IDs ($TYPEFULLY_SOCIAL_SET_ID, $BLOOM_AD_ACCOUNT_ID, act_XXXXXXXXX)
+- Account/set IDs (286685, act_725955967809454)
 - Cron job UUIDs (`xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx` for real scheduled routines)
 - Deployment hostnames (`*.up.railway.app`, `*.onrender.com`) and Render service IDs (`srv-...`)
 - API URLs (https://api.domain.com/path/)
@@ -48,8 +48,8 @@ After stripping values from the repo, add them to the private env file so skills
 
 ```bash
 cat >> ~/.hermes/.env << 'EOF'
-APP_DOMAIN=$APP_DOMAIN
-BLOOM_API_DOMAIN=$BLOOM_API_DOMAIN
+APP_DOMAIN=example.com
+BLOOM_API_DOMAIN=api.example.com
 EOF
 ```
 

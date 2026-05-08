@@ -1,15 +1,6 @@
 ---
 name: gsc-cli
-description: Query Google Search Console data via MCP (mcporter). Use when checking search performance, impressions, clicks, CTR, rankings for $APP_DOMAIN or any verified property. Also use for finding SEO quick wins, checking indexing status, or managing sitemaps.
-version: 1.1.0
-metadata:
-  runtime:
-    tags: [SEO, Google, Search Console, GSC, Analytics, Rankings]
-prerequisites:
-  commands: [mcporter]
-  credential_files:
-    - path: ~/.config/gsc-credentials.json
-      description: Google Cloud service account JSON key with Search Console API access
+description: Query Google Search Console data via MCP (mcporter). Use when checking search performance, impressions, clicks, CTR, rankings for any verified property. Also use for finding SEO quick wins, checking indexing status, or managing sitemaps.
 ---
 
 # gsc-cli — Google Search Console via MCP
@@ -51,16 +42,16 @@ Query Google Search Console performance data using mcporter's `gsc` server.
 ```bash
 # Step 1: Register the service account via the Webmasters API
 uv run --with google-auth --with google-auth-httplib2 --with google-api-python-client python3 << 'EOF'
+import os
 from google.oauth2 import service_account
 from googleapiclient.discovery import build
-import os
 
 creds = service_account.Credentials.from_service_account_file(
     os.path.expanduser('~/.config/gsc-credentials.json'),
     scopes=['https://www.googleapis.com/auth/webmasters']
 )
 service = build('webmasters', 'v3', credentials=creds)
-service.sites().add(siteUrl='sc-domain:$GSC_SITE_DOMAIN').execute()
+service.sites().add(siteUrl=f"sc-domain:{os.environ['APP_DOMAIN']}").execute()
 print("Registered as unverified user")
 
 # Check status
@@ -89,7 +80,7 @@ mcporter list gsc --schema
 ```bash
 # Last 28 days of query performance
 mcporter call gsc.search_analytics \
-  siteUrl="sc-domain:$GSC_SITE_DOMAIN" \
+  siteUrl="sc-domain:$APP_DOMAIN" \
   startDate="2026-04-09" \
   endDate="2026-05-07" \
   dimensions="query" \
@@ -98,7 +89,7 @@ mcporter call gsc.search_analytics \
 
 # Page-level performance
 mcporter call gsc.search_analytics \
-  siteUrl="sc-domain:$GSC_SITE_DOMAIN" \
+  siteUrl="sc-domain:$APP_DOMAIN" \
   startDate="2026-04-09" \
   endDate="2026-05-07" \
   dimensions="page" \
@@ -109,7 +100,7 @@ mcporter call gsc.search_analytics \
 ```bash
 # Query + page breakdown (which queries land on which pages)
 mcporter call gsc.search_analytics \
-  siteUrl="sc-domain:$GSC_SITE_DOMAIN" \
+  siteUrl="sc-domain:$APP_DOMAIN" \
   startDate="2026-04-01" \
   endDate="2026-05-01" \
   dimensions="query,page" \
@@ -118,7 +109,7 @@ mcporter call gsc.search_analytics \
 
 # Device breakdown
 mcporter call gsc.search_analytics \
-  siteUrl="sc-domain:$GSC_SITE_DOMAIN" \
+  siteUrl="sc-domain:$APP_DOMAIN" \
   startDate="2026-04-01" \
   endDate="2026-05-01" \
   dimensions="query,device" \
@@ -126,18 +117,18 @@ mcporter call gsc.search_analytics \
 
 # Daily trend for a specific query
 mcporter call gsc.search_analytics \
-  siteUrl="sc-domain:$GSC_SITE_DOMAIN" \
+  siteUrl="sc-domain:$APP_DOMAIN" \
   startDate="2026-04-01" \
   endDate="2026-05-01" \
   dimensions="date" \
-  queryFilter="$APP_SEARCH_QUERY" \
+  queryFilter="bloom investing app" \
   --output json
 ```
 
 ### Enhanced search analytics (up to 25K rows, regex)
 ```bash
 mcporter call gsc.enhanced_search_analytics \
-  siteUrl="sc-domain:$GSC_SITE_DOMAIN" \
+  siteUrl="sc-domain:$APP_DOMAIN" \
   startDate="2026-04-01" \
   endDate="2026-05-01" \
   dimensions="query,page" \
@@ -150,7 +141,7 @@ mcporter call gsc.enhanced_search_analytics \
 ```bash
 # Filter by page URL
 mcporter call gsc.search_analytics \
-  siteUrl="sc-domain:$GSC_SITE_DOMAIN" \
+  siteUrl="sc-domain:$APP_DOMAIN" \
   startDate="2026-04-01" \
   endDate="2026-05-01" \
   dimensions="query" \
@@ -159,7 +150,7 @@ mcporter call gsc.search_analytics \
 
 # Regex filter for related queries
 mcporter call gsc.search_analytics \
-  siteUrl="sc-domain:$GSC_SITE_DOMAIN" \
+  siteUrl="sc-domain:$APP_DOMAIN" \
   startDate="2026-04-01" \
   endDate="2026-05-01" \
   dimensions="query" \
@@ -169,7 +160,7 @@ mcporter call gsc.search_analytics \
 
 # Mobile only
 mcporter call gsc.search_analytics \
-  siteUrl="sc-domain:$GSC_SITE_DOMAIN" \
+  siteUrl="sc-domain:$APP_DOMAIN" \
   startDate="2026-04-01" \
   endDate="2026-05-01" \
   dimensions="query" \
@@ -181,7 +172,7 @@ mcporter call gsc.search_analytics \
 ```bash
 # Find keywords ranking 4-10 with optimization potential
 mcporter call gsc.detect_quick_wins \
-  siteUrl="sc-domain:$GSC_SITE_DOMAIN" \
+  siteUrl="sc-domain:$APP_DOMAIN" \
   startDate="2026-04-01" \
   endDate="2026-05-01" \
   minImpressions:50 \
@@ -192,7 +183,7 @@ mcporter call gsc.detect_quick_wins \
 
 # Or use enhanced_search_analytics with inline quick wins
 mcporter call gsc.enhanced_search_analytics \
-  siteUrl="sc-domain:$GSC_SITE_DOMAIN" \
+  siteUrl="sc-domain:$APP_DOMAIN" \
   startDate="2026-04-01" \
   endDate="2026-05-01" \
   dimensions="query,page" \
@@ -203,7 +194,7 @@ mcporter call gsc.enhanced_search_analytics \
 ### URL Indexing Inspection
 ```bash
 mcporter call gsc.index_inspect \
-  siteUrl="sc-domain:$GSC_SITE_DOMAIN" \
+  siteUrl="sc-domain:$APP_DOMAIN" \
   inspectionUrl="https://$APP_DOMAIN/subscribe" \
   --output json
 ```
@@ -242,7 +233,7 @@ mcporter call gsc.submit_sitemap \
 
 ## Site URL Format
 
-- Domain property: `sc-domain:$GSC_SITE_DOMAIN` (covers all subdomains and protocols)
+- Domain property: `sc-domain:$APP_DOMAIN` (covers all subdomains and protocols)
 - URL prefix: `https://$APP_DOMAIN/` (trailing slash required)
 
 Use `sc-domain:` format when available as it captures all traffic.
@@ -270,4 +261,4 @@ Use `sc-domain:` format when available as it captures all traffic.
 - `dataState="all"` includes preliminary data that may change.
 - Max 25,000 rows per request. For high-volume sites, use filters to segment.
 - Service account must be added as **Owner/Full** user in GSC, not just viewer.
-- Service account credential file at `~/.config/gsc-credentials.json` (email configured during setup).
+- Service account credential file at `~/.config/gsc-credentials.json` (email: `$GSC_SERVICE_ACCOUNT_EMAIL`).
