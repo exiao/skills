@@ -13,7 +13,7 @@ grep -rn "HARDCODED_VALUE" --include="*.md" . 2>/dev/null | grep -v node_modules
 Common patterns to scan for:
 - Domain names ($BLOOM_API_DOMAIN, $APP_DOMAIN)
 - Email addresses (admin@domain.com)
-- Account/set IDs ($TYPEFULLY_SOCIAL_SET_ID, act_725955967809454)
+- Account/set IDs ($TYPEFULLY_SOCIAL_SET_ID, $BLOOM_AD_ACCOUNT_ID, act_XXXXXXXXX)
 - Cron job UUIDs (`xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx` for real scheduled routines)
 - Deployment hostnames (`*.up.railway.app`, `*.onrender.com`) and Render service IDs (`srv-...`)
 - API URLs (https://api.domain.com/path/)
