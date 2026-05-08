@@ -130,7 +130,7 @@ YTD: +18.3%
 ### Step 9 — Ensure Tag + Upload + Create Draft
 
 ```bash
-cd ~/clawd/skills/typefully
+cd ~/.hermes/skills/marketing/typefully
 
 # Ensure 'investing-log' tag exists (safe to run even if it already exists)
 node scripts/typefully.js tags:create $TYPEFULLY_SOCIAL_SET_ID --name 'investing-log' 2>/dev/null || true

@@ -1,8 +1,8 @@
-# Skills — 340+ Claude Code Skill Templates
+# Skills — 320+ Claude Code Skill Templates
 
 > **Source:** [github.com/exiao/skills](https://github.com/exiao/skills) | **License:** MIT
 
-A battle-tested collection of **340+ prompt-template skills** for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) spanning content, marketing, design, development, investing, growth, and infrastructure.
+A battle-tested collection of **320+ prompt-template skills** for [Claude Code](https://docs.anthropic.com/en/docs/claude-code) spanning content, marketing, design, development, investing, growth, and infrastructure.
 
 > **Skills are prompt templates that Claude Code invokes on demand.** Each skill is a folder with a `SKILL.md` file. Resources: [Intro](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview) | [Free course](https://anthropic.skilljar.com/introduction-to-agent-skills) | [Complete guide](https://resources.anthropic.com/hubfs/The-Complete-Guide-to-Building-Skill-for-Claude.pdf)
 

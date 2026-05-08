@@ -197,7 +197,7 @@ TYPEFULLY_API_KEY=<key> node scripts/typefully.js drafts:get $TYPEFULLY_SOCIAL_S
 jq '{status, scheduled_date, private_url, media: .platforms.x.posts[0].media_ids, text: .platforms.x.posts[0].text}' /tmp/typefully-draft-<draft_id>.json
 ```
 
-**Note:** `TYPEFULLY_SOCIAL_SET_ID` is not set in .env. Use the hardcoded value `$TYPEFULLY_SOCIAL_SET_ID` for Bloom. The API key is `TYPEFULLY_API_KEY` from .env.
+**Note:** Set `TYPEFULLY_SOCIAL_SET_ID` in the environment or local config before running. Do not hardcode the numeric social set ID in this public skill. The API key is `TYPEFULLY_API_KEY` from .env.
 
 ### Step 9 — Report
 
@@ -243,7 +243,7 @@ Typefully: https://typefully.com/?d=[draft_id]&a=$TYPEFULLY_SOCIAL_SET_ID
 6. **Scheduling instead of drafting** — do not schedule insider-trade posts. Create an unscheduled Typefully draft only; the account owner reviews before posting.
 7. **Reporting when no trade found** — if Step 2 yields nothing, NO_REPLY silently. Don't send a "nothing found" message.
 8. **Using screener URL as primary source** — it frequently returns empty HTML. Always start with `insider-purchases-25k` page and filter client-side.
-9. **TYPEFULLY_SOCIAL_SET_ID not in .env** — it's not there. Bloom's social set ID is hardcoded: `$TYPEFULLY_SOCIAL_SET_ID`.
+9. **TYPEFULLY_SOCIAL_SET_ID missing** — set it in the environment or local config. Never hardcode the numeric social set ID in the skill.
 10. **Not detecting cluster buys** — when multiple insiders buy the same ticker on the same day, that's the strongest signal. Always check for this pattern and highlight it in the tweet.
 
 ## Constitutional Rules

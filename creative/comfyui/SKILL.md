@@ -59,7 +59,7 @@ for workflow execution.
 
 **Example workflows (`workflows/`):** SD 1.5, SDXL, Flux Dev, SDXL img2img,
 SDXL inpaint, ESRGAN upscale, AnimateDiff video, Wan T2V. See
-`workflows/README.md`.
+`workflows/WORKFLOWS.md`.
 
 ## When to Use
 
