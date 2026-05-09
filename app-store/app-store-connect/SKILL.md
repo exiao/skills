@@ -57,7 +57,7 @@ If `asc` is not installed or not on PATH, use the App Store Connect API directly
 ```python
 import json, time, urllib.request, os, jwt
 cfg = json.load(open(os.path.expanduser('~/.asc/config.json')))
-key_path = os.path.expanduser(cfg.get('key_path') or cfg.get('private_key_path') or '~/.asc/AuthKey_QX7RXQBMUZ.p8')
+key_path = os.path.expanduser(cfg.get('key_path') or cfg.get('private_key_path') or os.environ.get('ASC_PRIVATE_KEY_PATH', '~/.asc/AuthKey.p8'))
 key = open(key_path).read()
 token = jwt.encode(
     {'iss': cfg['issuer_id'], 'exp': int(time.time()) + 1200, 'aud': 'appstoreconnect-v1'},

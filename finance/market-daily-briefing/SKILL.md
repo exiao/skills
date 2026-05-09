@@ -26,7 +26,7 @@ These values were looked up and confirmed. Use them directly without re-querying
 
 | Constant | Value | Notes |
 |----------|-------|-------|
-| Typefully social set ID (@investwithbloom) | `286685` | From `social-sets:list` |
+| Typefully social set ID ($TYPEFULLY_USERNAME) | `$TYPEFULLY_SOCIAL_SET_ID` | From `social-sets:list` |
 | Typefully script path | `~/projects/skills/marketing/typefully/scripts/typefully.js` | Canonical location |
 | Serper script path | `~/projects/skills/ai-tools/web-search/scripts/serper.sh` | Full absolute path required |
 
@@ -165,11 +165,11 @@ Prioritize: mega-caps, widely-held names, dramatic movers (>5%), anything popula
 ### Signal (primary)
 Do NOT send via the message tool. The cron delivery handles Signal routing automatically. Just output the briefing text as your reply.
 
-### Typefully (secondary — @investwithbloom)
+### Typefully (secondary — $TYPEFULLY_USERNAME)
 After Signal, create a public-facing tweet of the sharpest single data point:
 
 ```bash
-node ~/projects/skills/marketing/typefully/scripts/typefully.js drafts:create 286685 \
+node ~/projects/skills/marketing/typefully/scripts/typefully.js drafts:create $TYPEFULLY_SOCIAL_SET_ID \
   --platform x \
   --text "<post text>"
 # Do NOT add --schedule. Save as unscheduled draft only — Eric reviews before posting.

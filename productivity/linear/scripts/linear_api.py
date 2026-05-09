@@ -229,7 +229,11 @@ def cmd_create_issue(args: argparse.Namespace) -> None:
         inp["priority"] = args.priority
     if args.parent:
         inp["parentId"] = args.parent
-    # TODO: label + assignee name->id lookup (omitted for v1 brevity)
+    # Fail fast on unsupported flags rather than silently ignoring them
+    for flag in ("label", "assignee"):
+        if getattr(args, flag, None):
+            sys.stderr.write(f"--{flag} is not yet supported for create-issue (needs name->id lookup)\n")
+            sys.exit(1)
 
     q = """mutation($input: IssueCreateInput!) {
       issueCreate(input: $input) {

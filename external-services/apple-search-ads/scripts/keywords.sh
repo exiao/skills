@@ -26,7 +26,7 @@ cmd_list() {
   done
 
   local response
-  response=$(asa_api GET "/campaigns/${cid}/adgroups/${agid}/targetingkeywords") || return 1
+  response=$(asa_api GET "/campaigns/${cid}/adgroups/${agid}/targetingkeywords?limit=1000") || return 1
 
   local filter='.data[]?'
   if [[ -n "$status" ]]; then
