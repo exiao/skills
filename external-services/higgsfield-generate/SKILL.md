@@ -77,8 +77,9 @@ Skip both checks if `higgsfield account status` already prints account info.
 
 2. **Pass media inputs straight to flags.** Media flags accept a local file path **or** a UUID. CLI auto-uploads paths and auto-detects job vs upload for UUIDs. No need to pre-upload. Each model declares accepted roles (`image`, `start_image`, `end_image`, `video`, `audio`) — see `references/media-inputs.md`.
 3. **Validate quickly.** If unsure of params, run `higgsfield model get <jst> --json` once and pass only what's needed. Use schema defaults otherwise. The server returns `adjustments` for non-fatal coercions (e.g. `aspect_ratio=99:99` → closest match) and a structured error for invalid declared-param values.
-4. **Submit and wait in one shot.** `higgsfield generate create <jst> --prompt "..." [media flags] [param flags] --wait`. Blocks until terminal status and prints the result URL on stdout. Tunables: `--wait-timeout 20m` (default 10m), `--wait-interval 5s` (default 3s).
-5. **Deliver.** Send the URL plus a one-line summary (model, duration if video).
+4. **Shape Seedance prompts before submitting.** For `seedance_2_0`, especially UGC/talking-head ads, use `references/seedance-prompting-guide.md`: keep each clip ≤15s, embed dialogue inline with the visible action, put brand names on visible-speaker beats, use the selfie POV wording when relevant, and add real-world props for realism.
+5. **Submit and wait in one shot.** `higgsfield generate create <jst> --prompt "..." [media flags] [param flags] --wait`. Blocks until terminal status and prints the result URL on stdout. Tunables: `--wait-timeout 20m` (default 10m), `--wait-interval 5s` (default 3s).
+6. **Deliver.** Send the URL plus a one-line summary (model, duration if video).
 
 To inspect or rerun later, `higgsfield generate list --json` and `higgsfield generate get <id> --json` work for retrospection. `higgsfield generate wait <id>` is still available if you ever need to rejoin a job started without `--wait`.
 

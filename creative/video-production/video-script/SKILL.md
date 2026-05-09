@@ -108,7 +108,7 @@ Hook → rapid clips → CTA
 
 **Product test reveal (15-30s)**
 Brand shot → Data reveal → Score climax → Alternative CTA
-The subject being tested is the hook (pick brands everyone knows and has opinions on). Data is the drama — make the score reveal feel like a climax, not a footnote. The product appears only at the end as "the tool I used to find this." This format is infinitely repeatable: same structure, different brand/ticker/guru each video. Source: Product Test Reveal case study (30M views, 232 videos, identical format). Best for: products with data/analysis at their core (fintech, health, comparison tools).
+The subject being tested is the hook (pick brands everyone knows and has opinions on). Data is the drama — make the score reveal feel like a climax, not a footnote. The product appears only at the end as "the tool I used to find this." This format is infinitely repeatable: same structure, different brand/ticker/guru each video. Source: @oasishealthapp (30M views, 232 videos, identical format). Best for: products with data/analysis at their core (fintech, health, comparison tools).
 
 ### Timing rules
 

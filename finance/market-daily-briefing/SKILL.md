@@ -16,7 +16,7 @@ Delivers a concise, narrative market briefing covering earnings results, economi
 | **Bloom CLI** (`bloom`) | Pull real-time price data, top movers, sentiment scores. Auth: bloom-cli reads API keys from `~/.bloom/config.json` or env vars (`BLOOM_API_KEY`). Run `bloom auth` to configure. |
 | **Serper** (`web-search` skill, `SERPER_API_KEY`) | Search for earnings results, analyst reactions, market news |
 | **Firecrawl** (`FIRECRAWL_API_KEY`) | Scrape full articles when Serper snippets cut off before the numbers |
-| **Bloom MCP** (`${BLOOM_MCP_URL}`, Bearer: `${BLOOM_MCP_API_KEY}`) | Check what stocks Bloom users are watching — front-load coverage of these. Note: `BLOOM_MCP_API_KEY` is a separate credential from bloom-cli's `BLOOM_API_KEY`. |
+| **Bloom MCP** (`https://api.getbloom.app/mcp/`, Bearer: `${BLOOM_MCP_API_KEY}`) | Check what stocks Bloom users are watching — front-load coverage of these. Note: `BLOOM_MCP_API_KEY` is a separate credential from bloom-cli's `BLOOM_API_KEY`. |
 
 ---
 
@@ -26,9 +26,9 @@ These values were looked up and confirmed. Use them directly without re-querying
 
 | Constant | Value | Notes |
 |----------|-------|-------|
-| Typefully social set ID ($TYPEFULLY_USERNAME) | `$TYPEFULLY_SOCIAL_SET_ID` | From `social-sets:list` |
-| Typefully script path | `~/.hermes/skills/marketing/typefully/scripts/typefully.js` | Runtime skill location |
-| Serper script path | `~/.hermes/skills/ai-tools/web-search/scripts/serper.sh` | Runtime skill location |
+| Typefully social set ID (@investwithbloom) | `286685` | From `social-sets:list` |
+| Typefully script path | `~/projects/skills/marketing/typefully/scripts/typefully.js` | Canonical location |
+| Serper script path | `~/projects/skills/ai-tools/web-search/scripts/serper.sh` | Full absolute path required |
 
 ---
 
@@ -116,10 +116,10 @@ If `BLOOM_API_KEY` is not set (bloom commands return "No API key found"), skip S
 5. **Mark all percentages with `~` prefix** (e.g. "~-3%") since they come from article snippets, not live API data. Don't use the verbose "(unverified — source: article)" to save character budget.
 
 **Effective search patterns (confirmed working):**
-- `bash ~/.hermes/skills/ai-tools/web-search/scripts/serper.sh "earnings results today [date]" --type news --num 5`
-- `bash ~/.hermes/skills/ai-tools/web-search/scripts/serper.sh "stock market movers today [date] premarket" --num 5`
-- `bash ~/.hermes/skills/ai-tools/web-search/scripts/serper.sh "[TICKER] stock price premarket [date]" --num 3`
-- `bash ~/.hermes/skills/ai-tools/web-search/scripts/serper.sh "[Company] Q1 2026 earnings EPS revenue" --type news --num 3`
+- `bash ~/projects/skills/ai-tools/web-search/scripts/serper.sh "earnings results today [date]" --type news --num 5`
+- `bash ~/projects/skills/ai-tools/web-search/scripts/serper.sh "stock market movers today [date] premarket" --num 5`
+- `bash ~/projects/skills/ai-tools/web-search/scripts/serper.sh "[TICKER] stock price premarket [date]" --num 3`
+- `bash ~/projects/skills/ai-tools/web-search/scripts/serper.sh "[Company] Q1 2026 earnings EPS revenue" --type news --num 3`
 
 This produces a usable briefing but with lower confidence on exact intraday numbers.
 
@@ -165,14 +165,14 @@ Prioritize: mega-caps, widely-held names, dramatic movers (>5%), anything popula
 ### Signal (primary)
 Do NOT send via the message tool. The cron delivery handles Signal routing automatically. Just output the briefing text as your reply.
 
-### Typefully (secondary — $TYPEFULLY_USERNAME)
+### Typefully (secondary — @investwithbloom)
 After Signal, create a public-facing tweet of the sharpest single data point:
 
 ```bash
-node ~/.hermes/skills/marketing/typefully/scripts/typefully.js drafts:create $TYPEFULLY_SOCIAL_SET_ID \
+node ~/projects/skills/marketing/typefully/scripts/typefully.js drafts:create 286685 \
   --platform x \
   --text "<post text>"
-# Do NOT add --schedule. Save as unscheduled draft only — the account owner reviews before posting.
+# Do NOT add --schedule. Save as unscheduled draft only — Eric reviews before posting.
 ```
 
 Tweet guidelines:
@@ -186,7 +186,7 @@ Tweet guidelines:
 
 ## Cron Config
 
-- **ID:** `$CRON_JOB_ID`
+- **ID:** `b04e6814-7840-4927-b529-feb052cadbfc`
 - **Schedule:** `0 10 * * 1-5` (10am ET, Mon-Fri)
 - **Model:** `sonnet`
 
@@ -200,4 +200,4 @@ Tweet guidelines:
 4. **Too long** — Under 2000 characters. If it's longer, cut. Quiet days = 2-3 sentences.
 5. **Copying Signal verbatim to Typefully** — Public post needs to be distilled to one sharp point, not a copy-paste.
 6. **Hallucinated percentages** — News article snippets often don't contain exact current-day % moves. The model fills in plausible-sounding numbers that are wrong. Always pull from bloom-cli first (Step 0), then narrate around verified numbers.
-7. **bloom-cli auth missing** — If `BLOOM_API_KEY` is absent or `bloom` reports "No API key found", use the fallback path. Do not retry failed bloom commands in a loop; either run `bloom auth` once when interactive setup is appropriate or switch to web-search sources for the briefing.
+7. **bloom-cli auth missing** — As of 2026-05-05, `BLOOM_API_KEY` is NOT in `~/.hermes/.env` or `~/.bloom/config.json`. The cron model must use the fallback path until this is fixed. Don't waste tool calls retrying bloom commands that will fail.

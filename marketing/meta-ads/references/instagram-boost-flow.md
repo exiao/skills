@@ -5,7 +5,7 @@ Browser-based ad workflow for running ads **without a Facebook ad account** — 
 ## Context
 
 - **Account:** invest.with.bloom on Instagram
-- **Login:** $META_ADS_LOGIN (password in ads/iteration/config.json)
+- **Login:** admin@getbloom.app (password in ads/iteration/config.json)
 - **Budget per ad:** $5/day, run until paused
 - **Destination:** App Store link for Bloom
 - **Browser profile:** clawd
@@ -66,7 +66,7 @@ Log to `ads/iteration/[YYYY-MM-DD]_promotions.log`.
 5. When boost dialog appears: select **"Without a Facebook ad account"**
 6. Objective: Visit your website → App Store URL
 7. Budget: $5/day, run until paused
-8. **If payment method needed: STOP and notify the account owner**
+8. **If payment method needed: STOP and notify Eric**
 
 Save manifest to `ads/iteration/creatives/[YYYY-MM-DD]/manifest.md` with: filename, format, hook, primary text.
 

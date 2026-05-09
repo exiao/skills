@@ -48,6 +48,7 @@ gh api graphql \
 
 Use this sweep to classify results:
 - `ready`: CI green or skipped, merge state clean, approved or no blocking review, zero unresolved actionable threads.
+- `needs re-review`: CI green, merge state clean, zero unresolved threads, but aggregate `reviewDecision` still says `CHANGES_REQUESTED` after thread cleanup. Report that the PR is clean but needs reviewer re-review/dismissal instead of calling it ready.
 - `pushed fix`: a commit was pushed and CI is pending or a bot re-review is pending.
 - `blocked`: current review decision is changes requested with unresolved actionable issues that are too large or ambiguous for cron.
 - `monitoring`: CI still pending after reasonable wait.

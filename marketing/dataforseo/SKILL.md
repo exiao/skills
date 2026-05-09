@@ -142,11 +142,11 @@ curl -s -X POST "$BASE/dataforseo_labs/apple/app_competitors/live" \
 ```bash
 curl -s -X POST "$BASE/dataforseo_labs/google/ranked_keywords/live" \
   -H "$DFS_AUTH" -H "Content-Type: application/json" \
-  -d '[{"target": "$APP_DOMAIN", "location_code": 2840, "language_code": "en", "limit": 50}]'
+  -d '[{"target": "investwithbloom.com", "location_code": 2840, "language_code": "en", "limit": 50}]'
 ```
 
 **Returns:** Items with `keyword_data.keyword`, `keyword_data.keyword_info.search_volume`, `ranked_serp_element.serp_item.rank_absolute`  
-**Note:** $APP_DOMAIN ranks for 12 keywords, all brand-name. Use on competitor domains to find their traffic-driving terms.
+**Note:** investwithbloom.com ranks for 12 keywords, all brand-name. Use on competitor domains to find their traffic-driving terms.
 
 ---
 
@@ -169,7 +169,7 @@ curl -s -X POST "$BASE/ai_optimization/ai_keyword_data/keywords_search_volume/li
 # Step 1 — Queue
 curl -s -X POST "$BASE/on_page/task_post" \
   -H "$DFS_AUTH" -H "Content-Type: application/json" \
-  -d '[{"target": "https://$SUBSTACK_DOMAIN/p/your-slug", "max_crawl_pages": 1, "calculate_keyword_density": true, "enable_browser_rendering": true}]'
+  -d '[{"target": "https://mycrystalball.substack.com/p/your-slug", "max_crawl_pages": 1, "calculate_keyword_density": true, "enable_browser_rendering": true}]'
 
 # Step 2 — Summary
 curl -s "$BASE/on_page/summary/<TASK_ID>" -H "$DFS_AUTH"
@@ -181,7 +181,7 @@ curl -s -X POST "$BASE/on_page/pages" \
 ```
 
 **Returns:** Per-page `checks` — title tag, meta description, H1, broken links, keyword density, CWV.  
-For full site: `target: "$APP_DOMAIN"`, `max_crawl_pages: 50`
+For full site: `target: "getbloom.app"`, `max_crawl_pages: 50`
 
 ---
 
@@ -192,7 +192,7 @@ For full site: `target: "$APP_DOMAIN"`, `max_crawl_pages: 50`
 | ASO keyword volume | 1. Batch up to 700 keywords per call |
 | Keyword ideas | 2. Use 2–5 seeds, sort by `search_volume` desc |
 | SEO difficulty | 3. <30 = easy target |
-| Google SERP check | 4. Search for `$APP_DOMAIN` in `domain` field |
+| Google SERP check | 4. Search for `getbloom.app` in `domain` field |
 | App Store rank for keyword | 5. Find `app_id == "$BLOOM_APP_STORE_ID"` |
 | All keywords Bloom ranks for | 6. Sort by `rank_absolute` for best positions |
 | App Store competitors | 7. Lower `avg_position` = stronger competitor |

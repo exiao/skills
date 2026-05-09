@@ -25,22 +25,19 @@ cmd_list() {
     esac
   done
 
-  # Use POST /find for server-side filtering + pagination (GET defaults to ~20 results)
-  local payload='{"pagination":{"limit":100,"offset":0}'
+  local response
+  response=$(asa_api GET "/campaigns") || return 1
+
+  local filter='.data[]?'
   if [[ -n "$status" ]]; then
-    payload='{"pagination":{"limit":100,"offset":0},"conditions":[{"field":"status","operator":"EQUALS","values":["'"$status"'"]}]}'
-  else
-    payload='{"pagination":{"limit":100,"offset":0}}'
+    filter=".data[]? | select(.status == \"$status\")"
   fi
 
-  local response
-  response=$(asa_api POST "/campaigns/find" "$payload") || return 1
-
-  echo "$response" | jq -r '
-    .data[]? | [.id, .name, .status, .supplySources[0] // "N/A",
-      (.dailyBudgetAmount.amount // "N/A"),
-      (.budgetAmount.amount // "N/A")] |
-    @tsv' | column -t -s $'\t' | {
+  echo "$response" | jq -r "
+    $filter | [.id, .name, .status, .supplySources[0] // \"N/A\",
+      (.dailyBudgetAmount.amount // \"N/A\"),
+      (.budgetAmount.amount // \"N/A\")] |
+    @tsv" | column -t -s $'\t' | {
       echo "ID  NAME  STATUS  SUPPLY_SOURCE  DAILY_BUDGET  TOTAL_BUDGET"
       cat
     }

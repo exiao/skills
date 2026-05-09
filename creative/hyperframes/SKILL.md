@@ -9,7 +9,7 @@ prerequisites:
 metadata:
   hermes:
     tags: [creative, video, animation, html, gsap, motion-graphics]
-    related_skills: [manim-video]
+    related_skills: [manim-video, meme-generation]
     category: creative
     requires_toolsets: [terminal]
 ---
@@ -33,7 +33,7 @@ HTML is the source of truth for video. A composition is an HTML file with `data-
 
 Do **not** use this skill for:
 - Pure math/equation animation (→ `manim-video`)
-- Image generation or memes (→ `image generation skills)
+- Image generation or memes (→ `meme-generation`, image models)
 - Live video conferencing or streaming
 
 ## Quick Reference

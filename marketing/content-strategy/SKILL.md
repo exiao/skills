@@ -155,6 +155,20 @@ Match the angle to a format that amplifies it.
 | Hands-Doing-Something | Tactile background task holds attention subconsciously while spoken content delivers value | Tutorials, study/productivity tips, any niche where the visual task signals relatability |
 | Tier List | Gamified ranking format; viewers argue placements in comments, driving engagement | Content strategy, tool reviews, platform comparisons, "best of" lists |
 | Viral Breakdown / Reaction | Dual-screen commentary on a viral post; borrowed traffic + authority positioning | Creator education, niche analysis, weekly pillar content |
+| Three-Screen App Demo | Shows the core product loop in a way creators can repeat: input → processing → result | Influencer-led consumer apps, AI utilities, scanning/logging/analyzer apps |
+
+### Three-Screen App Demo
+
+Design the product so an influencer can explain it in three screens without narration. Cal AI's creator videos repeatedly show: camera → loading → food detail page. The product team optimized those screens for instant comprehension because influencer marketing was the primary growth loop. (Source: @JosephKChoi interview with Daniel from Cal AI, May 2026)
+
+**Use this as an app idea and product design test:**
+1. What is the input screen?
+2. What is the magical processing or suspense screen?
+3. What is the result screen worth showing?
+
+If those three screens are not obvious, creators will have to explain too much and paid/organic creative gets weaker.
+
+**Bloom adaptation:** stock/ticker input or portfolio screenshot → AI analysis loading → clear insight card/risk score/actionable watchlist result.
 
 ### The "Hands-Doing-Something" Format
 
@@ -195,6 +209,10 @@ Source: @thebranding.ai breakdown of multiple creators going viral with the same
 3. **Analyze why they worked** — hook structure, comment sentiment, format, pacing
 4. **Recreate the format yourself** — don't copy, match the structure and emotional beat
 5. **See early traction** before sourcing any paid creators
+
+### Daniel / Cal AI / Sway Playbook
+
+Before paying creators or building more product, check whether the concept can prove demand through content and a manual paid version. The durable lessons: distribution before product, spreadsheet-batched slideshow formats, three-screen product demos, content-niche app scoring, and influencer fit. Load `references/daniel-calai-sway-playbook.md` for the full playbook and Bloom adaptations. (Source: @JosephKChoi interview with Daniel from Cal AI/Sway, May 2026)
 
 Once a format proves out, hand it to creators via `whop-content-rewards` (managed tier). Skip this step only if you're scaling a format already validated in a prior batch.
 
@@ -283,11 +301,30 @@ Place labels at the moment you identify the tactic, not before. Let the source v
 
 ---
 
-## Step 2e: Repeatable Daily Format (The Oasis Model)
+## Step 2e: Result-First Product Proof Loop (WayShot Model)
+
+For visual consumer apps, lead with the aspirational result, then reveal the ordinary input. Do not open with a feature explanation or a before shot. The result earns attention; the original creates the shock.
+
+**Case study:** WayShot, a photo editor, reached 150M+ views across 8 accounts, 500K+ downloads in one month, $100K MRR, and #6 in the U.S. App Store by stacking three repeatable TikTok/Reels formats. (Source: Social Growth Engineers, May 2026)
+
+**The sequence that worked:**
+1. **Audience builder:** Native, barely promotional relatable format: "That friend who thinks everything is aesthetic." Product signal only through account name. Job: reach, comments, shares. One breakout reached ~48.6M views.
+2. **Product proof:** Two-slide faceless slideshow: edited photo first, original second, caption "edited by [app]." Job: make the product transformation obvious without explaining it. One example reached ~7.5M views.
+3. **Save engine:** Sharper identity/reveal hook: "What camera did you use?" → "Oh it's my phone." Job: bookmarks because the result feels aspirational and replicable. The strongest newer variation reportedly hit ~7M views and 230K bookmarks.
+
+**Operating rule:** This is not before/after. It is after/before. Beautiful outcome first, flat source second, app mention last. Do not explain the product if the contrast can prove it.
+
+**Metric rule:** For save-engine formats, bookmarks are the leading signal. Comments show conversation; saves show desire to recreate.
+
+**Use when:** the product creates a visible transformation: photo/video editing, design tools, fitness/body changes, home decor, dashboards, AI-generated assets, makeovers, portfolio analysis cards.
+
+**Bloom application:** Show the clean AI insight/card first, then reveal the messy raw signal: confusing chart, analyst noise, Reddit hype, or flat brokerage screen. The app is the tool that made the useful version.
+
+## Step 2f: Repeatable Daily Format (The Oasis Model)
 
 Most creators chase variety. The highest-growth accounts do the opposite: one format, repeated daily, with only the subject changing.
 
-**Case study:** Product Test Reveal case study — 30M views, 232 Reels, $23K/month MRR. Every single video follows the same structure: test a popular water brand, reveal contaminants, show a score, recommend alternatives. The format never changes. The brand being tested changes.
+**Case study:** @oasishealthapp — 30M views, 232 Reels, $23K/month MRR. Every single video follows the same structure: test a popular water brand, reveal contaminants, show a score, recommend alternatives. The format never changes. The brand being tested changes.
 
 **Why repetition beats variety:**
 - The algorithm rewards predictable quality over creative range
@@ -457,9 +494,9 @@ Retired pillars aren't deleted. Keep `tiktok-marketing/pillar-bench.json` and re
 | `references/content-formats.md` | Content format types, templates, and selection criteria |
 | `references/distribution.md` | Distribution channels, cross-posting strategy, amplification |
 | `references/geo-targeting.md` | Geo-targeting strategy for content localization |
-| `references/geo-llm-discovery.md` | GEO (Generative Engine Optimization): getting cited by AI chatbots via Reddit, LinkedIn, Substack. Includes sycophancy research context. |
 | `references/interactive-content.md` | Interactive content types, quizzes, calculators, assessments |
 | `references/tiktok-warmup.md` | 5-day TikTok account warmup process, retention benchmarks, account abandonment rules |
+| `references/daniel-calai-sway-playbook.md` | Distribution-before-product, slideshow batching, three-screen demos, content-niche app scoring |
 
 ---
 
@@ -496,33 +533,6 @@ What a complete strategy card looks like after running this skill. Use this as t
 - Tweets → `tweet-ideas`
 - TikTok → `slideshow-creator`
 - Scheduling → `typefully`
-
----
-
-## Social Comms Personality
-
-How you show up matters as much as what you post. These principles govern tone and presence across all social channels.
-
-**Voice principles:**
-- Simple announcements, human language — no corporate press-release energy
-- Socially aware humor and joy — be a person, not a brand account
-- Spontaneity — not everything needs to be polished or scheduled
-- Generosity — give away value freely, don't gate everything
-- Positive about the future and about builders
-- Let the product speak for itself — don't oversell
-- Let the audience be your champion — amplify them, don't just broadcast
-- "Thinking out loud" energy — share process, not just outcomes
-- Engage with people (especially small accounts) — don't just talk at the crowd
-- Engage with discourse if it's good faith — don't hide from conversation
-- Cater to the very online (in moderation)
-- Tactful honesty about flaws — acknowledge what's broken, don't pretend
-- Tasteful jabs at competitors are fine
-- Cringe is better than corporate — if you have to pick, pick human
-- Above all, show your humanity
-
-**Anti-patterns:** Overthought announcements. Jargon-heavy feature drops. Ignoring replies. Only engaging with big accounts. Hiding behind brand voice when a real voice would land better.
-
-Source: @anuatluru analysis of OpenAI's comms shift (May 2026)
 
 ---
 
@@ -571,7 +581,7 @@ What actually works for consumer apps vs. what sounds good but doesn't.
 
 **Alternative funnel: Quiz-based landing pages**
 
-Instead of Ad → App Store → Install, run Ad → Web Quiz → Personalized Results → App Store. A quiz between the ad and the offer warms cold traffic through micro-commitments. DTC benchmark: cold traffic conversion jumped from 1.2% to 4.7% with a quiz funnel (DTC quiz funnel case study, $2M in 90 days).
+Instead of Ad → App Store → Install, run Ad → Web Quiz → Personalized Results → App Store. A quiz between the ad and the offer warms cold traffic through micro-commitments. DTC benchmark: cold traffic conversion jumped from 1.2% to 4.7% with a quiz funnel (@DTC_Quizbuilder, $2M in 90 days).
 
 Why it works for apps:
 - Each question answered is a small "yes" that compounds (sunk cost)
@@ -592,7 +602,7 @@ Retargeting play: Everyone who takes the quiz but doesn't install gave you data.
 
 Bloom application: The onboarding flow already asks risk tolerance and goals post-install. A pre-install web quiz version of this would warm traffic before the App Store page, and the data feeds retargeting even if they never install.
 
-Source: DTC quiz funnel case study
+Source: @DTC_Quizbuilder thread (https://x.com/DTC_Quizbuilder/status/2010379560769015885)
 
 **SEO timing:**
 - Don't prioritize SEO before your first customers — takes months to kick in, and if you pivot the product, the work goes to zero
@@ -605,8 +615,6 @@ Source: DTC quiz funnel case study
 | File | Contents |
 |------|----------|
 | `references/social-content.md` | Social media strategy: content pillars, hook formulas, calendars, engagement, repurposing, analytics |
-| `references/channel-tier-list.md` | Channel tier list (B2C), quiz funnel strategy, SEO timing |
-| `references/viral-breakdown-pillar.md` | Weekly viral breakdown pillar format, on-screen labels, sourcing |
 | `references/free-tool-strategy.md` | Engineering-as-marketing: tool types, ideation, evaluation scorecard, lead capture |
 | `references/lead-magnets.md` | Lead magnet types, buyer stage matching, gating strategy, distribution, benchmarks |
 | `references/marketing-ideas.md` | 139 SaaS marketing ideas catalog organized by category, stage, and budget |

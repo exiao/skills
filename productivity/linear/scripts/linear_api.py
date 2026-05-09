@@ -223,20 +223,13 @@ def cmd_create_issue(args: argparse.Namespace) -> None:
         sys.stderr.write(f"Team not found: {args.team}\n")
         sys.exit(1)
     inp: dict[str, Any] = {"title": args.title, "teamId": tid}
-    if args.description is not None:
+    if args.description:
         inp["description"] = args.description
     if args.priority is not None:
         inp["priority"] = args.priority
     if args.parent:
         inp["parentId"] = args.parent
-    unsupported = [name for name in ("label", "assignee") if getattr(args, name) is not None]
-    if unsupported:
-        sys.stderr.write(
-            "Unsupported create-issue option(s): "
-            f"{', '.join('--' + name for name in unsupported)}. "
-            "Use update commands or raw GraphQL until name-to-id lookup is implemented.\n"
-        )
-        sys.exit(2)
+    # TODO: label + assignee name->id lookup (omitted for v1 brevity)
 
     q = """mutation($input: IssueCreateInput!) {
       issueCreate(input: $input) {
@@ -250,7 +243,7 @@ def cmd_update_issue(args: argparse.Namespace) -> None:
     inp: dict[str, Any] = {}
     if args.title:
         inp["title"] = args.title
-    if args.description is not None:
+    if args.description:
         inp["description"] = args.description
     if args.priority is not None:
         inp["priority"] = args.priority

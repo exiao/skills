@@ -39,6 +39,9 @@ Read `~/clawd/WRITING-STYLE.md` in full before writing anything. It contains:
 - Weave links inline, never as a references section
 - Vary paragraph length. Break metronomic cadence.
 
+### Landing-page copy reviews
+When reviewing a website for investor, customer, or sales copy, do not stop at prose if the user asks for visual before/after. Pair the copy plan with a concrete page architecture: hero thesis, proof strip, before/after panels, diagrams that explain the strategic argument, copy replacement table, and final CTA. If asked to make it shareable, use the frontend-design workflow and deploy a polished static page rather than sending only text.
+
 ### Step 3: Run the quality tests
 Before delivering any draft, check all four:
 
@@ -61,6 +64,18 @@ Scan the draft for every pattern in the Kill Phrases and Structural Slop section
 - Show the work, don't claim the conclusion
 - Bold claim → immediate vulnerability when making strong assertions
 - Use "we/let's" to bring the reader along, not "you should"
+
+## Finance / Investing Copy
+When writing Bloom or investing marketing copy, sell research clarity and risk awareness, not guaranteed outcomes.
+- Prefer: "second opinion," "red flags," "what to pay attention to," "with the receipts," "research any stock," "understand why prices move."
+- Avoid: "hidden investing opportunities," "pick winning stocks," "avoid losses," "boost returns," "no hallucinations," "latest AI models" as a primary benefit.
+- Convert hype into concrete user anxiety: "$5,000 decisions shouldn't be guesses," "Your portfolio deserves more than 6 minutes of research," "What would prove me wrong?"
+- Add a lightweight disclaimer for paywalls/landing pages: "for research, not financial advice."
+
+## Bloom and BloomBot conversion copy
+- For Bloom or BloomBot paywalls, onboarding, ads, and subscribe pages, read `references/bloom-paywall-copy.md` before drafting.
+- The strongest angle is proof, attention, and risk control: second opinion before a trade, what to pay attention to, red flags, and receipts.
+- Avoid compliance-risky promises like "pick winning stocks," "avoid losses," "boost your return," and "no hallucinations." Prefer research and decision-support language.
 
 ## Platform Notes
 

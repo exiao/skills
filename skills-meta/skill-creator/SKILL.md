@@ -1,7 +1,7 @@
 ---
 name: skill-creator
 preloaded: true
-description: Create new skills, modify and improve existing skills, and measure skill performance. Use when creating or editing ANY skill — including rewrites, description tweaks, or adding examples. TDD pre-flight required: write failing test first (3+ pressure scenarios run WITHOUT the skill) before touching SKILL.md. Also use for running evals, benchmarking skill performance with variance analysis, and optimizing skill descriptions for better triggering accuracy.
+description: "Create new skills, modify and improve existing skills, and measure skill performance. Use when creating or editing ANY skill — including rewrites, description tweaks, or adding examples. TDD pre-flight required: write failing test first (3+ pressure scenarios run WITHOUT the skill) before touching SKILL.md. Also use for running evals, benchmarking skill performance with variance analysis, and optimizing skill descriptions for better triggering accuracy."
 ---
 
 > **Source:** Anthropic internal skill — local copy, do not modify without checking upstream.
@@ -319,6 +319,21 @@ Kill the viewer server when you're done with it:
 ```bash
 kill $VIEWER_PID 2>/dev/null
 ```
+
+---
+
+## Incorporating External Research Into Existing Skills
+
+When the user shares a link, thread, article, video, or pasted notes and says "incorporate this skill" or "update the skill library," treat it as a skill-maintenance task, not a summarization task.
+
+1. Fetch the source with the domain-appropriate reader (`bird read` for X/Twitter, web search/fetch for web, video tools for video).
+2. Extract durable, reusable operating principles. Ignore biographical fluff, engagement bait, and one-off anecdotes unless they encode a repeatable workflow.
+3. Distribute each principle to the existing class-level skill that owns that concern. Do not dump everything into one convenient skill. Operational API/campaign mechanics go in operational skills; creative strategy goes in creative/copy/content skills; hooks go in hook skills; measurement rules go in analytics/paid-ads skills.
+4. Prefer patching currently loaded skills first, then existing umbrellas. Add `references/` only when the detail is too bulky for SKILL.md or is source-like documentation future agents may need.
+5. Tag source and date compactly, e.g. `(Source: @handle, May 2026)`, so later agents can distinguish observed advice from local convention.
+6. Verify with a diff or targeted readback before replying. The final reply should say exactly what changed and where, not re-summarize the whole source.
+
+This fast incorporation path is for small-to-medium updates to existing skills. Use the full RED → GREEN → REFACTOR eval loop for creating new skills, large rewrites, or changes where quality can be meaningfully benchmarked.
 
 ---
 

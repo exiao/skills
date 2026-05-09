@@ -1,6 +1,16 @@
 ---
 name: gsc-cli
-description: Query Google Search Console data via MCP (mcporter). Use when checking search performance, impressions, clicks, CTR, rankings for any verified property. Also use for finding SEO quick wins, checking indexing status, or managing sitemaps.
+description: Query Google Search Console data via MCP (mcporter). Use when checking search performance, impressions, clicks, CTR, rankings for investwithbloom.com or any verified property. Also use for finding SEO quick wins, checking indexing status, or managing sitemaps.
+version: 1.1.0
+author: exiao
+metadata:
+  runtime:
+    tags: [SEO, Google, Search Console, GSC, Analytics, Rankings]
+prerequisites:
+  commands: [mcporter]
+  credential_files:
+    - path: ~/.config/gsc-credentials.json
+      description: Google credential file for Search Console API access. Can be service_account JSON or authorized_user OAuth JSON with quota_project_id.
 ---
 
 # gsc-cli — Google Search Console via MCP
@@ -11,7 +21,7 @@ Query Google Search Console performance data using mcporter's `gsc` server.
 
 | Tool | Purpose |
 |------|---------|
-| `list_sites` | List all sites visible to the service account |
+| `list_sites` | List all sites visible to the authenticated Google identity |
 | `search_analytics` | Basic search performance data |
 | `enhanced_search_analytics` | Up to 25K rows, regex filters, quick wins detection |
 | `detect_quick_wins` | Dedicated quick wins finder with ROI estimation |
@@ -23,50 +33,56 @@ Query Google Search Console performance data using mcporter's `gsc` server.
 ## Setup
 
 ### Prerequisites
-1. Google Cloud service account JSON key at `~/.config/gsc-credentials.json`
+1. Google credential file at `~/.config/gsc-credentials.json`
 2. Search Console API enabled in Google Cloud Console
-3. Service account added as user in GSC for the target site
+3. The authenticated Google identity has access to the GSC property
 
-### Creating the service account
-1. Go to console.cloud.google.com/iam-admin/serviceaccounts
-2. Pick or create a project
-3. Create Service Account (no IAM roles needed; permissions come from GSC)
-4. Keys tab -> Add Key -> JSON -> downloads automatically
-5. Save to `~/.config/gsc-credentials.json`
-6. Enable Search Console API: console.cloud.google.com/apis/library/searchconsole.googleapis.com
+### Recommended auth: user's Google account OAuth
 
-### Granting GSC access (PITFALL: UI won't work)
+Use OAuth when the user already owns the GSC properties. The MCP server's `GoogleAuth({ keyFile })` accepts `authorized_user` credential JSON, even though the package docs only mention service accounts.
 
-**The GSC web UI rejects service account emails with "email not found".** You must use the API workaround:
-
+Fast path with gcloud:
 ```bash
-# Step 1: Register the service account via the Webmasters API
-uv run --with google-auth --with google-auth-httplib2 --with google-api-python-client python3 << 'EOF'
-import os
-from google.oauth2 import service_account
-from googleapiclient.discovery import build
+gcloud auth application-default login \
+  --scopes=https://www.googleapis.com/auth/cloud-platform,https://www.googleapis.com/auth/webmasters.readonly
 
-creds = service_account.Credentials.from_service_account_file(
-    os.path.expanduser('~/.config/gsc-credentials.json'),
-    scopes=['https://www.googleapis.com/auth/webmasters']
-)
-service = build('webmasters', 'v3', credentials=creds)
-service.sites().add(siteUrl=f"sc-domain:{os.environ['APP_DOMAIN']}").execute()
-print("Registered as unverified user")
-
-# Check status
-sites = service.sites().list().execute()
-print(sites)
-EOF
-
-# Step 2: The property owner must then approve/verify in GSC UI
-# Settings -> Users and permissions -> the SA should now appear as pending
+# Copy or symlink ADC to the file mcporter expects
+cp ~/.config/gcloud/application_default_credentials.json ~/.config/gsc-credentials.json
 ```
 
-After the owner approves, verify access:
+Then edit `~/.config/gsc-credentials.json` and ensure it contains a quota project:
+```json
+{
+  "type": "authorized_user",
+  "client_id": "...",
+  "client_secret": "...",
+  "refresh_token": "...",
+  "quota_project_id": "<google-cloud-project-id>"
+}
+```
+
+If `quota_project_id` is missing, `mcporter call gsc.list_sites` fails with:
+`searchconsole.googleapis.com API requires a quota project`.
+
+### Alternate auth: service account
+
+Service accounts work poorly with GSC because the web UI may reject service account emails with `email not found`. If OAuth is available, prefer OAuth.
+
+If service account auth is still required:
+1. Go to console.cloud.google.com/iam-admin/serviceaccounts
+2. Pick or create a project
+3. Create Service Account (no IAM roles needed; GSC permissions are separate)
+4. Keys tab -> Add Key -> JSON
+5. Save to `~/.config/gsc-credentials.json`
+6. Enable Search Console API for the project
+7. Try adding the service account in GSC Settings -> Users and permissions. If the UI rejects it, switch to OAuth instead. The API self-registration workaround can leave the service account as `siteUnverifiedUser`, which still cannot query analytics.
+
+Verify access:
 ```bash
 mcporter call gsc.list_sites --output json
 ```
+
+OAuth/auth troubleshooting details are in `references/oauth-auth.md`.
 
 ### mcporter config
 Already configured in `~/.mcporter/mcporter.json` as stdio server:
@@ -80,7 +96,7 @@ mcporter list gsc --schema
 ```bash
 # Last 28 days of query performance
 mcporter call gsc.search_analytics \
-  siteUrl="sc-domain:$APP_DOMAIN" \
+  siteUrl="sc-domain:investwithbloom.com" \
   startDate="2026-04-09" \
   endDate="2026-05-07" \
   dimensions="query" \
@@ -89,7 +105,7 @@ mcporter call gsc.search_analytics \
 
 # Page-level performance
 mcporter call gsc.search_analytics \
-  siteUrl="sc-domain:$APP_DOMAIN" \
+  siteUrl="sc-domain:investwithbloom.com" \
   startDate="2026-04-09" \
   endDate="2026-05-07" \
   dimensions="page" \
@@ -100,7 +116,7 @@ mcporter call gsc.search_analytics \
 ```bash
 # Query + page breakdown (which queries land on which pages)
 mcporter call gsc.search_analytics \
-  siteUrl="sc-domain:$APP_DOMAIN" \
+  siteUrl="sc-domain:investwithbloom.com" \
   startDate="2026-04-01" \
   endDate="2026-05-01" \
   dimensions="query,page" \
@@ -109,7 +125,7 @@ mcporter call gsc.search_analytics \
 
 # Device breakdown
 mcporter call gsc.search_analytics \
-  siteUrl="sc-domain:$APP_DOMAIN" \
+  siteUrl="sc-domain:investwithbloom.com" \
   startDate="2026-04-01" \
   endDate="2026-05-01" \
   dimensions="query,device" \
@@ -117,7 +133,7 @@ mcporter call gsc.search_analytics \
 
 # Daily trend for a specific query
 mcporter call gsc.search_analytics \
-  siteUrl="sc-domain:$APP_DOMAIN" \
+  siteUrl="sc-domain:investwithbloom.com" \
   startDate="2026-04-01" \
   endDate="2026-05-01" \
   dimensions="date" \
@@ -128,7 +144,7 @@ mcporter call gsc.search_analytics \
 ### Enhanced search analytics (up to 25K rows, regex)
 ```bash
 mcporter call gsc.enhanced_search_analytics \
-  siteUrl="sc-domain:$APP_DOMAIN" \
+  siteUrl="sc-domain:investwithbloom.com" \
   startDate="2026-04-01" \
   endDate="2026-05-01" \
   dimensions="query,page" \
@@ -141,16 +157,16 @@ mcporter call gsc.enhanced_search_analytics \
 ```bash
 # Filter by page URL
 mcporter call gsc.search_analytics \
-  siteUrl="sc-domain:$APP_DOMAIN" \
+  siteUrl="sc-domain:investwithbloom.com" \
   startDate="2026-04-01" \
   endDate="2026-05-01" \
   dimensions="query" \
-  pageFilter="$APP_DOMAIN/subscribe" \
+  pageFilter="investwithbloom.com/subscribe" \
   --output json
 
 # Regex filter for related queries
 mcporter call gsc.search_analytics \
-  siteUrl="sc-domain:$APP_DOMAIN" \
+  siteUrl="sc-domain:investwithbloom.com" \
   startDate="2026-04-01" \
   endDate="2026-05-01" \
   dimensions="query" \
@@ -160,7 +176,7 @@ mcporter call gsc.search_analytics \
 
 # Mobile only
 mcporter call gsc.search_analytics \
-  siteUrl="sc-domain:$APP_DOMAIN" \
+  siteUrl="sc-domain:investwithbloom.com" \
   startDate="2026-04-01" \
   endDate="2026-05-01" \
   dimensions="query" \
@@ -172,7 +188,7 @@ mcporter call gsc.search_analytics \
 ```bash
 # Find keywords ranking 4-10 with optimization potential
 mcporter call gsc.detect_quick_wins \
-  siteUrl="sc-domain:$APP_DOMAIN" \
+  siteUrl="sc-domain:investwithbloom.com" \
   startDate="2026-04-01" \
   endDate="2026-05-01" \
   minImpressions:50 \
@@ -183,7 +199,7 @@ mcporter call gsc.detect_quick_wins \
 
 # Or use enhanced_search_analytics with inline quick wins
 mcporter call gsc.enhanced_search_analytics \
-  siteUrl="sc-domain:$APP_DOMAIN" \
+  siteUrl="sc-domain:investwithbloom.com" \
   startDate="2026-04-01" \
   endDate="2026-05-01" \
   dimensions="query,page" \
@@ -194,8 +210,8 @@ mcporter call gsc.enhanced_search_analytics \
 ### URL Indexing Inspection
 ```bash
 mcporter call gsc.index_inspect \
-  siteUrl="sc-domain:$APP_DOMAIN" \
-  inspectionUrl="https://$APP_DOMAIN/subscribe" \
+  siteUrl="sc-domain:investwithbloom.com" \
+  inspectionUrl="https://investwithbloom.com/subscribe" \
   --output json
 ```
 
@@ -203,13 +219,13 @@ mcporter call gsc.index_inspect \
 ```bash
 # List all sitemaps
 mcporter call gsc.list_sitemaps \
-  siteUrl="https://$APP_DOMAIN/" \
+  siteUrl="https://investwithbloom.com/" \
   --output json
 
 # Submit a new sitemap
 mcporter call gsc.submit_sitemap \
-  siteUrl="https://$APP_DOMAIN/" \
-  feedpath="https://$APP_DOMAIN/sitemap.xml" \
+  siteUrl="https://investwithbloom.com/" \
+  feedpath="https://investwithbloom.com/sitemap.xml" \
   --output json
 ```
 
@@ -233,8 +249,8 @@ mcporter call gsc.submit_sitemap \
 
 ## Site URL Format
 
-- Domain property: `sc-domain:$APP_DOMAIN` (covers all subdomains and protocols)
-- URL prefix: `https://$APP_DOMAIN/` (trailing slash required)
+- Domain property: `sc-domain:investwithbloom.com` (covers all subdomains and protocols)
+- URL prefix: `https://investwithbloom.com/` (trailing slash required)
 
 Use `sc-domain:` format when available as it captures all traffic.
 
@@ -255,10 +271,10 @@ Use `sc-domain:` format when available as it captures all traffic.
 
 ## Pitfalls
 
-- **GSC UI rejects service account emails.** Must use the API registration workaround (see Setup above).
-- **No IAM roles needed** for the service account. Skip the role selection when creating it. Permissions come from GSC user management, not Google Cloud IAM.
+- **Prefer OAuth user credentials over service accounts** for personal/company GSC properties. Service accounts often cannot be added through the GSC UI, while OAuth immediately inherits the user's existing properties.
+- `authorized_user` JSON works as `GOOGLE_APPLICATION_CREDENTIALS` for this MCP server because it uses GoogleAuth `keyFile` under the hood.
+- OAuth ADC needs `quota_project_id`; without it, Search Console returns a 403 quota project error.
 - GSC data has a **2-3 day lag**. Don't query today's date.
 - `dataState="all"` includes preliminary data that may change.
 - Max 25,000 rows per request. For high-volume sites, use filters to segment.
-- Service account must be added as **Owner/Full** user in GSC, not just viewer.
-- Service account credential file at `~/.config/gsc-credentials.json` (email: `$GSC_SERVICE_ACCOUNT_EMAIL`).
+- No Google Cloud IAM role is needed for GSC access. GSC permissions are separate from Cloud IAM.

@@ -145,6 +145,7 @@ Convert free users to paid at moments of experienced value.
 - **Show, don't just tell.** Demonstrate paid feature value, preview what's missing.
 - **Friction-free path.** Easy to upgrade when ready.
 - **Respect the no.** Easy to continue free. Maintain trust.
+- **Trial retention starts immediately.** For short mobile trials, optimize the first 72 hours for repeated core value, not just initial conversion. Cal AI focused on improving the meal logging core screens, groups, streaks, and milestones so users had enough value during the 3-day trial to stay subscribed. (Source: @JosephKChoi interview with Daniel from Cal AI/Sway, May 2026)
 
 ## Trigger Points
 

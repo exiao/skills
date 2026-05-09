@@ -4,14 +4,25 @@ When a user shares a claude.ai/design handoff URL (format: `api.anthropic.com/v1
 
 ## Bundle Format
 
-The URL returns a gzip-compressed tar archive. Extract it:
+The URL returns a gzip-compressed tar archive. Extract it. If curl/gunzip naming gets awkward, use Python so you can inspect content type and write a normal `.tar` file:
 
 ```bash
-curl -sL "<url>" -o /tmp/design.gz
-gunzip -f /tmp/design.gz
+python3 - <<'PY'
+import gzip, pathlib, urllib.request
+url = '<url>'
+raw = urllib.request.urlopen(urllib.request.Request(url, headers={'User-Agent':'Mozilla/5.0'}), timeout=30).read()
+out = gzip.decompress(raw)
+path = pathlib.Path('/tmp/design-bundle.tar')
+path.write_bytes(out)
+print(path, path.stat().st_size)
+PY
+
+tar -tf /tmp/design-bundle.tar | head -100
 mkdir -p /tmp/design-extracted
-tar xf /tmp/design -C /tmp/design-extracted
+tar -xf /tmp/design-bundle.tar -C /tmp/design-extracted
 ```
+
+Use a unique `/tmp` directory. Do not extract archives into the target repo unless the assets are intentionally part of the implementation.
 
 ## Bundle Structure
 
@@ -67,6 +78,19 @@ When asked to compare a design bundle against existing code:
 4. Report: what's new, what's changed, what's removed, what's better in each
 5. Recommend which changes are highest-impact to adopt
 
+## Bloom light-mode token notes
+
+A May 2026 Bloom design bundle established these production UI defaults:
+
+- Canvas: `#FFFEFA` (Bloom sugar), not pure white.
+- Primary text: `#171616` (liquorice), not pure black.
+- Secondary text: `#504E4B` and `#74726D`.
+- Action/accent: `#118383` petrol blue.
+- Borders: `#CBCAC9`, commonly 2px on cards.
+- Cards: warm light surface, 8px radius, 16px-ish padding, very soft `0 2px 3px rgba(203,202,201,0.5)` shadow.
+- Product UI should avoid gradients, glow, blur, heavy shadows, emoji, and unicode-as-icon. Use SVG/CSS icons instead.
+- Helvetica Now is canonical when licensed and available. Static marketing pages can fall back to platform sans rather than shipping licensed fonts.
+
 ## Sharing Design Previews
 
 Users often can't open multi-file HTML prototypes locally (JSX imports and relative paths break). Deploy to Surge for instant preview:
@@ -81,7 +105,8 @@ This preserves relative asset paths (fonts, SVGs, JSX imports) since Surge serve
 
 ## Pitfalls
 
-- The bundle URL returns `application/gzip` content-type. WebExtract/Firecrawl will fail; use curl directly.
+- The bundle URL returns `application/gzip` content-type. WebExtract/Firecrawl will fail; use curl or Python directly.
+- If the first bytes look like binary garbage, you probably decompressed neither gzip nor tar yet. Save/decompress first, then `tar -tf` to list files.
 - Chat transcripts contain `[tool: ...]` markers for Claude's tool calls. Skip those; focus on user messages and assistant's summary text.
 - `[tool: snip]` markers mean context was compressed during design. Ignore gaps.
 - Some assets may be referenced but missing (e.g. `bloom-mark.svg`). Check the target codebase for existing equivalents.

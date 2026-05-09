@@ -360,6 +360,10 @@ When a repo's main checkout has accumulated uncommitted changes (common with ski
 
 Key idea: create a clean worktree from `origin/main`, copy dirty files from the main checkout into it, commit + push + PR from the worktree.
 
+## Curating Broad Snapshot PRs
+
+When a PR comes from a runtime/local snapshot, assume it contains a mix of useful lessons, stale generated changes, private operational data, and regressions. Do not merge it wholesale. Classify files as KEEP, MAIN, or CHERRY; revert MAIN files from base; redact private details; preserve existing modularization; validate changed `SKILL.md` frontmatter and run a private-pattern scan before pushing. See `references/curating-snapshot-prs.md` for the full checklist and reusable validation scripts.
+
 ## Pitfalls
 
 ### Never amend/squash a pushed commit when force-push is blocked
@@ -384,7 +388,7 @@ gh pr create --body-file /tmp/pr-body.md
 
 ### `gh pr edit` silently failing on some repos
 
-On some organization repos (for example `$YOUR_REPO`) `gh pr edit --title` and `gh pr edit --body-file` exit 0 with a stderr warning about "Projects (classic) being deprecated" but the title/body are NOT updated. The underlying GraphQL mutation fails on `repository.pullRequest.projectCards` and the rest of the mutation never runs. You'll only notice if you re-fetch the PR and see the old title.
+On some org repos (seen on `Bloom-Invest/bloom`) `gh pr edit --title` and `gh pr edit --body-file` exit 0 with a stderr warning about "Projects (classic) being deprecated" but the title/body are NOT updated. The underlying GraphQL mutation fails on `repository.pullRequest.projectCards` and the rest of the mutation never runs. You'll only notice if you re-fetch the PR and see the old title.
 
 Workaround: skip `gh pr edit` and patch via REST API directly. This always works:
 

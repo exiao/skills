@@ -1,1 +1,0 @@
-Yuanbao group management skills.

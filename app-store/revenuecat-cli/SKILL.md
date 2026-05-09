@@ -114,6 +114,36 @@ mcporter call revenuecat.list-products project_id=proj2cab6270 limit:100 --outpu
 jq -r '.content[0].text' /tmp/revenuecat/products.json
 ```
 
+### Get package products and prices for a hosted checkout page
+Use this when a Bloom-owned pre-checkout page needs to show prices before redirecting to a RevenueCat Web Purchase Link.
+
+```bash
+# Find the offering. BloomBot v2 currently uses lookup_key bloombot_v2_default.
+mcporter call revenuecat.list-offerings project_id=proj2cab6270 --output json \
+  > /tmp/revenuecat/offerings.json
+
+# Inspect packages and expanded products by offering ID, not lookup_key.
+mcporter call revenuecat.get-offering \
+  project_id=proj2cab6270 \
+  offering_id=ofrngf31a090110 \
+  --args '{"expand":["package","package.product"]}' \
+  --output json > /tmp/revenuecat/offering-bloombot-v2.json
+
+# Then fetch prices by product IDs returned from the offering.
+mcporter call revenuecat.list-product-prices \
+  project_id=proj2cab6270 \
+  product_id=prodb632b58f8a \
+  --output json > /tmp/revenuecat/prices-yearly-onboarding.json
+mcporter call revenuecat.list-product-prices \
+  project_id=proj2cab6270 \
+  product_id=prodab96bc979a \
+  --output json > /tmp/revenuecat/prices-weekly.json
+```
+
+RevenueCat returns `amount` in cents for USD in this MCP output. Example: `7800` means `$78.00`, `500` means `$5.00`.
+
+Pitfall: `get-offering` expects the opaque offering ID (`ofrng...`), not the lookup key (`default`, `bloombot_v2_default`). Calling it with the lookup key can return 404.
+
 ### Audit entitlement attachments (catalog drift check)
 ```bash
 # List entitlements
@@ -136,6 +166,37 @@ mcporter call revenuecat.get-offering \
   --args '{"expand": ["package", "package.product"]}' \
   --output json > /tmp/revenuecat/offering.json
 ```
+
+### Web Purchase Links and hosted package selectors
+
+When debugging RevenueCat Web Purchase Links or hosted plan selectors, read `references/web-purchase-links-and-offerings.md`. Key points:
+
+- A Web Purchase Link without `package_id` can show a generic hosted selector based on the linked offering's packages.
+- If there is no RC Paywall object, value props and marketing copy may not be configurable through the hosted selector. Use a Bloom-owned pre-checkout page for richer value props, then redirect to a specific package.
+- To show only one plan, remove other packages from the relevant offering. This does not delete products or entitlements.
+- Direct REST package edits require `project_configuration:packages:read_write`; the MCP is read-only and will not perform writes.
+
+### Product prices and units
+
+`list-product-prices` returns text like:
+
+```text
+[1]{amount,amount_micros,currency}:
+  7800,78000000,USD
+```
+
+For USD, `amount` is cents and `amount_micros` is micro-units. Convert `amount / 100` for display copy, so `7800` is `$78.00` and `500` is `$5.00`. Do not infer price from product or package names. Always call `list-product-prices` for the product attached to the package you will link to.
+
+### BloomBot subscribe prices found in May 2026
+
+BloomBot v2 offering lookup key: `bloombot_v2_default`.
+
+Packages:
+- `bloombot_yearly_onboarding` -> product `prodb632b58f8a` -> `7800 USD` -> `$78/year`
+- `$rc_weekly` -> product `prodab96bc979a` -> `500 USD` -> `$5/week`
+- `$rc_annual` -> product `prodf010147771` -> `10400 USD` -> `$104/year`
+
+Verify again before changing user-facing price copy.
 
 ## Writes (not in MCP — use REST API)
 

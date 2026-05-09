@@ -28,5 +28,5 @@ description: What this skill does
 All CLI-based third-party service skills live in `external-services/`. Renamed: copilot-money→copilot-money-cli, appfigures→appfigures-cli, dataforseo→dataforseo-cli, google-ads→google-ads-cli, meta-ads→meta-ads-cli, prometheus→prometheus-cli, porkbun→porkbun-cli (merged 6 sub-skills).
 
 ## Implementation
-- Runtime: `agent/prompt_builder.py` on `live-config` branch ($RUNTIME_REPO#6)
-- Skills: `main` branch ($SKILLS_REPO#115)
+- Runtime: `agent/prompt_builder.py` on `live-config` branch (exiao/hermes-agent#6)
+- Skills: `main` branch (exiao/skills#115)
