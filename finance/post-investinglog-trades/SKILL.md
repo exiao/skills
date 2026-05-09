@@ -97,7 +97,7 @@ export GEMINI_API_KEY
 
 Use Nano Banana Pro:
 ```bash
-uv run ~/clawd/skills/nano-banana-pro/scripts/generate_image.py
+uv run ~/.hermes/skills/creative/nano-banana-pro/scripts/generate_image.py
 ```
 
 **Design spec:**
@@ -130,7 +130,7 @@ YTD: +18.3%
 ### Step 9 — Ensure Tag + Upload + Create Draft
 
 ```bash
-cd ~/clawd/skills/typefully
+cd ~/.hermes/skills/marketing/typefully
 
 # Ensure 'investing-log' tag exists (safe to run even if it already exists)
 node scripts/typefully.js tags:create $TYPEFULLY_SOCIAL_SET_ID --name 'investing-log' 2>/dev/null || true
@@ -145,7 +145,7 @@ node scripts/typefully.js drafts:create $TYPEFULLY_SOCIAL_SET_ID \
   --text "<tweet_text>" \
   --media <media_id> \
   --tags investing-log
-# Do NOT add --schedule. Save as unscheduled draft only — the repo owner reviews before posting.
+# Do NOT add --schedule. Save as unscheduled draft only — the account owner reviews before posting.
 # → returns draft_id + scheduled time
 ```
 
@@ -211,7 +211,7 @@ Scheduled: [time]
 
 1. **Posting NOACTION/SCENARIO files** — always filter these out in Step 1.
 2. **Skipping dedup check** — always read il-pipeline-state.json first; repeating a tweet is embarrassing.
-3. **Wrong Typefully account** — use account ID `$TYPEFULLY_SOCIAL_SET_ID` (not `$TYPEFULLY_PERSONAL_SET_ID`, which is for personal posts).
+3. **Wrong Typefully account** — use account ID `$TYPEFULLY_SOCIAL_SET_ID` (not a personal account set ID).
 4. **PIL fallback** — never use PIL/Pillow. Only Nano Banana Pro for image generation.
 5. **State file not updated** — always write back after successful post; otherwise same trade posts again tomorrow.
 6. **Overwriting old state** — keep last 50 entries, don't truncate to just the new one.

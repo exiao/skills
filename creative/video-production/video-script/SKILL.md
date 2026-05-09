@@ -56,7 +56,7 @@ Save each script as a markdown file. The header block captures global metadata; 
 | **Platform** | Target distribution channel | TikTok, Reels, Shorts, YouTube |
 | **Aspect** | Frame ratio | 9:16 (vertical), 16:9 (landscape), 1:1 (square) |
 | **Duration** | Total target length | ~15s, ~30s, ~60s, ~90s, ~2min, ~5min |
-| **Style** | Production approach | talking-head, slideshow, explainer, demo, montage |
+| **Style** | Production approach | talking-head, slideshow, explainer, demo, montage, product-test |
 | **Character** | AI character slug | Slug from the character-creation skill, or "none" |
 | **Music mood** | Background music direction | upbeat, dramatic, chill, corporate, none |
 | **Visual** | What the viewer sees | Plain-language description of the shot |
@@ -105,6 +105,10 @@ Screen recordings or product walkthroughs. The hook should show the end result f
 **Montage (15-30s)**
 Hook → rapid clips → CTA
 2-3 second clips cut to music. Works for mood pieces, product showcases, before/after compilations. Every clip should be visually interesting on its own. No filler shots.
+
+**Product test reveal (15-30s)**
+Brand shot → Data reveal → Score climax → Alternative CTA
+The subject being tested is the hook (pick brands everyone knows and has opinions on). Data is the drama — make the score reveal feel like a climax, not a footnote. The product appears only at the end as "the tool I used to find this." This format is infinitely repeatable: same structure, different brand/ticker/guru each video. Source: Product Test Reveal case study (30M views, 232 videos, identical format). Best for: products with data/analysis at their core (fintech, health, comparison tools).
 
 ### Timing rules
 

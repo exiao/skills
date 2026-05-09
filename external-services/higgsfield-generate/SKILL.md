@@ -122,6 +122,7 @@ Branded image/video gen: avatars + products + optional setup hooks/settings + ad
 - **Webproduct** — App Store / web page version. Auto-routes when fetching App Store URLs.
 - **Hook** — reusable opening angle / ad hook. Browse with `higgsfield marketing-studio hooks list`. Hook text is prepended to the user's prompt; it does not replace `--prompt`.
 - **Setting** — reusable environment / scene context. Browse with `higgsfield marketing-studio settings list`.
+- **Ad Reference** — upload a top-performing or competitor video, pass its ID as `--ad_reference_id` to `marketing_studio_video`. Studio recreates the format with your product/avatar. See `references/marketing-studio-ads.md`.
 
 ### Discovery commands
 
@@ -175,7 +176,7 @@ higgsfield marketing-studio settings list --json
    ```
    Add `--hook_id <hook_id>` and/or `--setting_id <setting_id>` when a setup hook/setting was selected.
    `product_ids` and `avatars` are JSON arrays; pass them via `@/path/to/file.json`. Do not pass a bare UUID to `--product_ids`.
-   Resolution is `480p` or `720p`. Aspect ratio is one of `auto`/`21:9`/`16:9`/`4:3`/`1:1`/`3:4`/`9:16`. `--generate-audio true` is supported here (unlike `seedance_2_0`). `--wait` blocks until done; bump `--wait-timeout 30m` for longer ad runs.
+   Resolution is `480p`, `720p`, or `1080p`. Aspect ratio is one of `auto`/`21:9`/`16:9`/`4:3`/`1:1`/`3:4`/`9:16`. `--generate-audio true` is supported here (unlike `seedance_2_0`). `--wait` blocks until done; bump `--wait-timeout 30m` for longer ad runs.
 6. **Deliver.** URL + one-line summary (mode, duration).
 
 ### Click-to-Ad shortcut (URL-driven)
@@ -230,3 +231,4 @@ Load on demand:
 - `references/marketing-products.md` — URL fetch vs manual product create
 - `references/marketing-setup-items.md` — hooks/settings discovery and usage
 - `references/marketing-modes.md` — every Marketing Studio mode
+- `references/reference-video-and-postprocessing.md` — reference-first UGC video workflow and anti-AI finishing

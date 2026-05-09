@@ -114,8 +114,9 @@ The hook is 80% of performance. Types: Stated (what you SAY), Visual (what they 
 | Instagram Comment | Dialogue/Q&A feel | Addressing objections |
 | Meme Formats | Culturally native | Contrasts, humor |
 | Testimonial Card | Direct social proof | Warm audiences |
+| Product Test Reveal | Data-driven exposé feels like journalism | Cold audiences, skeptical users |
 
-**App footage rule:** Maximum 4-5 seconds showing the app in use. The ad is about the problem/outcome, not the product. App footage is proof, not the pitch. (Source: @athcanft, May 2026)
+**App footage rule:** Maximum 4-5 seconds showing the app in use. The ad is about the problem/outcome, not the product. App footage is proof, not the pitch. (Source: paid-social creative benchmark, May 2026)
 
 #### Format-Audience Matrix
 
@@ -124,6 +125,30 @@ The hook is 80% of performance. Types: Stated (what you SAY), Visual (what they 
 | Cold | Notes App, Meme, Text-Over-Video, Reddit/Tweet |
 | Warm | UGC, Testimonial, Carousel, Before/After |
 | Hot | Talking Head, Demo, Direct Offer |
+
+#### Product Test Reveal Format
+
+Source: Product Test Reveal case study (30M views, $23K MRR, identical format across 232 Reels).
+
+**Structure (15s total):**
+- **0-2s:** Show the familiar brand (the "villain") — instant recognition stops scroll
+- **2-8s:** Reveal the hidden problem using real data — contaminants, bad performance, missed signals
+- **8-12s:** Score or rating reveal — the climactic data point
+- **12-15s:** "Here's what I use instead" — soft CTA, product positioned as the tool that exposed the problem
+
+**Why it converts as a paid format:**
+- Educational framing bypasses ad fatigue
+- The product is discovered, not pitched
+- Data provides built-in credibility (specific numbers > vague claims)
+- Familiar brands as villains create engagement bait (comments arguing = algorithm fuel)
+
+**Bloom example:**
+- 0-2s: "I tested ChatGPT's top stock picks for 2025"
+- 2-8s: Show performance data — missed earnings, ignored insider selling, no risk analysis
+- 8-12s: "Bloom's AI flagged 3 out of 5 as high risk before they dropped"
+- 12-15s: App screenshot, "Try Bloom free. Link in bio."
+
+**Production:** Near-zero cost. Screen recordings + text overlays + data cards. No actors, no studio.
 
 **Output:** Select 3-5 formats per campaign.
 

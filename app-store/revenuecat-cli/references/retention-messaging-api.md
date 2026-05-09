@@ -4,9 +4,20 @@ Setup guide for configuring Apple's cancel-flow retention offers through Revenue
 
 ## Prerequisites
 - Apple must approve your access (request at https://developer.apple.com/contact/request/retention-messaging-api/)
-- Need: App Name, Apple ID (numeric, e.g. 1436348671), endpoint URL from RevenueCat
+- Need: App Name, Apple ID (numeric, e.g. `$APP_STORE_APP_ID`), endpoint URL from RevenueCat
 - Only account holder can submit the form
 - Approval timing is unpredictable (weeks to months)
+
+## Existing Custom Endpoint Pitfall
+
+Some apps already have a custom subscription-retention endpoint, for example `$APP_API_DOMAIN/retention-api/`. If Apple points to a stub endpoint instead of RevenueCat, retention messaging silently fails because:
+
+1. Apple sends the cancellation request to your backend
+2. Your backend returns a placeholder `messageId`
+3. No retention offer is shown to the user
+4. RevenueCat never sees the request, so setup verification and save tracking fail
+
+**Resolution**: Ensure Apple's notification URL points to RevenueCat's endpoint (provided in Lifecycle > Retention setup wizard, step 1). Keep any custom endpoint only as a deliberate fallback.
 
 ## Promotional Offers in App Store Connect
 
@@ -74,6 +85,31 @@ Equalized prices are in LOCAL currencies (INR 1499, JPY 2200, etc.), not USD.
 3. **Default Message**: Required first. Title ≤66 chars, subtitle ≤144 chars. Auto-translate from English.
 4. **Promotional Messages**: Map Active product → Offered product → Promotion identifier. Eligibility rules (e.g., first seen >14 days).
 5. **Production**: After perf test passes, connect prod URL, recreate messages. Apple reviews per locale.
+
+## Example Offer Mapping
+
+Use placeholders in public docs. Replace these with your real App Store Connect product IDs, offer codes, and prices in private config.
+
+| Product | Offer Code | Type | Details |
+|---------|-----------|------|---------|
+| `$PRODUCT_ID_MONTHLY` | `$OFFER_CODE_MONTHLY_DISCOUNT` | Percentage discount | PAY_AS_YOU_GO, 1 period |
+| `$PRODUCT_ID_MONTHLY` | `$OFFER_CODE_MONTHLY_FREE` | Free period | FREE_TRIAL |
+| `$PRODUCT_ID_ANNUAL` | `$OFFER_CODE_ANNUAL_DISCOUNT` | Percentage discount | PAY_AS_YOU_GO, 1 period |
+| `$PRODUCT_ID_ANNUAL` | `$OFFER_CODE_ANNUAL_FREE` | Free period | FREE_TRIAL |
+| `$PRODUCT_ID_WEEKLY` | `$OFFER_CODE_WEEKLY_DISCOUNT` | Percentage discount | PAY_AS_YOU_GO, 1 period |
+| `$PRODUCT_ID_WEEKLY` | `$OFFER_CODE_WEEKLY_FREE` | Free period | FREE_TRIAL |
+
+RevenueCat messages to configure:
+- **Default**: Generic cancellation-save message for all products/locales
+- **Promotional**: Discount or free-period message with eligibility rules such as first seen >14 days
+
+## Remaining Setup Steps
+
+1. Verify Apple's notification URL points to RevenueCat, not a legacy custom endpoint
+2. Make a sandbox purchase to complete step 3 of 4 in RC wizard
+3. Pass the performance test (~1 hour)
+4. Connect production URL, recreate messages for production
+5. Apple reviews production messages per locale
 
 ## Browser Automation Notes
 - Grid cells: double-click to activate input

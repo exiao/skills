@@ -5,7 +5,7 @@ description: Use when the cron fires at 8am ET on Mondays — pulls the week's m
 
 # Earnings Card Pipeline
 
-Every Monday, pulls up to 5 major companies reporting earnings that week, writes an analyst-perspective take for each, generates a styled earnings card via Nano Banana Pro, and schedules tweets via Typefully.
+Every Monday, pulls up to 5 major companies reporting earnings that week, writes an analyst-perspective take for each, generates a styled earnings card via Nano Banana Pro, and creates unscheduled Typefully drafts for account-owner review.
 
 ---
 
@@ -16,8 +16,8 @@ Every Monday, pulls up to 5 major companies reporting earnings that week, writes
 | `web-search` skill | Serper query for earnings calendar + analyst estimates |
 | `exec` (curl) | Benzinga API for earnings calendar |
 | `nano-banana-pro` skill | Generate 1080×1080 die-cut sticker earnings card |
-| `typefully` skill | Upload card + create scheduled tweet draft |
-| `message` tool | Report to Signal group |
+| `typefully` skill | Upload card + create unscheduled tweet draft |
+| final response | Report to Signal group via cron delivery. Do not call message/send_message |
 
 ---
 
@@ -25,12 +25,22 @@ Every Monday, pulls up to 5 major companies reporting earnings that week, writes
 
 ### Step 1 — Pull This Week's Earnings
 
-**Primary: Serper web search** (reliable, no API key expiration issues):
+**Discovery: Serper web search** (find which companies report this week):
 1. `"most anticipated earnings week [Month] [day] [Year]"` — EarningsWhispers posts weekly lists
 2. `"earnings calendar this week [Month] [Year]"` — broader coverage
-3. For day/company specifics: `"[TICKER] Q[N] [Year] earnings estimate EPS revenue"`
 
-Then use `bloom earnings [TICKER]` for per-company EPS/revenue estimates and history.
+**Data: bloom CLI** (get estimates and dates for discovered tickers):
+```bash
+# Confirm earnings dates and get EPS/revenue estimates
+# bloom-cli does not expose a bulk earnings-calendar command; query candidate tickers one at a time.
+for TICKER in AAPL MSFT GOOG AMZN NVDA; do
+  bloom earnings "$TICKER" -f json
+done
+# Returns: symbol, earnings_date, eps_estimate, market_cap
+
+# For deeper estimates and history per ticker
+bloom earnings AAPL
+```
 
 From the combined results, select up to **5 mega-cap or widely-held names** (Apple, Google, Meta, Amazon, Netflix, NVDA, AMD, etc. — names retail investors recognize). Skip micro-caps. **Skip companies that already reported** (e.g., Sunday evening releases like PLTR) even if they appear in the week's calendar.
 
@@ -88,6 +98,8 @@ Output: `/tmp/earnings-card-[TICKER]-$(date +%Y%m%d).png`
 
 **Batch generation via script file (required):** ShellExec interprets `&&` as shell backgrounding and rejects chained commands. Instead of running each card as a separate ShellExec call, write all generation commands into a single bash script (e.g., `/tmp/gen-earnings-cards.sh`) and execute it once with `timeout=600`. This avoids the `&&` error and reduces round-trips from 5+ calls to 1. Same pattern works for Typefully uploads and draft creation.
 
+**Quote prompts safely:** Earnings prompts and tweets contain `$0.50`, `$15.58B`, and `$TICKER`. If the bash script uses `set -u` and double-quoted prompt strings, shell expansion treats `$0`, `$15`, `$JD`, etc. as variables and can crash with `unbound variable` or silently corrupt the prompt. Put long prompts and tweet text in **single quotes** inside the script, or use heredocs with quoted delimiters (`cat <<'EOF'`).
+
 ```bash
 #!/bin/bash
 set -e
@@ -95,8 +107,8 @@ source ~/.hermes/.env
 export GEMINI_API_KEY
 SCRIPT=~/.hermes/skills/creative/nano-banana-pro/scripts/generate_image.py
 
-echo "=== Generating TICKER card ==="
-uv run "$SCRIPT" --prompt "..." --filename "/tmp/earnings-card-TICKER-YYYYMMDD.png" \
+run_card "TICKER" 'Create a 1080x1080 financial earnings data card in die-cut sticker style... Est. EPS: $1.04 ... Est. Rev: $15.58B ...'
+uv run "$SCRIPT" --prompt "$prompt" --filename "/tmp/earnings-card-TICKER-YYYYMMDD.png" \
   --resolution 1K --aspect-ratio 1:1 --model pro
 # repeat for each ticker...
 ```
@@ -112,7 +124,7 @@ No hashtags. No emojis. Confident and data-forward.
 
 ### Step 6 — Upload + Create Each Draft
 
-**Typefully account:** Bloom = social_set_id `$TYPEFULLY_SOCIAL_SET_ID` (discovered via `social-sets:list`). `TYPEFULLY_SOCIAL_SET_ID` is set via env. Discover with `social-sets:list` if needed.
+**Typefully account:** Bloom = social_set_id `$TYPEFULLY_SOCIAL_SET_ID` (discovered via `social-sets:list`). `TYPEFULLY_SOCIAL_SET_ID` is NOT in .env — use `$TYPEFULLY_SOCIAL_SET_ID` directly.
 
 ```bash
 source ~/.hermes/.env && export TYPEFULLY_API_KEY
@@ -130,7 +142,7 @@ node ~/.hermes/skills/marketing/typefully/scripts/typefully.js drafts:create $TY
   --platform x \
   --text "..." \
   --media "$MEDIA_ID"
-# Do NOT add --schedule. Save as unscheduled draft only — the repo owner reviews before posting.
+# Do NOT add --schedule. Save as unscheduled draft only — the account owner reviews before posting.
 # → returns draft_id, private_url
 ```
 
@@ -163,7 +175,7 @@ Draft: https://typefully.com/?d=[draft_id]&a=$TYPEFULLY_SOCIAL_SET_ID | Status: 
 ## Delivery
 
 - Signal group: `$SIGNAL_MARKETING_GROUP` — cron delivery handles routing, do NOT send via message tool
-- Typefully account: Bloom = `$TYPEFULLY_SOCIAL_SET_ID` (from env or `social-sets:list`)
+- Typefully account: Bloom = `$TYPEFULLY_SOCIAL_SET_ID` (hardcoded, not in .env)
 - Cards: `/tmp/earnings-card-TICKER-YYYYMMDD.png`
 
 ---
@@ -188,7 +200,8 @@ Draft: https://typefully.com/?d=[draft_id]&a=$TYPEFULLY_SOCIAL_SET_ID | Status: 
 7. **Vague AI take** — "could move the stock" is not useful. Be specific: "margin guidance matters more than EPS beat."
 8. **Not reporting failures** — if Nano Banana Pro fails for one ticker, still process the others and report the failure in Signal.
 9. **Benzinga 401** — Token expires periodically. Don't waste time debugging; go straight to Serper fallback. The Serper path (EarningsWhispers + individual ticker searches) is fully sufficient.
-10. **TYPEFULLY_SOCIAL_SET_ID not in .env** — Set via `$TYPEFULLY_SOCIAL_SET_ID` env var. Discover with `social-sets:list` if needed.
+10. **TYPEFULLY_SOCIAL_SET_ID not in .env** — The Bloom account ID is `$TYPEFULLY_SOCIAL_SET_ID`. Discover with `social-sets:list` if unsure, but it's stable.
 11. **Already-reported companies** — Some mega-caps report Sunday evening (e.g., PLTR on May 4) or Monday after close. When searching for each ticker, check snippets for past-tense language like "reported", "beat", "missed", "revenue was", "EPS of $X" to detect companies that already reported. In the May 2026 run, PLTR, AMD, SHOP, and RIVN had all reported by the time the cron executed on Wednesday — only DIS, UBER, NVO, APP, and COIN were still upcoming.
 12. **Mid-week re-runs** — The cron is scheduled for Monday 8am ET, but may fire late or be re-triggered mid-week. If running on a non-Monday, use the actual current date to determine which companies have already reported vs. are still upcoming. Tweet text should reference the actual reporting day ("reports tomorrow", "reports Thursday") relative to the current date, not relative to Monday.
 13. **Serper script path** — The correct path is `~/.hermes/skills/ai-tools/web-search/scripts/serper.sh` (not `skills/serper-search/`). The web-search skill's script directory moved; always use the path from the web-search skill.
+14. **Bash `$` expansion in prompts/tweets** — In generated scripts, single-quote prompt and tweet literals that contain prices or cashtags. Double quotes plus `set -u` caused `/tmp/gen-earnings-cards.sh: line 22: $4: unbound variable` because `$45.57B` was parsed as `$4`. The Typefully script has the same risk for `$JD` cashtags and estimate text; use single quotes or quoted heredocs.

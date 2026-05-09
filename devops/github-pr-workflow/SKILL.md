@@ -360,6 +360,42 @@ When a repo's main checkout has accumulated uncommitted changes (common with ski
 
 Key idea: create a clean worktree from `origin/main`, copy dirty files from the main checkout into it, commit + push + PR from the worktree.
 
+## Pitfalls
+
+### Never amend/squash a pushed commit when force-push is blocked
+
+If a commit is already pushed and force-push is forbidden (common in fork workflows with merge-protection plugins), you CANNOT `git reset --soft HEAD~1` + re-commit, because the new commit diverges and `git push` will be rejected as non-fast-forward. The fix:
+
+- **Make review fixes as a NEW commit on top**, not by amending the original.
+- If you accidentally reset and re-committed, recover with: `git fetch origin <branch> && git reset --soft origin/<branch>` which stages your working-tree changes as a diff on top of the remote's version. Then commit those as a clean follow-up.
+- `git pull --rebase` after a divergent reset often causes merge conflicts on the same files. Prefer the `fetch + reset --soft` approach.
+
+### PR body with markdown
+
+Never inline markdown in `--body` (shell quoting breaks it). Always write to a temp file and use `--body-file`:
+
+```bash
+cat > /tmp/pr-body.md << 'EOF'
+## Summary
+...
+EOF
+gh pr create --body-file /tmp/pr-body.md
+```
+
+### `gh pr edit` silently failing on some repos
+
+On some organization repos (for example `$YOUR_REPO`) `gh pr edit --title` and `gh pr edit --body-file` exit 0 with a stderr warning about "Projects (classic) being deprecated" but the title/body are NOT updated. The underlying GraphQL mutation fails on `repository.pullRequest.projectCards` and the rest of the mutation never runs. You'll only notice if you re-fetch the PR and see the old title.
+
+Workaround: skip `gh pr edit` and patch via REST API directly. This always works:
+
+```bash
+gh api -X PATCH /repos/$OWNER/$REPO/pulls/$PR_NUMBER \
+  -f title="New title" \
+  -F body=@/tmp/pr-body-full.md
+```
+
+Notes: `-f` is for plain string fields, `-F` with `@file` reads file contents into the field. Combine both in one call. Verify with `gh pr view $PR_NUMBER --json title,body -q '.title + "\n---\n" + .body'`.
+
 ## Useful PR Commands Reference
 
 | Action | gh | git + curl |

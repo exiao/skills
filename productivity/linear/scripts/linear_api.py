@@ -229,7 +229,7 @@ def cmd_create_issue(args: argparse.Namespace) -> None:
         inp["priority"] = args.priority
     if args.parent:
         inp["parentId"] = args.parent
-    unsupported = [name for name in ("label", "assignee") if getattr(args, name)]
+    unsupported = [name for name in ("label", "assignee") if getattr(args, name) is not None]
     if unsupported:
         sys.stderr.write(
             "Unsupported create-issue option(s): "

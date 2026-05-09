@@ -53,6 +53,7 @@ Or call the agent with natural language: "show me ASA campaign performance for l
 4. [Strategy Playbook](#strategy-playbook)
 5. [Attribution Guide](#attribution-guide)
 6. [Common Traps](#common-traps)
+7. [Daily Optimization Passes](#daily-optimization-passes)
 
 ---
 
@@ -159,6 +160,15 @@ asa_api_all /campaigns
 ```
 
 Features: auto-auth via asa-auth.sh, token caching (1hr TTL), exponential backoff on 429s, auto-refresh on 401.
+
+### Daily Optimization Passes
+
+For scheduled recommendation-only optimization passes, read `references/daily-optimization.md` before running scripts. It captures strict CPA guardrails, report format, and current API/script quirks:
+
+- `campaigns.sh list --status ENABLED` can fail on `selector`; run `campaigns.sh list` and filter `ENABLED` rows if needed.
+- Keyword report sorting should use `localSpend`, not `spend`.
+- If `optimize.sh bids` hits null-metric `jq` errors, continue with raw `asa_api` JSON and compute recommendations from `localSpend`, taps, installs, keyword IDs, and ad group IDs.
+- Search-term reports should use `timeZone:"ORTZ"` in raw API fallbacks.
 
 ---
 

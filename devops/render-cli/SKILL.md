@@ -48,7 +48,7 @@ render services instances <SERVICE_ID> -o json --confirm
 render services create --name my-api --type web_service --repo https://github.com/org/repo -o json --confirm
 
 # Clone from existing service
-render services create --from srv-abc123 --name my-api-clone -o json --confirm
+render services create --from $SOURCE_SERVICE_ID --name my-api-clone -o json --confirm
 
 # Update a service
 render services update <SERVICE_ID> -o json --confirm
@@ -258,6 +258,28 @@ render workspace set <WORKSPACE_ID> -o json --confirm
 ```
 
 The workspace persists in `~/.render/cli.yaml` across commands.
+
+## Environment Variables (REST API only)
+
+The Render CLI does NOT support env var management. Use the REST API:
+
+```bash
+source ~/.hermes/.env
+
+# Set/update a single env var (PUT creates or overwrites)
+curl -s -X PUT "https://api.render.com/v1/services/<SERVICE_ID>/env-vars/<KEY>" \
+  -H "Authorization: Bearer $RENDER_API_KEY_APP1" \
+  -H "Content-Type: application/json" \
+  -d '{"value": "my-value"}'
+
+# List all env vars
+curl -s "https://api.render.com/v1/services/<SERVICE_ID>/env-vars" \
+  -H "Authorization: Bearer $RENDER_API_KEY_APP1"
+```
+
+Pitfalls:
+- POST to `/env-vars` (bulk create) may silently return empty. Use PUT to `/env-vars/<KEY>` for reliable single-key operations.
+- No generic `RENDER_API_KEY` exists in .env. Use workspace-specific keys: `RENDER_API_KEY_<WORKSPACE>` (for example `RENDER_API_KEY_APP1` or `RENDER_API_KEY_APP2`).
 
 ## Common Patterns
 

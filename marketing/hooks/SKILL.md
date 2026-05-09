@@ -97,7 +97,7 @@ Hook patterns optimized for AI-generated UGC ads (TikTok/Instagram). These are p
 - **Never show the app/product in the first 3 seconds.** Hook with emotion, curiosity, or a pattern interrupt first. The product reveal comes after the hook lands.
 - **Pattern-interrupt visuals:** Use provocative or unexpected imagery in the first frame to stop the scroll (within platform ad policies). The goal is comment bait — visuals that make people react, argue, or tag someone.
 
-Source: @athcanft (May 2026)
+Source: paid-social creative benchmark (May 2026)
 
 ### "this is ur reminder that..." format
 
@@ -113,7 +113,7 @@ Template: `this is ur reminder that [pain point everyone ignores] [and optional 
 
 ### Before/After Transformation (visual-only hook)
 
-No words in the first 3 seconds. The visual transformation IS the hook. Highest-performing TikTok ad format for app installs per @athcanft ($5-10 CPA, $0 production cost).
+No words in the first 3 seconds. The visual transformation IS the hook. Highest-performing TikTok ad format for app installs per paid-social creative benchmark ($5-10 CPA, $0 production cost).
 
 **Format:** "before" (3-5s) → cut → "after" (3-5s) → app screenshot CTA (2s). 12s total.
 
@@ -121,7 +121,40 @@ No words in the first 3 seconds. The visual transformation IS the hook. Highest-
 
 **Production pipeline:** Generate "before" face (nano-banana-pro or similar) → enhance with fal.ai face-enhancement for "after" glow-up → animate both with Kling motion control using same reference video → assemble with video-editor.
 
-See also: [VISUAL-HOOKS.md](~/clawd/skills/video-production/VISUAL-HOOKS.md) Sources 7 & 8 for full visual hook breakdowns.
+See also: [VISUAL-HOOKS.md](/creative/video-production/VISUAL-HOOKS.md) Sources 7 & 8 for full visual hook breakdowns.
+
+---
+
+## Familiar Brand as Villain (Product Test Reveal)
+
+Source: Product Test Reveal case study — 30M views across 232 Reels, $23K/month MRR, 100K+ followers. Solo founder, identical format every video.
+
+The formula: take a brand everyone knows, reveal a hidden problem using data, position your product as the tool that exposed it.
+
+**Structure:**
+```
+Familiar Brand (0-2s) → Hidden Problem with Data (2-8s) → Score/Rating Reveal (8-12s) → "Here's what I use instead" (12-15s)
+```
+
+**Why it works:**
+- Familiar brand = instant recognition = scroll stop
+- Data as drama: the score reveal IS the content
+- Educational framing bypasses ad fatigue ("I tested X" reads as journalism, not promotion)
+- The product is discovered as "the tool I used," never pitched directly
+- Identical structure scales infinitely: same format, different brands, daily
+
+**Bloom applications:**
+- "I tested ChatGPT's stock picks" → bad performance data → "here's what real AI analysis looks like"
+- "I ran Robinhood's top picks through Bloom's AI" → missed signals → AI confidence scores
+- "I asked Jim Cramer's top pick to Bloom" → what the AI flagged that he didn't
+- "WallStreetBets said buy [ticker]" → what the data actually shows
+
+**The villain shortlist (brands everyone has an opinion on):**
+ChatGPT, Robinhood, WallStreetBets, Jim Cramer, Mad Money, Motley Fool, Yahoo Finance, CNBC
+
+**Key principle:** the villain must be something the audience currently trusts or uses. The cognitive dissonance between "I use this" and "it's actually bad" is what drives engagement.
+
+**Self-sustaining loop:** Content generates app usage → usage generates data → data generates more content. Oasis runs lab tests that become videos. Bloom runs AI analysis that becomes videos.
 
 ---
 

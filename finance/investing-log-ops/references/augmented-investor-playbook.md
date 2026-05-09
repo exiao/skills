@@ -47,7 +47,7 @@ Prompting AI = delegating to a smart junior analyst who lacks your context:
 
 ## Gaps Identified in investing-log (May 2026)
 
-Applied against the 4-phase pipeline in Bloom-Invest/investing-log:
+Applied against the 4-phase pipeline in $INVESTING_LOG_REPO:
 
 1. **Intelligence Mosaic** (HIGH) — Add "Ecosystem Signal Extraction" to Stage 3 deep research. Currently researches candidates in isolation.
 2. **Management Credibility Tracking** (MEDIUM) — Add to Pass 3 screening: track last 3-4 quarters guidance vs actuals. Flag serial over-promisers.

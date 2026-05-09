@@ -81,10 +81,10 @@ A common CI-only test failure pattern: `patch("package.submodule.function")` wor
 2. **Fix: Use `patch.object` with explicit imports.** Instead of string-based patch targets:
    ```python
    # FRAGILE — depends on import order
-   with patch("bloom_backend.portfolio_analytics.risk.analyze_portfolio", ...):
+   with patch("myapp.analytics.risk.analyze_portfolio", ...):
    
    # ROBUST — explicit import guarantees the module is loaded
-   from bloom_backend.portfolio_analytics import risk as risk_mod
+   from myapp.analytics import risk as risk_mod
    with patch.object(risk_mod, "analyze_portfolio", ...):
    ```
 
@@ -102,7 +102,7 @@ A common CI-only test failure pattern: `patch("package.submodule.function")` wor
    
    **Working pattern:** Patch `async_to_sync` itself to return a sync function with canned results:
    ```python
-   from bloom_backend.views import portfolio_analytics as pa_view
+   from myapp.views import portfolio_analytics as pa_view
    
    canned = {"summary": {...}, "risk": {...}, ...}
    with patch.object(pa_view, "async_to_sync", return_value=lambda args: canned):
