@@ -148,8 +148,8 @@ For reference:
 
 | Resource | Value |
 |----------|-------|
-| Web service | `srv-bpfldo88atn28fgm5td0` (bloom-api) |
-| Env group | `evg-bpflhvo8atn28fgm60u0` (Bloom Production) |
+| Web service | `$RENDER_SERVICE_ID` (bloom-api) |
+| Env group | `$RENDER_ENV_GROUP_ID` (Bloom Production) |
 | API key env var | `RENDER_API_KEY` (see TOOLS.md for value) |
 
 ---

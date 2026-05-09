@@ -69,7 +69,7 @@ Click "Save" or "Save draft". Confirm the post appears in Substack's drafts list
 
 ## Publication Details
 
-- **Blog**: blog.promptpm.ai ("my crystal ball" by Eric Xiao)
+- **Blog**: the configured Substack blog
 - **Available URL**: getbloom.substack.com (not yet created)
 
 ## After Saving Draft

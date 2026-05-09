@@ -264,7 +264,7 @@ class ComfyRunner:
         base_path = parsed.path.rstrip("/")
         ws_url = f"{scheme}://{netloc}{base_path}/ws?clientId={self.client_id}"
         if self.is_cloud and self.api_key:
-            ws_url += f"&token={self.api_key}"
+            ws_url += f"&token={self.api_key}"  # Known ComfyUI Cloud limitation: WS auth requires query param (no header support)
 
         outputs: dict[str, Any] = {}
         error_payload: dict[str, Any] | None = None

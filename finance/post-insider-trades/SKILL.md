@@ -176,28 +176,28 @@ SEC Form 4 URLs are typically ~95 chars. Budget accordingly. Test with `echo -n 
 
 ### Step 8 — Upload Card + Create Typefully Draft
 
-The Bloom Typefully social set ID is **286685** (username: `investwithbloom`).
+The Bloom Typefully social set ID is set via `TYPEFULLY_SOCIAL_SET_ID` env var (username: `investwithbloom`).
 
 ```bash
 cd ~/.hermes/skills/marketing/typefully
 
 # Upload media
-TYPEFULLY_API_KEY=<key> node scripts/typefully.js media:upload 286685 /tmp/insider-trade-card-$(date +%Y%m%d).png
+TYPEFULLY_API_KEY=<key> node scripts/typefully.js media:upload $TYPEFULLY_SOCIAL_SET_ID /tmp/insider-trade-card-$(date +%Y%m%d).png
 # → returns media_id
 
 # Create draft with media (unscheduled)
 # Prefer --file for multiline tweets to avoid shell quoting issues.
 printf '%s' "<tweet_text>" > /tmp/insider-tweet-$(date +%Y%m%d).txt
-TYPEFULLY_API_KEY=<key> node scripts/typefully.js drafts:create 286685 --platform x --file /tmp/insider-tweet-$(date +%Y%m%d).txt --media <media_id>
+TYPEFULLY_API_KEY=<key> node scripts/typefully.js drafts:create $TYPEFULLY_SOCIAL_SET_ID --platform x --file /tmp/insider-tweet-$(date +%Y%m%d).txt --media <media_id>
 # Do NOT add --schedule. Save as unscheduled draft only — Eric reviews before posting.
 # → returns draft_id
 
 # Verify it stayed unscheduled and media is attached.
-TYPEFULLY_API_KEY=<key> node scripts/typefully.js drafts:get 286685 <draft_id> > /tmp/typefully-draft-<draft_id>.json
+TYPEFULLY_API_KEY=<key> node scripts/typefully.js drafts:get $TYPEFULLY_SOCIAL_SET_ID <draft_id> > /tmp/typefully-draft-<draft_id>.json
 jq '{status, scheduled_date, private_url, media: .platforms.x.posts[0].media_ids, text: .platforms.x.posts[0].text}' /tmp/typefully-draft-<draft_id>.json
 ```
 
-**Note:** `TYPEFULLY_SOCIAL_SET_ID` is not set in .env. Use the hardcoded value `286685` for Bloom. The API key is `TYPEFULLY_API_KEY` from .env.
+**Note:** Set `TYPEFULLY_SOCIAL_SET_ID` in .env. The API key is `TYPEFULLY_API_KEY` from .env.
 
 ### Step 9 — Report
 
@@ -211,7 +211,7 @@ Filed: [date]
 Stock: $[current] | YTD: [+/-X%]
 
 Tweet: [tweet text]
-Typefully: https://typefully.com/?d=[draft_id]&a=286685
+Typefully: https://typefully.com/?d=[draft_id]&a=$TYPEFULLY_SOCIAL_SET_ID
 ```
 
 ---
@@ -219,7 +219,7 @@ Typefully: https://typefully.com/?d=[draft_id]&a=286685
 ## Delivery
 
 - Cron delivery: announces to Marketing Signal group automatically
-- Typefully account: social_set_id `286685` (Bloom @investwithbloom)
+- Typefully account: social_set_id `$TYPEFULLY_SOCIAL_SET_ID` (Bloom brand account)
 - Card saved to: `/tmp/insider-trade-card-YYYYMMDD.png`
 
 ---
@@ -243,7 +243,7 @@ Typefully: https://typefully.com/?d=[draft_id]&a=286685
 6. **Scheduling instead of drafting** — do not schedule insider-trade posts. Create an unscheduled Typefully draft only; Eric reviews before posting.
 7. **Reporting when no trade found** — if Step 2 yields nothing, NO_REPLY silently. Don't send a "nothing found" message.
 8. **Using screener URL as primary source** — it frequently returns empty HTML. Always start with `insider-purchases-25k` page and filter client-side.
-9. **TYPEFULLY_SOCIAL_SET_ID not in .env** — it's not there. Bloom's social set ID is hardcoded: `286685`.
+9. **TYPEFULLY_SOCIAL_SET_ID not in .env** — set `TYPEFULLY_SOCIAL_SET_ID` in .env.
 10. **Not detecting cluster buys** — when multiple insiders buy the same ticker on the same day, that's the strongest signal. Always check for this pattern and highlight it in the tweet.
 
 ## Constitutional Rules
