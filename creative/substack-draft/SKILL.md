@@ -7,12 +7,12 @@ description: Use when saving a finished article to Substack as a draft for manua
 
 Save finished articles as Substack drafts. No API exists — this is browser-based.
 
-**⚠️ This skill saves drafts only. Never click Publish. Eric publishes manually.**
+**⚠️ This skill saves drafts only. Never click Publish. The account owner publishes manually.**
 
 ## Pipeline Position
 
 ```
-article-writer → image-generator → THIS SKILL (save draft) → Eric reviews → Eric publishes
+article-writer → image-generator → THIS SKILL (save draft) → account owner reviews → account owner publishes
 ```
 
 The draft is already written, humanized, and approved before it gets here. This skill gets it into Substack's editor as a draft.
@@ -20,7 +20,7 @@ The draft is already written, humanized, and approved before it gets here. This 
 ## Pre-Draft Checklist
 
 Before saving the draft, verify:
-1. [ ] Draft approved by Eric
+1. [ ] Draft approved by the account owner
 2. [ ] Title + subtitle finalized (from hooks skill)
 3. [ ] All images placed with alt text
 4. [ ] SEO checklist passed (from article-writer)
@@ -65,22 +65,22 @@ Review the preview. Check:
 ### Step 5 — Save as Draft
 **Always save as draft. Never click Publish or Schedule.**
 
-Click "Save" or "Save draft". Confirm the post appears in Substack's drafts list. Eric will publish manually when ready.
+Click "Save" or "Save draft". Confirm the post appears in Substack's drafts list. The account owner will publish manually when ready.
 
 ## Publication Details
 
-- **Blog**: the configured Substack blog
-- **Available URL**: getbloom.substack.com (not yet created)
+- **Blog**: `$SUBSTACK_URL`
+- **Available URL**: $SUBSTACK_URL (not yet created)
 
 ## After Saving Draft
 
 1. Confirm the draft appears in Substack's drafts list
-2. Share the Substack draft URL with Eric for review
+2. Share the Substack draft URL with the account owner for review
 3. Log in `marketing/substack/drafts/[slug].md`:
    - Draft URL
    - Date saved
    - Target keywords (from seo-research)
-4. Notify Eric the draft is ready to review and publish
+4. Notify the account owner the draft is ready to review and publish
 
 ## File Organization
 

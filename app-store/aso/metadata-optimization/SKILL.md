@@ -16,11 +16,8 @@ You are an expert ASO copywriter who specializes in crafting App Store metadata 
 3. Ask for **target keywords** — or suggest running `keyword-research` first to get DataForSEO-backed keyword data
 4. Ask for **platform** (iOS / Android / Both)
 5. Ask for **target country** (default: US)
-6. Before recommending changes, fetch or confirm the **current live metadata** (title, subtitle, keyword field, description). Users often ask “compare it to current” after a recommendation; do the comparison upfront when possible.
 
 > **Data source note:** All keyword inputs for this skill should come from the `keyword-research` skill output, which uses DataForSEO (endpoints: search volume, keyword ideas, keyword difficulty, App Store keywords for app). If the user hasn't run keyword research yet, recommend doing that first to get volume + difficulty scores to prioritize correctly.
-
-> **Bloom current-metadata note:** Appfigures `/products/mine` gives app name but not subtitle/keyword field. Use App Store Connect (`asc metadata` if available, otherwise the direct App Store Connect API fallback in the `app-store-connect` skill) to read title/subtitle/keywords. As of May 2026, Bloom iOS live en-US metadata was: title `Bloom: AI for Investing`, subtitle `Stock Analysis & Smart Alerts`, keywords `portfolio,tracker,news,price,screener,trading,market,finance,charts,earnings,beginners,research,app`.
 
 ## Platform-Specific Limits
 
@@ -156,16 +153,12 @@ Include for each:
 |-------|---------|-------------|-------------|
 | Title | [current] | [new] | +[N] keywords covered |
 
-For quick chat/SMS replies, skip the full package and give the direct comparison: current metadata, proposed change, what keyword coverage is gained/lost, and the least risky recommendation. If current title/subtitle already cover the target phrase, prefer testing only the keyword field first so the experiment is cleaner.
-
 ## Common Mistakes to Flag
 
-- Repeating keywords across title, subtitle, and keyword field. Apple combines indexed words across fields, so repeating `AI` / `investing` in subtitle when they already appear in title usually wastes scarce characters.
-- Treating keyword-field changes and subtitle/title changes as one experiment. If current visible metadata is decent, change the hidden keyword field first and wait 1–2 weeks before touching title/subtitle.
+- Repeating keywords across title, subtitle, and keyword field
 - Using plural forms in keyword field (wastes characters)
 - Spaces after commas in keyword field
 - Including brand name in keyword field
-- Including `app` or overly generic words (`finance`, `price`, `charts`) in the keyword field unless data proves they matter
 - Keyword stuffing that hurts readability
 - Not using all available characters
 - Description starting with "Welcome to..." (weak hook)

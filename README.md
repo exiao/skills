@@ -123,7 +123,6 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [claude-md-management](coding/claude-md-management/) | Use when asked to audit, improve, or maintain CLAUDE.md files across repos. Triggers on "audit my CLAUDE.md", "check if my CLAUDE.md is up to date", capturing session learnings, or keeping project memory current. |
 | [context7](coding/context7/) | Use when writing code that uses a specific library or framework and you need accurate, current API docs — not year-old training data. Fetches version-specific documentation via Context7 MCP. |
 | [fastapi-piccolo-typer-testing](coding/fastapi-piccolo-typer-testing/) | Patterns for writing fast, DB-free pytest suites against FastAPI routers, Piccolo ORM queries, Typer CLI commands, and service-layer code. Use when adding test coverage to a FastAPI + Piccolo + Typer app, mocking async ORM query chains, or testing Typer commands that lazily import services.… |
-| [firecrawl](coding/firecrawl/) | Scrape, crawl, search, and interact with web pages using Firecrawl CLI and API. Use when the user mentions "firecrawl", "scrape a website", "crawl a site", "map a site", "web scraping", "extract web data", "interact with a page", or needs richer web extraction than WebExtract (JS-rendered pages,… |
 | [fix-sentry-issues](coding/fix-sentry-issues/) | Use when scanning Sentry issues for Bloom and creating fix PRs. |
 | [godmode](coding/godmode/) | Jailbreak API-served LLMs using G0DM0D3 techniques — Parseltongue input obfuscation (33 techniques), GODMODE CLASSIC system prompt templates, ULTRAPLINIAN multi-model racing, encoding escalation, and Hermes-native prefill/system prompt integration. Use when a user wants to bypass safety filters,… |
 | [jupyter-live-kernel](coding/jupyter-live-kernel/) | Use a live Jupyter kernel for stateful, iterative Python execution via hamelnb. Load this skill when the task involves exploration, iteration, or inspecting intermediate results — data science, ML experimentation, API exploration, or building up complex code step-by-step. Uses terminal to run… |
@@ -141,6 +140,8 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [systematic-debugging](coding/systematic-debugging/) | Use when encountering any bug, test failure, or unexpected behavior. 4-phase root cause investigation — NO fixes without understanding the problem first. |
 | [test-driven-development](coding/test-driven-development/) | Use when implementing any feature or bugfix, before writing implementation code. Enforces RED-GREEN-REFACTOR cycle with test-first approach. |
 | [writing-plans](coding/writing-plans/) | Use when you have a spec or requirements for a multi-step task. Creates comprehensive implementation plans with bite-sized tasks, exact file paths, and complete code examples. |
+| [ci-evals-llm-agents](coding/ci-evals-llm-agents/) | Build CI eval pipelines for LLM agent systems. Use when adding evals to repos with LLM agents, creating SimulatorBackend patterns, setting up multi-model CI matrices, or debugging flaky agent eval output. Triggers: CI evals, agent evals, simulator backend, eval matrix, eval CI. |
+| [subagent-driven-development](coding/subagent-driven-development/) | Use when executing implementation plans with independent tasks. Dispatches fresh delegate_task per task with two-stage review (spec compliance then code quality). |
 
 ### 🎨 Creative & Content
 
@@ -184,6 +185,14 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [video-script](creative/video-script/) | Generate structured scene-by-scene video scripts with production metadata (visuals, audio, sources, transitions, captions) ready to feed into the video-production pipeline (Sora, Kling, ElevenLabs, InfiniteTalk, Remotion, stock-footage, video-editor). Use when asked to "write a video script",… |
 | [writer](creative/writer/) | Write content in Eric's voice — articles, blog posts, tweets, social media posts, marketing copy, newsletter drafts. Loads WRITING-STYLE.md and enforces kill phrases. |
 | [youtube-content](creative/youtube-content/) | Fetch YouTube video transcripts and transform them into structured content (chapters, summaries, threads, blog posts). Use when the user shares a YouTube URL or video link, asks to summarize a video, requests a transcript, or wants to extract and reformat content from any YouTube video. |
+| [claude-design](creative/claude-design/) | Design one-off HTML artifacts (landing, deck, prototype). |
+| [comfyui](creative/comfyui/) | Generate images, video, and audio with ComfyUI — install, launch, manage nodes/models, run workflows with parameter injection. Uses the official comfy-cli for lifecycle and direct REST/WebSocket API for execution. |
+| [design-md](creative/design-md/) | Use when creating, editing, or validating DESIGN.md files, design tokens, DTCG token specs, Tailwind theme exports, design system documentation, WCAG contrast checks, or Google Stitch-compatible design specs. |
+| [humanizer](creative/humanizer/) | Humanize text: strip AI-isms and add real voice. |
+| [hyperframes](creative/hyperframes/) | Create HTML-based video compositions, animated title cards, social overlays, captioned talking-head videos, audio-reactive visuals, and shader transitions using HyperFrames. HTML is the source of truth for video. Use when the user wants a rendered MP4/WebM from an HTML composition, wants to animate text/logos/charts over media, needs captions synced to audio, wants TTS narration, or wants to convert a website into a video. |
+| [pretext](creative/pretext/) | Use when building creative browser demos with @chenglou/pretext — DOM-free text layout for ASCII art, typographic flow around obstacles, text-as-geometry games, kinetic typography, and text-powered generative art. Produces single-file HTML demos by default. |
+| [sketch](creative/sketch/) | Throwaway HTML mockups: 2-3 design variants to compare. |
+| [touchdesigner-mcp](creative/touchdesigner-mcp/) | Control a running TouchDesigner instance via twozero MCP — create operators, set parameters, wire connections, execute Python, build real-time visuals. 36 native tools. |
 
 ### ⚙️ DevOps & Infrastructure
 
@@ -231,7 +240,6 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [render-cli](devops/render-cli/) | Manage Render.com services, deploys, databases, logs, and infrastructure using the official Render CLI (`render`). Use this skill whenever the user asks about Render deployments, service management, viewing Render logs, restarting Render services, running database queries on Render Postgres,… |
 | [dspy](devops/research/dspy/) | Build complex AI systems with declarative programming, optimize prompts automatically, create modular RAG systems and agents with DSPy - Stanford NLP's framework for systematic LM programming |
 | [security-audit](devops/security-audit/) | Run a codebase security audit using OWASP Top 10 and STRIDE threat modeling. Use when auditing code for vulnerabilities or preparing for a pentest. |
-| [stably-cli](devops/stably-cli/) | Use the Stably CLI to create, run, fix, and maintain Playwright tests in the bloom-tests repo. Use when running tests (stably test), auto-fixing failures (stably fix), or generating new tests from a prompt (stably create). |
 | [stably-sdk-rules](devops/stably-sdk-rules/) | Best practices for writing Stably AI-powered Playwright tests. Use when writing, reviewing, or debugging tests in bloom-tests that use @stablyai/playwright-test — covers when to use aiAssert vs raw Playwright, agent.act, extract, getLocatorsByAI, and email flows. |
 | [axolotl](devops/training/axolotl/) | Expert guidance for fine-tuning LLMs with Axolotl - YAML configs, 100+ models, LoRA/QLoRA, DPO/KTO/ORPO/GRPO, multimodal support |
 | [grpo-rl-training](devops/training/grpo-rl-training/) | Expert guidance for GRPO/RL fine-tuning with TRL for reasoning and task-specific model training |
@@ -412,6 +420,7 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [prometheus-cli](external-services/prometheus-cli/) | Search TikTok viral videos, App Store rankings, hook analysis via SGE Prometheus MCP. |
 | [stably-cli](external-services/stably-cli/) | Create, run, fix, and maintain Playwright tests using the Stably CLI. |
 | [usefastlane-ai](external-services/usefastlane-ai/) | Short-form content platform and REST API for generating, remixing, scheduling TikTok, Reels, and Shorts. |
+| [gsc-cli](external-services/gsc-cli/) | Query Google Search Console data via MCP (mcporter). Use when checking search performance, impressions, clicks, CTR, rankings for $APP_DOMAIN or any verified property. Also use for finding SEO quick wins, checking indexing status, or managing sitemaps. |
 
 ### 🎵 Media
 
@@ -500,7 +509,6 @@ These started from other open-source projects, modified and extended for these w
 | [remotion-videos](creative/video-production/remotion-videos/) | [remotion-dev/skills](https://github.com/remotion-dev/skills) |
 | [frontend-slides](visual-design/frontend-slides/) | [zarazhangrui/frontend-slides](https://github.com/zarazhangrui/frontend-slides) |
 | [last30days](marketing/last30days/) | [mvanhorn/last30days-skill](https://github.com/mvanhorn/last30days-skill) |
-| [stably-cli](devops/stably-cli/) | [skills.sh/stablyai](https://skills.sh/stablyai/agent-skills/stably-cli) |
 | [stably-sdk-rules](devops/stably-sdk-rules/) | [skills.sh/stablyai](https://skills.sh/stablyai/agent-skills/stably-sdk-rules) |
 | [sahil-office-hours](research/sahil-office-hours/) | [slavingia/skills](https://github.com/slavingia/skills) |
 | [design-md](visual-design/design-md/) | [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md) + [Google Stitch DESIGN.md spec](https://stitch.withgoogle.com/docs/design-md/overview/) |
