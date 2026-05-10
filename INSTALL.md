@@ -43,7 +43,7 @@ Manage campaigns on Google, Apple, and Meta.
 ### 7. Development & Coding
 TDD workflows, PR management, deploy verification, browser automation, and more.
 
-**Skills:** agent-browser, babysit-pr, claude-md-management, context7, demo-pr-feature, deploy-bloom, document-release, documents, fix-bloom-prs, fix-sentry-issues, app-store-connect, ios-simulator, last30days, ralph-mode, serena, stably-cli, stably-sdk-rules, superpowers-coding, superpowers-planning, superpowers-reviews, verify-deploy, codex, security-audit
+**Skills:** agent-browser, babysit-pr, claude-md-management, context7, deploy-bloom, document-release, documents, fix-sentry-issues, app-store-connect, ios-simulator, last30days, ralph-mode, serena, stably-cli, stably-sdk-rules, superpowers-coding, superpowers-planning, superpowers-reviews, verify-deploy, codex, security-audit
 
 ### 8. Strategy & Business
 Trading, domain management, cloud ops, and decision-making frameworks.

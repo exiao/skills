@@ -89,9 +89,9 @@ Performance Max needs more creative variation. Supply:
 #### Display URL Paths (15 characters each)
 
 ```
-getbloom.app/Stock/Research     ← tells them what they'll find
-getbloom.app/AI/Investing       ← keyword reinforcement  
-getbloom.app/Free/Download      ← risk reversal in the URL
+$APP_DOMAIN/Stock/Research     ← tells them what they'll find
+$APP_DOMAIN/AI/Investing       ← keyword reinforcement  
+$APP_DOMAIN/Free/Download      ← risk reversal in the URL
 ```
 
 #### Ad Extensions (use all of them)

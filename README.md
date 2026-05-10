@@ -30,13 +30,19 @@ Install the skills from https://github.com/exiao/skills
 | [**coding**](coding/) | 23 | Programming, debugging, testing, code review, web scraping |
 | [**creative**](creative/) | 38 | Writing, editing, media production, content creation |
 | [**devops**](devops/) | 55 | CI/CD, GitHub, Docker, MLOps, model training/inference |
+| [**external-services**](external-services/) | 17 | External service CLIs and API integrations |
 | [**finance**](finance/) | 9 | Investing, market analysis, portfolio management |
 | [**marketing**](marketing/) | 38 | Ads (Google/Meta/Apple), SEO, analytics, social media |
+| [**media**](media/) | 1 | Media content tools (Spotify, audio) |
 | [**memory**](memory/) | 3 | Memory management — GC, setup, and recall |
+| [**ops-center**](ops-center/) | 1 | Ops center codebase review and reference |
 | [**productivity**](productivity/) | 16 | Apple apps, email, notes, smart home, local search, gaming |
+| [**reference**](reference/) | 2 | Reference notes for specific projects |
 | [**research**](research/) | 10 | Deep research, competitive analysis, market intelligence |
 | [**skills-meta**](skills-meta/) | 6 | Skills about skills — creating, auditing, improving, testing |
+| [**software-development**](software-development/) | 5 | Frameworks, debugging, architecture patterns |
 | [**visual-design**](visual-design/) | 37 | UI/UX design, diagrams, image generation, frontend |
+| [**yuanbao**](yuanbao/) | 1 | Yuanbao automation and integrations |
 
 ---
 

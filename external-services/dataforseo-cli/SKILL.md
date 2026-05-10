@@ -182,7 +182,7 @@ curl -s -X POST "$BASE/on_page/pages" \
 ```
 
 **Returns:** Per-page `checks` — title tag, meta description, H1, broken links, keyword density, CWV.  
-For full site: `target: "getbloom.app"`, `max_crawl_pages: 50`
+For full site: `target: "$APP_DOMAIN"`, `max_crawl_pages: 50`
 
 ---
 
@@ -193,7 +193,7 @@ For full site: `target: "getbloom.app"`, `max_crawl_pages: 50`
 | ASO keyword volume | 1. Batch up to 700 keywords per call |
 | Keyword ideas | 2. Use 2–5 seeds, sort by `search_volume` desc |
 | SEO difficulty | 3. <30 = easy target |
-| Google SERP check | 4. Search for `getbloom.app` in `domain` field |
+| Google SERP check | 4. Search for `$APP_DOMAIN` in `domain` field |
 | App Store rank for keyword | 5. Find `app_id == "$BLOOM_APP_STORE_ID"` |
 | All keywords Bloom ranks for | 6. Sort by `rank_absolute` for best positions |
 | App Store competitors | 7. Lower `avg_position` = stronger competitor |
