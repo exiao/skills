@@ -1,11 +1,6 @@
 ---
 name: yuanbao
-description: "Yuanbao (元宝) groups: @mention users, query info/members."
-version: 1.0.0
-metadata:
-  hermes:
-    tags: [yuanbao, mention, at, group, members, 元宝, 派, 艾特]
-    related_skills: []
+description: Use when working with Yuanbao (元宝) groups: @mention users, 艾特 someone, query group info, list group members, find users, send DMs/private messages, or handle Yuanbao group interactions.
 ---
 
 # Yuanbao Group Interaction

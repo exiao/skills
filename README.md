@@ -391,6 +391,66 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [sticker-creator](visual-design/sticker-creator/) | Create die-cut sticker style cards via Nano Banana Pro. Use for social media cards, earnings cards, brand stickers, announcement cards, and any content formatted as a bold, clean sticker with a thick white border. |
 | [userinterface-wiki](visual-design/userinterface-wiki/) | UI/UX best practices for web interfaces. Use when reviewing animations, CSS, audio, typography, UX patterns, prefetching, or icon implementations. Covers 11 categories from animation principles to typography. Outputs file:line findings. |
 
+### 🔌 External Services
+
+| Skill | Description |
+|-------|-------------|
+| [appfigures-cli](external-services/appfigures-cli/) | Query Appfigures for app store analytics (downloads, revenue, reviews, rankings). |
+| [apple-search-ads](external-services/apple-search-ads/) | Create, optimize, and scale Apple Search Ads campaigns with API automation. |
+| [bird-twitter](external-services/bird-twitter/) | Read X/Twitter timelines, tweets, and threads using the bird CLI (cookie-based GraphQL). |
+| [copilot-money-cli](external-services/copilot-money-cli/) | Query Copilot Money for finances, transactions, net worth, and holdings. |
+| [dataforseo-cli](external-services/dataforseo-cli/) | Keyword research (volume, difficulty, ideas), App Store/Google Play rankings, Google SERP rankings. |
+| [firecrawl](external-services/firecrawl/) | Scrape, crawl, search, and interact with web pages using Firecrawl CLI and API. |
+| [google-ads-cli](external-services/google-ads-cli/) | Manage Google Ads campaigns: performance checks, keyword pausing, report downloads, campaign optimization. |
+| [higgsfield-generate](external-services/higgsfield-generate/) | Generate AI videos and images using Higgsfield. |
+| [higgsfield-marketplace-cards](external-services/higgsfield-marketplace-cards/) | Create marketplace-style product cards with Higgsfield. |
+| [higgsfield-product-photoshoot](external-services/higgsfield-product-photoshoot/) | AI product photoshoot generation with Higgsfield. |
+| [higgsfield-soul-id](external-services/higgsfield-soul-id/) | Manage Soul ID character consistency for Higgsfield generations. |
+| [meta-ads-cli](external-services/meta-ads-cli/) | Daily Meta ad operations via Marketing API: Ad Library research, performance checks, creative generation, and reporting. |
+| [porkbun-cli](external-services/porkbun-cli/) | Manage Porkbun domains, DNS records, SSL certificates, URL forwarding, and hosting blueprints. |
+| [prometheus-cli](external-services/prometheus-cli/) | Search TikTok viral videos, App Store rankings, hook analysis via SGE Prometheus MCP. |
+| [stably-cli](external-services/stably-cli/) | Create, run, fix, and maintain Playwright tests using the Stably CLI. |
+| [usefastlane-ai](external-services/usefastlane-ai/) | Short-form content platform and REST API for generating, remixing, scheduling TikTok, Reels, and Shorts. |
+
+### 🎵 Media
+
+| Skill | Description |
+|-------|-------------|
+| [spotify](media/spotify/) | Spotify: play, search, queue, manage playlists and devices. |
+
+### 🏢 Ops Center
+
+| Skill | Description |
+|-------|-------------|
+| [ops-center-codebase-review](ops-center/ops-center-codebase-review/) | Reference notes from full ops-center codebase review. |
+
+### 📚 Reference
+
+| Skill | Description |
+|-------|-------------|
+| [fintary-dashboard-notes](reference/fintary-dashboard-notes/) | Reference notes for Fintary ops-center dashboard rebuild. |
+| [ops-center-reference](reference/ops-center-reference/) | Fintary ops-center v2 architecture, API proxy pattern, infrastructure, env vars, and related repos. |
+
+### 🛠️ Software Development
+
+| Skill | Description |
+|-------|-------------|
+| [debugging-hermes-tui-commands](software-development/debugging-hermes-tui-commands/) | Debug Hermes Agent TUI slash commands: Python, gateway, Ink UI. |
+| [hermes-agent-skill-authoring](software-development/hermes-agent-skill-authoring/) | Author in-repo SKILL.md: frontmatter, validator, structure. |
+| [node-inspect-debugger](software-development/node-inspect-debugger/) | Debug Node.js via --inspect + Chrome DevTools Protocol CLI. |
+| [python-debugpy](software-development/python-debugpy/) | Debug Python: pdb REPL + debugpy remote (DAP). |
+| [spike](software-development/spike/) | Throwaway experiments to validate an idea before building. |
+
+### 🀄 Yuanbao
+
+| Skill | Description |
+|-------|-------------|
+| [yuanbao](yuanbao/) | Yuanbao (元宝) groups: @mention users, query info/members. |
+
+---
+
+## Adapted Skills
+
 ---
 
 ## Adapted Skills
