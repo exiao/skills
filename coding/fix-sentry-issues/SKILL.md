@@ -10,7 +10,7 @@ Scan recent Sentry issues for Bloom (last 24h, all statuses), analyze root cause
 
 ## Prerequisites
 
-- Sentry MCP configured via mcporter (org: `getbloom`, region: `https://us.sentry.io`)
+- Sentry MCP configured via mcporter (org: `$SENTRY_ORG`, region: `https://us.sentry.io`)
 - GitHub CLI (`gh`) authenticated with Bloom-Invest org access
 - Git worktrees for isolated branches
 - If this runs as cron, read `references/cron-safety.md` before changing attached skills or toolsets. The cron scanner can block execution based on loaded skill documentation, not just the task prompt.
@@ -27,7 +27,7 @@ Scan recent Sentry issues for Bloom (last 24h, all statuses), analyze root cause
 ```bash
 # Get 10 most recent issues sorted by frequency
 mcporter call sentry.list_issues \
-  organizationSlug=getbloom \
+  organizationSlug=$SENTRY_ORG \
   query='last_seen:+12h' \
   sort=freq \
   limit=10 \
@@ -37,7 +37,7 @@ mcporter call sentry.list_issues \
 If `mcporter` returns `Tool list_issues not found`, use the raw Sentry API fallback. This worked in the 2026-05-09 cron run and preserves deterministic `lastSeen` + `freq` sorting:
 
 ```bash
-sentry api '/api/0/organizations/getbloom/issues/?query=lastSeen:-12h&sort=freq&limit=10' --method GET \
+sentry api '/api/0/organizations/$SENTRY_ORG/issues/?query=lastSeen:-12h&sort=freq&limit=10' --method GET \
   | jq '[.[] | {id,shortId,project:.project.slug,title,culprit,permalink,status,count,userCount,firstSeen,lastSeen,level,logger,type,issueType,metadata}]'
 ```
 
@@ -47,7 +47,7 @@ Note: We fetch ALL issues (not just unresolved) to catch regressions, recently r
 
 ```bash
 # Keep output compact because raw JSON includes huge commit/PR bodies.
-sentry issue list getbloom/invest --limit 10 -t 7d --query 'is:resolved' --json \
+sentry issue list $SENTRY_ORG/$SENTRY_PROJECT --limit 10 -t 7d --query 'is:resolved' --json \
   | jq '{data:[.data[] | {id,shortId,title,culprit,permalink,status,statusDetails,metadata,type,issueType,level,logger,project}]}'
 ```
 
@@ -77,7 +77,7 @@ For EACH of the 10 issues, get full details:
 
 ```bash
 mcporter call sentry.get_issue_details \
-  organizationSlug=getbloom \
+  organizationSlug=$SENTRY_ORG \
   issueId=<ISSUE_ID> \
   regionUrl='https://us.sentry.io'
 ```
@@ -183,7 +183,7 @@ cat > /tmp/sentry-pr-body.md <<'EOF'
 - **Issue:** <SENTRY_ISSUE_ID>
 - **Error:** <error message>
 - **Frequency:** <events/users count>
-- **Link:** https://getbloom.sentry.io/issues/<ISSUE_NUMBER>/
+- **Link:** https://$SENTRY_ORG.sentry.io/issues/<ISSUE_NUMBER>/
 
 ## Root Cause
 <explanation of why this error occurs>

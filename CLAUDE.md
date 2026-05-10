@@ -39,6 +39,10 @@ category-name/
 - Keep `SKILL.md` under 500 lines. Move details to `references/`.
 - No README.md, CHANGELOG.md, or human-facing docs inside skill directories.
 
+## Bloom CLI
+
+For bloom CLI command discovery, run `bloom --help` or `bloom <command> --help`.
+
 ## Rules
 
 1. **No hardcoded credentials.** Use `$ENV_VAR_NAME` for tokens, API keys, auth strings, product IDs. This repo is public.

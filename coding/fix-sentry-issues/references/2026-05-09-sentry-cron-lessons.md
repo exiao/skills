@@ -7,7 +7,7 @@ Context: scheduled Bloom Sentry fixer scanned the 10 most frequent issues seen i
 - The documented MCP command `mcporter call sentry.list_issues ...` failed with `Tool list_issues not found`.
 - Fallback that worked:
   ```bash
-  sentry api '/api/0/organizations/getbloom/issues/?query=lastSeen:-12h&sort=freq&limit=10' --method GET \
+  sentry api '/api/0/organizations/$SENTRY_ORG/issues/?query=lastSeen:-12h&sort=freq&limit=10' --method GET \
     | jq '[.[] | {id,shortId,project:.project.slug,title,culprit,permalink,status,count,userCount,firstSeen,lastSeen,level,logger,type,issueType,metadata}]'
   ```
 - `mcporter list sentry` showed the tool is currently named `search_issues`, but the raw `sentry api` endpoint gave the most deterministic sort/filter behavior for the cron workflow.

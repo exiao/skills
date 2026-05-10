@@ -1,6 +1,6 @@
 ---
 name: frontend-design
-description: Use when build production-grade frontend interfaces with high design quality.
+description: Use when building production-grade frontend interfaces with high design quality.
 license: Complete terms in LICENSE.txt
 ---
 

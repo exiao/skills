@@ -1,12 +1,6 @@
 ---
 name: yt-dlp
 description: Download audio/video from YouTube and other sites using yt-dlp. Use when the user asks to download music, songs, albums, podcasts, or video from YouTube or similar platforms. Triggers on 'download song', 'get mp3', 'yt-dlp', 'youtube download', 'rip audio'.
-version: 1.0.0
-metadata:
-  runtime:
-    tags: [youtube, music, download, mp3, audio, video, yt-dlp]
-    category: media
-    requires_toolsets: [terminal]
 ---
 
 # yt-dlp — Media Downloads
