@@ -37,7 +37,7 @@ Install the skills from https://github.com/exiao/skills
 | [**research**](research/) | 10 | Deep research, competitive analysis, market intelligence |
 | [**skills-meta**](skills-meta/) | 7 | Skills about skills — creating, auditing, improving, testing |
 | [**visual-design**](visual-design/) | 38 | UI/UX design, diagrams, image generation, frontend |
-| [**video-production**](video-production/) | 1 | Video production workflows and clip generation |
+| [**video-production**](video-production/) | 2 | Video production workflows and clip generation |
 | [**external-services**](external-services/) | 17 | External service CLIs and API integrations |
 | [**media**](media/) | 1 | Media content tools (Spotify, audio) |
 | [**ops-center**](ops-center/) | 1 | Ops center codebase review and reference |
@@ -215,6 +215,7 @@ ng-context/) | When the user wants to create or update their product marketing c
 | Skill | Description |
 |-------|-------------|
 | [clipify](video-production/clipify/) | Find funny moments in videos, cut clips, reframe vertical, and burn word-by-word captions. |
+| [editframe](video-production/editframe/) | Build, preview, and render videos with Editframe, the HTML/CSS/React video composition tool. Use for code-generated videos, Editframe projects, HTML/CSS video compositions, MP4 rendering, and Node.js/FFmpeg video automation. |
 
 ### 🎯 Visual Design
 
