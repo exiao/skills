@@ -108,23 +108,6 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [ios-simulator](app-store/ios-simulator/) | Use when automating iOS Simulator tasks with 21 accessibility-driven scripts: building and running iOS apps, device lifecycle management, screenshot capture, UI navigation via accessibility, gesture replay, app install/launch, status bar configuration, and health checks. Also use for iOS testing… |
 | [revenuecat-cli](app-store/revenuecat-cli/) | Use when querying RevenueCat for projects, apps, products, entitlements, offerings, packages, customers, subscriptions, purchases, webhooks, or overview metrics via mcporter. Triggers on "revenuecat", "RC project", "list RC products", "check customer entitlement", "RC offering", "subscription… |
 
-### 🌱 Bloom
-
-| Skill | Description |
-|-------|-------------|
-| [bloom-cli](bloom/bloom-cli/) | Use when fetching stock data, company fundamentals, market data, earnings, SEC filings, price history, analyst ratings, peer comparisons, or financial research via the Bloom CLI. |
-| [bloom-design-system](bloom/bloom-design-system/) | Use Bloom's product design system when designing, implementing, or reviewing Bloom UI, including BloomBot subscribe/paywall pages, app-like cards, mobile screens, buttons, badges, typography, spacing, borders, color tokens, iconography, and brand-fit reviews. |
-| [bloom-e2e-test-fixes](bloom/bloom-e2e-test-fixes/) | Fix failing Bloom E2E tests when Stably or Playwright needs manual debugging, resilient selectors, or screenshot-based diagnosis. |
-| [bloom-notifications](bloom/bloom-notifications/) | Add, modify, or debug Bloom push notification types, alert preferences, commands, and delivery. |
-| [bloom-portfolio-arch](bloom/bloom-portfolio-arch/) | Bloom portfolio architecture for chart rendering, Plaid integration, backtest queries, snapshots, and portfolio analytics. |
-| [bloom-render-cron-debug](bloom/bloom-render-cron-debug/) | Reference for debugging Bloom Render cron jobs and Django import chain issues. |
-| [bloom-render-debug](bloom/bloom-render-debug/) | Debug Bloom API crashes, latency, health checks, Render restarts, and slow endpoints. |
-| [bloombot-access-gate](bloom/bloombot-access-gate/) | BloomBot subscription access gate plugin, WhatsApp subscription checks, deep research gating, credits, admins, and deployment. |
-| [bloombot-vps-ops](bloom/bloombot-vps-ops/) | Manage the BloomBot VPS, SSH access, cron jobs, skill files, and service operations. |
-| [demo-pr-feature](bloom/demo-pr-feature/) | Capture demo screenshots or videos of Bloom PR features, deploy to Surge, and post PR comments. |
-| [fix-bloom-prs](bloom/fix-bloom-prs/) | Fix CI failures, review code, and address review comments across tracked repos. |
-| [fix-migration-conflicts](bloom/fix-migration-conflicts/) | Fix Django migration conflicts in Bloom by resolving multiple leaf nodes and renumbering skipped migrations. |
-
 ### 💻 Coding & Development
 
 | Skill | Description |

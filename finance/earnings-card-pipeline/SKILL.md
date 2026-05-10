@@ -179,7 +179,7 @@ Draft: https://typefully.com/?d=[draft_id]&a=$TYPEFULLY_SOCIAL_SET_ID | Status: 
 
 ## Cron Config
 
-- **ID:** `0400d7b1-679c-40da-8772-def88fbb7824`
+- **ID:** `$EARNINGS_CARD_PIPELINE_CRON_ID`
 - **Schedule:** `0 8 * * 1` (8am ET, Mondays)
 - **Model:** default (claude-sonnet)
 - **Target:** isolated

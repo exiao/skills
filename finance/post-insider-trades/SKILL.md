@@ -226,7 +226,7 @@ Typefully: https://typefully.com/?d=[draft_id]&a=$TYPEFULLY_SOCIAL_SET_ID
 
 ## Cron Config
 
-- **ID:** `76392017-245d-43bd-a6a5-899ea211467c`
+- **ID:** `$INSIDER_TRADES_CRON_ID`
 - **Schedule:** `0 9,14 * * 1-5` (9am + 2pm ET, Mon–Fri)
 - **Model:** default (claude-sonnet)
 - **Target:** isolated

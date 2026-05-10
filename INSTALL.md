@@ -33,7 +33,7 @@ AI video generation, voiceovers, screen recording, and video editing.
 ### 5. Analytics & Research
 App analytics, keyword research, stock research, web search, and trend tracking.
 
-**Skills:** appfigures, copilot-money, dataforseo, grok-search, notebooklm, phoenix-cli, polymarket, seo-research, stock-research, trend-research, web-search, bloom-cli
+**Skills:** appfigures, copilot-money, dataforseo, grok-search, notebooklm, phoenix-cli, polymarket, seo-research, stock-research, trend-research, web-search
 
 ### 6. Advertising
 Manage campaigns on Google, Apple, and Meta.
