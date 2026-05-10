@@ -10,7 +10,7 @@ Setup guide for configuring Apple's cancel-flow retention offers through Revenue
 
 ## Bloom-Specific: Existing Custom Endpoint (PITFALL)
 
-Bloom has a custom retention endpoint at `api.getbloom.app/retention-api/` (code: `bloom_backend/views/retention.py`). This was built before the RevenueCat integration and is a **stub** that returns a hardcoded dummy `messageId`. If Apple's notification URL is pointed here instead of RevenueCat's URL, retention messaging silently fails because:
+Bloom has a custom retention endpoint at `$BLOOM_API_DOMAIN/retention-api/` (code: `bloom_backend/views/retention.py`). This was built before the RevenueCat integration and is a **stub** that returns a hardcoded dummy `messageId`. If Apple's notification URL is pointed here instead of RevenueCat's URL, retention messaging silently fails because:
 
 1. Apple sends the cancellation request to your backend
 2. Your backend returns `"default-retention-message-id"` (not a real message)
@@ -105,7 +105,7 @@ RevenueCat messages configured:
 
 ## Remaining Setup Steps
 
-1. Verify Apple's notification URL points to RevenueCat (not `api.getbloom.app/retention-api/`)
+1. Verify Apple's notification URL points to RevenueCat (not `$BLOOM_API_DOMAIN/retention-api/`)
 2. Make a sandbox purchase to complete step 3 of 4 in RC wizard
 3. Pass the performance test (~1 hour)
 4. Connect production URL, recreate messages for production

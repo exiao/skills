@@ -25,18 +25,21 @@ cmd_list() {
     esac
   done
 
-  local response
-  response=$(asa_api GET "/campaigns/${cid}/adgroups/${agid}/targetingkeywords?limit=1000") || return 1
-
-  local filter='.data[]?'
+  # Use POST /find for server-side filtering + pagination (GET defaults to ~20 results)
+  local payload='{"pagination":{"limit":1000,"offset":0}'
   if [[ -n "$status" ]]; then
-    filter=".data[]? | select(.status == \"$status\")"
+    payload='{"pagination":{"limit":1000,"offset":0},"conditions":[{"field":"status","operator":"EQUALS","values":["'"$status"'"]}]}'
+  else
+    payload='{"pagination":{"limit":1000,"offset":0}}'
   fi
 
-  echo "$response" | jq -r "
-    $filter | [.id, .text, .matchType, .status,
-      (.bidAmount.amount // \"default\")] |
-    @tsv" | column -t -s $'\t' | {
+  local response
+  response=$(asa_api POST "/campaigns/${cid}/adgroups/${agid}/targetingkeywords/find" "$payload") || return 1
+
+  echo "$response" | jq -r '
+    .data[]? | [.id, .text, .matchType, .status,
+      (.bidAmount.amount // "default")] |
+    @tsv' | column -t -s $'\t' | {
       echo "ID  TEXT  MATCH_TYPE  STATUS  BID"
       cat
     }

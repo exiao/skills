@@ -72,7 +72,7 @@ def get(path):
 ```
 
 Useful read-only paths:
-- Resolve app: `/apps?filter[bundleId]=com.bloom.invest&limit=1`
+- Resolve app: `/apps?filter[bundleId]=$BUNDLE_ID&limit=1`
 - Versions: `/apps/{app_id}/appStoreVersions?filter[platform]=IOS&limit=10`
 - Version localization, includes `description`, `keywords`, `promotionalText`, `whatsNew`: `/appStoreVersions/{version_id}/appStoreVersionLocalizations?limit=200`
 - App info: `/apps/{app_id}/appInfos?limit=10`

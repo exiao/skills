@@ -1,6 +1,6 @@
 ---
 name: gsc-cli
-description: Query Google Search Console data via MCP (mcporter). Use when checking search performance, impressions, clicks, CTR, rankings for investwithbloom.com or any verified property. Also use for finding SEO quick wins, checking indexing status, or managing sitemaps.
+description: Query Google Search Console data via MCP (mcporter). Use when checking search performance, impressions, clicks, CTR, rankings for $APP_DOMAIN or any verified property. Also use for finding SEO quick wins, checking indexing status, or managing sitemaps.
 version: 1.1.0
 author: exiao
 metadata:
@@ -96,7 +96,7 @@ mcporter list gsc --schema
 ```bash
 # Last 28 days of query performance
 mcporter call gsc.search_analytics \
-  siteUrl="sc-domain:investwithbloom.com" \
+  siteUrl="sc-domain:$APP_DOMAIN" \
   startDate="2026-04-09" \
   endDate="2026-05-07" \
   dimensions="query" \
@@ -105,7 +105,7 @@ mcporter call gsc.search_analytics \
 
 # Page-level performance
 mcporter call gsc.search_analytics \
-  siteUrl="sc-domain:investwithbloom.com" \
+  siteUrl="sc-domain:$APP_DOMAIN" \
   startDate="2026-04-09" \
   endDate="2026-05-07" \
   dimensions="page" \
@@ -116,7 +116,7 @@ mcporter call gsc.search_analytics \
 ```bash
 # Query + page breakdown (which queries land on which pages)
 mcporter call gsc.search_analytics \
-  siteUrl="sc-domain:investwithbloom.com" \
+  siteUrl="sc-domain:$APP_DOMAIN" \
   startDate="2026-04-01" \
   endDate="2026-05-01" \
   dimensions="query,page" \
@@ -125,7 +125,7 @@ mcporter call gsc.search_analytics \
 
 # Device breakdown
 mcporter call gsc.search_analytics \
-  siteUrl="sc-domain:investwithbloom.com" \
+  siteUrl="sc-domain:$APP_DOMAIN" \
   startDate="2026-04-01" \
   endDate="2026-05-01" \
   dimensions="query,device" \
@@ -133,7 +133,7 @@ mcporter call gsc.search_analytics \
 
 # Daily trend for a specific query
 mcporter call gsc.search_analytics \
-  siteUrl="sc-domain:investwithbloom.com" \
+  siteUrl="sc-domain:$APP_DOMAIN" \
   startDate="2026-04-01" \
   endDate="2026-05-01" \
   dimensions="date" \
@@ -144,7 +144,7 @@ mcporter call gsc.search_analytics \
 ### Enhanced search analytics (up to 25K rows, regex)
 ```bash
 mcporter call gsc.enhanced_search_analytics \
-  siteUrl="sc-domain:investwithbloom.com" \
+  siteUrl="sc-domain:$APP_DOMAIN" \
   startDate="2026-04-01" \
   endDate="2026-05-01" \
   dimensions="query,page" \
@@ -157,16 +157,16 @@ mcporter call gsc.enhanced_search_analytics \
 ```bash
 # Filter by page URL
 mcporter call gsc.search_analytics \
-  siteUrl="sc-domain:investwithbloom.com" \
+  siteUrl="sc-domain:$APP_DOMAIN" \
   startDate="2026-04-01" \
   endDate="2026-05-01" \
   dimensions="query" \
-  pageFilter="investwithbloom.com/subscribe" \
+  pageFilter="$APP_DOMAIN/subscribe" \
   --output json
 
 # Regex filter for related queries
 mcporter call gsc.search_analytics \
-  siteUrl="sc-domain:investwithbloom.com" \
+  siteUrl="sc-domain:$APP_DOMAIN" \
   startDate="2026-04-01" \
   endDate="2026-05-01" \
   dimensions="query" \
@@ -176,7 +176,7 @@ mcporter call gsc.search_analytics \
 
 # Mobile only
 mcporter call gsc.search_analytics \
-  siteUrl="sc-domain:investwithbloom.com" \
+  siteUrl="sc-domain:$APP_DOMAIN" \
   startDate="2026-04-01" \
   endDate="2026-05-01" \
   dimensions="query" \
@@ -188,7 +188,7 @@ mcporter call gsc.search_analytics \
 ```bash
 # Find keywords ranking 4-10 with optimization potential
 mcporter call gsc.detect_quick_wins \
-  siteUrl="sc-domain:investwithbloom.com" \
+  siteUrl="sc-domain:$APP_DOMAIN" \
   startDate="2026-04-01" \
   endDate="2026-05-01" \
   minImpressions:50 \
@@ -199,7 +199,7 @@ mcporter call gsc.detect_quick_wins \
 
 # Or use enhanced_search_analytics with inline quick wins
 mcporter call gsc.enhanced_search_analytics \
-  siteUrl="sc-domain:investwithbloom.com" \
+  siteUrl="sc-domain:$APP_DOMAIN" \
   startDate="2026-04-01" \
   endDate="2026-05-01" \
   dimensions="query,page" \
@@ -210,8 +210,8 @@ mcporter call gsc.enhanced_search_analytics \
 ### URL Indexing Inspection
 ```bash
 mcporter call gsc.index_inspect \
-  siteUrl="sc-domain:investwithbloom.com" \
-  inspectionUrl="https://investwithbloom.com/subscribe" \
+  siteUrl="sc-domain:$APP_DOMAIN" \
+  inspectionUrl="https://$APP_DOMAIN/subscribe" \
   --output json
 ```
 
@@ -219,13 +219,13 @@ mcporter call gsc.index_inspect \
 ```bash
 # List all sitemaps
 mcporter call gsc.list_sitemaps \
-  siteUrl="https://investwithbloom.com/" \
+  siteUrl="https://$APP_DOMAIN/" \
   --output json
 
 # Submit a new sitemap
 mcporter call gsc.submit_sitemap \
-  siteUrl="https://investwithbloom.com/" \
-  feedpath="https://investwithbloom.com/sitemap.xml" \
+  siteUrl="https://$APP_DOMAIN/" \
+  feedpath="https://$APP_DOMAIN/sitemap.xml" \
   --output json
 ```
 
@@ -249,8 +249,8 @@ mcporter call gsc.submit_sitemap \
 
 ## Site URL Format
 
-- Domain property: `sc-domain:investwithbloom.com` (covers all subdomains and protocols)
-- URL prefix: `https://investwithbloom.com/` (trailing slash required)
+- Domain property: `sc-domain:$APP_DOMAIN` (covers all subdomains and protocols)
+- URL prefix: `https://$APP_DOMAIN/` (trailing slash required)
 
 Use `sc-domain:` format when available as it captures all traffic.
 

@@ -193,7 +193,7 @@ Proxy status:
 ```
 
 For the Bloom migration (Render → Railway):
-- `api.getbloom.app` → CNAME `tmnv267w.up.railway.app`
+- `$BLOOM_API_DOMAIN` → CNAME `tmnv267w.up.railway.app`
 - **DNS only (grey cloud)** — not proxied
 - Railway provisioned SSL automatically within ~10 minutes
 

@@ -143,11 +143,11 @@ curl -s -X POST "$BASE/dataforseo_labs/apple/app_competitors/live" \
 ```bash
 curl -s -X POST "$BASE/dataforseo_labs/google/ranked_keywords/live" \
   -H "$DFS_AUTH" -H "Content-Type: application/json" \
-  -d '[{"target": "investwithbloom.com", "location_code": 2840, "language_code": "en", "limit": 50}]'
+  -d '[{"target": "$APP_DOMAIN", "location_code": 2840, "language_code": "en", "limit": 50}]'
 ```
 
 **Returns:** Items with `keyword_data.keyword`, `keyword_data.keyword_info.search_volume`, `ranked_serp_element.serp_item.rank_absolute`  
-**Note:** investwithbloom.com ranks for 12 keywords, all brand-name. Use on competitor domains to find their traffic-driving terms.
+**Note:** $APP_DOMAIN ranks for 12 keywords, all brand-name. Use on competitor domains to find their traffic-driving terms.
 
 ---
 

@@ -139,7 +139,6 @@ Key pitfall: `if: ${{ failure() }}` on a dependent job does NOT run when upstrea
 
 Another pitfall: `${{ github.job }}` in a `report-failure` job resolves to `"report-failure"`, not the name of the job that actually failed. Don't use it as a tag; `workflow` + `run_id` are sufficient.
 
-See `references/sentry-gha-setup.md` for the full composite action template.
 
 ## Legacy
 

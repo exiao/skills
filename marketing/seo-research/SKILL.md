@@ -164,7 +164,7 @@ curl -s -X POST "https://api.dataforseo.com/v3/serp/google/organic/live/advanced
   -H "Content-Type: application/json" \
   -d '[{"keyword": "TARGET_KEYWORD", "location_code": 2840, "language_code": "en", "depth": 100}]'
 ```
-Filter results for `getbloom.app` or `investwithbloom.com` in `domain` field.
+Filter results for `getbloom.app` or `$APP_DOMAIN` in `domain` field.
 
 ### Serper (supplemental)
 ```bash

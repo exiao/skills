@@ -55,8 +55,8 @@ After stripping values from the repo, add them to the private env file so skills
 
 ```bash
 cat >> ~/.hermes/.env << 'EOF'
-APP_DOMAIN=investwithbloom.com
-BLOOM_API_DOMAIN=api.getbloom.app
+APP_DOMAIN=example.com
+BLOOM_API_DOMAIN=api.example.com
 EOF
 ```
 

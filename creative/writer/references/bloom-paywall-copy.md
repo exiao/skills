@@ -88,7 +88,7 @@ Prefer:
 
 ## RevenueCat subscribe page pattern
 
-For a branded BloomBot paywall, host the pitch on `investwithbloom.com/subscribe` rather than relying on the generic RevenueCat package selector. Keep one clear Continue CTA after plan selection.
+For a branded BloomBot paywall, host the pitch on `$APP_DOMAIN/subscribe` rather than relying on the generic RevenueCat package selector. Keep one clear Continue CTA after plan selection.
 
 Current CTA target pattern:
 `https://pay.rev.cat/<token>/<encoded_phone>?package_id=bloombot_yearly_onboarding`

@@ -223,7 +223,7 @@ def cmd_create_issue(args: argparse.Namespace) -> None:
         sys.stderr.write(f"Team not found: {args.team}\n")
         sys.exit(1)
     inp: dict[str, Any] = {"title": args.title, "teamId": tid}
-    if args.description:
+    if args.description is not None:
         inp["description"] = args.description
     if args.priority is not None:
         inp["priority"] = args.priority
@@ -247,7 +247,7 @@ def cmd_update_issue(args: argparse.Namespace) -> None:
     inp: dict[str, Any] = {}
     if args.title:
         inp["title"] = args.title
-    if args.description:
+    if args.description is not None:
         inp["description"] = args.description
     if args.priority is not None:
         inp["priority"] = args.priority

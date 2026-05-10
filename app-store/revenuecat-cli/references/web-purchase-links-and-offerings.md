@@ -54,7 +54,7 @@ then stop and use the dashboard or ask for a v2 secret key with `project_configu
 
 For a WhatsApp upsell, avoid a generic RC selector with multiple similar plans. Use one short subscribe link:
 
-1. `investwithbloom.com/subscribe` pre-checkout page shows value props.
+1. `$APP_DOMAIN/subscribe` pre-checkout page shows value props.
 2. Redirect directly to the discounted annual onboarding package with `package_id=bloombot_yearly_onboarding`.
 3. Keep RevenueCat hosted checkout for payment, but move marketing copy/value props into Bloom-owned HTML where it can be edited and tested.
 
