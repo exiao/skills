@@ -1,6 +1,6 @@
 ---
 name: design-md
-description: Author/validate/export Google DESIGN.md token spec files.
+description: Use when creating, editing, or validating DESIGN.md files, design tokens, DTCG token specs, Tailwind theme exports, design system documentation, WCAG contrast checks, or Google Stitch-compatible design specs.
 ---
 
 # DESIGN.md Skill

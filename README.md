@@ -33,7 +33,7 @@ Install the skills from https://github.com/exiao/skills
 | [**external-services**](external-services/) | 17 | External service CLIs and API integrations |
 | [**finance**](finance/) | 9 | Investing, market analysis, portfolio management |
 | [**marketing**](marketing/) | 38 | Ads (Google/Meta/Apple), SEO, analytics, social media |
-| [**media**](media/) | 1 | Media content tools (Spotify, audio) |
+| [**media**](media/) | 2 | Media content tools (Spotify, video/audio downloads) |
 | [**memory**](memory/) | 3 | Memory management — GC, setup, and recall |
 | [**ops-center**](ops-center/) | 1 | Ops center codebase review and reference |
 | [**productivity**](productivity/) | 16 | Apple apps, email, notes, smart home, local search, gaming |
@@ -42,6 +42,7 @@ Install the skills from https://github.com/exiao/skills
 | [**skills-meta**](skills-meta/) | 6 | Skills about skills — creating, auditing, improving, testing |
 | [**software-development**](software-development/) | 5 | Frameworks, debugging, architecture patterns |
 | [**visual-design**](visual-design/) | 37 | UI/UX design, diagrams, image generation, frontend |
+| [**video-production**](video-production/) | 1 | Video production workflows and clip generation |
 | [**yuanbao**](yuanbao/) | 1 | Yuanbao automation and integrations |
 
 ---
@@ -417,6 +418,7 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | Skill | Description |
 |-------|-------------|
 | [spotify](media/spotify/) | Spotify: play, search, queue, manage playlists and devices. |
+| [yt-dlp](media/yt-dlp/) | Download videos, extract metadata/transcripts, and process media from YouTube and other supported sites via yt-dlp. |
 
 ### 🏢 Ops Center
 
@@ -447,9 +449,11 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 |-------|-------------|
 | [yuanbao](yuanbao/) | Yuanbao (元宝) groups: @mention users, query info/members. |
 
----
+### 🎬 Video Production
 
-## Adapted Skills
+| Skill | Description |
+|-------|-------------|
+| [clipify](video-production/clipify/) | Find the funniest moments in a video, cut standalone clips, optionally reformat 16:9 to 9:16, and burn opus-style captions. |
 
 ---
 
