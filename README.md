@@ -27,7 +27,6 @@ Install the skills from https://github.com/exiao/skills
 |----------|--------|-------------|
 | [**ai-tools**](ai-tools/) | 10 | AI agents, MCP integrations, web search, LLM tooling |
 | [**app-store**](app-store/) | 28 | App Store tools, RevenueCat, Prometheus, ReelFarm |
-| [**bloom**](bloom/) | 12 | Bloom product-specific workflows, UI, ops, testing, and debugging |
 | [**coding**](coding/) | 23 | Programming, debugging, testing, code review, web scraping |
 | [**creative**](creative/) | 38 | Writing, editing, media production, content creation |
 | [**devops**](devops/) | 55 | CI/CD, GitHub, Docker, MLOps, model training/inference |

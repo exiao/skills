@@ -41,7 +41,7 @@ category-name/
 
 ## Bloom CLI
 
-For bloom CLI command discovery, run `bloom --help` or `bloom <command> --help`.
+For bloom CLI command discovery, run bloom --help or `bloom <command> --help`.
 
 ## Rules
 

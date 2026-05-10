@@ -93,7 +93,7 @@ Triggered by: "screen for ideas in [sector]", "high conviction ideas", "what's i
 
 ## Daily Market Briefing (Cron Job)
 
-**Cron ID:** `b04e6814-7840-4927-b529-feb052cadbfc`
+**Cron ID:** `$CRON_JOB_ID`
 **Schedule:** `0 15 * * 1-5` (3pm ET, Mon-Fri)
 **Model:** Sonnet
 **Delivery:** Signal DM to Eric
