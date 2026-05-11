@@ -26,40 +26,29 @@ tags: [skills, maintenance, cleanup]
 
 ### Preserving Dirty Runtime Checkout Before Switching Branches
 
-The runtime checkout (`~/.hermes/skills`) often has a mix of tracked modifications and untracked new files. `git stash` fails when untracked files conflict with files on the target branch. Use this pattern:
+Do not do cleanup or PR work directly in the runtime checkout (`~/.hermes/skills`). Preserve first, then move the review work into a project worktree:
 
 ```bash
-cd ~/.hermes/skills
-# Commit ALL changes (tracked + untracked) to a preservation branch
-git checkout -b wip/preserve-$(date +%Y%m%d)
-git add -A
-git commit -m "WIP: preserve all local changes"
-# Now switch to main cleanly
-git checkout main && git pull origin main
+cd ~/projects/skills
+git fetch origin main
+BRANCH="wip/preserve-skills-$(date +%Y%m%d)"
+git worktree add ~/projects/_worktrees/$BRANCH -b "$BRANCH" origin/main
 ```
 
-To create a clean PR from the preserved changes:
-```bash
-# Create fresh branch from main
-git worktree add ~/projects/_worktrees/skills-cleanup -b chore/cleanup origin/main
-# Generate a patch of the delta (excluding generated state)
-git diff origin/main..wip/preserve-YYYYMMDD -- ':!.curator_backups' ':!.hub' ':!.usage.json' ':!*.moved' > /tmp/cleanup.patch
-# Apply to the clean branch
-cd ~/projects/_worktrees/skills-cleanup && git apply /tmp/cleanup.patch
-```
+Copy or patch only the intentional skill changes into the worktree. Exclude generated/runtime state (`.usage.json`, `.usage.json.lock`, `.curator_state`, `.curator_backups/`, temporary reports, moved-file markers). Before committing, inspect `git diff --name-status` and stage explicit files rather than blanket-adding the runtime checkout.
 
 ### Public Repo Review Checklist (for cleanup PRs)
 
 Before pushing, scan for violations (this repo is PUBLIC):
 ```bash
-grep -rn '@gmail\|@promptpm\|exiao3\|Eric Xiao\|286685\|srv-[a-z0-9]\{10,\}\|evg-[a-z0-9]\{10,\}\|AuthKey_[A-Z0-9]\|+1[0-9]\{10\}\|password in' --include="*.md" --include="*.py" --include="*.sh" .
+grep -rnE '(personal-email@example\.com|PRIVATE_DOMAIN|ACCOUNT_ID|srv-[a-z0-9]{10,}|evg-[a-z0-9]{10,}|AuthKey_[A-Z0-9]+|\+1[0-9]{10}|password in)' --include="*.md" --include="*.py" --include="*.sh" .
 ```
 
 Critical rules:
 - **500-line limit**: Never delete a `references/` file and inline into SKILL.md if result exceeds 500 lines. Restore the reference file.
 - **No README.md** inside skill directories (per AGENTS.md)
-- **Env var placeholders**: Use `$VAR_NAME` for all account-specific values. See `babysit-pr/references/public-repo-redaction.md` for the full list.
-- **Product domains are OK**: `getbloom.app` as the app URL is fine. Personal emails, account IDs, infra IDs are not.
+- **Env var placeholders**: Use `$VAR_NAME` for all account-specific values. See `../../coding/babysit-pr/references/public-repo-redaction.md` for the full list.
+- **Product domains are OK**: public product domains are fine. Personal emails, account IDs, infra IDs, private domains, and operational IDs are not.
 
 ### Categories That Were Full Duplicates (removed 2026-05-01)
 github/, autonomous-ai-agents/, software-development/, mlops/, media/, mcp/, leisure/, red-teaming/, note-taking/, email/, smart-home/, gaming/, analytics/, diagramming/, domain/, feeds/, gifs/, inference-sh/, dogfood/

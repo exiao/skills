@@ -4,27 +4,27 @@
 
 When a branch has many untracked files that conflict with the target branch (e.g., both branches added the same files), `git stash` won't work because untracked files aren't stashed by default, and even `git stash -u` will fail on the checkout if the target branch has those files tracked.
 
-**Pattern: commit-to-preservation-branch:**
+**Pattern: preserve first, curate in a worktree:**
 ```bash
-# 1. Create a preservation branch from current position
-git checkout -b wip/<descriptive-name>-preserved
+# 1. From the canonical project checkout, create a fresh worktree from main
+cd ~/projects/<repo>
+git fetch origin main
+BRANCH="wip/<descriptive-name>-preserved"
+git worktree add ~/projects/_worktrees/$BRANCH -b "$BRANCH" origin/main
 
-# 2. Add EVERYTHING (tracked modifications + untracked files)
-git add -A
-git commit -m "WIP: preserve <branch> changes (tracked + untracked)"
+# 2. Copy or patch only intentional files into the worktree
+cd ~/projects/_worktrees/$BRANCH
+git diff --name-status
 
-# 3. Now you can cleanly switch to main
-git checkout main
-git pull origin main
+# 3. Stage explicit files after inspection, not generated runtime state
+git add path/to/intentional-file.md
+git commit -m "WIP: preserve intentional changes"
 ```
 
-**Then to apply the delta to a fresh branch from main:**
+If you must generate a patch from a dirty branch, exclude local state before applying it to the clean worktree:
 ```bash
-# Generate a patch of what the old branch had vs main (excluding local state)
-git diff origin/main..wip/<name> -- ':!.local-state/' ':!.curator_backups' ':!.hub' ':!*.json.lock' > /tmp/delta.patch
-
-# Verify it applies cleanly (dry run)
-git checkout -b new-branch origin/main
+git diff origin/main..wip/<name> -- ':!.local-state/' ':!.curator_backups' ':!.hub' ':!.usage.json' ':!*.json.lock' > /tmp/delta.patch
+cd ~/projects/_worktrees/$BRANCH
 git apply --check /tmp/delta.patch
 git apply /tmp/delta.patch
 ```
@@ -54,7 +54,7 @@ Per AGENTS.md: "CI failures from bad credentials (401) are infra issues. Retry t
 ## Public Repo Redaction Checklist (for skill cleanup PRs)
 
 When preparing skills for a public repo, scan for:
-- Email addresses (grep for `@gmail`, `@promptpm`, personal domains)
+- Email addresses (grep for generic email patterns and personal domains)
 - Social handles used as identifiers (not just mentions)
 - Hardcoded connection IDs, social set IDs, cron IDs
 - Private key filenames (e.g., `AuthKey_XXXXX.p8`)

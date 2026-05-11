@@ -175,8 +175,6 @@ Use this workflow for scheduled or recurring optimization reviews where the user
 
 For recurring cron reports, prefer a deterministic script over an agent-written prose report. Have the script query Google Ads, compute CPA/ROAS/date math, include app store context, and print the final report; then configure cron with `script=...` and `no_agent=true` so stdout is delivered as-is. This prevents LLM date mistakes, stale ratio math, wrong attribution explanations, and objective-mismatched top asset picks. See `references/deterministic-scheduled-reports.md` for GAQL snippets, cron update pattern, and the double-down workflow for winning assets.
 
-8. Only recommend actions. Do not call mutate services, pause assets, change budgets, or edit bids in report-only mode.
-
 Recommendation thresholds to start from:
 - **PAUSE**: zero conversions plus meaningful spend over 7-30 days.
 - **BUDGET UP**: CPA well below target or ROAS above target, high conversion volume, and daily spend near budget.
