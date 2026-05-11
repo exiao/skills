@@ -5,7 +5,7 @@ description: Use when the cron fires at 9am or 2pm ET on weekdays — scrapes Op
 
 # Insider Trades Pipeline
 
-Finds the most compelling recent insider buy (CEO/CFO/Director, >$500k, filed last 24h), generates a visual trade receipt card, creates an unscheduled Typefully draft for Eric to review, and reports to Signal.
+Finds the most compelling recent insider buy (CEO/CFO/Director, >$500k, filed last 24h), generates a visual trade receipt card, creates an unscheduled Typefully draft for the account owner to review, and reports to Signal.
 
 ---
 
@@ -176,7 +176,7 @@ SEC Form 4 URLs are typically ~95 chars. Budget accordingly. Test with `echo -n 
 
 ### Step 8 — Upload Card + Create Typefully Draft
 
-The Bloom Typefully social set ID is set via `TYPEFULLY_SOCIAL_SET_ID` env var (username: `investwithbloom`).
+The Bloom Typefully social set ID is set via `TYPEFULLY_SOCIAL_SET_ID` env var (username: `$TYPEFULLY_USERNAME`).
 
 ```bash
 cd ~/.hermes/skills/marketing/typefully
@@ -189,7 +189,7 @@ TYPEFULLY_API_KEY=<key> node scripts/typefully.js media:upload $TYPEFULLY_SOCIAL
 # Prefer --file for multiline tweets to avoid shell quoting issues.
 printf '%s' "<tweet_text>" > /tmp/insider-tweet-$(date +%Y%m%d).txt
 TYPEFULLY_API_KEY=<key> node scripts/typefully.js drafts:create $TYPEFULLY_SOCIAL_SET_ID --platform x --file /tmp/insider-tweet-$(date +%Y%m%d).txt --media <media_id>
-# Do NOT add --schedule. Save as unscheduled draft only — Eric reviews before posting.
+# Do NOT add --schedule. Save as unscheduled draft only — the account owner reviews before posting.
 # → returns draft_id
 
 # Verify it stayed unscheduled and media is attached.
@@ -240,7 +240,7 @@ Typefully: https://typefully.com/?d=[draft_id]&a=$TYPEFULLY_SOCIAL_SET_ID
 3. **Logo too small** — always validate logo file is >5KB before using. Placeholder/icon files are useless.
 4. **Tweet over 260 chars** — count carefully; SEC Form 4 URLs are ~95 chars. Use `echo -n | wc -c` to verify.
 5. **Missing GEMINI_API_KEY** — must pass inline: `GEMINI_API_KEY="$GEMINI_API_KEY" uv run ...`. Just sourcing .env isn't enough.
-6. **Scheduling instead of drafting** — do not schedule insider-trade posts. Create an unscheduled Typefully draft only; Eric reviews before posting.
+6. **Scheduling instead of drafting** — do not schedule insider-trade posts. Create an unscheduled Typefully draft only; the account owner reviews before posting.
 7. **Reporting when no trade found** — if Step 2 yields nothing, NO_REPLY silently. Don't send a "nothing found" message.
 8. **Using screener URL as primary source** — it frequently returns empty HTML. Always start with `insider-purchases-25k` page and filter client-side.
 9. **TYPEFULLY_SOCIAL_SET_ID not in .env** — set `TYPEFULLY_SOCIAL_SET_ID` in .env.
