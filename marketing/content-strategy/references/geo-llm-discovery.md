@@ -81,7 +81,7 @@ Zoom is specifically working on how the brand shows up when people ask AI chatbo
 
 2. **Reddit**: Authentic presence in r/investing, r/stocks, r/personalfinance. User-generated reviews and mentions matter more than our own posts. Consider Dove-style approach: invite honest reviews.
 
-3. **LinkedIn**: Eric posting consistently about AI + investing intersection. Specific claims with data (user counts, features, results) > generic product announcements.
+3. **LinkedIn**: The account owner posting consistently about AI + investing intersection. Specific claims with data (user counts, features, results) > generic product announcements.
 
 4. **App Store reviews**: High-quality App Store reviews feed into LLM training data. The review generation strategy matters for GEO, not just ASO.
 

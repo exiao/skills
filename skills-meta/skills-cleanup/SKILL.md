@@ -22,7 +22,7 @@ tags: [skills, maintenance, cleanup]
 2. Identify duplicates (same skill name, different category) and local-only skills
 3. Move duplicates to `~/.hermes/skills-archive/` (recoverable)
 4. For genuinely new local-only skills worth keeping: branch, commit, PR
-5. Eric merges — never push to main directly
+5. The repo owner merges — never push to main directly
 
 ### Runtime Checkout Preservation
 
