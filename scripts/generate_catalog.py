@@ -23,14 +23,18 @@ class Skill:
     description: str
 
 
+ABBREVIATIONS = {"e.g", "i.e", "etc", "v", "vs", "mr", "mrs", "ms", "dr"}
+
+
 def shorten(text: str, limit: int = 220) -> str:
     text = re.sub(r"\s+", " ", text).strip()
     if len(text) <= limit:
         return text
 
-    sentence = re.search(r"^(.{1,%d}?[.!?])(?:\s|$)" % (limit - 1), text)
-    if sentence:
-        return sentence.group(1)
+    for match in re.finditer(r"[.!?](?:\s|$)", text[:limit]):
+        token = text[: match.start()].rsplit(" ", 1)[-1].lower().rstrip(".")
+        if token not in ABBREVIATIONS:
+            return text[: match.start() + 1]
 
     cut = text[: limit - 1].rsplit(" ", 1)[0]
     return f"{cut}…"
@@ -173,18 +177,11 @@ def update_readme(skills: list[Skill], descriptions: dict[str, str]) -> None:
     table = build_readme_table(skills, descriptions)
     text = README.read_text(encoding="utf-8")
 
-    if TABLE_START in text and TABLE_END in text:
-        pattern = re.compile(rf"{re.escape(TABLE_START)}.*?{re.escape(TABLE_END)}", re.DOTALL)
-        updated = pattern.sub(table, text, count=1)
-    else:
-        pattern = re.compile(
-            r"(The README only lists categories\. The full skill index is generated in \[CATALOG\.md\]\(CATALOG\.md\)\.\n\n)"
-            r"\| Category \| Skills \| Description \|\n\|---\|---:\|---\|\n(?:\|.*\|\n)+",
-        )
-        updated, count = pattern.subn(rf"\1{table}\n", text, count=1)
-        if count != 1:
-            raise ValueError("Could not find README category table to update")
+    if TABLE_START not in text or TABLE_END not in text:
+        raise ValueError("README is missing generated category table markers")
 
+    pattern = re.compile(rf"{re.escape(TABLE_START)}.*?{re.escape(TABLE_END)}", re.DOTALL)
+    updated = pattern.sub(table, text, count=1)
     README.write_text(updated, encoding="utf-8")
 
 
