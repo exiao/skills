@@ -38,7 +38,7 @@ Install the skills from https://github.com/exiao/skills
 | [**productivity**](productivity/) | 17 | Apple apps, email, notes, smart home, local search, gaming |
 | [**research**](research/) | 12 | Deep research, competitive analysis, market intelligence |
 | [**skills-meta**](skills-meta/) | 7 | Skills about skills — creating, auditing, improving, testing |
-| [**visual-design**](visual-design/) | 37 | UI/UX design, diagrams, image generation, frontend |
+| [**visual-design**](visual-design/) | 36 | UI/UX design, diagrams, image generation, frontend |
 
 ---</think><|tool_calls_section_begin|><|tool_call_begin|>functions.execute_code:92<|tool_call_argument_begin|>{
 
@@ -186,6 +186,8 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [video-script](creative/video-production/video-script/) | Generate structured scene-by-scene video scripts with production metadata (visuals, audio, sources, transitions, captions) ready to feed into the video-production pipeline (Sora, Kling, ElevenLabs, InfiniteTalk, Remotion, stock-footage, video-editor). Use when asked to "write a video script",… |
 | [writer](creative/writer/) | Write content in the author's voice — articles, blog posts, tweets, social media posts, marketing copy, newsletter drafts. Loads WRITING-STYLE.md and enforces kill phrases. |
 | [youtube-content](creative/video-production/youtube-content/) | Fetch YouTube video transcripts and transform them into structured content (chapters, summaries, threads, blog posts). Use when the user shares a YouTube URL or video link, asks to summarize a video, requests a transcript, or wants to extract and reformat content from any YouTube video. |
+| [clipify](creative/video-production/clipify/) | Find the funniest moments in a video, cut standalone clips, optionally reformat 16:9 to 9:16, and burn opus-style captions. |
+| [editframe](creative/video-production/editframe/) | AI-powered video frame editing via browser automation and FFmpeg. |
 | [claude-design](creative/claude-design/) | Design one-off HTML artifacts (landing, deck, prototype). |
 | [comfyui](creative/comfyui/) | Generate images, video, and audio with ComfyUI — install, launch, manage nodes/models, run workflows with parameter injection. Uses the official comfy-cli for lifecycle and direct REST/WebSocket API for execution. |
 | [design-md](creative/design-md/) | Use when creating, editing, or validating DESIGN.md files, design tokens, DTCG token specs, Tailwind theme exports, design system documentation, WCAG contrast checks, or Google Stitch-compatible design specs. |
@@ -195,8 +197,6 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [sketch](creative/sketch/) | Throwaway HTML mockups: 2-3 design variants to compare. |
 | [touchdesigner-mcp](creative/touchdesigner-mcp/) | Control a running TouchDesigner instance via twozero MCP — create operators, set parameters, wire connections, execute Python, build real-time visuals. 36 native tools. |
 
-| [clipify](creative/video-production/clipify/) | Find the funniest moments in a video, cut standalone clips, optionally reformat 16:9 to 9:16, and burn opus-style captions. |
-| [editframe](creative/video-production/editframe/) | AI-powered video frame editing via browser automation and FFmpeg. |
 
 ### ⚙️ DevOps & Infrastructure
 
