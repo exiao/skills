@@ -13,7 +13,7 @@ Pulls recent AI model trades from the Bloom investing-log repo, picks the most c
 
 | Tool | Purpose |
 |------|---------|
-| `gh` CLI | Fetch trade files from $INVESTING_LOG_REPO repo |
+| `gh` CLI | Fetch trade files from bloom-invest/investing-log repo |
 | `web-search` skill | Enrich with current price + YTD % |
 | `nano-banana-pro` skill | Generate 1080×1080 trade card |
 | `typefully` skill | Upload card + create scheduled tweet draft |
@@ -29,15 +29,15 @@ Fetch the 5 most recent trades from each model folder:
 
 ```bash
 # Claude
-gh api 'repos/$INVESTING_LOG_REPO/contents/trades/claude' \
+gh api 'repos/bloom-invest/investing-log/contents/trades/claude' \
   --jq '[.[] | {name: .name, download_url: .download_url}] | sort_by(.name) | reverse | .[0:5]'
 
 # OpenAI
-gh api 'repos/$INVESTING_LOG_REPO/contents/trades/openai' \
+gh api 'repos/bloom-invest/investing-log/contents/trades/openai' \
   --jq '[.[] | {name: .name, download_url: .download_url}] | sort_by(.name) | reverse | .[0:5]'
 
 # Gemini
-gh api 'repos/$INVESTING_LOG_REPO/contents/trades/gemini' \
+gh api 'repos/bloom-invest/investing-log/contents/trades/gemini' \
   --jq '[.[] | {name: .name, download_url: .download_url}] | sort_by(.name) | reverse | .[0:5]'
 ```
 
@@ -97,7 +97,7 @@ export GEMINI_API_KEY
 
 Use Nano Banana Pro:
 ```bash
-uv run ~/.hermes/skills/creative/nano-banana-pro/scripts/generate_image.py
+uv run ~/clawd/skills/nano-banana-pro/scripts/generate_image.py
 ```
 
 **Design spec:**
@@ -130,7 +130,7 @@ YTD: +18.3%
 ### Step 9 — Ensure Tag + Upload + Create Draft
 
 ```bash
-cd ~/.hermes/skills/marketing/typefully
+cd ~/clawd/skills/typefully
 
 # Ensure 'investing-log' tag exists (safe to run even if it already exists)
 node scripts/typefully.js tags:create $TYPEFULLY_SOCIAL_SET_ID --name 'investing-log' 2>/dev/null || true
@@ -195,7 +195,7 @@ Scheduled: [time]
 
 ## Cron Config
 
-- **ID:** `$CRON_JOB_ID`
+- **ID:** `$INVESTINGLOG_TRADES_CRON_ID`
 - **Schedule:** `0 16 * * 1-5` (4pm ET, Mon–Fri)
 - **Model:** default (claude-sonnet)
 - **Target:** isolated
@@ -211,7 +211,7 @@ Scheduled: [time]
 
 1. **Posting NOACTION/SCENARIO files** — always filter these out in Step 1.
 2. **Skipping dedup check** — always read il-pipeline-state.json first; repeating a tweet is embarrassing.
-3. **Wrong Typefully account** — use account ID `$TYPEFULLY_SOCIAL_SET_ID` (not a personal account set ID).
+3. **Wrong Typefully account** — use account ID `$TYPEFULLY_SOCIAL_SET_ID` (not `$TYPEFULLY_PERSONAL_SET_ID` which is the personal account).
 4. **PIL fallback** — never use PIL/Pillow. Only Nano Banana Pro for image generation.
 5. **State file not updated** — always write back after successful post; otherwise same trade posts again tomorrow.
 6. **Overwriting old state** — keep last 50 entries, don't truncate to just the new one.

@@ -49,3 +49,31 @@ Router skill. The `asc` CLI covers the full surface area of App Store Connect. R
 | **Status** | `asc status --app <APP_ID>` |
 
 Always run `asc <subcommand> --help` to verify flags. Output: `--output table` for humans, default JSON for scripts.
+
+## Direct API fallback when `asc` is unavailable
+
+If `asc` is not installed or not on PATH, use the App Store Connect API directly with credentials from `~/.asc/config.json` and the private key path in that config. This is especially useful for read-only metadata checks.
+
+```python
+import json, time, urllib.request, os, jwt
+cfg = json.load(open(os.path.expanduser('~/.asc/config.json')))
+key_path = os.path.expanduser(cfg.get('key_path') or cfg.get('private_key_path') or os.environ.get('ASC_PRIVATE_KEY_PATH', '~/.asc/AuthKey.p8'))
+key = open(key_path).read()
+token = jwt.encode(
+    {'iss': cfg['issuer_id'], 'exp': int(time.time()) + 1200, 'aud': 'appstoreconnect-v1'},
+    key,
+    algorithm='ES256',
+    headers={'kid': cfg['key_id'], 'typ': 'JWT'},
+)
+base = 'https://api.appstoreconnect.apple.com/v1'
+def get(path):
+    req = urllib.request.Request(base + path, headers={'Authorization': 'Bearer ' + token})
+    return json.load(urllib.request.urlopen(req, timeout=30))
+```
+
+Useful read-only paths:
+- Resolve app: `/apps?filter[bundleId]=$BUNDLE_ID&limit=1`
+- Versions: `/apps/{app_id}/appStoreVersions?filter[platform]=IOS&limit=10`
+- Version localization, includes `description`, `keywords`, `promotionalText`, `whatsNew`: `/appStoreVersions/{version_id}/appStoreVersionLocalizations?limit=200`
+- App info: `/apps/{app_id}/appInfos?limit=10`
+- App info localization, includes `name`, `subtitle`, privacy URLs: `/appInfos/{app_info_id}/appInfoLocalizations?limit=200`

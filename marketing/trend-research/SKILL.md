@@ -221,6 +221,7 @@ Additional signals:
 - **Engagement rate**: (likes + comments) / views — >5% is strong, >10% is exceptional
 - **Creator size ratio**: Small creator + big numbers = breakout content
 - **Cross-platform appearance**: Same topic trending on 2+ platforms = real trend
+- **Bookmark/save density**: For aspirational or tutorial-like visuals, high saves can matter more than comments. It means viewers want to recreate the result. WayShot's "What camera did you use?" format hit 7M views and 230K bookmarks because the outcome was aspirational, replicable, and product-tied. (Source: Social Growth Engineers, May 2026)
 
 ### Step 4 — Download Thumbnails
 
@@ -263,8 +264,10 @@ Report format:
 - **Views:** X | **Likes:** X | **Comments:** X | **Shares:** X
 - **Posted:** [time ago]
 - **URL:** [link]
-- **Why it's working:** [analysis — hook, format, timing, emotion]
-- **Remixable angle for Bloom:** [how we could adapt this]
+- Why it's working: [analysis — hook, format, timing, emotion]
+- Format job: [audience builder / product proof / save engine / conversion CTA]
+- Reveal order: [before-after / after-before / no transformation]
+- Remixable angle for Bloom: [how we could adapt this]
 
 ---
 

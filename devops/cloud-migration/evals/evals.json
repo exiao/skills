@@ -84,7 +84,7 @@
     },
     {
       "id": 2,
-      "prompt": "Clone our Railway project to Fly.io as a backup environment. We have on Railway: a Django web service (bloom-web), Postgres database (Railway managed), Redis instance (Railway managed), custom domain api.myapp.com, 40+ env vars. I want to provision an identical environment on Fly.io, copy the current data, and have it running as a hot standby that I can failover to. Walk me through it with actual commands.",
+      "prompt": "Clone our Railway project to Fly.io as a backup environment. We have on Railway: a Django web service (web-service), Postgres database (Railway managed), Redis instance (Railway managed), custom domain api.myapp.com, 40+ env vars. I want to provision an identical environment on Fly.io, copy the current data, and have it running as a hot standby that I can failover to. Walk me through it with actual commands.",
       "expected_output": "Complete Railway → Fly.io clone guide: flyctl app creation, Fly Postgres provisioning, flyctl proxy for pg_dump from Railway, pg_restore to Fly Postgres, Upstash Redis setup, flyctl secrets for env vars, fly.toml config, deploy, and DNS failover strategy.",
       "assertions": [
         {

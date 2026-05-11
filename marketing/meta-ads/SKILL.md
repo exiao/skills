@@ -18,7 +18,7 @@ API="https://graph.facebook.com/v22.0"
 PAGE_ID="$BLOOM_PAGE_ID"           # Facebook Page ID
 INSTAGRAM_ID="$BLOOM_INSTAGRAM_ID" # Instagram user ID for creatives
 IOS_APP_LINK="http://itunes.apple.com/app/id${BLOOM_APP_STORE_ID}"
-ANDROID_APP_LINK="http://play.google.com/store/apps/details?id=com.bloom.invest"
+ANDROID_APP_LINK="http://play.google.com/store/apps/details?id=$BUNDLE_ID"
 ADSET_IOS="$BLOOM_IOS_ADSET_ID"       # General, iOS (ACTIVE)
 ADSET_ANDROID="$BLOOM_ANDROID_ADSET_ID"   # General, Android (ACTIVE)
 # All BLOOM_* vars set in gateway env.

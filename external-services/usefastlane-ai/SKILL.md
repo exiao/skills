@@ -193,6 +193,8 @@ Analytics:
 
 ## Automation Artifacts
 
+For Bloom's existing daily cron, load `references/bloom-workspace.md` for account IDs and job behavior. For script failures, macOS shell portability, and caption extraction pitfalls, load `references/cron-automation-pitfalls.md`.
+
 When building an autonomous campaign in a local project, create:
 
 ```text
@@ -253,6 +255,7 @@ Blitz findings from live use:
 - If Blitz returns `202` without a content id, or then returns `404`, treat it as no usable suggestion/content for that call. Wait and retry or adjust the angle/preference setup.
 - For slideshows, verify both the suggestion text and the rendered images.
 - **Content endpoint has no caption/suggestion fields.** `GET /content/:id` only returns `_id`, `type`, `status`, `files`, `thumbnailUrl`. The suggestion/hook text only appears in the `POST /blitz` response. Capture it during generation if you need it for scheduling captions.
+- **Blitz suggestion can be an object, not a string.** Do not schedule the raw `suggestion` JSON as a caption. Extract `suggestion.generatedText` or `hook.generatedText` first, falling back to `title` or a generic caption.
 - **YouTube rejects slideshows.** Only video content types (`video-hook`, `green-screen`) can be scheduled to YouTube. Slideshows get: `"YouTube only accepts single-video content"`. Skip YouTube for slideshow content.
 - **YouTube title must be ≤100 chars.** The `caption` field is used as the YouTube title. Truncate or write a short title separately. Use `description` for the longer text.
 - **Instagram and YouTube require captions.** Scheduling without a `caption` fails with validation errors. Always provide one, even if it's a generic fallback. A five-line suggestion can become one cover plus four advice slides; if the user asked for five actual tips, prompt/configure "no cover, exactly five slides, each slide is one numbered tip".

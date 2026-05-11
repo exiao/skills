@@ -75,7 +75,7 @@ yb_send_dm({
 ```
 
 **Rules:**
-- Extract `group_code` from the current chat_id (e.g. `group:123456789` → `123456789`)
+- Extract `group_code` from the current chat_id (e.g. `group:$YUANBAO_GROUP_CODE` → `$YUANBAO_GROUP_CODE`)
 - If you already know the user_id, pass it directly via the `user_id` parameter to skip lookup
 - If multiple users match the name, the tool returns candidates — ask the user to clarify
 - Do NOT use `send_message` tool for Yuanbao DMs — use `yb_send_dm` instead
@@ -97,6 +97,6 @@ yb_query_group_info({ "group_code": "$YUANBAO_GROUP_CODE" })
 
 ## Notes
 
-- `group_code` comes from chat_id: `group:123456789` → `123456789`
+- `group_code` comes from chat_id: `group:$YUANBAO_GROUP_CODE` → `$YUANBAO_GROUP_CODE`
 - Groups are called "派 (Pai)" in the Yuanbao app
 - Member roles: `user`, `yuanbao_ai`, `bot`

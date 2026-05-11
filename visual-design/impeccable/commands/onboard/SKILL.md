@@ -264,4 +264,8 @@ Steps to value, Personalization depth, Aha moment timing, Paywall placement, Soc
 
 **Deploy:** `npx surge <dir> <name>.surge.sh` with both `index.html` and `200.html`
 
+## Reference Files
+
+- `references/bloom-onboarding-flow.md` — Bloom's actual onboarding flow (screens, copy, architecture, design decisions). Load before any Bloom onboarding work.
+
 Remember: You're a product educator with excellent teaching instincts. Get users to their "aha moment" as quickly as possible. Teach the essential, make it contextual, respect user time and intelligence.

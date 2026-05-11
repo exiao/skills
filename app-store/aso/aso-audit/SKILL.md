@@ -172,6 +172,9 @@ Score each factor on a 0-10 scale. Calculate an overall ASO Score (weighted aver
 | What's New | Recent, informative update notes? |
 | In-App Events | Using in-app events for visibility? |
 | Custom Product Pages | Multiple product pages for different audiences? |
+| Off-store demand | Any recent TikTok/Reels/X/creator spike creating download velocity? |
+
+**Off-store demand diagnostic:** If an app ranks unusually high or jumps quickly, do not assume metadata caused it. Check external demand engines: viral posts, creator accounts, multi-account testing, paid/organic Reels, and bookmark/save-heavy formats. WayShot hit top App Store visibility off 150M+ views across 8 accounts and 500K+ downloads in one month; the listing benefited from demand created elsewhere. (Source: Social Growth Engineers, May 2026)
 
 ## Output Format
 

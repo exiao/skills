@@ -155,6 +155,20 @@ Match the angle to a format that amplifies it.
 | Hands-Doing-Something | Tactile background task holds attention subconsciously while spoken content delivers value | Tutorials, study/productivity tips, any niche where the visual task signals relatability |
 | Tier List | Gamified ranking format; viewers argue placements in comments, driving engagement | Content strategy, tool reviews, platform comparisons, "best of" lists |
 | Viral Breakdown / Reaction | Dual-screen commentary on a viral post; borrowed traffic + authority positioning | Creator education, niche analysis, weekly pillar content |
+| Three-Screen App Demo | Shows the core product loop in a way creators can repeat: input → processing → result | Influencer-led consumer apps, AI utilities, scanning/logging/analyzer apps |
+
+### Three-Screen App Demo
+
+Design the product so an influencer can explain it in three screens without narration. Cal AI's creator videos repeatedly show: camera → loading → food detail page. The product team optimized those screens for instant comprehension because influencer marketing was the primary growth loop. (Source: @JosephKChoi interview with Daniel from Cal AI, May 2026)
+
+**Use this as an app idea and product design test:**
+1. What is the input screen?
+2. What is the magical processing or suspense screen?
+3. What is the result screen worth showing?
+
+If those three screens are not obvious, creators will have to explain too much and paid/organic creative gets weaker.
+
+**Bloom adaptation:** stock/ticker input or portfolio screenshot → AI analysis loading → clear insight card/risk score/actionable watchlist result.
 
 ### The "Hands-Doing-Something" Format
 
@@ -195,6 +209,10 @@ Source: @thebranding.ai breakdown of multiple creators going viral with the same
 3. **Analyze why they worked** — hook structure, comment sentiment, format, pacing
 4. **Recreate the format yourself** — don't copy, match the structure and emotional beat
 5. **See early traction** before sourcing any paid creators
+
+### Daniel / Cal AI / Sway Playbook
+
+Before paying creators or building more product, check whether the concept can prove demand through content and a manual paid version. The durable lessons: distribution before product, spreadsheet-batched slideshow formats, three-screen product demos, content-niche app scoring, and influencer fit. Load `references/daniel-calai-sway-playbook.md` for the full playbook and Bloom adaptations. (Source: @JosephKChoi interview with Daniel from Cal AI/Sway, May 2026)
 
 Once a format proves out, hand it to creators via `whop-content-rewards` (managed tier). Skip this step only if you're scaling a format already validated in a prior batch.
 
@@ -283,11 +301,30 @@ Place labels at the moment you identify the tactic, not before. Let the source v
 
 ---
 
-## Step 2e: Repeatable Daily Format (The Oasis Model)
+## Step 2e: Result-First Product Proof Loop (WayShot Model)
+
+For visual consumer apps, lead with the aspirational result, then reveal the ordinary input. Do not open with a feature explanation or a before shot. The result earns attention; the original creates the shock.
+
+**Case study:** WayShot, a photo editor, reached 150M+ views across 8 accounts, 500K+ downloads in one month, $100K MRR, and #6 in the U.S. App Store by stacking three repeatable TikTok/Reels formats. (Source: Social Growth Engineers, May 2026)
+
+**The sequence that worked:**
+1. **Audience builder:** Native, barely promotional relatable format: "That friend who thinks everything is aesthetic." Product signal only through account name. Job: reach, comments, shares. One breakout reached ~48.6M views.
+2. **Product proof:** Two-slide faceless slideshow: edited photo first, original second, caption "edited by [app]." Job: make the product transformation obvious without explaining it. One example reached ~7.5M views.
+3. **Save engine:** Sharper identity/reveal hook: "What camera did you use?" → "Oh it's my phone." Job: bookmarks because the result feels aspirational and replicable. The strongest newer variation reportedly hit ~7M views and 230K bookmarks.
+
+**Operating rule:** This is not before/after. It is after/before. Beautiful outcome first, flat source second, app mention last. Do not explain the product if the contrast can prove it.
+
+**Metric rule:** For save-engine formats, bookmarks are the leading signal. Comments show conversation; saves show desire to recreate.
+
+**Use when:** the product creates a visible transformation: photo/video editing, design tools, fitness/body changes, home decor, dashboards, AI-generated assets, makeovers, portfolio analysis cards.
+
+**Bloom application:** Show the clean AI insight/card first, then reveal the messy raw signal: confusing chart, analyst noise, Reddit hype, or flat brokerage screen. The app is the tool that made the useful version.
+
+## Step 2f: Repeatable Daily Format (The Oasis Model)
 
 Most creators chase variety. The highest-growth accounts do the opposite: one format, repeated daily, with only the subject changing.
 
-**Case study:** Product Test Reveal case study — 30M views, 232 Reels, $23K/month MRR. Every single video follows the same structure: test a popular water brand, reveal contaminants, show a score, recommend alternatives. The format never changes. The brand being tested changes.
+**Case study:** @oasishealthapp — 30M views, 232 Reels, $23K/month MRR. Every single video follows the same structure: test a popular water brand, reveal contaminants, show a score, recommend alternatives. The format never changes. The brand being tested changes.
 
 **Why repetition beats variety:**
 - The algorithm rewards predictable quality over creative range
@@ -443,189 +480,16 @@ Retired pillars aren't deleted. Keep `tiktok-marketing/pillar-bench.json` and re
 
 ## References (Load On-Demand)
 
-| Reference | Contents |
-|-----------|---------|
-| `references/analytics-loop.md` | Per-post tracking, pillar-level monthly review |
-| `references/feedback-loop.md` | Daily diagnostic, hook evolution, CTA rotation |
-| `references/calendar-batching.md` | Scheduling strategy, queue management, posting cadence |
-| `references/monetization-research.md` | CPM research, Content Rewards, niche selection |
-| `references/competitor-research.md` | TikTok/App Store gap analysis, storing findings |
-| `references/creative-research-methods.md` | Discovering trending ad formats, creative concepts, and content styles |
-| `references/ad-formats-library.md` | All ad formats with structure templates, best uses, and examples |
-| `references/6-elements-framework.md` | The 6 elements of Meta ad creative with best practices and optimization |
-| `references/copywriting-formulas.md` | Copy structures for writing Meta ad primary text, headlines, and descriptions |
-| `references/content-formats.md` | Content format types, templates, and selection criteria |
-| `references/distribution.md` | Distribution channels, cross-posting strategy, amplification |
-| `references/geo-targeting.md` | Geo-targeting strategy for content localization |
-| `references/geo-llm-discovery.md` | GEO (Generative Engine Optimization): getting cited by AI chatbots via Reddit, LinkedIn, Substack. Includes sycophancy research context. |
-| `references/interactive-content.md` | Interactive content types, quizzes, calculators, assessments |
-| `references/tiktok-warmup.md` | 5-day TikTok account warmup process, retention benchmarks, account abandonment rules |
+Load the relevant file in `references/` when you need implementation detail: analytics/feedback loops, calendar batching, monetization, competitor research, creative research, ad formats, copywriting formulas, content formats, distribution, geo-targeting, interactive content, TikTok warmup, or the Daniel Calai/Sway playbook.
 
 ---
 
-## Sample Output
+## Examples and Tier Lists
 
-What a complete strategy card looks like after running this skill. Use this as the template for what to produce.
-
----
-
-**Campaign:** [Your App] — Cold TikTok / Instagram (March 2026)
-**Topic:** AI has an edge in investing that retail investors don't know about  
-**Audience level:** 1–2 (unaware / problem-aware)
-
-**Research insights:**
-- Trending on TikTok: "passive income" + "the stock market is rigged" + "what hedge funds don't tell you"
-- Competitor weakness (from reviews): "Robinhood tells you nothing, just a chart" — users want context
-- Audience language: "I don't even know where to start", "I feel like I'm always late to the news"
-
-**Angles (pick one per batch):**
-1. *Wound-first:* "By the time you read the news, the trade already happened." → exits to [Your App] seeing it first
-2. *Surprising number:* "Hedge funds run 10,000 stock screens before breakfast. Here's how to match that for free."
-3. *Stolen thought:* "You already know the stock market isn't fair. Here's the part nobody explains."
-
-**Hook (stated / visual / audio):**
-- Stated: "The stock market has a cheat code most people don't know exists."
-- Visual: Phone showing a red portfolio → cut to AI identifying the reason → cut to green
-- Audio: "What if I told you the stocks that just dumped were actually the buy signal?"
-
-**Format:** Notes App (cold) → Testimonial Card (retargeted)  
-**Awareness level targeted:** Level 1–2 cold, Level 3–4 retargeted
-
-**Delegate to:**
-- Visuals → `copywriting` + `nano-banana-pro`
-- Tweets → `tweet-ideas`
-- TikTok → `slideshow-creator`
-- Scheduling → `typefully`
-
----
-
-## Social Comms Personality
-
-How you show up matters as much as what you post. These principles govern tone and presence across all social channels.
-
-**Voice principles:**
-- Simple announcements, human language — no corporate press-release energy
-- Socially aware humor and joy — be a person, not a brand account
-- Spontaneity — not everything needs to be polished or scheduled
-- Generosity — give away value freely, don't gate everything
-- Positive about the future and about builders
-- Let the product speak for itself — don't oversell
-- Let the audience be your champion — amplify them, don't just broadcast
-- "Thinking out loud" energy — share process, not just outcomes
-- Engage with people (especially small accounts) — don't just talk at the crowd
-- Engage with discourse if it's good faith — don't hide from conversation
-- Cater to the very online (in moderation)
-- Tactful honesty about flaws — acknowledge what's broken, don't pretend
-- Tasteful jabs at competitors are fine
-- Cringe is better than corporate — if you have to pick, pick human
-- Above all, show your humanity
-
-**Anti-patterns:** Overthought announcements. Jargon-heavy feature drops. Ignoring replies. Only engaging with big accounts. Hiding behind brand voice when a real voice would land better.
-
-Source: @anuatluru analysis of OpenAI's comms shift (May 2026)
-
----
-
-## Creator Activity Tier List
-
-What to spend your time on as a content creator, ranked by impact. Based on @wootak's framework (https://www.instagram.com/reel/DVwed_xEvHx/).
-
-| Tier | Activity | Why |
-|------|----------|-----|
-| **S** | **Post consistently** | Nothing else matters if you don't publish. Ship beats perfect. |
-| **S** | **Define your niche/target** | Focused content reaches the right people. Broad content reaches nobody. |
-| **S** | **Use TikTok (especially TikTok Shop)** | Highest-leverage platform for organic discovery right now. |
-| **S** | **Repurpose content cross-platform** | Every platform's audience sees it "for the first time." One piece of content = 3-5 posts. |
-| **A** | **Script/outline before filming** | Structure beats improv. But execution (posting) matters more than perfect scripts. |
-| **A** | **Track analytics** | Know what works. But analysis without posting is procrastination. |
-| **A** | **Post at optimal times** | Helps, but doesn't replace quality or consistency. |
-| **B** | **Writing elaborate captions** | Useful but overrated. Most creators over-invest here relative to impact. |
-| **C** | **Written/text-only content** | Video outperforms text on every social platform. Text content is C tier in a video-first world. |
-| **F** | **Hashtags** | Zero meaningful impact on modern algorithms. Complete waste of effort. |
-
-The hierarchy: **Posting > Targeting > Platform choice > Repurposing > Scripting > Analytics > Timing > Captions > Text content > Hashtags.**
-
----
-
-## Channel Tier List (Bloom / B2C)
-
-What actually works for consumer apps vs. what sounds good but doesn't.
-
-**High-signal channels:**
-- TikTok / Instagram Reels — primary B2C organic discovery; recreate before recruiting creators
-- Influencer/creator marketing — TikTok/YouTube/Instagram. Lovable ($400M ARR) spends 10x more on influencer marketing than paid social and considers it their key growth driver. Validate formats with your own account first, then hand proven formats to creators. This should be the primary paid channel, not Meta ads.
-- Free credits / freemium as marketing — treat free tier as a marketing channel, not a cost center. "Our free giveaways are bigger than paid marketing spend." (Lovable CEO, 20VC March 2026)
-- Free SEO tools — high-value lead magnets, easier to rank than blog posts, builds backlinks
-- Email marketing — works if sequences are built correctly (see growth skill); people do read emails
-
-**Questionable-signal channels (test carefully):**
-- Meta/Facebook ads — Lovable's CEO at $400M ARR: "Meta ads have little incrementality; pass through views which don't materialize into anything. I haven't seen them work in a while." (Lenny's Podcast, Dec 2025). If running Meta ads, watch incrementality closely: are installs you're paying for ones that would have happened organically? Compare install lift when ads are paused vs. running.
-
-**Low-signal channels (avoid or deprioritize):**
-- Newsletter sponsorships — expensive and most clicks are bots
-- Twitter ads — worst targeting in the industry; not worth the spend
-- Google ads — more expensive than Facebook for consumer apps, higher irrelevant clicks
-- Referral programs — very hard to make work; only viable with stable conversion and large customer base
-- Reddit audience building — ban risk is high; answering long-tail questions can work, but building an audience there doesn't
-- Beta directories (BetaList, etc.) — mostly dead; not worth the setup
-
-**Alternative funnel: Quiz-based landing pages**
-
-Instead of Ad → App Store → Install, run Ad → Web Quiz → Personalized Results → App Store. A quiz between the ad and the offer warms cold traffic through micro-commitments. DTC benchmark: cold traffic conversion jumped from 1.2% to 4.7% with a quiz funnel (DTC quiz funnel case study, $2M in 90 days).
-
-Why it works for apps:
-- Each question answered is a small "yes" that compounds (sunk cost)
-- Questions seed beliefs and pre-handle objections before the user sees pricing
-- Non-completers give you zero-party data for segmented retargeting (someone who answered "I struggle with timing the market" gets a different retargeting ad than someone who answered "I don't know what to invest in")
-- The loading/results screen is captive attention: 10-15s where you show testimonials, social proof, and app previews while "calculating their results"
-
-Quiz sequencing that converts:
-1. Q1-Q2: Low-friction demographics (age, experience level). Zero cognitive load, starts the yes-chain.
-2. Q3-Q4: Aspirational goals ("What's your investing goal?"). Emotional questions hit harder after they've committed.
-3. Q5-Q6: Pain points and struggles. Now they've told you their problems.
-4. Breather slide with social proof after Q4.
-5. Results page → personalized app recommendation → App Store link.
-
-Drop-off benchmarks: Q1 = 30-40% drop-off (normal, biggest filter). Remaining questions: under 15% each. Overall completion: aim for 25%+. If any single question has 10%+ drop-off, simplify it (fewer options, add "None of the above").
-
-Retargeting play: Everyone who takes the quiz but doesn't install gave you data. Segment retargeting by their answers: "tried other investing apps" → ad about why Bloom's AI is different. "Low confidence in stock picks" → ad about AI-powered research. Specific beats generic.
-
-Bloom application: The onboarding flow already asks risk tolerance and goals post-install. A pre-install web quiz version of this would warm traffic before the App Store page, and the data feeds retargeting even if they never install.
-
-Source: DTC quiz funnel case study
-
-**SEO timing:**
-- Don't prioritize SEO before your first customers — takes months to kick in, and if you pivot the product, the work goes to zero
-- When you do SEO: free tools first (easier to rank, more shareable, generate backlinks naturally), then long-tail blog posts with purchase intent, then programmatic data-driven pages
-
----
-
-## Reference Files
-
-| File | Contents |
-|------|----------|
-| `references/social-content.md` | Social media strategy: content pillars, hook formulas, calendars, engagement, repurposing, analytics |
-| `references/channel-tier-list.md` | Channel tier list (B2C), quiz funnel strategy, SEO timing |
-| `references/viral-breakdown-pillar.md` | Weekly viral breakdown pillar format, on-screen labels, sourcing |
-| `references/free-tool-strategy.md` | Engineering-as-marketing: tool types, ideation, evaluation scorecard, lead capture |
-| `references/lead-magnets.md` | Lead magnet types, buyer stage matching, gating strategy, distribution, benchmarks |
-| `references/marketing-ideas.md` | 139 SaaS marketing ideas catalog organized by category, stage, and budget |
-| `references/blog-seo-planning.md` | Searchable vs shareable, content pillars, topic clusters, buyer stage keywords, ideation sources |
-
+Load `references/examples-and-tier-lists.md` when you need a complete strategy-card example, creator activity tier list, channel tier list, or quiz-funnel details.
 
 ---
 
 ## Related Skills
 
-- `hooks` — hook formulas and title generation
-- `copywriting` — page copy, direct response, brand voice, A/B testing blitz
-- `tweet-ideas` — standalone tweet content
-- `article-writer` — long-form drafts
-- `slideshow-creator` — TikTok production and ReelFarm automation
-- `content-atomizer` — repurpose long-form into platform-native pieces
-- `typefully` — scheduling to LinkedIn, X, Threads
-- `last30days` — recent trending research
-- `grok-search` — X/web search for zeitgeist signals
-- `trend-research` — trending content across platforms
-- `web-search` — Google search for trending topics and news
-- `character-creation` — create and store AI video character configs + portraits
+Use adjacent skills as needed: `hooks`, `copywriting`, `tweet-ideas`, `article-writer`, `slideshow-creator`, `content-atomizer`, `typefully`, `last30days`, `grok-search`, `trend-research`, `web-search`, and `character-creation`.

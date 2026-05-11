@@ -26,6 +26,15 @@ If the user says something like "dogfood vercel.com", start immediately with def
 
 Always use `agent-browser` directly (not `npx agent-browser`). The direct binary uses the fast Rust client.
 
+Before starting, check prerequisites:
+
+```bash
+command -v agent-browser || true
+command -v surge || true  # only needed if user asks to publish
+```
+
+If `agent-browser` is unavailable, do not stop. Use browser tools or Playwright as a fallback and read `references/playwright-surge-fallback.md`. The goal is evidence-backed QA, not loyalty to one browser driver.
+
 ## Workflow
 
 ```
@@ -183,13 +192,14 @@ Aim to find **5-10 well-documented issues**, then wrap up. Depth of evidence mat
 After exploring:
 
 1. Re-read the report and update the summary severity counts so they match the actual issues. Every `### ISSUE-` block must be reflected in the totals.
-2. Close the session:
+2. If using `agent-browser`, close the session:
 
 ```bash
 agent-browser --session {SESSION} close
 ```
 
-3. Tell the user the report is ready and summarize findings: total issues, breakdown by severity, and the most critical items.
+3. If the user asked to publish, create a readable `index.html` in the output directory, keep `report.md` and artifacts alongside it, deploy with Surge, then verify HTTP 200 before replying. See `references/playwright-surge-fallback.md` for the exact Surge pattern.
+4. Tell the user the report is ready and summarize findings: total issues, breakdown by severity, most critical items, and the public URL if published.
 
 ## Guidance
 
@@ -206,8 +216,8 @@ agent-browser --session {SESSION} close
 - **Type like a human.** When filling form fields during video recording, use `type` instead of `fill` (types character-by-character). Use `fill` only outside of video recording when speed matters.
 - **Pace repro videos for humans.** Add `sleep 1` between actions and `sleep 2` before the final result screenshot. Videos should be watchable at 1x speed.
 - **Be efficient with commands.** Batch multiple `agent-browser` commands in a single shell call when they are independent. Use `agent-browser --session {SESSION} scroll down 300` for scrolling.
-- **Also test the backend directly, but verify your payloads.** When the app hits an API, `curl` the endpoints independently. First inspect what the frontend actually sends. A 500 from a malformed test payload is your bug, not the app's. If you cannot determine the payload shape, label the result as "API returned error with test payload, may be payload mismatch" rather than declaring the API broken.
-- **Distinguish automation artifacts from real bugs.** Some issues only appear because of how agent-browser interacts with the page, such as `$` signs eaten by `type` or ref-click failures. Before reporting, ask: "Would a human user see this?" If unsure, mark it unconfirmed and suggest manual verification.
+- **Also test the backend directly — but verify your payloads.** When the app hits an API, `curl` the endpoints independently. But first, inspect what the frontend actually sends (use `eval` to read fetch call arguments, or check network requests). A 500 from a malformed test payload is YOUR bug, not the app's. If you can't determine the correct payload shape, note it as "API returned error with test payload; may be payload mismatch" rather than declaring "API is broken." Reporting false positives destroys credibility.
+- **Distinguish automation artifacts from real bugs.** Some issues only appear because of how agent-browser interacts with the page (e.g., `$` signs eaten by `type`, buttons unclickable via ref but fine for real users). Before reporting, ask: "Would a human user see this?" If unsure, mark as "unconfirmed — may be automation artifact" and suggest manual verification.
 
 ## Pitfalls (agent-browser quirks)
 
@@ -215,10 +225,23 @@ These are real issues encountered during dogfood sessions. Read before starting.
 
 - **`wait --load networkidle` often times out on SPAs.** Skip it if it fails and proceed with screenshots/snapshots. The page is usually ready.
 - **`press` takes only a key, not a selector.** Correct: `press Enter`. Wrong: `press @e12 Enter`. To press a key while focused on an element, `click` or `focus` the element first, then `press`.
-- **There is no `js`, `exec`, or `viewport` command.** Use `eval` to run JavaScript. There is no built-in viewport resize; use `eval "window.resizeTo(w, h)"` if needed, or accept the default viewport.
-- **`type` may interpret `$` as special.** If testing dollar amounts, verify the displayed text matches what you typed. Use `fill` instead of `type` when exact fidelity matters more than human-like typing. Flag dollar-sign issues as unconfirmed unless verified in a real browser.
-- **Ref-based click can fail with "matched N elements".** Re-run `snapshot -i` to get fresh refs. If a button still cannot be clicked by ref, use a CSS selector or `eval "document.querySelector('...').click()"` as fallback.
-- **The submit/send button pattern.** Many chat UIs have submit buttons inside textareas that are hard to target. Fallback sequence: click ref, press Enter after focusing textarea, then use DOM eval to find and click the button.
+- **There is no `js`, `exec`, or `viewport` command.** Use `eval` to run JavaScript. There is no built-in viewport resize; use `eval "window.resizeTo(w, h)"` (may not work in headless) or accept the default viewport.
+- **`type` may interpret `$` as special.** The `type` command sends keystrokes and `$` followed by digits can be swallowed or misinterpreted. If testing dollar amounts, verify the displayed text matches what you typed (use `eval` or `get text` to read back the field value). Use `fill` instead of `type` when exact fidelity matters more than human-like typing. Flag dollar-sign issues as "unconfirmed — may be automation artifact" unless verified in a real browser.
+- **Ref-based click can fail with "matched N elements".** This happens when the page has changed since the last `snapshot`. Always re-run `snapshot -i` to get fresh refs. If a button still can't be clicked by ref, use a CSS selector or `eval "document.querySelector('...').click()"` as fallback.
+- **Be efficient with commands.** Batch multiple `agent-browser` commands in a single shell call when they are independent. Use `agent-browser --session {SESSION} scroll down 300` for scrolling.
+- **Also test the backend directly — but verify your payloads.** When the app hits an API, `curl` the endpoints independently. But first, inspect what the frontend actually sends (use `eval` to read fetch call arguments, or check network requests). A 500 from a malformed test payload is YOUR bug, not the app's. If you can't determine the correct payload shape, note it as "API returned error with test payload; may be payload mismatch" rather than declaring "API is broken." Reporting false positives destroys credibility.
+- **Distinguish automation artifacts from real bugs.** Some issues only appear because of how agent-browser interacts with the page (e.g., `$` signs eaten by `type`, buttons unclickable via ref but fine for real users). Before reporting, ask: "Would a human user see this?" If unsure, mark as "unconfirmed — may be automation artifact" and suggest manual verification.
+
+## Pitfalls (agent-browser quirks)
+
+These are real issues encountered during dogfood sessions. Read before starting.
+
+- **`wait --load networkidle` often times out on SPAs.** Skip it if it fails and proceed with screenshots/snapshots. The page is usually ready.
+- **`press` takes only a key, not a selector.** Correct: `press Enter`. Wrong: `press @e12 Enter`. To press a key while focused on an element, `click` or `focus` the element first, then `press`.
+- **There is no `js`, `exec`, or `viewport` command.** Use `eval` to run JavaScript. There is no built-in viewport resize; use `eval "window.resizeTo(w, h)"` (may not work in headless) or accept the default viewport.
+- **`type` may interpret `$` as special.** The `type` command sends keystrokes and `$` followed by digits can be swallowed or misinterpreted. If testing dollar amounts, verify the displayed text matches what you typed (use `eval` or `get text` to read back the field value). Use `fill` instead of `type` when exact fidelity matters more than human-like typing. Flag dollar-sign issues as "unconfirmed — may be automation artifact" unless verified in a real browser.
+- **Ref-based click can fail with "matched N elements".** This happens when the page has changed since the last `snapshot`. Always re-run `snapshot -i` to get fresh refs. If a button still can't be clicked by ref, use a CSS selector or `eval "document.querySelector('...').click()"` as fallback.
+- **The submit/send button pattern.** Many chat UIs have submit buttons inside textareas that are hard to target. Fallback sequence: (1) try `click @ref`, (2) try `press Enter` after focusing the textarea, (3) use `eval` to find and click the button via DOM query.
 
 ## References
 
@@ -226,6 +249,7 @@ These are real issues encountered during dogfood sessions. Read before starting.
 |-----------|--------------|
 | [references/issue-taxonomy.md](references/issue-taxonomy.md) | Start of session: calibrate what to look for, severity levels, exploration checklist |
 | [references/design-critique.md](references/design-critique.md) | When the session scope includes UI/UX quality — run after functional exploration to score heuristics, flag visual/color/typography issues, and produce a Critical/Important/Polish triage |
+| [references/playwright-surge-fallback.md](references/playwright-surge-fallback.md) | When `agent-browser` is unavailable/failing, when using Playwright/browser tools as the driver, or when publishing a public dogfood report to Surge |
 
 ## Templates
 

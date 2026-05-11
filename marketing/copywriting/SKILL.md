@@ -188,7 +188,7 @@ This skill's reference files cover both page copy frameworks and direct response
 - [4. TikTok / Meta Ad Scripts](references/4-tiktok-meta-ad-scripts.md)
 - [5. Push Notifications](references/5-push-notifications.md)
 - [6. Email Sequences](references/6-email-sequences.md)
-- [7. UGC Script Templates](references/7-ugc-script-templates.md)
+- [7. UGC Script Templates](references/7-ugc-script-templates.md) — includes Authority-Led Hack List → Product Reveal from Jetback UGC
 - [Quiz Funnel Copy](references/quiz-funnel-copy.md)
 - [A/B Testing Framework](references/a-b-testing-framework.md)
 - [Copy Anti-Patterns](references/copy-anti-patterns-kill-on-sight.md)

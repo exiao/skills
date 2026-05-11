@@ -140,4 +140,5 @@ This skill content is modularized into reference docs for readability.
 - [Example Session Flow](references/example-session-flow.md)
 - [Conversion Session Flow](references/conversion-session-flow.md)
 - [Adding Slides from Images](references/adding-slides-from-images.md) — recreating screenshot visuals as inline SVG/HTML, slide critique workflow, Surge deploy tips
+- [Existing Surge Deck Enhancement](references/existing-surge-deck-enhancement.md) — backup-first workflow, Google Slides visual extraction, localhost/live verification, screenshot delivery, and pitfalls for editing deployed HTML decks
 - [Live Demo Strategy](references/live-demo-strategy.md) — selecting, sequencing, and framing live demos in decks; the "toy vs factory" anti-pattern; risk management; slide structure for demo slides

@@ -7,6 +7,82 @@
 
 Always specify shot structure upfront: number of shots, total duration, aspect ratio.
 
+Every individual Seedance 2.0 generation tops out at 15 seconds. Do not prompt for a 30s or 60s video. Build longer pieces by generating separate 15s-or-shorter clips, carrying identity/location forward with a reference frame, then stitching in post.
+
+For single continuous clips, keep the scene to one location, one camera move, and 1-2 primary actions. If you need cuts, location changes, app-screen inserts, or captions, generate clean footage and composite those parts later.
+
+---
+
+## Format 0: AI UGC / Talking-Head Ads
+
+**Source:** @adriansolarzz, May 2026.
+
+Use this format for selfie ads, creator testimonials, product demos, app pitches, or any UGC-style clip where realism matters more than cinematic spectacle.
+
+### 5-Beat Formula
+
+1. **Subject:** age, hair, outfit, accessories, ethnicity, and any identity-locking details.
+2. **Setting:** one concrete environment with real objects, not abstract mood words.
+3. **Action:** 1 primary action plus 1-2 secondary beats for 5-8s clips; max 2 primary actions for 15s clips.
+4. **Camera:** named camera behavior: front-facing selfie camera, locked-off, handheld natural shake, dolly push-in, arc, tracking shot.
+5. **Lighting/style/mood:** put lighting at the end. For UGC, prefer plain language like "soft window light" over polished cinema tags.
+
+### Dialogue Embedding Rule
+
+Embed dialogue inline with the matching visual beat. Do not add a separate "voiceover script" block.
+
+Wrong:
+> A woman in a kitchen takes a sip of coffee. Voiceover: "I use Bloom every morning."
+
+Right:
+> A 28-year-old woman in a sunlit kitchen takes a sip of coffee, sets the cup down, looks directly into the lens, and says, "I use Bloom every morning before the market opens."
+
+Use "says" / "asks" / "finishes" attribution every time. Put brand names on visible-speaker beats where the mouth is on camera. Avoid brand names during cutaways because pronunciation gets mushier without lip-sync pressure.
+
+### Brand Name Pronunciation Defense
+
+For brand names, acronyms, or unusual product names:
+
+1. Spell acronyms phonetically: "A. I.", "U G Cee", "C. E. O.".
+2. Add enunciation direction before the line: "she slows down slightly and clearly enunciates...".
+3. Repeat the name naturally in the middle of the clip with a comma, not as a forced CTA: "It's called Bloom, Bloom, and it tracks the stocks I actually care about."
+
+### Selfie POV That Does Not Render a Phone
+
+Do not write "phone held at arm's length" unless you want the phone visible. Use:
+
+> The camera IS her phone's front-facing selfie camera. We see her face filling the frame from the phone's perspective, no phone visible in the shot, just her looking directly into the lens as if talking to her followers. Subtle natural shake mimicking a propped-up phone.
+
+Stability choices:
+- Propped phone: "subtle natural shake mimicking a propped-up phone"
+- Locked off: "steady locked-off front-facing camera view"
+- Vlog handheld: "subtle handheld shake, organic camera movement"
+
+### Real-Brand Prop Strategy
+
+Name 2-4 specific real-world props in the scene to prevent generic AI backgrounds. Use recognizable shape/color signals even if logos are imperfect.
+
+Examples:
+- Bedroom/vanity: sage green Stanley tumbler, Sephora bag, AirPods case, Celsius can, Glossier products
+- Kitchen: Starbucks cup, Trader Joe's salad container, stickered MacBook, Whole Foods bag, Brita pitcher
+- Car: Liquid Death can in cup holder, AirPods case on dashboard, iPhone charger cable, Whole Foods bag on passenger seat
+- Street: Starbucks cup, Whole Foods storefront, Sephora tote, New Balance sneakers, yellow cab
+- Podcast/studio: Celsius can, Stanley tumbler, stickered MacBook, AirPods Max, LED strip lighting
+
+### On-Screen Text Rule
+
+Seedance cannot spell reliably. Do not ask it to render captions, URLs, app UI text, readable logos, or subtitles. Generate text-free footage, then add captions/logos/app screens in CapCut, Premiere, Final Cut, or After Effects. For app reveals, screen-record the actual app and composite it into the insert beat.
+
+### Trademark/Censorship Workaround
+
+If a trademarked game, brand, or franchise blocks/degrades output, describe the visual DNA instead of naming the property: proportions, shading, lighting, color grade, environment, and genre. Example: use "open-world crime drama video game cutscene in a sun-bleached West Coast city with palm trees" instead of naming GTA.
+
+### UGC Prompt Template
+
+```text
+[Subject with specific visual details] in [one concrete setting with 2-4 real-world props]. [Primary action plus 1-2 secondary beats]. The camera IS [specific camera perspective], [framing], [stability], [what must not be visible if relevant]. [Subject] says, "[short exact dialogue embedded at the visual moment]." [Lighting/style/mood]. Total: [5/10/15]s / [1 continuous shot or N stitched clips] / [aspect ratio].
+```
+
 ---
 
 ## Format 1: Transformations
@@ -141,6 +217,7 @@ No image input needed. Full prompt: "Fight of a 3D person with 2D"
 
 | Format | Shots | Key Instruction | Typical Inputs |
 |--------|-------|-----------------|----------------|
+| AI UGC / Talking-Head Ads | 1 continuous shot per clip | 5-beat formula, inline dialogue, visible-speaker brand names, real-brand props | Optional avatar/product refs, app screen composited later |
 | Transformations | 4-6 | Numbered shots, escalation arc | 3-4 images |
 | Orbs | 1 | POV opening block + VFX brackets | 1 image |
 | POVs | 1 | "No cuts, no zoom, natural head movement" | 1 image |
@@ -150,10 +227,17 @@ No image input needed. Full prompt: "Fight of a 3D person with 2D"
 ## Universal Tips
 
 1. Always specify shot structure upfront (shots, duration, aspect ratio)
-2. Use "ARRI ALEXA aesthetic" for cinematic realism
-3. "No 3D, no cartoon, no VFX" forces ultra-realism
-4. VFX brackets `[VFX: description]` for inline effects
-5. "RAMPS TO SLOW MOTION... SNAPS BACK" for temporal control
-6. Include SFX descriptions for richer output
-7. Be explicit about what the camera is NOT doing
-8. Sometimes the shortest prompt hits hardest
+2. Keep each generation at 15 seconds max; stitch separate clips for longer pieces
+3. For UGC, use the 5-beat formula: subject, setting, action, camera, lighting/style/mood
+4. Embed dialogue inline with "says [exact line]" rather than a separate script block
+5. Put brand names on visible-speaker beats; use phonetic spelling and enunciation direction when needed
+6. For selfie POV, say the camera IS the phone's front-facing camera and explicitly say no phone is visible
+7. Add 2-4 real-world brand props for realism, but composite readable logos/text in post
+8. Never ask Seedance to spell captions, URLs, app UI text, or subtitles; add those in editing
+9. Use "ARRI ALEXA aesthetic" for cinematic realism, but avoid polished cinema language for casual UGC
+10. "No 3D, no cartoon, no VFX" forces ultra-realism
+11. VFX brackets `[VFX: description]` for inline effects
+12. "RAMPS TO SLOW MOTION... SNAPS BACK" for temporal control
+13. Include SFX descriptions for richer output
+14. Be explicit about what the camera is NOT doing
+15. Sometimes the shortest prompt hits hardest

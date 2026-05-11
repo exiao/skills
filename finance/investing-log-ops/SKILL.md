@@ -139,13 +139,13 @@ RUN_ID=<id>
 gh run view $RUN_ID --json jobs --jq '.jobs[] | "\(.name) | \(.status)/\(.conclusion)"'
 
 # Which step failed?
-gh api repos/$INVESTING_LOG_REPO/actions/runs/$RUN_ID/jobs \
+gh api repos/Bloom-Invest/investing-log/actions/runs/$RUN_ID/jobs \
   --jq '.jobs[] | select(.conclusion=="failure") | .steps[] | select(.conclusion=="failure") | {name, conclusion}'
 
 # Get the failed job's logs (gh run view --log-failed often returns empty for matrix jobs)
-JOB_ID=$(gh api repos/$INVESTING_LOG_REPO/actions/runs/$RUN_ID/jobs \
+JOB_ID=$(gh api repos/Bloom-Invest/investing-log/actions/runs/$RUN_ID/jobs \
   --jq '.jobs[] | select(.conclusion=="failure") | .id')
-gh api repos/$INVESTING_LOG_REPO/actions/jobs/$JOB_ID/logs 2>&1 | tail -40
+gh api repos/Bloom-Invest/investing-log/actions/jobs/$JOB_ID/logs 2>&1 | tail -40
 ```
 
 ### 4. Check for in-progress / stuck runs

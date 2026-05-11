@@ -24,5 +24,13 @@ tags: [skills, maintenance, cleanup]
 4. For genuinely new local-only skills worth keeping: branch, commit, PR
 5. The repo owner merges — never push to main directly
 
+### Runtime Checkout Preservation
+
+When preserving changes from the live runtime checkout (`~/.hermes/skills`), do **not** blindly stash, pull, or commit all dirty files. The runtime checkout can contain generated state and stale tracked-file drift. Use `references/runtime-skills-preservation.md`: create a fresh `origin/main` worktree, copy runtime files without deleting upstream files, exclude generated state, secret-scan selected files, and usually commit only genuinely untracked local additions as a draft PR.
+
+### Runtime Snapshot PR Review
+
+When reviewing a large tracked-file snapshot PR from the live runtime checkout, treat it as an archive to mine, not a merge candidate. Use `references/runtime-snapshot-pr-review.md`: classify each file as `KEEP`, `MAIN`, or `CHERRY`, scan for private values and generated-state drift, then recommend small focused follow-up PRs instead of merging the snapshot wholesale.
+
 ### Categories That Were Full Duplicates (removed 2026-05-01)
 github/, autonomous-ai-agents/, software-development/, mlops/, media/, mcp/, leisure/, red-teaming/, note-taking/, email/, smart-home/, gaming/, analytics/, diagramming/, domain/, feeds/, gifs/, inference-sh/, dogfood/

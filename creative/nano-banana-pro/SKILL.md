@@ -94,7 +94,6 @@ Tips:
 
 ## Other Image Generation Engines
 
-- `grok-imagine` — xAI Aurora (Grok Imagine). Same XAI_API_KEY. Fast + quality models.
 - `gpt-image-2` — OpenAI. Used in meta-ads-cli pipeline (curl to OpenAI Images API).
 - `image_generate` — Built-in runtime tool (native, no script needed).
 

@@ -152,6 +152,25 @@ If a line explains or teaches without escalating tension, cut it. Information is
 6. **Music/trending sound under the voiceover.** Boosts distribution.
 7. **CTA = "Link in bio"** (TikTok doesn't support clickable links in organic, only Spark Ads or paid).
 
+### TikTok Paid App Ad Structure: Meme Sandwich
+
+TikTok app ads should feel like organic meme content that happens to contain the app, not an app demo with a meme wrapper.
+
+**Structure:**
+- 0-3s: meme hook or engagement-bait caption that is about the viewer, not the product
+- 3-6s: app demo at 3-4x speed, showing the core feature fast
+- 6-9s: back to the meme, joke, reaction, or story payoff
+- Repeat the app's main feature 2-3 times across variants, not as one long demo
+
+**Rules:**
+- Avoid direct praise or hard CTAs like "Download my app" inside the content. Let TikTok's CTA button do the CTA work.
+- Avoid making the video ABOUT the app. The app should be a prop in the story.
+- Avoid showing the app continuously for more than ~3 seconds in any one beat; viewers smell the ad and scroll.
+- Study competitor ads that have been live a long time, then copy the format mechanics, not the surface details.
+- Rage-bait and comment-bait can work, but keep it inside platform policy and brand risk tolerance.
+
+Source: @athcanft, May 2026
+
 ### Meta (Facebook/Instagram) Specific Rules
 
 1. **Square (1:1) or vertical (4:5) for feed.** 9:16 for Stories/Reels.

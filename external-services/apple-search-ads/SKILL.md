@@ -3,7 +3,7 @@ name: Apple Search Ads
 preloaded: true
 slug: apple-search-ads
 version: 2.0.0
-homepage: https://github.com/$SKILLS_REPO/tree/main/apple-search-ads
+homepage: https://github.com/exiao/skills/tree/main/apple-search-ads
 description: Create, optimize, and scale Apple Search Ads campaigns with API automation, attribution integration, and bid strategy recommendations.
 metadata: {"openclaw":{"emoji":"🍎","requires":{"bins":["curl","jq","python3","bc"],"env":["ASA_CLIENT_ID","ASA_TEAM_ID","ASA_KEY_ID","ASA_ORG_ID","ASA_PRIVATE_KEY_PATH"]},"os":["linux","darwin"]}}
 ---

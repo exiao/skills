@@ -11,7 +11,7 @@ Uses the official `sentry` CLI (v0.31.0+, installed via cli.sentry.dev). Authent
 ## Org context
 
 - Org slug: `$SENTRY_ORG`
-- Projects: set `$SENTRY_PROJECT` to the target project slug (for example backend, frontend, updater, bot, or pipeline projects).
+- Projects: `$SENTRY_PROJECT` (Django backend), `bloom-frontend-web` (React), `bloom-updater` (FastAPI), `whatsgpt` (BloomBot), `choices-dev`, `bible-app`, `jotter`, `user-studies`, `userstudies-frontend`, `investing-arena` (FastAPI, investingarena.ai), `investing-log-pipeline` (GitHub Actions pipeline)
 - Default target for most commands: `$SENTRY_ORG/$SENTRY_PROJECT`
 
 ## Key commands
@@ -21,24 +21,26 @@ Uses the official `sentry` CLI (v0.31.0+, installed via cli.sentry.dev). Authent
 sentry issue list $SENTRY_ORG/$SENTRY_PROJECT --limit 10
 
 # View a specific issue
-sentry issue view PROJECT-123
+sentry issue view INVEST-5PY
 
-# Get latest event (stack trace + breadcrumbs)
-sentry issue events PROJECT-123
+# Get latest event list (stack trace metadata + breadcrumbs when included)
+# With --json, output is an object with .data[], not a top-level array.
+sentry issue events INVEST-5PY --json
+sentry issue events INVEST-5PY --json | jq '.data[0]'
 
 # AI root cause analysis (Seer)
-sentry issue explain PROJECT-123
+sentry issue explain INVEST-5PY
 
 # AI fix plan
-sentry issue plan PROJECT-123
+sentry issue plan INVEST-5PY
 
 # Resolve / unresolve / archive
-sentry issue resolve PROJECT-123
-sentry issue unresolve PROJECT-123
-sentry issue archive PROJECT-123
+sentry issue resolve INVEST-5PY
+sentry issue unresolve INVEST-5PY
+sentry issue archive INVEST-5PY
 
 # Merge duplicate issues
-sentry issue merge PROJECT-123 PROJECT-456
+sentry issue merge INVEST-5PY INVEST-4SR
 
 # List projects
 sentry project list $SENTRY_ORG/
@@ -89,7 +91,7 @@ Combine with spaces (AND): `is:unresolved firstSeen:-7d`.
 - Use `-w` / `--web` to open in browser
 - Use `--period` / `-t` for time filtering (e.g. `1h`, `24h`, `7d`)
 - The CLI auto-detects org/project from env/DSN, but always pass `$SENTRY_ORG/<project>` explicitly for reliability
-- Short IDs like `PROJECT-123` work as issue identifiers everywhere
+- Short IDs like `INVEST-5PY` work as issue identifiers everywhere
 - `sentry schema <resource>` to discover API endpoints without third-party docs
 
 ## Common playbooks
@@ -101,15 +103,15 @@ sentry issue list $SENTRY_ORG/$SENTRY_PROJECT --limit 10
 
 **"Debug a specific issue"**
 ```bash
-sentry issue view PROJECT-XXX
-sentry issue events PROJECT-XXX
-sentry issue explain PROJECT-XXX
-sentry issue plan PROJECT-XXX
+sentry issue view INVEST-XXX
+sentry issue events INVEST-XXX
+sentry issue explain INVEST-XXX
+sentry issue plan INVEST-XXX
 ```
 
 **"Which release introduced this?"**
 ```bash
-sentry issue view PROJECT-XXX --json | jq '.firstRelease'
+sentry issue view INVEST-XXX --json | jq '.firstRelease'
 sentry release list $SENTRY_ORG/$SENTRY_PROJECT --limit 5
 ```
 
@@ -119,7 +121,7 @@ Use the REST API via `sentry api`:
 
 ```bash
 # Create a project (team slug required)
-sentry api /api/0/teams/$SENTRY_ORG/$SENTRY_TEAM_SLUG/projects/ --method POST \
+sentry api /api/0/teams/$SENTRY_ORG/bloom/projects/ --method POST \
   --data '{"name": "my-project", "platform": "python-fastapi"}'
 
 # Get the DSN for the new project

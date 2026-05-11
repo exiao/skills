@@ -163,6 +163,49 @@ why you didn't switch sooner."
 [Text overlay: product name]
 ```
 
+## Authority-Led Hack List → Product Reveal
+
+Use when the product can be framed as an insider hack, especially for travel, finance, shopping, savings, health, or any category where expertise lowers skepticism.
+
+Source: @onlinedopamine breakdown of Jetback/flightcheatcode UGC ad, May 2026. Transcript pattern: "As a flight attendant for three years..." → three travel booking hacks → "the most important one" is sending the flight confirmation to Jetback for price-drop refunds → specific saving proof → "I'm not going to gatekeep anymore."
+
+### Structure
+
+1. **Authority hook:** `As a [credible role] for [time period], these are the [number] [category] hacks I tell my friends and family.`
+2. **Useful tips:** Give 2-3 tips before mentioning the product. These should feel valuable even without the product.
+3. **Bridge:** `And [number], probably the most important one...`
+4. **Product as hack:** Present the product as the easiest/most valuable tactic in the list.
+5. **Specific proof:** `I've already [saved/made/avoided] [$X/result] from [specific use case].`
+6. **Anti-gatekeeping close:** `I'm not going to gatekeep anymore.`
+
+### Template
+
+```
+As a [credible role] for [time period], these are the [number] [category] hacks I tell all my friends now that I'm not [in that role / gatekeeping].
+
+Number one: [useful non-product tip].
+Number two: [useful non-product tip].
+Number three: [useful non-product tip or myth correction].
+
+And number four, probably the most important one: [product behavior].
+You [simple action], and [product] [specific benefit].
+I've already [specific proof/result].
+Honestly, [plain-language verdict].
+I'm not going to gatekeep anymore.
+```
+
+### Bloom adaptation
+
+```
+As someone who's reviewed hundreds of retail portfolios, these are the 3 checks I run before buying any stock.
+
+Number one: check whether the move already happened before the news hit.
+Number two: look for insider selling, not just analyst ratings.
+Number three, probably the most important one: run the ticker through Bloom.
+It shows the risks, earnings context, and what the market is missing in one report.
+I'm not going to gatekeep my stock research process anymore.
+```
+
 ## Script Adaptation Rules
 
 **For different tones**, adjust these variables:

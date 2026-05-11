@@ -52,7 +52,7 @@ PRODUCT_IDS_JSON=$(mktemp)
 printf '["<product_id>"]' > "$PRODUCT_IDS_JSON"
 
 higgsfield generate create marketing_studio_video \
-  --prompt "Recreate this ad format for $APP_NAME" \
+  --prompt "Recreate this ad format for Bloom AI investing app" \
   --ad_reference_id "<upload_id_or_job_id>" \
   --product_ids @"$PRODUCT_IDS_JSON" \
   --mode ugc \
@@ -62,9 +62,9 @@ higgsfield generate create marketing_studio_video \
   --wait --json
 ```
 
-**Use cases for app ads:**
+**Use cases for Bloom ads:**
 - Feed in your best-performing Meta/Google ad → generate variations
-- Feed in a competitor's viral ad → recreate with your product branding
+- Feed in a competitor's viral ad → recreate with Bloom branding
 - A/B test the same ad format with different avatars or hooks
 - Scale winning formats across platforms (Meta → TikTok → YouTube)
 
@@ -109,13 +109,13 @@ higgsfield generate create marketing_studio_video \
 
 # 5. Generate marketing image
 higgsfield generate create marketing_studio_image \
-  --prompt "Clean app ad showing $APP_NAME interface" \
+  --prompt "Clean app ad showing Bloom AI investing interface" \
   --aspect_ratio 1:1 \
   --resolution 2k \
   --wait --json
 ```
 
-## Mode Selection for App Ads
+## Mode Selection for Bloom Ads
 
 | Goal | Recommended Mode | Why |
 |------|-----------------|-----|
@@ -135,7 +135,7 @@ higgsfield generate create marketing_studio_image \
 
 ## Pricing Context
 
-Check your subscription tier and credit balance before generating. Credit costs vary by model:
+The account owner has a Creator subscription. Credit costs vary by model:
 - 1,000 credits ≈ 500 Nano Banana Pro images ≈ ~114 Kling 3.0 videos
 - Marketing Studio videos cost more credits than static images
 - Check balance: `higgsfield account status`

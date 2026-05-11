@@ -396,11 +396,18 @@ This is the hardest screen. Approach:
 ## IMPORTANT GUIDELINES
 
 ### For the Questionnaire Questions
+- Give context before asking questions. If users do not understand what the app does yet, questions feel random and lower purchase intent. Sway originally went straight into questions and got feedback like "what does this app even do?" Their fix: show clear videos/images explaining the problem and solution first, then ask for personalization. (Source: @JosephKChoi interview with Daniel from Cal AI/Sway, May 2026)
 - Questions must feel natural and conversational, not like a survey
 - Each question should make the user think "yes, they get me"
 - Options should cover the major user segments without being exhaustive
+- Prefer fast multiple choice. The question order matters less than answerability; if users have to think hard, onboarding slows them down before the paywall.
 - Use emoji icons to make lists feel lighter and more scannable
-- The order matters: start with aspiration (goals), then pain, then proof, then preference
+- The order matters: clarify why they are here, label their problem, show the dream result, personalize, explain why the app is for them, then paywall.
+
+### For Sequential Paywall Journeys
+- A high-converting consumer app onboarding can be a one-path sales flow where the user barely has to think: context → easy questions → dream result → paywall → aha moment.
+- If the pre-paywall aha requires leaving the app or doing work, consider moving the aha after the paywall and teasing the outcome instead. Sway tested asking users to upload dating screenshots before paywall, but it performed worse because users had to leave the app and might not return. Simpler pre-paywall flow won.
+- The paywall should preview value concretely, not just ask for money. Sway showed an "action plan" and a carousel of subscription benefits before unlocking the full app.
 
 ### For the App Demo
 - Keep it to ONE core interaction — don't try to demo the whole app

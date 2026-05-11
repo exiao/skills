@@ -28,6 +28,10 @@ Individual skills may require additional context — check the skill's preparati
 
 ## Design Direction
 
+### Client-facing visual proposal pages
+
+When the user asks to turn recommendations, copy strategy, product critique, or design feedback into a shareable before/after page, read `references/visual-proposal-pages.md`. Build a polished static page rather than returning only prose. The page should make the recommendation visible: side-by-side before/after panels, proof strips, diagrams, roadmap, copy translation table, and a final recommended architecture. For Surge delivery, write both `index.html` and a primary asset file such as `styles.css`, deploy, then open the production URL and visually verify styling loaded.
+
 Commit to a BOLD aesthetic direction:
 - **Purpose**: What problem does this interface solve? Who uses it?
 - **Tone**: Pick an extreme: brutally minimal, maximalist chaos, retro-futuristic, organic/natural, luxury/refined, playful/toy-like, editorial/magazine, brutalist/raw, art deco/geometric, soft/pastel, industrial/utilitarian, etc. There are so many flavors to choose from. Use these for inspiration but design one that is true to the aesthetic direction.

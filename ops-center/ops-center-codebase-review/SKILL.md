@@ -8,7 +8,7 @@ description: Reference notes from full ops-center codebase review (2026-04-30)
 # Ops-Center Codebase Review (2026-04-30)
 
 ## Summary
-Full codebase review of github.com/$OPS_CENTER_REPO completed. PR #64 updated all docs.
+Full codebase review of github.com/Fintary/ops-center completed. PR #64 updated all docs.
 
 ## Actual Counts (verified from source)
 - **19 tables** + **10 enums** in app/models/tables.py
@@ -20,7 +20,7 @@ Full codebase review of github.com/$OPS_CENTER_REPO completed. PR #64 updated al
 - **20 data helper functions** in app/page_data.py (872 lines)
 
 ## Pre-existing Security Bug
-Known security issues exist. Details tracked privately.
+DELETE /api/agent-hierarchy/{hierarchy_id} doesn't filter by account_id — cross-tenant deletion risk. Flagged for separate fix.
 
 ## Key Architecture Notes
 - Feature flags: RECONCILE_BULK, RECONCILE_SUGGESTIONS

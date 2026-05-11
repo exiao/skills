@@ -179,6 +179,8 @@ Common failure modes in bloom-tests and fixes:
 
 **agent.act() Failures:** Replace with explicit Playwright selectors when possible. Reserve `agent.act()` for genuinely dynamic interactions where the exact selector isn't predictable.
 
+**Search/Algolia Flakiness:** Avoid making critical Bloom QA flows depend on live search results when the same state can be reached through deterministic in-app navigation. In Stably/headless runs, stock search for `AAPL` has returned ETF-like results (`AAPW`, `AAPY`, `AAPD`) or hung before `Apple Inc` appeared. Prefer direct collection pages, ticker rows, or “Copy collection to portfolio” flows when testing portfolio mechanics. See `references/bloom-search-and-collections-flakiness.md` for a concrete repro and refactor pattern.
+
 **Back Button Fragility:** `.getByRole('button').first()` is brittle. Use name or aria-label selectors instead.
 
 ## Required Env Vars

@@ -43,7 +43,9 @@ Gather this context (ask if not provided):
 | **Meta** | Demand generation, visual products | Creating demand, strong creative assets |
 | **LinkedIn** | B2B, decision-makers | Job title/company targeting matters |
 | **Twitter/X** | Tech audiences, thought leadership | Audience is active on X |
-| **TikTok** | Younger demographics, viral creative | Audience skews 18-34, video capacity |
+| **TikTok** | Consumer apps, cheap creative testing, viral-native video | Need fast install/subscription creative learning with 6-12 native videos |
+
+**TikTok vs Meta for app installs:** TikTok is often better for finding winning creatives because learning is cheaper and faster. Expect roughly $100-300 to get useful signal on TikTok vs. $1K-2K to push Meta through learning. Use TikTok to discover winners, then port proven concepts to Meta if they have durable CPA. (Source: @athcanft, May 2026)
 
 ---
 
@@ -97,7 +99,12 @@ META_Conv_Lookalike-Customers_FreeTrial_YYYY_Q1
 - **Lookalikes**: Base on best customers (by LTV), not all customers
 - **Retargeting**: Segment by funnel stage
 - **Exclusions**: Exclude existing customers and recent converters
-- **App installs default**: Super broad targeting (USA, English-speaking). Don't over-segment. Let the algorithm find your audience. Narrow only after you have conversion data. (Source: @athcanft, May 2026)
+
+**App installs default:** Super broad targeting (USA, English-speaking). Don't over-segment. Let the algorithm find your audience. Narrow only after you have conversion data. (Source: @athcanft, May 2026)
+
+**TikTok app-install setup:** Do not run plain Install optimization once you care about revenue. For iOS subscription apps, wire an MMP such as AppsFlyer plus RevenueCat, map `rc_initial_purchase_event` to TikTok's `Subscribe` event, verify a real purchase fires in TikTok Events Manager, then optimize Smart+ for `Subscribe` or `Trial Start`. If the subscription/trial event is not active, pause launch. Install campaigns can produce cheap installs that never pay. (Source: @athcanft, May 2026)
+
+**TikTok Smart+ defaults:** Use App Promotion → App Install, iOS 14 campaign enabled, campaign budget around $50/day for tests, optimization goal = In-app event, bid strategy = Maximum Delivery, broad geo/language targeting. Disable Pangle and Lemon8 placements unless deliberately testing them. In the ad setup, disable auto-select creative assets, selling points, automatic enhancements, and most CTA text except Download/Install. Add 6-12 ads per launch. (Source: @athcanft, May 2026)
 - **Geo-strategy for TikTok ads**: Don't start in the USA. CPMs are brutal and competition is highest in the world. Start in Tier 1 Europe (Germany, Switzerland, Scandinavia): same buying power, fraction of the cost, way less competition. Win there first, then bring the proven funnel to the US. (Source: @timoxkoehler, May 2026)
 
 ---
@@ -134,6 +141,8 @@ Captions always (85% watch without sound). Native feel outperforms polished.
 **If CTR is low:** New hooks/angles, refine targeting, refresh creative.
 
 **If CPM is high:** Expand targeting, try different placements, improve creative fit.
+
+**TikTok winner thresholds:** Treat a creative as promising when CPI < $2, CTR > 1%, and CPA < LTV. Spend $200-300 across 6-12 ads to buy signal, not certainty. When a winner appears, create 20-30 variations of the same format before trying a totally new concept. (Source: @athcanft, May 2026)
 
 ### Bid Strategy Progression
 1. Start with manual or cost caps

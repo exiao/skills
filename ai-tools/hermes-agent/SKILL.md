@@ -975,6 +975,9 @@ PY
 ```
 For a whole job, call `cron.scheduler._build_job_prompt(job)` and ensure it does not raise `CronPromptInjectionBlocked`.
 
+### Preflight compression barely shrinks the session
+If Hermes shows `📦 Preflight compression: ~N tokens >= threshold` but compression only removes a small amount, do not assume the compressor is broken. The preflight estimate is full request size, including tool schemas, system prompt, memory, loaded skills, protected head, protected recent tail, and current user message. Only the old middle transcript is compressible. First check whether tools/system/protected tail dominate the request; then recommend a new session, fewer enabled toolsets, or more aggressive `protect_last_n` / `target_ratio` settings. See `references/context-compression-triage.md` for the diagnostic model and commands.
+
 ### Changes not taking effect
 - **Tools/skills:** `/reset` starts a new session with updated toolset
 - **Config changes:** `/restart` reloads gateway config

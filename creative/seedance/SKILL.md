@@ -104,6 +104,19 @@ Use `@image1`, `@image2`, etc. to reference images in order:
 - "@image1 transforms into @image2"
 - "The whale in @image1 meets the ninja in @image2"
 
+## Prompting Rules
+
+For Seedance 2.0 prompts, especially UGC/talking-head ads:
+
+- Treat 15 seconds as a hard per-generation ceiling. Build longer pieces by stitching multiple clips in post.
+- Use a 5-beat structure: subject with specific visual details, one concrete setting, 1-2 actions, explicit camera direction, lighting/style/mood at the end.
+- Embed dialogue inline with the visual beat using `says "exact line"`; do not create a separate voiceover script block.
+- Put brand names on visible-speaker beats. For weird names/acronyms, add phonetic spelling and enunciation direction.
+- For selfie POV, write: `the camera IS her phone's front-facing selfie camera, no phone visible in the shot` to avoid the model rendering a person holding a phone.
+- Add 2-4 real-world props for UGC realism, but do not ask Seedance to render readable captions, URLs, app UI text, or logos. Composite those in post.
+
+See `higgsfield-generate/references/seedance-prompting-guide.md` for the full Seedance 2.0 prompting playbook and UGC template.
+
 ## Notes
 
 - Peak hours (09:00-15:00 GMT): queue times can extend to hours. Use `--max-attempts 3600` (5 hours) to avoid timeouts during peak.

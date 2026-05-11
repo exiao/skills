@@ -1,6 +1,6 @@
 ---
 name: railway
-description: Deploy, manage, and operate Railway projects via CLI and MCP. Use when creating Railway services, deploying code, adding databases (Postgres, Redis), setting environment variables, viewing logs, managing domains, or doing anything with Railway infrastructure. Also use when asked about the Bloom backend on Railway.
+description: Deploy, manage, and operate Railway projects via CLI and MCP. Use when creating Railway services, deploying code, adding databases (Postgres, Redis), setting environment variables, viewing logs, managing domains, or doing anything with Railway infrastructure.
 ---
 
 # Railway
@@ -159,7 +159,7 @@ Railway Postgres is accessible externally via the proxy URL. Use `pg_dump` with 
 export PATH="/opt/homebrew/opt/libpq/bin:$PATH"
 
 # Get the public DB URL (from the Postgres service vars)
-cd ~/bloom-railway
+cd ~/my-railway-app
 railway service link Postgres
 DB_URL=$(railway variable list --json | python3 -c "import sys,json; print(json.load(sys.stdin)['DATABASE_PUBLIC_URL'])")
 
@@ -189,8 +189,8 @@ psql "$NEW_DB_URL" < backup.sql
 ### Restore to local Postgres (for dev/testing)
 
 ```bash
-createdb bloom_local
-pg_restore -d bloom_local --no-owner --no-privileges -j4 backup.dump
+createdb app_local
+pg_restore -d app_local --no-owner --no-privileges -j4 backup.dump
 ```
 
 ### Verify backup integrity
@@ -215,7 +215,7 @@ Schedule: 0 4 * * 0 (Sunday 4am)
 Task: Back up Railway Postgres to ~/backups/railway/
 ```
 
-The dump file goes to `~/backups/railway/bloom_YYYYMMDD.dump`. Keep last 4 weekly backups.
+The dump file goes to `~/backups/railway/app_YYYYMMDD.dump`. Keep last 4 weekly backups.
 
 ### Important notes
 

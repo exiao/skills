@@ -78,7 +78,7 @@ When a skill references third-party tools or CLIs, verify the commands actually 
 - `bloom peers` → doesn't exist, use `bloom info`
 - `bloom ratings` → doesn't exist, use `bloom info`
 
-For the full bloom-cli command list, see `finance/bloom-cli/SKILL.md`. Common commands include: `bloom info`, `bloom price`, `bloom financials`, `bloom screen`, `bloom earnings`, `bloom technicals`, `bloom news`, `bloom sentiment`.
+For bloom CLI command discovery, run `bloom --help` or `bloom <command> --help`. Common commands include: `bloom info`, `bloom price`, `bloom financials`, `bloom screen`, `bloom earnings`, `bloom technicals`, `bloom news`, `bloom sentiment`.
 
 When referencing another skill, use its exact `name` from frontmatter (not folder name or a guess).
 

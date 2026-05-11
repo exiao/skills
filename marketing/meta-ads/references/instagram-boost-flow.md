@@ -5,7 +5,7 @@ Browser-based ad workflow for running ads **without a Facebook ad account** — 
 ## Context
 
 - **Account:** invest.with.bloom on Instagram
-- **Login:** $META_ADS_LOGIN (password in ads/iteration/config.json)
+- **Login:** $META_ADS_LOGIN (credentials in local config)
 - **Budget per ad:** $5/day, run until paused
 - **Destination:** App Store link for Bloom
 - **Browser profile:** clawd
@@ -74,7 +74,7 @@ Save manifest to `ads/iteration/creatives/[YYYY-MM-DD]/manifest.md` with: filena
 
 ## Step 6 — Report
 
-Send to signal +15202753080:
+Send to signal $SIGNAL_PHONE:
 - X ads analyzed, Y killed, Z promoted, W new uploaded
 - Best/worst performer (CPM + engagement)
 - 6 new creative concepts — what makes each one fresh

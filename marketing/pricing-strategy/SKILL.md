@@ -167,6 +167,22 @@ The exit offer alone can 2x your ARPU vs the "$9.99/month" trap. Always split-te
 
 Source: @timoxkoehler (May 2026, $40K MRR, 85K+ downloads)
 
+### Consumables and App Store Whales
+
+Subscriptions cap spend. Consumables create room for power users to spend more when the app has repeatable high-emotion value.
+
+**Sway AI pattern:** after launch, users repeated the dating-profile/photo flow more often than expected, so the team added paid photo packs/credits. Their theory: like dating apps and games, a small top-percentile user segment can drive a large share of revenue when there is no hard cap on useful spend. (Source: @JosephKChoi interview with Daniel from Cal AI/Sway, May 2026)
+
+Use consumables when:
+- The value repeats naturally: more photos, more analyses, more reports, more generations, more scans.
+- The marginal result is personally meaningful or status-linked.
+- The subscription covers baseline access, while credits unlock extra volume or premium outputs.
+- The user can understand what one credit buys without reading docs.
+
+Avoid consumables when they make the core subscription feel incomplete or nickel-and-dimed.
+
+**Bloom adaptation:** potential consumables are premium deep-dive reports, extra AI portfolio reviews, or high-touch watchlist audits. Do not sell basic daily value piecemeal.
+
 ---
 
 ## Related Skills

@@ -29,7 +29,7 @@ mcporter call revenuecat.<tool> key=value key2:5 --output json > /tmp/revenuecat
 Then `jq` the output. Tool names use **dashes**, not underscores: `list-products`, `get-customer`, etc.
 
 **Argument syntax:**
-- `key=value` for strings: `project_id=proj2cab6270`
+- `key=value` for strings: `project_id=$REVENUECAT_PROJECT_ID`
 - `key:value` for numbers: `limit:50`
 - For nested: `--args '{"expand": ["product"]}'`
 
@@ -81,12 +81,12 @@ Then `jq` the output. Tool names use **dashes**, not underscores: `list-products
 mkdir -p /tmp/revenuecat
 mcporter call revenuecat.list-projects --output json > /tmp/revenuecat/projects.json
 jq -r '.content[0].text' /tmp/revenuecat/projects.json
-# Bloom is proj2cab6270
+# Project ID is `$REVENUECAT_PROJECT_ID`
 ```
 
 ### Pull MRR + overview metrics
 ```bash
-mcporter call revenuecat.get-overview-metrics project_id=proj2cab6270 currency=USD --output json \
+mcporter call revenuecat.get-overview-metrics project_id=$REVENUECAT_PROJECT_ID currency=USD --output json \
   > /tmp/revenuecat/metrics.json
 jq -r '.content[0].text' /tmp/revenuecat/metrics.json
 ```
@@ -95,13 +95,13 @@ jq -r '.content[0].text' /tmp/revenuecat/metrics.json
 ```bash
 # Get customer profile
 mcporter call revenuecat.get-customer \
-  project_id=proj2cab6270 \
+  project_id=$REVENUECAT_PROJECT_ID \
   customer_id="user_12345" \
   --output json > /tmp/revenuecat/customer.json
 
 # Get their active subs
 mcporter call revenuecat.list-subscriptions \
-  project_id=proj2cab6270 \
+  project_id=$REVENUECAT_PROJECT_ID \
   customer_id="user_12345" \
   environment=production \
   --output json > /tmp/revenuecat/subs.json
@@ -109,7 +109,7 @@ mcporter call revenuecat.list-subscriptions \
 
 ### List all products in the project
 ```bash
-mcporter call revenuecat.list-products project_id=proj2cab6270 limit:100 --output json \
+mcporter call revenuecat.list-products project_id=$REVENUECAT_PROJECT_ID limit:100 --output json \
   > /tmp/revenuecat/products.json
 jq -r '.content[0].text' /tmp/revenuecat/products.json
 ```
@@ -117,13 +117,13 @@ jq -r '.content[0].text' /tmp/revenuecat/products.json
 ### Audit entitlement attachments (catalog drift check)
 ```bash
 # List entitlements
-mcporter call revenuecat.list-entitlements project_id=proj2cab6270 --output json \
+mcporter call revenuecat.list-entitlements project_id=$REVENUECAT_PROJECT_ID --output json \
   > /tmp/revenuecat/entitlements.json
 
 # For each entitlement, see what's attached
 ENT_ID=premium
 mcporter call revenuecat.get-products-from-entitlement \
-  project_id=proj2cab6270 \
+  project_id=$REVENUECAT_PROJECT_ID \
   entitlement_id=$ENT_ID \
   --output json > /tmp/revenuecat/products-for-$ENT_ID.json
 ```
@@ -131,7 +131,7 @@ mcporter call revenuecat.get-products-from-entitlement \
 ### Inspect an offering with all packages and products expanded
 ```bash
 mcporter call revenuecat.get-offering \
-  project_id=proj2cab6270 \
+  project_id=$REVENUECAT_PROJECT_ID \
   offering_id=default \
   --args '{"expand": ["package", "package.product"]}' \
   --output json > /tmp/revenuecat/offering.json
@@ -143,7 +143,7 @@ For create/update/delete operations, use the v2 REST API directly. Requires a v2
 
 ```bash
 # Example: create a product (NOT available via MCP)
-curl -X POST https://api.revenuecat.com/v2/projects/proj2cab6270/products \
+curl -X POST https://api.revenuecat.com/v2/projects/$REVENUECAT_PROJECT_ID/products \
   -H "Authorization: Bearer $REVENUECAT_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"store_identifier": "com.bloom.premium.monthly", "type": "subscription", "app_id": "app123"}'
@@ -157,6 +157,6 @@ API reference: https://www.revenuecat.com/reference/api-v2-overview
 - For raw API responses, use direct REST curl with `$REVENUECAT_API_KEY` instead of mcporter.
 - Pagination: pass `limit` and `starting_after` (cursor from previous page).
 - `environment` defaults to all; specify `production` or `sandbox` to filter.
-- Bloom's project ID: `proj2cab6270` (cached here so we don't need to look it up every time).
+- RevenueCat project ID: `$REVENUECAT_PROJECT_ID`.
 - This skill is the recommended interface to RevenueCat reads. The native `mcp_revenuecat_*` MCP tools have been deactivated.
 - For Apple Retention Messaging API setup (cancel-flow offers via RC), see `references/retention-messaging-api.md`.

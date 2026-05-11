@@ -229,20 +229,6 @@ railway variable set \
 
 ---
 
-## Railway Project IDs (Bloom)
-
-For reference when working on the Bloom app:
-
-| Resource | Value |
-|----------|-------|
-| Project | `bloom-backend` (ID: `b81d6f59-32a5-4094-8bbd-8671f9e0888a`) |
-| Web service | `bloom-web` (ID: `369dfa8d-471d-40c9-9c96-a48515354ad9`) |
-| Postgres | `Postgres` (ID: `c9c78cb9-249e-46f9-bca6-8525ff49c176`) |
-| Railway domain | `bloom-web-production-d709.up.railway.app` |
-| Custom domain | `$BLOOM_API_DOMAIN` → CNAME `$RAILWAY_PUBLIC_DOMAIN` |
-
----
-
 ## Common Railway Issues & Fixes
 
 | Issue | Cause | Fix |

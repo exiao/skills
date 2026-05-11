@@ -5,7 +5,7 @@ description: Use when the cron fires at 8am ET on Mondays — pulls the week's m
 
 # Earnings Card Pipeline
 
-Every Monday, pulls up to 5 major companies reporting earnings that week, writes an analyst-perspective take for each, generates a styled earnings card via Nano Banana Pro, and creates unscheduled Typefully drafts for account-owner review.
+Every Monday, pulls up to 5 major companies reporting earnings that week, writes an analyst-perspective take for each, generates a styled earnings card via Nano Banana Pro, and creates unscheduled Typefully drafts for account owner review.
 
 ---
 
@@ -32,10 +32,7 @@ Every Monday, pulls up to 5 major companies reporting earnings that week, writes
 **Data: bloom CLI** (get estimates and dates for discovered tickers):
 ```bash
 # Confirm earnings dates and get EPS/revenue estimates
-# bloom-cli does not expose a bulk earnings-calendar command; query candidate tickers one at a time.
-for TICKER in AAPL MSFT GOOG AMZN NVDA; do
-  bloom earnings "$TICKER" -f json
-done
+bloom earnings-calendar AAPL MSFT GOOG AMZN NVDA --days 7
 # Returns: symbol, earnings_date, eps_estimate, market_cap
 
 # For deeper estimates and history per ticker
@@ -124,7 +121,7 @@ No hashtags. No emojis. Confident and data-forward.
 
 ### Step 6 — Upload + Create Each Draft
 
-**Typefully account:** Bloom = social_set_id `$TYPEFULLY_SOCIAL_SET_ID` (discovered via `social-sets:list`). `TYPEFULLY_SOCIAL_SET_ID` is NOT in .env — use `$TYPEFULLY_SOCIAL_SET_ID` directly.
+**Typefully account:** Bloom = social_set_id `$TYPEFULLY_SOCIAL_SET_ID` (discovered via `social-sets:list`). Set `TYPEFULLY_SOCIAL_SET_ID` in .env or pass it directly.
 
 ```bash
 source ~/.hermes/.env && export TYPEFULLY_API_KEY
@@ -175,14 +172,14 @@ Draft: https://typefully.com/?d=[draft_id]&a=$TYPEFULLY_SOCIAL_SET_ID | Status: 
 ## Delivery
 
 - Signal group: `$SIGNAL_MARKETING_GROUP` — cron delivery handles routing, do NOT send via message tool
-- Typefully account: Bloom = `$TYPEFULLY_SOCIAL_SET_ID` (hardcoded, not in .env)
+- Typefully account: Bloom = `$TYPEFULLY_SOCIAL_SET_ID` (from $TYPEFULLY_SOCIAL_SET_ID env var)
 - Cards: `/tmp/earnings-card-TICKER-YYYYMMDD.png`
 
 ---
 
 ## Cron Config
 
-- **ID:** `$CRON_JOB_ID`
+- **ID:** `$EARNINGS_CARD_PIPELINE_CRON_ID`
 - **Schedule:** `0 8 * * 1` (8am ET, Mondays)
 - **Model:** default (claude-sonnet)
 - **Target:** isolated
@@ -200,7 +197,7 @@ Draft: https://typefully.com/?d=[draft_id]&a=$TYPEFULLY_SOCIAL_SET_ID | Status: 
 7. **Vague AI take** — "could move the stock" is not useful. Be specific: "margin guidance matters more than EPS beat."
 8. **Not reporting failures** — if Nano Banana Pro fails for one ticker, still process the others and report the failure in Signal.
 9. **Benzinga 401** — Token expires periodically. Don't waste time debugging; go straight to Serper fallback. The Serper path (EarningsWhispers + individual ticker searches) is fully sufficient.
-10. **TYPEFULLY_SOCIAL_SET_ID not in .env** — The Bloom account ID is `$TYPEFULLY_SOCIAL_SET_ID`. Discover with `social-sets:list` if unsure, but it's stable.
+10. **TYPEFULLY_SOCIAL_SET_ID not in .env** — Discover the social set ID with `social-sets:list` if unsure, but it's stable.
 11. **Already-reported companies** — Some mega-caps report Sunday evening (e.g., PLTR on May 4) or Monday after close. When searching for each ticker, check snippets for past-tense language like "reported", "beat", "missed", "revenue was", "EPS of $X" to detect companies that already reported. In the May 2026 run, PLTR, AMD, SHOP, and RIVN had all reported by the time the cron executed on Wednesday — only DIS, UBER, NVO, APP, and COIN were still upcoming.
 12. **Mid-week re-runs** — The cron is scheduled for Monday 8am ET, but may fire late or be re-triggered mid-week. If running on a non-Monday, use the actual current date to determine which companies have already reported vs. are still upcoming. Tweet text should reference the actual reporting day ("reports tomorrow", "reports Thursday") relative to the current date, not relative to Monday.
 13. **Serper script path** — The correct path is `~/.hermes/skills/ai-tools/web-search/scripts/serper.sh` (not `skills/serper-search/`). The web-search skill's script directory moved; always use the path from the web-search skill.

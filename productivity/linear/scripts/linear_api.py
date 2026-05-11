@@ -229,14 +229,11 @@ def cmd_create_issue(args: argparse.Namespace) -> None:
         inp["priority"] = args.priority
     if args.parent:
         inp["parentId"] = args.parent
-    unsupported = [name for name in ("label", "assignee") if getattr(args, name) is not None]
-    if unsupported:
-        sys.stderr.write(
-            "Unsupported create-issue option(s): "
-            f"{', '.join('--' + name for name in unsupported)}. "
-            "Use update commands or raw GraphQL until name-to-id lookup is implemented.\n"
-        )
-        sys.exit(2)
+    # Fail fast on unsupported flags rather than silently ignoring them
+    for flag in ("label", "assignee"):
+        if getattr(args, flag, None):
+            sys.stderr.write(f"--{flag} is not yet supported for create-issue (needs name->id lookup)\n")
+            sys.exit(1)
 
     q = """mutation($input: IssueCreateInput!) {
       issueCreate(input: $input) {

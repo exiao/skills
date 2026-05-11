@@ -149,7 +149,7 @@ For reference:
 | Resource | Value |
 |----------|-------|
 | Web service | `$RENDER_SERVICE_ID` (bloom-api) |
-| Env group | `evg-bpflhvo8atn28fgm60u0` (Bloom Production) |
+| Env group | `$RENDER_ENV_GROUP_ID` (Bloom Production) |
 | API key env var | `RENDER_API_KEY` (see TOOLS.md for value) |
 
 ---

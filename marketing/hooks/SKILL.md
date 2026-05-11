@@ -97,7 +97,7 @@ Hook patterns optimized for AI-generated UGC ads (TikTok/Instagram). These are p
 - **Never show the app/product in the first 3 seconds.** Hook with emotion, curiosity, or a pattern interrupt first. The product reveal comes after the hook lands.
 - **Pattern-interrupt visuals:** Use provocative or unexpected imagery in the first frame to stop the scroll (within platform ad policies). The goal is comment bait — visuals that make people react, argue, or tag someone.
 
-Source: paid-social creative benchmark (May 2026)
+Source: @athcanft (May 2026)
 
 ### "this is ur reminder that..." format
 
@@ -113,7 +113,7 @@ Template: `this is ur reminder that [pain point everyone ignores] [and optional 
 
 ### Before/After Transformation (visual-only hook)
 
-No words in the first 3 seconds. The visual transformation IS the hook. Highest-performing TikTok ad format for app installs per paid-social creative benchmark ($5-10 CPA, $0 production cost).
+No words in the first 3 seconds. The visual transformation IS the hook. Highest-performing TikTok ad format for app installs per @athcanft ($5-10 CPA, $0 production cost).
 
 **Format:** "before" (3-5s) → cut → "after" (3-5s) → app screenshot CTA (2s). 12s total.
 
@@ -121,13 +121,13 @@ No words in the first 3 seconds. The visual transformation IS the hook. Highest-
 
 **Production pipeline:** Generate "before" face (nano-banana-pro or similar) → enhance with fal.ai face-enhancement for "after" glow-up → animate both with Kling motion control using same reference video → assemble with video-editor.
 
-See also: [VISUAL-HOOKS.md](/creative/video-production/VISUAL-HOOKS.md) Sources 7 & 8 for full visual hook breakdowns.
+See also: [VISUAL-HOOKS.md](~/clawd/skills/video-production/VISUAL-HOOKS.md) Sources 7 & 8 for full visual hook breakdowns.
 
 ---
 
 ## Familiar Brand as Villain (Product Test Reveal)
 
-Source: Product Test Reveal case study — 30M views across 232 Reels, $23K/month MRR, 100K+ followers. Solo founder, identical format every video.
+Source: @oasishealthapp — 30M views across 232 Reels, $23K/month MRR, 100K+ followers. Solo founder, identical format every video.
 
 The formula: take a brand everyone knows, reveal a hidden problem using data, position your product as the tool that exposed it.
 
@@ -156,6 +156,17 @@ ChatGPT, Robinhood, WallStreetBets, Jim Cramer, Mad Money, Motley Fool, Yahoo Fi
 
 **Self-sustaining loop:** Content generates app usage → usage generates data → data generates more content. Oasis runs lab tests that become videos. Bloom runs AI analysis that becomes videos.
 
+### After-Before Product Proof
+
+For visual products, try the WayShot order: result first, ordinary original second, product mention last. The hook is a social observation or tool-confusion line, not a feature claim.
+
+Best hook shells:
+- `That friend who thinks everything is [aesthetic / cinematic / optimized]`
+- `she [edits / tracks / analyzes] too much` → reveal: `damn you're right`
+- `What [camera / tool / analyst] did you use?` → reveal: `Oh it's my phone`
+
+Use this when the content can prove value through contrast. Load `references/after-before-product-proof-sge.md` for templates and adaptations. (Source: Social Growth Engineers WayShot case study, May 2026)
+
 ---
 
 ## References
@@ -183,6 +194,7 @@ This skill content is modularized into reference docs for readability.
 - [Hook Micro-Optimization (SGE)](references/hook-micro-optimization-sge.md)
 - [Conversation-Triggering Hooks (SGE)](references/conversation-triggering-hooks-sge.md)
 - [Faceless Content Formats (SGE)](references/faceless-content-formats-sge.md)
+- [After-Before Product Proof (SGE / WayShot)](references/after-before-product-proof-sge.md)
 - [4 Organic Growth Hacks That Look Like Cheating (SGE)](references/4-organic-growth-hacks-that-look-like-cheating-sge.md)
 - [Multi-Account Hook Testing at Scale (SGE)](references/multi-account-hook-testing-at-scale-sge.md)
 - [Instagram-Specific Adaptations (SGE)](references/instagram-specific-adaptations-sge.md)

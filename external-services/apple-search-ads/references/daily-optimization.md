@@ -16,8 +16,9 @@ These quirks were observed against Apple Search Ads API v5 in a daily cron run.
 1. `./scripts/campaigns.sh list --status ENABLED` can fail with HTTP 400 `UNRECOGNIZED_PROPERTY` for `selector`. Work around it by running `./scripts/campaigns.sh list`, then filter the formatted table for `ENABLED` rows.
 2. `./scripts/reports.sh keywords <cid> --sort spend` can fail with `INVALID_ORDER_BY_INPUT` because the API expects `localSpend`, not `spend`. Use `--sort localSpend`, omit `--sort`, or call `asa_api` directly with `orderBy.field="localSpend"`.
 3. `optimize.sh bids` can emit `jq` division errors when install metrics are null. Continue with raw keyword reports and compute recommendations yourself from `total.localSpend.amount`, `total.taps`, and `totalInstalls` or `tapInstalls`.
-4. Search term reports should use `timeZone:"ORTZ"`. General campaign and keyword reports can use UTC, but search terms are picky.
-5. Search tab, Today tab, and Product Page campaigns do not contain keywords. Keyword-style wasted-spend reports may emit expected `INVALID_INPUT` errors for those supply sources. Note the errors, but do not abort the whole pass.
+4. `reports.sh campaigns` may print a bogus `TOTALS: Spend=null ... TotalInstalls=0` footer even when campaign rows contain real spend/install data. Do not use that footer for grand totals. Sum campaign rows yourself or fetch raw `/reports/campaigns` JSON and sum each row's `total` object.
+5. Search term reports should use `timeZone:"ORTZ"`. General campaign and keyword reports can use UTC, but search terms are picky.
+6. Search tab, Today tab, and Product Page campaigns do not contain keywords. Keyword-style wasted-spend reports may emit expected `INVALID_INPUT` errors for those supply sources. Note the errors, but do not abort the whole pass.
 
 ## Raw API fallback
 
@@ -50,8 +51,10 @@ asa_api GET "/campaigns/$cid/adgroups" > "raw-adgroups-$cid.json"
 For deterministic approval commands, pull IDs from raw metadata:
 
 - Keyword bid or pause: `metadata.keywordId`, `metadata.adGroupId`, `metadata.campaignId`
-- Search-term promote target: use the relevant ad group ID from `/campaigns/$cid/adgroups`
+- Search-term promote target: use `metadata.adGroupId` from the search-term row when present; otherwise use the relevant ad group ID from `/campaigns/$cid/adgroups`
 - Negative: campaign ID is enough for `negatives.sh add-campaign`
+
+When a formatted report and raw JSON disagree, prefer raw JSON for calculations and formatted scripts for human-readable logs. Save a small parsed summary JSON next to the logs (`parsed-summary.json`) so approval/execution jobs can map recommendation numbers back to exact IDs and commands.
 
 ## Recommendation thresholds
 

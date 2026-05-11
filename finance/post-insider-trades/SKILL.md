@@ -176,7 +176,7 @@ SEC Form 4 URLs are typically ~95 chars. Budget accordingly. Test with `echo -n 
 
 ### Step 8 — Upload Card + Create Typefully Draft
 
-The Bloom Typefully social set ID is **$TYPEFULLY_SOCIAL_SET_ID** (username: `$TYPEFULLY_USERNAME`).
+The Bloom Typefully social set ID is set via `TYPEFULLY_SOCIAL_SET_ID` env var (username: `$TYPEFULLY_USERNAME`).
 
 ```bash
 cd ~/.hermes/skills/marketing/typefully
@@ -197,7 +197,7 @@ TYPEFULLY_API_KEY=<key> node scripts/typefully.js drafts:get $TYPEFULLY_SOCIAL_S
 jq '{status, scheduled_date, private_url, media: .platforms.x.posts[0].media_ids, text: .platforms.x.posts[0].text}' /tmp/typefully-draft-<draft_id>.json
 ```
 
-**Note:** Set `TYPEFULLY_SOCIAL_SET_ID` in the environment or local config before running. Do not hardcode the numeric social set ID in this public skill. The API key is `TYPEFULLY_API_KEY` from .env.
+**Note:** Set `TYPEFULLY_SOCIAL_SET_ID` in .env. The API key is `TYPEFULLY_API_KEY` from .env.
 
 ### Step 9 — Report
 
@@ -219,14 +219,14 @@ Typefully: https://typefully.com/?d=[draft_id]&a=$TYPEFULLY_SOCIAL_SET_ID
 ## Delivery
 
 - Cron delivery: announces to Marketing Signal group automatically
-- Typefully account: social_set_id `$TYPEFULLY_SOCIAL_SET_ID` (Bloom $TYPEFULLY_USERNAME)
+- Typefully account: social_set_id `$TYPEFULLY_SOCIAL_SET_ID` (Bloom brand account)
 - Card saved to: `/tmp/insider-trade-card-YYYYMMDD.png`
 
 ---
 
 ## Cron Config
 
-- **ID:** `$CRON_JOB_ID`
+- **ID:** `$INSIDER_TRADES_CRON_ID`
 - **Schedule:** `0 9,14 * * 1-5` (9am + 2pm ET, Mon–Fri)
 - **Model:** default (claude-sonnet)
 - **Target:** isolated
@@ -243,7 +243,7 @@ Typefully: https://typefully.com/?d=[draft_id]&a=$TYPEFULLY_SOCIAL_SET_ID
 6. **Scheduling instead of drafting** — do not schedule insider-trade posts. Create an unscheduled Typefully draft only; the account owner reviews before posting.
 7. **Reporting when no trade found** — if Step 2 yields nothing, NO_REPLY silently. Don't send a "nothing found" message.
 8. **Using screener URL as primary source** — it frequently returns empty HTML. Always start with `insider-purchases-25k` page and filter client-side.
-9. **TYPEFULLY_SOCIAL_SET_ID missing** — set it in the environment or local config. Never hardcode the numeric social set ID in the skill.
+9. **TYPEFULLY_SOCIAL_SET_ID not in .env** — set `TYPEFULLY_SOCIAL_SET_ID` in .env.
 10. **Not detecting cluster buys** — when multiple insiders buy the same ticker on the same day, that's the strongest signal. Always check for this pattern and highlight it in the tweet.
 
 ## Constitutional Rules
