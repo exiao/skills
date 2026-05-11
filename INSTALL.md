@@ -38,7 +38,7 @@ App analytics, keyword research, stock research, web search, and trend tracking.
 ### 6. Advertising
 Manage campaigns on Google, Apple, and Meta.
 
-**Skills:** google-ads, apple-search-ads, meta-ads
+**Skills:** google-ads, apple-search-ads, meta-ads-cli
 
 ### 7. Development & Coding
 TDD workflows, PR management, deploy verification, browser automation, and more.

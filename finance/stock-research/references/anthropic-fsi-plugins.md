@@ -43,4 +43,4 @@ These are reference material, not skills we run directly. They assume MCP connec
 3. **Output templates** — tables, formats, and section structures
 4. **Guardrails** — cite every number, flag unsourced data, stop for review
 
-When doing stock research, earnings analysis, or comps work, consult the relevant SKILL.md for institutional-grade framing. Adapt for our tools (Serper, Firecrawl, Bloom CLI) instead of their MCPs.
+When doing stock research, earnings analysis, or comps work, consult the relevant SKILL.md for institutional-grade framing. Adapt for available tools such as web search, scraping, market data CLIs, or licensed data APIs instead of their MCPs.

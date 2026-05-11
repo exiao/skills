@@ -37,16 +37,16 @@ Your copy must communicate:
 
 **Example:**
 ```
-Homeschooling sounds great until you see the price tag.
+Managing your money sounds simple until you see how many tabs it takes.
 
-Curriculum: $500-2,000. Classes: $100-300/month. Co-ops, field trips, supplies...
-it adds up fast. And suddenly the "freedom" feels like financial stress.
+Brokerage, bank app, spreadsheets, watchlists, newsletters...
+it adds up fast. And suddenly "staying informed" feels like another job.
 
-What if you could access all of that - curriculum, classes, resources, support -
-without the cost?
+What if you could get the important context in one place,
+without rebuilding your workflow?
 
-OpenEd is a tuition-free program that gives families everything they need.
-Apply in 5 minutes.
+[Product] gives busy investors a faster way to understand what matters.
+Try it in 5 minutes.
 ```
 
 **Best For:**
@@ -71,17 +71,17 @@ Apply in 5 minutes.
 
 **Example:**
 ```
-My son went from C student to 4.0 in one year.
+I went from checking five investing apps every morning to one.
 
-Same kid. Same intelligence. Different environment.
+Same portfolio. Same goals. Better workflow.
 
-Turns out his "social battery" was getting so drained at school
-he had nothing left for academics. We tried OpenEd's flexible program.
+Turns out I was wasting energy collecting context
+instead of making decisions. I tried [Product].
 
-Now he learns at home at his own pace. His mental health improved
-along with his grades.
+Now I can see the news, risks, and next questions faster.
+Less tab chaos, more clarity.
 
-OpenEd is tuition-free. Application takes 5 minutes.
+[Product] takes 5 minutes to try.
 ```
 
 **Best For:**
@@ -104,16 +104,15 @@ OpenEd is tuition-free. Application takes 5 minutes.
 
 **Example:**
 ```
-BEFORE: Daily stomach problems. Crying fits every morning.
-A kid who dreaded school.
+BEFORE: Ten tabs open. Three conflicting opinions.
+A decision you keep postponing.
 
-AFTER: All of that is gone. She's thriving.
-Actually asking to learn more.
+AFTER: The key facts, risks, and next questions are clear.
+You know what to look into next.
 
-THE BRIDGE: We joined OpenEd's tuition-free program.
-Personalized learning at her own pace, with real support.
+THE BRIDGE: [Product] turns scattered research into a simple investing workflow.
 
-Application takes 5 minutes.
+Try it in 5 minutes.
 ```
 
 **Best For:**
@@ -140,16 +139,15 @@ Application takes 5 minutes.
 
 **Example:**
 ```
-"He went from being a C student at school to now being a 4.0 student.
-His mental health has improved as well as his grades."
+"I finally understand why my stocks are moving without reading five different sites."
 
-This mom discovered her son's "social battery" was getting drained
-so fast at school he had nothing left for academics.
+This user was tired of bouncing between news, charts, and analyst notes
+just to understand what changed.
 
-With OpenEd's flexible, tuition-free program, he now learns at home
-at his own pace - while still taking a couple classes at school for social.
+With [Product], the important context lives in one workflow.
+Less hunting, more useful questions.
 
-Join 5,000+ families who found a better fit.
+Join thousands of users who want clearer investing research.
 ```
 
 **Best For:**
@@ -178,22 +176,20 @@ Join 5,000+ families who found a better fit.
 
 **Example:**
 ```
-I thought my daughter wasn't smart enough.
+I thought I was bad at keeping up with the market.
 
-She struggled in public school. Behind in reading.
-Teachers said she needed to "keep up" with everyone else.
+Every week, another earnings report, rate headline, or stock move.
+I kept saving articles and never reading them.
 
-But she wasn't keeping up. She was falling further behind.
+Then I tried [Product]. It gave me the context first,
+so I knew what deserved more attention.
 
-Then we joined OpenEd. She could finally take the time
-to master concepts before moving on.
+Within a week, my research felt less scattered.
 
-Within a year, she caught up. Now she's ahead.
+The problem was never curiosity.
+It was the workflow.
 
-The problem was never her intelligence.
-It was an environment that didn't fit.
-
-OpenEd is tuition-free. Apply in 5 minutes.
+Try [Product] in 5 minutes.
 ```
 
 **Best For:**
@@ -218,18 +214,17 @@ OpenEd is tuition-free. Apply in 5 minutes.
 
 **Example:**
 ```
-5 things I wish I knew before homeschooling:
+5 things I wish I knew before building an investing routine:
 
-1. You don't need to recreate school at home
-2. 3 focused hours beats 7 distracted ones
-3. Your kid's pace > grade level expectations
-4. Community exists (you just have to find it)
-5. There are tuition-free programs that cover everything
+1. You do not need every headline
+2. One clear workflow beats five dashboards
+3. Risks matter as much as upside
+4. Good questions beat hot takes
+5. Consistency matters more than checking constantly
 
-OpenEd taught me all of this - and gave us the curriculum,
-classes, and support to actually do it.
+[Product] helped me turn scattered research into a repeatable habit.
 
-Join 5,000+ families. Apply in 5 minutes.
+Join thousands of users. Try it in 5 minutes.
 ```
 
 **Best For:**
@@ -256,17 +251,16 @@ Join 5,000+ families. Apply in 5 minutes.
 
 **Example:**
 ```
-What if homeschooling didn't cost a fortune?
+What if staying on top of your stocks did not require five apps?
 
-What if you could access premium curriculum, hundreds of classes,
-and a dedicated teacher to support you...
+What if you could see the news, risks, and research prompts
+for your watchlist in one place...
 
-Without spending thousands per year?
+Without spending your morning tab-hopping?
 
-That's OpenEd. A tuition-free program through innovative
-public school partnerships.
+That is [Product]. A faster research workflow for busy investors.
 
-5,000+ families already joined. Application takes 5 minutes.
+Thousands of users already joined. Try it in 5 minutes.
 ```
 
 **Best For:**
@@ -293,17 +287,16 @@ public school partnerships.
 
 **Example:**
 ```
-I'll be honest: I was terrified to homeschool.
+I'll be honest: I used to avoid looking at my portfolio.
 
-Am I qualified? Can we afford it? Will they fall behind?
-What about socialization?
+Was I missing something? Was the move already over?
+Was I just reacting to headlines?
 
-Then I found OpenEd. Curriculum included. Support included.
-Community included. Cost: $0.
+Then I found [Product]. News, context, risks, and follow-up questions in one place.
 
-My son went from hating school to asking to do more.
+I went from scattered checking to a simple research habit.
 
-If you're on the fence... this is your sign. Apply in 5 minutes.
+If your investing workflow feels messy, try it in 5 minutes.
 ```
 
 **Best For:**
@@ -337,25 +330,25 @@ If you're on the fence... this is your sign. Apply in 5 minutes.
 
 ```
 "After [time/experience] in [field], here's what I learned..."
-"[Number] families discovered this..."
+"[Number] users discovered this..."
 "The secret [experts] won't tell you..."
 ```
 
 ### Problem Callout Hooks
 
 ```
-"If your child [problem sign], read this..."
+"If your workflow [problem sign], read this..."
 "Stop [common mistake]..."
 "[Problem]? There's another way..."
-"The problem isn't your kid. It's [real problem]..."
+"The problem isn't your workflow. It's [real problem]..."
 ```
 
 ### Social Proof Hooks
 
 ```
-"5,000+ families discovered..."
+"5,000+ users discovered..."
 "This one thing changed everything for us..."
-"Why [number] parents are doing [action]..."
+"Why [number] users are doing [action]..."
 "[Result] - here's how..."
 ```
 
@@ -390,9 +383,9 @@ Headlines appear below the media. Keep them short (5-8 words max).
 ```
 
 **Examples:**
-- "Homeschooling Made Possible"
-- "Quality Education Without the Cost"
-- "Finally, Flexibility That Works"
+- "Research Made Simpler"
+- "Better Context Without the Chaos"
+- "Finally, Research That Works"
 
 ### Question Headlines
 
@@ -403,9 +396,9 @@ Headlines appear below the media. Keep them short (5-8 words max).
 ```
 
 **Examples:**
-- "What If Learning Was Free?"
-- "Ready for Educational Freedom?"
-- "Struggling with Curriculum Costs?"
+- "What If Research Was Clear?"
+- "Ready for a Cleaner Workflow?"
+- "Struggling with Too Many Tabs?"
 
 ### Statement Headlines
 
@@ -416,22 +409,22 @@ Headlines appear below the media. Keep them short (5-8 words max).
 ```
 
 **Examples:**
-- "Maybe the Problem Isn't Your Kid"
-- "Premium Resources, Zero Cost"
-- "Education That Actually Fits"
+- "Maybe the Problem Is the Workflow"
+- "Premium Context, Less Chaos"
+- "Research That Actually Fits"
 
 ### Social Proof Headlines
 
 ```
 "Join [Number]+ [Audience]"
-"Why [Number] Families Switched"
-"[Number] Parents Discovered This"
+"Why [Number] Users Switched"
+"[Number] Users Discovered This"
 ```
 
 **Examples:**
-- "Join 5,000+ Families"
-- "Why Thousands Switched"
-- "The Program Parents Love"
+- "Join Thousands of Users"
+- "Why Users Switched"
+- "The Workflow Users Love"
 
 ---
 
@@ -442,7 +435,7 @@ Descriptions appear under headlines. Use for urgency, clarification, or secondar
 ### Urgency/Timing
 
 ```
-"Apply for Fall 2026"
+"Start this week"
 "Limited spots remaining"
 "Enrollment closing soon"
 ```
@@ -451,24 +444,24 @@ Descriptions appear under headlines. Use for urgency, clarification, or secondar
 
 ```
 "No experience needed"
-"5-minute application"
-"Tuition-free program"
+"5-minute setup"
+"Simple pricing"
 ```
 
 ### Secondary Benefit
 
 ```
-"Personalized support included"
-"Curriculum + classes + community"
+"Personalized context included"
+"Context + analysis + workflow"
 "Everything you need, nothing you don't"
 ```
 
 ### Social Proof
 
 ```
-"Join 5,000+ families"
+"Join thousands of users"
 "Trusted by thousands"
-"See why parents love it"
+"See why users love it"
 ```
 
 ---
@@ -483,7 +476,7 @@ Descriptions appear under headlines. Use for urgency, clarification, or secondar
 **Copy Length:** Longer, more education needed
 
 **Example Hook:**
-"Your child spends 7 hours a day in a system designed in 1892..."
+"Your workflow spends 7 hours a day in a system designed in 1892..."
 
 ### Level 2: Problem Aware
 *Know the problem, don't know solutions exist*
@@ -503,7 +496,7 @@ Descriptions appear under headlines. Use for urgency, clarification, or secondar
 **Copy Length:** Medium, focus on differentiators
 
 **Example Hook:**
-"Unlike other homeschool programs, OpenEd provides..."
+"Unlike other tools, [Product] gives you..."
 
 ### Level 4: Product Aware
 *Know your product, haven't acted*
@@ -513,7 +506,7 @@ Descriptions appear under headlines. Use for urgency, clarification, or secondar
 **Copy Length:** Shorter, more direct
 
 **Example Hook:**
-"See why 5,000+ families chose OpenEd..."
+"See why thousands of users chose [Product]..."
 
 ### Level 5: Fully Aware
 *Know and want your product*
@@ -533,31 +526,31 @@ Descriptions appear under headlines. Use for urgency, clarification, or secondar
 
 **"Am I qualified?"**
 ```
-"You don't need teaching credentials. You need curriculum
+"You don't need technical expertise. You need workflow
 (included), support (included), and community (included)."
 ```
 
 **"Can we afford it?"**
 ```
-"OpenEd is tuition-free. Curriculum, classes, resources -
-all included through innovative public school partnerships."
+"[Product] keeps pricing simple. The core workflow is included,
+so you are not forced into a maze of add-ons."
 ```
 
 **"Will they fall behind?"**
 ```
-"My son went from being behind in math to a grade level ahead.
-When learning fits the child, they don't fall behind - they accelerate."
+"My son went from being behind in math to a a week ahead.
+When learning fits the workflow, they don't fall behind - they accelerate."
 ```
 
-**"What about socialization?"**
+**"What about support?"**
 ```
-"With co-ops, field trips, extracurriculars, and community events,
-our kids have MORE meaningful social time, not less."
+"With templates, examples, integrations, and support,
+our workflows have MORE meaningful social time, not less."
 ```
 
 **"I don't have time."**
 ```
-"Most families finish core learning in 3 focused hours.
+"Most users finish core learning in 3 focused hours.
 No more homework battles. No more exhausted evenings."
 ```
 

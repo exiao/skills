@@ -1,126 +1,187 @@
 ---
 name: stock-research
-description: Use when performing stock or equity research, earnings analysis, coverage reports, or generating daily market briefings for Bloom. Covers on-demand research tasks and the scheduled daily market briefing cron job.
+description: Perform stock and equity research, earnings analysis, peer comparison, watchlist review, and concise market commentary. Use when analyzing a ticker, writing an investment research note, comparing companies, preparing earnings context, or creating a market briefing.
 ---
 
 # Stock Research
 
-Two modes: **on-demand equity research** (analyze a company, generate ideas, write coverage) and **daily market briefing** (automated cron job for Bloom users).
+Research public companies using structured market data, filings, earnings materials, analyst context, and news.
 
----
+## Scope
 
-## Quick Reference
+This skill supports equity research and market commentary. It does not provide personalized financial advice, trade execution, or guarantees.
 
-| Task | Trigger phrase |
-|------|----------------|
-| Earnings analysis | "analyze [TICKER] earnings", "how did [company] do" |
-| Initiating coverage | "initiate coverage on [TICKER]", "deep dive on [company]" |
-| Comps analysis | "run comps for [company]", "how does [ticker] compare" |
-| DCF sanity check | "DCF for [ticker]", "is [company] overvalued" |
-| Morning note (on-demand) | "morning note", "what's moving today", "market briefing" |
-| Idea generation | "screen for ideas in [sector]", "high conviction ideas" |
-| Daily briefing (auto) | Cron: 3pm ET Mon-Fri → Signal DM to the account owner |
+## Modes
 
----
+| Mode | Use |
+|------|-----|
+| Quick ticker brief | User asks "what is going on with $TICKER?" |
+| Deep research note | User asks for a full company analysis |
+| Earnings analysis | User asks about earnings, guidance, or transcript takeaways |
+| Peer comparison | User asks to compare companies or sectors |
+| Market briefing | User asks for a concise daily market update |
 
-## Tools
+## Data Sources
 
-- **bloom-cli** (preloaded skill): Primary data source. `bloom info`, `bloom earnings`, `bloom financials`, `bloom price`, `bloom screen`, `bloom transcript`, `bloom catalysts`. Always try bloom-cli first before web search.
-- **Serper** (`web-search` skill, `SERPER_API_KEY`): Search for earnings releases, analyst commentary, news, filings
-- **Firecrawl** (`FIRECRAWL_API_KEY`): Scrape full articles, earnings releases, SEC filings when search snippets aren't enough
-- **Bloom MCP** (`https://$BLOOM_API_DOMAIN/mcp/`, Bearer: `$BLOOM_MCP_API_KEY`): Check what stocks Bloom users are watching; prioritize coverage accordingly
+Prefer structured sources first:
 
----
+- Market data CLI/API: price, market cap, financials, estimates, analyst ratings, peers
+- SEC filings: 10-K, 10-Q, 8-K, S-1, proxy filings
+- Earnings materials: press release, slides, transcript
+- Company investor relations pages
+- Reputable market news
+- Optional watchlist file or API supplied by the user
 
-## On-Demand Research Workflows
+If a specialized CLI is available, use it first. Otherwise use web search and source links.
 
-### Earnings Analysis
-Triggered by: "analyze [TICKER] earnings", "how did [company] do this quarter"
+## Quick Ticker Brief
 
-1. Search for the earnings release and analyst reactions
-2. Pull actual vs. consensus EPS and revenue (beat/miss/in-line)
-3. Cover: stock reaction (%, after-hours vs. open), guidance changes, 2-3 key takeaways (margins, growth drivers, segment breakdowns, management commentary)
-4. Flag if Bloom users hold this stock (check Bloom MCP)
+Answer in this order:
 
-### Initiating Coverage / Deep Dive
-Triggered by: "initiate coverage on [TICKER]", "deep dive on [company]"
+1. What the company does
+2. Current stock move and timeframe
+3. Most likely reason for the move
+4. Key financial snapshot
+5. Bull case
+6. Bear case
+7. What to watch next
 
-Structure:
-- **Thesis**: 2-3 sentence bull case
-- **Business**: What they do, how they make money, moat
-- **Financials**: Revenue growth, margins, key ratios
-- **Valuation**: Current multiple vs. peers, historical range, rough DCF sanity check
-- **Bull/Bear**: 3 bull points, 3 bear points
-- **Verdict**: Rating (Buy/Hold/Sell equivalent) with price target rationale
+Keep it concise unless the user asks for depth.
 
-### Morningstar-Quality Report (investing-log)
-Triggered by: "generate report for [TICKER]", "Morningstar report", "stock report"
+## Deep Research Note
 
-Uses the investing-log `generate_ondemand.py` script with DeepAgents. Reports must conform to schema v2.0 with these Morningstar-signature sections: economic moat (none/narrow/wide with ROIC evidence), fair value estimate (explicit DCF with stated assumptions), capital allocation rating, 5+ year financial history table, and management assessment.
+Include:
 
-See **[references/morningstar-report-framework.md](references/morningstar-report-framework.md)** for full schema, methodology, template rendering details, and common mistakes.
+### 1. Business overview
+- Products and segments
+- Revenue model
+- Customers
+- Geography
+- Competitive position
 
-### Comps Analysis
-Triggered by: "run comps for [company]", "how does [ticker] compare to peers"
+### 2. Financial profile
+- Revenue growth
+- Gross margin and operating margin
+- Free cash flow
+- Balance sheet
+- Dilution or buybacks
+- Unit economics, if relevant
 
-1. Identify 4-6 comparable companies (same sector, similar business model/size)
-2. Pull key metrics: EV/Revenue, EV/EBITDA, P/E, P/FCF, revenue growth, EBITDA margin
-3. Show where the target trades vs. peer median/mean
-4. Note any premium or discount and why it's warranted or not
+### 3. Valuation
+Use simple sanity checks before complex models:
+- Market cap and enterprise value
+- Revenue and earnings multiples
+- Free cash flow yield
+- Peer comparison
+- Growth-adjusted context
 
-### DCF Sanity Check
-Triggered by: "DCF for [ticker]", "is [company] overvalued"
+DCF is optional. If used, show assumptions and sensitivity. Do not present a DCF output as a target price without caveats.
 
-Keep it simple — this is a sanity check, not a Bloomberg model:
-1. Revenue estimates for 3-5 years (use analyst consensus if available)
-2. Assumed FCF margin
-3. Terminal growth rate and discount rate
-4. Implied price vs. current; sensitivity on key assumptions
+### 4. Catalysts
+- Earnings dates
+- Product launches
+- Regulatory events
+- Macro sensitivity
+- Industry shifts
+- Management changes
 
-### Morning Note / Market Briefing (On-Demand)
-Triggered by: "morning note", "what's moving today", "market briefing"
+### 5. Risks
+- Competitive risk
+- Margin pressure
+- Customer concentration
+- Balance sheet risk
+- Valuation risk
+- Regulatory or legal risk
 
-Lead with the biggest story. Cover: pre-market movers, overnight news, earnings, economic data due today. Keep under 300 words. Conversational, no tables.
+### 6. Bull and bear cases
+Write both clearly. If one side is weak, say so.
 
-### Idea Generation
-Triggered by: "screen for ideas in [sector]", "high conviction ideas", "what's interesting right now"
+## Earnings Analysis
 
-1. Search for recent sector themes, analyst upgrades, catalyst-driven setups
-2. Cross-reference with Bloom's watchlist (what are users already watching?)
-3. Surface 3-5 names with a one-line thesis for each
+For earnings, collect:
+- EPS and revenue vs consensus
+- Guidance vs consensus
+- Segment performance
+- Margin commentary
+- Cash flow
+- Management tone
+- Stock reaction
+- Analyst or market interpretation
 
----
+Output:
 
-## Daily Market Briefing (Cron Job)
+```
+$TICKER earnings:
 
-**Cron ID:** `$CRON_JOB_ID`
-**Schedule:** `0 15 * * 1-5` (3pm ET, Mon-Fri)
-**Model:** Sonnet
-**Delivery:** Signal DM to the account owner
+The headline: [one sentence]
 
-Runs automatically every weekday at 3pm ET. Covers:
+Numbers:
+- Revenue: [actual] vs [estimate]
+- EPS: [actual] vs [estimate]
+- Guidance: [actual] vs [estimate]
 
-1. **Earnings results** (today + last night): Beat/miss on EPS and revenue, stock reaction, 2-3 takeaways. Prioritize mega-caps, widely-held names, big movers, and anything popular on Bloom.
-2. **Market-moving news**: Fed commentary, economic data (CPI, jobs, GDP), sector rotations, single-stock moves >5%, M&A, regulatory news.
+What mattered:
+1. [takeaway]
+2. [takeaway]
+3. [takeaway]
 
-**Output format:** Conversational narrative. No tables, no bullet dumps. Lead with the biggest story. Quiet days = 2-3 sentences. Under 2000 characters total.
+Bull read: [...]
+Bear read: [...]
+Watch next: [...]
+```
 
----
+## Peer Comparison
 
-## Common Mistakes
+Compare:
+- Growth
+- Margins
+- Valuation
+- Balance sheet
+- Market share or product differentiation
+- Execution quality
 
-1. **Skipping Bloom MCP check** — Not verifying whether Bloom users hold the stock being analyzed. User-held stocks should be front-loaded in coverage; it's directly relevant to the product.
-2. **Using search snippets for earnings numbers** — News article snippets often cut off before the actual EPS/revenue figures. Use Firecrawl to scrape the full earnings press release when numbers are missing.
-3. **DCF overconfidence** — Presenting DCF output as a target price without flagging assumptions. These are sanity checks, not Bloomberg models. Always show sensitivity on key assumptions.
-4. **Market briefing too long** — Daily briefings should be under 2000 characters, conversational, no tables. Bullet dumps and tables belong in research notes, not the cron delivery to Signal.
-5. **Missing the stock reaction** — For earnings analysis, reporting EPS beat/miss without the stock's actual price reaction (% change, after-hours vs. open) is incomplete. Both numbers are required.
+Use tables when comparing multiple companies.
 
-## Reference Material
+## Market Briefing
 
-- **[Anthropic FSI Plugins](references/anthropic-fsi-plugins.md)** — Index of institutional-grade skill templates cloned from github.com/anthropics/financial-services-plugins and knowledge-work-plugins. Contains prompt patterns, workflow sequences, and output templates for earnings analysis, comps, DCF, idea generation, thesis tracking, and sector overviews. Consult when you need institutional framing beyond what this skill covers.
+For daily commentary, keep it under 2,000 characters unless asked for a full note.
 
-## Notes
+Prioritize:
+- Major index moves
+- Mega-cap movers
+- Earnings results
+- Macro data
+- Sector moves
+- User-provided watchlist names
 
-- For valuation work, always note assumptions explicitly — these are frameworks, not financial advice
-- When Bloom MCP shows a stock is widely held by users, front-load that coverage
-- Use Firecrawl on earnings press releases when search snippets cut off before the numbers
+Use the separate `market-daily-briefing` skill if available for a more detailed briefing workflow.
+
+## Verification Rules
+
+- Verify every price move and percentage against a reliable source.
+- Do not trust stale snippets without checking dates.
+- Distinguish reported facts from interpretation.
+- Quote filings and transcripts directly for important claims.
+- If data is missing, say what is missing.
+- Never use ID columns or row counts as revenue or payout figures.
+
+## Writing Style
+
+- Be specific
+- Avoid vague "strong fundamentals" language
+- Explain the mechanism behind a stock move
+- Separate thesis from evidence
+- No unsupported price targets
+- No personalized buy/sell advice
+
+## Output Format
+
+For most requests:
+
+1. Bottom line
+2. Key facts
+3. What changed
+4. Bull case
+5. Bear case
+6. What to watch
+7. Sources or data notes

@@ -170,7 +170,7 @@ After the hook, the body should:
 The final 1-2 sentences that connect to your CTA:
 
 ```
-"OpenEd is tuition-free. Application takes 5 minutes."
+"[Product] solves the workflow in minutes. Try it today."
 "Join 5,000+ families who discovered a better way."
 "See if you qualify - it takes 60 seconds."
 ```
@@ -346,7 +346,7 @@ The action button users click. Meta provides limited options.
 3. **Consistency** - CTA button should match bridge copy
 4. **Test variations** - Sometimes "Learn More" outperforms "Apply Now"
 
-### OpenEd Recommended CTAs
+### Recommended CTAs
 
 - **Cold campaigns:** "Learn More"
 - **Warm retargeting:** "Apply Now" or "Sign Up"

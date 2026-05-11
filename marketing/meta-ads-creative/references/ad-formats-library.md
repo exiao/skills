@@ -639,7 +639,7 @@ Feature 3: X        Feature 3: Y
 ```
 "[Direct quote - specific outcome or transformation]"
 
-- [Name], OpenEd Parent
+- [Name], [Product] Customer
 ```
 
 **Best For:**

@@ -61,7 +61,7 @@ Every Meta ad has 6 elements:
 **Output:** `[Campaign]_Research.md` with 10-20 insights and exact quotes.
 
 > **Load on-demand:** `references/creative-research-methods.md` for detailed research process.
-> **Load on-demand:** `references/audience-segments.md` for OpenEd segment mapping.
+> **Load on-demand:** `references/audience-segments.md` for generic audience segment mapping.
 
 ---
 
@@ -79,7 +79,7 @@ Every Meta ad has 6 elements:
 | 4 - Product Aware | Know you, haven't acted | Address objections, provide proof |
 | 5 - Fully Aware | Ready to act | Make offer irresistible |
 
-**OpenEd typical:** Cold traffic = Level 1-2. Retargeted = Level 3-4. Email list = Level 4-5.
+**Typical mapping:** Cold traffic = Level 1-2. Retargeted = Level 3-4. Email list = Level 4-5.
 
 #### Write Hooks First
 
@@ -131,7 +131,7 @@ The hook is 80% of performance. Types: Stated (what you SAY), Visual (what they 
 
 When the destination is WhatsApp, Messenger, or Instagram DMs, sell one concrete chat job rather than a generic assistant. Strong messaging-ad jobs are high-intent and easy to complete in-message: send a portfolio screenshot, text one ticker, type a brief. Match the creative, primary text, prefill/welcome message, and bot's first reply exactly. Judge creative by cost per qualified conversation and activation rate, not cheapest message start.
 
-For investing products, keep language compliance-safe: research-style breakdown, second opinion, risk/concentration, bull case/bear case. Avoid "what to buy," guaranteed returns, personalized advice, and profit-promise language. For detailed BloomBot patterns, load `../../external-services/meta-ads-cli/references/click-to-whatsapp-bloombot.md`.
+For regulated categories like investing, health, legal, or finance, keep language compliance-safe. Offer research context, second opinions, risk checks, or educational summaries. Avoid guaranteed outcomes, personalized advice, and profit-promise language. For messaging-ad patterns, load `../../external-services/meta-ads-cli/references/click-to-whatsapp.md`.
 
 #### After-Before Product Proof Format
 
@@ -149,7 +149,7 @@ Source: Social Growth Engineers WayShot case study, May 2026. WayShot reached 15
 - Bookmarks are a success signal because the viewer wants to recreate the outcome.
 - Works especially well for visual transformation products: photo/video editors, design tools, AI image apps, fitness, decor, and any app that turns messy input into a clean output.
 
-**Bloom adaptation:** Show a clean Bloom AI insight/card first, then reveal the confusing raw chart, noisy Reddit thread, or broker screen it came from. Hook: "What analyst did you use?" Reveal: "Oh it's my phone."
+**Generic adaptation:** Show the clean output first, then reveal the messy source it came from. Hook: "What tool made that?" Reveal: "Oh it's on my phone."
 
 #### Product Test Reveal Format
 
@@ -167,11 +167,11 @@ Source: @oasishealthapp (30M views, $23K MRR, identical format across 232 Reels)
 - Data provides built-in credibility (specific numbers > vague claims)
 - Familiar brands as villains create engagement bait (comments arguing = algorithm fuel)
 
-**Bloom example:**
-- 0-2s: "I tested ChatGPT's top stock picks for 2025"
-- 2-8s: Show performance data — missed earnings, ignored insider selling, no risk analysis
-- 8-12s: "Bloom's AI flagged 3 out of 5 as high risk before they dropped"
-- 12-15s: App screenshot, "Try Bloom free. Link in bio."
+**Example:**
+- 0-2s: "I tested the most popular tools in this category"
+- 2-8s: Show real comparison data and hidden weaknesses
+- 8-12s: "Only one caught the issue that mattered"
+- 12-15s: Product screenshot and soft CTA
 
 **Production:** Near-zero cost. Screen recordings + text overlays + data cards. No actors, no studio.
 
@@ -198,7 +198,7 @@ Source: @onlinedopamine breakdown of Jetback/flightcheatcode UGC ad, May 2026. T
 - The offer feels close to can't-refuse: send confirmation, get refunded if price drops.
 - The product is revealed as the best tip in a useful list, not a cold interruption.
 
-**Bloom adaptation:** "As someone who's reviewed hundreds of retail portfolios... these are the 3 checks I run before buying any stock." Tip 3 becomes Bloom: send/check your ticker or portfolio and get the AI risk report.
+**Generic adaptation:** "As someone who has reviewed hundreds of [workflows/items]... these are the 3 checks I run before choosing one." The final tip introduces the product as the shortcut.
 
 ---
 
@@ -215,7 +215,7 @@ When creator/influencer ads work, the leverage is not just authenticity. It is b
 - Mild controversy or debate is useful if policy-safe; comment activity can be a performance signal.
 - Do not assume boosted organic = good paid creative. Commission explicit ad concepts, then repurpose winners.
 
-**Bloom adaptation:** prioritize investing/finance creators whose business is education, commentary, or newsletters, not paid stock-pick subscriptions that Bloom would replace.
+**Generic adaptation:** prioritize creators whose audience already has the problem, but whose core paid product is not directly cannibalized by your app.
 
 ---
 
@@ -248,7 +248,7 @@ When creator/influencer ads work, the leverage is not just authenticity. It is b
 #### Naming Convention
 
 `[Campaign]_[Format]_[Hook Type]_[Variation]`
-Example: `OpenEd_NotesApp_StarterPack_V1`
+Example: `[Product]_NotesApp_StarterPack_V1`
 
 **Output:** `[Campaign]_Ad_Concepts.md` with complete concepts.
 
@@ -275,18 +275,18 @@ Before finalizing any concept:
 
 ---
 
-## OpenEd-Specific Notes
+## Brand and Compliance Notes
 
-**Brand Voice:** Warm, empowering, not salesy. "We're here to help" not "Buy now."
+**Brand Voice:** Match the product context. Default to clear, specific, and native to the platform. Avoid sounding like polished SaaS copy.
 
 **Key Messages:**
-- Tuition-free access to resources
-- Maintain educational freedom
-- Support without judgment
+- Lead with the user's desired outcome
+- Make the paid/free or before/after delta obvious
+- Show proof without overclaiming
 
 **Testimonials:** Use real quotes verbatim. Match to audience segment. Get permission.
 
-**Compliance:** No outcome guarantees. Follow Meta ad policies.
+**Compliance:** No unsupported outcome guarantees. Follow Meta ad policies.
 
 ---
 
@@ -298,6 +298,6 @@ Before finalizing any concept:
 | `references/ad-formats-library.md` | All formats with templates |
 | `references/copywriting-formulas.md` | PAS, AIDA, hooks, headlines |
 | `references/creative-research-methods.md` | Research process |
-| `references/audience-segments.md` | OpenEd segment mapping |
+| `references/audience-segments.md` | Generic audience segment mapping |
 
 *v1.1 (2026-01-23): Refactored for progressive disclosure. Detailed content moved to references.*
