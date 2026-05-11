@@ -40,7 +40,31 @@ Install the skills from https://github.com/exiao/skills
 | [**skills-meta**](skills-meta/) | 7 | Skills about skills — creating, auditing, improving, testing |
 | [**visual-design**](visual-design/) | 37 | UI/UX design, diagrams, image generation, frontend |
 
----
+---... I'll use the python script directly, which already worked before. To resolve the conflict, I need to remove the conflict markers and accept HEAD's version (which removes video-production and yuanbao from the category table). I'll use execute_code for this. I should fix this by writing the file directly or using python to edit it. Since I know the exact content I want, let me fix this with a python script that uses open/read/write.
+
+Actually, the simplest approach is to use a `write_file` call. But that's risky for a large file. A better approach: use execute_code with read/modify/write. Or better yet, abandon merging main and instead resolve the conflict programmatically.
+
+The better approach might be to just do `git merge --abort`, then use `git rebase origin/main` instead. But since main also has these categories, the rebase might have similar conflicts.
+
+Actually, looking at this more carefully: the merge conflict is ONLY in README.md. The categories still exist in main, so when I merge main into my branch, Git sees that I deleted those lines in README.md but main kept them. That's the conflict.
+
+The proper resolution for this PR is to keep my deletion (the PR's goal is to remove these categories). But since main still has the actual directories, merging main would bring back the directories unless they're also deleted.
+
+Wait, let me reconsider. The PR deletes:
+- ops-center
+- reference  
+- yuanbao
+- software-development
+- video-production
+- mlops
+
+But when I merge main, Git won't auto-merge the deletions because main still has those directories. Git only tracks files, and since main never modified the deleted SKILL.md files (they just still exist there), the merge should be clean for those files - Git will keep my deletion of them since main didn't change them.
+
+The ONLY conflict is README.md because main's README still references these categories and my branch removed those references.
+
+So the resolution is simple: keep my README.md version (without those categories) and finish the merge.
+
+Let me do this via execute_code.</think><|tool_calls_section_begin|><|tool_call_begin|>functions.execute_code:92<|tool_call_argument_begin|>{
 
 ## Skill Structure
 
@@ -196,6 +220,7 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [touchdesigner-mcp](creative/touchdesigner-mcp/) | Control a running TouchDesigner instance via twozero MCP — create operators, set parameters, wire connections, execute Python, build real-time visuals. 36 native tools. |
 
 | [clipify](creative/video-production/clipify/) | Find the funniest moments in a video, cut standalone clips, optionally reformat 16:9 to 9:16, and burn opus-style captions. |
+| [editframe](creative/video-production/editframe/) | AI-powered video frame editing via browser automation and FFmpeg. |
 
 ### ⚙️ DevOps & Infrastructure
 
