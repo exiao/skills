@@ -132,14 +132,21 @@ Local CLI rendering requires no account or API key. API workflows require `EDITF
 Upload:
 
 ```js
-const fileBytes = await fs.readFile("clip.mp4");
+import { readFile } from "node:fs/promises";
+
+const clipPath = process.env.CLIP_PATH;
+if (!clipPath) throw new Error("CLIP_PATH is required");
+
+const filename = process.env.CLIP_FILENAME || "clip.mp4";
+const contentType = process.env.CLIP_CONTENT_TYPE || "video/mp4";
+const fileBytes = await readFile(clipPath);
 
 const res = await fetch("https://editframe.com/api/v1/files", {
   method: "POST",
   headers: {
     Authorization: `Bearer ${process.env.EDITFRAME_API_KEY}`,
-    "Content-Type": "video/mp4",
-    "X-Filename": "clip.mp4",
+    "Content-Type": contentType,
+    "X-Filename": filename,
   },
   body: fileBytes,
 });

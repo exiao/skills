@@ -189,12 +189,12 @@ Use these sources to refresh or update this skill later:
 - Time model docs: https://editframe.com/docs/composition/time-model
 - Render CLI docs: https://editframe.com/docs/cli/render
 - Files API docs: https://editframe.com/docs/api/files
-- Embedded agent prompt source: https://editframe.com/assets/AgentPromptCTA-PmDFIsXz.js
+- Embedded agent prompt: inspect https://editframe.com/getting-started page source and fetch the current bundled JS asset matching `AgentPrompt*.js`. Do not rely on a previously captured hashed asset URL because it changes on deploy.
 
 Update procedure:
 
 1. Re-fetch the URLs above.
-2. Check the embedded JS for the exported agent prompt string.
+2. From the getting-started page source, find the current `AgentPrompt*.js` asset and check it for the exported agent prompt string.
 3. Update `references/agent-prompt.md` with the verbatim prompt if it changed.
 4. Update `references/docs-summary.md` and this SKILL.md with any changed commands, flags, components, or pitfalls.
 5. Run `skill_view(name="editframe")` to verify the skill loads and linked files are discoverable.
