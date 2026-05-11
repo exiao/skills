@@ -13,12 +13,12 @@
 ### 1. Content & Writing
 Write articles, generate headlines, build content pipelines, and publish to Substack.
 
-**Skills:** article-writer, brand-identity, content-pipeline, content-strategy, editor-in-chief, evaluate-content, hooks, outline-generator, substack-draft, tweet-ideas, writer
+**Skills:** article-writer, brand-identity, content-strategy, editor-in-chief, evaluate-content, hooks, outline-generator, substack-draft, tweet-ideas, writer
 
 ### 2. Marketing & Growth
 ASO, competitor research, synthetic user studies, ad operations, and growth optimization.
 
-**Skills:** aso, competitive-analysis, dogfood, growth, churn-prevention, email-sequence, copywriting, cold-email, positioning-angles, referral-program, optimize-prompt, synthetic-userstudies, typefully, whop-content-rewards, paid-ads, launch-strategy, marketing-psychology, pricing-strategy, product-marketing-context
+**Skills:** aso, competitive-analysis, dogfood, growth, churn-prevention, email-sequence, copywriting, cold-email, positioning-angles, referral-program, synthetic-userstudies, typefully, whop-content-rewards, paid-ads, launch-strategy, marketing-psychology, pricing-strategy, product-marketing-context
 
 ### 3. Design & Visual
 Generate images, create diagrams, run design reviews, and build polished frontends.
@@ -43,7 +43,7 @@ Manage campaigns on Google, Apple, and Meta.
 ### 7. Development & Coding
 TDD workflows, PR management, deploy verification, browser automation, and more.
 
-**Skills:** agent-browser, babysit-pr, claude-md-management, context7, deploy-bloom, document-release, documents, fix-sentry-issues, app-store-connect, ios-simulator, last30days, ralph-mode, serena, stably-cli, stably-sdk-rules, superpowers-coding, superpowers-planning, superpowers-reviews, verify-deploy, codex, security-audit
+**Skills:** agent-browser, babysit-pr, claude-md-management, context7, document-release, documents, app-store-connect, ios-simulator, last30days, ralph-mode, serena, stably-cli, stably-sdk-rules, superpowers-coding, superpowers-planning, superpowers-reviews, verify-deploy, codex, security-audit
 
 ### 8. Strategy & Business
 Trading, domain management, cloud ops, and decision-making frameworks.
@@ -58,7 +58,7 @@ Skill creation, OpenClaw setup, and system maintenance.
 ### 10. Automated Pipelines (Cron Jobs)
 Scheduled content and social media automation. These run on a schedule — only install if you plan to set up crons.
 
-**Skills:** earnings-card-pipeline, post-bloom-features, post-insider-trades, post-investinglog-trades, content-performance-report, market-daily-briefing
+**Skills:** earnings-card-pipeline, post-insider-trades, market-daily-briefing
 
 ### 11. UI/UX Reference
 Best practices for animations, CSS, typography, and UX patterns.
