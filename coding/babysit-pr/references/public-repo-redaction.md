@@ -13,8 +13,8 @@ grep -rn "HARDCODED_VALUE" --include="*.md" . 2>/dev/null | grep -v node_modules
 Common patterns to scan for:
 - Domain names (example.com, api.example.com)
 - Email addresses (admin@domain.com, socials@domain.com)
-- Account/set IDs (286685, act_725955967809454)
-- Phone numbers (+15551234567)
+- Account/set IDs (`ACCOUNT_ID`, `act_<META_AD_ACCOUNT_ID>`)
+- Phone numbers (`+1XXXXXXXXXX`)
 - Cron job UUIDs (`xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx` for real scheduled routines)
 - Deployment hostnames (`*.up.railway.app`, `*.onrender.com`) and Render service IDs (`srv-...`), env group IDs (`evg-...`)
 - API URLs (https://api.domain.com/path/)
@@ -23,8 +23,8 @@ Common patterns to scan for:
 - RevenueCat project, product, entitlement, and offering IDs (`proj...`, `prod...`, `ofrng...`) plus live subscription prices
 - Live App Store ASO metadata: title, subtitle, keyword field, competitor-sensitive copy
 - Private chat/group codes from messaging platforms
-- Private key filenames (AuthKey_XXXXXXX.p8)
-- Connection IDs from third-party services (long alphanumeric strings like `mn74v7k5gb02xyvqfxek42myb5865sjq`)
+- Private key filenames (`PRIVATE_KEY_FILENAME.p8`)
+- Connection IDs from third-party services (long alphanumeric strings like `CONNECTION_ID_PLACEHOLDER`)
 - Personal names in bylines, ownership examples, or action instructions (prefer "the account owner")
 - Password location hints ("password in path/to/file")
 

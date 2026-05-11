@@ -57,7 +57,7 @@ When preparing skills for a public repo, scan for:
 - Email addresses (grep for generic email patterns and personal domains)
 - Social handles used as identifiers (not just mentions)
 - Hardcoded connection IDs, social set IDs, cron IDs
-- Private key filenames (e.g., `AuthKey_XXXXX.p8`)
+- Private key filenames (for example, platform-specific key files)
 - Account-specific paths (Google Drive email-based mount paths)
 
 Replace with `$ENV_VAR_NAME` or generic placeholders. The Gemini and Codex automated reviewers will catch these, but fixing proactively saves a review cycle.
