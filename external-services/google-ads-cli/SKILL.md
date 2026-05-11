@@ -165,9 +165,17 @@ Use this workflow for scheduled or recurring optimization reviews where the user
 1. Confirm API access with `~/.google-ads.yaml`; install the Python package if needed with `python -m pip install google-ads`.
 2. Query all enabled campaigns for `YESTERDAY`, `LAST_7_DAYS`, and `LAST_30_DAYS`.
 3. Include `campaign_budget.amount_micros`, `campaign.bidding_strategy_type`, `campaign.target_cpa.target_cpa_micros`, `campaign.maximize_conversions.target_cpa_micros`, `campaign.target_roas.target_roas`, and `campaign.maximize_conversion_value.target_roas` so recommendations can cite current vs proposed values.
-4. Pull App Campaign asset performance from `ad_group_ad_asset_view`, not `asset_group_asset`.
-5. Score campaigns on CPA vs tCPA, ROAS vs tROAS, spend pacing against daily budget, and conversion volume.
-6. Only recommend actions. Do not call mutate services, pause assets, change budgets, or edit bids in report-only mode.
+4. Include App Campaign context (`campaign.app_campaign_setting.app_id`, `app_store`, `bidding_strategy_goal_type`) before explaining attribution. Do not infer iOS/CPP behavior for Android Google Play campaigns.
+5. Pull App Campaign asset performance from `ad_group_ad_asset_view`, not `asset_group_asset`.
+6. Score campaigns on CPA vs tCPA, ROAS vs tROAS, spend pacing against daily budget, and conversion volume.
+7. Rank top assets by the campaign objective, not generic CTR. For tROAS campaigns, prefer conversion value and ROAS with enough spend/impressions; for tCPA campaigns, use CPA/conversions with volume floors.
+8. Only recommend actions. Do not call mutate services, pause assets, change budgets, or edit bids in report-only mode.
+
+### Deterministic scheduled reports
+
+For recurring cron reports, prefer a deterministic script over an agent-written prose report. Have the script query Google Ads, compute CPA/ROAS/date math, include app store context, and print the final report; then configure cron with `script=...` and `no_agent=true` so stdout is delivered as-is. This prevents LLM date mistakes, stale ratio math, wrong attribution explanations, and objective-mismatched top asset picks. See `references/deterministic-scheduled-reports.md` for GAQL snippets, cron update pattern, and the double-down workflow for winning assets.
+
+8. Only recommend actions. Do not call mutate services, pause assets, change budgets, or edit bids in report-only mode.
 
 Recommendation thresholds to start from:
 - **PAUSE**: zero conversions plus meaningful spend over 7-30 days.
@@ -175,7 +183,7 @@ Recommendation thresholds to start from:
 - **BUDGET DOWN**: sustained overspend with weak conversion signal.
 - **BID ADJUST**: tCPA/tROAS mismatch persists across 7d and 30d windows.
 - **REMOVE ASSET**: 1000+ impressions and zero conversions.
-- **INVESTIGATE**: value tracking is zero on tROAS campaigns, sudden conversion/value drops, or policy/status issues.
+- **INVESTIGATE**: value tracking is zero on tROAS campaigns, sudden conversion/value drops, policy/status issues, or low CPA but weak ROAS where installs may be dominating counted conversions.
 
 ## Audit Checklist
 
@@ -228,6 +236,10 @@ This is the cleanest iOS attribution signal available post-ATT. Server-side, no 
 3. **Developer token in test mode** — A test-mode developer token can query the API but can't modify campaigns. If mutations silently fail, verify the token is approved for production.
 4. **Checking UI before waiting for tables** — The Google Ads UI is heavy and loads data asynchronously. Taking a snapshot too early captures loading spinners, not data. Wait for tables to fully render.
 6. **`asset_group_asset` is not reliable for App Campaign asset reporting** — legacy App Campaigns may return zero rows. Use `ad_group_ad_asset_view` with `campaign.status` in the SELECT clause. If you see `PROHIBITED_RESOURCE_TYPE_IN_SELECT_CLAUSE` from `asset_field_type_view`, switch views instead of fighting the field list.
+7. **`campaign_budget` fields are incompatible with `ad_group_ad_asset_view`** — query budgets separately from `campaign`; don't include `campaign_budget.amount_micros` in the asset-performance GAQL.
+8. **Default config path may be wrong** — if `GoogleAdsClient.load_from_storage()` looks for `~/google-ads.yaml` while the real file is `~/.google-ads.yaml`, pass the absolute path explicitly.
+9. **DataForSEO app competitor rows may omit titles** — resolve returned app IDs through `https://itunes.apple.com/lookup?id=<ids>&country=us` before reporting competitor names.
+10. **Higgsfield model schemas change** — `seedream_v5_lite` may reject `--aspect_ratio 2:1`; check `higgsfield model get seedream_v5_lite --json`, generate 16:9 if needed, then crop to 1200x628.
 
 ---
 
@@ -249,6 +261,8 @@ Run weekly (Mondays) to refresh ad assets. Separate from the daily performance r
 
 For App Campaigns, prefer `ad_group_ad_asset_view`. `asset_group_asset` often returns zero rows for legacy App Campaigns, and `asset_field_type_view` can reject direct `asset.*` fields as incompatible.
 
+Read `references/weekly-creative-generation-notes.md` before scheduled creative runs. It captures API quirks, DataForSEO title lookup, Higgsfield sizing workarounds, and the chart/callout double-down pattern from prior runs.
+
 ```python
 # Query asset performance for App Campaigns
 query = """
@@ -266,7 +280,8 @@ query = """
       metrics.impressions,
       metrics.clicks,
       metrics.cost_micros,
-      metrics.conversions
+      metrics.conversions,
+      metrics.conversions_value
     FROM ad_group_ad_asset_view
     WHERE campaign.status = 'ENABLED'
       AND segments.date DURING LAST_30_DAYS
@@ -277,9 +292,10 @@ query = """
 ```
 
 Identify:
-- Top performing headlines, descriptions, images, and videos by conversion rate, with CTR as secondary context
+- Top performing headlines, descriptions, images, and videos by campaign objective. For tROAS campaigns, prioritize conversion value and ROAS with enough spend/impressions; for tCPA campaigns, prioritize CPA/conversions.
 - Bottom performers by conversion rate once they have meaningful impressions
 - Removal candidates: assets with 1000+ impressions and zero conversions
+- Whether known winning assets still win, and what visual/copy pattern should be doubled down on
 
 ### Step W2 — Competitor Copy Research (via DataForSEO)
 
@@ -331,19 +347,26 @@ Generate using the tri-model approach. Sizes needed:
 
 ```bash
 # Higgsfield (landscape)
+# Check allowed aspect ratios first. If 2:1 is unavailable, generate 16:9 and crop/resize to 1200x628.
+higgsfield model get seedream_v5_lite --json
 higgsfield generate create seedream_v5_lite \
   --prompt "..." \
-  --aspect_ratio 2:1 \
+  --aspect_ratio 16:9 \
+  --quality high \
   --wait --json
 
-# Nano Banana Pro or gpt-image-2 (square)
-# Use same approach as meta-ads-cli skill
+# Nano Banana Pro, gpt-image-2, or Seedream 1:1 (square)
+# Resize final square to 1200x1200.
 ```
 
+For exact crop commands and known model quirks, see `references/weekly-creative-generation-notes.md`.
+
 **Creative direction for Google App Campaign images:**
-- Show the app in action (phone mockup with Bloom UI)
+- Double down on proven winning visual patterns from Step W1. If the winner is a clean chart/callout creative, create variants of that pattern instead of defaulting to phone mockups.
+- For chart/callout variants: white background, thick green trend line, orange event marker, small clean tooltip connected to the chart, neutral market-event language, and no real tickers.
+- Show the app in action only when the winning pattern or prompt calls for UI. Do not add phone mockups by default.
 - Clean, professional, not meme-style (Google is stricter than Meta)
-- Include the app name "Bloom" visually
+- Include the app name "Bloom" visually only if it improves clarity
 - No misleading financial claims or specific return promises
 - Bright, optimistic color palette matching brand (teal #28B5BD, navy #0f172a)
 
@@ -376,16 +399,25 @@ higgsfield generate create marketing_studio_video \
 
 ### Step W6 — Visual QA Gate
 
-Same as Meta: inspect each generated image for:
-1. Text legibility and correct spelling
-2. No wrong logos
-3. No AI artifacts
-4. Google Ads policy compliance (no misleading claims)
-5. If video/UGC looks too synthetic, apply light finishing: grain 25-40, sharpness +10-20, brightness -5 to -10, vignette 5-15. Keep finance ads credible, not over-filtered.
+Inspect every generated image/video before reporting it. Be stricter than normal: Eric explicitly rejected generic AI image assets for ads, so bias toward false negatives. It is better to send zero creative assets than to offer low-quality ones for upload.
+
+Hard reject any asset with:
+1. Illegible, misspelled, garbled, or awkward text
+2. Wrong logos, fake UI, fake tickers, or misleading finance claims
+3. Obvious AI artifacts, glossy AI-template polish, or uncanny composition
+4. Generic finance visuals: bland line charts, abstract stock arrows, meaningless dashboards, crypto/Wall Street clichés, clipart people, or low-effort SaaS ad layouts
+5. Weak connection to Bloom's actual value prop: understanding why stocks move, AI research, market news, and investor decision support
+6. Anything that looks like an asset Eric would call "AI slop" or "this image asset sucks"
+
+Score each asset 1-5 on specificity, taste/design quality, typography, non-generic finance visual, and policy safety. Approve only if the overall score is at least 4/5 and no category is below 3/5.
+
+Rejected assets must not be attached, recommended, offered for upload, or uploaded. Regenerate up to 2 times if time allows. If nothing clears the gate, say no usable image assets were generated this week and attach zero images.
+
+If video/UGC looks too synthetic but otherwise promising, apply light finishing: grain 25-40, sharpness +10-20, brightness -5 to -10, vignette 5-15. If it still looks fake or generic, reject it.
 
 ### Step W7 — Report with Confirmation
 
-Output the report with all generated assets. DO NOT upload automatically.
+Output the report with only approved assets. DO NOT upload automatically.
 
 ```
 🎯 Google Ads Weekly Creative Refresh — [date]
@@ -396,21 +428,28 @@ Top description: "..." — X conv
 Weakest asset: "..." — 0 conv, $X spend → recommend removal
 
 ## New Headlines (5)
-1. "AI picks. You profit." (22 chars)
+1. "AI research for investors" (25 chars)
 2. ...
 
 ## New Descriptions (3)
-1. "Bloom's AI monitors 500+ stocks daily..." (87 chars)
+1. "See the news behind price moves. Try Bloom free." (48 chars)
 2. ...
 
-## New Images (2)
-[attached]
+## Creative QA
+Generated candidates: X
+Approved assets: Y
+Rejected assets: Z
+Rejected reasons:
+- asset/file: reason
 
-## New Video (1)
-[YouTube URL or attached]
+## Approved Images
+[attach only approved assets]
 
-Reply "upload" to add all assets to campaign [name].
-Reply "upload headlines only" / "upload images only" for partial.
+## Approved Video
+[YouTube URL or attach only if approved]
+
+If Y > 0: Reply "upload" to add approved assets to campaign [name].
+If Y = 0: No assets are uploadable from this run. Do not include an upload CTA.
 ```
 
 ### Step W8 — Upload on Confirmation (manual trigger)

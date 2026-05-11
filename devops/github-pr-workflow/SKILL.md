@@ -360,9 +360,11 @@ When a repo's main checkout has accumulated uncommitted changes (common with ski
 
 Key idea: create a clean worktree from `origin/main`, copy dirty files from the main checkout into it, commit + push + PR from the worktree.
 
-## Curating Broad Snapshot PRs
+### When stash/checkout fails due to untracked conflicts
 
-When a PR comes from a runtime/local snapshot, assume it contains a mix of useful lessons, stale generated changes, private operational data, and regressions. Do not merge it wholesale. Classify files as KEEP, MAIN, or CHERRY; revert MAIN files from base; redact private details; preserve existing modularization; validate changed `SKILL.md` frontmatter and run a private-pattern scan before pushing. See `references/curating-snapshot-prs.md` for the full checklist and reusable validation scripts.
+If `git stash` and `git checkout main` both refuse because untracked files conflict with the target branch, use the commit-to-preservation-branch + patch approach. See `references/untracked-conflict-preservation.md` for the full recipe.
+
+Key idea: commit everything (tracked + untracked) to a `wip/` branch to clear the tree, then generate a diff patch against main and apply it to a fresh worktree.
 
 ## Pitfalls
 
@@ -386,9 +388,22 @@ EOF
 gh pr create --body-file /tmp/pr-body.md
 ```
 
+### Public repo PRs: scan for personal data before pushing
+
+When PRing changes that originated from a private/local context into a public repo, always scan before committing:
+
+```bash
+# Check for personal emails, handles, internal URLs
+git diff --name-only | xargs grep -l '@gmail\|@company\|personal-handle\|internal\.url' 2>/dev/null
+# Also check new untracked files
+git status --short | grep "^?" | sed 's/^?? //' | xargs grep -rl 'pattern' 2>/dev/null
+```
+
+Redact with `sed -i '' 's/personal@email/USER_EMAIL/g'` before committing. The AGENTS.md for public repos typically specifies what must be redacted.
+
 ### `gh pr edit` silently failing on some repos
 
-On some org repos (seen on `Bloom-Invest/bloom`) `gh pr edit --title` and `gh pr edit --body-file` exit 0 with a stderr warning about "Projects (classic) being deprecated" but the title/body are NOT updated. The underlying GraphQL mutation fails on `repository.pullRequest.projectCards` and the rest of the mutation never runs. You'll only notice if you re-fetch the PR and see the old title.
+On some organization repos (for example `$YOUR_REPO`) `gh pr edit --title` and `gh pr edit --body-file` exit 0 with a stderr warning about "Projects (classic) being deprecated" but the title/body are NOT updated. The underlying GraphQL mutation fails on `repository.pullRequest.projectCards` and the rest of the mutation never runs. You'll only notice if you re-fetch the PR and see the old title.
 
 Workaround: skip `gh pr edit` and patch via REST API directly. This always works:
 

@@ -1,6 +1,6 @@
 # Bloom Fastlane Workspace
 
-Last updated: 2026-05-07
+Last updated: 2026-05-05
 
 ## Connected Accounts
 
@@ -10,12 +10,12 @@ Last updated: 2026-05-07
 | TikTok | $TIKTOK_CREATOR_HANDLE | $TIKTOK_CREATOR_CONNECTION_ID | Personal finance creator |
 | Instagram | $IG_BRAND_HANDLE | $IG_BRAND_CONNECTION_ID | Bloom brand |
 | Instagram | $IG_CREATOR_HANDLE | $IG_CREATOR_CONNECTION_ID | Personal finance creator |
-| YouTube | $YT_CHANNEL_NAME | $YT_CONNECTION_ID | $YT_CHANNEL_ID |
+| YouTube | $YOUTUBE_CHANNEL_NAME | $YOUTUBE_CONNECTION_ID | $YOUTUBE_CHANNEL_ID |
 
 ## Active Angles (as of setup)
 
 | Angle | ID | Target Audience |
-|-------|----|----------------|
+|-------|----|-----------------|
 | Second Opinion Investing | $ANGLE_ID_1 | Active retail investors wanting validation |
 | Information Overload Fatigue | $ANGLE_ID_2 | Self-directed investors struggling with noise |
 | Beginner Investing Anxiety | $ANGLE_ID_3 | First-time investors feeling overwhelmed |
@@ -26,19 +26,25 @@ All format weights at 25% even split. 50% remix, 50% own media, 50% product ment
 
 ## Cron
 
-- Job: `fastlane-daily` (ID: $FASTLANE_CRON_ID)
+- Job: `fastlane-daily` (ID: `d21431bbea17` in this workspace)
 - Schedule: daily at 10am ET (`0 10 * * *`)
-- Script: `~/.hermes/scripts/fastlane-daily.sh` (wrapper: `fastlane-daily.py`)
+- Script wrapper: `~/.hermes/scripts/fastlane-daily.py`
+- Bash implementation: `~/.hermes/scripts/fastlane-daily.sh`
 - Delivers to: signal:Skills Admin
-- Behavior: generates 3 pieces via Blitz, polls until rendered, **auto-schedules to Bloom brand accounts** (TikTok, Instagram, YouTube). No approval needed.
-- Schedule stagger: posts at 2pm, 5pm, 8pm ET the next day.
-- YouTube: skips slideshows (not supported), truncates titles to <100 chars.
+- Behavior: generates 3 pieces via Blitz, polls until rendered, and auto-schedules to Bloom brand accounts. No approval needed for this cron.
+- Target accounts: TikTok `@invest.with.bloom`, Instagram `invest.with.bloom`, YouTube `invest with bloom` / `Eric Invests` where supported.
+- YouTube is skipped for `slideshow` content because Fastlane only accepts single-video content for YouTube.
 - Batch size controlled by `FASTLANE_BATCH_SIZE` env var (default 3).
-- Creator accounts are ON HOLD.
-- Operational pitfall: the shell script runs under macOS `/bin/bash` 3.2, so avoid Bash 4 features like `declare -A`. See `references/cron-automation-pitfalls.md`.
-- Caption pitfall: Blitz suggestions may be JSON objects. Extract `suggestion.generatedText` before scheduling; do not pass raw suggestion JSON as the caption.
+- Scheduler timeout should be long enough for generation polling. `cron.script_timeout_seconds: 900` in `~/.hermes/config.yaml` is a known-good value for this job.
 
-## Resolved Questions
+## Recovery Pattern: Timed Out Daily Run
 
-- Post to all 5 accounts or just Bloom? **Bloom brand only** (3 accounts: TikTok, Instagram, YouTube). Creator accounts on hold.
-- Auto-schedule or require approval? **Auto-schedule.**
+If the job reports `Script timed out after 120s`, do not assume no content was generated. The script may have started Blitz items and died before scheduling.
+
+1. List recent content: `GET /content?limit=10`.
+2. Identify the newest 3 items around the failed run time with `status: CREATED`.
+3. List recent posts: `GET /posts?limit=30`.
+4. For each new content ID, verify it is not already scheduled before posting, otherwise duplicates are easy.
+5. Schedule videos to TikTok, Instagram, and YouTube; schedule slideshows to TikTok and Instagram only.
+6. Verify scheduled records by filtering `/posts` for the recovered `content_id`s and checking `status: SCHEDULED`.
+7. Report generated IDs, content types, scheduled post IDs, platforms, and times.

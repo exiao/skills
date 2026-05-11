@@ -99,6 +99,7 @@ Based on the user interview, fill in these components:
 - **name**: Skill identifier
 - **description**: When to trigger, what it does. This is the primary triggering mechanism - include both what the skill does AND specific contexts for when to use it. All "when to use" info goes here, not in the body. Note: currently Claude has a tendency to "undertrigger" skills -- to not use them when they'd be useful. To combat this, please make the skill descriptions a little bit "pushy". So for instance, instead of "How to build a simple fast dashboard to display internal Anthropic data.", you might write "How to build a simple fast dashboard to display internal Anthropic data. Make sure to use this skill whenever the user mentions dashboards, data visualization, internal metrics, or wants to display any kind of company data, even if they don't explicitly ask for a 'dashboard.'"
 - **compatibility**: Required tools, dependencies (optional, rarely needed)
+- **source/update section**: When a skill is created from external docs, a copied prompt, an API page, or a product getting-started guide, put a `## Skill source` section at the bottom of SKILL.md. Include the canonical source URLs and a short update procedure so a future agent can refresh the skill without rediscovering provenance.
 - **the rest of the skill :)**
 
 ### Skill Writing Guide

@@ -439,6 +439,10 @@ If the API returns `code=31` ("pending action" / security hold), **stop and noti
 
 Always use `$BLOOM_APP_STORE_ID` for iOS ad links (the current App Store ID). The adset's `promoted_object.object_store_url` is the ground truth — verify it matches before creating creatives.
 
+## Attribution: Click-to-WhatsApp / Bloombot
+
+For campaigns that send users into Bloombot's WhatsApp Business number, load `references/click-to-whatsapp-bloombot.md` before setup or optimization. Key rule: judge by cost per qualified conversation, not cost per message. Capture CTWA webhook metadata (`ctwa_clid`, `source_id`, referral headline/body/media, prefill text) on first inbound message, then send CAPI events back to Meta: Lead = qualified conversation, Subscribe/CompleteRegistration = recurring opt-in, Purchase = paid subscription. Do not scale conversation optimization without downstream quality data, or Meta will find cheap bored tappers.
+
 ## Attribution: Custom Product Pages
 
 For iOS app campaigns, use Apple Custom Product Pages (CPPs) as the ad destination instead of the default App Store listing. Each CPP gets tracked separately in App Store Connect analytics, giving you exact revenue per ad/campaign with zero SDK complexity.
