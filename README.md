@@ -42,7 +42,7 @@ Install the skills from https://github.com/exiao/skills
 | [**skills-meta**](skills-meta/) | 6 | Skills about skills — creating, auditing, improving, testing |
 | [**software-development**](software-development/) | 5 | Frameworks, debugging, architecture patterns |
 | [**visual-design**](visual-design/) | 37 | UI/UX design, diagrams, image generation, frontend |
-| [**video-production**](video-production/) | 1 | Video production workflows and clip generation |
+| [**video-production**](video-production/) | 2 | Video production workflows and clip generation |
 | [**yuanbao**](yuanbao/) | 1 | Yuanbao automation and integrations |
 
 ---
@@ -469,6 +469,7 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | Skill | Description |
 |-------|-------------|
 | [clipify](video-production/clipify/) | Find the funniest moments in a video, cut standalone clips, optionally reformat 16:9 to 9:16, and burn opus-style captions. |
+| [editframe](video-production/editframe/) | Build, preview, and render videos with Editframe, the HTML/CSS/React video composition tool. Use for code-generated videos, Editframe projects, HTML/CSS video compositions, MP4 rendering, and Node.js/FFmpeg video automation. |
 
 ---
 
