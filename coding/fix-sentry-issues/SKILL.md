@@ -19,6 +19,8 @@ Scan recent Sentry issues for Bloom (last 24h, all statuses), analyze root cause
 
 - See `references/2026-05-08-sentry-cron-lessons.md` for Sentry CLI/MCP quirks, resolved-issue audit gotchas, and Bloom-specific triage examples discovered during an actual cron run.
 - See `references/2026-05-09-sentry-cron-lessons.md` for the `sentry.list_issues` MCP fallback, resolved-issue unrelated-commit handling, OpenAI Agents trace ID fix pattern, Capacitor Badge Android guard, and focused test command pitfalls.
+- See `references/2026-05-db-pool-catchalls.md` for a concrete DB pool exhaustion catch-all example.
+- See `references/2026-05-crypto-db-pool-noise.md` for per-item crypto/background loop handling plus deterministic logger tests.
 
 ## Workflow
 

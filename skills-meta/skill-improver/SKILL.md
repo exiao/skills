@@ -159,6 +159,17 @@ experiment	score	max_score	pass_rate	status	description
 
 This is the core autoresearch loop. Once started, run autonomously until stopped.
 
+### mutation principles
+
+When improving a skill, optimize for durable agent behavior rather than adding brittle rules. Use these principles when choosing mutations:
+
+- **Gotchas are the highest-signal part of a skill.** If failures repeat, capture the specific footgun and the correct recovery path.
+- **Don't state the obvious.** Assume the model knows generic advice. Add only context that changes behavior for this skill.
+- **Use progressive disclosure with linked files.** Keep `SKILL.md` lean, then point to `references/`, `scripts/`, or `assets/` when deeper context is needed.
+- **Include scripts when repeated work appears.** If runs keep recreating the same helper code, bundle it in `scripts/` so future agents compose instead of reinventing boilerplate.
+- **Track skill usage and failure modes.** Undertriggering, overtriggering, and recurring bad outputs are signals for the next eval or mutation.
+- **Avoid over-specific instructions that railroad the agent.** Prefer explaining the why and giving flexible patterns over narrow rules that only pass the current evals.
+
 **LOOP:**
 
 1. **Analyze failures.** Look at which evals are failing most. Read the actual outputs that failed. Identify the pattern — is it a formatting issue? A missing instruction? An ambiguous directive?

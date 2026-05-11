@@ -73,9 +73,7 @@ When writing Bloom or investing marketing copy, sell research clarity and risk a
 - Add a lightweight disclaimer for paywalls/landing pages: "for research, not financial advice."
 
 ## Bloom and BloomBot conversion copy
-- For Bloom or BloomBot paywalls, onboarding, ads, and subscribe pages, read `references/bloom-paywall-copy.md` before drafting.
-- The strongest angle is proof, attention, and risk control: second opinion before a trade, what to pay attention to, red flags, and receipts.
-- Avoid compliance-risky promises like "pick winning stocks," "avoid losses," "boost your return," and "no hallucinations." Prefer research and decision-support language.
+For Bloom or BloomBot paywalls, onboarding upsells, ads, and subscribe-page copy, read `references/bloom-paywall-copy.md` before drafting. Prefer concise, outcome-led copy with a clear free-vs-paid delta, emotional hooks, specific proof, and compliance-safe language. Avoid feature soup, SaaS jargon, profit-promise language, and advice-y claims like "never miss a trade" or "know what to buy".
 
 ## Platform Notes
 

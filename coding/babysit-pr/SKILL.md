@@ -15,6 +15,15 @@ Monitor a single PR through its full lifecycle: check scope, wait for CI, read r
 - **Parent session key** (optional, for sending progress updates to the parent agent via `send_to_task`)
 - **Max cycles** (optional, default 10. Each cycle = one CI wait + fix attempt)
 
+## Webhook Review Event Filtering
+
+When invoked from a single code-review webhook/event, apply the event-level filter before setup:
+
+- Exit with exactly `No action needed` if the triggering review state is `approved`.
+- Exit with exactly `No action needed` if the webhook action is `dismissed`.
+- Exit with exactly `No action needed` if the triggering review state is `commented`, the review body is empty, and the event payload has no inline comments or review thread references. Empty-body commented reviews can still carry actionable inline comments, so inspect thread/comment payloads before skipping.
+- Otherwise, treat the review as actionable and run the babysit loop, even if the PR's aggregate `reviewDecision` is already `APPROVED`. A PR can be approved overall while a later `COMMENTED` review contains a real inline fix request.
+
 ## Spawning
 
 When spawning this skill as a sub-agent, use `streamTo: "parent"` so the parent receives real-time progress. Also pass the parent session key so the sub-agent can send structured status updates at key milestones.
@@ -156,7 +165,9 @@ HEAD=$(gh pr view $PR --repo $REPO --json headRefOid -q '.headRefOid')
 
 **Resolve handled comments:** After triaging, resolve any review threads that are outdated or already addressed. See step 2b.
 
-**If CI green + no actionable unaddressed findings → PR is ready. Report success and stop.**
+**Before declaring ready, run the automated review final sweep.** If CI is green but GitHub still shows `CHANGES_REQUESTED`, `BLOCKED`, a latest top-level bot comment with `Must Fix` items, or unresolved non-outdated GraphQL threads, keep working. Load `references/automated-review-final-sweep.md` for exact commands and decision rules.
+
+**If CI green + no actionable unaddressed findings + no unresolved non-outdated actionable threads → PR is ready. Report success and stop.**
 
 **If there are actionable findings → go to step 3.**
 
@@ -394,6 +405,8 @@ This is the common case: user already knows what's wrong, just wants it done.
 See also:
 - `references/delegation-and-git-pitfalls.md` — force-push recovery, batch thread resolution, toolset names
 - `references/public-repo-redaction.md` — stripping hardcoded values from public repos and adding env vars
+- `references/branch-preservation-and-ci-auth.md` — preserving dirty branches via commit+patch pattern, CI 401 auth retry protocol, public repo redaction checklist
+- `references/automated-review-final-sweep.md` — final reconciliation of CI, formal reviews, issue comments, and unresolved GraphQL threads before calling a PR clean
 
 - **Python mock failures in xdist.** String-based `patch("pkg.submod.func")` can silently fail in pytest-xdist workers if the submodule isn't explicitly imported. Use `patch.object(imported_mod, "func")` instead. Also patch the import site that the view/code under test actually calls, not the original service module, when functions are imported with `from service import func`; otherwise xdist/order-dependent tests can leak stubs or miss the patch. See `references/delegation-and-git-pitfalls.md` for the full diagnosis checklist.
 - **MagicMock + `hasattr` can create fake attributes.** In tests that use `MagicMock` as a stand-in object, `hasattr(mock, "_exception")` may return true because `MagicMock.__getattr__` creates a child mock. This can turn a thread-exception mock into `raise <MagicMock>`, producing `TypeError: exceptions must derive from BaseException` in CI. Check `"_exception" in mock.__dict__` or initialize the attribute explicitly instead.
