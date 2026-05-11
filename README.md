@@ -27,23 +27,18 @@ Install the skills from https://github.com/exiao/skills
 |----------|--------|-------------|
 | [**ai-tools**](ai-tools/) | 10 | AI agents, MCP integrations, web search, LLM tooling |
 | [**app-store**](app-store/) | 28 | App Store tools, RevenueCat, Prometheus, ReelFarm |
-| [**coding**](coding/) | 23 | Programming, debugging, testing, code review, web scraping |
-| [**creative**](creative/) | 38 | Writing, editing, media production, content creation |
+| [**coding**](coding/) | 28 | Programming, debugging, testing, code review, web scraping |
+| [**creative**](creative/) | 39 | Writing, editing, media production, content creation |
 | [**devops**](devops/) | 55 | CI/CD, GitHub, Docker, MLOps, model training/inference |
 | [**external-services**](external-services/) | 17 | External service CLIs and API integrations |
 | [**finance**](finance/) | 9 | Investing, market analysis, portfolio management |
 | [**marketing**](marketing/) | 38 | Ads (Google/Meta/Apple), SEO, analytics, social media |
 | [**media**](media/) | 2 | Media content tools (Spotify, video/audio downloads) |
 | [**memory**](memory/) | 3 | Memory management — GC, setup, and recall |
-| [**ops-center**](ops-center/) | 1 | Ops center codebase review and reference |
 | [**productivity**](productivity/) | 16 | Apple apps, email, notes, smart home, local search, gaming |
-| [**reference**](reference/) | 2 | Reference notes for specific projects |
 | [**research**](research/) | 10 | Deep research, competitive analysis, market intelligence |
 | [**skills-meta**](skills-meta/) | 6 | Skills about skills — creating, auditing, improving, testing |
-| [**software-development**](software-development/) | 5 | Frameworks, debugging, architecture patterns |
 | [**visual-design**](visual-design/) | 37 | UI/UX design, diagrams, image generation, frontend |
-| [**video-production**](video-production/) | 1 | Video production workflows and clip generation |
-| [**yuanbao**](yuanbao/) | 1 | Yuanbao automation and integrations |
 
 ---
 
@@ -143,6 +138,12 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [ci-evals-llm-agents](coding/ci-evals-llm-agents/) | Build CI eval pipelines for LLM agent systems. Use when adding evals to repos with LLM agents, creating SimulatorBackend patterns, setting up multi-model CI matrices, or debugging flaky agent eval output. Triggers: CI evals, agent evals, simulator backend, eval matrix, eval CI. |
 | [subagent-driven-development](coding/subagent-driven-development/) | Use when executing implementation plans with independent tasks. Dispatches fresh delegate_task per task with two-stage review (spec compliance then code quality). |
 
+| [debugging-hermes-tui-commands](coding/debugging-hermes-tui-commands/) | Debug Hermes Agent TUI slash commands: Python, gateway, Ink UI. |
+| [hermes-agent-skill-authoring](coding/hermes-agent-skill-authoring/) | Author in-repo SKILL.md: frontmatter, validator, structure. |
+| [node-inspect-debugger](coding/node-inspect-debugger/) | Debug Node.js via --inspect + Chrome DevTools Protocol CLI. |
+| [python-debugpy](coding/python-debugpy/) | Debug Python: pdb REPL + debugpy remote (DAP). |
+| [spike](coding/spike/) | Throwaway experiments to validate an idea before building. |
+
 ### 🎨 Creative & Content
 
 | Skill | Description |
@@ -193,6 +194,8 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [pretext](creative/pretext/) | Use when building creative browser demos with @chenglou/pretext — DOM-free text layout for ASCII art, typographic flow around obstacles, text-as-geometry games, kinetic typography, and text-powered generative art. Produces single-file HTML demos by default. |
 | [sketch](creative/sketch/) | Throwaway HTML mockups: 2-3 design variants to compare. |
 | [touchdesigner-mcp](creative/touchdesigner-mcp/) | Control a running TouchDesigner instance via twozero MCP — create operators, set parameters, wire connections, execute Python, build real-time visuals. 36 native tools. |
+
+| [clipify](creative/video-production/clipify/) | Find the funniest moments in a video, cut standalone clips, optionally reformat 16:9 to 9:16, and burn opus-style captions. |
 
 ### ⚙️ DevOps & Infrastructure
 
@@ -434,41 +437,6 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 |-------|-------------|
 | [spotify](media/spotify/) | Spotify: play, search, queue, manage playlists and devices. |
 | [yt-dlp](media/yt-dlp/) | Download videos, extract metadata/transcripts, and process media from YouTube and other supported sites via yt-dlp. |
-
-### 🏢 Ops Center
-
-| Skill | Description |
-|-------|-------------|
-| [ops-center-codebase-review](ops-center/ops-center-codebase-review/) | Reference notes from full ops-center codebase review. |
-
-### 📚 Reference
-
-| Skill | Description |
-|-------|-------------|
-| [fintary-dashboard-notes](reference/fintary-dashboard-notes/) | Reference notes for Fintary ops-center dashboard rebuild. |
-| [ops-center-reference](reference/ops-center-reference/) | Fintary ops-center v2 architecture, API proxy pattern, infrastructure, env vars, and related repos. |
-
-### 🛠️ Software Development
-
-| Skill | Description |
-|-------|-------------|
-| [debugging-hermes-tui-commands](software-development/debugging-hermes-tui-commands/) | Debug Hermes Agent TUI slash commands: Python, gateway, Ink UI. |
-| [hermes-agent-skill-authoring](software-development/hermes-agent-skill-authoring/) | Author in-repo SKILL.md: frontmatter, validator, structure. |
-| [node-inspect-debugger](software-development/node-inspect-debugger/) | Debug Node.js via --inspect + Chrome DevTools Protocol CLI. |
-| [python-debugpy](software-development/python-debugpy/) | Debug Python: pdb REPL + debugpy remote (DAP). |
-| [spike](software-development/spike/) | Throwaway experiments to validate an idea before building. |
-
-### 🀄 Yuanbao
-
-| Skill | Description |
-|-------|-------------|
-| [yuanbao](yuanbao/) | Yuanbao (元宝) groups: @mention users, query info/members. |
-
-### 🎬 Video Production
-
-| Skill | Description |
-|-------|-------------|
-| [clipify](video-production/clipify/) | Find the funniest moments in a video, cut standalone clips, optionally reformat 16:9 to 9:16, and burn opus-style captions. |
 
 ---
 
