@@ -1,7 +1,7 @@
 ---
-name: last30days
+name: last30days-open
 version: "2.1-open"
-description: "Research topics, manage watchlists, get briefings, query history. Also triggered by 'last30'. Sources: Reddit, X, YouTube, web."
+description: "Use only when the user explicitly asks for the open variant of last30days, including watchlists, briefings, and history queries. Sources: Reddit, X, YouTube, web."
 argument-hint: 'last30 AI video tools, last30 watch my competitor every week, last30 give me my briefing'
 allowed-tools: Bash, Read, Write, AskUserQuestion, WebSearch
 ---
