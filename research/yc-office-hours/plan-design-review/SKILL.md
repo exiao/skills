@@ -1,3 +1,8 @@
+---
+name: plan-design-review
+description: Review implementation plans and specs for design quality before coding. Use when a plan needs UI/UX critique, missing state coverage, AI-slop detection, responsive/accessibility checks, or unresolved design decisions.
+---
+
 # Plan Design Review
 
 Interactive design review for plans and specs, before any code is written. Rates each design dimension 0-10, explains what a 10 looks like, then edits the plan to close the gap.

@@ -24,22 +24,24 @@ Find more skills: [OpenClaw native skills](https://github.com/openclaw/openclaw/
 
 The README only lists categories. The full skill index is generated in [CATALOG.md](CATALOG.md).
 
+<!-- BEGIN GENERATED CATEGORY TABLE -->
 | Category | Skills | Description |
 |---|---:|---|
-| [ai-tools](ai-tools/) | 10 | AI agents, MCP integrations, web search, and LLM tooling |
-| [app-store](app-store/) | 28 | App Store Connect, ASO, RevenueCat, screenshots, and simulators |
-| [coding](coding/) | 29 | Programming, debugging, testing, code review, and PR workflows |
-| [creative](creative/) | 49 | Writing, editing, media production, video, and content creation |
-| [devops](devops/) | 54 | CI/CD, GitHub workflows, Docker, MLOps, cloud deployment, and infrastructure |
-| [external-services](external-services/) | 17 | External service CLIs and API integrations |
-| [finance](finance/) | 11 | Investing, market analysis, portfolio management, earnings, and comps |
-| [marketing](marketing/) | 39 | Ads, SEO, analytics, social media, content strategy, and growth |
-| [media](media/) | 2 | Media content tools |
-| [memory](memory/) | 3 | Memory management, setup, garbage collection, and recall |
-| [productivity](productivity/) | 17 | Email, notes, Apple apps, smart home, local search, documents, and gaming |
-| [research](research/) | 12 | Deep research, competitive analysis, market intelligence, and papers |
-| [skills-meta](skills-meta/) | 7 | Skills about creating, auditing, improving, testing, and cleaning up skills |
-| [visual-design](visual-design/) | 35 | UI/UX design, diagrams, image generation, frontend design, and design systems |
+| [ai-tools](ai-tools/) | 10 | AI agents (Claude Code, Codex, OpenCode), MCP integrations, web search tools, and LLM-powered utilities. |
+| [app-store](app-store/) | 28 | App Store skills — App Store Connect API, ASO keyword optimization, screenshots, iOS simulators, and RevenueCat subscription management. |
+| [coding](coding/) | 29 | Programming, debugging, testing, code review, PR management, prompt optimization, and software development workflows. |
+| [creative](creative/) | 49 | Writing, editing, content pipelines, media production (video via Kling/Seedance/Remotion/Manim, audio, GIFs), AI image generation (Nano Banana), content evaluation, Substack drafts, and YouTube content. |
+| [devops](devops/) | 54 | CI/CD, GitHub workflows (PRs, reviews, issues, rulesets), Docker debugging, MLOps (training, inference, evaluation), cloud deployment (Render, Railway), DNS/domains (Porkbun), security audits, webhook management, and Playwright testing (Stably). |
+| [external-services](external-services/) | 17 | External service CLIs and API integrations — Porkbun domains, Copilot Money finances, Appfigures analytics, DataForSEO keywords, Google Ads, Meta Ads, Apple Search Ads, Prometheus/PAssistant, Stably testing, Firecrawl scraping, Bird (X/Twitter), and Higgsfield AI video/image generation. |
+| [finance](finance/) | 11 | Finance and investing — Alpaca trading, stock research, wealth management (Copilot Money), earnings card pipeline, market daily briefings, Polymarket predictions, and insider/investing log trade posting. |
+| [marketing](marketing/) | 39 | Advertising (Google, Meta, Apple Search Ads), SEO, analytics, social media (X/Twitter via Bird and xitter, Typefully scheduling), content strategy and pipelines, hooks, trend research, positioning, pricing strategy, brand identity, NotebookLM, email sequences, and growth. |
+| [media](media/) | 2 | Skills for working with media content — YouTube transcripts, GIF search, music generation, and audio visualization. |
+| [memory](memory/) | 3 | Memory management — garbage collection, setup, and recall from past sessions. |
+| [productivity](productivity/) | 17 | Email (Himalaya), notes (Obsidian, Apple Notes, Notion), Apple apps (Reminders, FindMy, iMessage), Google Workspace, smart home (OpenHue), Linear project management, PDF tools, PowerPoint, OCR, local search, and leisure/gaming (Minecraft, Pokemon). |
+| [research](research/) | 12 | Academic research (arXiv, paper writing), brainstorming, blog/content monitoring, LLM knowledge base, synthetic user studies, hotel/trip planning, and office hours frameworks (YC, Sahil). |
+| [skills-meta](skills-meta/) | 7 | Skills about skills — creating, auditing, improving, testing skill quality, preloading optimization, cleanup, and QA dogfooding. |
+| [visual-design](visual-design/) | 35 | Visual design skills — Excalidraw diagrams, D3.js visualizations, canvas design, slides, frontend design, image generation, Apple UX guidelines, design review, sticker creation, sales assets, and Impeccable design system. The SKILL.md at this level acts as a router that triages to the right sub-skill. |
+<!-- END GENERATED CATEGORY TABLE -->
 
 ## Skill structure
 

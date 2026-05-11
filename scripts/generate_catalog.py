@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate CATALOG.md from SKILL.md frontmatter."""
+"""Generate CATALOG.md and README category counts from SKILL.md frontmatter."""
 
 from __future__ import annotations
 
@@ -9,23 +9,10 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 CATALOG = ROOT / "CATALOG.md"
+README = ROOT / "README.md"
 SKIP_DIRS = {".git", ".github", "node_modules"}
-CATEGORY_DESCRIPTIONS = {
-    "ai-tools": "AI agents, MCP integrations, web search, and LLM tooling",
-    "app-store": "App Store Connect, ASO, RevenueCat, screenshots, and simulators",
-    "coding": "Programming, debugging, testing, code review, and PR workflows",
-    "creative": "Writing, editing, media production, video, and content creation",
-    "devops": "CI/CD, GitHub workflows, Docker, MLOps, cloud deployment, and infrastructure",
-    "external-services": "External service CLIs and API integrations",
-    "finance": "Investing, market analysis, portfolio management, earnings, and comps",
-    "marketing": "Ads, SEO, analytics, social media, content strategy, and growth",
-    "media": "Media content tools",
-    "memory": "Memory management, setup, garbage collection, and recall",
-    "productivity": "Email, notes, Apple apps, smart home, local search, documents, and gaming",
-    "research": "Deep research, competitive analysis, market intelligence, and papers",
-    "skills-meta": "Skills about creating, auditing, improving, testing, and cleaning up skills",
-    "visual-design": "UI/UX design, diagrams, image generation, frontend design, and design systems",
-}
+TABLE_START = "<!-- BEGIN GENERATED CATEGORY TABLE -->"
+TABLE_END = "<!-- END GENERATED CATEGORY TABLE -->"
 
 
 @dataclass(frozen=True)
@@ -36,22 +23,27 @@ class Skill:
     description: str
 
 
-def first_sentence(text: str, limit: int = 220) -> str:
+def shorten(text: str, limit: int = 220) -> str:
     text = re.sub(r"\s+", " ", text).strip()
     if len(text) <= limit:
         return text
+
+    sentence = re.search(r"^(.{1,%d}?[.!?])(?:\s|$)" % (limit - 1), text)
+    if sentence:
+        return sentence.group(1)
+
     cut = text[: limit - 1].rsplit(" ", 1)[0]
     return f"{cut}…"
 
 
-def parse_frontmatter(path: Path) -> tuple[str, str]:
+def parse_simple_frontmatter(path: Path) -> dict[str, str]:
     text = path.read_text(encoding="utf-8")
     if not text.startswith("---\n"):
-        return path.parent.name, ""
+        raise ValueError(f"{path.relative_to(ROOT)} is missing YAML frontmatter")
 
     end = text.find("\n---", 4)
     if end == -1:
-        return path.parent.name, ""
+        raise ValueError(f"{path.relative_to(ROOT)} has unterminated YAML frontmatter")
 
     frontmatter = text[4:end].splitlines()
     data: dict[str, str] = {}
@@ -74,8 +66,27 @@ def parse_frontmatter(path: Path) -> tuple[str, str]:
             continue
         data[key] = value.strip('"\'')
         i += 1
+    return data
 
-    return data.get("name") or path.parent.name, data.get("description", "")
+
+def parse_frontmatter(path: Path) -> tuple[str, str]:
+    data = parse_simple_frontmatter(path)
+    missing = [key for key in ("name", "description") if not data.get(key)]
+    if missing:
+        fields = ", ".join(missing)
+        raise ValueError(f"{path.relative_to(ROOT)} is missing required frontmatter: {fields}")
+    return data["name"], data["description"]
+
+
+def load_category_descriptions() -> dict[str, str]:
+    descriptions: dict[str, str] = {}
+    for path in sorted(ROOT.glob("*/DESCRIPTION.md")):
+        rel = path.relative_to(ROOT)
+        if any(part in SKIP_DIRS or part.startswith(".") for part in rel.parts):
+            continue
+        data = parse_simple_frontmatter(path)
+        descriptions[path.parent.name] = data.get("description", "")
+    return descriptions
 
 
 def iter_skills() -> list[Skill]:
@@ -95,10 +106,32 @@ def markdown_table_row(values: list[str]) -> str:
     return "| " + " | ".join(escaped) + " |"
 
 
-def build_catalog(skills: list[Skill]) -> str:
+def group_by_category(skills: list[Skill]) -> dict[str, list[Skill]]:
     by_category: dict[str, list[Skill]] = {}
     for skill in skills:
         by_category.setdefault(skill.category, []).append(skill)
+    return by_category
+
+
+def build_category_table(
+    by_category: dict[str, list[Skill]],
+    descriptions: dict[str, str],
+    link_prefix: str,
+    link_suffix: str = "",
+) -> list[str]:
+    lines = [
+        "| Category | Skills | Description |",
+        "|---|---:|---|",
+    ]
+    for category in sorted(by_category):
+        description = descriptions.get(category, "")
+        link = f"{link_prefix}{category}{link_suffix}"
+        lines.append(markdown_table_row([f"[{category}]({link})", str(len(by_category[category])), description]))
+    return lines
+
+
+def build_catalog(skills: list[Skill], descriptions: dict[str, str]) -> str:
+    by_category = group_by_category(skills)
 
     lines = [
         "# Skills Catalog",
@@ -109,36 +142,58 @@ def build_catalog(skills: list[Skill]) -> str:
         "",
         "## Categories",
         "",
-        "| Category | Skills | Description |",
-        "|---|---:|---|",
+        *build_category_table(by_category, descriptions, "#"),
     ]
-
-    for category in sorted(by_category):
-        description = CATEGORY_DESCRIPTIONS.get(category, "")
-        lines.append(markdown_table_row([f"[{category}](#{category})", str(len(by_category[category])), description]))
 
     for category in sorted(by_category):
         lines.extend([
             "",
             f"## {category}",
             "",
-            f"{CATEGORY_DESCRIPTIONS.get(category, '')}",
+            descriptions.get(category, ""),
             "",
             "| Skill | Description |",
             "|---|---|",
         ])
         for skill in by_category[category]:
             rel = skill.path.parent.relative_to(ROOT).as_posix()
-            lines.append(markdown_table_row([f"[{skill.name}]({rel}/)", first_sentence(skill.description)]))
+            lines.append(markdown_table_row([f"[{skill.name}]({rel}/)", shorten(skill.description)]))
 
     lines.append("")
     return "\n".join(lines)
 
 
+def build_readme_table(skills: list[Skill], descriptions: dict[str, str]) -> str:
+    by_category = group_by_category(skills)
+    lines = [TABLE_START, *build_category_table(by_category, descriptions, "", "/"), TABLE_END]
+    return "\n".join(lines)
+
+
+def update_readme(skills: list[Skill], descriptions: dict[str, str]) -> None:
+    table = build_readme_table(skills, descriptions)
+    text = README.read_text(encoding="utf-8")
+
+    if TABLE_START in text and TABLE_END in text:
+        pattern = re.compile(rf"{re.escape(TABLE_START)}.*?{re.escape(TABLE_END)}", re.DOTALL)
+        updated = pattern.sub(table, text, count=1)
+    else:
+        pattern = re.compile(
+            r"(The README only lists categories\. The full skill index is generated in \[CATALOG\.md\]\(CATALOG\.md\)\.\n\n)"
+            r"\| Category \| Skills \| Description \|\n\|---\|---:\|---\|\n(?:\|.*\|\n)+",
+        )
+        updated, count = pattern.subn(rf"\1{table}\n", text, count=1)
+        if count != 1:
+            raise ValueError("Could not find README category table to update")
+
+    README.write_text(updated, encoding="utf-8")
+
+
 def main() -> None:
+    descriptions = load_category_descriptions()
     skills = iter_skills()
-    CATALOG.write_text(build_catalog(skills), encoding="utf-8")
-    print(f"Generated {CATALOG.relative_to(ROOT)} with {len(skills)} skills")
+    CATALOG.write_text(build_catalog(skills, descriptions), encoding="utf-8")
+    update_readme(skills, descriptions)
+    print(f"Generated {CATALOG.relative_to(ROOT)} and {README.relative_to(ROOT)} with {len(skills)} skills")
 
 
 if __name__ == "__main__":
