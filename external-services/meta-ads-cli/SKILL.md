@@ -455,7 +455,7 @@ For iOS app campaigns, use Apple Custom Product Pages (CPPs) as the ad destinati
 
 ## Common Mistakes
 
-See also `references/2026-05-09-run-pitfalls.md` for concrete API error payloads and the deterministic text-overlay workaround from a real run.
+See also `references/2026-05-09-run-pitfalls.md` for concrete API error payloads and the deterministic text-overlay workaround from a real run. Load `references/operational-pitfalls.md` when debugging app link mismatches, creative-limit errors, missing ad objects, or production API responses that don't match the happy path.
 
 1. **Token not set** — always use `$META_ACCESS_TOKEN` from env. Never hardcode.
 2. **Cron scanner false positives** — this skill is loaded into scheduled cron prompts, and Hermes scans the fully assembled prompt before execution. Avoid single-line examples where `curl` contains `$API`, `$TOKEN`, `$KEY`, `$SECRET`, or similar on the same line. Use neutral variable names like `GRAPH_URL` instead of `API`, and put auth form fields or headers on continuation lines. Verify with `tools.cronjob_tools._scan_cron_prompt(skill_text)` after editing.

@@ -183,6 +183,8 @@ Recommendation thresholds to start from:
 - **REMOVE ASSET**: 1000+ impressions and zero conversions.
 - **INVESTIGATE**: value tracking is zero on tROAS campaigns, sudden conversion/value drops, policy/status issues, or low CPA but weak ROAS where installs may be dominating counted conversions.
 
+For tROAS campaigns with zero value, weirdly low CPA, or install-heavy conversion mix, load `references/app-campaign-troas-debugging.md` before recommending bid or budget changes.
+
 ## Audit Checklist
 
 Quick health check for any Google Ads account:
