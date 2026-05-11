@@ -16,7 +16,7 @@ Common patterns to scan for:
 - Account/set IDs (`ACCOUNT_ID`, `act_<META_AD_ACCOUNT_ID>`)
 - Phone numbers (`+1XXXXXXXXXX`)
 - Cron job UUIDs (`xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx` for real scheduled routines)
-- Deployment hostnames (`*.up.railway.app`, `*.onrender.com`) and Render service IDs (`srv-...`), env group IDs (`evg-...`)
+- Deployment hostnames (`*.up.railway.app`, `*.onrender.com`) and Render service IDs (`srv-...`), env group IDs (`evg-...`), and workspace-specific API key names (`$RENDER_API_KEY_<WORKSPACE>`)
 - API URLs (https://api.domain.com/path/)
 - Social media handles (@username)
 - Substack/newsletter URLs and private publication subdomains

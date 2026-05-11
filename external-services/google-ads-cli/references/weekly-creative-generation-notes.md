@@ -7,7 +7,7 @@ Session-derived notes for report-only Google App Campaign creative refreshes.
 - If `GoogleAdsClient.load_from_storage()` tries `~/google-ads.yaml` even though config exists at `~/.google-ads.yaml`, pass the path explicitly:
   ```python
   import os
-  client = GoogleAdsClient.load_from_storage(os.path.expanduser('~/.google-ads.yaml'))
+  client = GoogleAdsClient.load_from_storage(os.getenv('GOOGLE_ADS_CONFIG_PATH', os.path.expanduser('~/.google-ads.yaml')))
   ```
 - `ad_group_ad_asset_view` is the right view for App Campaign asset reporting, but it is not compatible with `campaign_budget.amount_micros`. Pull budgets from a separate `campaign` query if needed. If included in the asset query, Google Ads returns `PROHIBITED_RESOURCE_TYPE_IN_SELECT_CLAUSE` for `CAMPAIGN_BUDGET`.
 - Include `metrics.conversions_value` for tROAS campaigns and rank image/video assets by value and ROAS, not only conversions.

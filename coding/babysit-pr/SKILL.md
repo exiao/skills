@@ -21,7 +21,7 @@ When invoked from a single code-review webhook/event, apply the event-level filt
 
 - Exit with exactly `No action needed` if the triggering review state is `approved`.
 - Exit with exactly `No action needed` if the webhook action is `dismissed`.
-- Exit with exactly `No action needed` if the triggering review state is `commented` and the review body is empty.
+- Exit with exactly `No action needed` if the triggering review state is `commented`, the review body is empty, and the event payload has no inline comments or review thread references. Empty-body commented reviews can still carry actionable inline comments, so inspect thread/comment payloads before skipping.
 - Otherwise, treat the review as actionable and run the babysit loop, even if the PR's aggregate `reviewDecision` is already `APPROVED`. A PR can be approved overall while a later `COMMENTED` review contains a real inline fix request.
 
 ## Spawning

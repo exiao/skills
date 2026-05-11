@@ -37,6 +37,8 @@ git worktree add ~/projects/_worktrees/$BRANCH -b "$BRANCH" origin/main
 
 Copy or patch only the intentional skill changes into the worktree. Exclude generated/runtime state (`.usage.json`, `.usage.json.lock`, `.curator_state`, `.curator_backups/`, temporary reports, moved-file markers). Before committing, inspect `git diff --name-status` and stage explicit files rather than blanket-adding the runtime checkout.
 
+For longer cleanup/review checklists, see `references/runtime-skills-preservation.md` and `references/runtime-snapshot-pr-review.md`.
+
 ### Public Repo Review Checklist (for cleanup PRs)
 
 Before pushing, scan for violations (this repo is PUBLIC):

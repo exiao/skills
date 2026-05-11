@@ -4,7 +4,7 @@ These are runtime issues discovered during actual cron executions. Check this fi
 
 ## Android App Link Mismatch (2026-05-10)
 
-The Android adset's `promoted_object.object_store_url` uses `com.bloom.invest`, NOT `com.investwithbloom`. The `$BLOOM_ANDROID_PACKAGE_ID` env var may be stale.
+The Android adset's `promoted_object.object_store_url` uses the package name from `$ANDROID_PACKAGE_NAME`, not stale package env vars from older setups.
 
 **Fix:** Always verify the adset's promoted_object before creating creatives:
 ```bash
@@ -39,9 +39,9 @@ Error: "User request limit reached" (code 17, subcode 2446079).
 
 **Recovery:** The rate limit clears after ~5 minutes of inactivity on the ad account.
 
-## gpt-image-1 API Format (2026-05-10)
+## OpenAI image model API format (2026-05-10)
 
-The OpenAI Images API with `gpt-image-1` model:
+If falling back to `gpt-image-1` instead of the current preferred image model, the OpenAI Images API:
 - Returns `b64_json` by default in `data[0].b64_json`
 - Does NOT accept `response_format` parameter (causes "Unknown parameter" error)
 - Does NOT return a `url` field
