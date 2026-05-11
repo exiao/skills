@@ -15,6 +15,7 @@ A category is bloat if any of the following hold:
 To audit quickly:
 ```python
 import os
+root = os.environ.get("REPO_ROOT", ".")
 for name in sorted(os.listdir(root)):
     path = os.path.join(root, name)
     if os.path.isdir(path) and not name.startswith("."):
