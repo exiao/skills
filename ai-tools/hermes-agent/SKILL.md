@@ -931,42 +931,8 @@ terminal(command="tmux new-session -d -s resumed 'hermes --resume 20260225_14305
 2. `hermes login` — re-authenticate OAuth providers
 3. Check `.env` has the right API key
 
-### google-gemini-cli works for main chat but helper tasks fail
-Use this when Hermes can resolve `google-gemini-cli` for the main runtime, but compression, memory summaries, web extraction, or other auxiliary tasks log `OAuth provider google-gemini-cli not directly supported, try 'auto'`.
-
-1. Confirm main runtime resolution first:
-```bash
-source .venv/bin/activate 2>/dev/null || source venv/bin/activate
-python - <<'PY'
-from hermes_cli.runtime_provider import resolve_runtime_provider
-print(resolve_runtime_provider(requested='google-gemini-cli'))
-PY
-```
-Expected: provider `google-gemini-cli`, api mode `chat_completions`, base URL `cloudcode-pa://google`.
-
-2. Reproduce the auxiliary routing failure separately:
-```bash
-python - <<'PY'
-from agent.auxiliary_client import resolve_provider_client
-client, model = resolve_provider_client('google-gemini-cli', model='gemini-3.1-pro-preview')
-print(type(client).__name__ if client else None, model)
-PY
-```
-Failing behavior: `(None, None)` plus the warning above.
-
-3. Root cause: runtime provider support lives in `hermes_cli/runtime_provider.py`, while auxiliary side tasks route through `agent/auxiliary_client.py`. The latter may still reject OAuth providers unless it has a provider-specific branch.
-
-4. Add a failing regression test before implementation, for example in `tests/agent/test_auxiliary_client.py`, asserting `resolve_provider_client('google-gemini-cli', model='gemini-3.1-pro-preview')` returns `GeminiCloudCodeClient` and the requested model. Patch credentials with `hermes_cli.auth.resolve_gemini_oauth_runtime_credentials` so the test does not hit real OAuth.
-
-5. Implementation shape: in `agent/auxiliary_client.py`, add a `google-gemini-cli` branch under OAuth provider handling that builds `agent.gemini_cloudcode_adapter.GeminiCloudCodeClient` using `resolve_gemini_oauth_runtime_credentials()`, preserves the requested model, and supports async wrapping via the existing `_to_async_client` path.
-
 ### Anthropic base_url / local proxy not being honored
 Use this when `config.yaml` points Anthropic at a local proxy (for example `providers.anthropic.base_url: http://127.0.0.1:18801`) but live Hermes traffic still appears to hit `https://api.anthropic.com`.
-
-### Proxy tool renames vs Hermes tool aliases
-When a user asks to rename, alias, overwrite, or make a Hermes tool name nicer, first determine whether they mean the proxy-facing Anthropic/Claude billing proxy name or the real Hermes registry name. If a proxy config already exists, do not jump to creating a plugin or editing `tools.registry`.
-
-For proxy-facing names, inspect `~/.hermes/proxy/config.json` and `~/.hermes/proxy/proxy.js`. `config.toolRenames` is merged over `DEFAULT_TOOL_RENAMES`, so adding the same original name overwrites the default mapping. Example: `[["skill_view", "LoadSkill"], ["mcp_skill_view", "LoadSkill"]]` overrides the default `SkillView` proxy name while Hermes still dispatches to `skill_view` after reverse mapping. Read `references/proxy-tool-renames.md` for the exact workflow and pitfalls.
 
 1. Check the effective runtime provider resolution, not just `config.yaml`:
 ```bash
@@ -1017,44 +983,6 @@ If Hermes shows `📦 Preflight compression: ~N tokens >= threshold` but compres
 - **Config changes:** `/restart` reloads gateway config
 - **Code changes:** Restart the CLI or gateway process
 
-### Gateway tool progress labels vs tool names
-When a user asks for a tool to have a "nicer name" on a gateway bot, first determine whether they mean the user-visible progress label, not the actual model tool schema name.
-
-1. Check the bot/profile config for display mappings before proposing plugins, registry aliases, or proxy rewrites:
-```bash
-python3 - <<'PY'
-import yaml
-from pathlib import Path
-cfg = yaml.safe_load(Path('hermes/config.yaml').read_text())
-print(cfg.get('display', {}).get('tool_display', {}))
-print(cfg.get('display', {}).get('tool_display_rewrite', {}))
-PY
-```
-Common path in backed-up bot repos: `hermes/config.yaml` (users may casually call it `config.yml`).
-
-2. `display.tool_display` maps runtime/proxy-visible tool names to friendly gateway progress text. Example from BloomBot:
-```yaml
-display:
-  tool_display:
-    SkillView: Loading research playbook
-```
-This changes what subscribers see while a tool runs. It does not rename the underlying Hermes tool or affect model tool calls.
-
-3. If the visible key is PascalCase (`SkillView`, `SessionSearch`, `WebSearch`), that usually means a proxy or provider adapter already renamed the original Hermes tool (`skill_view`, `session_search`, `web_search`) before display formatting. Match the key that appears in the bot's current config/session output.
-
-4. Only investigate `toolRenames`, registry plugins, or `skill_view` aliases if the user explicitly wants to change the model-facing function name or a provider-side sanitized name. For a display-only request, editing `display.tool_display` is the minimal fix.
-
-5. If the local checkout is stale or divergent, inspect `origin/main:hermes/config.yaml` before concluding the config lacks the setting:
-```bash
-python3 - <<'PY'
-import subprocess
-text = subprocess.check_output(['git', 'show', 'origin/main:hermes/config.yaml'], text=True)
-for i, line in enumerate(text.splitlines(), 1):
-    if 'tool_display' in line or 'SkillView' in line:
-        print(f'{i}: {line}')
-PY
-```
-
 ### Skills not showing
 1. `hermes skills list` — verify installed
 2. `hermes skills config` — check platform enablement
@@ -1065,9 +993,6 @@ Check logs first:
 ```bash
 grep -i "failed to send\|error" ~/.hermes/logs/gateway.log | tail -20
 ```
-
-### Gateway/profile-specific tool aliases
-When a user asks to rename, alias, hide, or overwrite a tool name for a specific gateway profile, prefer a small profile/plugin alias over editing Hermes core. See `references/bloombot-tool-aliases.md` for the `skill_view` → `load_skill` pattern, including registry deregistration, plugin toolset discovery, and verification.
 
 ### Messaging platform triage (local Hermes)
 When a user says to inspect their "own Hermes" messaging setup, verify the local Hermes instance first before checking any remote box.
