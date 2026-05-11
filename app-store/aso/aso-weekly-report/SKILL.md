@@ -23,6 +23,9 @@ Optional:
 - `$APPFIGURES_BLOOM_ANDROID_ID`
 - `$APPFIGURES_COMPETITOR_APP_IDS`, comma-separated Appfigures product IDs for tracked competitors
 - `$ASO_COMPETITOR_APP_STORE_IDS`, comma-separated Apple app IDs for DataForSEO gap checks
+- `$ASO_LOCATION_CODE`, DataForSEO location code. Default: `2840` for United States.
+- `$ASO_LANGUAGE_CODE`, DataForSEO language code. Default: `en`.
+- `$ASO_SNAPSHOT_DIR`, snapshot directory. Default: `$HOME/.hermes/skills/analytics/aso-weekly-report/snapshots/`.
 
 Related skills with endpoint details:
 - `appfigures-cli`
@@ -55,11 +58,11 @@ if [ -n "$APPFIGURES_BLOOM_ANDROID_ID" ]; then PRODUCTS="$PRODUCTS,$APPFIGURES_B
 ```
 
 Fetch:
-- Sales/downloads for this week and prior week: `GET /reports/sales/?products=$PRODUCTS&group_by=dates&start_date=-7&end_date=0`
-- Revenue including IAPs for both periods: add `include_inapps=true`
+- Sales/downloads for a complete 14-day window: `GET /reports/sales/?products=$PRODUCTS&group_by=dates&start_date=-14&end_date=-1`, then split locally into this week and prior week.
+- Revenue including IAPs for the same complete 14-day window: add `include_inapps=true`.
 - Subscriptions if available: `GET /reports/subscriptions`
 - Current ratings: `GET /ratings?products=$APPFIGURES_BLOOM_IOS_ID`
-- Category ranks: `GET /ranks/$APPFIGURES_BLOOM_IOS_ID/daily/-7/0?countries=US`
+- Category ranks for the same complete 14-day window: `GET /ranks/$APPFIGURES_BLOOM_IOS_ID/daily/-14/-1?countries=US`
 - Recent 1 to 2 star reviews: `GET /reviews?products=$APPFIGURES_BLOOM_IOS_ID&stars=1,2&count=10&sort=-date`
 
 Compute:
@@ -77,13 +80,15 @@ Use DataForSEO Labs Apple endpoints. They are synchronous and cheaper than task 
 ```bash
 DFS_AUTH="Authorization: Basic $DATAFORSEO_AUTH_BASE64"
 DFS_BASE="https://api.dataforseo.com/v3"
+ASO_LOCATION_CODE="${ASO_LOCATION_CODE:-2840}"
+ASO_LANGUAGE_CODE="${ASO_LANGUAGE_CODE:-en}"
 ```
 
 Fetch Bloom's top App Store keywords:
 ```bash
 curl -s -X POST "$DFS_BASE/dataforseo_labs/apple/keywords_for_app/live" \
   -H "$DFS_AUTH" -H "Content-Type: application/json" \
-  -d '[{"app_id":"'"$BLOOM_APP_STORE_ID"'","location_code":2840,"language_code":"en","limit":100,"order_by":["ranked_serp_element.serp_item.rank_absolute,asc"]}]'
+  -d '[{"app_id":"'"$BLOOM_APP_STORE_ID"'","location_code":'"$ASO_LOCATION_CODE"',"language_code":"'"$ASO_LANGUAGE_CODE"'","limit":100,"order_by":["ranked_serp_element.serp_item.rank_absolute,asc"]}]'
 ```
 
 Parse `tasks[0].result[0].items`. For each item, extract:
@@ -100,7 +105,7 @@ Prefer `$ASO_COMPETITOR_APP_STORE_IDS` when set. Otherwise use DataForSEO `app_c
 ```bash
 curl -s -X POST "$DFS_BASE/dataforseo_labs/apple/app_competitors/live" \
   -H "$DFS_AUTH" -H "Content-Type: application/json" \
-  -d '[{"app_id":"'"$BLOOM_APP_STORE_ID"'","location_code":2840,"language_code":"en","limit":5}]'
+  -d '[{"app_id":"'"$BLOOM_APP_STORE_ID"'","location_code":'"$ASO_LOCATION_CODE"',"language_code":"'"$ASO_LANGUAGE_CODE"'","limit":5}]'
 ```
 
 For up to 3 competitors, fetch their `keywords_for_app/live` results with limit 50.
@@ -114,8 +119,8 @@ Gap rules:
 ### 4. Snapshot comparison
 
 Snapshot directory:
-```text
-~/.hermes/skills/analytics/aso-weekly-report/snapshots/
+```bash
+SNAPSHOT_DIR="${ASO_SNAPSHOT_DIR:-$HOME/.hermes/skills/analytics/aso-weekly-report/snapshots}"
 ```
 
 Filename format:
@@ -198,7 +203,7 @@ Recommendations:
 2. [Specific action]
 3. [Specific action if warranted]
 
-Snapshot saved: ~/.hermes/skills/analytics/aso-weekly-report/snapshots/[YYYY-MM-DD].json
+Snapshot saved: $SNAPSHOT_DIR/[YYYY-MM-DD].json
 ```
 
 First run ending:

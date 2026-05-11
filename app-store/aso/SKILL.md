@@ -1,6 +1,6 @@
 ---
 name: aso
-description: ASO skills for Bloom: keyword research, audits, metadata optimization, competitor analysis, and unattended weekly ASO reporting using DataForSEO. Use when the user asks about App Store Optimization, improving Bloom's App Store ranking, keyword strategy, metadata, competitor analysis, organic app store reports, or keyword ranking updates for mobile apps.
+description: ASO skills for Bloom: keyword research, audits, metadata optimization, competitor analysis, and unattended weekly ASO reporting using DataForSEO and Appfigures. Use when the user asks about App Store Optimization, improving Bloom's App Store ranking, keyword strategy, metadata, competitor analysis, organic app store reports, or keyword ranking updates for mobile apps.
 ---
 
 # ASO Skill Router
@@ -29,6 +29,6 @@ You have access to five specialized ASO sub-skills. Based on the user's request,
 1. Read the user's request carefully.
 2. If it's clearly one skill area, load that sub-skill immediately.
 3. If it spans multiple (e.g., "audit + write new metadata"), start with the audit, then chain to metadata-optimization.
-4. If ambiguous, ask: "Would you like a full audit, keyword research, metadata copy, or competitor analysis?"
+4. If ambiguous, ask: "Would you like a full audit, keyword research, metadata copy, competitor analysis, or weekly ASO report?"
 
 Always check for `app-marketing-context.md` in the workspace — it has Bloom's positioning, audience, and goals.
