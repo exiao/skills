@@ -1,73 +1,78 @@
-# Preserving a Dirty Worktree When Switching Branches (Untracked Conflict)
+# Preserving Dirty Work When Untracked Files Conflict
 
 ## Problem
 
-When a branch has both modified tracked files AND untracked files that now exist on main (e.g., after a PR merged the same content), `git stash` + `git checkout main` + `git pull` will fail with:
+A branch can have tracked modifications plus untracked files that now exist on `main`, usually after another PR merged overlapping content. In that state, stash/apply or branch switching can fail with:
 
 ```
 error: The following untracked working tree files would be overwritten by merge:
 ```
 
-`git stash` only handles tracked modifications and new staged files. Untracked files that conflict with the target branch are not stashed.
+Do not keep working in the dirty runtime checkout. Preserve the content, then curate it in a fresh project worktree.
 
-## Solution: Commit Everything to a Preservation Branch
+## Safer pattern: preserve, then curate in a worktree
 
 ```bash
-# 1. Create a preservation branch from current position
-git checkout -b wip/<original-branch>-preserved
+# 1. Start from the canonical project checkout, not the runtime checkout
+cd ~/projects/<repo>
+git fetch origin main
 
-# 2. Add EVERYTHING (tracked changes + untracked files)
-git add -A
+# 2. Create a fresh worktree from main
+BRANCH="wip/<descriptive-name>-preserved"
+git worktree add ~/projects/_worktrees/$BRANCH -b "$BRANCH" origin/main
 
-# 3. Commit with WIP marker
-git commit -m "WIP: preserve <original-branch> changes (tracked + untracked)"
+# 3. Copy or patch only intentional changes into the worktree
+cd ~/projects/_worktrees/$BRANCH
+git diff --name-status
 
-# 4. Now switch to main cleanly
-git checkout main
-git pull origin main
+# 4. Stage explicit files after inspection
+git add path/to/intentional-file.md
+git commit -m "WIP: preserve intentional changes"
 ```
 
-## When to Use This vs Stash
+Avoid `git add -A` on a runtime checkout. It can sweep generated state, locks, local reports, or private config into a public PR.
+
+## If a dirty branch already exists
+
+Generate a patch from the preserved branch and exclude generated/runtime state before applying it to a clean worktree:
+
+```bash
+git diff origin/main..wip/<preserved-branch> -- \
+  ':!.curator_backups' \
+  ':!.hub' \
+  ':!.usage.json' \
+  ':!.usage.json.lock' \
+  ':!.curator_state' \
+  ':!*.lock' \
+  > /tmp/delta.patch
+
+cd ~/projects/_worktrees/$BRANCH
+git apply --check /tmp/delta.patch
+git apply /tmp/delta.patch
+```
+
+Then review before staging:
+
+```bash
+git diff --name-status origin/main
+git diff --check origin/main
+git add path/to/file1 path/to/file2
+git commit -m "chore: <description>"
+```
+
+## When to use this
 
 | Situation | Use |
 |-----------|-----|
-| Only tracked modifications | `git stash` is fine |
-| Untracked files that don't conflict with target | `git stash -u` works |
-| Untracked files that DO exist on target branch | **Commit to preservation branch** |
-| Large working tree with 100+ changed files | **Commit to preservation branch** (safer, reviewable) |
+| Only tracked modifications in a normal project worktree | A normal commit on a branch |
+| Untracked files conflict with the target branch | Preserve/curate pattern above |
+| Large working tree with many changed files | Preserve/curate pattern above |
+| Runtime checkout has generated files | Fresh project worktree, explicit staging only |
 
-## Recovering: Creating a Clean PR from Preserved Work
+## Key insight
 
-After preserving, to turn the delta into a PR:
+When another PR merges content that your local branch also has, the delta between your preserved branch and updated main may be small even if the raw file count is large. Check `git diff --stat origin/main..HEAD` from the curated worktree before deciding what belongs in the PR.
 
-```bash
-# 1. Create a fresh branch from main
-git worktree add ~/projects/_worktrees/<task> -b <new-branch> origin/main
+## Pitfall: merge conflicts when both sides add the same file
 
-# 2. Generate a patch of what your preserved branch has that main doesn't
-# Exclude local state files that shouldn't be in the repo
-git diff origin/main..wip/<preserved-branch> -- ':!.curator_backups' ':!.hub' ':!.usage.json' > /tmp/delta.patch
-
-# 3. Check it applies cleanly
-cd ~/projects/_worktrees/<task>
-git apply --check /tmp/delta.patch
-
-# 4. Apply, commit, push, PR
-git apply /tmp/delta.patch
-git add -A
-git commit -m "chore: <description>"
-git push origin <new-branch>
-gh pr create --title "..." --body-file /tmp/pr-body.md
-```
-
-## Key Insight
-
-When PR #X merges content that your local branch also has (e.g., a snapshot PR), the delta between your branch and updated main may be small even though the raw file count is large. Always check `git diff --stat origin/main..HEAD` to understand the true scope before deciding how to proceed.
-
-## Pitfall: Merge Conflicts When Both Sides Add the Same File
-
-If the preserved branch and main both added the same file (add/add conflict), `git merge origin/main` will produce many conflicts. Don't merge. Instead:
-
-1. Abort the merge: `git merge --abort`
-2. Use the patch approach above (diff against main, apply to fresh worktree)
-3. `git apply` will cleanly skip files that are identical and apply only the deltas
+If the preserved branch and main both added the same file, `git merge origin/main` may produce add/add conflicts. Prefer the curated patch approach above for snapshot-style PRs. It lets you exclude generated state and reapply only intentional deltas to a clean worktree.

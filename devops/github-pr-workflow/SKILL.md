@@ -362,9 +362,9 @@ Key idea: create a clean worktree from `origin/main`, copy dirty files from the 
 
 ### When stash/checkout fails due to untracked conflicts
 
-If `git stash` and `git checkout main` both refuse because untracked files conflict with the target branch, use the commit-to-preservation-branch + patch approach. See `references/untracked-conflict-preservation.md` for the full recipe.
+If stash/apply or branch switching refuses because untracked files conflict with the target branch, stop working in the dirty checkout. Use the preserve-then-curate worktree pattern in `references/untracked-conflict-preservation.md`.
 
-Key idea: commit everything (tracked + untracked) to a `wip/` branch to clear the tree, then generate a diff patch against main and apply it to a fresh worktree.
+Key idea: create a fresh worktree from `origin/main`, copy or patch only intentional changes into it, exclude generated runtime state, and stage explicit files after inspecting `git diff --name-status`.
 
 ## Pitfalls
 
