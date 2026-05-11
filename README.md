@@ -27,17 +27,17 @@ Install the skills from https://github.com/exiao/skills
 |----------|--------|-------------|
 | [**ai-tools**](ai-tools/) | 10 | AI agents, MCP integrations, web search, LLM tooling |
 | [**app-store**](app-store/) | 28 | App Store tools, RevenueCat, Prometheus, ReelFarm |
-| [**coding**](coding/) | 28 | Programming, debugging, testing, code review, web scraping |
-| [**creative**](creative/) | 39 | Writing, editing, media production, content creation |
-| [**devops**](devops/) | 55 | CI/CD, GitHub, Docker, MLOps, model training/inference |
+| [**coding**](coding/) | 29 | Programming, debugging, testing, code review, web scraping |
+| [**creative**](creative/) | 48 | Writing, editing, media production, content creation |
+| [**devops**](devops/) | 54 | CI/CD, GitHub, Docker, MLOps, model training/inference |
 | [**external-services**](external-services/) | 17 | External service CLIs and API integrations |
-| [**finance**](finance/) | 9 | Investing, market analysis, portfolio management |
-| [**marketing**](marketing/) | 38 | Ads (Google/Meta/Apple), SEO, analytics, social media |
+| [**finance**](finance/) | 11 | Investing, market analysis, portfolio management |
+| [**marketing**](marketing/) | 39 | Ads (Google/Meta/Apple), SEO, analytics, social media |
 | [**media**](media/) | 2 | Media content tools (Spotify, video/audio downloads) |
 | [**memory**](memory/) | 3 | Memory management — GC, setup, and recall |
-| [**productivity**](productivity/) | 16 | Apple apps, email, notes, smart home, local search, gaming |
-| [**research**](research/) | 10 | Deep research, competitive analysis, market intelligence |
-| [**skills-meta**](skills-meta/) | 6 | Skills about skills — creating, auditing, improving, testing |
+| [**productivity**](productivity/) | 17 | Apple apps, email, notes, smart home, local search, gaming |
+| [**research**](research/) | 12 | Deep research, competitive analysis, market intelligence |
+| [**skills-meta**](skills-meta/) | 7 | Skills about skills — creating, auditing, improving, testing |
 | [**visual-design**](visual-design/) | 37 | UI/UX design, diagrams, image generation, frontend |
 
 ---
