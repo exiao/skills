@@ -364,7 +364,7 @@ Key idea: create a clean worktree from `origin/main`, copy dirty files from the 
 
 If stash/apply or branch switching refuses because untracked files conflict with the target branch, stop working in the dirty checkout. Use the preserve-then-curate worktree pattern in `references/untracked-conflict-preservation.md`.
 
-Key idea: create a fresh worktree from `origin/main`, copy or patch only intentional changes into it, exclude generated runtime state, and stage explicit files after inspecting `git diff --name-status`.
+Key idea: create a fresh worktree from `origin/main`, copy or patch only intentional changes into it, exclude generated runtime state, and stage explicit files after inspecting `git diff --name-status`. For broad snapshot PR curation, also see `references/curating-snapshot-prs.md`.
 
 ## Pitfalls
 

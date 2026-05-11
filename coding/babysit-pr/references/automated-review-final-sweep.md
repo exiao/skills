@@ -28,11 +28,11 @@ gh pr view "$PR" --repo "$REPO" \
 
 # Latest formal review. Empty COMMENTED reviews are often created by thread replies.
 gh api --paginate "repos/$REPO/pulls/$PR/reviews" \
-  --slurp --jq 'add | sort_by(.submitted_at // "") | last | {author:.user.login,state:.state,body:(.body // "")}'
+  | jq -s 'add | sort_by(.submitted_at // "") | last | {author:.user.login,state:.state,body:(.body // "")}'
 
 # Latest top-level issue comment. Automated reviewers often put the real summary here.
 gh api --paginate "repos/$REPO/issues/$PR/comments" \
-  --slurp --jq 'add | sort_by(.created_at // "") | last | {author:.user.login,created:.created_at,body:(.body // "")}'
+  | jq -s 'add | sort_by(.created_at // "") | last | {author:.user.login,created:.created_at,body:(.body // "")}'
 
 # Unresolved, non-outdated threads
 gh api graphql \
