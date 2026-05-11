@@ -127,6 +127,12 @@ The hook is 80% of performance. Types: Stated (what you SAY), Visual (what they 
 | Warm | UGC, Testimonial, Carousel, Before/After |
 | Hot | Talking Head, Demo, Direct Offer |
 
+#### Click-to-WhatsApp / Messaging Ads
+
+When the destination is WhatsApp, Messenger, or Instagram DMs, sell one concrete chat job rather than a generic assistant. Strong messaging-ad jobs are high-intent and easy to complete in-message: send a portfolio screenshot, text one ticker, type a brief. Match the creative, primary text, prefill/welcome message, and bot's first reply exactly. Judge creative by cost per qualified conversation and activation rate, not cheapest message start.
+
+For investing products, keep language compliance-safe: research-style breakdown, second opinion, risk/concentration, bull case/bear case. Avoid "what to buy," guaranteed returns, personalized advice, and profit-promise language. For detailed BloomBot patterns, load `../../external-services/meta-ads-cli/references/click-to-whatsapp-bloombot.md`.
+
 #### After-Before Product Proof Format
 
 Source: Social Growth Engineers WayShot case study, May 2026. WayShot reached 150M+ views across 8 accounts, 500K+ downloads in one month, and $100K MRR by repeating result-first visual formats.
