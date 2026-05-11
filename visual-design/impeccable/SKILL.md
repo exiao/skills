@@ -1,16 +1,16 @@
 ---
 name: impeccable
-description: Run impeccable design quality commands on frontend code — audit, critique, polish, animate, normalize, and more. Built on top of the frontend-design skill with 21 steering commands and 10 domain-specific reference files. Use when doing a design QA pass, reviewing UI quality, or refining a frontend component before shipping.
+description: Run impeccable design quality commands on frontend code — audit, critique, polish, animate, normalize, and more. Built on top of the frontend-design skill with 20 steering commands and 10 domain-specific reference files. Use when doing a design QA pass, reviewing UI quality, or refining a frontend component before shipping.
 ---
 
 > **Source:** External skill (frontend-design ecosystem) — local copy, do not modify without checking upstream.
 
 # Impeccable
 
-Design quality layer for Claude Code. 21 commands that audit, review, polish, and refine frontend interfaces. Complements the `frontend-design` skill (vision/direction) with systematic QA passes.
+Design quality layer for Claude Code. 20 commands that audit, review, polish, and refine frontend interfaces. Complements the `frontend-design` skill (vision/direction) with systematic QA passes.
 
 **Source:** https://github.com/pbakaus/impeccable  
-**Installed at:** `~/clawd/skills/` (frontend-design + 21 individual command skills)
+**Installed at:** `~/clawd/skills/` (frontend-design + 20 individual command skills)
 
 ## When to Use
 
@@ -19,7 +19,7 @@ Design quality layer for Claude Code. 21 commands that audit, review, polish, an
 - Targeted fixes: `/colorize`, `/animate`, `/bolder`, `/quieter`
 - Design system alignment: `/normalize`, `/extract`
 
-## 21 Commands
+## 20 Commands
 
 | Command | What it does |
 |---|---|

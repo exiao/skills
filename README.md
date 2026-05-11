@@ -27,23 +27,18 @@ Install the skills from https://github.com/exiao/skills
 |----------|--------|-------------|
 | [**ai-tools**](ai-tools/) | 10 | AI agents, MCP integrations, web search, LLM tooling |
 | [**app-store**](app-store/) | 28 | App Store tools, RevenueCat, Prometheus, ReelFarm |
-| [**coding**](coding/) | 23 | Programming, debugging, testing, code review, web scraping |
-| [**creative**](creative/) | 38 | Writing, editing, media production, content creation |
-| [**devops**](devops/) | 55 | CI/CD, GitHub, Docker, MLOps, model training/inference |
+| [**coding**](coding/) | 29 | Programming, debugging, testing, code review, web scraping |
+| [**creative**](creative/) | 49 | Writing, editing, media production, content creation |
+| [**devops**](devops/) | 54 | CI/CD, GitHub, Docker, MLOps, model training/inference |
 | [**external-services**](external-services/) | 17 | External service CLIs and API integrations |
-| [**finance**](finance/) | 9 | Investing, market analysis, portfolio management |
-| [**marketing**](marketing/) | 38 | Ads (Google/Meta/Apple), SEO, analytics, social media |
+| [**finance**](finance/) | 11 | Investing, market analysis, portfolio management |
+| [**marketing**](marketing/) | 39 | Ads (Google/Meta/Apple), SEO, analytics, social media |
 | [**media**](media/) | 2 | Media content tools (Spotify, video/audio downloads) |
 | [**memory**](memory/) | 3 | Memory management — GC, setup, and recall |
-| [**ops-center**](ops-center/) | 1 | Ops center codebase review and reference |
-| [**productivity**](productivity/) | 16 | Apple apps, email, notes, smart home, local search, gaming |
-| [**reference**](reference/) | 2 | Reference notes for specific projects |
-| [**research**](research/) | 10 | Deep research, competitive analysis, market intelligence |
-| [**skills-meta**](skills-meta/) | 6 | Skills about skills — creating, auditing, improving, testing |
-| [**software-development**](software-development/) | 5 | Frameworks, debugging, architecture patterns |
-| [**visual-design**](visual-design/) | 37 | UI/UX design, diagrams, image generation, frontend |
-| [**video-production**](video-production/) | 2 | Video production workflows and clip generation |
-| [**yuanbao**](yuanbao/) | 1 | Yuanbao automation and integrations |
+| [**productivity**](productivity/) | 17 | Apple apps, email, notes, smart home, local search, gaming |
+| [**research**](research/) | 12 | Deep research, competitive analysis, market intelligence |
+| [**skills-meta**](skills-meta/) | 7 | Skills about skills — creating, auditing, improving, testing |
+| [**visual-design**](visual-design/) | 35 | UI/UX design, diagrams, image generation, frontend |
 
 ---
 
@@ -143,6 +138,12 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [ci-evals-llm-agents](coding/ci-evals-llm-agents/) | Build CI eval pipelines for LLM agent systems. Use when adding evals to repos with LLM agents, creating SimulatorBackend patterns, setting up multi-model CI matrices, or debugging flaky agent eval output. Triggers: CI evals, agent evals, simulator backend, eval matrix, eval CI. |
 | [subagent-driven-development](coding/subagent-driven-development/) | Use when executing implementation plans with independent tasks. Dispatches fresh delegate_task per task with two-stage review (spec compliance then code quality). |
 
+| [debugging-hermes-tui-commands](coding/debugging-hermes-tui-commands/) | Debug Hermes Agent TUI slash commands: Python, gateway, Ink UI. |
+| [hermes-agent-skill-authoring](coding/hermes-agent-skill-authoring/) | Author in-repo SKILL.md: frontmatter, validator, structure. |
+| [node-inspect-debugger](coding/node-inspect-debugger/) | Debug Node.js via --inspect + Chrome DevTools Protocol CLI. |
+| [python-debugpy](coding/python-debugpy/) | Debug Python: pdb REPL + debugpy remote (DAP). |
+| [spike](coding/spike/) | Throwaway experiments to validate an idea before building. |
+
 ### 🎨 Creative & Content
 
 | Skill | Description |
@@ -185,6 +186,10 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [video-script](creative/video-production/video-script/) | Generate structured scene-by-scene video scripts with production metadata (visuals, audio, sources, transitions, captions) ready to feed into the video-production pipeline (Sora, Kling, ElevenLabs, InfiniteTalk, Remotion, stock-footage, video-editor). Use when asked to "write a video script",… |
 | [writer](creative/writer/) | Write content in the author's voice — articles, blog posts, tweets, social media posts, marketing copy, newsletter drafts. Loads WRITING-STYLE.md and enforces kill phrases. |
 | [youtube-content](creative/video-production/youtube-content/) | Fetch YouTube video transcripts and transform them into structured content (chapters, summaries, threads, blog posts). Use when the user shares a YouTube URL or video link, asks to summarize a video, requests a transcript, or wants to extract and reformat content from any YouTube video. |
+| [youtube-scriptwriting](creative/video-production/youtube-scriptwriting/) | Write retention-optimized long-form YouTube scripts through a checkpoint workflow (research, hook, structure, body, editing). Use when asked to "write a YouTube script", "YouTube video outline", "long-form video script", "improve video retention", "structure a YouTube video", or when turning raw ideas/transcripts/notes into a compelling video script. Covers hook formats, 7 story structures, rehook techniques, editing audits, and outro binge loops. |
+| [youtube-title-creator](creative/video-production/youtube-title-creator/) | Generate high-CTR YouTube titles and thumbnail concepts using 119 proven frameworks ranked by performance score. Use when creating YouTube titles, optimizing video titles for CTR, generating thumbnail text, A/B testing title variations, or pairing titles with complementary thumbnails. Covers framework fitting method, universalization strategy, complementarity principle, and psychological trigger analysis. |
+| [clipify](creative/video-production/clipify/) | Find the funniest moments in a video, cut standalone clips, optionally reformat 16:9 to 9:16, and burn opus-style captions. |
+| [editframe](creative/video-production/editframe/) | Build, preview, and render videos with Editframe, the HTML/CSS/React video composition tool. Use this whenever the user mentions Editframe, wants code-generated videos, asks to scaffold an Editframe project, build an HTML/CSS video composition, render MP4 locally, use ef-timegroup/ef-video/ef-audio/ef-text components, or automate video generation with Node.js and FFmpeg. |
 | [claude-design](creative/claude-design/) | Design one-off HTML artifacts (landing, deck, prototype). |
 | [comfyui](creative/comfyui/) | Generate images, video, and audio with ComfyUI — install, launch, manage nodes/models, run workflows with parameter injection. Uses the official comfy-cli for lifecycle and direct REST/WebSocket API for execution. |
 | [design-md](creative/design-md/) | Use when creating, editing, or validating DESIGN.md files, design tokens, DTCG token specs, Tailwind theme exports, design system documentation, WCAG contrast checks, or Google Stitch-compatible design specs. |
@@ -193,6 +198,7 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [pretext](creative/pretext/) | Use when building creative browser demos with @chenglou/pretext — DOM-free text layout for ASCII art, typographic flow around obstacles, text-as-geometry games, kinetic typography, and text-powered generative art. Produces single-file HTML demos by default. |
 | [sketch](creative/sketch/) | Throwaway HTML mockups: 2-3 design variants to compare. |
 | [touchdesigner-mcp](creative/touchdesigner-mcp/) | Control a running TouchDesigner instance via twozero MCP — create operators, set parameters, wire connections, execute Python, build real-time visuals. 36 native tools. |
+
 
 ### ⚙️ DevOps & Infrastructure
 
@@ -307,7 +313,7 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [growth](marketing/growth/) | Use when optimizing growth across the full funnel: in-product CRO (signup, onboarding, paywalls, churn) and go-to-market strategy (launches, pricing, email, referrals, A/B tests, psychology). |
 | [hooks](marketing/hooks/) | Use when generating hooks, headlines, titles, and scroll-stopping openers for content. |
 | [last30days](marketing/last30days/) | Use when researching what happened in the last 30 days on a topic. Also triggered by 'last30'. Sources: Reddit, X, YouTube, web. Produces expert-level summary with copy-paste-ready prompts. |
-| [open](marketing/last30days/variants/open/) | Research topics, manage watchlists, get briefings, query history. Also triggered by 'last30'. Sources: Reddit, X, YouTube, web. |
+| [last30days-open](marketing/last30days/variants/open/) | Use only when the user explicitly asks for the open variant of last30days, including watchlists, briefings, and history queries. Sources: Reddit, X, YouTube, web. |
 | [launch-strategy](marketing/launch-strategy/) | When the user wants to plan a product launch, feature announcement, or release strategy. Use when someone mentions 'launch,' 'Product Hunt,' 'feature release,' 'go-to-market,' 'beta launch,' 'early access,' 'waitlist,' or 'launch checklist.' |
 | [marketing-psychology](marketing/marketing-psychology/) | When the user wants to apply psychological principles, mental models, or behavioral science to marketing. Use when someone mentions 'psychology,' 'mental models,' 'cognitive bias,' 'persuasion,' 'behavioral science,' 'anchoring,' 'social proof,' 'scarcity,' 'loss aversion,' 'framing,' or 'nudge.' |
 | [meta-ads](marketing/meta-ads/) | Daily Meta ad operations via Marketing API — check performance, kill losers, promote winners, generate 6 fresh creatives via Nano Banana Pro, upload as new ads, and report to Signal. Runs as cron at 4am ET. |
@@ -377,10 +383,9 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [d3js-visualization](visual-design/d3js-visualization/) | Use when creating interactive D3.js data visualizations. |
 | [design-review](visual-design/design-review/) | Run a product design review on a feature or site. Answers 13 design questions, runs Nielsen Norman heuristic evaluation, builds before/after visual fixes, and deploys a shareable report to Surge. Use when asked to review a design, audit UX, do a design review, or analyze a product's user experience. |
 | [excalidraw-mcp](visual-design/excalidraw-mcp/) | Use when creating hand-drawn style Excalidraw diagrams via the Excalidraw MCP at https://mcp.excalidraw.com/mcp. Use for flow diagrams, architecture diagrams, slide visuals, and any time a sketchy/hand-drawn diagram is needed as a PNG file. |
-| [frontend-design](visual-design/frontend-design/) | Use when build production-grade frontend interfaces with high design quality. |
 | [frontend-slides](visual-design/frontend-slides/) | Use when creating animation-rich HTML presentations or convert PPT to web. |
 | [image-generator](visual-design/image-generator/) | Use when generate article visuals: diagrams, hero images, screenshots. |
-| [impeccable](visual-design/impeccable/) | Run impeccable design quality commands on frontend code — audit, critique, polish, animate, normalize, and more. Built on top of the frontend-design skill with 21 steering commands and 10 domain-specific reference files. Use when doing a design QA pass, reviewing UI quality, or refining a… |
+| [impeccable](visual-design/impeccable/) | Run impeccable design quality commands on frontend code — audit, critique, polish, animate, normalize, and more. Built on top of the frontend-design skill with 20 steering commands and 10 domain-specific reference files. Use when doing a design QA pass, reviewing UI quality, or refining a… |
 | [adapt](visual-design/impeccable/commands/adapt/) | Adapt designs to work across different screen sizes, devices, contexts, or platforms. Implements breakpoints, fluid layouts, and touch targets. Use when the user mentions responsive design, mobile layouts, breakpoints, viewport adaptation, or cross-device compatibility. |
 | [animate](visual-design/impeccable/commands/animate/) | Review a feature and enhance it with purposeful animations, micro-interactions, and motion effects that improve usability and delight. Use when the user mentions adding animation, transitions, micro-interactions, motion design, hover effects, or making the UI feel more alive. |
 | [arrange](visual-design/impeccable/commands/arrange/) | Improve layout, spacing, and visual rhythm. Fixes monotonous grids, inconsistent spacing, and weak visual hierarchy. Use when the user mentions layout feeling off, spacing issues, visual hierarchy, crowded UI, alignment problems, or wanting better composition. |
@@ -392,7 +397,7 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [delight](visual-design/impeccable/commands/delight/) | Add moments of joy, personality, and unexpected touches that make interfaces memorable and enjoyable to use. Elevates functional to delightful. Use when the user asks to add polish, personality, animations, micro-interactions, delight, or make an interface feel fun or memorable. |
 | [distill](visual-design/impeccable/commands/distill/) | Strip designs to their essence by removing unnecessary complexity. Great design is simple, powerful, and clean. Use when the user asks to simplify, declutter, reduce noise, remove elements, or make a UI cleaner and more focused. |
 | [extract](visual-design/impeccable/commands/extract/) | Extract and consolidate reusable components, design tokens, and patterns into your design system. Identifies opportunities for systematic reuse and enriches your component library. Use when the user asks to create components, refactor repeated UI patterns, build a design system, or extract tokens. |
-| [frontend-design](visual-design/impeccable/commands/frontend-design/) | Create distinctive, production-grade frontend interfaces with high design quality. Generates creative, polished code that avoids generic AI aesthetics. Use when the user asks to build web components, pages, artifacts, posters, or applications, or when any design skill requires project context. |
+| [frontend-design](visual-design/frontend-design/) | Create distinctive, production-grade frontend interfaces with high design quality. Generates creative, polished code that avoids generic AI aesthetics. Use when the user asks to build web components, pages, artifacts, posters, or applications, or when any design skill requires project context. |
 | [harden](visual-design/impeccable/commands/harden/) | Improve interface resilience through better error handling, i18n support, text overflow handling, and edge case management. Makes interfaces robust and production-ready. Use when the user asks to harden, make production-ready, handle edge cases, add error states, or fix overflow and i18n issues. |
 | [normalize](visual-design/impeccable/commands/normalize/) | Audits and realigns UI to match design system standards, spacing, tokens, and patterns. Use when the user mentions consistency, design drift, mismatched styles, tokens, or wants to bring a feature back in line with the system. |
 | [onboard](visual-design/impeccable/commands/onboard/) | Designs and improves onboarding flows, empty states, and first-run experiences to help users reach value quickly. Use when the user mentions onboarding, first-time users, empty states, activation, getting started, or new user flows. |
@@ -434,42 +439,6 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 |-------|-------------|
 | [spotify](media/spotify/) | Spotify: play, search, queue, manage playlists and devices. |
 | [yt-dlp](media/yt-dlp/) | Download videos, extract metadata/transcripts, and process media from YouTube and other supported sites via yt-dlp. |
-
-### 🏢 Ops Center
-
-| Skill | Description |
-|-------|-------------|
-| [ops-center-codebase-review](ops-center/ops-center-codebase-review/) | Reference notes from full ops-center codebase review. |
-
-### 📚 Reference
-
-| Skill | Description |
-|-------|-------------|
-| [fintary-dashboard-notes](reference/fintary-dashboard-notes/) | Reference notes for Fintary ops-center dashboard rebuild. |
-| [ops-center-reference](reference/ops-center-reference/) | Fintary ops-center v2 architecture, API proxy pattern, infrastructure, env vars, and related repos. |
-
-### 🛠️ Software Development
-
-| Skill | Description |
-|-------|-------------|
-| [debugging-hermes-tui-commands](software-development/debugging-hermes-tui-commands/) | Debug Hermes Agent TUI slash commands: Python, gateway, Ink UI. |
-| [hermes-agent-skill-authoring](software-development/hermes-agent-skill-authoring/) | Author in-repo SKILL.md: frontmatter, validator, structure. |
-| [node-inspect-debugger](software-development/node-inspect-debugger/) | Debug Node.js via --inspect + Chrome DevTools Protocol CLI. |
-| [python-debugpy](software-development/python-debugpy/) | Debug Python: pdb REPL + debugpy remote (DAP). |
-| [spike](software-development/spike/) | Throwaway experiments to validate an idea before building. |
-
-### 🀄 Yuanbao
-
-| Skill | Description |
-|-------|-------------|
-| [yuanbao](yuanbao/) | Yuanbao (元宝) groups: @mention users, query info/members. |
-
-### 🎬 Video Production
-
-| Skill | Description |
-|-------|-------------|
-| [clipify](video-production/clipify/) | Find the funniest moments in a video, cut standalone clips, optionally reformat 16:9 to 9:16, and burn opus-style captions. |
-| [editframe](video-production/editframe/) | Build, preview, and render videos with Editframe, the HTML/CSS/React video composition tool. Use for code-generated videos, Editframe projects, HTML/CSS video compositions, MP4 rendering, and Node.js/FFmpeg video automation. |
 
 ---
 
@@ -518,7 +487,7 @@ These started from other open-source projects, modified and extended for these w
 | [last30days](marketing/last30days/) | [mvanhorn/last30days-skill](https://github.com/mvanhorn/last30days-skill) |
 | [stably-sdk-rules](devops/stably-sdk-rules/) | [skills.sh/stablyai](https://skills.sh/stablyai/agent-skills/stably-sdk-rules) |
 | [sahil-office-hours](research/sahil-office-hours/) | [slavingia/skills](https://github.com/slavingia/skills) |
-| [design-md](visual-design/design-md/) | [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md) + [Google Stitch DESIGN.md spec](https://stitch.withgoogle.com/docs/design-md/overview/) |
+| [design-md](creative/design-md/) | [VoltAgent/awesome-design-md](https://github.com/VoltAgent/awesome-design-md) + [Google Stitch DESIGN.md spec](https://stitch.withgoogle.com/docs/design-md/overview/) |
 | [design-mode](visual-design/design-mode/) | [elder-plinius/CL4R1T4S](https://github.com/elder-plinius/CL4R1T4S/blob/main/ANTHROPIC/Claude-Design-Sys-Prompt.txt) (Anthropic design-surface system prompt) |
 
 ## License
