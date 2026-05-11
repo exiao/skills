@@ -1,6 +1,6 @@
 # Creative Research Methods: Finding Trending Ad Formats
 
-**Purpose:** Discover trending ad formats, creative concepts, and content styles that are working RIGHT NOW - then adapt them for OpenEd campaigns.
+**Purpose:** Discover trending ad formats, creative concepts, and content styles that are working RIGHT NOW - then adapt them for [PRODUCT] campaigns.
 
 ---
 
@@ -19,9 +19,9 @@ The best Meta ads often borrow formats from organic content that's already worki
 ### How to Use It
 
 1. **Search competitors directly:**
-   - Search for "homeschool" related brands
-   - Look at what curriculum companies are running
-   - Check education technology brands
+   - Search for brands in the target category
+   - Look at what direct competitors are running
+   - Check adjacent-category brands
 
 2. **Look for long-running ads:**
    - Ads running 30+ days = likely performing
@@ -34,13 +34,13 @@ The best Meta ads often borrow formats from organic content that's already worki
    - Copy the primary text structure
    - Note hook style
 
-### Specific Searches for OpenEd
+### Category-Specific Searches
 
-- "homeschool curriculum"
-- "online school"
-- "home education"
-- "charter school"
-- Education technology brands
+- "[category] tools"
+- "[category] alternatives"
+- "[job-to-be-done] solution"
+- "charter incumbent solution"
+- Category technology brands
 - Parenting/family brands (for format inspiration)
 
 ### Format Patterns to Track
@@ -61,7 +61,7 @@ Even for Meta ads, TikTok formats often translate well because they're native/lo
 
 1. **Top Ads Dashboard:**
    - Filter by region (US)
-   - Filter by industry (Education, Parenting)
+   - Filter by industry (Category, Parenting)
    - Sort by engagement or conversions
 
 2. **What to look for:**
@@ -71,9 +71,9 @@ Even for Meta ads, TikTok formats often translate well because they're native/lo
    - Sound/music trends (adapt for Meta)
 
 3. **Trending Hashtags:**
-   - Check what hashtags are trending in #homeschool
-   - Look at #momtok formats
-   - See what's working in #education
+   - Check what hashtags are trending in #category
+   - Look at #[audience-community] formats
+   - See what's working in #category
 
 ### Format Ideas from TikTok
 
@@ -102,12 +102,12 @@ Even for Meta ads, TikTok formats often translate well because they're native/lo
 - Caption styles getting saves
 
 **Reddit:**
-- Post formats in parenting/homeschool subs
+- Post formats in parenting/category subs
 - What gets upvoted organically?
 - The "confession" or "update" format
 
 **Facebook Groups:**
-- What posts get shared in homeschool groups?
+- What posts get shared in category groups?
 - What formats drive comments?
 - What makes people tag friends?
 
@@ -162,7 +162,7 @@ For each format type, maintain examples:
    - Text overlay styles
 
 3. **YouTube Ad Library:**
-   - Search "homeschool" or related terms
+   - Search "category" or related terms
    - Note pre-roll ad structures
    - Identify hook patterns
 
@@ -172,7 +172,7 @@ For each format type, maintain examples:
 
 ### Google Trends
 
-- Search interest in homeschool terms
+- Search interest in category terms
 - Seasonal patterns
 - Related queries rising
 
@@ -212,7 +212,7 @@ For each format type, maintain examples:
 ### Weekly Deep Dive (30 min)
 
 1. **TikTok Creative Center** (10 min)
-   - Top performing ads in education
+   - Top performing ads in category
    - New format patterns
 
 2. **Competitor Audit** (10 min)
@@ -260,7 +260,7 @@ For each format type, maintain examples:
 **Why It Works:**
 [What makes this effective]
 
-**OpenEd Adaptation:**
+**[PRODUCT] Adaptation:**
 [How we could use this]
 
 **Priority:** High / Medium / Low
@@ -318,7 +318,7 @@ For each format type, maintain examples:
 
 3. **Adapt, don't copy**
    - Use format structure
-   - Apply OpenEd voice and message
+   - Apply the product voice and message
    - Make it authentic to our brand
 
 ### Format Testing Priority

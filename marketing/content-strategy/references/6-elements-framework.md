@@ -170,9 +170,9 @@ After the hook, the body should:
 The final 1-2 sentences that connect to your CTA:
 
 ```
-"OpenEd is tuition-free. Application takes 5 minutes."
-"Join 5,000+ families who discovered a better way."
-"See if you qualify - it takes 60 seconds."
+"[PRODUCT] reduces [pain] in minutes."
+"Join 5,000+ customers who found a better workflow."
+"Start with the free template."
 ```
 
 ### Formatting Best Practices
@@ -213,10 +213,10 @@ The headline should:
 **Tone:** Clear, direct, benefit-focused
 
 **What works:**
-- Benefit statements: "Homeschooling Made Possible"
-- Value props: "Tuition-Free Personalized Education"
-- Outcomes: "From Struggling to Thriving"
-- Questions: "Ready for Educational Freedom?"
+- Benefit statements: "Cleaner Workflows Made Possible"
+- Value props: "Personalized Setup Without the Complexity"
+- Outcomes: "From Scattered to Organized"
+- Questions: "Ready for a Cleaner Workflow?"
 
 **What doesn't work:**
 - Vague statements: "Learn More About Us"
@@ -234,7 +234,7 @@ The headline should:
 **Simple Promise:**
 ```
 "[Desired State] Made [Easy/Possible/Simple]"
-→ "Homeschooling Made Possible"
+→ "Cleaner Workflows Made Possible"
 ```
 
 **Transformation:**
@@ -246,7 +246,7 @@ The headline should:
 **Social Proof:**
 ```
 "Join [Number]+ [Audience]"
-→ "Join 5,000+ Families"
+→ "Join 5,000+ Customers"
 ```
 
 **Question:**
@@ -280,23 +280,23 @@ The description should:
 
 **Social Proof:**
 ```
-"Join 5,000+ families"
+"Join 5,000+ customers"
 "Trusted by thousands"
 "See why parents love it"
 ```
 
 **Clarification:**
 ```
-"Tuition-free program"
-"5-minute application"
-"No experience needed"
+"Low-friction setup"
+"5-minute setup"
+"No migration required"
 ```
 
 **Friction Reduction:**
 ```
 "Free to apply"
 "No commitment required"
-"See if you qualify"
+"Start free"
 ```
 
 ### Character Limit
@@ -310,7 +310,7 @@ The description should:
 → "Apply for Fall 2026"
 
 [Proof Point] + [Audience]
-→ "5,000+ families enrolled"
+→ "5,000+ customers enrolled"
 
 [Benefit] + [Ease]
 → "Free program, easy application"
@@ -324,9 +324,9 @@ The action button users click. Meta provides limited options.
 
 ### Available CTA Options
 
-**Education/Program CTAs:**
+**Program CTAs:**
 - Learn More (lowest commitment)
-- Apply Now (higher intent)
+- Start Now (higher intent)
 - Sign Up (for leads)
 - Get Quote (if applicable)
 - Contact Us (for questions)
@@ -337,19 +337,19 @@ The action button users click. Meta provides limited options.
 |---------------------|-----------|
 | Cold (unaware) | Learn More, See More |
 | Warm (considering) | Sign Up, Get Started |
-| Hot (ready) | Apply Now, Enroll Now |
+| Hot (ready) | Start Now, Get Started |
 
 ### CTA Best Practices
 
-1. **Match to awareness level** - Don't ask cold traffic to "Apply Now"
+1. **Match to awareness level** - Don't ask cold traffic to "Start Now"
 2. **Match to offer** - CTA should align with what happens next
 3. **Consistency** - CTA button should match bridge copy
-4. **Test variations** - Sometimes "Learn More" outperforms "Apply Now"
+4. **Test variations** - Sometimes "Learn More" outperforms "Start Now"
 
-### OpenEd Recommended CTAs
+### [PRODUCT] Recommended CTAs
 
 - **Cold campaigns:** "Learn More"
-- **Warm retargeting:** "Apply Now" or "Sign Up"
+- **Warm retargeting:** "Start Now" or "Sign Up"
 - **Newsletter/lead magnet:** "Sign Up"
 - **Webinar/event:** "Register" or "Sign Up"
 
@@ -363,8 +363,8 @@ Where users go when they click. Critical for conversion.
 
 **The #1 rule:** Landing page headline should mirror the ad.
 
-If ad says: "Tuition-Free Personalized Education"
-Landing page should say: "Tuition-Free Personalized Education" (or very close)
+If ad says: "Personalized Setup Without the Complexity"
+Landing page should say: "Personalized Setup Without the Complexity" (or very close)
 
 **Why it matters:**
 - Reduces cognitive load
@@ -392,7 +392,7 @@ Landing page should say: "Tuition-Free Personalized Education" (or very close)
 
 **4. Proof Elements**
 - Testimonials near CTA
-- Social proof (number of families)
+- Social proof (number of customers)
 - Trust badges if applicable
 
 **5. Friction Reduction**
@@ -455,7 +455,7 @@ Ensure proper tracking:
 2. **Media format** (video vs image, UGC vs produced)
 3. **Primary text structure** (long vs short, story vs direct)
 4. **Headline** (benefit angle)
-5. **CTA button** (Learn More vs Apply Now)
+5. **CTA button** (Learn More vs Start Now)
 6. **Description** (urgency vs proof)
 
 ### A/B Testing Best Practices

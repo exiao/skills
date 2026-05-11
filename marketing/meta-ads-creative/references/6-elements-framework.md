@@ -213,10 +213,10 @@ The headline should:
 **Tone:** Clear, direct, benefit-focused
 
 **What works:**
-- Benefit statements: "Homeschooling Made Possible"
-- Value props: "Tuition-Free Personalized Education"
-- Outcomes: "From Struggling to Thriving"
-- Questions: "Ready for Educational Freedom?"
+- Benefit statements: "Cleaner Workflows Made Possible"
+- Value props: "Personalized Setup Without the Complexity"
+- Outcomes: "From Scattered to Organized"
+- Questions: "Ready for a Cleaner Workflow?"
 
 **What doesn't work:**
 - Vague statements: "Learn More About Us"
@@ -228,13 +228,13 @@ The headline should:
 **Benefit + Mechanism:**
 ```
 "[Outcome] Without [Obstacle]"
-→ "Quality Education Without the Cost"
+→ "Quality Category Without the Cost"
 ```
 
 **Simple Promise:**
 ```
 "[Desired State] Made [Easy/Possible/Simple]"
-→ "Homeschooling Made Possible"
+→ "Cleaner Workflows Made Possible"
 ```
 
 **Transformation:**
@@ -287,8 +287,8 @@ The description should:
 
 **Clarification:**
 ```
-"Tuition-free program"
-"5-minute application"
+"Low-friction setup"
+"5-minute setup"
 "No experience needed"
 ```
 
@@ -324,7 +324,7 @@ The action button users click. Meta provides limited options.
 
 ### Available CTA Options
 
-**Education/Program CTAs:**
+**Category/Program CTAs:**
 - Learn More (lowest commitment)
 - Apply Now (higher intent)
 - Sign Up (for leads)
@@ -363,8 +363,8 @@ Where users go when they click. Critical for conversion.
 
 **The #1 rule:** Landing page headline should mirror the ad.
 
-If ad says: "Tuition-Free Personalized Education"
-Landing page should say: "Tuition-Free Personalized Education" (or very close)
+If ad says: "Personalized Setup Without the Complexity"
+Landing page should say: "Personalized Setup Without the Complexity" (or very close)
 
 **Why it matters:**
 - Reduces cognitive load
@@ -410,7 +410,7 @@ Landing page should say: "Tuition-Free Personalized Education" (or very close)
 
 **Explainer/Sales Page:**
 - For cold/warm audiences
-- More education needed
+- More category needed
 - Testimonials and benefits
 - CTA after value established
 

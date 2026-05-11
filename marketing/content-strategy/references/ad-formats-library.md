@@ -152,10 +152,10 @@ r/[subreddit]
 - "I found this" moments
 
 **Subreddits to Reference:**
-- r/homeschool
-- r/Parenting
-- r/specialneeds
-- r/education
+- r/[niche-community]
+- r/[audience-community]
+- r/[problem-community]
+- r/[category-community]
 
 ---
 
@@ -639,7 +639,7 @@ Feature 3: X        Feature 3: Y
 ```
 "[Direct quote - specific outcome or transformation]"
 
-- [Name], OpenEd Parent
+- [Name], [Customer Segment]
 ```
 
 **Best For:**

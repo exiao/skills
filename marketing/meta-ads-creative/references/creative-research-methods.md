@@ -21,7 +21,7 @@ The best Meta ads often borrow formats from organic content that's already worki
 1. **Search competitors directly:**
    - Search for "category" related brands
    - Look at what product companies are running
-   - Check education technology brands
+   - Check adjacent-category brands
 
 2. **Look for long-running ads:**
    - Ads running 30+ days = likely performing
@@ -38,7 +38,7 @@ The best Meta ads often borrow formats from organic content that's already worki
 
 - "category product"
 - "online school"
-- "home education"
+- "home category"
 - "charter school"
 - Education technology brands
 - Parenting/family brands (for format inspiration)
@@ -71,9 +71,9 @@ Even for Meta ads, TikTok formats often translate well because they're native/lo
    - Sound/music trends (adapt for Meta)
 
 3. **Trending Hashtags:**
-   - Check what hashtags are trending in #category
-   - Look at #momtok formats
-   - See what's working in #education
+   - Check what hashtags are trending in #[niche]
+   - Look at #[audience-community] formats
+   - See what's working in #[category]
 
 ### Format Ideas from TikTok
 
@@ -212,7 +212,7 @@ For each format type, maintain examples:
 ### Weekly Deep Dive (30 min)
 
 1. **TikTok Creative Center** (10 min)
-   - Top performing ads in education
+   - Top performing ads in category
    - New format patterns
 
 2. **Competitor Audit** (10 min)

@@ -345,9 +345,9 @@ Transform, change, revolutionize, overhaul, upgrade, improve, enhance, boost, sk
 **Usage:** "[Surprising claim] (not joking)"
 
 **Examples:**
-- "This doubled our learning in half the time (not joking)"
-- "We spent $0 on curriculum this year (not joking)"
-- "My kid asked for more math (not joking)"
+- "This doubled our output in half the time (not joking)"
+- "We cut our reporting time in half (not joking)"
+- "The team asked to keep the new workflow (not joking)"
 
 **Why it works:** Anticipates skepticism, adds conviction
 
@@ -539,7 +539,7 @@ When applying power words to your niche, consider:
 - Strong performers: Profitable, strategic, smart, disciplined, compounding
 - Avoid: "Guaranteed," "risk-free" (legal/ethical issues)
 
-**Education/Coaching:**
+**Category/Coaching:**
 - Strong performers: Transformative, practical, actionable, proven, hands-on
 - Avoid: Effortless, instant (learning takes work, don't oversell)
 
