@@ -366,6 +366,8 @@ If stash/apply or branch switching refuses because untracked files conflict with
 
 Key idea: create a fresh worktree from `origin/main`, copy or patch only intentional changes into it, exclude generated runtime state, and stage explicit files after inspecting `git diff --name-status`. For broad snapshot PR curation, also see `references/curating-snapshot-prs.md`.
 
+When a PR or stash comes from a runtime/local snapshot, assume it contains a mix of useful lessons, stale generated changes, private operational data, and regressions. Do not merge it wholesale. Preserve the live checkout state first, then curate only from a dedicated worktree. Classify files as KEEP, DISCARD, or CONFLICT; revert unwanted public diffs from base without destructive checkout/reset commands; redact private details; preserve existing modularization; validate changed `SKILL.md` frontmatter and run a private-pattern scan before pushing. For live runtime checkout triage after `git stash apply`, see `references/runtime-stash-triage.md`.
+
 ## Pitfalls
 
 ### Never amend/squash a pushed commit when force-push is blocked

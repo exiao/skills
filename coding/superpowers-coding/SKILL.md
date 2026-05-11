@@ -538,6 +538,12 @@ Before implementing anything that calls an external API, library, or service you
 
 Model names, parameter names, and auth methods change. Never assume. This applies to: OpenAI, GitHub Actions, Google APIs, RevenueCat, Stripe, Fal.ai, and any npm package you haven't recently read docs for.
 
+### Dynamic account/context before special-case config
+
+When implementing customer/account/report pages, do not add client-specific env vars, name checks, or fallback IDs as a shortcut unless the product explicitly needs a pinned account. Use the app's active account/context plumbing and resolve resources through that context. A hardcoded `ALEVO_ACCOUNT_ID`-style escape hatch makes the feature look verified while bypassing the real multi-account path.
+
+If the task says “verify this account first,” verify the actual contextual API path for that account before or alongside implementation. If credentials prevent live verification, say that plainly and keep the code dynamic rather than replacing verification with config.
+
 ### 3-Error Escalation Rule
 
 If the same tool call or test fails 3 consecutive times without progress, **stop**. Do not keep trying. Report:

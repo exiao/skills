@@ -37,6 +37,8 @@ BASE_SHA=$(git rev-parse HEAD~1)  # or origin/main
 HEAD_SHA=$(git rev-parse HEAD)
 ```
 
+**For GitHub PR reviews:** also use the checklist in `references/pr-review-field-guide.md`. It covers `gh pr view`, inline PR comments, issue comments, diff inspection, targeted tests, and concise severity reporting. This avoids missing automated inline comments that do not appear in formal review summaries.
+
 **2. Dispatch code-reviewer subagent** using template at `code-reviewer.md`
 
 **Placeholders in the template:**

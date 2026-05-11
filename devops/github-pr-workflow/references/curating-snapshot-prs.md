@@ -6,11 +6,16 @@ Use this when a PR was created from a runtime/local snapshot and contains a mix 
 
 Turn the raw dump into a mergeable curation PR. Do not merge the snapshot wholesale.
 
+For runtime checkout stash triage after a user applies a stash on `main`, see `references/runtime-stash-triage.md`. It gives the KEEP / DISCARD / CONFLICTS reporting shape and commands for staged diffs, unmerged index entries, generated runtime files, and orphan category stubs.
+
 ## Workflow
 
-1. Inspect PR metadata and changed files.
+0. Preserve the live source checkout before curating.
+   If the snapshot came from a runtime directory such as `~/.hermes/skills`, treat that checkout as user state, not a disposable work area. Do not clean, reset, or drop stashes there. If it has uncommitted changes, first preserve them on a branch or stash that can be reapplied, then do all curation in a dedicated worktree under `~/projects/_worktrees/`.
+
+1. Inspect PR metadata, mergeability, and changed files.
    ```bash
-   gh pr view <PR> --json headRefName,baseRefName,title,url,isDraft
+   gh pr view <PR> --json headRefName,baseRefName,title,url,isDraft,mergeStateStatus,reviewDecision
    git diff --name-status origin/main...HEAD
    git diff --stat origin/main...HEAD
    ```
@@ -20,14 +25,23 @@ Turn the raw dump into a mergeable curation PR. Do not merge the snapshot wholes
    - MAIN: generated index churn, stale docs, duplicated inline docs, downgrades, private snapshots.
    - CHERRY: files with a few reusable lines mixed with private or stale content.
 
-3. Revert MAIN files from base.
+3. Revert MAIN files from base without destructive checkout/reset commands.
+   Prefer writing the base copy explicitly:
    ```bash
-   git checkout origin/main -- path/to/file.md
+   git show origin/main:path/to/file.md > path/to/file.md
+   git add path/to/file.md
    ```
-   For files added only by the snapshot and not wanted:
+   For files added only by the snapshot and not wanted, remove them from the index/worktree with `git rm` only inside the disposable worktree, never in the user's live checkout.
+
+   If the user wants a changed skill preserved locally but dropped from the public PR, keep or copy it under the gitignored local-only category. In `exiao/skills`, `internal/` is ignored for this purpose. Example for a local-only runtime skill that already lives under `internal/`:
    ```bash
-   git rm path/to/file.md
+   git -C ~/.hermes/skills check-ignore -v internal/hermes-agent/SKILL.md
+
+   # In the disposable PR worktree, remove the public copy instead of publishing local runtime notes.
+   git rm -r ai-tools/hermes-agent
+   git add -A README.md ai-tools
    ```
+   Verify `gh pr diff <PR> --name-only | grep -i '<skill-name>'` returns nothing before reporting that the skill was dropped from the PR.
 
 4. Redact CHERRY/KEEP content.
    Replace private domains, account IDs, cron IDs, Render/Railway IDs, Typefully IDs, local paths, org names, personal owner wording, and operational metrics with env vars or generic placeholders.
@@ -42,6 +56,7 @@ Turn the raw dump into a mergeable curation PR. Do not merge the snapshot wholes
    README/CLAUDE category counts and skill rows should reflect the final curated diff, not the raw snapshot.
 
 8. Validate before pushing.
+   Use an independent review pass for broad curation PRs. A subagent or reviewer should look specifically for public-repo leaks, stale references, hardcoded local paths/product IDs, accidental strategy drift into operational skills, and regressions against `origin/main`.
    ```bash
    # Changed SKILL.md frontmatter only
    python3 - <<'PY'
@@ -108,7 +123,13 @@ PY
       -F body=@/tmp/pr-body.md
     ```
 
-11. Re-check CI and review status.
+11. Re-check CI, mergeability, and review status.
+    A curation PR is not done until GitHub reports it as mergeable and reviewer feedback is either addressed or explicitly out of scope:
+    ```bash
+    gh pr view <PR> --json mergeStateStatus,reviewDecision,statusCheckRollup,isDraft
+    gh pr checks <PR>
+    ```
+    Check all comment sources, not just formal reviews. Automated reviewers often leave issue comments or inline review threads. If local `gh` lacks modern JSON flags such as `--slurp`, pipe paginated output through `jq -s 'add | ...'` instead.
 
 ## Common removals
 

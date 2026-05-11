@@ -115,19 +115,30 @@ Typical workflow: `stably test` > (failures?) > `stably fix` > `stably test`
 
 ## Bloom-Specific Setup
 
+Prefer the repo-local CLI if `stably` is not globally installed. Install dependencies first, then call `./node_modules/.bin/stably` directly so verification does not depend on global npm state.
+
 ```bash
 cd ~/projects/bloom-tests
+npm install --no-audit --no-fund
 source ~/.hermes/.env
 STABLY_API_KEY=$STABLY_API_KEY \
 STABLY_PROJECT_ID=$STABLY_PROJECT_ID \
 BASE_URL=https://bloom.onrender.com \
-stably test
+./node_modules/.bin/stably test
 ```
 
 To fix after a failing run:
 ```bash
 source ~/.hermes/.env
-STABLY_API_KEY=$STABLY_API_KEY STABLY_PROJECT_ID=$STABLY_PROJECT_ID stably fix
+STABLY_API_KEY=$STABLY_API_KEY STABLY_PROJECT_ID=$STABLY_PROJECT_ID ./node_modules/.bin/stably fix
+```
+
+If a test run URL is produced but `stably runs view` fails because `stably` is not on PATH, use the local binary:
+
+```bash
+source ~/.hermes/.env
+STABLY_API_KEY=$STABLY_API_KEY STABLY_PROJECT_ID=$STABLY_PROJECT_ID \
+./node_modules/.bin/stably runs view <runId>
 ```
 
 ## Playwright Pitfalls

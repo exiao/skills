@@ -336,6 +336,12 @@ When the user shares a link, thread, article, video, or pasted notes and says "i
 
 This fast incorporation path is for small-to-medium updates to existing skills. Use the full RED → GREEN → REFACTOR eval loop for creating new skills, large rewrites, or changes where quality can be meaningfully benchmarked.
 
+## Session Review Skill Maintenance
+
+When the user asks to review the current conversation and update the skill library, be active by default. Scan for workflow corrections, style preferences, non-trivial fixes, tool quirks, and any skill that was loaded but proved incomplete. Patch the currently loaded skill first when it owns the lesson; otherwise patch an existing class-level umbrella. Prefer a concise SKILL.md pitfall or step for reusable guidance, and put session-specific transcripts, commands, or curation details in `references/` with a one-line pointer from SKILL.md. Avoid one-session-one-skill sprawl: create a new skill only when no existing umbrella covers the class, and make the new name class-level rather than tied to a PR, error string, or today's feature.
+
+For repository cleanup sessions, capture the reusable operating rule, not the raw session log. Example: "runtime checkout stash apply left conflicts, generated state, and public/private skill split" belongs as a stash-curation pitfall under a git/skills-cleanup umbrella, while the exact file list belongs in a reference file if future agents need it.
+
 ---
 
 ## Improving the skill

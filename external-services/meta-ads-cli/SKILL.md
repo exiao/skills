@@ -443,6 +443,8 @@ Always use `$BLOOM_APP_STORE_ID` for iOS ad links (the current App Store ID). Th
 
 For campaigns that send users into Bloombot's WhatsApp Business number, load `references/click-to-whatsapp-bloombot.md` before setup or optimization. Key rule: judge by cost per qualified conversation, not cost per message. Capture CTWA webhook metadata (`ctwa_clid`, `source_id`, referral headline/body/media, prefill text) on first inbound message, then send CAPI events back to Meta: Lead = qualified conversation, Subscribe/CompleteRegistration = recurring opt-in, Purchase = paid subscription. Do not scale conversation optimization without downstream quality data, or Meta will find cheap bored tappers.
 
+When implementing CTWA tracking/routing or making first-pass Bloombot ad assets, also load `references/2026-05-10-ctwa-implementation-pitfalls.md`. It captures the repo split (Bloom backend + bloombot runtime plugin), required context keys, first-response mapping, local test blocker, and creative QA pitfalls from the first implementation pass.
+
 ## Attribution: Custom Product Pages
 
 For iOS app campaigns, use Apple Custom Product Pages (CPPs) as the ad destination instead of the default App Store listing. Each CPP gets tracked separately in App Store Connect analytics, giving you exact revenue per ad/campaign with zero SDK complexity.

@@ -140,12 +140,27 @@ search_files("function_name(", path="src/", file_glob="*.py")
 search_files("variable_name\\s*=", path="src/", file_glob="*.py")
 ```
 
+### 6. Trace Import Graphs Before Blaming the Environment
+
+**WHEN focused tests fail during import/setup with an unrelated dependency:**
+
+- Do not dismiss it as an environment blocker yet
+- Read the full traceback and identify every import hop
+- Look for package `__init__.py` barrel imports or eager imports that pull heavy modules into unrelated tests
+- Prefer shrinking the import surface over pinning or blaming the dependency
+- Re-run the focused test after fixing the import graph
+
+Example: a BloomBot API test failed with a `matplotlib` native import error because `bloom_backend.views.__init__` imported backtest/correlation/agent modules, which imported `bt` / `ffn` / `matplotlib`. The fix was removing heavy view modules from the views package barrel because routes already imported them directly.
+
+Read `references/unrelated-import-failures.md` for the full checklist.
+
 ### Phase 1 Completion Checklist
 
 - [ ] Error messages fully read and understood
 - [ ] Issue reproduced consistently
 - [ ] Recent changes identified and reviewed
 - [ ] Evidence gathered (logs, state, data flow)
+- [ ] For import/setup failures, import chain traced before blaming environment/dependencies
 - [ ] Problem isolated to specific component/code
 - [ ] Root cause hypothesis formed
 

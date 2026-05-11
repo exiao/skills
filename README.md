@@ -25,7 +25,7 @@ Install the skills from https://github.com/exiao/skills
 
 | Category | Skills | Description |
 |----------|--------|-------------|
-| [**ai-tools**](ai-tools/) | 10 | AI agents, MCP integrations, web search, LLM tooling |
+| [**ai-tools**](ai-tools/) | 9 | AI agents, MCP integrations, web search, LLM tooling |
 | [**app-store**](app-store/) | 28 | App Store tools, RevenueCat, Prometheus, ReelFarm |
 | [**coding**](coding/) | 29 | Programming, debugging, testing, code review, web scraping |
 | [**creative**](creative/) | 49 | Writing, editing, media production, content creation |
@@ -70,7 +70,6 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [claude-code-routines](ai-tools/claude-code-routines/) | Set up and manage Claude Code Routines — scheduled, API-triggered, and GitHub webhook automations that run on Anthropic's cloud. Use when asked about routines, scheduled tasks in Claude Code, automating with Claude, or setting up triggers for code review, deploys, alerts, or recurring tasks. |
 | [codex](ai-tools/codex/) | Delegate coding tasks to OpenAI Codex CLI agent. Use for building features, refactoring, PR reviews, and batch issue fixing. Requires the codex CLI and a git repository. |
 | [grok-search](ai-tools/grok-search/) | Search the web or X/Twitter using xAI Grok server-side tools (web_search, x_search) via the xAI Responses API. Use when you need tweets/threads/users from X, want Grok as an alternative to Brave, or you need structured JSON + citations. |
-| [hermes-agent](ai-tools/hermes-agent/) | Complete guide to using and extending Hermes Agent — CLI usage, setup, configuration, spawning additional agents, gateway platforms, skills, voice, tools, profiles, and a concise contributor reference. Load this skill when helping users configure Hermes, troubleshoot issues, spawn agent… |
 | [mcporter](ai-tools/mcporter/) | Use the mcporter CLI to list, configure, auth, and call MCP servers/tools directly (HTTP or stdio), including ad-hoc servers, config edits, and CLI/type generation. |
 | [native-mcp](ai-tools/native-mcp/) | Built-in MCP (Model Context Protocol) client that connects to external MCP servers, discovers their tools, and registers them as native Hermes Agent tools. Supports stdio and HTTP transports with automatic reconnection, security filtering, and zero-config tool injection. |
 | [opencode](ai-tools/opencode/) | Delegate coding tasks to OpenCode CLI agent for feature implementation, refactoring, PR review, and long-running autonomous sessions. Requires the opencode CLI installed and authenticated. |
