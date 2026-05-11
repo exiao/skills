@@ -190,7 +190,7 @@ psql "$NEW_DB_URL" < backup.sql
 
 ```bash
 createdb app_local
-pg_restore -d bloom_local --no-owner --no-privileges -j4 backup.dump
+pg_restore -d app_local --no-owner --no-privileges -j4 backup.dump
 ```
 
 ### Verify backup integrity
