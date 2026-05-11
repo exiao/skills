@@ -7,7 +7,7 @@ tags: [skills, maintenance, cleanup]
 ## Skills Repo Cleanup
 
 ### Key Facts
-- Skills repo: `~/.hermes/skills/` (git: `exiao/skills`)
+- Skills repo: `~/.hermes/skills/` (git: `$SKILLS_REPO`)
 - Automated skill creation nudge is **disabled** (`creation_nudge_interval: 0` in config.yaml)
 - Agent scans `~/.hermes/skills/` and `skills.external_dirs` (currently empty) — nothing else
 - Archive of removed duplicates/untracked skills: `~/.hermes/skills-archive/`
