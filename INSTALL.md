@@ -11,7 +11,7 @@
 ## Categories
 
 ### 1. Content & Writing
-Write articles, generate headlines, build content pipelines, and publish to Substack.
+Write articles, generate headlines, edit content, and publish to Substack.
 
 **Skills:** article-writer, brand-identity, content-strategy, editor-in-chief, evaluate-content, hooks, outline-generator, substack-draft, tweet-ideas, writer
 
