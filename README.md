@@ -383,7 +383,6 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [d3js-visualization](visual-design/d3js-visualization/) | Use when creating interactive D3.js data visualizations. |
 | [design-review](visual-design/design-review/) | Run a product design review on a feature or site. Answers 13 design questions, runs Nielsen Norman heuristic evaluation, builds before/after visual fixes, and deploys a shareable report to Surge. Use when asked to review a design, audit UX, do a design review, or analyze a product's user experience. |
 | [excalidraw-mcp](visual-design/excalidraw-mcp/) | Use when creating hand-drawn style Excalidraw diagrams via the Excalidraw MCP at https://mcp.excalidraw.com/mcp. Use for flow diagrams, architecture diagrams, slide visuals, and any time a sketchy/hand-drawn diagram is needed as a PNG file. |
-| [frontend-design](visual-design/frontend-design/) | Use when build production-grade frontend interfaces with high design quality. |
 | [frontend-slides](visual-design/frontend-slides/) | Use when creating animation-rich HTML presentations or convert PPT to web. |
 | [image-generator](visual-design/image-generator/) | Use when generate article visuals: diagrams, hero images, screenshots. |
 | [impeccable](visual-design/impeccable/) | Run impeccable design quality commands on frontend code — audit, critique, polish, animate, normalize, and more. Built on top of the frontend-design skill with 21 steering commands and 10 domain-specific reference files. Use when doing a design QA pass, reviewing UI quality, or refining a… |

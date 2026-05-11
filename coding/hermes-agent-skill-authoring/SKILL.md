@@ -36,7 +36,7 @@ Source of truth: `tools/skill_manager_tool.py::_validate_frontmatter`. Hard requ
 - `description` field present, ≤ **1024 chars** (`MAX_DESCRIPTION_LENGTH`).
 - Non-empty body after the closing `---`.
 
-Peer-matched shape used by every skill under `skills/software-development/`:
+Peer-matched shape used by skills under `coding/`:
 
 ```yaml
 ---
@@ -58,7 +58,7 @@ metadata:
 
 - Description: ≤ 1024 chars (enforced).
 - Full SKILL.md: ≤ 100,000 chars (enforced as `MAX_SKILL_CONTENT_CHARS`, ~36k tokens).
-- Peer skills in `software-development/` sit at **8-14k chars**. Aim for that range. If you're pushing past 20k, split into `references/*.md` and reference them from SKILL.md.
+- Peer skills in `coding/` sit at **8-14k chars**. Aim for that range. If you're pushing past 20k, split into `references/*.md` and reference them from SKILL.md.
 
 ## Peer-Matched Structure
 
@@ -97,7 +97,7 @@ Not every section is mandatory, but `Overview` + `When to Use` + actionable body
 skills/<category>/<skill-name>/SKILL.md
 ```
 
-Categories currently in repo (confirm with `ls skills/`): `autonomous-ai-agents`, `creative`, `data-science`, `devops`, `dogfood`, `email`, `gaming`, `github`, `leisure`, `mcp`, `media`, `mlops/*`, `note-taking`, `productivity`, `red-teaming`, `research`, `smart-home`, `social-media`, `software-development`.
+Categories currently in repo (confirm with `ls`): `ai-tools`, `app-store`, `coding`, `creative`, `devops`, `external-services`, `finance`, `marketing`, `media`, `memory`, `productivity`, `research`, `skills-meta`, `visual-design`.
 
 Pick the closest existing category. Don't invent new top-level categories casually.
 
