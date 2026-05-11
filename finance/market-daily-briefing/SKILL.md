@@ -172,7 +172,7 @@ After Signal, create a public-facing tweet of the sharpest single data point:
 node ~/projects/skills/marketing/typefully/scripts/typefully.js drafts:create $TYPEFULLY_SOCIAL_SET_ID \
   --platform x \
   --text "<post text>"
-# Do NOT add --schedule. Save as unscheduled draft only — Eric reviews before posting.
+# Do NOT add --schedule. Save as unscheduled draft only — the account owner reviews before posting.
 ```
 
 Tweet guidelines:

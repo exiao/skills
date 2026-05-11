@@ -43,7 +43,7 @@ Handling:
 - Stop uploads immediately.
 - Do not continue with Android if iOS failed, or vice versa.
 - Log whether image uploads or ad creative objects were already created.
-- Report that Eric needs to clean old ads or create fresh ad sets.
+- Report that the account owner needs to clean old ads or create fresh ad sets.
 
 ## Text-safe creative generation
 

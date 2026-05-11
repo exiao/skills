@@ -382,9 +382,9 @@ curl -s -X POST "$GRAPH_URL/$ACCOUNT/ads" \
 
 Repeat 6a-6c for Android ad set (`$ADSET_ANDROID`) using the Android app link, so each creative gets two ads (iOS + Android).
 
-⚠️ **If any API call returns an error with `payment` or `billing`: STOP and notify Eric.**
+⚠️ **If any API call returns an error with `payment` or `billing`: STOP and notify the account owner.**
 
-⚠️ **If ad creation returns Meta error `1487809` / "Too Many Ads" (ad set/campaign/account max ads, including paused/inactive ads): STOP uploading immediately and report it.** Do not partially roll out iOS-only or Android-only ads. Log whether an image upload or ad creative object was already created, then tell Eric the ad set needs cleanup or a fresh ad set before new ads can launch.
+⚠️ **If ad creation returns Meta error `1487809` / "Too Many Ads" (ad set/campaign/account max ads, including paused/inactive ads): STOP uploading immediately and report it.** Do not partially roll out iOS-only or Android-only ads. Log whether an image upload or ad creative object was already created, then tell the account owner the ad set needs cleanup or a fresh ad set before new ads can launch.
 
 ### Step 7 — Output Report
 
@@ -435,7 +435,7 @@ Load `references/ad-creative-framework.md` when generating new creatives, updati
 
 **NEVER attempt to log into Meta Ads Manager or Facebook via browser.** Browser login can trigger a security lockout on the ad account. All Meta ad management must go through the Marketing API only (`graph.facebook.com/v22.0`).
 
-If the API returns `code=31` ("pending action" / security hold), **stop and notify Eric** — he must resolve it manually from his own browser. Do not attempt browser automation to fix it.
+If the API returns `code=31` ("pending action" / security hold), **stop and notify the account owner** — he must resolve it manually from his own browser. Do not attempt browser automation to fix it.
 
 Always use `$BLOOM_APP_STORE_ID` for iOS ad links (the current App Store ID). The adset's `promoted_object.object_store_url` is the ground truth — verify it matches before creating creatives.
 

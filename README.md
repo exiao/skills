@@ -1,4 +1,4 @@
-# Eric's Skills — 90+ Claude Code Skill Templates
+# Skills — 90+ Claude Code Skill Templates
 
 > **Source:** [github.com/exiao/skills](https://github.com/exiao/skills) | **License:** MIT
 
@@ -183,7 +183,7 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [sora](creative/video-production/sora/) | Use when generate, remix, and manage Sora AI videos. |
 | [thumbnail](creative/video-production/thumbnail/) | Generate video cover frames and thumbnails for YouTube, TikTok, Reels, and social media. Use when asked for a video thumbnail, cover frame, YouTube thumbnail, or to extract a still from a video. |
 | [video-script](creative/video-production/video-script/) | Generate structured scene-by-scene video scripts with production metadata (visuals, audio, sources, transitions, captions) ready to feed into the video-production pipeline (Sora, Kling, ElevenLabs, InfiniteTalk, Remotion, stock-footage, video-editor). Use when asked to "write a video script",… |
-| [writer](creative/writer/) | Write content in Eric's voice — articles, blog posts, tweets, social media posts, marketing copy, newsletter drafts. Loads WRITING-STYLE.md and enforces kill phrases. |
+| [writer](creative/writer/) | Write content in the author's voice — articles, blog posts, tweets, social media posts, marketing copy, newsletter drafts. Loads WRITING-STYLE.md and enforces kill phrases. |
 | [youtube-content](creative/video-production/youtube-content/) | Fetch YouTube video transcripts and transform them into structured content (chapters, summaries, threads, blog posts). Use when the user shares a YouTube URL or video link, asks to summarize a video, requests a transcript, or wants to extract and reformat content from any YouTube video. |
 | [claude-design](creative/claude-design/) | Design one-off HTML artifacts (landing, deck, prototype). |
 | [comfyui](creative/comfyui/) | Generate images, video, and audio with ComfyUI — install, launch, manage nodes/models, run workflows with parameter injection. Uses the official comfy-cli for lifecycle and direct REST/WebSocket API for execution. |
@@ -282,6 +282,7 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [skill-improver](skills-meta/skill-improver/) | Autonomously optimize any Claude Code skill by running it repeatedly, scoring outputs against binary evals, mutating the prompt, and keeping improvements. |
 | [skill-preloading](skills-meta/skill-preloading/) | Reference for the two-tier skill loading system — preloaded vs category-gated skills, how to add/remove preloaded skills, and the external-services category layout. |
 | [skills-cleanup](skills-meta/skills-cleanup/) | How to clean up duplicate/untracked skills in the skills repo. |
+| [agent-improver](skills-meta/agent-improver/) | > |
 
 ### 📈 Marketing & Growth
 
@@ -325,6 +326,8 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [typefully](marketing/typefully/) | Use when creating, scheduling, or managing social posts via Typefully. |
 | [whop-content-rewards](marketing/whop-content-rewards/) | Set up and manage Content Rewards UGC campaigns on Whop for Bloom. Use when launching new campaigns, adding budget, reviewing submissions, or checking campaign performance. |
 | [xitter](marketing/xitter/) | Interact with X/Twitter via the x-cli terminal client using official X API credentials. Use for posting, reading timelines, searching tweets, liking, retweeting, bookmarks, mentions, and user lookups. |
+| [summarize-timeline](marketing/summarize-timeline/) | Summarize an X/Twitter timeline into a themed daily digest. Use when pulling a Following timeline via bird and producing a structured summary for Signal delivery. Triggers on 'summarize timeline', 'twitter digest', 'timeline summary', 'daily digest from twitter', 'twitter reader'. |
+| [xurl](marketing/xurl/) | Interact with X/Twitter via xurl, the official X API CLI. Use for posting, replying, quoting, searching, timelines, mentions, likes, reposts, bookmarks, follows, DMs, media upload, and raw v2 endpoint access. |
 
 ### 📋 Productivity
 
@@ -346,6 +349,7 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [openhue](productivity/openhue/) | Control Philips Hue lights, rooms, and scenes via the OpenHue CLI. Turn lights on/off, adjust brightness, color, color temperature, and activate scenes. |
 | [pokemon-player](productivity/pokemon-player/) | Play Pokemon games autonomously via headless emulation. Starts a game server, reads structured game state from RAM, makes strategic decisions, and sends button inputs — all from the terminal. |
 | [powerpoint](productivity/powerpoint/) | Use this skill any time a .pptx file is involved in any way — as input, output, or both. This includes: creating slide decks, pitch decks, or presentations; reading, parsing, or extracting text from any .pptx file (even if the extracted content will be used elsewhere, like in an email or… |
+| [airtable](productivity/airtable/) | Airtable REST API via curl. Records CRUD, filters, upserts. |
 
 ### 🔍 Research
 
@@ -360,6 +364,8 @@ See [CLAUDE.md](CLAUDE.md) for full conventions.
 | [synthetic-userstudies](research/synthetic-userstudies/) | Run synthetic user research sessions natively — no backend required. The agent plays an AI-generated persona and simulates a user interview based on the 4 Ps framework (Persona, Problem, Promise, Product). Use when a user wants to run a user research session, interview a synthetic persona,… |
 | [trip-planner](research/trip-planner/) | Generate detailed day-by-day travel itineraries with neighborhood-by-neighborhood routing, budget scaling, dietary-aware meal picks, proximity checks, and post-generation quality validation. Use when: plan a trip, travel itinerary, trip to [destination], vacation planning, travel planner. |
 | [yc-office-hours](research/yc-office-hours/) | Product discovery via YC-style forcing questions and 10-star product thinking. Use when starting a new feature, evaluating a product idea, or reframing a request into its most ambitious version. |
+| [another-perspective](research/another-perspective/) | Run a multi-perspective council analysis on any question, plan, or decision. Spawns parallel cognitive perspectives (Architect, Skeptic, Pragmatist, Innovator, User Advocate, Temporal Analyst) and synthesizes via structured dialectical analysis. Use when: making a significant decision, stress-testing a plan, red-teaming an idea, exploring alternatives, or needing a "devil's advocate" on something. Trigger phrases include "another perspective", "council analysis", "stress test this", "red team this", "poke holes in this", "multiple viewpoints", "what am I missing", "challenge this idea". |
+| [quick-brainstorm](research/quick-brainstorm/) | Lightweight brainstorm — 5 versions with estimated probabilities + assumption surfacing. Use when: brainstorm this, give me options, what are my options, quick brainstorm, /quick-brainstorm. |
 
 ### 🎯 Visual Design
 

@@ -5,7 +5,7 @@ description: Use when the cron fires at 8am ET on Mondays — pulls the week's m
 
 # Earnings Card Pipeline
 
-Every Monday, pulls up to 5 major companies reporting earnings that week, writes an analyst-perspective take for each, generates a styled earnings card via Nano Banana Pro, and creates unscheduled Typefully drafts for Eric review.
+Every Monday, pulls up to 5 major companies reporting earnings that week, writes an analyst-perspective take for each, generates a styled earnings card via Nano Banana Pro, and creates unscheduled Typefully drafts for account owner review.
 
 ---
 
@@ -139,7 +139,7 @@ node ~/.hermes/skills/marketing/typefully/scripts/typefully.js drafts:create $TY
   --platform x \
   --text "..." \
   --media "$MEDIA_ID"
-# Do NOT add --schedule. Save as unscheduled draft only — Eric reviews before posting.
+# Do NOT add --schedule. Save as unscheduled draft only — the account owner reviews before posting.
 # → returns draft_id, private_url
 ```
 
