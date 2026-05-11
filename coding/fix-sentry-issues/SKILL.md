@@ -10,48 +10,52 @@ Scan recent Sentry issues for Bloom (last 24h, all statuses), analyze root cause
 
 ## Prerequisites
 
-- Official Sentry CLI (`sentry`) authenticated via `$SENTRY_AUTH_TOKEN` (org: `$SENTRY_ORG`, project: `$SENTRY_PROJECT`)
-- GitHub CLI (`gh`) authenticated with $GITHUB_ORG access
+- Sentry MCP configured via mcporter (org: `$SENTRY_ORG`, region: `https://us.sentry.io`)
+- GitHub CLI (`gh`) authenticated with Bloom-Invest org access
 - Git worktrees for isolated branches
+- If this runs as cron, read `references/cron-safety.md` before changing attached skills or toolsets. The cron scanner can block execution based on loaded skill documentation, not just the task prompt.
+
+## Notes from prior runs
+
+- See `references/2026-05-08-sentry-cron-lessons.md` for Sentry CLI/MCP quirks, resolved-issue audit gotchas, and Bloom-specific triage examples discovered during an actual cron run.
+- See `references/2026-05-09-sentry-cron-lessons.md` for the `sentry.list_issues` MCP fallback, resolved-issue unrelated-commit handling, OpenAI Agents trace ID fix pattern, Capacitor Badge Android guard, and focused test command pitfalls.
+- See `references/2026-05-db-pool-catchalls.md` for a concrete DB pool exhaustion catch-all example.
+- See `references/2026-05-crypto-db-pool-noise.md` for per-item crypto/background loop handling plus deterministic logger tests.
 
 ## Workflow
 
-### 1. Check for existing Sentry fix PRs (do this FIRST)
-
-Before analyzing issues, check what's already in flight:
+### 1. Fetch recent issues (last 12h, most recent 10)
 
 ```bash
-cd ~/projects/bloom
-gh pr list --state open --search "sentry" --json number,title,headRefName,url
-gh pr list --state open --search "fix:" --json number,title,headRefName,url
+# Get 10 most recent issues sorted by frequency
+mcporter call sentry.list_issues \
+  organizationSlug=$SENTRY_ORG \
+  query='last_seen:+12h' \
+  sort=freq \
+  limit=10 \
+  regionUrl='https://us.sentry.io'
 ```
 
-Track these PR numbers. When analyzing issues in step 2, cross-reference each issue's culprit/error against existing PRs to avoid duplicate work. This often eliminates most or all issues from the fix queue. If `$BLOOM_REPO` is unset, derive it with `gh repo view --json nameWithOwner -q .nameWithOwner` before creating PRs or reading review comments.
-
-### 1b. Fetch recent issues (last 12h, most recent 10)
-
-Use the official `sentry` CLI. Do not use `mcporter` or Sentry MCP tools for this workflow.
+If `mcporter` returns `Tool list_issues not found`, use the raw Sentry API fallback. This worked in the 2026-05-09 cron run and preserves deterministic `lastSeen` + `freq` sorting:
 
 ```bash
-sentry issue list $SENTRY_ORG/$SENTRY_PROJECT --limit 10 -t 12h --json > /tmp/sentry_recent.json
-jq -r '.data[] | [.shortId,.title,.status,.culprit] | @tsv' /tmp/sentry_recent.json
+sentry api '/api/0/organizations/$SENTRY_ORG/issues/?query=lastSeen:-12h&sort=freq&limit=10' --method GET \
+  | jq '[.[] | {id,shortId,project:.project.slug,title,culprit,permalink,status,count,userCount,firstSeen,lastSeen,level,logger,type,issueType,metadata}]'
 ```
 
 Note: We fetch ALL issues (not just unresolved) to catch regressions, recently resolved issues that may have resurfaced, and issues that were auto-resolved but still occurring.
 
-### 1c. Verify recently resolved issues
-
-Also fetch issues resolved in the last 7 days to verify fixes are real:
+### 1b. Verify recently resolved issues
 
 ```bash
-# Get recently resolved issues
-sentry issue list $SENTRY_ORG/$SENTRY_PROJECT --limit 10 -t 7d --query 'is:resolved' --json > /tmp/sentry_resolved.json
-jq -r '.data[] | [.shortId,.title,.status,.culprit] | @tsv' /tmp/sentry_resolved.json
+# Keep output compact because raw JSON includes huge commit/PR bodies.
+sentry issue list $SENTRY_ORG/$SENTRY_PROJECT --limit 10 -t 7d --query 'is:resolved' --json \
+  | jq '{data:[.data[] | {id,shortId,title,culprit,permalink,status,statusDetails,metadata,type,issueType,level,logger,project}]}'
 ```
 
 For each resolved issue:
 1. Check `statusDetails.inCommit` or `statusDetails.inRelease` to find the resolving commit/PR
-2. Read the actual diff of the resolving commit — does it fix the root cause or just suppress Sentry noise?
+2. Read the actual diff of the resolving commit — does it fix the root cause or just suppress Sentry noise? Do not trust `statusDetails.inCommit` blindly; it can point to unrelated commits. If unrelated, label it `NOISE_SUPPRESSION / unrelated resolution`, then decide whether the current issue is real and hot enough to reopen.
 3. **Noise-only fixes to flag:** adding to `ignoreErrors`, `beforeSend` filters, downgrading log levels, or removing `capture_exception` calls WITHOUT fixing the underlying bug
 4. If the "fix" was noise suppression and the underlying issue is a real code bug (N+1 queries, broken schemas, unhandled errors, data corruption), mark it as FIX with a note that the previous resolution was noise-only
 
@@ -71,17 +75,22 @@ Add a "Resolved Issue Audit" section to the plan file:
 
 ### 2. Deep-analyze every issue
 
-For EACH of the 10 issues, get full details and latest event payloads with the official `sentry` CLI only. Do not call `mcporter sentry.get_issue_details`, `mcporter sentry.get_latest_event`, or any Sentry MCP tools.
-
-Use short IDs like `INVEST-5V0`:
+For EACH of the 10 issues, get full details:
 
 ```bash
-mkdir -p /tmp/sentry_details /tmp/sentry_cli_events
-sentry issue view <ISSUE_SHORT_ID> --json > /tmp/sentry_details/<ISSUE_SHORT_ID>.json
-sentry issue events <ISSUE_SHORT_ID> --json > /tmp/sentry_cli_events/<ISSUE_SHORT_ID>.json
+mcporter call sentry.get_issue_details \
+  organizationSlug=$SENTRY_ORG \
+  issueId=<ISSUE_ID> \
+  regionUrl='https://us.sentry.io'
 ```
 
-If `sentry issue events` returns multiple events, use the first/latest event for stack trace analysis and keep the full JSON artifact for citation. The Sentry CLI JSON shape is usually `{ "data": [...] }`, not a bare array, so parse `.data[]`. `sentry issue events` may omit full `entries`; `sentry issue view <ID> --json` often embeds the latest full event under `.event.entries`, including exception frames and message payloads.
+Also get latest event for full stack trace context. The Sentry MCP currently does not expose `get_latest_event`; use the official Sentry CLI instead:
+
+```bash
+sentry issue events <ISSUE_SHORT_ID> --json
+```
+
+`mcporter call sentry.get_issue_details ...` usually includes the most relevant frame and full stack trace, so use it as the primary deep-analysis source and use `sentry issue events` for event metadata/tags.
 
 ### 3. Write plan file
 
@@ -140,18 +149,20 @@ Work through each issue marked FIX in the plan, in execution order. For each fix
 ```bash
 # Create worktree for the fix
 cd ~/projects/bloom
-git fetch origin master
-git worktree add ~/projects/_worktrees/fix-sentry-<SHORT_ID> -b fix/sentry-<SHORT_ID> origin/master
-cd ~/projects/_worktrees/fix-sentry-<SHORT_ID>
+# Bloom currently uses master as the default branch. If origin/main exists, use it;
+# otherwise fall back to origin/master.
+git fetch origin main || git fetch origin master
+BASE_REF=$(git show-ref --verify --quiet refs/remotes/origin/main && echo origin/main || echo origin/master)
+git worktree add ~/projects/_worktrees/sentry-<SHORT_ID> -b fix/sentry-<SHORT_ID> "$BASE_REF"
+cd ~/projects/_worktrees/sentry-<SHORT_ID>
 ```
 
 **Fix guidelines:**
 - Address the **root cause**, not just the symptom
 - Add proper error handling / null checks / type guards
 - If it's a crash, make it a graceful degradation instead
-- For DB pool exhaustion specifically, prefer shared helpers (`bloom_backend/middleware/connection_pool.py`) and return 503 + `Retry-After` without explicit Sentry capture from catch-all handlers. Use warning logs for expected transient exhaustion, keep error logs for unexpected failures. For per-item/background loops that already degrade by skipping an item, downgrade only recognized pool exhaustion to `logger.warning(...)` and continue. See `references/2026-05-crypto-db-pool-noise.md` for a concrete crypto price example and deterministic test pattern.
-- When testing log-level routing under the full xdist backend suite, `caplog` may be empty or flaky for patched/module loggers. Prefer patching the module logger directly (e.g. `with patch("bloom_backend.investment_utils.logger") as mock_logger:`) and asserting `mock_logger.warning` was called while `mock_logger.error` was not.
-- When writing backend tests for individual view modules, avoid `from bloom_backend.views import ...` if it triggers heavy package imports (`backtest`/`bt`/`matplotlib`) or duplicate native module registration. Prefer `importlib.import_module("bloom_backend.views.<module>")` only after the package is already loaded, or load simple leaf modules with `importlib.util.spec_from_file_location` when safe.
+- For OpenAI Agents tracing errors saying `Expected an ID that begins with 'trace_'`, generate IDs as `trace_` + `uuid.uuid4().hex`, not short UUID fragments. See `references/2026-05-09-sentry-cron-lessons.md`.
+- For Capacitor plugin errors on Android, check `Capacitor.isPluginAvailable(...)` and plugin support methods before calling native APIs. Treat missing optional native plugins as no-op warnings, not app errors.
 - Run lint and tests before committing:
   ```bash
   # Backend
@@ -164,15 +175,13 @@ cd ~/projects/_worktrees/fix-sentry-<SHORT_ID>
 ### 5. Create PRs
 
 ```bash
-cd /tmp/bloom-worktrees/sentry-<SHORT_ID>
+cd ~/projects/_worktrees/sentry-<SHORT_ID>
 git add -A
 git commit -m "fix: <brief description> (<SENTRY_ISSUE_ID>)"
 git push origin fix/sentry-<SHORT_ID>
 
-gh pr create \
-  --repo $BLOOM_REPO \
-  --title "fix: <brief description> (<SENTRY_ISSUE_ID>)" \
-  --body "## Sentry Issue
+cat > /tmp/sentry-pr-body.md <<'EOF'
+## Sentry Issue
 - **Issue:** <SENTRY_ISSUE_ID>
 - **Error:** <error message>
 - **Frequency:** <events/users count>
@@ -187,25 +196,18 @@ gh pr create \
 ## Testing
 - [ ] Lint passes
 - [ ] Tests pass
-- [ ] Manually verified the fix addresses the stack trace"
+- [ ] Manually verified the fix addresses the stack trace
+EOF
+
+gh pr create \
+  --repo Bloom-Invest/bloom \
+  --title "fix: <brief description> (<SENTRY_ISSUE_ID>)" \
+  --body-file /tmp/sentry-pr-body.md
 ```
 
-### 5b. Babysit PR review and CI before reporting done
+### 6. Leave worktrees intact
 
-After opening the PR:
-
-```bash
-gh pr checks <PR_NUMBER> --watch --interval 10
-gh pr view <PR_NUMBER> --json reviews
-gh api repos/$BLOOM_REPO/issues/<PR_NUMBER>/comments
-gh api repos/$BLOOM_REPO/pulls/<PR_NUMBER>/comments
-```
-
-Fix actionable review comments, especially bot comments from Gemini/Claude. Do not rely on `gh pr view --json reviews` alone because inline review comments and issue comments are separate APIs. If you need to add commits after review, push normal follow-up commits. Do not amend and force-push because the git wrapper blocks force-pushes and rewriting PR history is against workflow.
-
-### 6. Archive the plan, leave worktrees alone
-
-Move the completed plan to `~/.hermes/plans/archive/` after fixes and PR checks finish. Do not remove worktrees or delete branches unless the user explicitly asks for cleanup; parallel agents may still depend on local state and the global git workflow prefers preserving worktrees.
+Do not remove worktrees or branches after opening the PR unless the user explicitly asks. Other agents or future babysit runs may need the branch state.
 
 ### 7. Report summary
 
@@ -223,37 +225,34 @@ For multiple fixes, spawn sub-agents per issue to work in parallel:
 
 ```
 sessions_spawn with label "sentry-fix-<SHORT_ID>"
-task: "Fix Sentry issue <ID> in worktree /tmp/bloom-worktrees/sentry-<SHORT_ID>. 
+task: "Fix Sentry issue <ID> in worktree ~/projects/_worktrees/sentry-<SHORT_ID>.
        Issue details: <paste details>. Create a PR with the fix."
 ```
 
 ## Noise Reduction Patterns
 
-For a concrete DB pool exhaustion catch-all example, see `references/2026-05-db-pool-catchalls.md`. For per-item crypto/background loop handling plus deterministic logger tests, see `references/2026-05-crypto-db-pool-noise.md`.
-
 When issues aren't code bugs but create Sentry noise, apply these patterns:
 
 | Pattern | When | Fix |
 |---------|------|-----|
-| **Downgrade logger.error → logger.warning** | Expected failures (429 rate limits, timeouts on health checks, bot-blocked fetches) that return graceful defaults | Change app logging to warning and do not call Sentry explicitly |
-| **Remove capture_exception/capture_message** | Caller already handles error gracefully (e.g., returns default data/tool error to user) | Remove the explicit Sentry call; keep the warning log |
+| **Downgrade logger.error → logger.warning** | Expected failures (429 rate limits, timeouts on health checks) that return graceful defaults | Change log level; Sentry captures errors but not warnings by default |
+| **Remove capture_exception/capture_message** | Caller already handles error gracefully (e.g., returns default data to user) | Remove the explicit Sentry call; keep the warning log |
 | **Fix double-reporting** | Inner function calls capture_exception AND outer caller catches + reports | Remove from inner function; let caller decide |
 | **Add to before_send filter** | Worker signals (SIGABRT, SIGTERM), known infra noise | Add string match in `bloom_backend/settings.py` `before_send` |
 | **Frontend beforeSend filter** | Timeouts, network errors in `src/lib/sentry.ts` | Add to `beforeSend` callback to drop event |
-
-**Important:** `sentry_sdk.capture_message(..., level="warning")` still creates Sentry events/issues. For legitimate expected failures, log with `logger.warning(...)` only. Keep `capture_exception` for unexpected failures.
 
 **Principle:** All failures still log at warning level for debugging — only Sentry issue creation is suppressed. True errors continue reporting normally.
 
 ## Key Bloom Files
 
 - **Backend Sentry config:** `bloom_backend/settings.py` (has `before_send` filter)
-- **Frontend Sentry config:** `src/lib/sentry.ts` (has `beforeSend` + `ignoreErrors`)
-- **FMP client:** `bloom_backend/third-partys/fmp_client.py`
-- **Cerebras:** `bloom_backend/third-partys/cerebras.py` (uses Instructor for structured output)
-- **Content translator:** `bloom_backend/content_translator.py`
-- **Firecrawl:** `bloom_backend/third-partys/firecrawl_client.py`
-- **Fetch URL tool:** `bloom_backend/tools/fetch_url_tool.py`
+- **Frontend Sentry config:** `frontend/src/utils/sentryConfig.ts` (has `beforeSend` + `ignoreErrors`)
+- **AlphaVantage client:** `bloom_backend/externals/alphavantage.py`
+- **AlphaVantage retry/errors:** `bloom_backend/http_retry.py`
+- **Symbol validation:** `bloom_backend/functions/is_valid_symbol.py`
+- **Fetch URL tool:** `bloom_backend/views/fetch_url_tool.py`
+- **Firecrawl fallback:** `bloom_backend/views/firecrawl_client.py`
+- **Phoenix tracing:** `bloom_backend/phoenix_otel.py`
 - **API tester:** `bloom_backend/management/commands/api_tester.py`
 
 ## Available LLM Models (Cerebras)
@@ -269,3 +268,5 @@ When issues aren't code bugs but create Sentry noise, apply these patterns:
 - Prioritize by frequency × severity
 - Check if a PR already exists for the same issue before creating a duplicate
 - **Always write the plan file first** — never skip straight to fixes
+- If existing async pytest tests fail locally with `async def functions are not natively supported`, do not waste the run fighting pytest plugin config. Add sync focused tests where possible, run `compileall`/lint, and document the local async-test blocker in the PR.
+- For frontend changed-file verification, prefer direct local binaries after `bun install` (`./node_modules/.bin/prettier --check <file>` and `./node_modules/.bin/eslint --ext=ts,tsx <file>`) when `bun run lint -- <file>` expands to the whole `src` tree or cannot find dependencies.

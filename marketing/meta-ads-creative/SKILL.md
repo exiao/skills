@@ -115,8 +115,9 @@ The hook is 80% of performance. Types: Stated (what you SAY), Visual (what they 
 | Meme Formats | Culturally native | Contrasts, humor |
 | Testimonial Card | Direct social proof | Warm audiences |
 | Product Test Reveal | Data-driven exposé feels like journalism | Cold audiences, skeptical users |
+| After-Before Product Proof | Aspirational result first, plain source second, product credit last | Visual consumer apps, editing tools, AI outputs, save-driven creative |
 
-**App footage rule:** Maximum 4-5 seconds showing the app in use. The ad is about the problem/outcome, not the product. App footage is proof, not the pitch. (Source: paid-social creative benchmark, May 2026)
+**App footage rule:** Maximum 4-5 seconds showing the app in use. The ad is about the problem/outcome, not the product. App footage is proof, not the pitch. (Source: @athcanft, May 2026)
 
 #### Format-Audience Matrix
 
@@ -128,13 +129,31 @@ The hook is 80% of performance. Types: Stated (what you SAY), Visual (what they 
 
 #### Click-to-WhatsApp / Messaging Ads
 
-When the destination is WhatsApp, Messenger, or Instagram DMs, the ad should sell one concrete chat job, not a generic assistant. Strong CTWA jobs are high-intent and easy to complete in-message: "send a portfolio screenshot," "text one ticker," "type brief." Match the creative, primary text, prefill/welcome message, and bot's first reply exactly. Judge creative by cost per qualified conversation and activation rate, not cheapest message start.
+When the destination is WhatsApp, Messenger, or Instagram DMs, sell one concrete chat job rather than a generic assistant. Strong messaging-ad jobs are high-intent and easy to complete in-message: send a portfolio screenshot, text one ticker, type a brief. Match the creative, primary text, prefill/welcome message, and bot's first reply exactly. Judge creative by cost per qualified conversation and activation rate, not cheapest message start.
 
-For Bloom/Bloombot, the recommended first wedge is portfolio screenshot second opinion: it is WhatsApp-native, high intent, and easier to qualify than generic AI chat. Use compliance-safe language: research-style breakdown, second opinion, risk/concentration, bull case/bear case. Avoid "what to buy," guaranteed returns, personalized advice, and profit-promise language.
+For investing products, keep language compliance-safe: research-style breakdown, second opinion, risk/concentration, bull case/bear case. Avoid "what to buy," guaranteed returns, personalized advice, and profit-promise language. For detailed BloomBot patterns, load `../../external-services/meta-ads-cli/references/click-to-whatsapp-bloombot.md`.
+
+#### After-Before Product Proof Format
+
+Source: Social Growth Engineers WayShot case study, May 2026. WayShot reached 150M+ views across 8 accounts, 500K+ downloads in one month, and $100K MRR by repeating result-first visual formats.
+
+**Structure:**
+- **0-2s:** Show the polished, aspirational result first. Make the viewer want the outcome before they know the tool.
+- **2-5s:** Reveal the ordinary original/input. The contrast creates the proof.
+- **5-8s:** Add a social hook/reveal line: "she edits too much" → "damn you're right" or "What camera did you use?" → "Oh it's my phone."
+- **Final card/caption:** Subtle product credit: "edited by [app]", account name, watermark, or CTA.
+
+**Why it converts:**
+- The creative feels like native social content, not an ad.
+- The result does the selling before the product appears.
+- Bookmarks are a success signal because the viewer wants to recreate the outcome.
+- Works especially well for visual transformation products: photo/video editors, design tools, AI image apps, fitness, decor, and any app that turns messy input into a clean output.
+
+**Bloom adaptation:** Show a clean Bloom AI insight/card first, then reveal the confusing raw chart, noisy Reddit thread, or broker screen it came from. Hook: "What analyst did you use?" Reveal: "Oh it's my phone."
 
 #### Product Test Reveal Format
 
-Source: Product Test Reveal case study (30M views, $23K MRR, identical format across 232 Reels).
+Source: @oasishealthapp (30M views, $23K MRR, identical format across 232 Reels).
 
 **Structure (15s total):**
 - **0-2s:** Show the familiar brand (the "villain") — instant recognition stops scroll
@@ -159,6 +178,44 @@ Source: Product Test Reveal case study (30M views, $23K MRR, identical format ac
 **Output:** Select 3-5 formats per campaign.
 
 > **Load on-demand:** `references/ad-formats-library.md` for all formats with templates and examples.
+
+---
+
+#### Authority-Led UGC Reveal
+
+Source: @onlinedopamine breakdown of Jetback/flightcheatcode UGC ad, May 2026. The video opens with creator authority, teaches common hacks, then introduces the product only after trust is established.
+
+**Structure:**
+- **0-2s authority:** "As a [credible role] for [time period]..." Example: "As a flight attendant for three years..."
+- **2-25s useful list:** Share 2-4 insider tips the audience already cares about. Mix familiar tips with sharper explanation so the creator feels knowledgeable.
+- **Mid-roll product reveal:** "The most important one..." Introduce the product as another hack, not as a sponsor.
+- **Specific proof:** Add one concrete personal result: "I've already saved $230."
+- **Anti-gatekeeping close:** "I'm not going to gatekeep anymore." This frames sharing as generosity, not selling.
+
+**Why it works:**
+- Expertise creates trust before the pitch.
+- The product rides on an existing high-intent desire (saving money on flights).
+- The offer feels close to can't-refuse: send confirmation, get refunded if price drops.
+- The product is revealed as the best tip in a useful list, not a cold interruption.
+
+**Bloom adaptation:** "As someone who's reviewed hundreds of retail portfolios... these are the 3 checks I run before buying any stock." Tip 3 becomes Bloom: send/check your ticker or portfolio and get the AI risk report.
+
+---
+
+### Influencer-Creative Ads
+
+When creator/influencer ads work, the leverage is not just authenticity. It is borrowed trust plus guaranteed distribution.
+
+**Sway AI pattern:** organic slideshow/content got the app to roughly $30-40K MRR; paid ads using a trusted dating influencer's videos scaled much further, toward about $2M ARR. The ads ran from or through the influencer's audience, and the best creatives still generated real comment activity. (Source: @JosephKChoi interview with Daniel from Cal AI/Sway, May 2026)
+
+**Use this checklist before betting on influencer ads:**
+- The creator's audience already knows the creator's content style, so the ad feels like a native recommendation.
+- The product complements the creator's business. Avoid creators whose paid offer the app cannibalizes.
+- You have more than one creator or a system for high creative volume. One creator becomes a bottleneck fast.
+- Mild controversy or debate is useful if policy-safe; comment activity can be a performance signal.
+- Do not assume boosted organic = good paid creative. Commission explicit ad concepts, then repurpose winners.
+
+**Bloom adaptation:** prioritize investing/finance creators whose business is education, commentary, or newsletters, not paid stock-pick subscriptions that Bloom would replace.
 
 ---
 

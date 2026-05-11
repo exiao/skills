@@ -193,24 +193,9 @@ Analytics:
 
 ## Automation Artifacts
 
-For Bloom's existing daily cron, load `references/bloom-workspace.md` for account IDs and job behavior.
+For Bloom's existing daily cron, load `references/bloom-workspace.md` for account IDs and job behavior. For script failures, macOS shell portability, and caption extraction pitfalls, load `references/cron-automation-pitfalls.md`.
 
-### Cron Script Pitfalls (critical)
-
-**macOS Bash 3.2:** Does not support `declare -A`. Use parallel indexed arrays instead.
-
-**Caption extraction bug:** `.data.suggestion` is an object with `{aiExplanation, contentType, createdAt, generatedText}`. Never let the raw object fall through as a caption via jq `//` chains. Extract `.data.suggestion.generatedText` explicitly, then take only the first line (`split("\n") | first`) since slideshows have multiline generatedText.
-
-**Caption construction:** Raw hook text alone is a bad social caption. Always append CTA + hashtags:
-```bash
-caption="${hook}. Try Bloom free, link in bio. #investing #stocks #ai #finance #personalfinance"
-```
-
-**Recovering bad posts:** `POST /posts/cancel` with `{"postIds": [...]}` is instant and non-destructive. Content stays in library. Then reschedule with proper captions via `POST /content/:id/schedule`.
-
-**YouTube constraints:** Rejects slideshows (only video-hook/green-screen). Title must be ≤100 chars. Always check content type before scheduling.
-
-**Cron timeout recovery:** Bloom's `fastlane-daily` cron may time out while Fastlane is still building content. Treat a timeout as partial failure, not proof that generation failed. Recover by listing recent content (`GET /content?limit=10`), identifying newly created IDs since the run started, checking `GET /posts?limit=30` to avoid duplicate scheduling, then scheduling unscheduled `CREATED` items manually. If the script's poll loop routinely exceeds the scheduler limit, set `cron.script_timeout_seconds` in `~/.hermes/config.yaml` high enough for the build window, e.g. 900 seconds.
+When building an autonomous campaign in a local project, create:
 
 ```text
 fastlane/
@@ -270,6 +255,7 @@ Blitz findings from live use:
 - If Blitz returns `202` without a content id, or then returns `404`, treat it as no usable suggestion/content for that call. Wait and retry or adjust the angle/preference setup.
 - For slideshows, verify both the suggestion text and the rendered images.
 - **Content endpoint has no caption/suggestion fields.** `GET /content/:id` only returns `_id`, `type`, `status`, `files`, `thumbnailUrl`. The suggestion/hook text only appears in the `POST /blitz` response. Capture it during generation if you need it for scheduling captions.
+- **Blitz suggestion can be an object, not a string.** Do not schedule the raw `suggestion` JSON as a caption. Extract `suggestion.generatedText` or `hook.generatedText` first, falling back to `title` or a generic caption.
 - **YouTube rejects slideshows.** Only video content types (`video-hook`, `green-screen`) can be scheduled to YouTube. Slideshows get: `"YouTube only accepts single-video content"`. Skip YouTube for slideshow content.
 - **YouTube title must be ≤100 chars.** The `caption` field is used as the YouTube title. Truncate or write a short title separately. Use `description` for the longer text.
 - **Instagram and YouTube require captions.** Scheduling without a `caption` fails with validation errors. Always provide one, even if it's a generic fallback. A five-line suggestion can become one cover plus four advice slides; if the user asked for five actual tips, prompt/configure "no cover, exactly five slides, each slide is one numbered tip".
