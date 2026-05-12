@@ -19,7 +19,7 @@ Or clone and point your agent at them:
 ```bash
 git clone https://github.com/exiao/skills.git
 # Hermes Agent
-runtime config set skills.path ./skills
+hermes config set skills.path ./skills
 ```
 
 Find more skills: [OpenClaw](https://github.com/openclaw/openclaw/tree/main/skills) | [ClawHub](https://clawhub.ai) | [skills.sh](https://skills.sh)
@@ -101,7 +101,7 @@ Skills in this repo integrate with the following third-party services and tools:
 | [meta-ads-cli](external-services/meta-ads-cli/) | [Meta Marketing API](https://developers.facebook.com/docs/marketing-apis/) |
 | [phoenix-cli](external-services/phoenix-cli/) | [Arize Phoenix](https://phoenix.arize.com) |
 | [porkbun-cli](external-services/porkbun-cli/) | [Porkbun](https://porkbun.com) |
-| [prometheus-cli](external-services/prometheus-cli/) | [Social Growth Engineers / PAssistant](https://passistant.com) |
+| [prometheus-cli](external-services/prometheus-cli/) | [Social Growth Engineers](https://socialgrowthengineers.com) |
 | [remotion](design/remotion/) | [Remotion](https://remotion.dev) |
 | [render-cli](external-services/render-cli/) | [Render](https://render.com) |
 | [sora](video/sora/) | [OpenAI Sora](https://sora.com) |
