@@ -268,7 +268,7 @@ source ~/.hermes/.env
 
 # Set/update a single env var (PUT creates or overwrites)
 curl -s -X PUT "https://api.render.com/v1/services/<SERVICE_ID>/env-vars/<KEY>" \
-  -H "Authorization: Bearer $RENDER_API_KEY_BLOOM" \
+  -H "Authorization: Bearer $RENDER_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"value": "my-value"}'
 
@@ -277,7 +277,7 @@ cursor=""
 while :; do
   url="https://api.render.com/v1/services/<SERVICE_ID>/env-vars"
   [ -n "$cursor" ] && url="$url?cursor=$cursor"
-  page=$(curl -s "$url" -H "Authorization: Bearer $RENDER_API_KEY_BLOOM")
+  page=$(curl -s "$url" -H "Authorization: Bearer $RENDER_API_KEY")
   printf '%s\n' "$page"
   cursor=$(printf '%s' "$page" | jq -r '.[-1].cursor // empty')
   [ -z "$cursor" ] && break
@@ -287,19 +287,15 @@ done
 Pitfalls:
 - POST to `/env-vars` (bulk create) may silently return empty. Use PUT to `/env-vars/<KEY>` for reliable single-key operations.
 - Env var listing is paginated. The first page can omit common keys like `WORKERS` or `DATABASE_URL`; follow `cursor` values before concluding a key is absent.
-- No generic `RENDER_API_KEY` exists in .env. Use workspace-specific keys: `RENDER_API_KEY_BLOOM` or `RENDER_API_KEY_FINTARY`.
+- No generic `RENDER_API_KEY` exists in .env. Use workspace-specific keys: `RENDER_API_KEY_BLOOM` or `RENDER_API_KEY`.
 
 ## Pitfalls
 
 - **Stale workspace after API key switch:** The CLI caches the last workspace in `~/.render/cli.yaml`. If you switch `RENDER_API_KEY` to a different account, the cached workspace ID belongs to the old account and every command fails with `404: not found: owner: tea-XXXXX`. Fix: `render workspaces -o json --confirm` to list available workspaces, then `render workspace set <WORKSPACE_ID> -o json --confirm` to select the right one.
-- **Postgres databases aren't listed by `render services`.** Use the REST API: `curl -s "https://api.render.com/v1/postgres" -H "Authorization: Bearer $RENDER_API_KEY_BLOOM" | jq '.[].postgres | {id, name}'`. The `render psql <DB_ID>` command works once you have the ID.
+- **Postgres databases aren't listed by `render services`.** Use the REST API: `curl -s "https://api.render.com/v1/postgres" -H "Authorization: Bearer $RENDER_API_KEY" | jq '.[].postgres | {id, name}'`. The `render psql <DB_ID>` command works once you have the ID.
 - **Private GitHub repos:** Render can't clone private repos without the GitHub app installed on the repo owner's account. Never make a repo public to work around this. Have the user install Render's GitHub app instead.
 - **Python version:** Render defaults to latest Python (e.g., 3.14). Add a `.python-version` file (e.g., `3.12.4`) to the repo root to pin it.
-- **Stale workspace cache causes 404s:** The CLI caches the active workspace in `~/.render/cli.yaml`. If another session or API key changed it, every command returns `404: not found: owner: <old-workspace-id>`. Fix: `render workspaces -o json --confirm` to list available workspaces, then `render workspace set <CORRECT_ID> -o json --confirm`. Always do this before any CLI operation if you get unexpected 404s.
-- **Postgres databases are NOT listed by `render services`:** Databases are a separate resource type. To discover database IDs, use the REST API: `curl -s "https://api.render.com/v1/postgres" -H "Authorization: Bearer $RENDER_API_KEY_BLOOM" | jq '.[].postgres | {id, name}'`. Bloom production DB: `dpg-cuqga3l2ng1s73ercck0-a` (name: `bloom-db`).
-- **Multi-account setup:** Eric has separate Render accounts/workspaces for different projects. Check .env for project-specific API keys: `CPE_RENDER_API_KEY`, `RENDER_API_KEY_BLOOM`, `RENDER_API_KEY_FINTARY`. Set `RENDER_API_KEY=$CPE_RENDER_API_KEY` before CLI commands to target the right workspace. Also must `render workspace set <ID>` since the CLI caches the last workspace.
-- **Workspace can go stale.** The CLI caches the last workspace in `~/.render/cli.yaml`. If commands return 404 "not found: owner: tea-XXXX", the cached workspace ID doesn't match the API key. Fix: `RENDER_API_KEY=$RENDER_API_KEY_BLOOM render workspaces -o json --confirm` to list available workspaces, then `render workspace set <correct-id>`. For Bloom: workspace ID is `tea-bpfklfr4ttth01lbtse0`.
-- **Postgres databases are not listed by `render services`.** To find database IDs, use the REST API: `curl -s "https://api.render.com/v1/postgres" -H "Authorization: Bearer $RENDER_API_KEY_BLOOM" | jq '.[].postgres | {id, name}'`. Bloom's primary DB: `dpg-cuqga3l2ng1s73ercck0-a`. Bloom workspace ID: `tea-bpfklfr4ttth01lbtse0`.
+- **Multi-account setup:** If you have separate Render accounts/workspaces for different projects, use project-specific API keys in .env. Set `RENDER_API_KEY=<project-key>` before CLI commands to target the right workspace. Also run `render workspace set <ID>` since the CLI caches the last workspace.
 - **Private repo deps in requirements.txt:** `pip install` on Render can't clone private GitHub repos (no auth). Either make the dep repo public, use Render's GitHub app for the dep repo too, or vendor the dependency.
 
 ## Migrating from Docker to Native Python Runtime

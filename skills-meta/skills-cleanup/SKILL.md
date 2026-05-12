@@ -65,4 +65,4 @@ When the user says the repo has "too many top-level folders" or categories feel 
 
 ### README and Catalog Maintenance
 
-When the README is too long or skill listings are manually maintained, use `references/readme-catalog-generation.md`. The preferred shape is a short category-only README plus a generated `CATALOG.md` built from `SKILL.md` frontmatter. Update repo conventions so future agents regenerate the catalog after adding, removing, or renaming skills instead of re-bloating the README.
+When the README is too long or skill listings are manually maintained, consider generating a CATALOG.md from `SKILL.md` frontmatter. Update repo conventions so future agents regenerate the catalog after adding, removing, or renaming skills instead of re-bloating the README.

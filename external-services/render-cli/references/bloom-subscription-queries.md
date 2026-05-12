@@ -6,8 +6,8 @@ Quick-reference queries for investigating subscription state in Bloom's producti
 
 ```bash
 source ~/.hermes/.env
-RENDER_API_KEY=$RENDER_API_KEY_BLOOM render workspace set tea-bpfklfr4ttth01lbtse0 -o json --confirm
-# Bloom DB ID: dpg-cuqga3l2ng1s73ercck0-a (name: bloom-db)
+RENDER_API_KEY=$RENDER_API_KEY render workspace set $RENDER_WORKSPACE_ID -o json --confirm
+# DB ID: $RENDER_DB_ID
 ```
 
 ## Check for duplicate subscriptions

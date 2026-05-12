@@ -15,7 +15,7 @@ Use this skill to keep App Store Connect (ASC) and RevenueCat aligned, including
 
 ## Preconditions
 - `asc` authentication is configured (`asc auth login` or `ASC_*` env vars).
-- `mcporter` is installed and the `revenuecat` server is registered in `~/.mcporter/mcporter.json` (see the `revenuecat-cli` mcporter server for setup).
+- `mcporter` is installed and the `revenuecat` server is registered in `~/.mcporter/mcporter.json` (configure the `revenuecat` server in `~/.mcporter/mcporter.json`).
 - `REVENUECAT_API_KEY` is set in the agent environment for read operations via mcporter.
 - For write operations (create/update), `REVENUECAT_WRITE_API_KEY` (a v2 secret key with write scope) must be set — these go through the REST API directly, not mcporter.
 - You know:
@@ -35,7 +35,7 @@ Use this skill to keep App Store Connect (ASC) and RevenueCat aligned, including
 - Do not use display names as unique identifiers.
 
 ## Scope boundary
-- The `revenuecat-cli` mcporter server (mcporter) is **read-only**: list/get for projects, apps, products, entitlements, offerings, packages, customers, subscriptions.
+- The mcporter `revenuecat` server (mcporter) is **read-only**: list/get for projects, apps, products, entitlements, offerings, packages, customers, subscriptions.
 - All **writes** (create/update products, attach entitlements, create offerings/packages) go through the RevenueCat v2 REST API directly via `curl`, using `REVENUECAT_WRITE_API_KEY`.
 - Use `asc` commands to create missing ASC subscription groups, subscriptions, and IAPs before RevenueCat mapping.
 
@@ -137,7 +137,7 @@ curl -sS -X POST "https://api.revenuecat.com/v2/projects/$REVENUECAT_PROJECT_ID/
   -H "Authorization: Bearer $REVENUECAT_WRITE_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
-    "store_identifier": "com.bloom.premium.monthly",
+    "store_identifier": "com.example.premium.monthly",
     "type": "subscription",
     "app_id": "<RC_APP_ID>"
   }'

@@ -184,9 +184,9 @@ Use these insights to inform concept selection. Double down on documented winner
 Use these skills to generate concepts:
 - **competitor research** (from Step 4.5) — remix proven competitor hooks, exploit gaps they're missing
 - **last30days** — what is viral in investing/fintech right now
-- **web-search** — trending finance content today
+- **last30days** — trending content research
 - **hooks** — generate scroll-stopping openers
-- **meta-ads-creative** — 6 Elements framework, proven ad formats
+- 6 Elements framework, proven ad formats (see references/)
 - **content-strategy** — angles from what is working on social
 
 Come up with **5 distinct concepts**. Each concept needs:
