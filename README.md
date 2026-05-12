@@ -13,7 +13,7 @@ A skill is a markdown file (`SKILL.md`) with YAML frontmatter that an AI agent l
 | Category | Skills | Description |
 |----------|--------|-------------|
 | [app-store](app-store/) | 28 | App Store Connect, ASO, screenshots, iOS simulators |
-| [coding](coding/) | 5 | PR babysitting, Sentry fixes, simplification, deploy verification |
+| [coding](coding/) | 8 | PR babysitting, Sentry fixes, simplification, deploy verification |
 | [thinking](thinking/) | 7 | Brainstorming, office hours, user studies, planning |
 | [writing](writing/) | 9 | Articles, copywriting, content strategy, editing, hooks |
 | [design](design/) | 31 | UI/UX, Impeccable design system, Excalidraw, Remotion |
