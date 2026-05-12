@@ -37,7 +37,7 @@ Find more skills: [OpenClaw](https://github.com/openclaw/openclaw/tree/main/skil
 | [skills-meta](skills-meta/) | 8 | Meta-skills for creating and improving other skills |
 | [thinking](thinking/) | 7 | Brainstorming, office hours, user studies, planning |
 | [video](video/) | 18 | Character creation, video editing, production (Kling, Sora, Remotion, ElevenLabs), YouTube content |
-| [writing](writing/) | 11 | Writing, copywriting, content strategy, editing, hooks, outlines, positioning, content pipeline |
+| [writing](writing/) | 11 | Writing, copywriting, content strategy, editing, content evaluation, hooks, outlines, positioning, content pipeline |
 
 ## Skill structure
 
