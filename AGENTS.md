@@ -22,8 +22,8 @@ category-name/
 | **coding** | PR babysitting, Sentry issue fixes, code simplification, deploy verification, QA dogfooding |
 | **thinking** | Brainstorming, office hours frameworks (YC, Sahil), synthetic user studies, planning, perspective shifts |
 | **writing** | Article writing, copywriting, content strategy, editing, content evaluation, hooks, research (last30days) |
-| **design** | UI/UX design, design systems (Impeccable), frontend design, Excalidraw diagrams, Remotion videos, stickers |
-| **media** | Brand identity, character creation, video editing, video production (Kling, Seedance, Remotion, ElevenLabs) |
+| **design** | UI/UX design, design systems (Impeccable), frontend design, Excalidraw diagrams, brand identity, stickers |
+| **video** | Character creation, video editing, production (Kling, Sora, Remotion, ElevenLabs), YouTube content, thumbnails |
 | **external-services** | CLI integrations for third-party APIs (Appfigures, Apple Search Ads, DataForSEO, Firecrawl, Google Ads, Grok, Higgsfield, Meta Ads, Porkbun, Prometheus, Render, Stably, Typefully, etc.) |
 | **memory** | Memory management — garbage collection, setup, and recall from past sessions |
 | **investing** | Stock research, portfolio analysis, market intelligence (coming soon) |
