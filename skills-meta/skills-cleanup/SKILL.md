@@ -63,6 +63,6 @@ Skills templated from a client project often have dead examples baked in (wrong 
 
 When the user says the repo has "too many top-level folders" or categories feel off, load `references/category-reorganization.md` for the full audit and move playbook. Covers bloat detection, merging overlapping categories, moving project-specific skills to `internal/`, and keeping README.md and CLAUDE.md in sync.
 
-### README and Catalog Maintenance
+### README Maintenance
 
-When the README is too long or skill listings are manually maintained, consider generating a CATALOG.md from `SKILL.md` frontmatter. Update repo conventions so future agents regenerate the catalog after adding, removing, or renaming skills instead of re-bloating the README.
+When adding, removing, or renaming skills, update the README.md category table with accurate skill counts.

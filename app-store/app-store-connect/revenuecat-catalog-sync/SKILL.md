@@ -1,6 +1,6 @@
 ---
 name: revenuecat-catalog-sync
-description: Reconcile App Store Connect subscriptions and in-app purchases with RevenueCat products, entitlements, offerings, and packages using the asc CLI and the revenuecat-cli skill (mcporter). Use when setting up or syncing subscription catalogs across ASC and RevenueCat.
+description: Reconcile App Store Connect subscriptions and in-app purchases with RevenueCat products, entitlements, offerings, and packages using the asc CLI and the revenuecat mcporter server. Use when setting up or syncing subscription catalogs across ASC and RevenueCat.
 ---
 
 # asc RevenueCat catalog sync
@@ -71,7 +71,7 @@ asc subscriptions list --group "GROUP_ID" --paginate --output json
 
 ### Step B - Read current RevenueCat catalog (mcporter)
 
-Use the `revenuecat-cli` mcporter server via `mcporter call revenuecat.<tool>`. All tool names use **dashes**, not underscores. Pass `project_id` and paginate with `starting_after` where applicable.
+Use the `revenuecat` mcporter server via `mcporter call revenuecat.<tool>`. All tool names use **dashes**, not underscores. Pass `project_id` and paginate with `starting_after` where applicable.
 
 ```bash
 mkdir -p /tmp/revenuecat
