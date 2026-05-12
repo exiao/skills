@@ -83,12 +83,3 @@ Some skills are adapted from or inspired by other open-source projects:
 | [last30days](writing/last30days/) | [mvanhorn/last30days-skill](https://github.com/mvanhorn/last30days-skill) |
 | [remotion-videos](design/remotion/) | [remotion-dev/skills](https://github.com/remotion-dev/skills) |
 | [stably-cli](external-services/stably-cli/) | [skills.sh/stablyai](https://skills.sh/stablyai/agent-skills/stably-cli) |
-
-### From [ClawHub](https://clawhub.ai)
-
-| Skill | Slug |
-|-------|------|
-| [apple-search-ads](external-services/apple-search-ads/) | apple-search-ads |
-| [demo-video](video/demo-video/) | demo-video |
-| [google-ads-cli](external-services/google-ads-cli/) | google-ads |
-| [meta-ads-cli](external-services/meta-ads-cli/) | meta-ads |
