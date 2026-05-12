@@ -54,3 +54,15 @@ Critical rules:
 
 ### Categories That Were Full Duplicates (removed 2026-05-01)
 github/, autonomous-ai-agents/, software-development/, mlops/, media/, mcp/, leisure/, red-teaming/, note-taking/, email/, smart-home/, gaming/, analytics/, diagramming/, domain/, feeds/, gifs/, inference-sh/, dogfood/
+
+### Inherited Client Examples
+
+Skills templated from a client project often have dead examples baked in (wrong audience, irrelevant copy, client-specific search queries). These mislead creative generation. Load `references/inherited-client-examples.md` for detection, cleanup rules, and a worked example.
+
+### Category Reorganization
+
+When the user says the repo has "too many top-level folders" or categories feel off, load `references/category-reorganization.md` for the full audit and move playbook. Covers bloat detection, merging overlapping categories, moving project-specific skills to `internal/`, and keeping README.md and CLAUDE.md in sync.
+
+### README Maintenance
+
+When adding, removing, or renaming skills, update the README.md category table with accurate skill counts.

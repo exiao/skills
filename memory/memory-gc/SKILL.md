@@ -38,6 +38,18 @@ editing via `FilePatch` on `~/.hermes/memories/MEMORY.md`. When using FilePatch:
 special chars in old entries). Use Python for age computation rather than
 awk, which chokes on multibyte sequences in some locales.
 
+**Pitfall — FilePatch `§` uniqueness:** The `§` separator appears on every
+entry boundary. `old_string` containing just `<text>\n§` will often match
+multiple locations. Always include enough surrounding context (adjacent
+entry text on both sides) to make the match unique. Alternatively, batch
+multiple adjacent removals into a single FilePatch that replaces the whole
+multi-entry block at once — this is more reliable than individual removals.
+
+**Pitfall — pending drain in cron:** The `memory` tool (MemoryStore) is
+typically unavailable in cron. Pending entries accumulate across cron GC
+runs. Do NOT clear `.pending.md` unless entries were actually drained
+successfully. They will drain during the next interactive session.
+
 ## Decay rules (from the `[meta] Memory format` entry)
 
 | cat                    | action                                              |
@@ -86,11 +98,15 @@ Each non-empty line is `TARGET\tLINE`. For each line:
 - If it still fails for capacity, either (a) consolidate with an existing
   similar entry via `replace`, or (b) skip and report.
 
-Once processed, clear the file:
+Once ALL entries are processed successfully, clear the file:
 
 ```bash
 : > ~/.hermes/episodes/.pending.md
 ```
+
+**If `memory` tool is unavailable (cron), skip this step entirely.** Do not
+clear the file. Pending entries will accumulate and drain during the next
+interactive session where the memory tool works.
 
 ### 5. Consolidate near-duplicates
 
@@ -120,6 +136,10 @@ Read the current canonical list from MEMORY.md (the
 Keep the `[meta] Episode tags` line under ~250 characters. If it starts to
 bust, drop themes that have not been used in the last 30 days.
 
+**Optimization:** If the tag output is large and the canonical list hasn't
+changed recently, scan only the top ~30 tags for missing canonicals. Don't
+waste tokens on the long tail.
+
 ### 7. Prune old files
 
 ```bash
@@ -143,6 +163,12 @@ Eviction priority (evict from top priority first):
 2. `[proj:*]` entries older than 14 days
 3. `[fact]` entries older than 45 days
 4. Longest entries first (within the same priority tier)
+
+**When no entries meet age thresholds but file is over target:** Fall back to
+evicting the longest `[env]` entries first, then longest `[proj:*]` entries,
+regardless of age. Prefer entries whose content is also captured in a dedicated
+memory file (e.g., `~/.hermes/memories/cpe-research.md`) or in a skill, since
+those can be re-derived.
 
 Before removing, copy evicted entries to `~/.hermes/episodes/.pending.md` in
 the format `MemoryStore\t<content>` so they can potentially be restored later.

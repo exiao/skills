@@ -185,6 +185,10 @@ Recommendation thresholds to start from:
 
 For tROAS campaigns with zero value, weirdly low CPA, or install-heavy conversion mix, load `references/app-campaign-troas-debugging.md` before recommending bid or budget changes.
 
+## Mutation / no-overwrite audit
+
+When Eric asks whether an agent or cron changed Google Ads, do not rely on the cron text alone. Verify with Google Ads `change_event` using a finite `BETWEEN` window, then check whether proposed text/image assets exist. Load `references/google-ads-mutation-audit.md` for the exact GAQL queries and reporting pattern.
+
 ## Audit Checklist
 
 Quick health check for any Google Ads account:
@@ -228,6 +232,10 @@ For iOS app install campaigns, use Apple Custom Product Pages (CPPs) as the ad c
 **Limit:** 35 CPPs per app. One per campaign or ad group theme works well.
 
 This is the cleanest iOS attribution signal available post-ATT. Server-side, no SDK, no privacy thresholds.
+
+## Cross-Platform Analysis
+
+When asked to evaluate ad strategy across channels (Google + Meta + organic), or correlate ad spend with RevenueCat subscriber/revenue data, see `references/cross-platform-analysis.md`. Key insight: cheap international installs can inflate Google Ads conversion counts while contributing little to MRR.
 
 ## Common Mistakes
 
@@ -361,6 +369,8 @@ higgsfield generate create seedream_v5_lite \
 
 For exact crop commands and known model quirks, see `references/weekly-creative-generation-notes.md`.
 
+**Deterministic fallback for chart/callout winners:** if the proven winner is a minimalist event-driven chart/callout asset, prefer a deterministic vector-style variant over forcing generative image models. This avoids generic AI finance slop and preserves typography. Use `scripts/chart_callout_asset.py` with Pillow via `uv run --with pillow` to create 1200x628 and 1200x1200 candidates, then still run the Visual QA gate before attaching anything. See `references/weekly-creative-generation-notes.md` for examples.
+
 **Creative direction for Google App Campaign images:**
 - Double down on proven winning visual patterns from Step W1. If the winner is a clean chart/callout creative, create variants of that pattern instead of defaulting to phone mockups.
 - For chart/callout variants: white background, thick green trend line, orange event marker, small clean tooltip connected to the chart, neutral market-event language, and no real tickers.
@@ -405,13 +415,16 @@ Hard reject any asset with:
 1. Illegible, misspelled, garbled, or awkward text
 2. Wrong logos, fake UI, fake tickers, or misleading finance claims
 3. Obvious AI artifacts, glossy AI-template polish, or uncanny composition
-4. Generic finance visuals: bland line charts, abstract stock arrows, meaningless dashboards, crypto/Wall Street clichés, clipart people, or low-effort SaaS ad layouts
+4. Generic finance visuals: bland line charts, abstract stock arrows, meaningless dashboards, crypto/Wall Street clichés, clipart people, low-effort SaaS ad layouts, or clean-but-boring vector templates
 5. Weak connection to Bloom's actual value prop: understanding why stocks move, AI research, market news, and investor decision support
-6. Anything that looks like an asset Eric would call "AI slop" or "this image asset sucks"
+6. Anything that looks like an asset Eric would call "AI slop", "horrible", or "this image asset sucks"
+7. Any minor remix of a rejected concept from a prior run, including the May 11, 2026 chart/callout variants: `bloom-earnings-surprise-1200x628.png`, `bloom-guidance-raise-1200x628.png`, `bloom-analyst-upgrade-1200x628.png`, and `bloom-news-catalyst-square.png`
 
-Score each asset 1-5 on specificity, taste/design quality, typography, non-generic finance visual, and policy safety. Approve only if the overall score is at least 4/5 and no category is below 3/5.
+Do not approve assets because they are legible, aligned, or artifact-free. "Polished but generic" is still a fail. Vision-model PASS ratings are advisory only and are overridden by Eric's taste feedback.
 
-Rejected assets must not be attached, recommended, offered for upload, or uploaded. Regenerate up to 2 times if time allows. If nothing clears the gate, say no usable image assets were generated this week and attach zero images.
+Score each asset 1-5 on specificity, taste/design quality, typography, non-generic finance visual, and policy safety. Approve only if every category is 5/5 or the asset is based on a human-approved Bloom design/template. If uncertain, reject.
+
+Rejected assets must not be attached, recommended, offered for upload, or uploaded. Regenerate up to 2 times if time allows, but never regenerate from a rejected concept family. If nothing clears the gate, say no usable image assets were generated this week and attach zero images.
 
 If video/UGC looks too synthetic but otherwise promising, apply light finishing: grain 25-40, sharpness +10-20, brightness -5 to -10, vignette 5-15. If it still looks fake or generic, reject it.
 

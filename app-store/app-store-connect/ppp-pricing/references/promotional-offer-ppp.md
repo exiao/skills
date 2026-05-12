@@ -25,4 +25,3 @@ Prices are in LOCAL currencies (INR 1499, JPY 2200, MXN 299). The floor is Apple
 - Price point IDs are base64-encoded JSON: `{"s":"SUB_ID","t":"TERRITORY","p":"PRICE_INDEX"}`
 
 ## Full API examples
-See `revenuecat-cli` skill's `references/retention-messaging-api.md` for complete curl examples.

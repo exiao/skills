@@ -61,13 +61,39 @@ When a known winning image is a clean chart/callout creative, do not regress to 
 
 Visual QA should explicitly check: legible text, correct spelling, no wrong logos, no people/phones if the winner had none, no artifacts, no misleading financial promises.
 
-## Hard quality gate after 2026-05-10 rejection
+## Deterministic chart/callout generation fallback
 
-Eric rejected the previous generated candidate as unacceptable for ads. Treat this as a strict taste bar, not a minor preference.
+For minimalist chart/callout winners, a deterministic vector-style asset can be better than an AI-generated image. It preserves typography, avoids fake UI/tickers, and makes it easier to stay close to the proven visual grammar. Use the bundled script when generative models are likely to produce generic finance ads:
+
+```bash
+uv run --with pillow python "$HOME/.hermes/skills/external-services/google-ads-cli/scripts/chart_callout_asset.py" \
+  --out-dir /tmp/bloom-google-ads \
+  --filename bloom-earnings-1200x628.png \
+  --size 1200x628 \
+  --event-label "Earnings update" \
+  --headline "Earnings beat expectations" \
+  --subline "Bloom explains the move before you react."
+```
+
+Good variant themes: earnings surprise, analyst upgrade, guidance raise, market-moving news. Keep language neutral. Avoid real tickers and profit promises. Still inspect the actual PNG visually and apply the hard QA gate before reporting or attaching.
+
+If the active Python environment lacks `pip` or Pillow, `uv run --with pillow ...` is the fastest portable route.
+
+## Hard quality gate after May 2026 rejections
+
+Eric rejected both the 2026-05-10 generated candidate and the 2026-05-11 chart/callout batch as unacceptable for ads. Treat this as a strict taste bar, not a minor preference.
+
+Banned rejected files/concept family:
+- `bloom-earnings-surprise-1200x628.png`
+- `bloom-guidance-raise-1200x628.png`
+- `bloom-analyst-upgrade-1200x628.png`
+- `bloom-news-catalyst-square.png`
+
+Do not make minor remixes of those assets. Clean vector execution, legible text, good alignment, and a vision-model PASS are not enough. The failure mode is "polished but generic finance SaaS ad," which must be rejected.
 
 Reject and do not attach any asset that looks like generic AI ad slop: bland finance charts, abstract arrows, meaningless dashboards, fake polished templates, crypto/Wall Street clichés, clipart people, awkward typography, overproduced AI gloss, or visuals that are only loosely related to Bloom.
 
-Approved assets need to score at least 4/5 overall, with no category below 3/5, on:
+Approved assets must either be based on a human-approved Bloom design/template or score 5/5 on every category:
 - Specificity to Bloom's real value prop
 - Taste/design quality
 - Typography/readability

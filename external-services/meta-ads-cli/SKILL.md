@@ -34,8 +34,8 @@ ADSET_ANDROID="$BLOOM_ANDROID_ADSET_ID"   # General, Android (ACTIVE)
 | `curl` + Meta Marketing API v22.0 | All ad management (read, pause, budget, create) |
 | `curl` + Meta Ad Library API | Competitor creative research |
 | `higgsfield` CLI | Higgsfield AI image generation (seedream, gpt_image_2, marketing_studio_image) |
-| `trend-research` skill | Find what investing/finance content is trending today |
-| `web-search` skill | Serper for trending finance content |
+| `last30days` skill | Find what investing/finance content is trending today |
+| web search skill | Serper for trending finance content |
 | `nano-banana-pro` skill | Generate 1080×1080 ad creatives |
 | Reply output | Report + creative summaries (cron delivery handles Signal routing) |
 
@@ -153,6 +153,17 @@ This feeds directly into Step 5c ideation.
 
 ---
 
+### Step 4.75 — Capacity Preflight Before Creative Generation
+
+Before spending time or tokens on new image generation, check whether both target ad sets have room for a full paired upload. Meta's max-ad limit includes paused/inactive ads, not just active ads, so the active count is not enough.
+
+1. Pull account-level ads with `fields=id,name,status,effective_status,adset_id,created_time`.
+2. Count non-archived ads in `$ADSET_IOS` and `$ADSET_ANDROID`.
+3. Each new creative needs one iOS slot and one Android slot.
+4. If either ad set lacks enough room for the intended batch, stop before generating images and report that old ads must be archived or fresh ad sets created.
+
+Do not create an iOS-only or Android-only partial rollout. If capacity is unclear, assume unsafe and stop before upload.
+
 ### Step 5 — Generate New Creatives (4-Phase Process)
 
 #### 5a — Build Exclusion List
@@ -172,10 +183,10 @@ Use these insights to inform concept selection. Double down on documented winner
 
 Use these skills to generate concepts:
 - **competitor research** (from Step 4.5) — remix proven competitor hooks, exploit gaps they're missing
-- **trend-research** — what is viral in investing/fintech right now
-- **web-search** — trending finance content today
+- **last30days** — what is viral in investing/fintech right now
+- **last30days** — trending content research
 - **hooks** — generate scroll-stopping openers
-- **meta-ads-creative** — 6 Elements framework, proven ad formats
+- 6 Elements framework, proven ad formats (see references/)
 - **content-strategy** — angles from what is working on social
 
 Come up with **5 distinct concepts**. Each concept needs:
@@ -283,13 +294,15 @@ If auth fails (`Session expired`), skip Higgsfield creatives and fall back to ex
 - High contrast, thumb-stopping in 0.5s
 - Bloom logo: 3 teal circles (light top-right, medium left, dark small bottom-right)
 
-**Logo usage:** Only include the Bloom logo when the concept calls for it (e.g. a branded card, CTA panel). Many formats (fake notifications, mock apps, memes) work better without a logo. When you DO include it:
+**Logo usage:** Only include the Bloom logo when the concept calls for it (e.g. a branded card, CTA panel). Many formats (fake notifications, mock apps, memes) work better without a logo. When you DO include it, do not trust the image model to draw the logo correctly:
 
-- Nano Banana Pro: pass `-i {baseDir}/assets/bloom-logo.png` as reference so the model sees the real logo
-- gpt-image-2: composite the real logo onto the output after generation using PIL/Pillow (don't ask the model to draw it)
-- Higgsfield: include the logo description in the prompt ("three teal circles arranged as the Bloom logo: large light-teal top-right, medium teal left, small dark-teal bottom-right"). Composite the real logo after if result is inaccurate.
+- Preferred: composite the real logo from `{baseDir}/assets/bloom-logo.png` onto the final PNG with PIL/Pillow, SVG, or canvas.
+- Nano Banana Pro: you may pass `-i {baseDir}/assets/bloom-logo.png` as reference, but still inspect the final logo against the reference asset.
+- gpt-image-2: composite the real logo after generation. Do not ask the model to draw it.
+- Higgsfield: composite the real logo after generation. Prompted logo descriptions are not enough.
+- If a generated background includes a fake/wrong Bloom logo, mask/crop it out or regenerate before compositing the real logo.
 
-The logo reference file lives at: `{baseDir}/assets/bloom-logo.png` (1024×1024 PNG)
+The canonical logo reference file lives at: `{baseDir}/assets/bloom-logo.png` (1024×1024 PNG). It is three teal circles: medium teal left, large light-teal top-right, small dark-teal bottom-right. Any feather/leaf/checkmark, four-circle cluster, garbled blob, or different geometry is the wrong logo.
 
 **Output filename:** Use a short slug describing the format:
 - Pattern: `creative-N-<format-slug>.png` (e.g. `creative-1-whatsapp-chat.png`, `creative-3-weather-card.png`)
@@ -305,21 +318,21 @@ Write `ads/iteration/creatives/$(date +%Y-%m-%d)/manifest.md` with format/hook/c
 After generating each creative, run a vision inspection on the output image. Check for:
 
 1. **Text legibility** — all text must be fully readable, correctly spelled, no garbled/mangled characters
-2. **No wrong logos** — if a logo is present, it must be correct (three teal circles). A missing logo is fine. A WRONG logo (feather, four circles, garbled shape, competitor brand) is a hard fail.
+2. **Logo accuracy against canonical asset** — if a logo is present, compare it to `{baseDir}/assets/bloom-logo.png`. It must be the Bloom mark: exactly three teal circles, medium teal left, large light-teal top-right, small dark-teal bottom-right. Missing logo is fine. Wrong logo is a hard fail: feather/leaf/checkmark, four circles, garbled blob, off-brand geometry, competitor brand, or any model-invented symbol.
 3. **AI artifacts** — no distorted UI elements, no hallucinated brand logos, no nonsense text
 
 ```
 For each generated creative image:
   - Use the vision tool to inspect the image
-  - Ask: "Is all text legible and correctly spelled? If any logo is shown, is it correct (three teal circles, not a feather or garbled)? Any AI artifacts or wrong brand logos?"
-  - If FAIL: regenerate with a more explicit prompt (add "IMPORTANT: spell all words correctly, no typos")
+  - Ask: "Is all text legible and correctly spelled? If any logo is shown, compare it to the canonical Bloom logo reference: exactly three teal circles (medium teal left, large light-teal top-right, small dark-teal bottom-right). Is the logo correct, or is it a feather/leaf/checkmark/four-circle cluster/garbled/model-invented mark? Any AI artifacts or wrong brand logos?"
+  - If FAIL: regenerate with a more explicit prompt (add "IMPORTANT: spell all words correctly, no typos, no fake logos")
   - If second attempt also FAIL: skip this creative, do not upload it
   - Only upload creatives that PASS the visual QA gate
 ```
 
-**Hard rule:** Never upload a creative with misspelled text or a WRONG logo. Missing logo is fine — wrong logo is not. One bad ad damages brand credibility more than no ad at all.
+**Hard rule:** Never upload a creative with misspelled text or a wrong Bloom logo. Missing logo is fine. A model-generated fake logo is not close enough, even if it is teal or vaguely circular. One bad ad damages brand credibility more than no ad at all.
 
-**Reliable text/logo workaround:** For text-heavy static ads, generate a text-free or low-text background with Nano Banana / gpt-image-2 / Higgsfield, then render final ad copy, CTA, disclaimer, and Bloom logo deterministically with SVG/HTML/canvas (e.g. `rsvg-convert`) instead of asking the image model to spell. This preserves tri-model visual variety while making the QA gate much easier to pass. If PIL/Pillow is unavailable, SVG + `rsvg-convert` works for logo/card overlays.
+**Reliable text/logo workaround:** For text-heavy static ads, generate a text-free or low-text background with Nano Banana / gpt-image-2 / Higgsfield, then render final ad copy, CTA, disclaimer, and Bloom logo deterministically with SVG/HTML/canvas/PIL instead of asking the image model to spell. This preserves tri-model visual variety while making the QA gate much easier to pass. If capacity is blocked, image models are slow, or model auth is flaky, deterministic PIL/SVG cards are an acceptable fallback execution path as long as the manifest records the intended model slot and final images pass vision QA. If PIL/Pillow is unavailable, SVG + `rsvg-convert` works for logo/card overlays.
 
 #### 5h — Append to Learnings File
 
@@ -384,7 +397,7 @@ Repeat 6a-6c for Android ad set (`$ADSET_ANDROID`) using the Android app link, s
 
 ⚠️ **If any API call returns an error with `payment` or `billing`: STOP and notify the account owner.**
 
-⚠️ **If ad creation returns Meta error `1487809` / "Too Many Ads" (ad set/campaign/account max ads, including paused/inactive ads): STOP uploading immediately and report it.** Do not partially roll out iOS-only or Android-only ads. Log whether an image upload or ad creative object was already created, then tell the account owner the ad set needs cleanup or a fresh ad set before new ads can launch.
+⚠️ **If ad creation returns Meta error `1487809` / "Too Many Ads" (ad set/campaign/account max ads, including paused/inactive ads): STOP uploading immediately and report it.** Do not partially roll out iOS-only or Android-only ads. Log whether an image upload, ad creative object, or ad object was already created, then tell the account owner the ad set needs cleanup or a fresh ad set before new ads can launch. If the local upload log is empty but the failure happened after creative creation, verify recent `/adcreatives` before saying nothing was created.
 
 ### Step 7 — Output Report
 
@@ -441,7 +454,11 @@ Always use `$BLOOM_APP_STORE_ID` for iOS ad links (the current App Store ID). Th
 
 ## Attribution: Click-to-WhatsApp / Bloombot
 
-For campaigns that send users into Bloombot's WhatsApp Business number, load `references/click-to-whatsapp-bloombot.md` before setup or optimization. Key rule: judge by cost per qualified conversation, not cost per message. Capture CTWA webhook metadata (`ctwa_clid`, `source_id`, referral headline/body/media, prefill text) on first inbound message, then send CAPI events back to Meta: Lead = qualified conversation, Subscribe/CompleteRegistration = recurring opt-in, Purchase = paid subscription. Do not scale conversation optimization without downstream quality data, or Meta will find cheap bored tappers.
+For campaigns that send users into Bloombot's WhatsApp Business number, load `references/click-to-whatsapp-bloombot.md` before setup or optimization. Key rule: judge by cost per qualified conversation, not cost per message.
+
+**Critical constraint (as of 2026-05-12):** BloomBot uses a Baileys gateway. Registering the number in a WABA breaks Baileys (E2E encryption disabled). Native CTWA campaigns are blocked until the gateway is migrated to Meta Cloud API. Use the wa.me deep link traffic campaign workaround instead: run a Traffic campaign (`OUTCOME_TRAFFIC`) with `https://wa.me/$WHATSAPP_NUMBER?text=<prefill>` as the destination URL. Users land in WhatsApp with a prefilled message, Baileys receives it normally. See `references/click-to-whatsapp-bloombot.md` for strategy and `references/2026-05-12-wame-traffic-campaign-setup.md` for the proven end-to-end API sequence.
+
+Capture CTWA webhook metadata (`ctwa_clid`, `source_id`, referral headline/body/media, prefill text) on first inbound message, then send CAPI events back to Meta: Lead = qualified conversation, Subscribe/CompleteRegistration = recurring opt-in, Purchase = paid subscription. Do not scale conversation optimization without downstream quality data, or Meta will find cheap bored tappers.
 
 ## Attribution: Custom Product Pages
 
@@ -455,7 +472,7 @@ For iOS app campaigns, use Apple Custom Product Pages (CPPs) as the ad destinati
 
 ## Common Mistakes
 
-See also `references/2026-05-09-run-pitfalls.md` for concrete API error payloads and the deterministic text-overlay workaround from a real run. Load `references/operational-pitfalls.md` when debugging app link mismatches, creative-limit errors, missing ad objects, or production API responses that don't match the happy path.
+See also `references/2026-05-09-run-pitfalls.md` for concrete API error payloads and the deterministic text-overlay workaround from a real run. Load `references/operational-pitfalls.md` when debugging app link mismatches, creative-limit errors, missing ad objects, or production API responses that don't match the happy path. Load `references/2026-05-11-run-pitfalls.md` when handling max-ad capacity, orphaned ad creative objects, wrong/ambiguous Bloom logos, failed creative-pack repair, or deciding whether to generate creatives before upload capacity is known. Load `references/2026-05-12-run-pitfalls.md` for gpt-image-2 timeout workarounds, archiving old ads to free capacity, already-archived kill targets, zero-impression ad debugging, and the "official document parody" format category. Load `references/2026-05-12-compositing-lessons.md` for the flat-card ban, gradient overlay opacity pitfalls, Higgsfield JSON parsing, GEMINI_API_KEY sourcing, and CTWA WABA phone number prerequisites.
 
 1. **Token not set** — always use `$META_ACCESS_TOKEN` from env. Never hardcode.
 2. **Cron scanner false positives** — this skill is loaded into scheduled cron prompts, and Hermes scans the fully assembled prompt before execution. Avoid single-line examples where `curl` contains `$API`, `$TOKEN`, `$KEY`, `$SECRET`, or similar on the same line. Use neutral variable names like `GRAPH_URL` instead of `API`, and put auth form fields or headers on continuation lines. Verify with `tools.cronjob_tools._scan_cron_prompt(skill_text)` after editing.
@@ -471,8 +488,18 @@ See also `references/2026-05-09-run-pitfalls.md` for concrete API error payloads
 11. **Skipping competitor research** — Step 4.5 must run before ideation. Without it, creatives are generated in a vacuum.
 12. **Firecrawl fails on Ad Library** — if firecrawl can't scrape the page (JS-heavy rendering), fall back to web search for "[competitor] facebook ads 2026" and extract what you can.
 13. **Ad Library API auth failure is not always 403** — OAuth code `10` / subcode `2332002` also means the app lacks Ad Library API authorization. Skip browser login, fall back to web search, and report the limitation.
-14. **Ad set max-ad limit** — Meta error `1487809` / "Too Many Ads" means the ad set/campaign/account hit the 50-ad limit including paused/inactive ads. Stop uploading and report cleanup/fresh-ad-set needed. Do not create a partial platform rollout.
+14. **Ad set max-ad limit** — Meta error `1487809` / "Too Many Ads" means the ad set/campaign/account hit the 50-ad limit including paused/inactive ads. Check capacity before generating creatives, using account-level ads and non-archived counts by target ad set. Stop uploading and report cleanup/fresh-ad-set needed. Do not create a partial platform rollout.
 15. **Image-model text risk** — for text-heavy ad cards, render final text and logo deterministically over generated backgrounds with SVG/canvas. This avoids misspellings while preserving visual variety.
+16. **gpt-image-2 (OpenAI direct) timeout** — the OpenAI Images API frequently times out (empty response after 120-240s). Do not retry more than once. Fall back to Nano Banana Pro (text-heavy) or Higgsfield `gpt_image_2` (photorealistic). Higgsfield routes the same model but handles polling internally via `--wait`.
+17. **Already-archived kill targets** — if pausing an ad returns error 1885088 ("Archived Ads Can't Be Edited"), it's already archived. Log and skip. Only `name` is editable on archived ads.
+18. **Zero-impression ads older than 48h** — flag in the daily report for manual review. May indicate approval delays, policy review for novel formats, or budget exhaustion across too many active ads.
+19. **GEMINI_API_KEY in ~/.hermes/.env, not openclaw.json** — the openclaw.json lookup often returns empty. Source `~/.hermes/.env` before running Nano Banana Pro to ensure `$GEMINI_API_KEY` is set.
+20. **Pure PIL flat cards are banned** — never ship solid-color PIL-rendered cards as final creatives. Always generate AI backgrounds first, then composite text/logo deterministically on top. If image models are all unavailable, report blocked instead of falling back to flat cards.
+21. **Gradient overlay washes out dark backgrounds** — alpha 140+ on a dark AI background makes it look like solid black. Start at alpha 40-80 or skip the overlay and use `ImageEnhance.Brightness` instead. See `references/2026-05-12-compositing-lessons.md`.
+22. **Higgsfield --json outputs a JSON array** — `[{...}]` not `{...}`. Use `json.load(f)[0]` not line-by-line `json.loads`.
+23. **CTWA requires registered WABA phone number** — before creating a Click-to-WhatsApp campaign, verify a production phone number exists under the Bloom WABA via the Graph API. Test numbers don't count.
+24. **Ad set creation requires `advantage_audience` flag** — Meta error 1870227 ("Advantage Audience Flag Required") fires if you create an ad set without `targeting_automation.advantage_audience` in the targeting spec. Set to `0` for manual targeting, `1` for Advantage+ expansion. This is mandatory as of 2026.
+25. **wa.me Traffic campaign objective** — use `OUTCOME_TRAFFIC` with `optimization_goal=LINK_CLICKS`. Do not use OUTCOME_ENGAGEMENT or OUTCOME_LEADS for wa.me links (those require WABA). See `references/2026-05-12-wame-traffic-campaign-setup.md` for the proven API flow.
 
 ## Constitutional Rules
 - NEVER pause or kill an ad without reporting which ad, current spend, and ROAS first.

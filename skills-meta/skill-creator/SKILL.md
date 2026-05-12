@@ -70,6 +70,7 @@ Detailed guidance for each phase lives in `references/`:
 - `red-flags-stop-and-start-over.md` — when to bail
 - `skill-creation-checklist-tdd-adapted.md` — step-by-step checklist
 - `claude-search-optimization-cso.md` — CSO techniques for description optimization
+- `public-skills-repo-hygiene.md` — how to keep public skill repositories useful while moving only truly private runbooks to ignored internal storage
 
 Only proceed to "Creating a skill" below after baseline results are documented.
 
@@ -101,6 +102,18 @@ Based on the user interview, fill in these components:
 - **compatibility**: Required tools, dependencies (optional, rarely needed)
 - **source/update section**: When a skill is created from external docs, a copied prompt, an API page, or a product getting-started guide, put a `## Skill source` section at the bottom of SKILL.md. Include the canonical source URLs and a short update procedure so a future agent can refresh the skill without rediscovering provenance.
 - **the rest of the skill :)**
+
+### Public/shared skill repositories
+
+When editing a skills repo that is public or intended to be shared, use a conservative public/private boundary. Default to sanitize and keep skills public when the reusable workflow survives. Move a skill to ignored internal storage only when it is inherently a private runbook, such as private infra topology, deploy pipelines, local proxy routing, cron/reporting operations, account-specific automations, or private-project eval/prompt loops.
+
+Before opening a PR that removes private skills from a public bundle:
+- Preserve local copies under an ignored `internal/` directory if the user still needs them.
+- Do not add ignored `internal/` paths to public README/INSTALL docs.
+- Update generated docs and install lists to remove stale references.
+- Search for old paths/names, parse moved internal frontmatter, and review the public diff for leaked secrets, account IDs, app IDs, cron IDs, private domains, private paths, or operational snapshots.
+
+Read `references/public-skills-repo-hygiene.md` for the full decision rule and validation checklist.
 
 ### Skill Writing Guide
 
@@ -338,6 +351,25 @@ This fast incorporation path is for small-to-medium updates to existing skills. 
 
 ---
 
+## Post-Session Skill Library Review
+
+When the user asks to review the conversation and update the skill library, treat it as an active maintenance pass. Most non-trivial sessions should produce at least a small skill improvement: a pitfall, workflow step, trigger broadening, or reference note. Do not default to "nothing to save" unless the session was genuinely routine and produced no correction, technique, workaround, or reusable observation.
+
+Pressure scenarios to check before deciding:
+1. Did the user correct style, tone, format, verbosity, workflow order, or tool choice? Patch the skill that governs that task so the preference is embedded in the procedure, not only memory.
+2. Did a new technique, workaround, source-analysis method, diagnostic sequence, or tool pattern emerge? Add it to the owning class-level skill.
+3. Did a consulted skill prove incomplete, stale, too narrow, or missing a pointer to a useful reference? Patch that skill before replying.
+
+Update order:
+1. Patch a skill loaded or used in the session if it covers the learning.
+2. Otherwise patch an existing class-level umbrella skill.
+3. Add `references/`, `templates/`, or `scripts/` under an umbrella when the detail is too bulky or source-like for SKILL.md, and add a one-line pointer from SKILL.md.
+4. Create a new skill only when no existing umbrella covers the class. New skills should be class-level, not tied to a PR, error string, link, feature codename, or one-off session artifact. In this environment, put new skills in category `internal` unless they clearly belong to an existing library category.
+
+Favor the target library shape: rich class-level SKILL.md files with support directories for detail, not a long flat list of narrow session skills. Preserve YAML frontmatter integrity and source attribution. Final replies should state exactly what changed and where.
+
+---
+
 ## Improving the skill
 
 This is the heart of the loop. You've run the test cases, the user has reviewed the results, and now you need to make the skill better based on their feedback.
@@ -376,6 +408,14 @@ Keep going until:
 For situations where you want a more rigorous comparison between two versions of a skill (e.g., the user asks "is the new version actually better?"), there's a blind comparison system. Read `agents/comparator.md` and `agents/analyzer.md` for the details. The basic idea is: give two outputs to an independent agent without telling it which is which, and let it judge quality. Then analyze why the winner won.
 
 This is optional, requires subagents, and most users won't need it. The human review loop is usually sufficient.
+
+---
+
+## Session Review Skill Maintenance
+
+When the user asks to review the current conversation and update the skill library, be active by default. Scan for workflow corrections, style preferences, non-trivial fixes, tool quirks, and any skill that was loaded but proved incomplete. Patch the currently loaded skill first when it owns the lesson; otherwise patch an existing class-level umbrella. Prefer a concise SKILL.md pitfall or step for reusable guidance, and put session-specific transcripts, commands, or curation details in `references/` with a one-line pointer from SKILL.md. Avoid one-session-one-skill sprawl: create a new skill only when no existing umbrella covers the class, and make the new name class-level rather than tied to a PR, error string, or today's feature.
+
+For repository cleanup sessions, capture the reusable operating rule, not the raw session log. Example: "runtime checkout stash apply left conflicts, generated state, and public/private skill split" belongs as a stash-curation pitfall under a git/skills-cleanup umbrella, while the exact file list belongs in a reference file if future agents need it.
 
 ---
 

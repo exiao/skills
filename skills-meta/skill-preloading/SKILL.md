@@ -11,8 +11,8 @@ description: Reference for the two-tier skill loading system — preloaded vs ca
 - Category descriptions come from each folder's `DESCRIPTION.md` (frontmatter `description:` field)
 - Description truncation was removed from `agent/skill_utils.py`
 
-## Current Preloaded Skills (26)
-web-search, recall, writer, plan, skill-creator, render-cli, sentry-debug, grok-search, mcporter, babysit-pr, ralph-mode, firecrawl, stably-cli, porkbun-cli, copilot-money-cli, higgsfield, appfigures-cli, bird-twitter, apple-search-ads, dataforseo-cli, google-ads-cli, meta-ads-cli, prometheus-cli, last30days, dogfood
+## Current Preloaded Skills (23)
+recall, writer, plan, skill-creator, skill-preloading, render-cli, grok-search, mcporter, babysit-pr, ralph-mode, firecrawl, stably-cli, porkbun-cli, copilot-money-cli, appfigures-cli, bird-twitter, apple-search-ads, dataforseo-cli, google-ads-cli, meta-ads-cli, prometheus-cli, last30days, dogfood
 
 ## To Add a New Preloaded Skill
 Add `preloaded: true` to the SKILL.md frontmatter:

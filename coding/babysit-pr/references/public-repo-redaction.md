@@ -27,6 +27,17 @@ Common patterns to scan for:
 - Connection IDs from third-party services (long alphanumeric strings like `CONNECTION_ID_PLACEHOLDER`)
 - Personal names in bylines, ownership examples, or action instructions (prefer "the account owner")
 - Password location hints ("password in path/to/file")
+- Absolute user paths (`/Users/testuser/...`, `/Users/eric/...`) in code snippets or docs
+
+## 1b. Exclude placeholder values from automated safety scans
+
+Automated safety scans flag `API_KEY=value` patterns, but many skills/docs contain intentional placeholder values in documentation examples (`rnd_xxxYourKeyHerexxx`, `sk_mcp_your_key_here`, `API_KEY="dummy"`). The placeholder word often appears after a prefix, so a simple regex lookahead won't work. Use a post-match filter instead:
+
+```python
+PLACEHOLDER_PAT = re.compile(r'(?i)(dummy|test_?key|example|fake|placeholder|xxx|your|changeme|TODO|_?here)')
+if name == 'secret_literal' and PLACEHOLDER_PAT.search(matched_value):
+    continue  # skip -- it's a doc example, not a real key
+```
 
 ## 2. Replace with env var placeholders
 
@@ -59,6 +70,12 @@ Use `sed -i ''` for bulk replacement across multiple files:
 sed -i '' 's|hardcoded.domain.com|$APP_DOMAIN|g' file1.md file2.md file3.md
 ```
 
+For absolute user paths, replace with portable equivalents:
+```python
+# Bad: load_dotenv("/Users/testuser/.hermes/.env")
+# Good: load_dotenv(os.path.expanduser("~/.hermes/.env"))
+```
+
 ## 3. Add actual values to ~/.hermes/.env
 
 After stripping values from the repo, add them to the private env file so skills can still resolve them at runtime:
@@ -80,9 +97,9 @@ grep -rn "old_value" --include="*.md" . 2>/dev/null | grep -v node_modules | gre
 ## 5. Check AGENTS.md compliance rules beyond secrets
 
 Public skills repos often have structural rules that reviewers flag:
-- **No README.md inside skill directories** — use TESTING.md, WORKFLOWS.md, etc. instead
-- **SKILL.md must stay under 500 lines** — if content was inlined from a reference file, revert it and keep the reference
-- **No personal data** — includes names in bylines, blog URLs with real names, personal handles in examples
+- **No README.md inside skill directories** -- use TESTING.md, WORKFLOWS.md, etc. instead
+- **SKILL.md must stay under 500 lines** -- if content was inlined from a reference file, revert it and keep the reference
+- **No personal data** -- includes names in bylines, blog URLs with real names, personal handles in examples
 
 ## 6. Resolve review threads in bulk
 

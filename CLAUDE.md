@@ -18,20 +18,16 @@ category-name/
 
 | Category | What's inside |
 |----------|--------------|
-| **ai-tools** | AI agents (Claude Code, Codex, OpenCode, Hermes Agent), MCP integrations, web search, LLM tooling |
-| **app-store** | App Store Connect, ASO, RevenueCat, screenshots, simulators |
-| **coding** | Programming, debugging, testing, code review, PR workflows |
-| **creative** | Writing, editing, media production, video (Kling, Seedance, Remotion), content creation |
-| **devops** | CI/CD, GitHub workflows, Docker, MLOps, model training/inference, cloud deployment, OpenClaw debugging |
-| **external-services** | External service CLIs and API integrations (Porkbun, Appfigures, DataForSEO, Firecrawl, Higgsfield, etc.) |
-| **finance** | Investing, market analysis, portfolio management, earnings, comps |
-| **marketing** | Ads (Google/Meta/Apple), SEO, analytics, social media, content strategy, last30days research |
-| **media** | Media content tools |
-| **memory** | Memory management — GC, setup, and recall from past sessions |
-| **productivity** | Apple apps, email, notes, smart home, local search, gaming |
-| **research** | Deep research, competitive analysis, market intelligence |
-| **skills-meta** | Skills about skills — creating, auditing, improving, testing |
-| **visual-design** | UI/UX design, diagrams, image generation, frontend design |
+| **app-store** | App Store Connect API, ASO keyword optimization, screenshots, iOS simulators |
+| **coding** | PR babysitting, Sentry issue fixes, code simplification, deploy verification, QA dogfooding |
+| **thinking** | Brainstorming, office hours frameworks (YC, Sahil), synthetic user studies, planning, perspective shifts |
+| **writing** | Article writing, copywriting, content strategy, editing, content evaluation, hooks, research (last30days) |
+| **design** | UI/UX design, design systems (Impeccable), frontend design, Excalidraw diagrams, brand identity, stickers |
+| **video** | Character creation, video editing, production (Kling, Sora, Remotion, ElevenLabs), YouTube content, thumbnails |
+| **external-services** | CLI integrations for third-party APIs (Appfigures, Apple Search Ads, DataForSEO, Firecrawl, Google Ads, Grok, Higgsfield, Meta Ads, Porkbun, Prometheus, Render, Stably, Typefully, etc.) |
+| **memory** | Memory management — garbage collection, setup, and recall from past sessions |
+| **investing** | Stock research, portfolio analysis, market intelligence (coming soon) |
+| **skills-meta** | Creating, auditing, improving skills; MCP port management; prompt optimization |
 
 ## Skill Conventions
 
@@ -82,7 +78,7 @@ When referencing another skill, use its exact `name` from frontmatter (not folde
 
 1. **No hardcoded credentials.** Use `$ENV_VAR_NAME` for tokens, API keys, auth strings, product IDs. This repo is public.
 2. **No personal data.** No emails, phone numbers, account balances, or internal URLs.
-3. **Update generated docs** when adding, removing, or renaming skills. Run `python scripts/generate_catalog.py`; README lists category counts, while every skill directory appears in CATALOG.md under the correct category.
+3. **Update README.md** when adding, removing, or renaming skills.
 4. **Don't rename product names.** "Hermes Agent", "OpenClaw", "Claude Code", "Codex" etc. are real product names. Use them as-is in skill content. Don't bulk-rename references to match a metadata convention.
 5. **Prefer portable paths.** Use workspace-relative paths or well-known config paths (`~/.hermes/`, `~/.openclaw/`, `~/clawd/`). Avoid paths to personal directories (e.g. `~/Documents/personal/...`).
 
