@@ -82,7 +82,7 @@ When referencing another skill, use its exact `name` from frontmatter (not folde
 
 1. **No hardcoded credentials.** Use `$ENV_VAR_NAME` for tokens, API keys, auth strings, product IDs. This repo is public.
 2. **No personal data.** No emails, phone numbers, account balances, or internal URLs.
-3. **Update README.md** when adding, removing, or renaming skills. Every skill directory must appear in the README under the correct category.
+3. **Update generated docs** when adding, removing, or renaming skills. Run `python scripts/generate_catalog.py`; README lists category counts, while every skill directory appears in CATALOG.md under the correct category.
 4. **Don't rename product names.** "Hermes Agent", "OpenClaw", "Claude Code", "Codex" etc. are real product names. Use them as-is in skill content. Don't bulk-rename references to match a metadata convention.
 5. **Prefer portable paths.** Use workspace-relative paths or well-known config paths (`~/.hermes/`, `~/.openclaw/`, `~/clawd/`). Avoid paths to personal directories (e.g. `~/Documents/personal/...`).
 
