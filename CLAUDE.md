@@ -20,14 +20,14 @@ category-name/
 |----------|--------------|
 | **app-store** | App Store Connect API, ASO keyword optimization, screenshots, iOS simulators |
 | **coding** | PR babysitting, Sentry issue fixes, code simplification, deploy verification, QA dogfooding |
-| **design** | UI/UX design, design systems (Impeccable), frontend design, slides, Excalidraw diagrams, brand identity, stickers |
+| **design** | UI/UX design, design systems (Impeccable), frontend design, slides, Excalidraw diagrams, brand identity, Remotion, stickers |
 | **external-services** | CLI integrations for third-party APIs (Appfigures, Apple Search Ads, DataForSEO, Firecrawl, Google Ads, Grok, Higgsfield, Meta Ads, Porkbun, Prometheus, Render, Stably, Typefully, etc.) |
 | **investing** | Stock research, portfolio analysis, market intelligence (coming soon) |
 | **memory** | Memory management — garbage collection, setup, and recall from past sessions |
 | **skills-meta** | Creating, auditing, improving skills; MCP port management; prompt optimization |
 | **thinking** | Brainstorming, office hours frameworks (YC, Sahil), synthetic user studies, planning, perspective shifts |
 | **video** | Character creation, video editing, production (Kling, Sora, Remotion, ElevenLabs), YouTube content, thumbnails |
-| **writing** | Copywriting, content strategy, editing, content evaluation, hooks, outlines, positioning, content pipeline, research (last30days) |
+| **writing** | Writing, copywriting, content strategy, editing, content evaluation, hooks, outlines, positioning, content pipeline, research (last30days) |
 
 ## Skill Conventions
 

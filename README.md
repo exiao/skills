@@ -30,14 +30,14 @@ Find more skills: [OpenClaw](https://github.com/openclaw/openclaw/tree/main/skil
 |----------|--------|-------------|
 | [app-store](app-store/) | 28 | App Store Connect, ASO, screenshots, iOS simulators |
 | [coding](coding/) | 8 | PR babysitting, Sentry fixes, simplification, deploy verification |
-| [design](design/) | 32 | UI/UX, Impeccable design system, Excalidraw, slides, Remotion |
+| [design](design/) | 32 | UI/UX, Impeccable design system, frontend design, slides, Excalidraw, brand identity, Remotion, stickers |
 | [external-services](external-services/) | 21 | Third-party API integrations and CLIs |
 | [investing](investing/) | 0 | Coming soon |
 | [memory](memory/) | 3 | Memory management for persistent agents |
 | [skills-meta](skills-meta/) | 8 | Meta-skills for creating and improving other skills |
 | [thinking](thinking/) | 7 | Brainstorming, office hours, user studies, planning |
 | [video](video/) | 18 | Character creation, video editing, production (Kling, Sora, Remotion, ElevenLabs), YouTube content |
-| [writing](writing/) | 11 | Copywriting, content strategy, editing, hooks, outlines, content pipeline |
+| [writing](writing/) | 11 | Writing, copywriting, content strategy, editing, hooks, outlines, positioning, content pipeline |
 
 ## Skill structure
 
