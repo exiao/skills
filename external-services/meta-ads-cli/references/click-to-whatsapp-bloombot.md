@@ -224,7 +224,7 @@ If `data` is empty or the production number is missing, native CTWA is blocked.
 Run a Traffic campaign with the ad's website URL set to a wa.me deep link:
 
 ```
-https://wa.me/19293262783?text=Can+you+review+my+portfolio%3F
+https://wa.me/$WHATSAPP_NUMBER?text=Can+you+review+my+portfolio%3F
 ```
 
 User taps the ad, WhatsApp opens with the prefilled message, they send it, Baileys receives it like any normal incoming message.

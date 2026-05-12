@@ -42,7 +42,7 @@ UPLOAD=$(curl -s -X POST "$GRAPH_URL/$ACCOUNT/adimages" \
 IMAGE_HASH=$(echo $UPLOAD | python3 -c "import sys,json; d=json.load(sys.stdin); print(list(d['images'].values())[0]['hash'])")
 
 # Creative with wa.me link
-WAME_URL="https://wa.me/19293262783?text=Can+you+review+my+portfolio%3F"
+WAME_URL="https://wa.me/$WHATSAPP_NUMBER?text=Can+you+review+my+portfolio%3F"
 CREATIVE_RESULT=$(curl -s -X POST "$GRAPH_URL/$ACCOUNT/adcreatives" \
   -F "name=Bloom CTWA Creative N" \
   -F "object_story_spec={

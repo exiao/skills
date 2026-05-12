@@ -41,7 +41,7 @@ Click-to-WhatsApp ads require a production WhatsApp Business phone number regist
 3. Verify a production (non-test) phone number exists with `status=CONNECTED`
 4. If no production number exists, stop and report the blocker — do not attempt to create the campaign
 
-The Bloom Business ID is 1428255340673915. As of 2026-05-12, the Bloom WABA (110591981930436) had zero production phone numbers. The only number found was a test number (+1 555-098-6539) on a separate test WABA.
+The Bloom Business ID is $META_BUSINESS_ID. As of 2026-05-12, the Bloom WABA ($META_WABA_ID) had zero production phone numbers. The only number found was a test number (+1 555-098-6539) on a separate test WABA.
 
 ## Baileys breaks under WhatsApp Coexistence
 
