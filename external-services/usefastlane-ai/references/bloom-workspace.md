@@ -30,8 +30,8 @@ All format weights at 25% even split. 50% remix, 50% own media, 50% product ment
 - Schedule: daily at 10am ET (`0 10 * * *`)
 - Script: `~/.hermes/scripts/fastlane-daily.sh` (wrapper: `fastlane-daily.py`)
 - Delivers to: signal:Skills Admin
-- Behavior: generates 3 pieces via Blitz, polls until rendered, **auto-schedules to Bloom brand accounts** (TikTok, Instagram, YouTube). No approval needed.
-- Schedule stagger: posts at 2pm, 5pm, 8pm ET the next day.
+- Behavior: generates 3 pieces via Blitz and polls until rendered. The script intentionally does **not** schedule; the cron agent must visually self-verify each item first, generate up to 2 replacements if needed, then schedule only approved items to Bloom brand accounts. See `references/bloom-visual-qa.md`.
+- Target schedule stagger: tomorrow at 18:00, 21:00, and 00:00 UTC, cycling by approved item.
 - YouTube: skips slideshows (not supported), truncates titles to <100 chars.
 - Batch size controlled by `FASTLANE_BATCH_SIZE` env var (default 3).
 - Creator accounts are ON HOLD.
@@ -41,4 +41,4 @@ All format weights at 25% even split. 50% remix, 50% own media, 50% product ment
 ## Resolved Questions
 
 - Post to all 5 accounts or just Bloom? **Bloom brand only** (3 accounts: TikTok, Instagram, YouTube). Creator accounts on hold.
-- Auto-schedule or require approval? **Auto-schedule.**
+- Auto-schedule or require approval? **Cron-agent visual self-verification before scheduling.** The script should not schedule directly; the agent schedules only approved items after visual/copy QA.

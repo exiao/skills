@@ -193,7 +193,7 @@ Analytics:
 
 ## Automation Artifacts
 
-For Bloom's existing daily cron, load `references/bloom-workspace.md` for account IDs and job behavior. For script failures, macOS shell portability, and caption extraction pitfalls, load `references/cron-automation-pitfalls.md`.
+For Bloom's existing daily cron, load `references/bloom-workspace.md` for account IDs and job behavior. For script failures, macOS shell portability, and caption extraction pitfalls, load `references/cron-automation-pitfalls.md`. For cron-agent visual QA, rejection logging, replacement loops, and scheduling rules, load `references/bloom-visual-qa.md`.
 
 When building an autonomous campaign in a local project, create:
 
@@ -245,8 +245,8 @@ The scripts should read `FASTLANE_API_KEY` from the environment, write results i
 3. Optionally patch preferences, stopping for approval if it flushes the queue.
 4. Call `POST /blitz` for requested quantity.
 5. Poll `GET /content/:id` every ~10 seconds until not `BUILDING`.
-6. QA `CREATED` items by type, files count, thumbnail, generated text if available, and campaign fit.
-7. If `FAILED`, report and decide whether to retry.
+6. QA `CREATED` items by type, files count, thumbnail, generated text if available, and campaign fit. For visual content, download the media and inspect actual rendered images or video frames before scheduling; metadata and thumbnails are not enough.
+7. If `FAILED` or rejected by QA, report and decide whether to retry.
 
 Blitz findings from live use:
 

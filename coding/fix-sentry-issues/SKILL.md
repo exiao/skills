@@ -10,38 +10,33 @@ Scan recent Sentry issues for Bloom (last 24h, all statuses), analyze root cause
 
 ## Prerequisites
 
-- Sentry MCP configured via mcporter (org: `$SENTRY_ORG`, region: `https://us.sentry.io`)
+- Official Sentry CLI (`sentry`) authenticated via `SENTRY_AUTH_TOKEN`
+- `$SENTRY_ORG` and `$SENTRY_PROJECT` set for Bloom backend Sentry access
 - GitHub CLI (`gh`) authenticated with Bloom-Invest org access
 - Git worktrees for isolated branches
+- If Sentry CLI auth or env vars are missing, stop and report the exact missing prerequisite. Do not fall back to mcporter/MCP.
 - If this runs as cron, read `references/cron-safety.md` before changing attached skills or toolsets. The cron scanner can block execution based on loaded skill documentation, not just the task prompt.
 
 ## Notes from prior runs
 
 - See `references/2026-05-08-sentry-cron-lessons.md` for Sentry CLI/MCP quirks, resolved-issue audit gotchas, and Bloom-specific triage examples discovered during an actual cron run.
 - See `references/2026-05-09-sentry-cron-lessons.md` for the `sentry.list_issues` MCP fallback, resolved-issue unrelated-commit handling, OpenAI Agents trace ID fix pattern, Capacitor Badge Android guard, and focused test command pitfalls.
+- See `references/2026-05-11-sentry-cron-lessons.md` for the official Sentry CLI-only workflow, stale Django/PostgreSQL connection retry pattern, Huey KeyError symptom triage, and Benzinga interpreter-shutdown noise handling.
 - See `references/2026-05-db-pool-catchalls.md` for a concrete DB pool exhaustion catch-all example.
 - See `references/2026-05-crypto-db-pool-noise.md` for per-item crypto/background loop handling plus deterministic logger tests.
+- See `references/2026-05-11-optional-refresh-db-pool.md` for the optional investment refresh pool-exhaustion pattern: call `close_old_connections()`, log a warning with lazy interpolation, and do not re-raise into Huey retries.
+- See `references/2026-05-12-sentry-cron-lessons.md` for open-PR dedupe examples, sparse Sentry list counts vs `issue view`, BloomBot missing-auth noise handling, and compact resolved-commit extraction.
 
 ## Workflow
 
 ### 1. Fetch recent issues (last 12h, most recent 10)
 
 ```bash
-# Get 10 most recent issues sorted by frequency
-mcporter call sentry.list_issues \
-  organizationSlug=$SENTRY_ORG \
-  query='last_seen:+12h' \
-  sort=freq \
-  limit=10 \
-  regionUrl='https://us.sentry.io'
+sentry issue list $SENTRY_ORG/$SENTRY_PROJECT --limit 10 -t 12h --json \
+  | jq '{data:[.data[] | {id,shortId,title,culprit,permalink,status,count,userCount,firstSeen,lastSeen,level,logger,type,issueType,metadata}]}'
 ```
 
-If `mcporter` returns `Tool list_issues not found`, use the raw Sentry API fallback. This worked in the 2026-05-09 cron run and preserves deterministic `lastSeen` + `freq` sorting:
-
-```bash
-sentry api '/api/0/organizations/$SENTRY_ORG/issues/?query=lastSeen:-12h&sort=freq&limit=10' --method GET \
-  | jq '[.[] | {id,shortId,project:.project.slug,title,culprit,permalink,status,count,userCount,firstSeen,lastSeen,level,logger,type,issueType,metadata}]'
-```
+Use the official Sentry CLI for Sentry data in cron runs. Do not call Sentry MCP tools such as `sentry.get_issue_details` or `sentry.get_latest_event`; configured MCP servers may not expose them consistently.
 
 Note: We fetch ALL issues (not just unresolved) to catch regressions, recently resolved issues that may have resurfaced, and issues that were auto-resolved but still occurring.
 
@@ -75,22 +70,14 @@ Add a "Resolved Issue Audit" section to the plan file:
 
 ### 2. Deep-analyze every issue
 
-For EACH of the 10 issues, get full details:
+For EACH of the 10 issues, get full details with the official CLI:
 
 ```bash
-mcporter call sentry.get_issue_details \
-  organizationSlug=$SENTRY_ORG \
-  issueId=<ISSUE_ID> \
-  regionUrl='https://us.sentry.io'
+sentry issue view <ISSUE_SHORT_ID> --json > /tmp/sentry_details/<ISSUE_SHORT_ID>.json
+sentry issue events <ISSUE_SHORT_ID> --json > /tmp/sentry_cli_events/<ISSUE_SHORT_ID>.json
 ```
 
-Also get latest event for full stack trace context. The Sentry MCP currently does not expose `get_latest_event`; use the official Sentry CLI instead:
-
-```bash
-sentry issue events <ISSUE_SHORT_ID> --json
-```
-
-`mcporter call sentry.get_issue_details ...` usually includes the most relevant frame and full stack trace, so use it as the primary deep-analysis source and use `sentry issue events` for event metadata/tags.
+Use `sentry issue view` as the primary issue metadata source and `sentry issue events` for latest event stack frames, tags, breadcrumbs, and request context. Save raw JSON artifacts under `/tmp/sentry_details/` and `/tmp/sentry_cli_events/` when they help compare clustered issues or preserve evidence for the plan.
 
 ### 3. Write plan file
 
@@ -162,7 +149,8 @@ cd ~/projects/_worktrees/sentry-<SHORT_ID>
 - Add proper error handling / null checks / type guards
 - If it's a crash, make it a graceful degradation instead
 - For OpenAI Agents tracing errors saying `Expected an ID that begins with 'trace_'`, generate IDs as `trace_` + `uuid.uuid4().hex`, not short UUID fragments. See `references/2026-05-09-sentry-cron-lessons.md`.
-- For Capacitor plugin errors on Android, check `Capacitor.isPluginAvailable(...)` and plugin support methods before calling native APIs. Treat missing optional native plugins as no-op warnings, not app errors.
+- For optional background refreshes that fail because the PostgreSQL pool is exhausted, call `close_old_connections()`, log a warning with lazy `%s` interpolation, and return without re-raising so Huey does not retry into pool pressure. Keep non-pool exceptions on the existing error path. See `references/2026-05-11-optional-refresh-db-pool.md`.
+- For stale DB connection errors, check ALL retry layers (inner utility retries AND outer caller retries AND Huey task-level retries). Fixing one layer while leaving others using `close_old_connections()` won't work because `close_old_connections()` doesn't discard broken connections. Use `connections.close_all()` at every retry boundary. See the "IMPORTANT" section in `references/2026-05-11-sentry-cron-lessons.md`.
 - Run lint and tests before committing:
   ```bash
   # Backend
@@ -240,8 +228,9 @@ When issues aren't code bugs but create Sentry noise, apply these patterns:
 | **Fix double-reporting** | Inner function calls capture_exception AND outer caller catches + reports | Remove from inner function; let caller decide |
 | **Add to before_send filter** | Worker signals (SIGABRT, SIGTERM), known infra noise | Add string match in `bloom_backend/settings.py` `before_send` |
 | **Frontend beforeSend filter** | Timeouts, network errors in `src/lib/sentry.ts` | Add to `beforeSend` callback to drop event |
+| **Missing auth on public server-to-server endpoints** | Unauthenticated internet probes hit endpoints that correctly return 401, e.g. BloomBot `header_empty=True` | Do not call `capture_message` for missing headers; log at info/debug. Keep Sentry for missing server secrets and non-empty malformed/wrong tokens that may indicate integration bugs |
 
-**Principle:** All failures still log at warning level for debugging — only Sentry issue creation is suppressed. True errors continue reporting normally.
+**Principle:** All failures still log at warning level for debugging — only Sentry issue creation is suppressed. True errors continue reporting normally. For expected unauthorized probes, info-level logs are enough because the endpoint already enforces 401.
 
 ## Key Bloom Files
 

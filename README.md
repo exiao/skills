@@ -1,71 +1,52 @@
-# Skills: Claude Code Skill Templates
+# Skills
 
-> Source: [github.com/exiao/skills](https://github.com/exiao/skills) | License: MIT
+A curated collection of skills for [Hermes Agent](https://github.com/NousResearch/hermes-agent), Claude Code, and other skill-aware AI agents.
 
-A collection of 300+ prompt-template skills for [Claude Code](https://docs.anthropic.com/en/docs/claude-code), [Hermes Agent](https://github.com/NousResearch/hermes-agent), and other skill-aware agents.
+Skills are structured prompts that teach AI agents specialized workflows, from App Store optimization to video production to stock research.
 
-Skills are folders with a `SKILL.md` entry point. Agents load them on demand when a task matches the skill description.
+## What's a skill?
 
-Resources: [Intro](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview) | [Free course](https://anthropic.skilljar.com/introduction-to-agent-skills) | [Complete guide](https://resources.anthropic.com/hubfs/The-Complete-Guide-to-Building-Skill-for-Claude.pdf)
+A skill is a markdown file (`SKILL.md`) with YAML frontmatter that an AI agent loads when it detects a matching task. Skills contain domain knowledge, step-by-step workflows, CLI commands, and decision trees that would otherwise require extensive prompting.
 
-## Installation
+## Categories
 
-Install everything. Open Claude Code and say:
-
-```text
-Install the skills from https://github.com/exiao/skills
-```
-
-Pick specific categories with the [Interactive Install Guide](INSTALL.md).
-
-Find more skills: [OpenClaw native skills](https://github.com/openclaw/openclaw/tree/main/skills) | [ClawHub](https://clawhub.ai) | [skills.sh](https://skills.sh)
-
-## Browse
-
-The README only lists categories. The full skill index is generated in [CATALOG.md](CATALOG.md).
-
-<!-- BEGIN GENERATED CATEGORY TABLE -->
 | Category | Skills | Description |
-|---|---:|---|
-| [ai-tools](ai-tools/) | 10 | AI agents (Claude Code, Codex, OpenCode), MCP integrations, web search tools, and LLM-powered utilities. |
-| [app-store](app-store/) | 28 | App Store skills — App Store Connect API, ASO keyword optimization, screenshots, iOS simulators, and RevenueCat subscription management. |
-| [coding](coding/) | 29 | Programming, debugging, testing, code review, PR management, prompt optimization, and software development workflows. |
-| [creative](creative/) | 49 | Writing, editing, content pipelines, media production (video via Kling/Seedance/Remotion/Manim, audio, GIFs), AI image generation (Nano Banana), content evaluation, Substack drafts, and YouTube content. |
-| [devops](devops/) | 54 | CI/CD, GitHub workflows (PRs, reviews, issues, rulesets), Docker debugging, MLOps (training, inference, evaluation), cloud deployment (Render, Railway), DNS/domains (Porkbun), security audits, webhook management, and Playwright testing (Stably). |
-| [external-services](external-services/) | 17 | External service CLIs and API integrations — Porkbun domains, Copilot Money finances, Appfigures analytics, DataForSEO keywords, Google Ads, Meta Ads, Apple Search Ads, Prometheus/PAssistant, Stably testing, Firecrawl scraping, Bird (X/Twitter), and Higgsfield AI video/image generation. |
-| [finance](finance/) | 11 | Finance and investing — Alpaca trading, stock research, wealth management (Copilot Money), earnings card pipeline, market daily briefings, Polymarket predictions, and insider/investing log trade posting. |
-| [marketing](marketing/) | 39 | Advertising (Google, Meta, Apple Search Ads), SEO, analytics, social media (X/Twitter via Bird and xitter, Typefully scheduling), content strategy and pipelines, hooks, trend research, positioning, pricing strategy, brand identity, NotebookLM, email sequences, and growth. |
-| [media](media/) | 2 | Skills for working with media content — YouTube transcripts, GIF search, music generation, and audio visualization. |
-| [memory](memory/) | 3 | Memory management — garbage collection, setup, and recall from past sessions. |
-| [productivity](productivity/) | 17 | Email (Himalaya), notes (Obsidian, Apple Notes, Notion), Apple apps (Reminders, FindMy, iMessage), Google Workspace, smart home (OpenHue), Linear project management, PDF tools, PowerPoint, OCR, local search, and leisure/gaming (Minecraft, Pokemon). |
-| [research](research/) | 12 | Academic research (arXiv, paper writing), brainstorming, blog/content monitoring, LLM knowledge base, synthetic user studies, hotel/trip planning, and office hours frameworks (YC, Sahil). |
-| [skills-meta](skills-meta/) | 7 | Skills about skills — creating, auditing, improving, testing skill quality, preloading optimization, cleanup, and QA dogfooding. |
-| [visual-design](visual-design/) | 35 | Visual design skills — Excalidraw diagrams, D3.js visualizations, canvas design, slides, frontend design, image generation, Apple UX guidelines, design review, sticker creation, sales assets, and Impeccable design system. The SKILL.md at this level acts as a router that triages to the right sub-skill. |
-<!-- END GENERATED CATEGORY TABLE -->
+|----------|--------|-------------|
+| [app-store](app-store/) | 28 | App Store Connect, ASO, screenshots, iOS simulators |
+| [coding](coding/) | 5 | PR babysitting, Sentry fixes, simplification, deploy verification |
+| [thinking](thinking/) | 7 | Brainstorming, office hours, user studies, planning |
+| [writing](writing/) | 9 | Articles, copywriting, content strategy, editing, hooks |
+| [design](design/) | 30 | UI/UX, Impeccable design system, Excalidraw, Remotion |
+| [media](media/) | 18 | Brand identity, character creation, video production |
+| [external-services](external-services/) | 21 | Third-party API integrations and CLIs |
+| [memory](memory/) | 3 | Memory management for persistent agents |
+| [investing](investing/) | 0 | Coming soon |
+| [skills-meta](skills-meta/) | 8 | Meta-skills for creating and improving other skills |
 
-## Skill structure
+**Total: 129 skills**
 
-Every skill lives inside a category folder:
+## Usage
 
-```text
-category/
-└── skill-name/
-    ├── SKILL.md              # Entry point, required
-    ├── references/           # Detailed docs, checklists, examples
-    ├── scripts/              # Deterministic code: Python, JS, bash
-    └── assets/               # Templates, images, static resources
-```
-
-## Full catalog
-
-Generate the full catalog after adding, removing, or renaming skills:
+### With Hermes Agent
 
 ```bash
-python scripts/generate_catalog.py
+# Point your skills directory to this repo
+runtime config set skills.path ./skills
+
+# Skills are automatically loaded when relevant tasks are detected
 ```
 
-This updates [CATALOG.md](CATALOG.md) from `SKILL.md` frontmatter. Do not hand-edit the catalog.
+### With Claude Code
+
+```bash
+# Add to your CLAUDE.md or .claude/settings.json
+# Skills in this repo follow Claude Code's skill format
+```
+
+### Creating your own skills
+
+See [AGENTS.md](AGENTS.md) for conventions, or use the `skill-creator` meta-skill.
 
 ## Contributing
 
-See [CLAUDE.md](CLAUDE.md) for repo conventions, skill authoring rules, and PR expectations.
+PRs welcome. See [AGENTS.md](AGENTS.md) for conventions. CI runs automated review on every PR.

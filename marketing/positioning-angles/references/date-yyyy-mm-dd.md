@@ -1,1 +1,0 @@
-# Date: [YYYY-MM-DD]
