@@ -16,7 +16,7 @@ A skill is a markdown file (`SKILL.md`) with YAML frontmatter that an AI agent l
 | [coding](coding/) | 8 | PR babysitting, Sentry fixes, simplification, deploy verification |
 | [thinking](thinking/) | 7 | Brainstorming, office hours, user studies, planning |
 | [writing](writing/) | 11 | Copywriting, content strategy, editing, hooks, outlines, content pipeline |
-| [design](design/) | 32 | UI/UX, Impeccable design system, Excalidraw, Remotion |
+| [design](design/) | 32 | UI/UX, Impeccable design system, Excalidraw, slides, Remotion |
 | [video](video/) | 18 | Character creation, video editing, production (Kling, Sora, Remotion, ElevenLabs), YouTube content |
 | [external-services](external-services/) | 21 | Third-party API integrations and CLIs |
 | [memory](memory/) | 3 | Memory management for persistent agents |
