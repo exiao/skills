@@ -53,3 +53,17 @@ category/
 ## Contributing
 
 PRs welcome. See [CLAUDE.md](CLAUDE.md) for conventions. CI runs automated review on every PR.
+
+## Attribution
+
+Some skills are forked from or inspired by third-party sources:
+
+| Skill | Source |
+|-------|--------|
+| [last30days](writing/last30days/) | [mvanhorn/last30days-skill](https://github.com/mvanhorn/last30days-skill) |
+| [grok-search](external-services/grok-search/) | [xAI docs](https://docs.x.ai/docs/guides/tools/search-tools) |
+| [mcporter](skills-meta/mcporter/) | [mcporter.dev](https://mcporter.dev) |
+| [apple-search-ads](external-services/apple-search-ads/) | [ClawHub](https://clawhub.ai) |
+| [google-ads-cli](external-services/google-ads-cli/) | [ClawHub](https://clawhub.ai) |
+| [meta-ads-cli](external-services/meta-ads-cli/) | [ClawHub](https://clawhub.ai) |
+| [demo-video](video/demo-video/) | [ClawHub](https://clawhub.ai) |
