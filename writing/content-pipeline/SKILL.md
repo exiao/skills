@@ -73,7 +73,7 @@ Your job:
 3. Run /outline-generator → outline.md
 4. Run /writer → draft.md (must pass "only the author could write this" test: use specific numbers, named frameworks, personal experience. Reference Bloom only if naturally relevant to the topic.)
 5. Run /editor-in-chief — max 5 iterations → editing-log.md + draft-final.md
-6. Run /image-generator — hero image → hero.png
+6. Generate a hero image → hero.png
 7. Write LinkedIn post directly → linkedin-post.md
    - Re-read ~/marketing/WRITING-STYLE.md kill phrases list before writing
    - Write a native LinkedIn post from draft-final.md. Do NOT reframe into "here's what most people get wrong" or "X isn't Y, it's Z" patterns. Lead with the most specific, surprising fact or data point from the article. Let the story carry the reader — no interpretive sentences telling them what to feel.

@@ -12,7 +12,7 @@ Generate 3 structured outline variants with different angles for any article/blo
 **This skill does:** Outline structure and variant generation only.
 
 **This skill does NOT do:**
-- SEO keyword research → `seo-research` skill
+- SEO keyword research → `dataforseo-cli` or manual research
 - Headline/title generation → `hooks` skill
 - Actual article writing → `writer` skill
 - Image/diagram creation → `image-generator` skill
@@ -24,7 +24,7 @@ Generate 3 structured outline variants with different angles for any article/blo
 | Topic / subject | Human or project brief | Yes |
 | Approved title + subtitle | `hooks` skill output | Yes |
 | Target word count | Human (default: 1,500–2,500) | No |
-| Target audience notes | Human or `seo-research` brief | No |
+| Target audience notes | Human or keyword research brief | No |
 
 ## Process
 
