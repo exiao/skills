@@ -63,4 +63,6 @@ PY
    - stale summary thread now superseded by a later passing review: reply that the latest review/check passed and resolve only if the referenced issue is demonstrably fixed
    - follow-up or intent question: leave unresolved and report it as non-blocking
 4. If the latest formal review is an empty `COMMENTED` review, ignore it as substance, but do not skip the latest issue comment. Thread replies can create empty formal reviews.
-5. Only report `Ready to merge` when checks pass and unresolved non-outdated actionable threads count is zero.
+5. Only report `Ready to merge` when checks pass (or the repo reports no checks configured), `mergeStateStatus` is `CLEAN`, and unresolved non-outdated actionable threads count is zero.
+6. If `mergeStateStatus` is briefly `UNKNOWN` immediately after a push or thread resolution, poll the PR aggregate state a few times before escalating. GitHub often settles from `UNKNOWN` to `CLEAN` once it recalculates mergeability.
+7. Empty `statusCheckRollup` plus `gh pr checks` output of `no checks reported` is non-blocking. Do not wait for CI that does not exist.

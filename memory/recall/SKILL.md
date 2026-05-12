@@ -107,6 +107,15 @@ to L4).
   user pick.
 - If nothing matched, say so — do not invent.
 
+## Project-local session extraction
+
+When a project runs its own Hermes Agent instance (e.g., CPE Research at
+`~/projects/avgo/hermes_home/`), its sessions live in THAT project's
+`hermes_home/sessions/`, not `~/.hermes/sessions/`. If workspace output
+files are missing but the run log shows completion, extract outputs from
+the session JSON's `write_file` tool call arguments. See
+`references/hermes-agent-session-extraction.md` for the extraction pattern.
+
 ## Safety rails
 
 - Never expose content from `~/.hermes/.env`, `auth.json`, `state.db`, or

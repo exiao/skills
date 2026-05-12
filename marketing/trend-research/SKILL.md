@@ -74,26 +74,22 @@ bird user-tweets <handle> --json -n 10
 ```
 
 #### YouTube
-Use Firecrawl to scrape YouTube trending page or niche search results:
+Prefer `yt-dlp` for YouTube trend scouting. Firecrawl often gets 403s or stripped YouTube pages, while `yt-dlp --dump-json` gives stable metadata, thumbnails, view counts, like counts, channel, upload date, and URLs.
+
 ```bash
-# Trending page
-firecrawl scrape "https://www.youtube.com/feed/trending" markdown
+# Niche search with full metadata, one JSON object per video
+yt-dlp --dump-json "ytsearch20:investing tips 2026" > youtube-investing.jsonl
 
-# Niche search sorted by view count
-firecrawl scrape "https://www.youtube.com/results?search_query=investing+tips&sp=CAMSAhAB" markdown
-```
-
-For richer data (view counts, thumbnails), use **browser automation**:
-```
-browser → navigate to youtube.com/feed/trending
-browser → snapshot to extract video cards
+# Multiple related searches
+for q in "investing tips 2026" "personal finance" "AI money tools"; do
+  safe=$(echo "$q" | tr ' ' '-')
+  yt-dlp --dump-json "ytsearch20:$q" > "youtube-$safe.jsonl"
+done
 ```
 
-Or use the YouTube Data API via web_fetch:
-```
-# Trending videos (no auth needed for basic data)
-web_fetch "https://www.youtube.com/feed/trending"
-```
+Parse the JSONL for `title`, `channel`/`uploader`, `view_count`, `like_count`, `comment_count`, `upload_date`, `webpage_url`, and `thumbnail`. Use the same virality index as the rest of the report. Download thumbnails from the `thumbnail` field into the report's `thumbnails/` folder.
+
+Use browser automation only when `yt-dlp` cannot reach the target or when you need visual layout context from YouTube trending pages.
 
 #### TikTok
 TikTok trending is harder without API access. Use Firecrawl + browser:
@@ -307,6 +303,19 @@ Can be run as a cron job or heartbeat task:
 - **Trend reports**: `marketing/trends/YYYY-MM-DD/trend-report.md`
 - **Thumbnails**: `marketing/trends/YYYY-MM-DD/*.jpg`
 - **Raw data**: `marketing/trends/YYYY-MM-DD/raw-data.json`
+
+### Scheduled / cron triangulation reports
+
+When the user asks for a scheduled or weekly trend pipeline, create a dated output directory first, write every raw source to disk, then synthesize from files rather than relying on chat context:
+
+```bash
+DATE_STAMP=$(date +%Y-%m-%d)
+OUT=~/projects/content/research/$DATE_STAMP
+mkdir -p "$OUT/thumbnails" "$OUT/.raw"
+echo "# Trend Triangulation — $DATE_STAMP" > "$OUT/INDEX.md"
+```
+
+For multi-source reports, use separate files like `01-last30days.md`, `02-trend-research.md`, `03-prometheus.md`, and `SYNTHESIS.md`. Log missing or partial sources explicitly in both the raw file and synthesis. Never fail silently in cron: a partial report with source-status notes is better than no report.
 
 ## References
 

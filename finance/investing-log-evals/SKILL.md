@@ -95,6 +95,19 @@ When non-Claude models produce endless NOACTION trades:
    - **No workflow_run trigger**: Trade workflow only has workflow_dispatch → Add workflow_run from research workflow
    - **After-hours execution**: Cron fires after market close → Fix cron to 15:30 UTC (10:30 AM EST)
 
+## Cross-Pollination: DST Patterns for Other Research Agents
+
+The DST architecture here (property-based invariants, deterministic simulators, fault injection) has been adapted for the CPE equity research agent. Key mappings:
+
+| investing-log Pattern | CPE Equivalent |
+|-----------------------|----------------|
+| AlpacaSimulator (partial fills, rejections, slippage) | SerperSim, FirecrawlSim, EDGARSim (rate limits, truncations, wrong filings) |
+| Safety invariants (S1-S10: position limits, cash non-negative) | Memo invariants (citation URLs resolve, claims match sources, conviction stated) |
+| Multi-model interaction simulation | Stale data detection (research takes 30min, data changes mid-run) |
+| `[SUCCESS/MISTAKE/DISPUTED]` memory tags | ACE framework `helpful/harmful` counters (formalized version) |
+
+See `stock-research` skill's `references/eval-benchmarks-for-research-agents.md` for the full 6-layer eval framework that wraps these DST patterns with third-party benchmarks (Vals.ai, FinanceBench, APEX IB, OBLIQ, METR).
+
 ## References
 
 - `references/DST_PLAN.md` in investing-log repo: original DST design doc

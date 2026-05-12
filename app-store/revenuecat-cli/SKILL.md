@@ -137,6 +137,17 @@ mcporter call revenuecat.get-offering \
   --output json > /tmp/revenuecat/offering.json
 ```
 
+## Limitations (important — read before planning analysis)
+
+The RC v2 API has significant gaps for analytics. See `references/api-limitations.md` for full details.
+
+- **No country-level revenue.** Cannot group revenue, subs, or trials by country via API. Dashboard only: Charts > Revenue > Group by Country.
+- **No chart/trend data.** `/v2/.../charts` doesn't exist. Daily/weekly/monthly time series are dashboard-only.
+- **No bulk customer listing.** Need specific `customer_id` to query. Cannot sample or enumerate.
+- **No transactions endpoint.** `/v2/.../transactions` returns 404.
+
+When asked to analyze revenue by geography, immediately flag that this requires the RC Dashboard and ask the user to export or check manually. Don't waste time trying API endpoints that don't exist.
+
 ## Writes (not in MCP — use REST API)
 
 For create/update/delete operations, use the v2 REST API directly. Requires a v2 secret API key (write-enabled):

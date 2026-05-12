@@ -289,6 +289,33 @@ Pitfalls:
 - Env var listing is paginated. The first page can omit common keys like `WORKERS` or `DATABASE_URL`; follow `cursor` values before concluding a key is absent.
 - No generic `RENDER_API_KEY` exists in .env. Use workspace-specific keys: `RENDER_API_KEY_BLOOM` or `RENDER_API_KEY_FINTARY`.
 
+## Pitfalls
+
+- **Private GitHub repos:** Render can't clone private repos without the GitHub app installed on the repo owner's account. Never make a repo public to work around this. Have the user install Render's GitHub app instead.
+- **Python version:** Render defaults to latest Python (e.g., 3.14). Add a `.python-version` file (e.g., `3.12.4`) to the repo root to pin it.
+- **Multi-account setup:** Eric has separate Render accounts/workspaces for different projects. Check .env for project-specific API keys: `CPE_RENDER_API_KEY`, `RENDER_API_KEY_BLOOM`, `RENDER_API_KEY_FINTARY`. Set `RENDER_API_KEY=$CPE_RENDER_API_KEY` before CLI commands to target the right workspace. Also must `render workspace set <ID>` since the CLI caches the last workspace.
+- **Private repo deps in requirements.txt:** `pip install` on Render can't clone private GitHub repos (no auth). Either make the dep repo public, use Render's GitHub app for the dep repo too, or vendor the dependency.
+
+## Migrating from Docker to Native Python Runtime
+
+When a service uses `runtime: docker` and you want to switch to Render's native Python runtime:
+
+1. **render.yaml changes:**
+   - `runtime: docker` → `runtime: python`
+   - Add `buildCommand: pip install .` (or `pip install -r requirements.txt`)
+   - Add `startCommand:` with the actual run command (use `$PORT` env var for the port)
+   - Update `HERMES_HOME` env var path: Docker uses `/app/...`, native uses `/opt/render/project/src/...`
+
+2. **Add `runtime.txt`** to repo root with e.g. `python-3.12.3` (Render defaults to latest Python otherwise, which may break things).
+
+3. **Update any scripts** that hardcode `/app/` paths to use `/opt/render/project/src/` or derive paths dynamically.
+
+4. **Delete the Dockerfile.**
+
+5. **Verify** that application code uses relative paths from `__file__` rather than hardcoded absolute paths, so it works in both environments.
+
+Pitfall: if the Dockerfile installed system packages (e.g., `apt-get install git curl`), those may not be available in the native runtime. Check the Dockerfile's `RUN apt-get` lines. Render's native Python image includes git but not all system deps.
+
 ## Common Patterns
 
 ### Deploy and verify

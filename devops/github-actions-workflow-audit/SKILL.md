@@ -1,6 +1,6 @@
 ---
 name: github-actions-workflow-audit
-description: "Deep-inspect GitHub Actions workflow chains for correctness and cost: verify trigger names match, workflow_run chains are complete, cron schedules are logical, concurrency groups prevent duplicates, no dead code exists, and expensive jobs are properly gated. Use when asked to verify workflows will run, audit CI/CD pipelines, debug why a workflow isn't triggering, validate workflow_run chains, or optimize CI costs."
+description: "Deep-inspect GitHub Actions workflow chains for correctness and cost: verify trigger names match, workflow_run chains are complete, cron schedules are logical, concurrency groups prevent duplicates, no dead code exists, and expensive jobs are properly gated. Also provides canonical workflow templates for new repos. Use when asked to verify workflows will run, audit CI/CD pipelines, debug why a workflow isn't triggering, validate workflow_run chains, optimize CI costs, or add standard CI/code-review workflows to a repo."
 ---
 
 # GitHub Actions Workflow Audit
@@ -14,8 +14,17 @@ Verify that a repo's GitHub Actions workflows will actually fire correctly and a
 - "Verify the pipeline chain"
 - "How expensive is my CI?"
 - "Make CI run on demand"
+- "Add CI to this repo" / "Add code review workflow"
 - After merging workflow changes to confirm correctness
 - Debugging silent workflow failures (workflow_run name mismatches produce no error)
+
+## Canonical Workflow Templates
+
+Copy-and-adapt templates for new repos:
+
+- `templates/claude-code-review.yml` — Claude Code Action PR review. Prompt-only (no plugins, no CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS). Includes check-author bot-loop prevention, concurrency per PR number, sticky comments, opus+sonnet fallback, scoped allowed-tools, auto-fix guardrails, and formal `gh pr review` submission. Adapt the `prompt:` section for each repo's domain and review focus areas.
+- `templates/ci-python-uv.yml` — Python CI with uv, ruff linting, and pytest. Adapt python-version, ruff target path (`.` vs `src/`), and env vars per repo. Ensure ruff is in the repo's dev/test dependencies in pyproject.toml.
+- `references/adding-ci-to-new-repo.md` — Checklist for adding CI to repos that never had a linter. Covers adding ruff as a dependency, fixing common lint errors (F841, F401, E402), per-file-ignores for Typer CLI apps, and committing lint fixes with the CI workflow.
 
 ## Audit Steps
 

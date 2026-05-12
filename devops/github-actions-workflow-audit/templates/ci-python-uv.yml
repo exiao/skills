@@ -1,0 +1,48 @@
+# Canonical CI workflow template for Python repos using uv
+# Runs on PRs to main. Lint with ruff, test with pytest.
+#
+# Adapt:
+# - python-version to match pyproject.toml requires-python
+# - ruff target path (. for whole repo, src/ for src-layout)
+# - uv sync flags (--all-extras to include dev/test deps)
+# - Add env vars if tests need them (e.g. DISABLE_CACHE: "1")
+
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.head_ref }}
+  cancel-in-progress: true
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          enable-cache: true
+          cache-dependency-glob: |
+            uv.lock
+            pyproject.toml
+
+      - name: Install dependencies
+        run: uv sync --all-extras
+
+      - name: Run linter
+        run: uv run ruff check .
+
+      - name: Run tests
+        run: uv run pytest -v --tb=short

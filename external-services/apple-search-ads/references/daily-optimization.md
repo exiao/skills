@@ -20,6 +20,8 @@ These quirks were observed against Apple Search Ads API v5 in daily cron runs.
 5. Search tab, Today tab, and Product Page campaigns do not contain keywords. Keyword-style wasted-spend reports may emit expected `INVALID_INPUT` errors for those supply sources. Note the errors, but do not abort the whole pass.
 6. `metadata.searchTermText` in raw search-term JSON is often `null`. The formatted `search-terms.sh` script handles mapping via keyword metadata. When using the raw fallback, correlate search-term spend with keyword-level reports (which have `metadata.keyword` text) to identify actual terms.
 7. `reports.sh campaigns` grand totals show `Spend=null` when Apple hasn't settled the day. Use the 7-day aggregate from POST `/reports/campaigns` endpoint (proper `grandTotals`) as the primary view.
+8. Raw `/reports/campaigns` includes paused campaigns in rows and grand totals. For daily optimization reports, compute grand totals from the enabled-campaign rows only, using `campaigns.sh list --status ENABLED` (or list-all fallback) as the enabled source of truth. Otherwise paused historical spend can make the report look worse than the active account.
+9. If an instruction references `~/.hermes/skills/advertising/apple-search-ads` but that directory does not exist, search installed skill paths and prefer `~/.hermes/skills/external-services/apple-search-ads` before failing. Multiple copies may exist; use the one with `references/daily-optimization.md` and executable scripts.
 
 ## Raw API fallback
 
@@ -79,7 +81,7 @@ Only number recommendations that can be safely executed later by exact command. 
 - Pause keyword: 7-day spend > `$2`, installs = 0, taps >= 5.
 - Lower bid: CPA > `$1.50`, installs >= 2. Move partway toward target CPA, and include current bid, suggested bid, and estimated savings.
 - Raise bid: CPA < `$0.60`, installs >= 3, and impression share < 80%. Cap raise at +30% of current bid.
-- Add negative: search term spend > `$1.50`, installs = 0, taps >= 3.
+- Add negative: search term spend > `$1.50`, installs = 0, taps >= 3. Do not add an exact negative for the core brand term inside a brand campaign just because the 7-day window had zero attributed installs; brand-defense terms need manual review.
 - Promote search term: installs >= 2 and CPA < `$0.80`.
 
 **Edge case -- non-English keyword clusters:** When individual keywords don't breach the $2 pause threshold but a cluster of non-English/off-category keywords collectively waste significant spend (e.g. 5 German/Italian/Spanish bible keywords each at $1.30 = $6.50 total), flag them as a batch pause recommendation. The pattern matters more than individual thresholds.
@@ -87,6 +89,8 @@ Only number recommendations that can be safely executed later by exact command. 
 Sort visible recommendations by dollar impact. Cap the visible list at 10 and mention that additional recommendations are in the logs.
 
 ## Bid calculation formula
+
+Before recommending a bid change, compare the live bid to the 7-day average CPT. If live bid is already far below the average CPT that produced the bad CPA, the account may already have been corrected mid-window. In that case either skip the bid change or label it as a conservative extra trim; do not overstate projected savings.
 
 For LOWER BID:
 ```

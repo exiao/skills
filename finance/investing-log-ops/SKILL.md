@@ -163,6 +163,7 @@ gh run list --limit 10 --json name,status,conclusion,createdAt,databaseId,headBr
 ## Reference Materials
 
 - `references/augmented-investor-playbook.md` — Distilled notes from "The Augmented Investor Playbook" (David Plawn / Portrait Analytics). Contains the Intelligence Mosaic framework, 5-part prompt blueprint, management credibility tracking, and gap analysis against the investing-log pipeline. Load when implementing research pipeline improvements.
+- `references/portable-research-patterns.md` — Patterns from investing-log that are general enough to port to other equity research agents (bear challenge, embedded expectations, persona screen, ecosystem signals, pre-mortem). Documents what was ported to CPE Research (avgo) and what was excluded as trading-specific.
 
 ## Incorporating External Research
 

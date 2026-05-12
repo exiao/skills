@@ -25,10 +25,16 @@ Two modes: **on-demand equity research** (analyze a company, generate ideas, wri
 
 ## Tools
 
+**Bloom-based (default):**
 - **bloom-cli** (preloaded skill): Primary data source. `bloom info`, `bloom earnings`, `bloom financials`, `bloom price`, `bloom screen`, `bloom transcript`, `bloom catalysts`. Always try bloom-cli first before web search.
+- **Bloom MCP** (`https://$BLOOM_API_DOMAIN/mcp/`, Bearer: `$BLOOM_MCP_API_KEY`): Check what stocks Bloom users are watching; prioritize coverage accordingly
+
+**Self-contained (CPE-research, no Bloom dependency):**
+- **research CLI** (`CPE-research/research-cli`): Wraps FMP, SEC EDGAR (XBRL + EFTS full-text search + filing text + 13F holders), AlphaSense, and Serper. 25 commands with `--source auto|edgar|fmp` routing. See [research-cli.md](references/research-cli.md) for full command reference and [sec-edgar-api.md](references/sec-edgar-api.md) for EDGAR endpoint details. Use when work must be self-contained. See [adversarial-research-framework.md](references/adversarial-research-framework.md) for full data source mapping.
+
+**Shared:**
 - **Serper** (`web-search` skill, `SERPER_API_KEY`): Search for earnings releases, analyst commentary, news, filings
 - **Firecrawl** (`FIRECRAWL_API_KEY`): Scrape full articles, earnings releases, SEC filings when search snippets aren't enough
-- **Bloom MCP** (`https://$BLOOM_API_DOMAIN/mcp/`, Bearer: `$BLOOM_MCP_API_KEY`): Check what stocks Bloom users are watching; prioritize coverage accordingly
 
 ---
 
@@ -117,7 +123,11 @@ Runs automatically every weekday at 3pm ET. Covers:
 
 ## Reference Material
 
+- **[Adversarial Research Framework](references/adversarial-research-framework.md)** — 4-phase pipeline (Gather → 5-lens Analyze → Adversarial Synthesize → Eval) for institutional-quality one-page memos. Includes Eric's source hierarchy (filings > IR materials > transcripts-as-biased > expert calls > news), first-principles reasoning methodology (hypothesize-before-lookup), required supply/demand and competition-evolution sections, 7-dimension eval rubric, memo template, anti-pattern detection, and non-Bloom data source mapping. Use this for CPE-research work or any research that needs to be self-contained without Bloom CLI.
 - **[Anthropic FSI Plugins](references/anthropic-fsi-plugins.md)** — Index of institutional-grade skill templates cloned from github.com/anthropics/financial-services-plugins and knowledge-work-plugins. Contains prompt patterns, workflow sequences, and output templates for earnings analysis, comps, DCF, idea generation, thesis tracking, and sector overviews. Consult when you need institutional framing beyond what this skill covers.
+- **[SEC EDGAR API Reference](references/sec-edgar-api.md)** — Complete free EDGAR API surface: endpoints in research-cli (submissions, XBRL company concept/facts/frames), endpoints not yet added (EFTS full-text search, filing document text, 13F holdings parsing), XBRL taxonomy/period/unit details, and bulk data downloads. Consult when expanding EDGAR coverage or debugging EDGAR API calls.
+- **[Eval Benchmarks for Research Agents](references/eval-benchmarks-for-research-agents.md)** — 6-layer eval framework for measuring equity research agent quality: Vals.ai Finance Agent (accuracy), FinanceBench (citations), APEX IB (hard reasoning), OBLIQ (retrieval), METR (endurance), custom memo rubric. Includes Opus 4.6 scorecard, DST patterns from investing-log, ACE self-improving playbook framework, and Bloom eval system patterns. Consult when building or evaluating research agent output quality.
+- **[CPE Pipeline Operations](references/cpe-pipeline-operations.md)** — How to run the CPE research agent end-to-end, workspace reuse/caching behavior, eval runner commands, billing proxy setup for Layer 6 LLM-as-judge (model name mismatch workaround), known test failures, and latest benchmark scores.
 
 ## Notes
 

@@ -1,6 +1,6 @@
 ---
 name: submission-health
-description: Preflight App Store submissions, submit builds, and monitor review status with asc. Use when shipping or troubleshooting review submissions.
+description: "Preflight App Store and Google Play submissions, submit builds, monitor review status, and troubleshoot rejection causes (pricing inconsistencies, compliance, metadata). Use when shipping, troubleshooting review submissions, or fixing store rejections."
 ---
 
 # asc submission health
@@ -130,6 +130,22 @@ asc review submissions-cancel --id "SUBMISSION_ID" --confirm
 Fix issues, then re-submit.
 
 ## Common Submission Errors
+
+### Google Play: Inconsistent subscription pricing display
+Google Play rejects updates when the paywall shows mixed currency symbols (e.g., CTA says "Start for $0.00" but fine print says "€104/year"). This happens when i18n translation strings hardcode `$` while the rest of the paywall dynamically uses the user's currency from RevenueCat/BillingClient.
+
+**Fix pattern:** Never hardcode currency symbols in translation strings. Use interpolation parameters that reference the same `currencySymbol` derived from the store SDK's package data:
+```
+// BAD
+"startForFree": "Start for $0.00"
+// GOOD
+"startForFree": "Start for {{freePrice}}"
+// Call site: t('startForFree', { freePrice: `${currencySymbol}0.00` })
+```
+
+Also check fallback prices (e.g., `FALLBACK_PRICES` constants). If RevenueCat hasn't loaded yet, ensure fallback display still uses a consistent currency symbol, not hardcoded `$`.
+
+See `references/pricing-consistency-checklist.md` for the full audit checklist.
 
 ### "Version is not in valid state"
 Check:

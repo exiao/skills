@@ -1,6 +1,6 @@
 ---
 name: hooks
-description: Use when generating hooks, headlines, titles, and scroll-stopping openers for content.
+description: Use when generating hooks, headlines, titles, and scroll-stopping openers for content. Also use when analyzing viral posts, Reels, TikToks, YouTube Shorts, or successful social examples to extract reusable hook patterns and improve hook guidance.
 ---
 # Headlines & Hooks Engine
 
@@ -96,8 +96,106 @@ Hook patterns optimized for AI-generated UGC ads (TikTok/Instagram). These are p
 
 - **Never show the app/product in the first 3 seconds.** Hook with emotion, curiosity, or a pattern interrupt first. The product reveal comes after the hook lands.
 - **Pattern-interrupt visuals:** Use provocative or unexpected imagery in the first frame to stop the scroll (within platform ad policies). The goal is comment bait — visuals that make people react, argue, or tag someone.
+- **Result first, interface last.** The reveal is the ad. Show the outcome, score, rating, scan, insight, or transformation before explaining the app.
+- **Trigger the desire, not the feature.** The hook should touch a core desire or insecurity: beauty, health, wealth, status, intelligence, identity, fear, belonging. A feature-only hook is too weak for cold traffic.
+- **One winning creative beats endless strategy.** Once a hook/visual combo works, make 10-12 variants with the same hook structure and different person, asset, stock, story, or reveal. Do not restart from scratch.
 
-Source: @athcanft (May 2026)
+Source: @athcanft (May 2026, Apr 2026 X guide)
+
+### Customer-Language Hook Mining
+
+Source: @adamtaylorl X article on beating Meta creative fatigue, May 2026.
+
+The best cold hooks sound like they came from the customer's group chat, not the brand's positioning doc. Before writing hooks, mine reviews, Reddit threads, comments, post-purchase surveys, and viral organic posts for exact phrasing, failed solutions, and inside jokes.
+
+Use the language in the hook when it proves you are one of them:
+- exact complaint: `I keep buying dips and somehow still feel late`
+- failed solution: `I tried reading 10-Ks. I still missed the obvious risk.`
+- inside joke: `My portfolio is just vibes and NVDA at this point`
+- identity phrase: `for people who want to invest but hate finance bro advice`
+
+Rules:
+- Keep the awkward specificity. Sanitizing customer language makes it generic.
+- Use one real phrase per hook, not a pile of audience slang.
+- Match the visual to the phrase. If the hook says `back on the golf course`, the image cannot be a glowing knee joint. Congruency beats cleverness.
+- Save source snippets with the hook so winners can be traced back to the language that created them.
+
+Bloom applications:
+- `My portfolio is up, so why does it feel like I got lucky?`
+- `I bought the "safe" dividend stock. Bloom found the part I skipped.`
+- `If your stock thesis is just "AI," run this check first.`
+
+### Audible Stim Cold Open
+
+Source: @Jibran_05 X post on UGC Reels audio hooks, May 2026.
+
+For Instagram Reels UGC, treat the first 0.5 seconds of audio like a visual first frame. A tiny, natural sound can break scroll autopilot before the viewer has processed the words.
+
+Working stim examples:
+- ice clinking while sipping water
+- phone slam or phone set-down
+- pen click
+- loud keyboard typing
+- cap pop, bag crinkle, page flip, marker squeak, coin drop
+
+Why it works:
+- **Immediate sensory interrupt:** the sound starts faster than language comprehension.
+- **Native texture:** it feels like real phone footage, not an ad bed.
+- **Micro-loop:** the viewer asks what just happened and stays long enough for the spoken hook.
+- **Attention layering:** visual hook plus audio hook gives the first second two jobs, not one.
+
+Rules:
+- Put the sound in the first 0.0-0.5 seconds, before or under the first word.
+- Make it diegetic. The sound should plausibly come from the action on screen.
+- Keep it short. This is a click, clack, sip, slam, or type burst, not a sound effect montage.
+- Do not use random SFX that make the ad feel edited. The point is native sensory friction.
+- Pair it with a real hook. Audio polish cannot save a weak premise.
+
+Bloom applications:
+- phone set-down → `I ran my portfolio through Bloom and it caught this`
+- keyboard typing burst → `I asked Bloom to find the problem in NVDA`
+- pen click over ticker list → `Three stocks people keep sending me. One failed the check.`
+- calculator tap → `Your dividend stock might be hiding this`
+
+### Pre-Posting Hook Diagnostics
+
+Source: @johnvirality on Higgsfield Virality Predictor / `brain_activity`, May 2026.
+
+When evaluating finished short-form cuts before posting, separate four questions:
+
+| Metric | What it diagnoses | Fix if weak |
+|--------|-------------------|-------------|
+| Audio interrupt | First 0.5 seconds break scroll autopilot | Add a native diegetic stim: pen click, phone set-down, ice clink, typing burst, page flip |
+| Hook score | First 3 seconds stop the scroll | Stronger first frame, closer face, clearer text overlay, faster motion, sharper pain expression |
+| Hold rate | Middle keeps attention after the hook | Remove dead air, add payoff beats, keep each line creating the next question |
+| Viral potential / share signal | Viewer has a reason to send it | Add social currency: warning, identity, status, humor, "this is so me," or useful shortcut |
+
+Use predictor scores as a triage tool, not taste. A video can score well and still feel like AI slop. Human taste gets veto power.
+
+Variant rule: test 3-5 first-frame approaches on the same script before changing the whole concept: face-forward, environment-forward, direct eye contact, looking away, frustrated expression, vulnerable expression, text-first, action-first.
+
+### Investigation Arc UGC Hook
+
+Source: @adamtaylorl X article on beating Meta creative fatigue, May 2026.
+
+A strong anti-ad UGC structure is the Investigation Arc: creator reacts to a familiar expert, product, claim, or habit, discovers a better answer, then drops proof early enough to spike curiosity.
+
+Structure:
+`react to familiar thing → find contradiction → investigate → early proof drop → product as tool/discovery`
+
+Why it works:
+- It feels like discovery, not a pitch.
+- The familiar target earns instant context.
+- The contradiction creates the open loop.
+- Early social proof gives the viewer a reason to trust the investigation before the CTA.
+
+Bloom shells:
+- `I checked [guru]'s stock pick because something felt off`
+- `Everyone was calling [ticker] obvious. Bloom disagreed on one thing.`
+- `I tried to prove this Reddit trade was smart. The data made it worse.`
+- `I thought my broker screen showed everything. Then I ran the portfolio check.`
+
+Brief creators with idea plus freestyle: give the hook, proof points, and customer phrases, then let them riff in their own words. Over-scripted UGC loses the native texture that makes the investigation credible.
 
 ### "this is ur reminder that..." format
 
@@ -113,13 +211,21 @@ Template: `this is ur reminder that [pain point everyone ignores] [and optional 
 
 ### Before/After Transformation (visual-only hook)
 
-No words in the first 3 seconds. The visual transformation IS the hook. Highest-performing TikTok ad format for app installs per @athcanft ($5-10 CPA, $0 production cost).
+No words in the first 3 seconds. The visual transformation IS the hook. High-performing TikTok ad format for app installs per @athcanft.
 
-**Format:** "before" (3-5s) → cut → "after" (3-5s) → app screenshot CTA (2s). 12s total.
+**Format:** "before" (3-5s) → cut → "after/reveal" (3-5s) → app screenshot CTA (2s). 12s total.
 
-**Bloom example:** confused investor staring at phone → transition → same person calm and confident with Bloom open, portfolio up.
+**What counts as the reveal:** face rating, body scan, food calorie breakdown, score, risk flag, AI insight card, portfolio diagnosis, or any result someone can understand in one frame.
 
-**Production pipeline:** Generate "before" face (nano-banana-pro or similar) → enhance with fal.ai face-enhancement for "after" glow-up → animate both with Kling motion control using same reference video → assemble with video-editor.
+**Bloom example:** confused investor staring at noisy ticker/chart → cut → clean Bloom AI insight/risk score/portfolio diagnosis → app screenshot CTA.
+
+**Hook shells:**
+- `I ran [thing they care about] through [analysis] and it caught this`
+- `[Ticker/guru/portfolio] looked fine until the score came back`
+- `This is what your broker screen is hiding`
+- `Before Bloom: [confusion/noise]. After Bloom: [clear insight/reveal].`
+
+**Production principle:** Make rough, native-looking variants fast. Trending sound, clear reveal, one-line overlay, no polished ad sheen. The moment it feels like an ad instead of a TikTok, the hook gets weaker.
 
 See also: [VISUAL-HOOKS.md](~/clawd/skills/video-production/VISUAL-HOOKS.md) Sources 7 & 8 for full visual hook breakdowns.
 
@@ -198,6 +304,7 @@ This skill content is modularized into reference docs for readability.
 - [4 Organic Growth Hacks That Look Like Cheating (SGE)](references/4-organic-growth-hacks-that-look-like-cheating-sge.md)
 - [Multi-Account Hook Testing at Scale (SGE)](references/multi-account-hook-testing-at-scale-sge.md)
 - [Instagram-Specific Adaptations (SGE)](references/instagram-specific-adaptations-sge.md)
+- [Social Video Hook Analysis Workflow](references/social-video-hook-analysis-workflow.md)
 - [Video Retention Architecture: 6-Step Framework](references/video-retention-architecture-6-step.md)
 - [Usage](references/usage.md)
 - [References](references/references.md)

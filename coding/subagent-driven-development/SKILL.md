@@ -217,6 +217,21 @@ git add -A && git commit -m "feat: complete [feature name] implementation"
 
 ## Handling Issues
 
+### If Subagent Completes Instantly Without Output
+
+The #1 failure mode. Subagents given abstract goals ("Load skill X. Analyze data. Write to Y.") complete in 2-5s, returning a summary instead of doing work. See `references/silent-completion-pitfall.md` for the full pattern. **Fix:** explicit tool names in instructions, absolute paths, verification step, and "task is NOT complete until the file exists."
+
+### If Subagent Times Out
+
+Subagents have a 600s (10min) timeout. Large builds WILL hit this. The pattern:
+
+1. **Check progress immediately** — `find`, `wc -l`, run tests, check git status. The subagent likely completed 60-80% of the work before timing out.
+2. **Continue from where it stopped** — don't restart from scratch. Identify what's done vs. missing and dispatch a new subagent (or do it yourself) for the remaining work only.
+3. **Split large builds proactively** — if a task involves creating 20+ files, split into phases: (a) scaffold + source code, (b) tests + fixtures, (c) docs + git. Each phase fits in one subagent window.
+4. **Parent agent as finisher** — for small remaining items (git commit, a config fix, one more test file), just do it yourself rather than spawning another subagent.
+
+**Example:** A 2,000-line CLI build timed out after creating all source code. Parent checked `find . -type f`, confirmed all 50 source files existed, then dispatched a second subagent for tests only. Second subagent built 77 tests. Parent handled git commit and a small error-handler fix directly.
+
 ### If Subagent Asks Questions
 
 - Answer clearly and completely

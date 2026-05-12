@@ -40,6 +40,10 @@ Include, when relevant:
 
 If the task is code-related, include exact file paths, likely test targets, and verification steps.
 
+## Agent architecture plans
+
+When planning an agent system (multi-phase pipeline, long-running agent, research agent, etc.), load `references/anthropic-harness-patterns.md` first. It contains condensed patterns from Anthropic's harness design articles: session/harness/sandbox separation, generator/evaluator pattern, lens isolation, inter-session state management, and framework selection criteria.
+
 ## Pitfall: Distributing third-party learnings into a skill library
 
 When the plan involves incorporating tips/frameworks from third-party sources (tweets, articles) into existing skills:

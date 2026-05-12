@@ -1,7 +1,7 @@
 ---
 name: prometheus-cli
 preloaded: true
-description: Search TikTok viral videos, App Store rankings, hook analysis, app strategy, and content research via SGE Prometheus MCP. Requires SGE_API_KEY. Use when researching viral video hooks, benchmarking app rankings, analyzing content trends, or pulling App Store review data. Trigger phrases include "prometheus", "viral content", "app store rankings", "SGE", "TikTok research", "hook analysis".
+description: Search TikTok viral videos, App Store rankings, hook analysis, app strategy, and content research via SGE Prometheus MCP / Passistant. Requires SGE_API_KEY. Use when researching viral video hooks, benchmarking app rankings, analyzing content trends, pulling App Store review data, or when a prompt mentions "prometheus", "Passistant", "SGE", "Social Growth Engineers", "viral content", "app store rankings", "TikTok research", or "hook analysis".
 ---
 
 # Prometheus — SGE Viral Content Intelligence
@@ -49,6 +49,20 @@ Get your API key at [socialgrowthengineers.com/settings](https://www.socialgrowt
 ## Tool Discovery
 
 All tools are **auto-discovered** via `tools/list` — no need to memorize them. When connected, your agent automatically sees every available tool with full parameter schemas.
+
+In Hermes or cron contexts, call Prometheus through `mcporter` even if the `prometheus` skill alias was not loaded:
+
+```bash
+# Verify the server and inspect available tools
+mcporter list prometheus
+
+# Call tools, writing large outputs to disk for later parsing
+mcporter call prometheus.hook_intelligence scope_type=vertical scope_primary_vertical=finance --output json > hook-intel.json
+mcporter call prometheus.search_videos query="investing tips" platform=tiktok limit:20 --output json > videos-investing.json
+mcporter call prometheus.ast_get_rankings category_id=6015 limit:25 --output json > rankings.json
+```
+
+`mcporter` output may be JSON-like MCP text content rather than strict JSON for some tools. If `jq` fails, inspect the raw file and extract the `content[].text` payload or quoted `text:` blocks before synthesis. Keep the raw file regardless.
 
 Tools fall into five categories:
 

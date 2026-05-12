@@ -237,6 +237,13 @@ git add -A && git commit -m "[verified] <description>"
 
 The `[verified]` prefix indicates an independent reviewer approved this change.
 
+## Reference: Design Review Patterns
+
+See `references/design-review-patterns.md` for design-quality anti-patterns beyond
+security/logic: premature specificity (hardcoded account IDs, year-baked property names,
+env vars for session context), dead code from template ports, and dataset resolver patterns.
+The reviewer subagent should check these in addition to the security/logic checklist.
+
 ## Reference: Common Patterns to Flag
 
 ### Python

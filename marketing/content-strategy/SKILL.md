@@ -40,6 +40,17 @@ Mine what's working **right now** before writing a single word.
 
 **Output:** 10-20 hook angles + exact audience language in their own words. Store in `[Campaign]_Research.md`.
 
+### Creative-Fatigue Research Stack
+
+Source: @adamtaylorl X article on beating Meta creative fatigue, May 2026.
+
+Before producing new ads, separate research into three jobs:
+1. **Validate demand:** find where spend and repeated creative effort are actually going. Do not treat ad-library longevity as proof by itself.
+2. **Find native inspiration:** mine organic social for formats that hold attention without looking like ads.
+3. **Source customer language:** pull reviews, Reddit threads, comments, support tickets, and post-purchase surveys for exact phrasing, failed solutions, and inside jokes.
+
+Use the research to reflect the audience back to itself. The goal is not more angles. The goal is angles that sound impossible for an outsider to write.
+
 > **Verbalized Sampling — avoid mode collapse:** LLMs default to the most "typical" response due to RLHF typicality bias. To get genuinely diverse angles, use this prompt structure:
 > *"Generate 15 hook angles for [topic]. For each, assign a probability (0–100%) representing how likely a typical AI would produce this exact angle. Include angles across the full distribution — obvious to unusual. Mark any below 20% probability as ⚡ Novel."*
 > This forces the model to surface low-probability angles it would normally skip. Aim for at least 4–5 ⚡ Novel angles per batch. ([Source: Verbalized Sampling, arXiv 2510.01171](https://arxiv.org/abs/2510.01171) — 1.6–2.1x diversity increase in creative writing)
@@ -78,13 +89,30 @@ Tutorials, frameworks, explainers: no reframe needed. Achievements, milestones, 
 
 Cold traffic = Level 1-2. Retargeted = Level 3-4. Email list = Level 4-5.
 
+### Full-Funnel Angle OS
+
+Source: @adamtaylorl X article on beating Meta creative fatigue, May 2026.
+
+Creative fatigue often means the account has exhausted one awareness level, not that the product needs a totally new story. Most brands overproduce bottom-of-funnel ads that mention the product immediately. To scale, map each major angle across all five awareness levels, then produce at least three format variations per angle so the platform can route the right message to the right person.
+
+For each angle, create:
+- **Unaware:** educate that the problem exists
+- **Problem aware:** validate the pain and name the hidden cost
+- **Solution aware:** compare paths and failed solutions
+- **Product aware:** show why this product is different
+- **Most aware:** offer, proof, guarantee, risk reversal, urgency
+
+Rule: if every ad mentions the product in the first three seconds, the account is probably overfed on Level 4-5 creative and starving Level 1-2.
+
 ### Hook Types
 
 Write all three, then pick the right one for the format:
 
-- **Stated** — what you SAY in copy
-- **Visual** — what they SEE in the first frame
-- **Audio** — what they HEAR in the first 3 seconds
+- **Stated**: what you SAY in copy
+- **Visual**: what they SEE in the first frame
+- **Audio**: what they HEAR in the first 3 seconds
+
+For Instagram Reels UGC, add a fourth micro-hook before the spoken hook: **Audible stim**. This is a diegetic sound in the first 0.5 seconds that breaks scroll autopilot before language lands. Use phone set-downs, pen clicks, ice clinks, typing bursts, page flips, or cap pops. Keep it native to the action on screen. If it feels like a stock sound effect, cut it. (Source: @Jibran_05, May 2026)
 
 > **Load on-demand:** `hooks` skill has 15+ proven hook formulas.
 
@@ -110,16 +138,39 @@ Source: @thebranding.ai — viral format breakdown (https://www.instagram.com/re
 
 ### The Wound-First Pattern
 
-Open with a shared fear the audience already carries. Not a product problem — a *life* fear.
+Open with a shared fear the audience already carries. Not a product problem, a *life* fear.
 
 1. Open with the wound (fear, frustration, societal shift)
 2. Deepen it: make it personal, inevitable, real
-3. Let the tension sit — no product mention yet
+3. Let the tension sit. No product mention yet
 4. Resolve with your brand as the only logical answer
 
 The product is never the subject. The fear is. The product is the exit.
 
 Best for: cold traffic at Level 1-2. Highly shareable because the fear is universal.
+
+### Social-Failure Tutorial Pattern
+
+Source: Adrian Per, `@omgadrian`, Instagram Reel `DG-5t5lJxOO`, Mar 2025.
+
+Tutorials get more shareable when they fix an embarrassing social failure, not just a technical skill gap. Adrian's photos Reel worked because it was not framed as "photo composition tips." It was framed as: your partner hates the photos you take, and here is how to stop failing at that visible relationship task.
+
+Formula:
+`Here's how to stop failing at [socially visible task], using [simple system anyone can follow].`
+
+Why it works:
+- **Relational stakes:** the viewer wants to be seen as competent by someone specific.
+- **Instant audience fit:** "GF (or BF)" tells the right person this is for them within one second.
+- **Share mechanic:** people can forward it as a playful accusation or useful nudge.
+- **Effort reduction:** "with just your phone" removes the gear/expertise objection.
+- **System promise:** "3 categories" makes the improvement feel repeatable, not taste-based.
+
+Use this pattern for any category where the product helps someone avoid looking clueless in front of another person: investing, fitness, dating, work, parenting, style, cooking, travel.
+
+Bloom applications:
+- `If your friend asked why you own that stock, could you answer? Here's the 5-minute check.`
+- `Most people explain their portfolio like they guessed. Here's the 3-pass review.`
+- `Stop sending your friend random tickers. Run this check first.`
 
 ### Open Loops
 
@@ -156,6 +207,20 @@ Match the angle to a format that amplifies it.
 | Tier List | Gamified ranking format; viewers argue placements in comments, driving engagement | Content strategy, tool reviews, platform comparisons, "best of" lists |
 | Viral Breakdown / Reaction | Dual-screen commentary on a viral post; borrowed traffic + authority positioning | Creator education, niche analysis, weekly pillar content |
 | Three-Screen App Demo | Shows the core product loop in a way creators can repeat: input → processing → result | Influencer-led consumer apps, AI utilities, scanning/logging/analyzer apps |
+| Investigation Arc | Creator reacts to a familiar claim/expert, finds a contradiction, investigates, then reveals proof | Anti-ad UGC, skeptical audiences, finance, health, categories with trust issues |
+
+### Anti-Ad Execution
+
+Source: @adamtaylorl X article on beating Meta creative fatigue, May 2026.
+
+Polished UGC can become an ad smell. For cold audiences, mimic the organic feed first and sell second.
+
+Execution rules:
+- Use loose **idea plus freestyle** creator briefs: hook, proof points, claims to avoid, and customer phrases. Do not script every line.
+- Build around human conflict or discovery, not product explanation.
+- Drop social proof early when skepticism is high.
+- Let the creator's phrasing stay imperfect if it feels native.
+- Product appears as the thing discovered during the investigation, not the thing announced at the start.
 
 ### Three-Screen App Demo
 
@@ -169,6 +234,25 @@ Design the product so an influencer can explain it in three screens without narr
 If those three screens are not obvious, creators will have to explain too much and paid/organic creative gets weaker.
 
 **Bloom adaptation:** stock/ticker input or portfolio screenshot → AI analysis loading → clear insight card/risk score/actionable watchlist result.
+
+### Viral Feature Test
+
+Source: @athcanft X guide, Apr 2026.
+
+Before building a campaign around an app, ask whether the app has a viral feature: a single visual moment that satisfies a core human desire and can be screen-recorded or shown in one frame.
+
+Formula:
+`core human desire + one-frame reveal = ad-native product loop`
+
+Core desires/insecurities that reliably sell: attractiveness, health, wealth, sex/dating, status, intelligence, identity, fear, belonging. Weak apps sell a feature. Strong apps sell an answer to a question the user already cares about.
+
+Reveal examples:
+- food scanner → calorie/macros breakdown
+- face/looks app → score/rating reveal
+- fitness/body app → scan or transformation
+- Bloom → risk score, portfolio diagnosis, hidden problem, AI insight card
+
+If the reveal cannot be understood muted in 1-2 seconds, fix the product surface before buying ads. The ad should not explain the app. The reveal should make the viewer want the answer.
 
 ### The "Hands-Doing-Something" Format
 
@@ -204,11 +288,32 @@ Source: @thebranding.ai breakdown of multiple creators going viral with the same
 
 **Recreate before you recruit.** Prove a format works on your own account before committing creator budget to it.
 
-1. **Warm up the account** in the niche — follow the 5-day TikTok warmup process before posting any content. See `references/tiktok-warmup.md` for the full checklist, retention benchmarks (42%+ watch-through), and account abandonment rules. (Sources: @rossark0, @alexcooldev, @lucaspatiri_, May 2026)
+1. **Warm up the account** in the niche. Follow the 5-day TikTok warmup process before posting any content. See `references/tiktok-warmup.md` for the full checklist, retention benchmarks (42%+ watch-through), and account abandonment rules. (Sources: @rossark0, @alexcooldev, @lucaspatiri_, May 2026)
 2. **Save viral videos** from <1k follower accounts; these are pre-algo signals of what's actually resonating
-3. **Analyze why they worked** — hook structure, comment sentiment, format, pacing
-4. **Recreate the format yourself** — don't copy, match the structure and emotional beat
+3. **Analyze why they worked**: hook structure, comment sentiment, format, pacing
+4. **Recreate the format yourself**: don't copy, match the structure and emotional beat
 5. **See early traction** before sourcing any paid creators
+6. **Pre-score finished cuts when a predictor tool is available.** Use this as a proxy, not an oracle. Score 3-5 versions before posting, especially if creator budget or trend timing matters. (Source: @johnvirality on Higgsfield `brain_activity`, May 2026)
+
+### Pre-Posting Creative QA Loop
+
+Source: @johnvirality X guide on Higgsfield Virality Predictor / `brain_activity`, May 2026.
+
+Do not wait three days for platform data when the issue is obvious in the first 15 seconds. Before posting, create a small variant batch and score the cuts against proxy attention metrics.
+
+Workflow:
+1. Generate or edit 3-5 hook variants of the same video. Change only the first-frame approach per variant: face-forward vs environment-forward, direct eye contact vs looking away, frustrated expression vs vulnerable expression, text-first vs action-first.
+2. Run each through the predictor if available. Track hook score, hold rate, viral potential, and any heatmap/report notes.
+3. Pick the winner only if it also passes human taste. A high model score with ugly AI slop still loses brand trust.
+4. Diagnose losers by attention failure:
+   - Silent first 0.5 seconds on Reels UGC: add a diegetic audible stim, such as a pen click, phone set-down, ice clink, typing burst, page flip, or cap pop. Audio can be the pattern interrupt before the viewer processes the first word. (Source: @Jibran_05, May 2026)
+   - Low first-3-second hook score: change first frame, proximity, face, motion, text overlay, or visual contrast.
+   - High hook but low hold: the middle is clickbait or too slow. Add a payoff beat, cut filler, or increase story tension.
+   - Low share/viral potential: add social currency. Make the viewer look smart, funny, early, warned, or seen when they share it.
+5. Regenerate the weakest two variants using the diagnosis and rescore once. Do not loop forever.
+6. Post the strongest scored variant, then compare predictor score against real retention and conversion data.
+
+Use this loop to shorten feedback cycles, not to outsource taste.
 
 ### Daniel / Cal AI / Sway Playbook
 
@@ -238,8 +343,9 @@ When the output is an AI character video series (TikTok, Reels, Shorts) rather t
 | **Niche relevance** | Does it serve the target audience directly? |
 | **Evergreen vs. timely** | Timely = post now; evergreen = queue |
 | **Production simplicity** | Can it be done with just a talking head? |
+| **Pre-posting score** | If using a predictor, does the finished cut clear the target hook/hold/share threshold? |
 
-Pick the top 3-5 ideas by total score. Those become the next production batch.
+Pick the top 3-5 ideas by total score. Those become the next production batch. If a predictor score disagrees with your taste, inspect the first 3 seconds manually before trusting either one.
 
 ### Script Format
 
@@ -341,6 +447,7 @@ Most creators chase variety. The highest-growth accounts do the opposite: one fo
 4. **Batch production** — once the template exists, produce 10-20 videos per session by swapping the variable
 5. **Post daily** — consistency > quality for algorithm favor. 1-2 posts/day minimum
 6. **Track per-variable performance** — which subjects drive the most views? Double down on those categories
+7. **Variant rule for paid:** when one creative wins, keep the hook and reveal structure fixed. Make 10-12 variants by swapping the person, subject, story, ticker, or result. Creative iteration beats campaign tinkering. (Source: @athcanft X guide, Apr 2026)
 
 **The self-sustaining content loop:**
 ```
@@ -460,6 +567,21 @@ Source: @lucaspatiri_ (May 2026)
 ### Hook Evolution Loop
 
 Track hook text, CTA, platform, and view/conversion data in `hook-performance.json`. Over time this reveals which hook + CTA combos actually drive results.
+
+### Angle Leaderboard and Creative Compounding
+
+Source: @adamtaylorl X article on beating Meta creative fatigue, May 2026.
+
+Do not let winners die in isolation. When a creative works, log the source, format, concept, angle, hook, persona, awareness level, visual structure, CTA, spend, views, CTR, CVR, CPA, and revenue. Use that as an Angle Leaderboard.
+
+Compound winners by recombining proven parts:
+- swap a winning hook onto a previous winning body
+- turn a winning video into a static
+- scale a winning angle into a new format
+- keep the customer language, but change the visual proof
+- keep the visual proof, but move it to a different awareness level
+
+Congruency rule for statics: the largest visual element must match the specific desire in the headline. If the headline changes from generic relief to `back on the golf course`, the image must show the golf course desire, not a generic product benefit.
 
 ### Monthly Pillar Review (Run on the 1st)
 

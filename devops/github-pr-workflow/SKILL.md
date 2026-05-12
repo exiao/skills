@@ -112,17 +112,25 @@ git push -u origin HEAD
 
 **With gh:**
 
+Run `gh pr create` from inside the repository or worktree. `gh pr create` does not support `-C`; use the shell/tool `workdir` instead.
+
+Always write markdown PR bodies to a file and pass `--body-file` to avoid shell quoting bugs:
+
 ```bash
-gh pr create \
-  --title "feat: add JWT-based user authentication" \
-  --body "## Summary
+cat > /tmp/pr-body.md << 'EOF'
+## Summary
 - Adds login and register API endpoints
-- JWT token generation and validation
+- Adds JWT token generation and validation
 
 ## Test Plan
 - [ ] Unit tests pass
 
-Closes #42"
+Closes #42
+EOF
+
+gh pr create \
+  --title "feat: add JWT-based user authentication" \
+  --body-file /tmp/pr-body.md
 ```
 
 Options: `--draft`, `--reviewer user1,user2`, `--label "enhancement"`, `--base develop`
@@ -360,6 +368,10 @@ When a repo's main checkout has accumulated uncommitted changes (common with ski
 
 Key idea: create a clean worktree from `origin/main`, copy dirty files from the main checkout into it, commit + push + PR from the worktree.
 
+### Applying a stash to a different worktree
+
+When a stash was created in the main checkout but needs to be PRed cleanly, pipe it into a fresh worktree: `git stash show -p stash@{0} | (cd worktree && git apply --3way -)`. See `references/stash-across-worktrees.md`.
+
 ### When stash/checkout fails due to untracked conflicts
 
 If stash/apply or branch switching refuses because untracked files conflict with the target branch, stop working in the dirty checkout. Use the preserve-then-curate worktree pattern in `references/untracked-conflict-preservation.md`.
@@ -375,6 +387,54 @@ If a commit is already pushed and force-push is forbidden (common in fork workfl
 - **Make review fixes as a NEW commit on top**, not by amending the original.
 - If you accidentally reset and re-committed, recover with: `git fetch origin <branch> && git reset --soft origin/<branch>` which stages your working-tree changes as a diff on top of the remote's version. Then commit those as a clean follow-up.
 - `git pull --rebase` after a divergent reset often causes merge conflicts on the same files. Prefer the `fetch + reset --soft` approach.
+
+### `gh` CLI auth vs non-default remotes
+
+When a repo's remote uses a PAT in the URL (e.g. `https://user:ghp_xxx@github.com/org/repo.git`) or a custom SSH host alias (e.g. `git@github-charles:org/repo.git`), `git push` works but `gh pr create` may fail with "Could not resolve to a Repository" because `gh` uses its own auth store and can't resolve non-standard remote URLs.
+
+Fix: pass the token via `GH_TOKEN` env var and explicitly specify `--repo`:
+
+```bash
+GH_TOKEN=ghp_xxx gh pr create --repo org/repo --title "..." --body-file /tmp/pr-body.md
+```
+
+Or source it from `.env` if stored there:
+
+```bash
+source ~/.hermes/.env
+GH_TOKEN=$SOME_ORG_TOKEN gh pr create --repo org/repo ...
+```
+
+Common case: CPE Research repos use `github-charles` SSH alias and `CPE_GITHUB_TOKEN`:
+```bash
+GH_TOKEN=$CPE_GITHUB_TOKEN gh pr create --repo cpe-research/avgo ...
+```
+
+### "No common history" when creating a PR
+
+If your feature branch was created independently (e.g. `git init` + push, or orphan branch), `gh pr create` fails with:
+
+```
+pull request create failed: GraphQL: The <branch> branch has no history in common with main (createPullRequest)
+```
+
+Fix: rebase your branch onto `origin/main` first:
+
+```bash
+git fetch origin main
+git rebase origin/main
+# Resolve conflicts as they come
+```
+
+If force-push is blocked after rebase (the rebased branch diverges from the remote), push under a new branch name instead:
+
+```bash
+git checkout -b <branch>-v2
+git push origin <branch>-v2
+gh pr create --base main --head <branch>-v2 --title "..." --body-file /tmp/pr-body.md
+```
+
+This avoids the force-push restriction entirely while preserving the clean rebased history.
 
 ### PR body with markdown
 
@@ -400,6 +460,20 @@ git status --short | grep "^?" | sed 's/^?? //' | xargs grep -rl 'pattern' 2>/de
 ```
 
 Redact with `sed -i '' 's/personal@email/USER_EMAIL/g'` before committing. The AGENTS.md for public repos typically specifies what must be redacted.
+
+### Review status can be stale after follow-up commits
+
+GitHub keeps old `CHANGES_REQUESTED` reviews in `.reviews[]` even after a later commit receives an approval. Do not stop at `reviewDecision` or the first changes-requested review. Check all comment sources, then interpret review state by chronology:
+
+```bash
+gh pr view $PR_NUMBER --json reviews,comments,statusCheckRollup,url \
+  -q '{url: .url, checks: [.statusCheckRollup[] | {name: .name, status: .status, conclusion: .conclusion}], reviews: [.reviews[] | {author: .author.login, state: .state, submittedAt: .submittedAt, body: .body}], comments: [.comments[] | {author: .author.login, body: .body}]}'
+
+gh api repos/$OWNER/$REPO/pulls/$PR_NUMBER/comments \
+  --jq '.[] | {user: .user.login, path: .path, line: .line, body: .body}'
+```
+
+If an older review requested changes and a later review says approved or LGTM after the fix commits, treat the older request as resolved unless there are still unresolved inline comments on the current diff. Mention that stale review history exists rather than claiming the PR is blocked.
 
 ### `gh pr edit` silently failing on some repos
 

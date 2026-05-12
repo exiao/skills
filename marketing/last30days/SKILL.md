@@ -106,7 +106,9 @@ for dir in \
   "${CLAUDE_PLUGIN_ROOT:-}" \
   "$HOME/.claude/skills/last30days" \
   "$HOME/.agents/skills/last30days" \
-  "$HOME/.codex/skills/last30days"; do
+  "$HOME/.codex/skills/last30days" \
+  "$HOME/.hermes/skills/last30days" \
+  "$HOME/.hermes/skills/marketing/last30days"; do
   [ -n "$dir" ] && [ -f "$dir/scripts/last30days.py" ] && SKILL_ROOT="$dir" && break
 done
 

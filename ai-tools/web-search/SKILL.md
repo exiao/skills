@@ -10,22 +10,28 @@ Google Search results via the Serper API. Requires `SERPER_API_KEY` env var.
 
 ## Quick Usage
 
+Use the script relative to this skill directory, or the installed absolute path:
+
 ```bash
+SERPER="$HOME/.hermes/skills/ai-tools/web-search/scripts/serper.sh"
+
 # Basic search
-scripts/serper.sh "promptfoo LLM evaluation framework"
+"$SERPER" "promptfoo LLM evaluation framework"
 
 # News search
-scripts/serper.sh "AI evaluation tools 2025" --type news
+"$SERPER" "AI evaluation tools 2025" --type news
 
 # Limit results
-scripts/serper.sh "harbor AI testing" --num 5
+"$SERPER" "harbor AI testing" --num 5
 
 # Country/language specific
-scripts/serper.sh "best restaurants" --gl us --hl en
+"$SERPER" "best restaurants" --gl us --hl en
 
 # Time filter (qdr:d = past day, qdr:w = past week, qdr:m = past month, qdr:y = past year)
-scripts/serper.sh "LLM benchmarks" --tbs qdr:w
+"$SERPER" "LLM benchmarks" --tbs qdr:w
 ```
+
+The CLI prints human-readable formatted text by default, not JSON. Save it to `.txt` or inspect with `sed`/`read_file`. If you need structured parsing, use the raw `curl | jq` pattern below instead of `json.load()` on CLI output.
 
 ## Search Types
 
@@ -60,4 +66,4 @@ People Also Ask: `question`, `snippet`, `title`, `link`
 - Free tier: 2,500 queries (one-time credits, no monthly refresh)
 - Paid: $50/mo for 50k queries
 - Rate limit: 100 req/s on free tier
-- Script path: `skills/serper-search/scripts/serper.sh`
+- Script path: `~/.hermes/skills/ai-tools/web-search/scripts/serper.sh` (inside the skill, `scripts/serper.sh`). Older references to `skills/serper-search/scripts/serper.sh` are stale.
