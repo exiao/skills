@@ -47,7 +47,7 @@ The Bloom Business ID is $META_BUSINESS_ID. As of 2026-05-12, the Bloom WABA ($M
 
 Registering a WhatsApp Business App number in a WABA via Meta's "Coexistence" mode disables end-to-end encryption. Baileys relies on Signal protocol E2E encryption to function. Per WhiskeySockets/Baileys#2152: after coexistence onboarding, Baileys can connect but cannot send messages. No fix exists.
 
-BloomBot's number (+1 929-326-2783) runs on Baileys. Do NOT register it in Meta's WABA.
+BloomBot's number ($WHATSAPP_NUMBER) runs on Baileys. Do NOT register it in Meta's WABA.
 
 Workaround: use a Traffic campaign with `wa.me` deep links as the destination URL instead of native CTWA. See `references/click-to-whatsapp-bloombot.md` for the full setup.
 

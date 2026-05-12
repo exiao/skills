@@ -15,15 +15,15 @@ A skill is a markdown file (`SKILL.md`) with YAML frontmatter that an AI agent l
 | [app-store](app-store/) | 28 | App Store Connect, ASO, screenshots, iOS simulators |
 | [coding](coding/) | 8 | PR babysitting, Sentry fixes, simplification, deploy verification |
 | [thinking](thinking/) | 7 | Brainstorming, office hours, user studies, planning |
-| [writing](writing/) | 9 | Articles, copywriting, content strategy, editing, hooks |
+| [writing](writing/) | 11 | Copywriting, content strategy, editing, hooks, outlines, content pipeline |
 | [design](design/) | 31 | UI/UX, Impeccable design system, Excalidraw, Remotion |
-| [video](video/) | 17 | Character creation, video editing, production (Kling, Sora, Remotion, ElevenLabs), YouTube content |
+| [video](video/) | 18 | Character creation, video editing, production (Kling, Sora, Remotion, ElevenLabs), YouTube content |
 | [external-services](external-services/) | 21 | Third-party API integrations and CLIs |
 | [memory](memory/) | 3 | Memory management for persistent agents |
 | [investing](investing/) | 0 | Coming soon |
 | [skills-meta](skills-meta/) | 8 | Meta-skills for creating and improving other skills |
 
-**Total: 129 skills**
+**Total: 135 skills**
 
 ## Usage
 
@@ -45,8 +45,8 @@ runtime config set skills.path ./skills
 
 ### Creating your own skills
 
-See [AGENTS.md](AGENTS.md) for conventions, or use the `skill-creator` meta-skill.
+See [CLAUDE.md](CLAUDE.md) for conventions, or use the `skill-creator` meta-skill.
 
 ## Contributing
 
-PRs welcome. See [AGENTS.md](AGENTS.md) for conventions. CI runs automated review on every PR.
+PRs welcome. See [CLAUDE.md](CLAUDE.md) for conventions. CI runs automated review on every PR.
