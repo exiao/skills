@@ -12,11 +12,11 @@ Turn zeitgeist signals into content that connects — then delegate creation, di
 **The flow:** Zeitgeist → Angles & Hooks → Create (via other skills) → Distribute → Analyze
 
 **NOT this skill:**
-- Writing tweets or posts → `tweet-ideas`
+- Writing tweets or posts → `writer`
 - Generating images → `image-generator` or `nano-banana-pro`
-- Creating TikTok slideshows → `slideshow-creator`
-- Writing articles → `article-writer`
-- Scheduling → `typefully` or `slideshow-creator`/ReelFarm
+- Creating TikTok slideshows → video skills
+- Writing articles → `writer`
+- Scheduling → `typefully` or video skills/ReelFarm
 
 ---
 
@@ -36,7 +36,7 @@ Mine what's working **right now** before writing a single word.
 | Support tickets and FAQs | Objections, misconceptions, friction points |
 | TikTok accounts with <1k followers | Viral signals before algo amplification; comment sentiment on what's actually resonating |
 
-**Skills to use:** `last30days`, `grok-search`, `trend-research`, `web-search`
+**Skills to use:** `last30days`, `grok-search`, `last30days`, web search
 
 **Output:** 10-20 hook angles + exact audience language in their own words. Store in `[Campaign]_Research.md`.
 
@@ -470,7 +470,7 @@ Place labels at the moment you identify the tactic, not before. Let the source v
 - Labels you'd drop: "LOSS AVERSION" (the emotional hook), "ROUND NUMBER" (they lost exactly $10K, not $9,847), "SCREENSHOT FORMAT" (looks organic, not produced), "NO CTA" (the virality IS the content, no ask)
 - Your commentary: explain each label as an investing psychology + content strategy concept simultaneously. Double value for the viewer.
 
-**Sourcing:** Use `last30days`, `grok-search`, or `trend-research` to find viral posts in the investing/personal finance niche weekly. Look for 50K+ views, especially from accounts under 10K followers (pre-algo signal).
+**Sourcing:** Use `last30days`, `grok-search`, or `last30days` to find viral posts in the investing/personal finance niche weekly. Look for 50K+ views, especially from accounts under 10K followers (pre-algo signal).
 
 ---
 
@@ -537,9 +537,9 @@ Don't write here. Route to the right skill.
 
 | Content Type | Skill |
 |-------------|-------|
-| Tweets / X posts | `tweet-ideas` |
-| Articles / long-form | `article-writer` |
-| TikTok slideshows | `slideshow-creator` |
+| Tweets / X posts | `writer` |
+| Articles / long-form | `writer` |
+| TikTok slideshows | video skills |
 | Hooks and headlines | `hooks` |
 | Ad copy (paid) | `copywriting` |
 | Paid creative concepts | `copywriting` (includes A/B blitz protocol) |
@@ -553,7 +553,7 @@ Don't write here. Route to the right skill.
 | Platform | Tool |
 |---------|------|
 | LinkedIn, X, Threads | `typefully` skill |
-| TikTok | `slideshow-creator` / ReelFarm |
+| TikTok | video skills / ReelFarm |
 
 **Queue minimums:**
 
@@ -698,4 +698,4 @@ Load `references/examples-and-tier-lists.md` when you need a complete strategy-c
 
 ## Related Skills
 
-Use adjacent skills as needed: `hooks`, `copywriting`, `tweet-ideas`, `article-writer`, `slideshow-creator`, `content-atomizer`, `typefully`, `last30days`, `grok-search`, `trend-research`, `web-search`, and `character-creation`.
+Use adjacent skills as needed: `hooks`, `copywriting`, `writer`, `writer`, video skills, `typefully`, `last30days`, `grok-search`, `last30days`, web search, and `character-creation`.

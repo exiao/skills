@@ -30,8 +30,8 @@ What a complete strategy card looks like after running this skill. Use this as t
 
 **Delegate to:**
 - Visuals → `copywriting` + `nano-banana-pro`
-- Tweets → `tweet-ideas`
-- TikTok → `slideshow-creator`
+- Tweets → `writer`
+- TikTok → video skills
 - Scheduling → `typefully`
 
 ---

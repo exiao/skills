@@ -124,5 +124,5 @@ A hand-drawn circular chart where energy's 3.3% is a thin sliver, with small ann
 ## References
 
 - Feeds into **image-generator** (provides the image brief)
-- Used during **article-writer** drafting or revision
+- Used during **writer** drafting or revision
 - Can also be used standalone for social media visuals

@@ -63,5 +63,5 @@ Go section by section. For every claim or assertion, ask: "Am I telling or showi
 
 ## References
 
-- Part of **article-writer** revision pipeline
+- Part of **writer** revision pipeline
 - Run after **remove-chaff**, before **emotion-amplifier**

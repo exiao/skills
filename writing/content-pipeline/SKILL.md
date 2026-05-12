@@ -29,7 +29,7 @@ Read `~/marketing/WRITING-STYLE.md` first.
 
 - **X/Twitter**: Pull @$TWITTER_USER's last 30 posts via `bird`. Note which topics/angles got most engagement (likes, replies, retweets).
 - **Grok X search**: Run `/grok-search` with `--x` to find what's trending in the author's niches (AI, investing, indie dev, fintech).
-- **Trend research**: Run `/trend-research` across YouTube, X, Reddit, and Substack to find viral formats, hooks, and topics with momentum.
+- **Trend research**: Run `/last30days` across YouTube, X, Reddit, and Substack to find viral formats, hooks, and topics with momentum.
 
 ### 1b. Find 3 topics
 
@@ -71,7 +71,7 @@ Your job:
 1. Read ~/marketing/WRITING-STYLE.md
 2. Run /hooks — generate 5 options, pick strongest → hooks.md
 3. Run /outline-generator → outline.md
-4. Run /article-writer → draft.md (must pass "only the author could write this" test: use specific numbers, named frameworks, personal experience. Reference Bloom only if naturally relevant to the topic.)
+4. Run /writer → draft.md (must pass "only the author could write this" test: use specific numbers, named frameworks, personal experience. Reference Bloom only if naturally relevant to the topic.)
 5. Run /editor-in-chief — max 5 iterations → editing-log.md + draft-final.md
 6. Run /image-generator — hero image → hero.png
 7. Write LinkedIn post directly → linkedin-post.md
@@ -80,7 +80,7 @@ Your job:
    - Run /evaluate-content on the post (Voice + Leanness scores only). If either scores below 4/5, rewrite and re-check. Max 2 revision passes.
    - Save final version to linkedin-post.md (post body only — no metadata headers)
 8. Write X thread → x-thread.md
-   - Run /tweet-ideas using draft-final.md as source. Pick the 5 strongest standalone tweets and sequence them as a thread.
+   - Run writer to create 5 standalone tweets from draft-final.md and sequence them as a thread.
    - No promotional framing, no article links in thread body (link goes in reply)
 9. Format for Substack → substack-ready.md
 
@@ -105,7 +105,7 @@ Do NOT publish. Do NOT send messages unless blocked.
 
 ## Phase 3 — Substack Drafts
 
-After all 3 sub-agents complete, for each article save a Substack draft using the `substack-draft` skill with `profile=clawd`.
+After all 3 sub-agents complete, for each article save a Substack draft using the Substack skill with `profile=clawd`.
 
 **NEVER click Publish. Draft only.**
 

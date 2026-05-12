@@ -14,7 +14,7 @@ Generate 3 structured outline variants with different angles for any article/blo
 **This skill does NOT do:**
 - SEO keyword research → `seo-research` skill
 - Headline/title generation → `hooks` skill
-- Actual article writing → `article-writer` skill
+- Actual article writing → `writer` skill
 - Image/diagram creation → `image-generator` skill
 
 ## Inputs
@@ -221,12 +221,12 @@ Structure of the output file:
 ---
 
 **Status:** Awaiting human selection
-**Next step:** → `article-writer` skill with approved outline
+**Next step:** → `writer` skill with approved outline
 ```
 
 ## Downstream Handoff
 
 Once the human approves a variant (or hybrid):
 1. Mark status as `Approved` in the outline file
-2. The approved outline feeds into `article-writer` for drafting
+2. The approved outline feeds into `writer` for drafting
 3. Image/diagram markers feed into `image-generator` for visual creation

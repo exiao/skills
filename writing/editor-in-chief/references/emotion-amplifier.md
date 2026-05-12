@@ -99,6 +99,6 @@ If the draft has zero vulnerability, it reads like a press release.
 
 ## References
 
-- Part of **article-writer** revision pipeline
+- Part of **writer** revision pipeline
 - Run after **show-dont-tell**, before **reader-simulator**
 - Shares emotion framework with **hooks** and **evaluate-content**

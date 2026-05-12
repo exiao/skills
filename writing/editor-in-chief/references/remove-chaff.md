@@ -72,5 +72,5 @@ Every "very", "really", "quite", "extremely", "incredibly", "significantly" is a
 
 ## References
 
-- Part of **article-writer** revision pipeline
+- Part of **writer** revision pipeline
 - Run before **show-dont-tell**

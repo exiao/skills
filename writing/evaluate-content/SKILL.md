@@ -584,9 +584,9 @@ Replace complex or pompous words with simpler ones. Source: Plain English Campai
 
 ## References
 
-- Used by **article-writer** (revision pass)
+- Used by **writer** (revision pass)
 - Used by **typefully** (hook quality check)
-- Used by **tweet-ideas** (tweet quality)
+- Used by **writer** (tweet quality)
 - Used by **hooks** (title evaluation)
-- Shares voice standards with **article-writer** humanizer section
+- Shares voice standards with **writer** humanizer section
 - **`~/marketing/WRITING-STYLE.md`** — ground truth for voice evaluation. Read the Kill Phrases list and Voice Fingerprint section before scoring Question 3. Generic "sounds human" is not the bar; Eric's specific fingerprint is.

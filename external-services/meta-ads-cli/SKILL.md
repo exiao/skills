@@ -34,8 +34,8 @@ ADSET_ANDROID="$BLOOM_ANDROID_ADSET_ID"   # General, Android (ACTIVE)
 | `curl` + Meta Marketing API v22.0 | All ad management (read, pause, budget, create) |
 | `curl` + Meta Ad Library API | Competitor creative research |
 | `higgsfield` CLI | Higgsfield AI image generation (seedream, gpt_image_2, marketing_studio_image) |
-| `trend-research` skill | Find what investing/finance content is trending today |
-| `web-search` skill | Serper for trending finance content |
+| `last30days` skill | Find what investing/finance content is trending today |
+| web search skill | Serper for trending finance content |
 | `nano-banana-pro` skill | Generate 1080×1080 ad creatives |
 | Reply output | Report + creative summaries (cron delivery handles Signal routing) |
 
@@ -183,7 +183,7 @@ Use these insights to inform concept selection. Double down on documented winner
 
 Use these skills to generate concepts:
 - **competitor research** (from Step 4.5) — remix proven competitor hooks, exploit gaps they're missing
-- **trend-research** — what is viral in investing/fintech right now
+- **last30days** — what is viral in investing/fintech right now
 - **web-search** — trending finance content today
 - **hooks** — generate scroll-stopping openers
 - **meta-ads-creative** — 6 Elements framework, proven ad formats

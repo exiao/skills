@@ -11,7 +11,7 @@ A single post is a test. A queue is a system.
 ## Workflow
 
 1. **Research first** — check monetization-research.md and competitor-research.md before planning content
-2. **Generate in bulk** — use tweet-ideas, content-atomizer, or slideshow-creator to produce the full week at once
+2. **Generate in bulk** — use writer, hooks, or copywriting to produce the full week at once
 3. **Schedule back-to-back** — use `--schedule next-free-slot` (Typefully) or ReelFarm automations to fill the calendar
 4. **Verify** — check `drafts:list --status scheduled --sort scheduled_date` to confirm queue depth
 5. **Set a refill trigger** — if queue drops below 3 days, refill immediately (not "when you have time")

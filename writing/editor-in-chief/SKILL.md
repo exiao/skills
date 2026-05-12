@@ -2,7 +2,7 @@
 name: editor-in-chief
 description: "Use when a first draft is complete and all Phase 1 gates are
   done: topic selected (seo-research), title approved (hooks), outline
-  approved (outline-generator), draft written (article-writer). Runs
+  approved (outline-generator), draft written (writer). Runs
   autonomous diagnosis-prescribe-rewrite loop before Substack."
 ---
 
@@ -33,7 +33,7 @@ After Phase 1 (human-in-the-loop) is complete:
 - ✅ Topic selected (seo-research)
 - ✅ Title/subtitle approved by Eric (hooks)
 - ✅ Outline approved by Eric (outline-generator)
-- ✅ First draft written (article-writer)
+- ✅ First draft written (writer)
 
 **All four must be complete before invoking this skill.** If any are missing, return to the appropriate Phase 1 skill first. Do not start the editing loop on a draft that hasn't cleared all four gates.
 
@@ -402,7 +402,7 @@ When a dimension needs work, read the corresponding reference file for detailed 
 ## Related Skills
 
 - **evaluate-content** — classification diagnostics (used in Step 1)
-- **article-writer** — humanizer checklist (used for Voice fixes)
+- **writer** — humanizer checklist (used for Voice fixes)
 - `~/marketing/WRITING-STYLE.md` — ground truth for voice
 - **Phase 1** (upstream): `seo-research`, `hooks`, `outline-generator`
-- **Phase 3** (downstream): `substack-draft`, `typefully`, `tweet-ideas`
+- **Phase 3** (downstream): `typefully`, `writer`

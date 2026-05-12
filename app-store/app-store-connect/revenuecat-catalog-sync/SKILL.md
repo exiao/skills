@@ -15,12 +15,12 @@ Use this skill to keep App Store Connect (ASC) and RevenueCat aligned, including
 
 ## Preconditions
 - `asc` authentication is configured (`asc auth login` or `ASC_*` env vars).
-- `mcporter` is installed and the `revenuecat` server is registered in `~/.mcporter/mcporter.json` (see the `revenuecat-cli` skill for setup).
+- `mcporter` is installed and the `revenuecat` server is registered in `~/.mcporter/mcporter.json` (see the `revenuecat-cli` mcporter server for setup).
 - `REVENUECAT_API_KEY` is set in the agent environment for read operations via mcporter.
 - For write operations (create/update), `REVENUECAT_WRITE_API_KEY` (a v2 secret key with write scope) must be set — these go through the REST API directly, not mcporter.
 - You know:
   - ASC app ID (`APP_ID`)
-  - RevenueCat `project_id` (Bloom = `proj2cab6270`)
+  - RevenueCat `project_id` (Bloom = `$REVENUECAT_PROJECT_ID`)
   - target RevenueCat app type (`app_store` or `mac_app_store`) and bundle ID for create flows
 
 ## Safety defaults
@@ -35,7 +35,7 @@ Use this skill to keep App Store Connect (ASC) and RevenueCat aligned, including
 - Do not use display names as unique identifiers.
 
 ## Scope boundary
-- The `revenuecat-cli` skill (mcporter) is **read-only**: list/get for projects, apps, products, entitlements, offerings, packages, customers, subscriptions.
+- The `revenuecat-cli` mcporter server (mcporter) is **read-only**: list/get for projects, apps, products, entitlements, offerings, packages, customers, subscriptions.
 - All **writes** (create/update products, attach entitlements, create offerings/packages) go through the RevenueCat v2 REST API directly via `curl`, using `REVENUECAT_WRITE_API_KEY`.
 - Use `asc` commands to create missing ASC subscription groups, subscriptions, and IAPs before RevenueCat mapping.
 
@@ -71,16 +71,16 @@ asc subscriptions list --group "GROUP_ID" --paginate --output json
 
 ### Step B - Read current RevenueCat catalog (mcporter)
 
-Use the `revenuecat-cli` skill via `mcporter call revenuecat.<tool>`. All tool names use **dashes**, not underscores. Pass `project_id` and paginate with `starting_after` where applicable.
+Use the `revenuecat-cli` mcporter server via `mcporter call revenuecat.<tool>`. All tool names use **dashes**, not underscores. Pass `project_id` and paginate with `starting_after` where applicable.
 
 ```bash
 mkdir -p /tmp/revenuecat
-mcporter call revenuecat.list-apps         project_id=proj2cab6270 --output json > /tmp/revenuecat/apps.json
-mcporter call revenuecat.list-products     project_id=proj2cab6270 limit:100 --output json > /tmp/revenuecat/products.json
-mcporter call revenuecat.list-entitlements project_id=proj2cab6270 --output json > /tmp/revenuecat/entitlements.json
-mcporter call revenuecat.list-offerings    project_id=proj2cab6270 --output json > /tmp/revenuecat/offerings.json
+mcporter call revenuecat.list-apps         project_id=$REVENUECAT_PROJECT_ID --output json > /tmp/revenuecat/apps.json
+mcporter call revenuecat.list-products     project_id=$REVENUECAT_PROJECT_ID limit:100 --output json > /tmp/revenuecat/products.json
+mcporter call revenuecat.list-entitlements project_id=$REVENUECAT_PROJECT_ID --output json > /tmp/revenuecat/entitlements.json
+mcporter call revenuecat.list-offerings    project_id=$REVENUECAT_PROJECT_ID --output json > /tmp/revenuecat/offerings.json
 # packages are per-offering:
-mcporter call revenuecat.list-packages     project_id=proj2cab6270 offering_id=default --output json > /tmp/revenuecat/packages.json
+mcporter call revenuecat.list-packages     project_id=$REVENUECAT_PROJECT_ID offering_id=default --output json > /tmp/revenuecat/packages.json
 ```
 
 Note: `list-projects` replaces the old `get_project` for project discovery. There is no `get_project` in the current MCP.
@@ -127,13 +127,13 @@ The current public RC MCP is read-only — these are write operations and must u
 
 ```bash
 # Create app (if missing)
-curl -sS -X POST "https://api.revenuecat.com/v2/projects/proj2cab6270/apps" \
+curl -sS -X POST "https://api.revenuecat.com/v2/projects/$REVENUECAT_PROJECT_ID/apps" \
   -H "Authorization: Bearer $REVENUECAT_WRITE_API_KEY" \
   -H "Content-Type: application/json" \
-  -d '{"name": "Bloom iOS", "type": "app_store", "bundle_id": "com.bloom.invest"}'
+  -d '{"name": "$APP_NAME", "type": "app_store", "bundle_id": "$APP_BUNDLE_ID"}'
 
 # Create product (per ASC product)
-curl -sS -X POST "https://api.revenuecat.com/v2/projects/proj2cab6270/products" \
+curl -sS -X POST "https://api.revenuecat.com/v2/projects/$REVENUECAT_PROJECT_ID/products" \
   -H "Authorization: Bearer $REVENUECAT_WRITE_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{
@@ -151,18 +151,18 @@ Read via mcporter; write via REST API:
 
 ```bash
 # Read
-mcporter call revenuecat.list-entitlements project_id=proj2cab6270 --output json
+mcporter call revenuecat.list-entitlements project_id=$REVENUECAT_PROJECT_ID --output json
 mcporter call revenuecat.get-products-from-entitlement \
-  project_id=proj2cab6270 entitlement_id=premium --output json
+  project_id=$REVENUECAT_PROJECT_ID entitlement_id=premium --output json
 
 # Write: create entitlement
-curl -sS -X POST "https://api.revenuecat.com/v2/projects/proj2cab6270/entitlements" \
+curl -sS -X POST "https://api.revenuecat.com/v2/projects/$REVENUECAT_PROJECT_ID/entitlements" \
   -H "Authorization: Bearer $REVENUECAT_WRITE_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"lookup_key": "premium", "display_name": "Premium"}'
 
 # Write: attach products to entitlement
-curl -sS -X POST "https://api.revenuecat.com/v2/projects/proj2cab6270/entitlements/<ENT_ID>/actions/attach_products" \
+curl -sS -X POST "https://api.revenuecat.com/v2/projects/$REVENUECAT_PROJECT_ID/entitlements/<ENT_ID>/actions/attach_products" \
   -H "Authorization: Bearer $REVENUECAT_WRITE_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"product_ids": ["<RC_PRODUCT_ID>"]}'
@@ -174,29 +174,29 @@ Read via mcporter; write via REST API:
 
 ```bash
 # Read
-mcporter call revenuecat.list-offerings project_id=proj2cab6270 --output json
-mcporter call revenuecat.list-packages project_id=proj2cab6270 offering_id=default --output json
+mcporter call revenuecat.list-offerings project_id=$REVENUECAT_PROJECT_ID --output json
+mcporter call revenuecat.list-packages project_id=$REVENUECAT_PROJECT_ID offering_id=default --output json
 
 # Write: create offering
-curl -sS -X POST "https://api.revenuecat.com/v2/projects/proj2cab6270/offerings" \
+curl -sS -X POST "https://api.revenuecat.com/v2/projects/$REVENUECAT_PROJECT_ID/offerings" \
   -H "Authorization: Bearer $REVENUECAT_WRITE_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"lookup_key": "default", "display_name": "Default"}'
 
 # Write: create package
-curl -sS -X POST "https://api.revenuecat.com/v2/projects/proj2cab6270/offerings/<OFF_ID>/packages" \
+curl -sS -X POST "https://api.revenuecat.com/v2/projects/$REVENUECAT_PROJECT_ID/offerings/<OFF_ID>/packages" \
   -H "Authorization: Bearer $REVENUECAT_WRITE_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"lookup_key": "$rc_monthly", "display_name": "Monthly", "position": 1}'
 
 # Write: attach products to package
-curl -sS -X POST "https://api.revenuecat.com/v2/projects/proj2cab6270/packages/<PKG_ID>/actions/attach_products" \
+curl -sS -X POST "https://api.revenuecat.com/v2/projects/$REVENUECAT_PROJECT_ID/packages/<PKG_ID>/actions/attach_products" \
   -H "Authorization: Bearer $REVENUECAT_WRITE_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"products": [{"product_id": "<RC_PRODUCT_ID>", "eligibility_criteria": "all"}]}'
 
 # Write: mark current offering
-curl -sS -X POST "https://api.revenuecat.com/v2/projects/proj2cab6270/offerings/<OFF_ID>" \
+curl -sS -X POST "https://api.revenuecat.com/v2/projects/$REVENUECAT_PROJECT_ID/offerings/<OFF_ID>" \
   -H "Authorization: Bearer $REVENUECAT_WRITE_API_KEY" \
   -H "Content-Type: application/json" \
   -d '{"is_current": true}'

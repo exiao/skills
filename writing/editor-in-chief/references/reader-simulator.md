@@ -105,6 +105,6 @@ After reading the closing, would the target reader subscribe for more?
 
 ## References
 
-- Part of **article-writer** revision pipeline
+- Part of **writer** revision pipeline
 - Run after **emotion-amplifier**, before **evaluate-content**
 - Uses target reader from **evaluate-content** question #6

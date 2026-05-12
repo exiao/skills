@@ -170,6 +170,6 @@ The ultimate prosody test. Read the piece aloud (or imagine reading it) and mark
 
 ## References
 
-- Part of **article-writer** revision pipeline (optional, for polish)
+- Part of **writer** revision pipeline (optional, for polish)
 - Run after **remove-chaff** (chaff removal changes the rhythm)
 - Complements **emotion-amplifier** (pacing serves emotion)

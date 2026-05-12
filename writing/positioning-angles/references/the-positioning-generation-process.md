@@ -182,6 +182,6 @@ After running tests, you'll have signal. Now converge:
 3. **Pick 1 primary angle** for your brand positioning (this goes everywhere — App Store, landing page, pitch deck)
 4. **Pick 1-2 secondary angles** for specific audiences or channels (e.g., Gen Z TikTok angle vs. Google Ads angle)
 5. **Build your positioning stack** (one-liner, elevator pitch, value prop, tagline, category claim) around the primary angle
-6. **Feed the winners into other skills**: headlines, direct-response-copy, content-atomizer
+6. **Feed the winners into other skills**: headlines
 
 ---
