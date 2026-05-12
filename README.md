@@ -30,14 +30,14 @@ Find more skills: [OpenClaw](https://github.com/openclaw/openclaw/tree/main/skil
 |----------|--------|-------------|
 | [app-store](app-store/) | 28 | App Store Connect, ASO, screenshots, iOS simulators |
 | [coding](coding/) | 8 | PR babysitting, Sentry fixes, simplification, deploy verification |
-| [thinking](thinking/) | 7 | Brainstorming, office hours, user studies, planning |
-| [writing](writing/) | 11 | Copywriting, content strategy, editing, hooks, outlines, content pipeline |
 | [design](design/) | 32 | UI/UX, Impeccable design system, Excalidraw, slides, Remotion |
-| [video](video/) | 18 | Character creation, video editing, production (Kling, Sora, Remotion, ElevenLabs), YouTube content |
 | [external-services](external-services/) | 21 | Third-party API integrations and CLIs |
-| [memory](memory/) | 3 | Memory management for persistent agents |
 | [investing](investing/) | 0 | Coming soon |
+| [memory](memory/) | 3 | Memory management for persistent agents |
 | [skills-meta](skills-meta/) | 8 | Meta-skills for creating and improving other skills |
+| [thinking](thinking/) | 7 | Brainstorming, office hours, user studies, planning |
+| [video](video/) | 18 | Character creation, video editing, production (Kling, Sora, Remotion, ElevenLabs), YouTube content |
+| [writing](writing/) | 11 | Copywriting, content strategy, editing, hooks, outlines, content pipeline |
 
 ## Skill structure
 
@@ -60,10 +60,10 @@ Some skills are forked from or inspired by third-party sources:
 
 | Skill | Source |
 |-------|--------|
-| [last30days](writing/last30days/) | [mvanhorn/last30days-skill](https://github.com/mvanhorn/last30days-skill) |
-| [grok-search](external-services/grok-search/) | [xAI docs](https://docs.x.ai/docs/guides/tools/search-tools) |
-| [mcporter](skills-meta/mcporter/) | [mcporter.dev](https://mcporter.dev) |
 | [apple-search-ads](external-services/apple-search-ads/) | [ClawHub](https://clawhub.ai) |
-| [google-ads-cli](external-services/google-ads-cli/) | [ClawHub](https://clawhub.ai) |
-| [meta-ads-cli](external-services/meta-ads-cli/) | [ClawHub](https://clawhub.ai) |
 | [demo-video](video/demo-video/) | [ClawHub](https://clawhub.ai) |
+| [google-ads-cli](external-services/google-ads-cli/) | [ClawHub](https://clawhub.ai) |
+| [grok-search](external-services/grok-search/) | [xAI docs](https://docs.x.ai/docs/guides/tools/search-tools) |
+| [last30days](writing/last30days/) | [mvanhorn/last30days-skill](https://github.com/mvanhorn/last30days-skill) |
+| [mcporter](skills-meta/mcporter/) | [mcporter.dev](https://mcporter.dev) |
+| [meta-ads-cli](external-services/meta-ads-cli/) | [ClawHub](https://clawhub.ai) |
