@@ -56,14 +56,39 @@ PRs welcome. See [CLAUDE.md](CLAUDE.md) for conventions. CI runs automated revie
 
 ## Attribution
 
-Some skills are forked from or inspired by third-party sources:
+Some skills are adapted from or inspired by other open-source projects:
 
-| Skill | Source |
-|-------|--------|
-| [apple-search-ads](external-services/apple-search-ads/) | [ClawHub](https://clawhub.ai) |
-| [demo-video](video/demo-video/) | [ClawHub](https://clawhub.ai) |
-| [google-ads-cli](external-services/google-ads-cli/) | [ClawHub](https://clawhub.ai) |
-| [grok-search](external-services/grok-search/) | [xAI docs](https://docs.x.ai/docs/guides/tools/search-tools) |
+### From [Anthropic](https://github.com/anthropics)
+
+| Skill | Original |
+|-------|----------|
+| [frontend-design](design/frontend-design/) | [anthropics/claude-code/plugins/frontend-design](https://github.com/anthropics/claude-code/tree/main/plugins/frontend-design) |
+| [ralph-mode](coding/ralph-mode/) | [anthropics/claude-code/plugins/ralph-wiggum](https://github.com/anthropics/claude-code/tree/main/plugins/ralph-wiggum) |
+| [skill-creator](skills-meta/skill-creator/) | [anthropics/claude-code/plugins/plugin-dev](https://github.com/anthropics/claude-code/tree/main/plugins/plugin-dev) |
+
+### From [coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills)
+
+| Skill | Original |
+|-------|----------|
+| [copywriting](writing/copywriting/) | ad-copy |
+| [positioning-angles](writing/positioning-angles/) | positioning-angles |
+
+### From Other Projects
+
+| Skill | Original |
+|-------|----------|
+| [app-store-screenshots](app-store/app-store-screenshots/) | [ParthJadhav/app-store-screenshots](https://github.com/ParthJadhav/app-store-screenshots) |
+| [frontend-slides](design/frontend-slides/) | [zarazhangrui/frontend-slides](https://github.com/zarazhangrui/frontend-slides) |
+| [impeccable](design/impeccable/) | [pbakaus/impeccable](https://github.com/pbakaus/impeccable) |
 | [last30days](writing/last30days/) | [mvanhorn/last30days-skill](https://github.com/mvanhorn/last30days-skill) |
-| [mcporter](skills-meta/mcporter/) | [mcporter.dev](https://mcporter.dev) |
-| [meta-ads-cli](external-services/meta-ads-cli/) | [ClawHub](https://clawhub.ai) |
+| [remotion-videos](design/remotion/) | [remotion-dev/skills](https://github.com/remotion-dev/skills) |
+| [stably-cli](external-services/stably-cli/) | [skills.sh/stablyai](https://skills.sh/stablyai/agent-skills/stably-cli) |
+
+### From [ClawHub](https://clawhub.ai)
+
+| Skill | Slug |
+|-------|------|
+| [apple-search-ads](external-services/apple-search-ads/) | apple-search-ads |
+| [demo-video](video/demo-video/) | demo-video |
+| [google-ads-cli](external-services/google-ads-cli/) | google-ads |
+| [meta-ads-cli](external-services/meta-ads-cli/) | meta-ads |
