@@ -102,6 +102,14 @@ Hook patterns optimized for AI-generated UGC ads (TikTok/Instagram). These are p
 
 Source: @athcanft (May 2026, Apr 2026 X guide)
 
+### The Trojan Horse Principle
+
+The highest-performing UGC ad hooks share one structural insight: the app is never the subject of the hook. The hook is a universally engaging human scenario (relationship drama, job cheating, moral panic) that happens to require the app as a plot device. The viewer processes a story, not an ad. The product is discovered within the narrative, not pitched.
+
+This principle connects: Dating/Cheating Story Hook, Staged Controversy Skit Hook, Investigation Arc, and Familiar Brand as Villain. All four use the same underlying mechanism with different emotional registers.
+
+Source: Pattern observed across @themariaines case studies (May 2026), 97M+ combined views.
+
 ### Truth-First Credibility Hooks
 
 Source: Naval Ravikant, `Sell the Truth`, nav.al/sell, May 2026.
@@ -241,6 +249,112 @@ Bloom shells:
 - `I thought my broker screen showed everything. Then I ran the portfolio check.`
 
 Brief creators with idea plus freestyle: give the hook, proof points, and customer phrases, then let them riff in their own words. Over-scripted UGC loses the native texture that makes the investigation credible.
+
+### Dating/Cheating Story Hook
+
+Source: @themariaines, May 2026 thread (97.2M views across 10 apps) + Sep 2025 Katch case study ($10K MRR in 90 days).
+
+Use relationship drama (cheating, breakups, suspicious behavior) as the storyline hook for ANY app, regardless of category. The app appears as a plot device within the story, never as the subject of the hook.
+
+**Evidence (all non-dating apps):**
+
+| App (category) | Views |
+|----------------|-------|
+| Cantina (AI editor) | 30M |
+| Creed (religion) | 18.2M |
+| Symmetry (fitness) | 14.7M |
+| Sounter (language learning) | 10.2M |
+| Pearly whites (teeth) | 9.6M |
+| Zest (cooking) | 4M |
+| Wiingy (study tool) | 3.6M |
+| Tomo (AI bot) | 2.9M |
+| Airbuds (social) | 2.6M |
+| Alta (fashion) | 1.2M |
+
+**Case study: Katch** (IG "recent followers" tracker). Launched June 2025 in a saturated market. Started with generic short hooks, got stuck in low-view jail. Pivoted to cheating story UGC in July. By August: 22M views across 6 ambassador accounts, $10K MRR, 10K downloads. One account (teresa__girlhacks) drove 17.3M of the 22M views.
+
+**Structure:**
+1. Story-time hook about cheating or relationship suspicion (spoken or text overlay)
+2. Important detail in parentheses that adds intrigue (their hook writing formula)
+3. Native UGC format: bathroom mirror recording, lecture hall, screen recording
+4. Story naturally leads to the app as discovery: "...and that's when I found out about this app"
+5. App demo or screen recording takes over
+
+**Why it works:**
+- Relationship drama is universally engaging regardless of the product category
+- The app enters as a plot device, not a pitch. Viewers process it as story, not ad.
+- Parenthetical details create micro-curiosity loops within the hook
+- Native UGC formats (bathroom mirror, lecture hall) bypass ad detection instincts
+- Comment sections explode with opinions on the relationship, not the product
+- Multi-account ambassador distribution lets you test dozens of story variants simultaneously
+
+**The "less obvious" variant:** Some apps now use dating hooks where the connection to the product is indirect or surprising (475K views, 3.9K shares for an app not even launched yet). The less obvious the product tie-in, the more the viewer stays to figure out the connection.
+
+**Hook writing formula:** `main story + important detail in ( )`
+- Draft dozens of versions of a similar story, cross-post across ambassador accounts
+- The parenthetical detail is what separates a 100K view hook from a 10M view hook
+
+**Bloom applications:**
+- `"my boyfriend's been acting weird lately (he keeps checking this one app at 6am)"` then reveal: it's Bloom, he's checking pre-market AI analysis
+- `"I found something on my partner's phone that changed everything (it was a stock portfolio I didn't know about)"` then pivot to Bloom's portfolio analysis
+- `"caught my roommate doing something suspicious at 3am (he was reading earnings reports)"` then show Bloom's AI earnings breakdown
+- `"she said she wasn't into finance (but her Bloom notifications told a different story)"`
+
+**Rules:**
+- The story must feel real. Over-produced or obviously scripted versions die.
+- The app reveal should feel like a natural plot point, not a hard pivot.
+- Parenthetical details should be specific and slightly absurd.
+- Cross-post variants across multiple accounts to find the hook that breaks out.
+- Works best with ambassador/creator networks, not brand accounts.
+
+### Staged Controversy Skit Hook
+
+Source: @themariaines, May 2026. SGE breakdown: socialgrowthengineers.com/the-only-playbook-of-job-interview-apps
+
+Stage a skit where someone "cheats" or does something controversial using an app. The controversy is manufactured to trigger comment-section engagement. The app is the tool that enables the transgression.
+
+**Evidence (job interview apps alone):**
+
+| App | Views | Notes |
+|-----|-------|-------|
+| LockedIn AI | 62.8M | Reposted staged interviews with fresh hooks |
+| Nora AI | 16M | Autonomous mock interview skits |
+| Einstein AI | 7.9M | |
+| Interview Pilot | 4.2M | |
+| Interview Sidekick | 2.4M | Single video, 39.9K likes, 2,700x median engagement |
+
+7 apps using the identical format.
+
+**The interview skit format:**
+1. Creator films a mock remote interview
+2. As interviewer asks questions, the app generates answers in real-time
+3. Visual gimmick: lotion on camera lens blurs the webcam so the interviewer can't see the candidate reading AI answers
+4. Hook text: "This generation is cooked" or similar moral-panic framing
+5. Comments flood with debate: hiring managers saying they can detect it, candidates defending it, general outrage
+
+**Why it works:**
+- Manufactured controversy triggers the algorithm's engagement signals (comments, shares, saves)
+- Moral-panic framing ("this generation is cooked") creates an opinion-forcing moment. Viewers MUST weigh in.
+- The app is positioned as dangerously effective, which is the strongest possible product proof
+- Multi-account distribution (7 TikTok accounts posting same content) maximizes surface area
+- The skit format is infinitely repeatable: same structure, different interviewer questions, different creators
+- Comment-section warfare keeps the video alive in the algorithm long after posting
+
+**The meta-pattern** (shared with Dating/Cheating hooks): The app is never the hook. The hook is a universally engaging scenario (relationship drama, job interview cheating) that happens to require the app as a plot device. The product is discovered, not pitched.
+
+**Bloom applications:**
+- `"My friend used AI to pick every stock in his portfolio (his returns are embarrassing mine)"`
+- Skit: someone screen-shares in a stock club meeting, Bloom's AI analysis is visible, everyone asks "wait, what is that"
+- `"I showed my financial advisor what Bloom found. He went quiet for 10 seconds."`
+- Mock "stock pitch competition" where one person secretly has Bloom's AI thesis running: "how does he always know the risks?"
+- `"This generation doesn't even read 10-Ks anymore"` with a Bloom AI analysis reveal
+
+**Rules:**
+- The controversy must be genuinely debatable, not obviously fake outrage
+- The app must look powerful within the skit. "Dangerously good" is the positioning.
+- Let creators freestyle the dialogue. Over-scripted skits lose native texture.
+- Multi-account distribution is part of the strategy, not optional
+- Monitor comments and engage with the debate to extend algorithmic life
 
 ### "this is ur reminder that..." format
 
