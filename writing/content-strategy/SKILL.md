@@ -556,6 +556,16 @@ Pick ONE. Run it for 30 days before evaluating or adding a second format.
 
 **Part numbering strategy:** Label every video in the series with a part number, even pt 1. High part numbers (pt 20+) are a growth accelerator: they signal a deep content library, trigger curiosity about earlier episodes, and tell the algorithm this is serialized content worth recommending in sequence. Cross-ref: Step 2d also uses "pt 1" labeling for the Viral Breakdown Pillar.
 
+### Referral-as-Gate + Emotional Paywall Sequencing
+
+Two principles from the Glam Up case study ($0 ad spend → 1M users, $150K MRR in 6 months):
+
+1. **Referral as gate, not bonus.** Make sharing a functional requirement to unlock value ("subscribe OR refer 3 friends"). When users post referral codes in TikTok comments, the platform reads mass commenting as engagement and boosts the video further. The product's growth mechanic and the algorithm feed each other.
+
+2. **Emotional commitment before price.** Build investment through a sequenced funnel (input → processing animation → blurred results → paywall). By the time the user sees the price, they're buying closure on something they feel they've already earned.
+
+> **Load on-demand:** `references/glam-up-case-study.md` for the full playbook: 12-step paywall sequence, discount bounce-back, price increase paradox, copycat judo, UGC creator system, what failed, and Bloom adaptations.
+
 ---
 
 ## Step 3: Create (Delegate)
@@ -713,7 +723,7 @@ Retired pillars aren't deleted. Keep `tiktok-marketing/pillar-bench.json` and re
 
 ## References (Load On-Demand)
 
-Load the relevant file in `references/` when you need implementation detail: analytics/feedback loops, calendar batching, monetization, competitor research, creative research, ad formats, copywriting formulas, content formats, distribution, geo-targeting, interactive content, TikTok warmup, the Daniel Calai/Sway playbook, or Bloom organic growth case studies (real creator data, verified TikTok accounts, hook patterns that drove downloads).
+Load the relevant file in `references/` when you need implementation detail: analytics/feedback loops, calendar batching, monetization, competitor research, creative research, ad formats, copywriting formulas, content formats, distribution, geo-targeting, interactive content, TikTok warmup, the Daniel Calai/Sway playbook, Bloom organic growth case studies (real creator data, verified TikTok accounts, hook patterns that drove downloads), or the Glam Up case study (referral-as-gate, emotional paywall sequencing, price increase paradox, UGC creator playbook).
 
 ---
 
