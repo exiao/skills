@@ -1,10 +1,8 @@
-# Repeatable Daily Format (The Oasis Model)
+## Step 2f: Repeatable Daily Format (The Oasis Model)
 
 Most creators chase variety. The highest-growth accounts do the opposite: one format, repeated daily, with only the subject changing.
 
-## Case Studies
-
-**Case study 1: @oasishealthapp** — 30M views, 232 Reels, $23K/month MRR. Every single video follows the same structure: test a popular water brand, reveal contaminants, show a score, recommend alternatives. The format never changes. The brand being tested changes.
+**Case study:** @oasishealthapp — 30M views, 232 Reels, $23K/month MRR. Every single video follows the same structure: test a popular water brand, reveal contaminants, show a score, recommend alternatives. The format never changes. The brand being tested changes.
 
 **Case study 2: Suno AI "Turning Texts Into Songs"** — Creators post "turning my [toxic person]'s texts into a song" using Suno AI. Some are on part 20, others on part 65. Every video clears hundreds of thousands of views. The AI-generated song plays while real text screenshots scroll on screen. The format never changes. The subject (which toxic person, which texts) changes. (Source: @alexolim_, May 2026)
 
@@ -13,7 +11,7 @@ Why this variant matters: the raw material is **emotional and personal**, not pr
 2. Create curiosity about earlier parts ("what happened in pt 1-19?")
 3. Train the algorithm on exactly who wants this content, compounding reach per episode
 
-## Serialized AI Transformation Pattern
+### Serialized AI Transformation Pattern
 
 Generalized from Oasis + Suno cases:
 
@@ -28,15 +26,14 @@ Formula: `[raw material with built-in curiosity] + [AI/tool transformation] + [s
 
 The pattern works because the creator's job is curation (picking the next subject), not creation (inventing a new format). Production cost per episode approaches zero.
 
-## Why Repetition Beats Variety
-
+**Why repetition beats variety:**
 - The algorithm rewards predictable quality over creative range
 - Viewers know what to expect, so they return (series architecture)
 - Production cost drops to near zero after the first video
 - You optimize one funnel instead of reinventing constantly
 - 232 videos at the same format means 232 data points on what hooks work within that format
 
-## How to Build a Repeatable Format
+**How to build a repeatable format:**
 
 1. **Pick one content structure** that maps to your product's core value (see hooks skill: "Familiar Brand as Villain" for a proven template)
 2. **Define the variable** — the one thing that changes per video (Oasis: the water brand. Bloom: the stock/ticker/guru)
@@ -46,15 +43,13 @@ The pattern works because the creator's job is curation (picking the next subjec
 6. **Track per-variable performance** — which subjects drive the most views? Double down on those categories
 7. **Variant rule for paid:** when one creative wins, keep the hook and reveal structure fixed. Make 10-12 variants by swapping the person, subject, story, ticker, or result. Creative iteration beats campaign tinkering. (Source: @athcanft X guide, Apr 2026)
 
-## The Self-Sustaining Content Loop
-
+**The self-sustaining content loop:**
 ```
 Content → App Downloads → Product Usage Data → More Content
 ```
 Oasis: lab tests → videos → downloads → subscription revenue → fund more lab tests. Bloom: AI analysis → videos → downloads → usage data → more analysis to feature in videos.
 
-## Bloom's Repeatable Format Candidates
-
+**Bloom's repeatable format candidates:**
 - "I ran [ticker] through Bloom's AI" — score reveal + what it caught
 - "I tested [guru/influencer]'s stock pick" — AI vs human analysis
 - "[Trending stock] — what the AI actually sees" — timely hook + evergreen format
@@ -63,11 +58,9 @@ Oasis: lab tests → videos → downloads → subscription revenue → fund more
 
 Pick ONE. Run it for 30 days before evaluating or adding a second format.
 
-## Part Numbering Strategy
+**Part numbering strategy:** Label every video in the series with a part number, even pt 1. High part numbers (pt 20+) are a growth accelerator: they signal a deep content library, trigger curiosity about earlier episodes, and tell the algorithm this is serialized content worth recommending in sequence. Cross-ref: Step 2d also uses "pt 1" labeling for the Viral Breakdown Pillar.
 
-Label every video in the series with a part number, even pt 1. High part numbers (pt 20+) are a growth accelerator: they signal a deep content library, trigger curiosity about earlier episodes, and tell the algorithm this is serialized content worth recommending in sequence. Cross-ref: the Viral Breakdown Pillar also uses "pt 1" labeling.
-
-## Referral-as-Gate + Emotional Paywall Sequencing
+### Referral-as-Gate + Emotional Paywall Sequencing
 
 Two principles from the Glam Up case study ($0 ad spend → 1M users, $150K MRR in 6 months):
 
@@ -76,3 +69,5 @@ Two principles from the Glam Up case study ($0 ad spend → 1M users, $150K MRR 
 2. **Emotional commitment before price.** Build investment through a sequenced funnel (input → processing animation → blurred results → paywall). By the time the user sees the price, they're buying closure on something they feel they've already earned.
 
 > **Load on-demand:** `references/glam-up-case-study.md` for the full playbook: 12-step paywall sequence, discount bounce-back, price increase paradox, copycat judo, UGC creator system, what failed, and Bloom adaptations.
+
+---

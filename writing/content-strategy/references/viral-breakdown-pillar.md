@@ -1,4 +1,4 @@
-# Viral Breakdown Pillar
+## Step 2d: Viral Breakdown Pillar
 
 This is a full account pillar — not a one-off format. Run it every week.
 
@@ -10,7 +10,7 @@ This is a full account pillar — not a one-off format. Run it every week.
 
 **Why it compounds:**
 | Benefit | Mechanism |
-|---------|-----------| 
+|---------|-----------|
 | Borrowed traffic | Your content surfaces in searches and feeds for the source post's audience |
 | Authority positioning | You're the person who understands the craft, not just a consumer |
 | Series architecture | Built-in return reason; viewers expect more installments |
@@ -29,4 +29,7 @@ Place labels at the moment you identify the tactic, not before. Let the source v
 - Labels you'd drop: "LOSS AVERSION" (the emotional hook), "ROUND NUMBER" (they lost exactly $10K, not $9,847), "SCREENSHOT FORMAT" (looks organic, not produced), "NO CTA" (the virality IS the content, no ask)
 - Your commentary: explain each label as an investing psychology + content strategy concept simultaneously. Double value for the viewer.
 
-**Sourcing:** Use `last30days` or `grok-search` to find viral posts in the investing/personal finance niche weekly. Look for 50K+ views, especially from accounts under 10K followers (pre-algo signal).
+**Sourcing:** Use `last30days`, `grok-search`, or `last30days` to find viral posts in the investing/personal finance niche weekly. Look for 50K+ views, especially from accounts under 10K followers (pre-algo signal).
+
+---
+
