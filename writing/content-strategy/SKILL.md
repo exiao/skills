@@ -18,9 +18,9 @@ Turn zeitgeist signals into content that connects — then delegate creation, di
 **NOT this skill:**
 - Writing tweets or posts → `writer`
 - Generating images → `image-generator` or `nano-banana-pro`
-- Creating TikTok slideshows → slideshow tools
+- Creating TikTok slideshows → video skills
 - Writing articles → `writer`
-- Scheduling → `typefully` or slideshow tools/ReelFarm
+- Scheduling → `typefully` or video skills/ReelFarm
 
 ---
 
@@ -40,7 +40,7 @@ Mine what's working **right now** before writing a single word.
 | Support tickets and FAQs | Objections, misconceptions, friction points |
 | TikTok accounts with <1k followers | Viral signals before algo amplification; comment sentiment on what's actually resonating |
 
-**Skills to use:** `last30days`, `grok-search`, `grok-search`
+**Skills to use:** `last30days`, `grok-search`
 
 **Output:** 10-20 hook angles + exact audience language in their own words. Store in `[Campaign]_Research.md`.
 
@@ -455,7 +455,7 @@ Don't write here. Route to the right skill.
 | Content Type | Skill |
 |-------------|-------|
 | Tweets, X posts, articles, long-form | `writer` |
-| TikTok slideshows | slideshow tools |
+| TikTok slideshows | video skills |
 | Hooks and headlines | `hooks` |
 | Ad copy (paid) | `copywriting` |
 | Paid creative concepts | `copywriting` (includes A/B blitz protocol) |
@@ -469,7 +469,7 @@ Don't write here. Route to the right skill.
 | Platform | Tool | Cadence |
 |---------|------|---------|
 | LinkedIn, X, Threads | `typefully` skill | 1/day (LI, Threads), 2/day (X) |
-| TikTok | slideshow tools / ReelFarm | 2-3/day |
+| TikTok | video skills / ReelFarm | 2-3/day |
 
 Batch at least 7 days per session. If queue drops below 3 days, refill immediately.
 
@@ -507,4 +507,4 @@ Load `references/examples-and-tier-lists.md` when you need a complete strategy-c
 
 ## Related Skills
 
-Use adjacent skills as needed: `hooks`, `copywriting`, `writer`, `writer`, slideshow tools, `typefully`, `last30days`, `grok-search`, `grok-search`, and `character-creation`.
+Use adjacent skills as needed: `hooks`, `copywriting`, `writer`, `typefully`, `last30days`, `grok-search`, and `character-creation`.

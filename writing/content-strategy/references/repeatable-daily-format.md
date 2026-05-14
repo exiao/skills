@@ -17,7 +17,7 @@ Generalized from Oasis + Suno cases:
 
 Formula: `[raw material with built-in curiosity] + [AI/tool transformation] + [serial numbering] = compounding series`
 
-| Element | Oasis | Suno | Bloom |
+| Element | Oasis | Suno | Bloom (Proposed) |
 |---------|-------|------|-------|
 | Raw material | Water brand | Toxic person's texts | Stock ticker / guru pick / portfolio |
 | Transformation | Lab contaminant test | AI song generation | AI analysis / risk score |
