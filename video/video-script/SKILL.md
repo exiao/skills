@@ -2,7 +2,6 @@
 name: video-script
 preloaded: true
 description: Generate structured scene-by-scene video scripts for short-form content (TikTok, Reels, Shorts) and retention-optimized long-form YouTube scripts, with production metadata ready to feed into the video-production pipeline (Sora, Kling, ElevenLabs, InfiniteTalk, Remotion, stock-footage, video-editor). Use when asked to "write a video script", "script for TikTok", "video outline", "plan a video", "storyboard", "scene breakdown", "video concept", "content brief for video", "shooting script", "long-form video script", "improve video retention", "structure a YouTube video", or whenever the video-production pipeline needs a structured script before production begins. Also trigger for "Reels script", "Shorts script", "YouTube script", "video idea with scenes", "retention-optimized script", or any request that implies breaking a video concept into timed scenes or sections with production directions.
-preloaded: true
 ---
 
 # Video Script Generator
