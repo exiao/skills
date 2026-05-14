@@ -1,6 +1,7 @@
 ---
 name: content-strategy
 description: "Use when building content strategy: hooks, angles, and ideas from what's trending now. Covers organic and paid creative across TikTok, X, YouTube, Meta, LinkedIn."
+preloaded: true
 ---
 
 # Content Strategy
@@ -12,11 +13,11 @@ Turn zeitgeist signals into content that connects — then delegate creation, di
 **The flow:** Zeitgeist → Angles & Hooks → Create (via other skills) → Distribute → Analyze
 
 **NOT this skill:**
-- Writing tweets or posts → `writer`
+- Writing tweets or posts → `tweet-ideas`
 - Generating images → `image-generator` or `nano-banana-pro`
-- Creating TikTok slideshows → video skills
-- Writing articles → `writer`
-- Scheduling → `typefully` or video skills/ReelFarm
+- Creating TikTok slideshows → `slideshow-creator`
+- Writing articles → `article-writer`
+- Scheduling → `typefully` or `slideshow-creator`/ReelFarm
 
 ---
 
@@ -36,7 +37,7 @@ Mine what's working **right now** before writing a single word.
 | Support tickets and FAQs | Objections, misconceptions, friction points |
 | TikTok accounts with <1k followers | Viral signals before algo amplification; comment sentiment on what's actually resonating |
 
-**Skills to use:** `last30days`, `grok-search`, `last30days`, web search
+**Skills to use:** `last30days`, `grok-search`, `trend-research`, `web-search`
 
 **Output:** 10-20 hook angles + exact audience language in their own words. Store in `[Campaign]_Research.md`.
 
@@ -470,7 +471,7 @@ Place labels at the moment you identify the tactic, not before. Let the source v
 - Labels you'd drop: "LOSS AVERSION" (the emotional hook), "ROUND NUMBER" (they lost exactly $10K, not $9,847), "SCREENSHOT FORMAT" (looks organic, not produced), "NO CTA" (the virality IS the content, no ask)
 - Your commentary: explain each label as an investing psychology + content strategy concept simultaneously. Double value for the viewer.
 
-**Sourcing:** Use `last30days`, `grok-search`, or `last30days` to find viral posts in the investing/personal finance niche weekly. Look for 50K+ views, especially from accounts under 10K followers (pre-algo signal).
+**Sourcing:** Use `last30days`, `grok-search`, or `trend-research` to find viral posts in the investing/personal finance niche weekly. Look for 50K+ views, especially from accounts under 10K followers (pre-algo signal).
 
 ---
 
@@ -499,6 +500,28 @@ Most creators chase variety. The highest-growth accounts do the opposite: one fo
 
 **Case study:** @oasishealthapp — 30M views, 232 Reels, $23K/month MRR. Every single video follows the same structure: test a popular water brand, reveal contaminants, show a score, recommend alternatives. The format never changes. The brand being tested changes.
 
+**Case study 2: Suno AI "Turning Texts Into Songs"** — Creators post "turning my [toxic person]'s texts into a song" using Suno AI. Some are on part 20, others on part 65. Every video clears hundreds of thousands of views. The AI-generated song plays while real text screenshots scroll on screen. The format never changes. The subject (which toxic person, which texts) changes. (Source: @alexolim_, May 2026)
+
+Why this variant matters: the raw material is **emotional and personal**, not product-test data. Real text screenshots are inherently voyeuristic (curiosity gap: "what did they say?"). The AI tool is the transformation engine, not the subject. And high part numbers (pt 20, pt 65) do three things:
+1. Signal creator commitment and depth of content library
+2. Create curiosity about earlier parts ("what happened in pt 1-19?")
+3. Train the algorithm on exactly who wants this content, compounding reach per episode
+
+### Serialized AI Transformation Pattern
+
+Generalized from Oasis + Suno cases:
+
+Formula: `[raw material with built-in curiosity] + [AI/tool transformation] + [serial numbering] = compounding series`
+
+| Element | Oasis | Suno | Bloom |
+|---------|-------|------|-------|
+| Raw material | Water brand | Toxic person's texts | Stock ticker / guru pick / portfolio |
+| Transformation | Lab contaminant test | AI song generation | AI analysis / risk score |
+| Reveal | Score + contaminants | Song playing over screenshots | Insight card / what AI caught |
+| Variable per episode | Which brand | Which person / texts | Which ticker / guru / trade |
+
+The pattern works because the creator's job is curation (picking the next subject), not creation (inventing a new format). Production cost per episode approaches zero.
+
 **Why repetition beats variety:**
 - The algorithm rewards predictable quality over creative range
 - Viewers know what to expect, so they return (series architecture)
@@ -526,8 +549,12 @@ Oasis: lab tests → videos → downloads → subscription revenue → fund more
 - "I ran [ticker] through Bloom's AI" — score reveal + what it caught
 - "I tested [guru/influencer]'s stock pick" — AI vs human analysis
 - "[Trending stock] — what the AI actually sees" — timely hook + evergreen format
+- "I ran my most impulsive trade through Bloom's AI — pt 1" — serialized personal portfolio audit
+- "Turning my broker's worst advice into an AI analysis — pt 1" — Suno-style emotional raw material + AI transformation
 
 Pick ONE. Run it for 30 days before evaluating or adding a second format.
+
+**Part numbering strategy:** Label every video in the series with a part number, even pt 1. High part numbers (pt 20+) are a growth accelerator: they signal a deep content library, trigger curiosity about earlier episodes, and tell the algorithm this is serialized content worth recommending in sequence. Cross-ref: Step 2d also uses "pt 1" labeling for the Viral Breakdown Pillar.
 
 ---
 
@@ -537,9 +564,9 @@ Don't write here. Route to the right skill.
 
 | Content Type | Skill |
 |-------------|-------|
-| Tweets / X posts | `writer` |
-| Articles / long-form | `writer` |
-| TikTok slideshows | video skills |
+| Tweets / X posts | `tweet-ideas` |
+| Articles / long-form | `article-writer` |
+| TikTok slideshows | `slideshow-creator` |
 | Hooks and headlines | `hooks` |
 | Ad copy (paid) | `copywriting` |
 | Paid creative concepts | `copywriting` (includes A/B blitz protocol) |
@@ -553,7 +580,7 @@ Don't write here. Route to the right skill.
 | Platform | Tool |
 |---------|------|
 | LinkedIn, X, Threads | `typefully` skill |
-| TikTok | video skills / ReelFarm |
+| TikTok | `slideshow-creator` / ReelFarm |
 
 **Queue minimums:**
 
@@ -686,7 +713,7 @@ Retired pillars aren't deleted. Keep `tiktok-marketing/pillar-bench.json` and re
 
 ## References (Load On-Demand)
 
-Load the relevant file in `references/` when you need implementation detail: analytics/feedback loops, calendar batching, monetization, competitor research, creative research, ad formats, copywriting formulas, content formats, distribution, geo-targeting, interactive content, TikTok warmup, or the Daniel Calai/Sway playbook.
+Load the relevant file in `references/` when you need implementation detail: analytics/feedback loops, calendar batching, monetization, competitor research, creative research, ad formats, copywriting formulas, content formats, distribution, geo-targeting, interactive content, TikTok warmup, the Daniel Calai/Sway playbook, or Bloom organic growth case studies (real creator data, verified TikTok accounts, hook patterns that drove downloads).
 
 ---
 
@@ -698,4 +725,4 @@ Load `references/examples-and-tier-lists.md` when you need a complete strategy-c
 
 ## Related Skills
 
-Use adjacent skills as needed: `hooks`, `copywriting`, `writer`, `writer`, video skills, `typefully`, `last30days`, `grok-search`, `last30days`, web search, and `character-creation`.
+Use adjacent skills as needed: `hooks`, `copywriting`, `tweet-ideas`, `article-writer`, `slideshow-creator`, `content-atomizer`, `typefully`, `last30days`, `grok-search`, `trend-research`, `web-search`, and `character-creation`.
