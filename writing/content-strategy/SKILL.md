@@ -262,6 +262,7 @@ Match the angle to a format that amplifies it.
 | Viral Breakdown / Reaction | Dual-screen commentary on a viral post; borrowed traffic + authority positioning | Creator education, niche analysis, weekly pillar content |
 | Three-Screen App Demo | Shows the core product loop in a way creators can repeat: input → processing → result | Influencer-led consumer apps, AI utilities, scanning/logging/analyzer apps |
 | Investigation Arc | Creator reacts to a familiar claim/expert, finds a contradiction, investigates, then reveals proof | Anti-ad UGC, skeptical audiences, finance, health, categories with trust issues |
+| Before/After [Product] | Two-word text overlay ("Before [PRODUCT]" / "After [PRODUCT]") over creator showing emotional transformation. No feature explanation needed. | Any product where the transformation is emotional (confidence, ease, joy), not just functional. AI tools, creative apps, fitness, learning. |
 
 ### Anti-Ad Execution
 
@@ -275,6 +276,10 @@ Execution rules:
 - Drop social proof early when skepticism is high.
 - Let the creator's phrasing stay imperfect if it feels native.
 - Product appears as the thing discovered during the investigation, not the thing announced at the start.
+
+**The 80/20 emotion-to-product ratio:** The best anti-ads spend ~80% of runtime on emotion (frustration, transformation, confidence, joy) and ~20% on product proof (a quick app UI flash, enough to show it's real). The product demo exists to prove legitimacy, not to explain features. If the feature demo exceeds 30% of the video, it's an ad again. (Source: Suno "Before/After" ad, May 2026 — 50s runtime, ~10s of app UI, rest is pure creator emotion)
+
+**No-CTA as positioning:** Some of the strongest ads end on emotion, not a sales pitch. No "download now," no "link in bio," no logo card. The brand name appears in the opening text overlay and that's enough. This works when: (1) the content is so good it gets shared as entertainment, (2) the product name is embedded in the hook text itself, and (3) a CTA would cheapen the emotional payoff. This is walk-away positioning applied to ad creative. Reserve for brand-building, not direct response.
 
 ### Three-Screen App Demo
 
