@@ -1,11 +1,25 @@
 ---
 name: video-script
-description: Generate structured scene-by-scene video scripts with production metadata (visuals, audio, sources, transitions, captions) ready to feed into the video-production pipeline (Sora, Kling, ElevenLabs, InfiniteTalk, Remotion, stock-footage, video-editor). Use when asked to "write a video script", "script for TikTok", "video outline", "plan a video", "storyboard", "scene breakdown", "video concept", "content brief for video", "shooting script", or whenever the video-production pipeline needs a structured script before production begins. Also trigger for "Reels script", "Shorts script", "YouTube script", "video idea with scenes", or any request that implies breaking a video concept into timed scenes with production directions.
+preloaded: true
+description: Generate structured scene-by-scene video scripts for short-form content (TikTok, Reels, Shorts) and retention-optimized long-form YouTube scripts, with production metadata ready to feed into the video-production pipeline (Sora, Kling, ElevenLabs, InfiniteTalk, Remotion, stock-footage, video-editor). Use when asked to "write a video script", "script for TikTok", "video outline", "plan a video", "storyboard", "scene breakdown", "video concept", "content brief for video", "shooting script", "long-form video script", "improve video retention", "structure a YouTube video", or whenever the video-production pipeline needs a structured script before production begins. Also trigger for "Reels script", "Shorts script", "YouTube script", "video idea with scenes", "retention-optimized script", or any request that implies breaking a video concept into timed scenes or sections with production directions.
+preloaded: true
 ---
 
 # Video Script Generator
 
-Takes a topic, hook, or concept and produces a scene-by-scene video script with production metadata. Every field in the output is designed to be machine-readable by downstream pipeline skills (Sora for AI video, stock-footage for B-roll, ElevenLabs/InfiniteTalk for voiceover, Remotion/video-editor for assembly).
+Takes a topic, hook, or concept and produces a video script with production metadata. Every field in the output is designed to be machine-readable by downstream pipeline skills (Sora for AI video, stock-footage for B-roll, ElevenLabs/InfiniteTalk for voiceover, Remotion/video-editor for assembly).
+
+## Two Modes
+
+This skill has two distinct workflows. Route based on format:
+
+| Request type | Workflow | Section |
+|-------------|----------|---------|
+| TikTok, Reels, YouTube Shorts, any vertical short-form (under 90s) | **Short-form scene structure** | Use "Output Format" through "Process" sections below |
+| YouTube long-form (2-20 min), retention optimization, structured YouTube video | **Long-form checkpoint workflow** | Jump to "Long-Form YouTube Scriptwriting" section |
+| Both formats requested | Produce **two separate scripts**, one per workflow | Use both sections |
+
+**Key distinction:** "YouTube Shorts" = short-form (under 60s, 9:16). "YouTube video" without "Shorts" and over 90s = long-form (16:9).
 
 ## Output Format
 
@@ -55,7 +69,7 @@ Save each script as a markdown file. The header block captures global metadata; 
 |-------|---------|--------|
 | **Platform** | Target distribution channel | TikTok, Reels, Shorts, YouTube |
 | **Aspect** | Frame ratio | 9:16 (vertical), 16:9 (landscape), 1:1 (square) |
-| **Duration** | Total target length | ~15s, ~30s, ~60s, ~90s, ~2min, ~5min |
+| **Duration** | Total target length | ~15s, ~30s, ~60s, ~90s, ~2min, ~5min, ~10min, ~15min, ~20min |
 | **Style** | Production approach | talking-head, slideshow, explainer, demo, montage, product-test |
 | **Character** | AI character slug | Slug from the character-creation skill, or "none" |
 | **Music mood** | Background music direction | upbeat, dramatic, chill, corporate, none |
@@ -137,6 +151,7 @@ Choose the source type based on what the visual demands:
 - **screen-recording:** Product demos, app walkthroughs. Use for any scene showing the actual product.
 - **image overlay:** Static images, logos, screenshots, text cards. Use for data slides, app store screenshots, brand moments.
 - **talking-head:** Character or person on camera. Requires a character slug or live footage.
+- **contact-sheet:** AI-generated video using a contact sheet for cross-shot consistency. Write as `contact-sheet frame-N + seedance/kling "motion prompt"`. Use when a character or product must look identical across 3+ shots. See `references/contact-sheet-method.md` for the full workflow.
 
 ### Caption highlights
 
@@ -203,3 +218,86 @@ Adapt these fields to whatever product or brand the script is for. If the user d
 7. **Save the script** as a markdown file. Suggest a filename based on the topic (e.g., `stop-dca-tiktok-30s.md`).
 
 If the user wants multiple variants (e.g., same topic in 30s and 60s, or TikTok and YouTube versions), produce separate scripts for each. Don't try to make one script serve multiple formats.
+
+## Long-Form YouTube Scriptwriting
+
+For YouTube long-form (2-20 min), use this retention-optimized checkpoint workflow instead of the short-form scene structure above. The output format is section-based with inline tags ([REHOOK], [SETUP], [PAYOFF], [CUT HERE]) rather than the scene-by-scene metadata format used for short-form.
+
+### Core Psychology
+
+All great scripts operate on one principle: **Reality must beat expectations.** When reality > expectations, you get satisfaction, engagement, shares. When reality < expectations, drop-off.
+
+### Checkpoint Workflow
+
+**1. Define Foundation**
+- Target audience (who, what they already know)
+- Desired emotion (ONE: awe, amusement, excitement, anger, surprise, sadness)
+- Core promise (one sentence: what viewer gets)
+
+**2. Research & Mine for Shock**
+Rate each fact 1-100 on "How many viewers would NOT know this?" 80+ = gold, 50-79 = supporting, below 50 = skip. Collect 5-10 high-shock facts. See `references/research.md`.
+
+**3. Write the Hook**
+Target + Transformation + Stakes. Verify 4 commandments: alignment (visual/spoken/text match), speed (value in 3s), clarity (topic unmistakable), curiosity (opens a question). See `references/hooks.md` for 9 formats, `references/hook-variants.md` for 5 types with templates.
+
+**4. Choose Structure & Outline**
+Pick ONE from `references/structures.md`:
+- Breakdown, Case Study, Listicle, Problem-Solver, Tutorial, Personal Story, Newscaster
+- Use "But-Therefore" transitions, never "And-Then"
+
+**5. Write the Body**
+For each section, use the Value Loop: Context (what) → Application (how) → Framing (why it matters).
+
+Retention rules:
+- **Rehooks** every 30-60s: reagitate the promise
+- **Second-best first**: ascending pattern keeps viewers
+- **Setups & Payoffs**: tease, delay, deliver
+
+**6. Edit for Quality** (see `references/editing.md`)
+Three audits: Story Flow (delete tangents), Comprehension (6th grade, short sentences, active voice), Speed-to-Value (value in 3s, rehooks every 30-60s, mini-payoffs per section).
+
+**7. Outro & CTA**
+Binge Loop: link back to content → introduce NEW problem → promise to solve in another video.
+
+### Retention Data
+
+- 55% of viewers lost in first 60 seconds, 20% in first 10s
+- Pattern interrupt in first 5s = 23% higher retention
+- Suspension bridge pattern (open loops) = 68% higher completion
+- AVD below 40% = deprioritized by algorithm
+- Only 16% reach final 10% (never save only CTA for end)
+- Pattern interrupt frequency: pre-recorded every 30s, live every 2-3min, Shorts every 2-3s
+
+### Long-Form Script Template
+
+```
+HOOK (0-15 seconds)
+- Confirm the click, open curiosity loop
+
+BODY SECTION 1 (Rehook → Content → Payoff)
+[Second-best point]
+
+BODY SECTION 2 (Rehook → Content → Payoff)
+[Best point]
+
+BODY SECTION 3+ (Rehook → Content → Payoff)
+[Remaining points descending]
+
+OUTRO (Last 15-30 seconds)
+- Summarize value, binge loop to next video
+```
+
+Mark sections with inline tags: [REHOOK], [SETUP], [PAYOFF], [CUT HERE].
+
+### YouTube Long-Form References
+
+- `references/research.md` — Research & idea development
+- `references/hooks.md` — 9 proven hook formats
+- `references/hook-variants.md` — 5 types with templates and decision guide
+- `references/structures.md` — 7 story structures
+- `references/retention.md` — Retention techniques
+- `references/retention-data.md` — Hard numbers, MrBeast principles
+- `references/editing.md` — Quality audits
+- `references/algorithm-guide.md` — CTR benchmarks, AVD thresholds, signal hierarchy
+- `references/contact-sheet-method.md` — Contact sheet workflow for AI video consistency (character/product locking across shots, style blocks, series continuity, Seedance integration)
+- `references/script-template.md` — Full annotated template with retention risk mapping
