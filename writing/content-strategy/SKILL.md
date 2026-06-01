@@ -17,7 +17,7 @@ Turn zeitgeist signals into content that connects — then delegate creation, di
 
 **NOT this skill:**
 - Writing tweets or posts → `writer`
-- Generating images → `image-generator` or `nano-banana-pro`
+- Generating image cards or stickers → `sticker-creator`
 - Creating TikTok slideshows → video skills
 - Writing articles → `writer`
 - Scheduling → `typefully` or video skills/ReelFarm
