@@ -60,7 +60,7 @@ jobs:
             Do not also post a `gh pr comment` unless `gh pr review` fails due to permissions.
           claude_args: |
             --allowedTools "mcp__github_inline_comment__create_inline_comment,Bash(gh pr comment:*),Bash(gh pr diff:*),Bash(gh pr view:*),Bash(gh pr review:*)"
-            --model claude-opus-4-6
+            --model claude-opus-4-8
             --fallback-model claude-sonnet-4-6
           # See https://github.com/anthropics/claude-code-action/blob/main/docs/usage.md
           # or https://docs.anthropic.com/en/docs/claude-code/sdk#command-line for available options

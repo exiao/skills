@@ -472,7 +472,23 @@ See also:
 - **Approval can clear `reviewDecision` instead of setting it to `APPROVED`.** Some repos show `reviewDecision: ""` after a bot approval when branch protection does not require reviews. Treat `mergeStateStatus: CLEAN`, all real checks green, latest review body approved/LGTM, and zero unresolved threads as ready even if `reviewDecision` is blank. Do not downgrade a clean PR just because older `CHANGES_REQUESTED` reviews remain in the review history.
 - **No checks configured is green after review sweep.** If `gh pr checks` says no checks reported and `statusCheckRollup` is empty, treat CI as non-blocking once scope is clean, merge state is `CLEAN`, and all review/comment/thread sources are addressed. Do not invent a CI wait for repos without configured checks.
 - **`mergeStateStatus: UNKNOWN` can be transient after pushes or thread resolution.** Poll `gh pr view --json mergeStateStatus,statusCheckRollup,headRefOid` a few times before classifying it as blocked. If it settles to `CLEAN`, checks are empty/green/skipped, and unresolved threads are zero, report ready.
-- **Aggregate `CHANGES_REQUESTED` can persist after thread cleanup.** If you resolve all actionable threads and final verification shows CI green, `mergeStateStatus: CLEAN`, and zero unresolved threads, but `reviewDecision` still says `CHANGES_REQUESTED`, do not call it ready. Report it as clean but needing reviewer re-review/dismissal, because GitHub can keep the blocking review decision stale until the reviewer re-reviews or an owner dismisses it.
+- **Aggregate `CHANGES_REQUESTED` can persist after thread cleanup.** If you resolve all actionable threads and final verification shows CI green, `mergeStateStatus: CLEAN`, and zero unresolved threads, but `reviewDecision` still says `CHANGES_REQUESTED`, the PR is functionally ready but the stale blocking review is gating merge. Bot reviewers (claude[bot], gemini-code-assist[bot]) often submit several `CHANGES_REQUESTED` reviews across cycles and never auto-dismiss them when their later review is `COMMENTED`/approving. **Dismiss the stale blocking reviews so the decision clears.** First confirm each blocking review's concerns are demonstrably fixed (read the review body, verify against current HEAD, check the bot's own latest review confirms resolution). Then dismiss every stale `CHANGES_REQUESTED` review from that reviewer:
+  ```bash
+  # List stale blocking reviews from a bot reviewer
+  gh api "repos/$REPO/pulls/$PR/reviews?per_page=100" \
+    --jq '.[] | select(.user.login=="claude[bot]" and .state=="CHANGES_REQUESTED") | .id'
+
+  # Dismiss each one with a note citing the fix commits
+  for RID in <ids>; do
+    gh api -X PUT "repos/$REPO/pulls/$PR/reviews/$RID/dismissals" \
+      -f message="Resolved in later commits (<shas>). Reviewer's latest review confirms all items addressed; CI green." \
+      --jq '.state'
+  done
+
+  # Verify the decision cleared
+  gh pr view $PR --repo $REPO --json reviewDecision,mergeable,mergeStateStatus
+  ```
+  Only dismiss reviews where the concerns are genuinely resolved. Never dismiss a human reviewer's `CHANGES_REQUESTED` or any unaddressed concern; for those, report that the PR needs the reviewer to re-review. Dismissing requires push/admin access to the repo; if the API returns 403, fall back to reporting it as needing reviewer re-review/dismissal.
 - **Resolving many threads adds lots of skipped bot checks.** Replying/resolving review threads can create one skipped `claude` check per thread. Treat skipped checks as non-blocking noise. Do not restart the babysitting loop unless a real reviewer job is pending, a non-skipped check fails, or a new substantive comment appears.
 - **Resolving threads can trigger fresh reviewer runs and base updates.** After resolving outdated threads, poll checks again and re-read the latest review decision. The PR head may advance because an auto-merge/update branch job merged the base branch while you were resolving comments. Fetch remote, compare HEAD to `origin/$BRANCH`, inspect any new merge commit for scope, then wait for the new CI/reviewer run before reporting ready.
 - **Terminal wrappers may misclassify `gh api graphql` mutations as long-lived processes.** If a concise `gh api graphql` command for `addPullRequestReviewThreadReply`/`resolveReviewThread` is blocked by the foreground-process heuristic, use a small Python `urllib.request` GraphQL helper via `execute_code` instead. Read the token from `gh auth token` at runtime inside the script or from a short-lived temp file, never paste tokens into logs or skill text.
