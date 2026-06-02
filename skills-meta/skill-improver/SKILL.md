@@ -1,10 +1,9 @@
 ---
 name: skill-improver
 description: "Autonomously optimize any skill by running it repeatedly, scoring outputs against binary evals, mutating the prompt via structured edits, and keeping improvements. Inspired by Karpathy's autoresearch + Microsoft's SkillOpt (arxiv:2605.23904) + howtoeval.com floor-raising patterns. Supports cross-model optimization (separate optimizer/target models), three-way data splits, rejected-edit buffers, longitudinal regression checks, checkpoint resume, golden cases (regression-proof critical paths), refusal evals (calibration testing), trajectory evals (process assertions), self-diagnostics (agent confidence capture), post-failure self-diagnosis, and production log saturation passes. Use when: optimize this skill, improve this skill, run autoresearch on, make this skill better, self-improve skill, benchmark skill, eval my skill, run evals on. Outputs: an improved SKILL.md, results log, changelog, and a live HTML dashboard."
-version: 2.1.0
 ---
 
-> **Source:** Karpathy autoresearch + SkillOpt (Microsoft Research, arxiv:2605.23904) + howtoeval.com (Ben Hylak, May 2026). See `references/structured-edits.md` for edit op spec, `references/eval-guide.md` for eval writing (including refusal evals, trajectory evals, and golden cases), `references/pitfalls.md` for known failure modes, `references/self-diagnostics.md` for the diagnostic capture protocol.
+> **Source:** Karpathy autoresearch + SkillOpt (Microsoft Research, arxiv:2605.23904) + howtoeval.com (Ben Hylak, May 2026). See `references/structured-edits.md` for edit op spec, `references/eval-guide.md` for eval writing (including refusal evals, trajectory evals, and golden cases), `references/pitfalls.md` for known failure modes, `references/self-diagnostics.md` for the diagnostic capture protocol, `references/skillopt-architecture.md` for the SkillOpt comparison and roadmap, `references/dashboard-and-data-formats.md` for the dashboard spec and artifact schemas, `references/worked-example.md` for a full run walkthrough and operational tips, `references/mutation-principles.md` for how to mutate well.
 
 # Skill Optimizer
 
@@ -152,10 +151,12 @@ Examples:
 
 Trajectory evals require capturing the full tool-call sequence during each run. Log intermediate steps (tool names, order, key arguments) alongside the final output. A skill that produces correct output through a wrong process is fragile and will break on novel inputs.
 
-**Max score calculation:**
+**Max score calculation:** Train and validation sets differ in size, so compute their ceilings separately:
 ```
-max_score = [number of evals] × [runs per experiment] × [number of inputs in the active set]
+max_train = [number of evals] × [runs per experiment] × [number of training inputs]
+max_val   = [number of evals] × [runs per experiment] × [number of validation inputs]
 ```
+The test ceiling is computed the same way but only used at final evaluation.
 
 ---
 
@@ -179,61 +180,11 @@ Before creating anything new, check if `autoresearch-[skill-name]/` already exis
 
 ## step 4: generate the live dashboard
 
-Before running any experiments, create a live HTML dashboard at `autoresearch-[skill-name]/dashboard.html` and open it in the browser.
+Before running any experiments, create a live HTML dashboard at `autoresearch-[skill-name]/dashboard.html` and open it in the browser. It auto-refreshes from `results.json` and shows the train/validation score curves, per-experiment keep/discard bars, per-eval breakdown, rejected-edit buffer, diagnostics frequency, and golden case status.
 
-The dashboard must:
-- Auto-refresh every 10 seconds (reads from results.json)
-- Show TWO score progression lines: training score and validation score (experiment number on X axis, pass rate % on Y axis). Divergence between the two = overfitting signal.
-- Show a colored bar for each experiment: green = keep, red = discard, blue = baseline, orange = slow update
-- Show a table of all experiments with: experiment #, train_score, val_score, status, description, edit_ops applied
-- Show per-eval breakdown: which evals pass most/least across all runs
-- Show rejected-edit buffer contents (last 10)
-- Show diagnostics frequency chart: how often each diagnostic category appears across all runs
-- Show golden case status: a row per golden case with pass/fail history across experiments (🔒 indicator, green/red per experiment)
-- Show current status: "Running experiment [N]..." or "Idle"
-- Use clean styling with soft colors (white background, pastel accents, clean sans-serif font)
+The full dashboard requirements, the `results.json` schema, and the `results.tsv` schema are in [references/dashboard-and-data-formats.md](references/dashboard-and-data-formats.md).
 
-Generate the dashboard as a single self-contained HTML file with inline CSS and JavaScript. Use Chart.js loaded from CDN for the line chart. The JS should fetch `results.json` and re-render.
-
-**Open it immediately** after creating it: `open dashboard.html` (macOS) so the user can see it in their browser.
-
-**results.json format:**
-
-```json
-{
-  "skill_name": "[name]",
-  "status": "running",
-  "current_experiment": 3,
-  "optimizer_model": "claude-opus-4-6",
-  "target_model": "gpt-5.5",
-  "split": {"train": 4, "val": 2, "test": 2},
-  "baseline": {"train_score": 70.0, "val_score": 65.0, "test_score": 68.0},
-  "best": {"val_score": 90.0, "experiment": 5},
-  "experiments": [
-    {
-      "id": 0,
-      "train_score": 70.0,
-      "val_score": 65.0,
-      "max_score": 20,
-      "status": "baseline",
-      "description": "original skill — no changes",
-      "edit_ops": [],
-      "failure_patterns": [],
-      "success_patterns": [],
-      "diagnostics_summary": {"missing_context": 0, "guessed": 0, "tool_failure": 0, "low_confidence": 0, "none": 0},
-      "golden_case_results": [],
-      "self_diagnoses": []
-    }
-  ],
-  "rejected_edits": [],
-  "slow_updates": [],
-  "eval_breakdown": [
-    {"name": "Text legibility", "train_pass": 8, "val_pass": 3, "total_train": 12, "total_val": 6}
-  ]
-}
-```
-
-When the run finishes (user stops it or ceiling hit), update `status` to `"complete"`, run the held-out test set, and add `final_test_score`.
+**Critical:** the held-out test set is NEVER scored during the run. `results.json` carries only train and validation scores throughout; `final_test_score` is added once, at the very end (step 8).
 
 ---
 
@@ -246,8 +197,8 @@ Run the skill AS-IS before changing anything. This is experiment #0.
 3. **Copy the original SKILL.md into the working directory as `[user-chosen-name].md`** -- this is the copy you will mutate. NEVER edit the original SKILL.md. All mutations happen on this copy only.
 4. Also save `SKILL.md.baseline` in the working directory (identical to the original -- this is your revert target and slow-update comparison anchor)
 5. Create `results.tsv`, `results.json`, `rejected_edits.json` (empty array), `slow_updates.json` (empty array), `checkpoint.json`, and `dashboard.html`. Open the dashboard.
-6. Run the skill using **all three sets** (train + val + test) with the **target model**. Score every output against every eval.
-7. Record the baseline: `train_score`, `val_score`, `test_score` independently.
+6. Run the skill using **only the train + validation sets** with the **target model**. Score every output against every eval. **Do not touch the test set here** — it stays sealed until final evaluation (step 8) so it remains an honest overfitting check.
+7. Record the baseline: `train_score` and `val_score` independently. The test set is scored once, at step 8 (against `SKILL.md.baseline` and the final skill), never during the run.
 8. Save checkpoint.
 
 **results.tsv format (tab-separated):**
@@ -473,7 +424,7 @@ When the loop stops:
 
 ### 8a. run held-out test set
 
-Run the **test inputs** (never seen during optimization) through the best skill using the **target model**. Score every output. This is the honest improvement number. Compare against the baseline test score from step 5.
+Now, for the first time, score the **test inputs** (never seen during optimization). Run them through BOTH `SKILL.md.baseline` (to get the honest baseline test score) and the best optimized skill, using the **target model**. The delta between the two is the honest improvement number.
 
 **Overfitting warning:** If val_score improved significantly but test_score didn't, the optimization overfit to the validation set. Flag this explicitly in the summary.
 
@@ -495,142 +446,12 @@ Present:
 
 ---
 
-## mutation principles
+## reference material
 
-When improving a skill, optimize for durable agent behavior rather than adding brittle rules:
-
-- **Subtract before adding.** The default instinct is to append more rules. Resist it. Long skills dilute the instructions that matter. If a skill is over 200 lines, the first mutation should be moving secondary content to `references/` files. A 50% shorter skill that scores the same is a strict improvement.
-- **Gotchas are the highest-signal part of a skill.** If failures repeat, capture the specific footgun and the correct recovery path. But gotchas belong in `references/` unless they affect the core loop.
-- **Don't state the obvious.** Assume the model knows generic advice. Add only context that changes behavior for this skill.
-- **Use progressive disclosure with linked files.** Keep SKILL.md lean, then point to `references/`, `scripts/`, or `assets/` when deeper context is needed. The core process should be readable in under 2 minutes.
-- **Include scripts when repeated work appears.** If runs keep recreating the same helper code, bundle it in `scripts/`.
-- **Avoid over-specific instructions that railroad the agent.** Prefer explaining the why and giving flexible patterns over narrow rules that only pass the current evals.
-- **Structural rules beat phrase bans.** Banning specific phrases triggers whack-a-mole. Structural rules ("if the brand is mentioned in the first sentence, you've failed") are more durable. See [references/pitfalls.md](references/pitfalls.md).
-
----
-
-## output format
-
-The skill produces these files in `autoresearch-[skill-name]/`:
-
-```
-autoresearch-[skill-name]/
-├── dashboard.html           # live browser dashboard (train + val curves, test bar)
-├── results.json             # data powering the dashboard
-├── results.tsv              # score log with train_score and val_score columns
-├── changelog.md             # detailed mutation log with edit ops and apply reports
-├── rejected_edits.json      # buffer of failed mutations with structured edit details
-├── slow_updates.json        # longitudinal comparison history
-├── checkpoint.json          # resume state
-├── SKILL.md.baseline        # original skill before optimization (untouched)
-└── [user-chosen-name].md    # working copy with protected guidance section
-```
-
----
-
-## example: optimizing a diagram-generator skill
-
-**Context gathered:**
-- Target skill: `~/.hermes/skills/visual-design/diagram-generator/SKILL.md`
-- Optimizer model: claude-opus-4-6 (session model)
-- Target model: gpt-5.5 (cross-architecture)
-- Test inputs (10): "OAuth flow", "CI/CD pipeline", "microservices arch", "onboarding funnel", "DB schema", "payment flow", "auth sequence", "deploy pipeline", "event system", "API gateway"
-- Split: 5 train, 3 val, 2 test
-- Evals: (1) All text legible? (2) Pastel/soft colors only? (3) Linear layout? (4) No numbers or ordinals?
-- Runs per experiment: 3
-
-**Baseline (experiment 0):**
-Ran all 10 inputs with gpt-5.5. Scored against 4 evals.
-Train: 65% | Val: 60% | Test: 70%
-
-**Experiment 1 — KEEP (train 80%, val 75%):**
-Failure clustering (opus): "3/5 training failures share the same pattern: numbered steps appear in flow diagrams. This is the highest-impact cluster."
-Edit proposed:
-```json
-{"edits": [{"op": "append", "content": "## Anti-patterns\n\nNEVER include step numbers, ordinal numbers (1st, 2nd), or sequential numbering in diagrams."}]}
-```
-Apply report: 1 applied, 0 skipped.
-Regression guard: no regressions on previously-passing evals.
-Val score improved 60% → 75%. **KEEP.**
-
-**Experiment 2 — DISCARD (train 85%, val 70%):**
-Edit: `{"op": "replace", "target": "pastel colors", "content": "all text minimum 14px font"}`
-Apply report: 1 applied.
-Train improved (80→85%), but val dropped (75→70%). **DISCARD.**
-Added to rejected-edit buffer: "font size rule — improved training but hurt validation, likely overfit to training inputs."
-
-**Experiment 3 — KEEP (train 90%, val 85%):**
-Failure clustering (opus): "2/5 training failures: bright red elements. Rejected-edit buffer says don't try font size. Recommend: replace vague 'pastel colors' with specific hex codes."
-Edit: `{"op": "replace", "target": "Use pastel, soft colors", "content": "Use these exact colors: #A8D8EA, #AA96DA, #FCBAD3, #FFFFD2, #B5EAD7"}`
-Val improved 75% → 85%. **KEEP.**
-
-**Slow update (after experiment 5):**
-Longitudinal comparison (baseline vs current, all 8 train+val inputs):
-- Improved: 3 inputs (numbering fixed, colors fixed)
-- Regressed: 1 input (complex diagram labels now overlap)
-- Persistent fail: 1 input (always too small text)
-- Stable success: 3 inputs
-
-Guidance written to protected section:
-```
-<!-- SLOW_UPDATE_START -->
-When generating complex diagrams with many nodes, increase spacing between elements
-to prevent label overlap. The color hex codes are working well; do not revert them.
-The persistent small-text issue on dense diagrams needs a different approach than
-font-size rules (which regressed validation scores in experiment 2).
-<!-- SLOW_UPDATE_END -->
-```
-
-**Final test evaluation:**
-Test score: baseline 70% → final 85%. Honest improvement: +15 points.
-Val improved +25 points but test only +15 — some val-specific optimization, but test still improved meaningfully. No overfitting flag.
-
-**Final delivery:**
-- Baseline: train 65%, val 60%, test 70% → Final: train 95%, val 90%, test 85%
-- 8 experiments, 5 kept, 3 discarded
-- 1 slow update pass
-- Top changes: hex color codes, anti-numbering rule, worked example
-- Remaining issue: dense diagrams occasionally get overlapping labels (flagged in slow update)
-
----
-
-## operational tips
-
-**Cross-model setup:** Default is Config A: opus as optimizer (current session), gpt-5.5 as target. For the target model, use `hermes chat -q` with a `--model` flag, or delegate to a subagent with the target model specified. To flip it (Config B: gpt optimizes, opus executes), tell the user to start the session on gpt-5.5 and set opus as target. Config C (same model) skips cross-architecture entirely. The optimizer makes ~2 calls per experiment (analysis + edit proposal). The target makes ~N x runs calls per experiment (rollouts). Cost difference is small.
-
-**Operational skills (API calls, uploads, deploys):** If the target skill makes real third-party calls, extract the testable section into a standalone mini-skill for optimization. See `references/ad-creative-ideation-case-study.md` for a worked example (43% → 95%).
-
-**Timeout risk for expensive skills:** If each test run is slow, subagents will timeout at 600s. Mitigations: (1) truncate test inputs to a representative subset, (2) reduce runs-per-experiment to 2-3, (3) pre-compute the filtering step, (4) run the loop in the main context instead of delegating. Plan your time budget: if one run takes ~60s, 3 runs × 10 experiments = 30 minutes minimum.
-
-**If you run out of ideas:** Re-read the failing outputs. Check the rejected-edit buffer for patterns in what didn't work. Try combining two previous near-miss mutations. Try removing things instead of adding them. Simplification that maintains the score is a win. Check the slow update guidance for persistent failures you haven't addressed.
-
----
-
-## how this connects to other skills
-
-**What feeds into skill-improver:**
-- Any existing skill that needs optimization
-- User-defined eval criteria (or help them define evals using the eval guide)
-
-**What skill-improver feeds into:**
-- The improved skill replaces the original (user's decision)
-- The changelog can be passed to future models for continued optimization
-- The eval suite can be reused whenever the skill is updated
-- The rejected-edit buffer prevents future runs from repeating failed approaches
-
-**Techniques adopted by other systems:**
-- CPE Research's `hill_climb.py` adopted structured edit ops, failure clustering, rejected-edit buffer, and report content analysis from this skill (PR #205, 2026-05-27). Key adaptation: their evals are deterministic pytest tests rather than LLM-judged binary checks, so the structured edits operate against a more stable scoring function. Their per-test regression guard (reject if ANY previously-passing test regresses) is stricter than the validation-gate approach here and worth considering for skills where eval stability is high.
-
----
-
-## future directions (v2.1)
-
-Not implemented in the current flow, but worth adding later:
-
-- **Periodic full rewrite.** Every 10 experiments, produce a complete clean rewrite of the skill from accumulated suggestions instead of incremental edits. Consolidates redundancies from many small changes. (SkillOpt's `rewrite_skill.md` mode.)
-- **Support count tracking.** Attach confidence scores to edits based on how many independent analyses support them. Like gradient magnitude in text space. (SkillOpt's `support_count` field.)
-- **Meta skill (optimizer memory).** Optimizer-side memory about what edit strategies work for this specific skill type. Persists across optimization runs. (SkillOpt's `meta_skill.py`.)
-- **Multi-edit steps with LR control.** Allow 2-4 edits per step when evidence is strong, with the optimizer deciding how many. Autonomous learning rate. (SkillOpt's `lr_autonomous.py` and `scheduler.py`.)
+- **Mutation principles** (how to mutate well: subtract before adding, structural rules over phrase bans): [references/mutation-principles.md](references/mutation-principles.md)
+- **Output file tree** (what the run produces): [references/dashboard-and-data-formats.md](references/dashboard-and-data-formats.md)
+- **Worked example** (full diagram-generator run walkthrough), **operational tips** (cross-model setup, timeout handling, idea recovery), and **how this connects to other skills**: [references/worked-example.md](references/worked-example.md)
+- **SkillOpt architecture comparison and roadmap** (mechanisms not yet implemented): [references/skillopt-architecture.md](references/skillopt-architecture.md)
 
 ---
 

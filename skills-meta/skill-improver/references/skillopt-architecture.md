@@ -1,6 +1,6 @@
 # SkillOpt Architecture — Comparison & Lessons
 
-**Source:** Microsoft Research, arxiv:2605.23904 (May 2025)
+**Source:** Microsoft Research, arxiv:2605.23904 (May 2026)
 **Code:** github.com/microsoft/SkillOpt
 **Paper:** https://microsoft.github.io/SkillOpt/
 
@@ -102,3 +102,12 @@ Three update strategies in `optimizer/update_modes.py`: patch (individual edits)
 | Qwen3.5-4B | Direct chat | +19.2 points |
 
 Cross-transfer: Codex-trained SpreadsheetBench skill → Claude Code: +31.8 points without re-optimization.
+
+## Roadmap (not yet implemented in skill-improver)
+
+These SkillOpt mechanisms are not in the current skill-improver flow, but are worth adding later:
+
+- **Periodic full rewrite.** Every 10 experiments, produce a complete clean rewrite of the skill from accumulated suggestions instead of incremental edits. Consolidates redundancies from many small changes. (SkillOpt's `rewrite_skill.md` mode.)
+- **Support count tracking.** Attach confidence scores to edits based on how many independent analyses support them. Like gradient magnitude in text space. (SkillOpt's `support_count` field.)
+- **Meta skill (optimizer memory).** Optimizer-side memory about what edit strategies work for this specific skill type. Persists across optimization runs. (SkillOpt's `meta_skill.py`.)
+- **Multi-edit steps with LR control.** Allow 2-4 edits per step when evidence is strong, with the optimizer deciding how many. Autonomous learning rate. (SkillOpt's `lr_autonomous.py` and `scheduler.py`.)
