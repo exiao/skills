@@ -2,6 +2,19 @@
 
 How to write eval criteria that actually improve your skills instead of giving you false confidence.
 
+## Contents
+
+- [The golden rule](#the-golden-rule)
+- [Test inputs: quantity and split](#test-inputs-quantity-and-split)
+- [Good evals vs bad evals](#good-evals-vs-bad-evals)
+- [Common mistakes](#common-mistakes)
+- [Writing your evals: the 3-question test](#writing-your-evals-the-3-question-test)
+- [Refusal evals](#refusal-evals)
+- [Trajectory evals](#trajectory-evals)
+- [Golden cases](#golden-cases)
+- [Deriving evals from production logs](#deriving-evals-from-production-logs)
+- [Template](#template)
+
 ---
 
 ## the golden rule
