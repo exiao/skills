@@ -199,7 +199,8 @@ Run the skill AS-IS before changing anything. This is experiment #0.
 5. Create `results.tsv`, `results.json`, `rejected_edits.json` (empty array), `slow_updates.json` (empty array), `checkpoint.json`, and `dashboard.html`. Open the dashboard.
 6. Run the skill using **only the train + validation sets** with the **target model**. Score every output against every eval. **Do not touch the test set here** — it stays sealed until final evaluation (step 8) so it remains an honest overfitting check.
 7. Record the baseline: `train_score` and `val_score` independently. The test set is scored once, at step 8 (against `SKILL.md.baseline` and the final skill), never during the run.
-8. Save checkpoint.
+8. **Snapshot the baseline as the initial accepted best:** copy `[user-chosen-name].md` to `[user-chosen-name].md.best` and record its hash in `checkpoint.json` as `best_skill_hash`. The baseline is the accepted state until the first KEEP. Without this, a run interrupted after baseline but before any KEEP would try to resume (step 3) from a `.best` snapshot that doesn't exist.
+9. Save checkpoint.
 
 **results.tsv format (tab-separated):**
 
@@ -311,9 +312,9 @@ Self-diagnostics also feed into refusal eval design: if the agent consistently r
 Before proceeding to validation, check for regressions on the training set:
 
 1. Compare per-eval pass/fail results against the **last ACCEPTED (kept) experiment's** pass history, not merely the previous experiment. Because every experiment is logged whether kept or discarded, the immediately previous record can be a discarded candidate; comparing against it can miss a regression from the accepted best (e.g. a golden case that already failed in the discarded run looks unchanged). Track per-eval pass history keyed to the accepted-best state.
-2. **Golden case check (strict):** If ANY golden case regresses on ANY eval, **discard immediately**. No exceptions, regardless of net score improvement. Golden cases are the "memory of bugs you refuse to reintroduce." Log the discard reason as `"golden_case_regression"` in the rejected-edit buffer.
+2. **Golden case check (strict):** If ANY golden case regresses on ANY eval, **discard immediately**: revert `[user-chosen-name].md` to the accepted best (`[user-chosen-name].md.best`) and log the discard reason as `"golden_case_regression"` in the rejected-edit buffer. No exceptions, regardless of net score improvement. Golden cases are the "memory of bugs you refuse to reintroduce."
 3. If any non-golden eval that was previously passing now fails on any training input: regression detected.
-4. If the net training score is lower or equal after the regression: **discard immediately** (skip validation gate, add to rejected-edit buffer with "regression" tag). This saves the cost of a validation run on a clearly-broken mutation.
+4. If the net training score is lower or equal after the regression: **discard immediately** — revert `[user-chosen-name].md` to the accepted best, skip the validation gate, and add to the rejected-edit buffer with a "regression" tag. This saves the cost of a validation run on a clearly-broken mutation. **Reverting here is mandatory:** if you only log the rejection without reverting, the next experiment starts from the rejected mutation and later scores/checkpoints build on an edit that was supposed to be discarded.
 5. If the net training score is still higher despite the regression: proceed to validation gate (the improvement outweighs the regression).
 
 Track per-eval pass history across experiments so you always know what was passing before.
@@ -386,8 +387,9 @@ Every 5th experiment, pause the fast loop and run a longitudinal regression chec
    Write 2-4 high-level guidance notes for the next round of optimization. These will be injected into a protected section of the skill that step-level edits cannot modify."
 
 5. Write the guidance into the working skill copy between `<!-- SLOW_UPDATE_START -->` and `<!-- SLOW_UPDATE_END -->` markers. If these markers don't exist yet, add them at the end of the skill.
-6. Each slow update overwrites the previous guidance (not accumulating).
-7. Log to `slow_updates.json`.
+6. **Validate the guidance before it becomes protected.** Slow-update guidance is a mutation too, so gate it like any other: re-score the train+val sets with the guidance in place. If the combined score does not improve over the current accepted best (e.g. the optimizer overreacted to a noisy longitudinal regression), revert the guidance block to the previous accepted version (or remove it if this was the first slow update) and log the rejection in `slow_updates.json` with a `"rejected"` status. Only a guidance block that holds or improves the score gets kept and protected. Update `[user-chosen-name].md.best`/`best_skill_hash` if it's kept.
+7. Each accepted slow update overwrites the previous guidance (not accumulating).
+8. Log to `slow_updates.json`.
 
 ### 6j. stopping criteria
 
