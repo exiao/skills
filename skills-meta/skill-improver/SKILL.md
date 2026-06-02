@@ -83,7 +83,7 @@ Do NOT skip this. You need to understand what the skill does before you can impr
 
 ## step 1.5: saturation pass (optional)
 
-Before writing evals, review real executions of the skill to understand its actual failure modes. This step is **optional** for new or low-usage skills, but **mandatory** for high-value skills with production history (e.g. meta-ads, memory-gc, bloombot-access-gate).
+Before writing evals, review real executions of the skill to understand its actual failure modes. This step is **optional** for new or low-usage skills, but **mandatory** for high-value skills with production history (e.g. meta-ads-cli, memory-gc).
 
 1. Search episode logs and session transcripts for 10-20 real executions of the target skill. Use the `recall` skill or `grep` through `~/.hermes/episodes/` and `~/.hermes/sessions/`.
 2. For each execution, note:
@@ -169,7 +169,7 @@ Before creating anything new, check if `autoresearch-[skill-name]/` already exis
 2. Read `results.json` for full experiment history
 3. Read `rejected_edits.json` for the rejected-edit buffer
 4. Read `slow_updates.json` for longitudinal comparison history
-5. Read the working skill copy `[name].md` as-is (it has the latest accepted state)
+5. Restore the working skill copy from the last ACCEPTED state, not the mutable working file. `checkpoint.json` records `best_skill_hash` (and a saved `[name].md.best` copy); if `[name].md` no longer matches that hash, a prior run was interrupted mid-mutation (after step 6d applied a candidate but before the validation gate / discard revert finished). In that case restore `[name].md` from `[name].md.best` so the next experiment builds only on a validated state, never on an unaccepted edit.
 6. Tell the user: "Found existing run at experiment [N] with best val_score [X]%. Resume or start fresh?"
 7. If resume: skip baseline, load all state, continue from experiment N+1
 8. If fresh: move the old directory to `autoresearch-[skill-name]-backup-[timestamp]/` and start over
@@ -180,7 +180,7 @@ Before creating anything new, check if `autoresearch-[skill-name]/` already exis
 
 ## step 4: generate the live dashboard
 
-Before running any experiments, create a live HTML dashboard at `autoresearch-[skill-name]/dashboard.html` and open it in the browser. It auto-refreshes from `results.json` and shows the train/validation score curves, per-experiment keep/discard bars, per-eval breakdown, rejected-edit buffer, diagnostics frequency, and golden case status.
+Before running any experiments, create the working directory `autoresearch-[skill-name]/` if it does not already exist (step 5 populates it; the dashboard write below needs it to exist first). Then create a live HTML dashboard at `autoresearch-[skill-name]/dashboard.html` and open it in the browser. It auto-refreshes from `results.json` and shows the train/validation score curves, per-experiment keep/discard bars, per-eval breakdown, rejected-edit buffer, diagnostics frequency, and golden case status.
 
 The full dashboard requirements, the `results.json` schema, and the `results.tsv` schema are in [references/dashboard-and-data-formats.md](references/dashboard-and-data-formats.md).
 
@@ -310,7 +310,7 @@ Self-diagnostics also feed into refusal eval design: if the agent consistently r
 
 Before proceeding to validation, check for regressions on the training set:
 
-1. Compare per-eval pass/fail results against the previous experiment.
+1. Compare per-eval pass/fail results against the **last ACCEPTED (kept) experiment's** pass history, not merely the previous experiment. Because every experiment is logged whether kept or discarded, the immediately previous record can be a discarded candidate; comparing against it can miss a regression from the accepted best (e.g. a golden case that already failed in the discarded run looks unchanged). Track per-eval pass history keyed to the accepted-best state.
 2. **Golden case check (strict):** If ANY golden case regresses on ANY eval, **discard immediately**. No exceptions, regardless of net score improvement. Golden cases are the "memory of bugs you refuse to reintroduce." Log the discard reason as `"golden_case_regression"` in the rejected-edit buffer.
 3. If any non-golden eval that was previously passing now fails on any training input: regression detected.
 4. If the net training score is lower or equal after the regression: **discard immediately** (skip validation gate, add to rejected-edit buffer with "regression" tag). This saves the cost of a validation run on a clearly-broken mutation.
@@ -323,7 +323,7 @@ Track per-eval pass history across experiments so you always know what was passi
 Run the updated skill on **validation inputs** using the **target model**. Score every output.
 
 **Keep/discard decision based on validation score:**
-- Val score improved over previous best → **KEEP.** Update the working copy as the new best.
+- Val score improved over previous best → **KEEP.** Update the working copy as the new best, then snapshot it: copy `[user-chosen-name].md` to `[user-chosen-name].md.best` and record its hash in `checkpoint.json` as `best_skill_hash`. This is the validated state an interrupted resume restores from (see step 3).
 - Val score stayed the same → **DISCARD.** Revert working copy. The change added complexity without measurable improvement on held-out data.
 - Val score got worse → **DISCARD.** Revert working copy.
 
@@ -353,7 +353,7 @@ After every experiment (kept or discarded):
 1. Append to `results.tsv`
 2. Update `results.json` (dashboard data)
 3. Update `rejected_edits.json` (if discarded)
-4. Update `checkpoint.json`: `{last_experiment, best_val_score, best_experiment, slow_update_count}`
+4. Update `checkpoint.json`: `{last_experiment, best_val_score, best_experiment, slow_update_count, best_skill_hash}`
 5. Append to `changelog.md` (see step 7)
 
 ### 6i. slow update (every 5 experiments)
@@ -395,6 +395,11 @@ Every 5th experiment, pause the fast loop and run a longitudinal regression chec
 - The user manually stops you
 - You hit the budget cap (if one was set)
 - You hit 95%+ val_score for 3 consecutive experiments (diminishing returns)
+- **Saturated training set:** all training outputs pass but validation still fails or
+  stays below threshold. The optimizer then has no training failure clusters to drive
+  6a/6c, so the loop has no actionable signal. When this happens, stop and report an
+  overfitting / data-coverage warning, and recommend adding or reshuffling more
+  training inputs rather than looping with nothing to fix.
 
 ---
 
@@ -424,7 +429,16 @@ When the loop stops:
 
 ### 8a. run held-out test set
 
-Now, for the first time, score the **test inputs** (never seen during optimization). Run them through BOTH `SKILL.md.baseline` (to get the honest baseline test score) and the best optimized skill, using the **target model**. The delta between the two is the honest improvement number.
+**Only if a held-out test set exists.** The degraded splits (5-7 inputs create no
+test set; 4 or fewer create no split at all) leave nothing to score here. In those
+minimum-input runs, skip this step and report "no honest test score (insufficient
+inputs for a held-out set)" instead of inventing a test result — deliver the train
+and validation deltas only.
+
+When a test set exists, score the **test inputs** (never seen during optimization)
+for the first time. Run them through BOTH `SKILL.md.baseline` (to get the honest
+baseline test score) and the best optimized skill, using the **target model**. The
+delta between the two is the honest improvement number.
 
 **Overfitting warning:** If val_score improved significantly but test_score didn't, the optimization overfit to the validation set. Flag this explicitly in the summary.
 
@@ -432,7 +446,7 @@ Now, for the first time, score the **test inputs** (never seen during optimizati
 
 Present:
 
-1. **Score summary:** Baseline → Final for all three sets (train, val, test)
+1. **Score summary:** Baseline → Final for each set that exists (train, val, and test when a held-out test set was created; otherwise state the test score is unavailable)
 2. **Total experiments run:** How many mutations were tried
 3. **Keep rate:** How many mutations were kept vs discarded
 4. **Top 3 changes that helped most** (from the changelog)
