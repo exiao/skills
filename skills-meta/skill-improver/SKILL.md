@@ -66,6 +66,8 @@ Example with 8 inputs: 4 train, 2 validation, 2 test.
 
 **Golden case placement:** Golden cases are always assigned to the training set, never randomized into validation or test. They are scored every experiment alongside regular training inputs. In the dashboard, golden cases are marked with a 🔒 indicator. In `results.json`, each input has an `"is_golden": true/false` field.
 
+**Persist the split assignments.** Record which concrete inputs landed in train / validation / test (by input ID or the prompt text) in `checkpoint.json` — not just the counts. A resumed run must reconstruct the exact same membership; if it only knows `{train: 4, val: 2, test: 2}` it will reshuffle and can leak a previously-sealed test prompt into training, destroying the honest test score. Store the per-input split (or a deterministic seed plus the ordered input list) so resume is byte-stable.
+
 ---
 
 ## step 1: read the skill
@@ -165,7 +167,7 @@ The test ceiling is computed the same way but only used at final evaluation.
 Before creating anything new, check if `autoresearch-[skill-name]/` already exists with a `checkpoint.json` file.
 
 **If checkpoint exists:**
-1. Read `checkpoint.json` to get: last completed experiment, best score, best experiment number, slow update count
+1. Read `checkpoint.json` to get: last completed experiment, best score, best experiment number, slow update count, and the **persisted split membership** (which inputs are train/val/test). Reuse that exact membership — never re-split, or a sealed test prompt can leak into training.
 2. Read `results.json` for full experiment history
 3. Read `rejected_edits.json` for the rejected-edit buffer
 4. Read `slow_updates.json` for longitudinal comparison history
@@ -200,7 +202,7 @@ Run the skill AS-IS before changing anything. This is experiment #0.
 6. Run the skill using **only the train + validation sets** with the **target model**. Score every output against every eval. **Do not touch the test set here** — it stays sealed until final evaluation (step 8) so it remains an honest overfitting check.
 7. Record the baseline: `train_score` and `val_score` independently. The test set is scored once, at step 8 (against `SKILL.md.baseline` and the final skill), never during the run.
 8. **Snapshot the baseline as the initial accepted best:** copy `[user-chosen-name].md` to `[user-chosen-name].md.best` and record its hash in `checkpoint.json` as `best_skill_hash`. The baseline is the accepted state until the first KEEP. Without this, a run interrupted after baseline but before any KEEP would try to resume (step 3) from a `.best` snapshot that doesn't exist.
-9. Save checkpoint.
+9. Save checkpoint, including the persisted split membership (see data split section and [references/dashboard-and-data-formats.md](references/dashboard-and-data-formats.md) for the `checkpoint.json` schema).
 
 **results.tsv format (tab-separated):**
 
@@ -219,9 +221,15 @@ This is the core optimization loop. Once started, run autonomously until stopped
 
 ### 6a. failure pattern clustering (optimizer model)
 
-Collect ALL failing outputs from the training set into a single analysis prompt. Send to the **optimizer model**:
+Collect ALL failing outputs from the training set into a single analysis prompt. For each failure, include the **original input**, the **output**, and **which eval criteria failed** (by name, with the binary/refusal/trajectory pass-fail) plus any self-diagnosis notes. Without the input and the named failed criteria, the optimizer is guessing at the failure pattern and can drive edits that fix the wrong behavior. Send to the **optimizer model**:
 
-"Here are [N] outputs that failed evaluation. The current skill is: [skill content].
+"Here are [N] failures. The current skill is: [skill content].
+
+Each failure:
+- Input: [original input]
+- Output: [output]
+- Failed evals: [names of the eval criteria that failed, and why]
+- Diagnosis (if any): [self-diagnosis from 6a.5]
 
 Group them by failure pattern. For each pattern:
 (a) What went wrong
@@ -354,7 +362,7 @@ After every experiment (kept or discarded):
 1. Append to `results.tsv`
 2. Update `results.json` (dashboard data)
 3. Update `rejected_edits.json` (if discarded)
-4. Update `checkpoint.json`: `{last_experiment, best_val_score, best_experiment, slow_update_count, best_skill_hash}`
+4. Update `checkpoint.json`: `{last_experiment, best_val_score, best_experiment, slow_update_count, best_skill_hash, split}` (keep the persisted split membership intact across saves)
 5. Append to `changelog.md` (see step 7)
 
 ### 6i. slow update (every 5 experiments)

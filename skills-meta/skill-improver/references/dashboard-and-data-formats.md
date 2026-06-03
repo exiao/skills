@@ -101,3 +101,32 @@ autoresearch-[skill-name]/
 ├── SKILL.md.baseline        # original skill before optimization (untouched)
 └── [user-chosen-name].md    # working copy with protected guidance section
 ```
+
+---
+
+## checkpoint.json format
+
+The resume state. Must store enough to reconstruct the run byte-for-byte, including
+the **exact split membership** — not just the counts — so a resumed run never reshuffles
+inputs and leaks a sealed test prompt into training.
+
+```json
+{
+  "last_experiment": 7,
+  "best_val_score": 90.0,
+  "best_experiment": 5,
+  "slow_update_count": 1,
+  "best_skill_hash": "sha256:…",
+  "split": {
+    "seed": 1337,
+    "train": ["input_id_1", "input_id_4", "input_id_6", "input_id_8"],
+    "val":   ["input_id_2", "input_id_7"],
+    "test":  ["input_id_3", "input_id_5"]
+  }
+}
+```
+
+`best_skill_hash` is the hash of `[user-chosen-name].md.best`; on resume, if the working
+file doesn't match it, restore from `.best` (a prior run was interrupted mid-mutation).
+The `split` arrays list the concrete inputs per set; a deterministic `seed` plus an ordered
+input list is an acceptable substitute as long as resume regenerates identical membership.
