@@ -66,7 +66,7 @@ Example with 8 inputs: 4 train, 2 validation, 2 test.
 
 **Golden case placement:** Golden cases are always assigned to the training set, never randomized into validation or test. They are scored every experiment alongside regular training inputs. In the dashboard, golden cases are marked with a 🔒 indicator. In `results.json`, each input has an `"is_golden": true/false` field.
 
-**Persist the split assignments.** Record which concrete inputs landed in train / validation / test (by input ID or the prompt text) in `checkpoint.json` — not just the counts. A resumed run must reconstruct the exact same membership; if it only knows `{train: 4, val: 2, test: 2}` it will reshuffle and can leak a previously-sealed test prompt into training, destroying the honest test score. Store the per-input split (or a deterministic seed plus the ordered input list) so resume is byte-stable.
+**Persist the split assignments.** Record which inputs landed in train/val/test (by ID or prompt text) in `checkpoint.json`, not just the counts. On resume, reuse that exact membership; reshuffling can leak a sealed test prompt into training.
 
 ---
 
@@ -167,12 +167,12 @@ The test ceiling is computed the same way but only used at final evaluation.
 Before creating anything new, check if `autoresearch-[skill-name]/` already exists with a `checkpoint.json` file.
 
 **If checkpoint exists:**
-0. **Sanity-check it's restorable.** If `checkpoint.json` has no `best_skill_hash` (or the `[name].md.best` snapshot is missing), it was written before the baseline snapshot completed — treat it as an incomplete pre-baseline run and start fresh (step 4), don't try to restore.
-1. Read `checkpoint.json` to get: last completed experiment, best score, best experiment number, slow update count, and the **persisted split membership** (which inputs are train/val/test). Reuse that exact membership — never re-split, or a sealed test prompt can leak into training.
+0. If it has no `best_skill_hash` or the `[name].md.best` snapshot is missing, it's a half-written pre-baseline run — start fresh (step 4).
+1. Read `checkpoint.json`: last experiment, best score/experiment, slow update count, and the split membership (which inputs are train/val/test). Reuse that exact membership; never re-split.
 2. Read `results.json` for full experiment history
 3. Read `rejected_edits.json` for the rejected-edit buffer
 4. Read `slow_updates.json` for longitudinal comparison history
-5. Restore the working skill copy from the last ACCEPTED state, not the mutable working file. `checkpoint.json` records `best_skill_hash` (and a saved `[name].md.best` copy); if `[name].md` no longer matches that hash, a prior run was interrupted mid-mutation (after step 6d applied a candidate but before the validation gate / discard revert finished). In that case restore `[name].md` from `[name].md.best` so the next experiment builds only on a validated state, never on an unaccepted edit.
+5. Restore `[name].md` from `[name].md.best` if it no longer matches `best_skill_hash` (a prior run was interrupted mid-mutation). Resume only from the last accepted state.
 6. Tell the user: "Found existing run at experiment [N] with best val_score [X]%. Resume or start fresh?"
 7. If resume: skip baseline, load all state, continue from experiment N+1
 8. If fresh: move the old directory to `autoresearch-[skill-name]-backup-[timestamp]/` and start over
@@ -199,11 +199,11 @@ Run the skill AS-IS before changing anything. This is experiment #0.
 2. Create a working directory: `autoresearch-[skill-name]/` inside the skill's folder
 3. **Copy the original SKILL.md into the working directory as `[user-chosen-name].md`** -- this is the copy you will mutate. NEVER edit the original SKILL.md. All mutations happen on this copy only.
 4. Also save `SKILL.md.baseline` in the working directory (identical to the original -- this is your revert target and slow-update comparison anchor)
-5. Create `results.tsv`, `results.json`, `rejected_edits.json` (empty array), `slow_updates.json` (empty array), and `dashboard.html`. Open the dashboard. **Do not create `checkpoint.json` yet** — it is written only after the baseline `.best` snapshot exists (step 8), so resume never finds a checkpoint that points at a missing snapshot.
-6. Run the skill using **only the train + validation sets** with the **target model**. Score every output against every eval. **Do not touch the test set here** — it stays sealed until final evaluation (step 8) so it remains an honest overfitting check.
-7. Record the baseline: `train_score` and `val_score` independently. The test set is scored once, at step 8 (against `SKILL.md.baseline` and the final skill), never during the run.
-8. **Snapshot the baseline as the initial accepted best:** copy `[user-chosen-name].md` to `[user-chosen-name].md.best` and record its hash. The baseline is the accepted state until the first KEEP.
-9. **Now create `checkpoint.json`** (last, after the `.best` snapshot exists), including `best_skill_hash` and the persisted split membership (see data split section and [references/dashboard-and-data-formats.md](references/dashboard-and-data-formats.md) for the schema). Creating it only here guarantees any checkpoint resume finds is backed by a real `.best` snapshot.
+5. Create `results.tsv`, `results.json`, `rejected_edits.json` (empty array), `slow_updates.json` (empty array), and `dashboard.html`. Open the dashboard. Don't create `checkpoint.json` yet (step 9).
+6. Run the skill using **only the train + validation sets** with the **target model**. Score every output against every eval. Leave the test set sealed until final evaluation (step 8).
+7. Record the baseline: `train_score` and `val_score` independently. The test set is scored once, at step 8.
+8. **Snapshot the baseline as the initial accepted best:** copy `[user-chosen-name].md` to `[user-chosen-name].md.best` and record its hash. This is the accepted state until the first KEEP.
+9. Create `checkpoint.json` now (after the `.best` snapshot), with `best_skill_hash` and the split membership (schema in [references/dashboard-and-data-formats.md](references/dashboard-and-data-formats.md)).
 
 **results.tsv format (tab-separated):**
 
@@ -222,7 +222,7 @@ This is the core optimization loop. Once started, run autonomously until stopped
 
 ### 6a. failure pattern clustering (optimizer model)
 
-Collect ALL failing outputs from the training set into a single analysis prompt. For each failure, include the **original input**, the **output**, and **which eval criteria failed** (by name, with the binary/refusal/trajectory pass-fail) plus any self-diagnosis notes. Without the input and the named failed criteria, the optimizer is guessing at the failure pattern and can drive edits that fix the wrong behavior. Send to the **optimizer model**:
+Collect ALL failing outputs from the training set. For each failure include the **input**, the **output**, and **which evals failed** (by name) plus any self-diagnosis notes, so the optimizer fixes the actual failure instead of guessing. Send to the **optimizer model**:
 
 "Here are [N] failures. The current skill is: [skill content].
 
@@ -320,10 +320,10 @@ Self-diagnostics also feed into refusal eval design: if the agent consistently r
 
 Before proceeding to validation, check for regressions on the training set:
 
-1. Compare per-eval pass/fail results against the **last ACCEPTED (kept) experiment's** pass history, not merely the previous experiment. Because every experiment is logged whether kept or discarded, the immediately previous record can be a discarded candidate; comparing against it can miss a regression from the accepted best (e.g. a golden case that already failed in the discarded run looks unchanged). Track per-eval pass history keyed to the accepted-best state.
+1. Compare per-eval pass/fail against the **last ACCEPTED (kept) experiment's** pass history, not just the previous record (which may be a discarded candidate). Track per-eval pass history keyed to the accepted-best state.
 2. **Golden case check (strict):** If ANY golden case regresses on ANY eval, **discard immediately**: revert `[user-chosen-name].md` to the accepted best (`[user-chosen-name].md.best`) and log the discard reason as `"golden_case_regression"` in the rejected-edit buffer. No exceptions, regardless of net score improvement. Golden cases are the "memory of bugs you refuse to reintroduce."
 3. If any non-golden eval that was previously passing now fails on any training input: regression detected.
-4. If the net training score is lower or equal after the regression: **discard immediately** — revert `[user-chosen-name].md` to the accepted best, skip the validation gate, and add to the rejected-edit buffer with a "regression" tag. This saves the cost of a validation run on a clearly-broken mutation. **Reverting here is mandatory:** if you only log the rejection without reverting, the next experiment starts from the rejected mutation and later scores/checkpoints build on an edit that was supposed to be discarded.
+4. If the net training score is lower or equal after the regression: **discard immediately** — revert `[user-chosen-name].md` to the accepted best (mandatory, or the next experiment builds on the rejected edit), skip the validation gate, and add to the rejected-edit buffer with a "regression" tag.
 5. If the net training score is still higher despite the regression: proceed to validation gate (the improvement outweighs the regression).
 
 Track per-eval pass history across experiments so you always know what was passing before.
@@ -374,7 +374,7 @@ Every 5th experiment, pause the fast loop and run a longitudinal regression chec
    - (a) the original `SKILL.md.baseline`
    - (b) the current best `[user-chosen-name].md`
 
-   Use training data only here. Validation stays a pure accept/reject gate (step 6i.6); feeding per-input val outcomes into the guidance-writing prompt would let the held-out set inform mutations, which is exactly the leakage the split prevents (and in 5-7 input runs there's no test set to recover an honest score).
+   Training only — validation stays a pure gate (6i.6), so val outcomes never feed the guidance prompt.
 2. Classify each training input into one of four categories:
    - **improved**: was failing with baseline, now passes with current
    - **regressed**: was passing with baseline, now fails with current
@@ -398,7 +398,7 @@ Every 5th experiment, pause the fast loop and run a longitudinal regression chec
    Write 2-4 high-level guidance notes for the next round of optimization. These will be injected into a protected section of the skill that step-level edits cannot modify."
 
 5. Write the guidance into the working skill copy between `<!-- SLOW_UPDATE_START -->` and `<!-- SLOW_UPDATE_END -->` markers. If these markers don't exist yet, add them at the end of the skill.
-6. **Validate the guidance before it becomes protected.** Slow-update guidance is a mutation too, so gate it like any other: re-score **train and validation independently** with the guidance in place. Keep it only if the train score improves **and** the validation score does not regress (holds steady or improves) versus the current accepted best — validation alone decides keep/discard here, just like step 6f, so a training gain can't buy a validation regression. Otherwise revert the guidance block to the previous accepted version (or remove it if this was the first slow update) and log the rejection in `slow_updates.json` with a `"rejected"` status. Only guidance that clears both checks gets kept and protected. Update `[user-chosen-name].md.best`/`best_skill_hash` if it's kept.
+6. **Gate the guidance like any other mutation.** Re-score train and validation independently. Keep the guidance only if train improves and validation doesn't regress; otherwise revert it (or remove it on the first slow update) and log `"rejected"` in `slow_updates.json`. Update `[user-chosen-name].md.best`/`best_skill_hash` if kept.
 7. Each accepted slow update overwrites the previous guidance (not accumulating).
 8. Log to `slow_updates.json`.
 

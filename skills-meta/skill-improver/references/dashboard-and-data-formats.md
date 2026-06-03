@@ -106,9 +106,7 @@ autoresearch-[skill-name]/
 
 ## checkpoint.json format
 
-The resume state. Must store enough to reconstruct the run byte-for-byte, including
-the **exact split membership** — not just the counts — so a resumed run never reshuffles
-inputs and leaks a sealed test prompt into training.
+The resume state. Stores the **split membership** (not just counts) so a resumed run reuses the same sets instead of reshuffling.
 
 ```json
 {
@@ -126,7 +124,4 @@ inputs and leaks a sealed test prompt into training.
 }
 ```
 
-`best_skill_hash` is the hash of `[user-chosen-name].md.best`; on resume, if the working
-file doesn't match it, restore from `.best` (a prior run was interrupted mid-mutation).
-The `split` arrays list the concrete inputs per set; a deterministic `seed` plus an ordered
-input list is an acceptable substitute as long as resume regenerates identical membership.
+`best_skill_hash` is the hash of `[user-chosen-name].md.best`; on resume, restore from `.best` if the working file doesn't match. A deterministic `seed` plus an ordered input list is fine in place of explicit `split` arrays.
