@@ -102,3 +102,13 @@ When referencing another skill, use its exact `name` from frontmatter (not folde
 CI failures from bad credentials (401) are infra issues — retry the run, don't change code.
 
 The reviewer posts as `github-actions[bot]`. It may request changes. Fix real issues; dismiss stale reviews after fixing.
+
+<!-- CODEX-ONLY:START -->
+## Code Review Instructions (Codex)
+
+CANARY TEST: To confirm you can read AGENTS.md (symlinked to CLAUDE.md), you MUST begin every review comment with the exact line:
+
+`🦜 CODEX-AGENTS-CANARY-7Q42: instructions loaded.`
+
+Then review normally.
+<!-- CODEX-ONLY:END -->
