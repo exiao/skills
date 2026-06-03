@@ -167,6 +167,7 @@ The test ceiling is computed the same way but only used at final evaluation.
 Before creating anything new, check if `autoresearch-[skill-name]/` already exists with a `checkpoint.json` file.
 
 **If checkpoint exists:**
+0. **Sanity-check it's restorable.** If `checkpoint.json` has no `best_skill_hash` (or the `[name].md.best` snapshot is missing), it was written before the baseline snapshot completed — treat it as an incomplete pre-baseline run and start fresh (step 4), don't try to restore.
 1. Read `checkpoint.json` to get: last completed experiment, best score, best experiment number, slow update count, and the **persisted split membership** (which inputs are train/val/test). Reuse that exact membership — never re-split, or a sealed test prompt can leak into training.
 2. Read `results.json` for full experiment history
 3. Read `rejected_edits.json` for the rejected-edit buffer
@@ -198,11 +199,11 @@ Run the skill AS-IS before changing anything. This is experiment #0.
 2. Create a working directory: `autoresearch-[skill-name]/` inside the skill's folder
 3. **Copy the original SKILL.md into the working directory as `[user-chosen-name].md`** -- this is the copy you will mutate. NEVER edit the original SKILL.md. All mutations happen on this copy only.
 4. Also save `SKILL.md.baseline` in the working directory (identical to the original -- this is your revert target and slow-update comparison anchor)
-5. Create `results.tsv`, `results.json`, `rejected_edits.json` (empty array), `slow_updates.json` (empty array), `checkpoint.json`, and `dashboard.html`. Open the dashboard.
+5. Create `results.tsv`, `results.json`, `rejected_edits.json` (empty array), `slow_updates.json` (empty array), and `dashboard.html`. Open the dashboard. **Do not create `checkpoint.json` yet** — it is written only after the baseline `.best` snapshot exists (step 8), so resume never finds a checkpoint that points at a missing snapshot.
 6. Run the skill using **only the train + validation sets** with the **target model**. Score every output against every eval. **Do not touch the test set here** — it stays sealed until final evaluation (step 8) so it remains an honest overfitting check.
 7. Record the baseline: `train_score` and `val_score` independently. The test set is scored once, at step 8 (against `SKILL.md.baseline` and the final skill), never during the run.
-8. **Snapshot the baseline as the initial accepted best:** copy `[user-chosen-name].md` to `[user-chosen-name].md.best` and record its hash in `checkpoint.json` as `best_skill_hash`. The baseline is the accepted state until the first KEEP. Without this, a run interrupted after baseline but before any KEEP would try to resume (step 3) from a `.best` snapshot that doesn't exist.
-9. Save checkpoint, including the persisted split membership (see data split section and [references/dashboard-and-data-formats.md](references/dashboard-and-data-formats.md) for the `checkpoint.json` schema).
+8. **Snapshot the baseline as the initial accepted best:** copy `[user-chosen-name].md` to `[user-chosen-name].md.best` and record its hash. The baseline is the accepted state until the first KEEP.
+9. **Now create `checkpoint.json`** (last, after the `.best` snapshot exists), including `best_skill_hash` and the persisted split membership (see data split section and [references/dashboard-and-data-formats.md](references/dashboard-and-data-formats.md) for the schema). Creating it only here guarantees any checkpoint resume finds is backed by a real `.best` snapshot.
 
 **results.tsv format (tab-separated):**
 
@@ -369,10 +370,12 @@ After every experiment (kept or discarded):
 
 Every 5th experiment, pause the fast loop and run a longitudinal regression check:
 
-1. Re-run ALL train+val inputs through TWO skills using the **target model**:
+1. Re-run the **training inputs only** through TWO skills using the **target model**:
    - (a) the original `SKILL.md.baseline`
    - (b) the current best `[user-chosen-name].md`
-2. Classify each input into one of four categories:
+
+   Use training data only here. Validation stays a pure accept/reject gate (step 6i.6); feeding per-input val outcomes into the guidance-writing prompt would let the held-out set inform mutations, which is exactly the leakage the split prevents (and in 5-7 input runs there's no test set to recover an honest score).
+2. Classify each training input into one of four categories:
    - **improved**: was failing with baseline, now passes with current
    - **regressed**: was passing with baseline, now fails with current
    - **persistent_fail**: fails with both
@@ -380,7 +383,7 @@ Every 5th experiment, pause the fast loop and run a longitudinal regression chec
 3. If previous slow-update guidance exists, include it for reflection.
 4. Send the comparison to the **optimizer model**:
 
-   "Here is a longitudinal comparison of the same [N] tasks under the original skill vs the current optimized skill after [M] experiments.
+   "Here is a longitudinal comparison of the same [N] training tasks under the original skill vs the current optimized skill after [M] experiments.
 
    Improved: [list]
    Regressed: [list]
@@ -395,7 +398,7 @@ Every 5th experiment, pause the fast loop and run a longitudinal regression chec
    Write 2-4 high-level guidance notes for the next round of optimization. These will be injected into a protected section of the skill that step-level edits cannot modify."
 
 5. Write the guidance into the working skill copy between `<!-- SLOW_UPDATE_START -->` and `<!-- SLOW_UPDATE_END -->` markers. If these markers don't exist yet, add them at the end of the skill.
-6. **Validate the guidance before it becomes protected.** Slow-update guidance is a mutation too, so gate it like any other: re-score the train+val sets with the guidance in place. If the combined score does not improve over the current accepted best (e.g. the optimizer overreacted to a noisy longitudinal regression), revert the guidance block to the previous accepted version (or remove it if this was the first slow update) and log the rejection in `slow_updates.json` with a `"rejected"` status. Only a guidance block that holds or improves the score gets kept and protected. Update `[user-chosen-name].md.best`/`best_skill_hash` if it's kept.
+6. **Validate the guidance before it becomes protected.** Slow-update guidance is a mutation too, so gate it like any other: re-score **train and validation independently** with the guidance in place. Keep it only if the train score improves **and** the validation score does not regress (holds steady or improves) versus the current accepted best — validation alone decides keep/discard here, just like step 6f, so a training gain can't buy a validation regression. Otherwise revert the guidance block to the previous accepted version (or remove it if this was the first slow update) and log the rejection in `slow_updates.json` with a `"rejected"` status. Only guidance that clears both checks gets kept and protected. Update `[user-chosen-name].md.best`/`best_skill_hash` if it's kept.
 7. Each accepted slow update overwrites the previous guidance (not accumulating).
 8. Log to `slow_updates.json`.
 
