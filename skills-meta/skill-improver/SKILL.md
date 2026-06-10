@@ -85,7 +85,7 @@ Before changing anything, audit and understand the target skill completely.
    - **Deterministic obvious fixes** (broken references, stale commands, malformed frontmatter, routing description issues)
    - **Behavioral hypotheses** that need eval evidence before changing
 
-Do NOT skip this. The audit pre-pass finds low-hanging structural problems, but it does not replace the eval loop. Do not edit the original SKILL.md; audit fixes are applied only to the working copy and still pass through the baseline/validation gate.
+Do NOT skip this. The audit pre-pass finds low-hanging structural problems, but it does not replace the eval loop. Do not edit the original SKILL.md; pass deterministic audit fixes into the experiment loop by applying them only to the working copy as the first candidate mutation, or by including them in the optimizer prompt context as required edit context. They still pass through the baseline/validation gate.
 
 ---
 
@@ -245,8 +245,8 @@ Group them by failure pattern. For each pattern:
 
 Then recommend which single pattern to fix first (highest impact).
 
-Previously rejected edits (do not repeat these or minor variants):
-[rejected-edit buffer contents]"
+Previously rejected edits (do not repeat these or minor variants), plus audit-found deterministic fixes to seed this mutation (if any; phrase them as required working-copy edits):
+[rejected-edit buffer contents; step 1 deterministic obvious fixes or empty]"
 
 Log the failure patterns in the experiment record.
 
@@ -274,7 +274,7 @@ Success-derived edits are lower priority than failure-derived edits. If both tar
 
 ### 6c. propose structured edits (optimizer model)
 
-Based on the failure clustering (and optionally success analysis), propose edits in structured JSON format:
+Based on the failure clustering (and optionally success analysis), propose edits in structured JSON format. If step 1 found deterministic obvious fixes, seed the first proposal with those deterministic fixes as the candidate mutation before proposing behavioral hypotheses:
 
 ```json
 {
