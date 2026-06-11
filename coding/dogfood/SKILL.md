@@ -248,6 +248,7 @@ These are real issues encountered during dogfood sessions. Read before starting.
 | Reference | When to Read |
 |-----------|--------------|
 | [references/issue-taxonomy.md](references/issue-taxonomy.md) | Start of session: calibrate what to look for, severity levels, exploration checklist |
+| [references/backend-5xx-triage.md](references/backend-5xx-triage.md) | When an API probe returns a 5xx — classify crash vs. isolated error vs. transient restart (poll /health, time it, reproduce), spot the async-route-calls-sync-ORM crash, and don't trust an open PR to close the bug you reproduced |
 | [references/design-critique.md](references/design-critique.md) | When the session scope includes UI/UX quality — run after functional exploration to score heuristics, flag visual/color/typography issues, and produce a Critical/Important/Polish triage |
 | [references/playwright-surge-fallback.md](references/playwright-surge-fallback.md) | When `agent-browser` is unavailable/failing, when using Playwright/browser tools as the driver, or when publishing a public dogfood report to Surge |
 

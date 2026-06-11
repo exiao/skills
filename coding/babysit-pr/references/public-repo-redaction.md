@@ -27,7 +27,7 @@ Common patterns to scan for:
 - Connection IDs from third-party services (long alphanumeric strings like `CONNECTION_ID_PLACEHOLDER`)
 - Personal names in bylines, ownership examples, or action instructions (prefer "the account owner")
 - Password location hints ("password in path/to/file")
-- Absolute user paths (`/Users/testuser/...`, `/Users/eric/...`) in code snippets or docs
+- Absolute user paths (`/Users/<username>/...`) in code snippets or docs
 
 ## 1b. Exclude placeholder values from automated safety scans
 
