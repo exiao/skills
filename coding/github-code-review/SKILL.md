@@ -490,7 +490,8 @@ never with `git checkout -- .` / `reset --hard` / `clean`:
 
 ```bash
 # Only when explicitly asked to clean up:
-git worktree remove ~/projects/_worktrees/pr-$PR_NUMBER
+REPO_SLUG=$(gh repo view --json nameWithOwner -q '.nameWithOwner' | tr '/' '-')
+git worktree remove ~/projects/_worktrees/${REPO_SLUG}-pr-$PR_NUMBER
 ```
 
 ### Decision: Approve vs Request Changes vs Comment
