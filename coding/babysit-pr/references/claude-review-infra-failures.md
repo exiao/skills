@@ -36,7 +36,7 @@ Before diving into per-PR fixes, check if all failing PRs share the same root ca
 
 To identify all affected repos at once:
 ```bash
-for REPO in <owner>/<repo-a> <owner>/<repo-b>; do
+for REPO in "$OWNER/$REPO_A" "$OWNER/$REPO_B"; do
   echo "=== $REPO ==="
   gh api "repos/$REPO/contents/.github/workflows/claude-code-review.yml" \
     --jq '.content' 2>/dev/null | base64 -d 2>/dev/null | grep AGENT_TEAMS && echo "  AFFECTED" || echo "  clean"

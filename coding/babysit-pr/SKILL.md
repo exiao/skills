@@ -338,20 +338,20 @@ BASE="$BRANCH"
 [ "$STATE" = "MERGED" ] && BASE="$DEFAULT"
 
 # Create a new worktree for the follow-up branch
-FOLLOW="followup-pr-$PR-<short-topic>"
+FOLLOW="followup-pr-$PR-SHORT_TOPIC"
 git fetch origin "$BASE"
 git worktree add "$HOME/projects/_worktrees/$FOLLOW" -b "$FOLLOW" "origin/$BASE"
 cd "$HOME/projects/_worktrees/$FOLLOW"
 
 # Apply the deferable cleanup, verify, commit, push
-git add <files>
+git add FILES
 git commit -m "followup: <short topic>"
 git push origin HEAD:"$FOLLOW"
 
 # Open the follow-up PR. Write body to a file, never inline long markdown.
 gh pr create --repo "$REPO" --base "$BASE" --head "$FOLLOW" \
   --title "Follow up to #$PR: <short topic>" \
-  --body-file /tmp/followup-pr-$PR-<short-topic>.md
+  --body-file /tmp/followup-pr-$PR-SHORT_TOPIC.md
 ```
 
 Follow-up PR body must include:

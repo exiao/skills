@@ -224,8 +224,8 @@ Use the configured URLs exactly — don't rediscover or substitute domains at ru
 Use the repo's default branch, then count commits since 24h ago. Keep `gh api` as GET when passing fields, and paginate the count — otherwise repos with more than 100 commits in the window get silently undercounted:
 
 ```bash
-default=$(gh api --method GET repos/<owner>/<repo> --jq .default_branch)
-count=$(gh api --paginate --method GET repos/<owner>/<repo>/commits \
+default=$(gh api --method GET repos/$OWNER/$REPO --jq .default_branch)
+count=$(gh api --paginate --method GET repos/$OWNER/$REPO/commits \
   -f sha="$default" \
   -f since="$SINCE_ISO" \
   -f per_page=100 \
