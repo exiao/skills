@@ -7,26 +7,28 @@ description: "Eval-driven skill optimizer: runs a skill repeatedly, scores outpu
 
 # Skill Optimizer
 
-Most skills work about 70% of the time. The other 30% you get garbage. The fix isn't to rewrite the skill from scratch. It's to let an agent run it dozens of times, score every output, and tighten the prompt until that 30% disappears.
+## the loop
 
-This skill runs an autonomous optimization loop: generate outputs, score against binary evals, cluster failure patterns, propose structured edits, validate on held-out inputs, keep what improves, discard what doesn't. A separate (usually stronger) model analyzes failures while the target model executes, because the same model can't see its own blind spots.
+Take any existing skill, define what "good output" looks like as binary yes/no checks, then run this loop:
+
+1. **Audit and read the skill.** Run `skill-audit` on the target skill, then read SKILL.md and linked references. Capture obvious structural/routing issues, but do not edit yet.
+2. **Gather the eval setup.** Confirm 8-12 test inputs, 3-6 binary evals, model config, run count, budget cap, and golden cases. Split inputs into train/validation/test.
+3. **Establish the baseline.** Copy the unchanged skill into the working directory, run train + validation with the target model, score it, and create the dashboard/checkpoint.
+4. **Score outputs with binary evals.** Include refusal evals and trajectory evals when the skill's failure mode depends on uncertainty or process, not just final text.
+5. **Diagnose failures.** Cluster failing outputs, self-diagnostics, and success patterns with the optimizer model.
+6. **Propose one structured edit.** Apply an append/insert_after/replace/delete mutation to the working copy only, starting with audit-found obvious fixes when they are high-confidence.
+7. **Validate before keeping.** Reject any golden-case regression and any mutation that fails to improve held-out validation. Keep only measured improvements; log all rejects.
+8. **Repeat, then seal it.** Use the rejected-edit buffer and slow updates until plateau/budget/user stop, then score the sealed test set once and deliver the improved file plus artifacts.
+
+**Output:** An improved skill copy + `results.tsv` log + `changelog.md` of every mutation attempted + a live HTML dashboard you can watch in your browser. The original SKILL.md is never overwritten.
 
 ---
 
-## the core job
+## why this exists
 
-Take any existing skill, define what "good output" looks like as binary yes/no checks, then run an autonomous loop that:
+Most skills work about 70% of the time. The other 30% you get garbage. The fix isn't to rewrite the skill from scratch. It's to let an agent run it dozens of times, score every output, and tighten the prompt until that 30% disappears.
 
-1. Generates outputs from the skill using test inputs (target model)
-2. Scores every output against the eval criteria
-3. Clusters failure patterns across all failing outputs (optimizer model)
-4. Proposes structured edits (append/insert_after/replace/delete) to fix the highest-impact pattern
-5. Validates changes on held-out inputs before accepting
-6. Keeps mutations that improve the validation score, discards the rest
-7. Periodically runs a longitudinal regression check (slow update)
-8. Repeats until the score ceiling is hit or the user stops it
-
-**Output:** An improved SKILL.md + `results.tsv` log + `changelog.md` of every mutation attempted + a live HTML dashboard you can watch in your browser.
+A separate (usually stronger) model analyzes failures while the target model executes, because the same model can't see its own blind spots.
 
 ---
 
@@ -70,16 +72,20 @@ Example with 8 inputs: 4 train, 2 validation, 2 test.
 
 ---
 
-## step 1: read the skill
+## step 1: audit and read the skill
 
-Before changing anything, read and understand the target skill completely.
+Before changing anything, audit and understand the target skill completely.
 
-1. Read the full SKILL.md file
-2. Read any files in `references/` that the skill links to
-3. Identify the skill's core job, process steps, and output format
-4. Note any existing quality checks or anti-patterns already in the skill
+1. Run `skill-audit` on the target skill directory. Capture the scorecard and recommended fixes.
+2. Read the full SKILL.md file.
+3. Read any files in `references/` that the skill links to.
+4. Identify the skill's core job, process steps, and output format.
+5. Note any existing quality checks or anti-patterns already in the skill.
+6. Separate audit findings into:
+   - **Deterministic obvious fixes** (broken references, stale commands, malformed frontmatter, routing description issues)
+   - **Behavioral hypotheses** that need eval evidence before changing
 
-Do NOT skip this. You need to understand what the skill does before you can improve it.
+Do NOT skip this. The audit pre-pass finds low-hanging structural problems, but it does not replace the eval loop. Do not edit the original SKILL.md; pass deterministic audit fixes into the experiment loop by applying them only to the working copy as the first candidate mutation, or by including them in the optimizer prompt context as required edit context. They still pass through the baseline/validation gate.
 
 ---
 
@@ -239,8 +245,8 @@ Group them by failure pattern. For each pattern:
 
 Then recommend which single pattern to fix first (highest impact).
 
-Previously rejected edits (do not repeat these or minor variants):
-[rejected-edit buffer contents]"
+Previously rejected edits (do not repeat these or minor variants), plus audit-found deterministic fixes to seed this mutation (if any; phrase them as required working-copy edits):
+[rejected-edit buffer contents; step 1 deterministic obvious fixes or empty]"
 
 Log the failure patterns in the experiment record.
 
@@ -268,7 +274,7 @@ Success-derived edits are lower priority than failure-derived edits. If both tar
 
 ### 6c. propose structured edits (optimizer model)
 
-Based on the failure clustering (and optionally success analysis), propose edits in structured JSON format:
+Based on the failure clustering (and optionally success analysis), propose edits in structured JSON format. If step 1 found deterministic obvious fixes, seed the first proposal with those deterministic fixes as the candidate mutation before proposing behavioral hypotheses:
 
 ```json
 {
