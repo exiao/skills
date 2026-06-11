@@ -175,7 +175,7 @@ Add an isolated worktree for the PR head instead:
 
 ```bash
 # Fetch the PR head into a local ref, then add a detached worktree for it
-git fetch origin pull/123/head:+pr-123
+git fetch origin +pull/123/head:pr-123
 git worktree add ~/projects/_worktrees/pr-123 pr-123
 cd ~/projects/_worktrees/pr-123
 
@@ -381,7 +381,7 @@ This gives you full access to `read_file`, `search_files`, and the ability to ru
 **Use a worktree, never a bare `git checkout`** (protects in-progress work and parallel agents):
 
 ```bash
-git fetch origin pull/$PR_NUMBER/head:+pr-$PR_NUMBER
+git fetch origin +pull/$PR_NUMBER/head:pr-$PR_NUMBER
 git worktree add ~/projects/_worktrees/pr-$PR_NUMBER pr-$PR_NUMBER
 cd ~/projects/_worktrees/pr-$PR_NUMBER
 ```
