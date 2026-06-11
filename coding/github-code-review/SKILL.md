@@ -389,13 +389,16 @@ cd ~/projects/_worktrees/pr-$PR_NUMBER
 ### Step 4: Read the diff and understand changes
 
 ```bash
+# Detect the base branch, don't assume main
+BASE=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@.*/@@')
+
 # Full diff against the base branch
-git diff main...HEAD
+git diff "origin/$BASE"...HEAD
 
 # Or file-by-file for large PRs
-git diff main...HEAD --name-only
+git diff "origin/$BASE"...HEAD --name-only
 # Then for each file:
-git diff main...HEAD -- path/to/file.py
+git diff "origin/$BASE"...HEAD -- path/to/file.py
 ```
 
 For each changed file, use `read_file` to see full context around the changes — diffs alone can miss issues visible only with surrounding code.
