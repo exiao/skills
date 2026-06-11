@@ -322,7 +322,8 @@ When only low-priority non-bug review comments remain, do not fix them on the cu
 Grouping rule: one follow-up PR per coherent change. Group related nits together (for example docs wording), but do not bundle unrelated cleanup with unrelated test ergonomics.
 
 Base/branch rule:
-- If the original PR is still open and its code is not on the default branch yet, branch from the original PR HEAD and open a stacked follow-up PR with `--base <original-pr-branch>`. This keeps the current PR unchanged while making the follow-up impossible to forget.
+- If the original PR is still open, its code is not on the default branch yet, and the PR head branch lives in the base repository, branch from the original PR HEAD and open a stacked follow-up PR with `--base ORIGINAL_PR_BRANCH`. This keeps the current PR unchanged while making the follow-up impossible to forget.
+- If the original PR is from a fork, do not assume `headRefName` exists on the base repo's `origin`. Branch from the default branch unless you explicitly have write access to the fork and can create the follow-up with `--head OWNER:BRANCH`.
 - If the original PR is already merged or the default branch already contains the relevant code, branch from the default branch and open the follow-up PR against the default branch.
 - Never push follow-up fixes onto the current PR branch unless the user explicitly asks to fix the current PR instead.
 
@@ -330,12 +331,17 @@ Procedure:
 ```bash
 # Original PR metadata
 BRANCH=$(gh pr view $PR --repo $REPO --json headRefName -q '.headRefName')
+HEAD_OWNER=$(gh pr view $PR --repo $REPO --json headRepositoryOwner -q '.headRepositoryOwner.login')
+BASE_OWNER=$(echo "$REPO" | cut -d/ -f1)
 DEFAULT=$(gh repo view $REPO --json defaultBranchRef -q '.defaultBranchRef.name')
 STATE=$(gh pr view $PR --repo $REPO --json state -q '.state')
 
-# Choose base
+# Choose base. Stack only when the source branch is on the base repo; fork heads
+# are named OWNER:BRANCH for PR creation and are not fetchable as origin/BRANCH.
 BASE="$BRANCH"
-[ "$STATE" = "MERGED" ] && BASE="$DEFAULT"
+if [ "$STATE" = "MERGED" ] || [ "$HEAD_OWNER" != "$BASE_OWNER" ]; then
+  BASE="$DEFAULT"
+fi
 
 # Create a new worktree for the follow-up branch
 FOLLOW="followup-pr-$PR-SHORT_TOPIC"

@@ -1,6 +1,7 @@
 ---
 name: github-code-review
-description: Review code changes by analyzing git diffs, leaving inline comments on PRs, and performing thorough pre-push review. Works with the gh CLI or falls back to git + GitHub REST API via curl. Use when: review this PR, review a pull request, look at this PR, code review, review my changes before I push, pre-push review, leave inline comments on a pull request.
+description: >-
+  Review code changes by analyzing git diffs, leaving inline comments on PRs, and performing thorough pre-push review. Works with the gh CLI or falls back to git + GitHub REST API via curl. Use when: review this PR, review a pull request, look at this PR, code review, review my changes before I push, pre-push review, leave inline comments on a pull request.
 ---
 
 # GitHub Code Review

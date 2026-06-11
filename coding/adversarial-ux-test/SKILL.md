@@ -1,6 +1,7 @@
 ---
 name: adversarial-ux-test
-description: Roleplay the most difficult, tech-resistant user for your product. Browse the app as that persona, find every UX pain point, then filter complaints through a pragmatism layer to separate real problems from noise. Creates actionable tickets from genuine issues only. Use when: adversarial UX test, stress-test the UX, find UX pain points, roleplay a difficult user, hostile user testing.
+description: >-
+  Roleplay the most difficult, tech-resistant user for your product. Browse the app as that persona, find every UX pain point, then filter complaints through a pragmatism layer to separate real problems from noise. Creates actionable tickets from genuine issues only. Use when: adversarial UX test, stress-test the UX, find UX pain points, roleplay a difficult user, hostile user testing.
 ---
 
 # Adversarial UX Test
