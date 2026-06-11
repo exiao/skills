@@ -1,6 +1,7 @@
 ---
 name: writing-plans
-description: Use when you have a spec or requirements for a multi-step task and need a detailed implementation plan. Creates comprehensive plans with bite-sized tasks, exact file paths, and complete copy-pasteable code examples. Use when - write a plan, plan this feature, break this down into tasks, turn this spec into an implementation plan, /goal.
+description: >-
+  Use when you have a concrete spec or requirements document and need it converted into a detailed implementation plan for coding. Creates bite-sized tasks with exact file paths, tests, and copy-pasteable code examples. Use when: break a spec into implementation tasks, turn requirements into a coding plan, produce an implementer-ready plan with file paths and tests, /goal.
 ---
 
 # Writing Implementation Plans

@@ -338,20 +338,20 @@ BASE="$BRANCH"
 [ "$STATE" = "MERGED" ] && BASE="$DEFAULT"
 
 # Create a new worktree for the follow-up branch
-FOLLOW="followup-pr-$PR-<short-topic>"
+FOLLOW="followup-pr-$PR-short-topic"
 git fetch origin "$BASE"
 git worktree add "$HOME/projects/_worktrees/$FOLLOW" -b "$FOLLOW" "origin/$BASE"
 cd "$HOME/projects/_worktrees/$FOLLOW"
 
 # Apply the deferable cleanup, verify, commit, push
-git add <files>
-git commit -m "followup: <short topic>"
+git add path/to/files
+git commit -m "followup: short topic"
 git push origin HEAD:"$FOLLOW"
 
 # Open the follow-up PR. Write body to a file, never inline long markdown.
 gh pr create --repo "$REPO" --base "$BASE" --head "$FOLLOW" \
-  --title "Follow up to #$PR: <short topic>" \
-  --body-file /tmp/followup-pr-$PR-<short-topic>.md
+  --title "Follow up to #$PR: short topic" \
+  --body-file /tmp/followup-pr-$PR-short-topic.md
 ```
 
 Follow-up PR body must include:
@@ -512,7 +512,7 @@ See also:
 - **MagicMock + `hasattr` can create fake attributes.** In tests that use `MagicMock` as a stand-in object, `hasattr(mock, "_exception")` may return true because `MagicMock.__getattr__` creates a child mock. This can turn a thread-exception mock into `raise <MagicMock>`, producing `TypeError: exceptions must derive from BaseException` in CI. Check `"_exception" in mock.__dict__` or initialize the attribute explicitly instead.
 - **Delegation toolsets.** When delegating to a sub-agent, you MUST pass `toolsets=["terminal", "file", "web", "memory", "skills"]`. The toolset name is `"terminal"`, NOT `"ShellExec"` or `"mcp_terminal"`. Without it the sub-agent has no shell and fails immediately.
 - **Force-push is blocked.** The git wrapper blocks all force pushes. Never amend commits; make a new fixup commit on top instead. See references for the recovery pattern if you already diverged.
-- **Never `git checkout -- <file>` / `git restore <file>` / `git reset --hard` to undo a stray formatter run.** These discard ALL uncommitted changes on that file, including your real logical edits, not just the formatting noise. Recovery that preserves your edits: either `git diff <file> | git apply -R` (reverses only the working-tree diff), or rebuild from base — `git show <base-ref>:<path> > <path>` to reset to the exact base content, then re-apply ONLY your logical change by hand. Re-run tests + the formatter's `check` (not `format`) after, and confirm `git diff --stat` shows only your intended change.
+- **Never `git checkout -- path/to/file` / `git restore path/to/file` / `git reset --hard` to undo a stray formatter run.** These discard ALL uncommitted changes on that file, including your real logical edits, not just the formatting noise. Do **not** claim `git diff path/to/file | git apply -R` preserves logical edits: applied to the full file diff, it reverses every unstaged change in that file. Safer recovery: rebuild from base (`git show base-ref:path/to/file > path/to/file`) and re-apply ONLY your logical change by hand, or manually/interactive-patch reverse only the formatter hunks after inspecting them. Re-run tests + the formatter's `check` (not `format`) after, and confirm `git diff --stat` shows only your intended change.
 - **Amended-after-push recovery without force-push.** If you `git commit --amend` (or otherwise rewrote a commit) AFTER it was already pushed, the next `git push` is rejected non-fast-forward and you cannot force-push. Recovery that keeps history append-only: `git fetch origin $BRANCH && git reset --soft origin/$BRANCH` (re-stages your amended changes as uncommitted, discarding the local rewritten commit but NOT the file edits), then `git commit -m "<follow-up msg>"` and a normal `git push origin HEAD:$BRANCH`. (`reset --soft` is allowed because it preserves working-tree content.)
 - **Batch thread resolution.** When resolving 5+ threads, loop in a single shell command (array of "ID:message" pairs) rather than one tool call per thread. See references for the pattern.
 - **Supply chain scanner false positives.** A "Scan PR for critical supply chain risks" CI check sometimes flags files (e.g. `setup.py`) that exist on the base branch and are NOT in the PR's diff. Verify with `gh pr diff $PR --repo $REPO --name-only | grep <flagged-file>`. If the file isn't in the diff, report as false positive and don't attempt to fix. This CI failure alone does not block "ready to merge" status.

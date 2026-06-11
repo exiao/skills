@@ -1,6 +1,7 @@
 ---
 name: kanban-orchestrator
-description: Decomposition playbook and anti-temptation rules for an orchestrator profile that routes work through a Kanban board instead of doing it directly. Use when acting as the orchestrator/dispatcher role — decomposing a goal into tasks, fanning out parallel work to worker profiles, gating dependent tasks with parent links, and recovering stuck workers. Trigger phrases: "orchestrate this", "decompose and route", "fan this out to workers", "route, don't execute", "delegate via kanban", "split this into tasks". The basic "don't do the work yourself" worker lifecycle is auto-injected into every worker's system prompt; this skill is the deeper playbook for the orchestrator role.
+description: >-
+  Decomposition playbook and anti-temptation rules for an orchestrator profile that routes work through a Kanban board instead of doing it directly. Use when acting as the orchestrator/dispatcher role — decomposing a goal into tasks, fanning out parallel work to worker profiles, gating dependent tasks with parent links, and recovering stuck workers. Trigger phrases: "orchestrate this", "decompose and route", "fan this out to workers", "route, don't execute", "delegate via kanban", "split this into tasks". The basic "don't do the work yourself" worker lifecycle is auto-injected into every worker's system prompt; this skill is the deeper playbook for the orchestrator role.
 ---
 
 # Kanban Orchestrator — Decomposition Playbook
