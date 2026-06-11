@@ -173,10 +173,11 @@ checkout clobbers any in-progress work and risks destroying parallel agents' sta
 Add an isolated worktree for the PR head instead:
 
 ```bash
-# Fetch the PR head into a local ref, then add a detached worktree for it
-git fetch origin pull/123/head:pr-123
-git worktree add ~/projects/_worktrees/pr-123 pr-123
-cd ~/projects/_worktrees/pr-123
+# Fetch the PR head into a repo-scoped local ref, then add a detached worktree for it
+REPO_SLUG=$(gh repo view --json nameWithOwner -q '.nameWithOwner' | tr '/' '-')
+git fetch origin +pull/123/head:pr-123
+git worktree add ~/projects/_worktrees/${REPO_SLUG}-pr-123 pr-123
+cd ~/projects/_worktrees/${REPO_SLUG}-pr-123
 
 # Now you can use read_file, search_files, run tests, etc.
 
@@ -380,21 +381,25 @@ This gives you full access to `read_file`, `search_files`, and the ability to ru
 **Use a worktree, never a bare `git checkout`** (protects in-progress work and parallel agents):
 
 ```bash
-git fetch origin pull/$PR_NUMBER/head:pr-$PR_NUMBER
-git worktree add ~/projects/_worktrees/pr-$PR_NUMBER pr-$PR_NUMBER
-cd ~/projects/_worktrees/pr-$PR_NUMBER
+REPO_SLUG=$(gh repo view --json nameWithOwner -q '.nameWithOwner' | tr '/' '-')
+git fetch origin +pull/$PR_NUMBER/head:pr-$PR_NUMBER
+git worktree add ~/projects/_worktrees/${REPO_SLUG}-pr-$PR_NUMBER pr-$PR_NUMBER
+cd ~/projects/_worktrees/${REPO_SLUG}-pr-$PR_NUMBER
 ```
 
 ### Step 4: Read the diff and understand changes
 
 ```bash
+# Detect the base branch, don't assume main
+BASE=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@.*/@@')
+
 # Full diff against the base branch
-git diff main...HEAD
+git diff "origin/$BASE"...HEAD
 
 # Or file-by-file for large PRs
-git diff main...HEAD --name-only
+git diff "origin/$BASE"...HEAD --name-only
 # Then for each file:
-git diff main...HEAD -- path/to/file.py
+git diff "origin/$BASE"...HEAD -- path/to/file.py
 ```
 
 For each changed file, use `read_file` to see full context around the changes — diffs alone can miss issues visible only with surrounding code.
