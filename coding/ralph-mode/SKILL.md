@@ -207,7 +207,7 @@ When monitoring a long-running autonomous loop or batch (parameter sweeps, multi
 
 Confirm liveness with a positive signal before concluding a stall, in this order:
 1. **Watch the log grow.** Capture line/byte count, `sleep 30`, re-capture. If it advanced (even by one line), it is PROGRESSING, not stalled. Single most reliable check.
-2. **Check log mtime.** `stat -f "%Sm" <log>` — modified seconds ago means alive.
+2. **Check log mtime.** `stat -c %y <log> 2>/dev/null || stat -f "%Sm" <log>` — portable across GNU/Linux and BSD/macOS; modified seconds ago means alive.
 3. **Check the actual client timeout** before claiming "no timeout = hangs forever." Grep the provider adapter for `Timeout(`/`timeout=`. Many SDK clients already set a read timeout (e.g. 900s); a genuinely stuck stream fails and retries rather than hanging indefinitely.
 
 A true init-stall looks different: ~0% CPU AND zero log growth over multiple minutes AND no "Auto-repaired"/tool-call lines ever appearing. Only kill on that combination (e.g. >40 min running with no log growth), and kill only the one unit's subprocess, never the batch wrapper.

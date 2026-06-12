@@ -174,11 +174,19 @@ checkout clobbers any in-progress work and risks destroying parallel agents' sta
 Add an isolated worktree for the PR head instead:
 
 ```bash
-# Fetch the PR head into a repo-scoped local ref, then add a detached worktree for it
+# Fetch the PR head to FETCH_HEAD, then add/reuse a detached repo-scoped worktree
 REPO_SLUG=$(gh repo view --json nameWithOwner -q '.nameWithOwner' | tr '/' '-')
-git fetch origin +pull/123/head:pr-123
-git worktree add ~/projects/_worktrees/${REPO_SLUG}-pr-123 pr-123
-cd ~/projects/_worktrees/${REPO_SLUG}-pr-123
+WT=~/projects/_worktrees/${REPO_SLUG}-pr-123
+git fetch origin pull/123/head
+if git -C "$WT" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  cd "$WT"
+  test -z "$(git status --short)" || { echo "Existing PR worktree has local changes; stop before updating it"; exit 1; }
+  git fetch origin pull/123/head
+  git switch --detach FETCH_HEAD
+else
+  git worktree add --detach "$WT" FETCH_HEAD
+  cd "$WT"
+fi
 
 # Now you can use read_file, search_files, run tests, etc.
 
@@ -246,15 +254,15 @@ curl -s -X POST \
 
 ### Submit a Formal Review (Approve / Request Changes)
 
-**With gh:**
+**With gh (top-level review text only; create inline comments separately with REST):**
 
 ```bash
 gh pr review 123 --approve --body "LGTM!"
-gh pr review 123 --request-changes --body "See inline comments."
+gh pr review 123 --request-changes --body "Requesting changes; details are in this top-level review body or in REST-created inline comments."
 gh pr review 123 --comment --body "Some suggestions, nothing blocking."
 ```
 
-**With curl — multi-comment review submitted atomically:**
+**With curl — multi-comment inline review submitted atomically:**
 
 ```bash
 HEAD_SHA=$(curl -s \
@@ -383,9 +391,17 @@ This gives you full access to `read_file`, `search_files`, and the ability to ru
 
 ```bash
 REPO_SLUG=$(gh repo view --json nameWithOwner -q '.nameWithOwner' | tr '/' '-')
-git fetch origin +pull/$PR_NUMBER/head:pr-$PR_NUMBER
-git worktree add ~/projects/_worktrees/${REPO_SLUG}-pr-$PR_NUMBER pr-$PR_NUMBER
-cd ~/projects/_worktrees/${REPO_SLUG}-pr-$PR_NUMBER
+WT=~/projects/_worktrees/${REPO_SLUG}-pr-$PR_NUMBER
+git fetch origin pull/$PR_NUMBER/head
+if git -C "$WT" rev-parse --is-inside-work-tree >/dev/null 2>&1; then
+  cd "$WT"
+  test -z "$(git status --short)" || { echo "Existing PR worktree has local changes; stop before updating it"; exit 1; }
+  git fetch origin pull/$PR_NUMBER/head
+  git switch --detach FETCH_HEAD
+else
+  git worktree add --detach "$WT" FETCH_HEAD
+  cd "$WT"
+fi
 ```
 
 ### Step 4: Read the diff and understand changes
@@ -423,18 +439,18 @@ Go through each category: Correctness, Security, Code Quality, Testing, Regressi
 
 ### Step 7: Post the review to GitHub
 
-Collect your findings and submit them as a formal review with inline comments.
+Collect your findings and submit them as a formal review. If the review needs inline comments, use the REST review-comments flow below; `gh pr review` can only submit top-level review text.
 
-**With gh:**
+**With gh (top-level review text only; `gh pr review` has no path/line flags):**
 ```bash
 # If no issues — approve
 gh pr review $PR_NUMBER --approve --body "Reviewed. Code looks clean — good test coverage, no security concerns."
 
-# If issues found — request changes with inline comments
-gh pr review $PR_NUMBER --request-changes --body "Found a few issues — see inline comments."
+# If issues found but you only need a top-level review summary
+gh pr review $PR_NUMBER --request-changes --body "Found a few issues; details are in this top-level review body."
 ```
 
-**With curl — atomic review with multiple inline comments:**
+**With curl/REST — request changes with multiple inline comments atomically:**
 ```bash
 HEAD_SHA=$(curl -s -H "Authorization: token $GITHUB_TOKEN" \
   https://api.github.com/repos/$OWNER/$REPO/pulls/$PR_NUMBER \
