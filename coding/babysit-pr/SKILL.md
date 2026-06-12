@@ -16,7 +16,9 @@ Monitor a single PR through its full lifecycle: check scope, wait for CI, read r
 - **Max cycles** (optional, default 10. Each cycle = one CI wait + fix attempt)
 
 > CI status when `gh pr checks` / `statusCheckRollup` returns 403 (the token
-> lacks Checks-read): query the Actions runs API keyed by the PR head SHA
+> lacks Checks-read): first resolve the PR head SHA
+> (`SHA=$(gh pr view "$PR" --repo "$REPO" --json headRefOid -q .headRefOid)`),
+> then query the Actions runs API keyed by it
 > (`gh api "repos/$REPO/actions/runs?head_sha=$SHA&per_page=50"`) and collapse to
 > the latest run per workflow. Do NOT switch GitHub accounts or declare CI broken.
 
@@ -323,7 +325,7 @@ Grouping rule: one follow-up PR per coherent change. Group related nits together
 
 Base/branch rule:
 - If the original PR is still open, its code is not on the default branch yet, and the PR head branch lives in the base repository, branch from the original PR HEAD and open a stacked follow-up PR with `--base ORIGINAL_PR_BRANCH`. This keeps the current PR unchanged while making the follow-up impossible to forget.
-- If the original PR is from a fork, do not assume `headRefName` exists on the base repo's `origin`. Branch from the default branch unless you explicitly have write access to the fork and can create the follow-up with `--head OWNER:BRANCH`.
+- If the original PR is from a fork, `headRefName` is not a branch on the base repo's `origin`, and the new code may not exist on the default branch yet. Prefer to defer the follow-up until the original PR merges (then branch from the default branch). Only branch from the fork head directly if you have write access to it and create the follow-up with `--head OWNER:BRANCH`.
 - If the original PR is already merged or the default branch already contains the relevant code, branch from the default branch and open the follow-up PR against the default branch.
 - Never push follow-up fixes onto the current PR branch unless the user explicitly asks to fix the current PR instead.
 
@@ -343,8 +345,10 @@ if [ "$STATE" = "MERGED" ] || [ "$HEAD_OWNER" != "$BASE_OWNER" ]; then
   BASE="$DEFAULT"
 fi
 
-# Create a new worktree for the follow-up branch
-FOLLOW="followup-pr-$PR-SHORT_TOPIC"
+# Create a new worktree for the follow-up branch.
+# Set a real per-group slug so multiple follow-ups don't collide on one branch/worktree/body-file.
+SHORT_TOPIC="docs-wording"   # replace per coherent group, e.g. test-ergonomics
+FOLLOW="followup-pr-$PR-$SHORT_TOPIC"
 git fetch origin "$BASE"
 git worktree add "$HOME/projects/_worktrees/$FOLLOW" -b "$FOLLOW" "origin/$BASE"
 cd "$HOME/projects/_worktrees/$FOLLOW"
@@ -357,7 +361,7 @@ git push origin HEAD:"$FOLLOW"
 # Open the follow-up PR. Write body to a file, never inline long markdown.
 gh pr create --repo "$REPO" --base "$BASE" --head "$FOLLOW" \
   --title "Follow up to #$PR: <short topic>" \
-  --body-file /tmp/followup-pr-$PR-SHORT_TOPIC.md
+  --body-file /tmp/followup-pr-$PR-$SHORT_TOPIC.md
 ```
 
 Follow-up PR body must include:

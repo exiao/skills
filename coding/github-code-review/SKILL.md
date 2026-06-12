@@ -360,6 +360,12 @@ Run the inline setup block from the top of this skill ("Setup (for PR interactio
 It detects the `gh` CLI, falls back to `$GITHUB_TOKEN`, and derives `$OWNER`/`$REPO`
 from the origin remote. (`$GH_OWNER`/`$GH_REPO` below are aliases for `$OWNER`/`$REPO`.)
 
+If the user gives a full PR URL for a different repo than the current checkout,
+parse `OWNER`/`REPO`/`PR_NUMBER` from the URL instead of trusting `origin`
+(e.g. `https://github.com/acme/widgets/pull/42` →
+`OWNER=$(echo "$URL" | cut -d/ -f4)`, `REPO=$(echo "$URL" | cut -d/ -f5)`,
+`PR_NUMBER=$(echo "$URL" | cut -d/ -f7)`).
+
 ### Step 2: Gather PR context
 
 Get the PR metadata, description, and list of changed files to understand scope before diving into code.
@@ -407,10 +413,14 @@ fi
 ### Step 4: Read the diff and understand changes
 
 ```bash
-# Detect the base branch, don't assume main
-BASE=$(git symbolic-ref refs/remotes/origin/HEAD | sed 's@.*/@@')
+# Use the PR's actual base branch (it may target a non-default branch like release/1.2).
+# For a specific PR: BASE=$(gh pr view $PR_NUMBER --json baseRefName -q '.baseRefName')
+# For local pre-push review with no PR yet, detect the default branch instead:
+BASE=$(gh pr view "$PR_NUMBER" --json baseRefName -q '.baseRefName' 2>/dev/null \
+  || git symbolic-ref refs/remotes/origin/HEAD | sed 's@.*/@@')
+git fetch origin "$BASE" --quiet
 
-# Full diff against the base branch
+# Full diff against the PR's base branch
 git diff "origin/$BASE"...HEAD
 
 # Or file-by-file for large PRs
