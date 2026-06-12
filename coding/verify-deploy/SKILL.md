@@ -198,21 +198,47 @@ No regressions detected. Deploy is healthy.
 
 ## Scheduled Mode (`--scheduled`)
 
-When invoked by the daily cron job, skip Phases 1-3 and run a lighter health-check flow:
+When invoked by a daily cron job, skip Phases 1-3 and run a lighter health-check flow across a fixed set of monitored apps:
 
-1. Curl every endpoint in the **Apps monitored** table below, record HTTP status + latency.
+1. Curl every endpoint in your **Apps monitored** config, record HTTP status + latency.
 2. Deploy detection: `gh api` to count commits in the last 24h for each repo.
 3. If recent commits exist, browser-benchmark that app's frontend (load time, TTFB, console errors, failed requests). Skip CWV/resource breakdowns.
-4. No canary. Sentry handles that.
+4. No canary. Leave canary alerting to your error-tracking service (e.g. Sentry).
+5. In cron mode, don't message directly — return the report for the scheduler to deliver.
+6. **Lead with problems.** If any check failed (non-200, unreachable site, failed cron run), open with a `🚨 Issues` block listing each failure on one line. If everything passed, open with `✅ All systems healthy.` The detailed tables follow either way.
 
 Output the "🏥 App Health Check" report format (table of endpoints + flags + optional "🆕 Recent deploys" section).
 
-### Apps monitored
+### Apps monitored config
+
+Keep the monitored set in a config the skill reads (or list it inline), one row per app:
 
 | App | Frontend URL | API URL | Endpoints | Repo |
 |-----|-------------|---------|-----------|------|
-| **Bloom** | `bloom.onrender.com` | `bloom.onrender.com` | `/api/health`, `/`, `/portfolios`, `/chat` | `Bloom-Invest/bloom` |
-| **Bible Genius** | `app.genius.bible` | `prompt-pm--bible-fastapi-app.modal.run` | API: `/`, `/api/get_chapter?book=John&chapter=1`, `/api/search_bible?query=love` · Frontend: `/` | `prompt-pm/bible-app` |
-| **InvestingArena** | `investingarena.ai` | `ai-portfolio-arena.onrender.com` | API: `/health`, `/api/portfolios`, `/api/activity` · Frontend: `/` | `Bloom-Invest/investing-log` |
+| `<your-app>` | `https://your-app.example.com` | `https://your-api.example.com` | `/health`, `/`, ... | `<owner>/<repo>` |
 
-**Use these URLs exactly. Do not substitute or discover alternatives.**
+Use the configured URLs exactly — don't rediscover or substitute domains at runtime. Additional one-off sites can be passed in a prompt; include them in the health table but don't permanently add them unless they recur.
+
+### Commit counting
+
+Use the repo's default branch, then count commits since 24h ago. Keep `gh api` as GET when passing fields, and paginate the count — otherwise repos with more than 100 commits in the window get silently undercounted:
+
+```bash
+default=$(gh api --method GET repos/$OWNER/$REPO --jq .default_branch)
+count=$(gh api --paginate --method GET repos/$OWNER/$REPO/commits \
+  -f sha="$default" \
+  -f since="$SINCE_ISO" \
+  -f per_page=100 \
+  --jq '.[].sha' | wc -l)
+```
+
+Generate `SINCE_ISO` in Python (`datetime.now(timezone.utc) - timedelta(hours=24)`) rather than shell `date` — quoting around inline date math fails silently inside automation wrappers.
+
+### Scheduled-mode pitfalls
+
+- **Check health endpoint semantics, not just status.** A monitored URL can return 200 but serve an SPA HTML shell (or other non-health body) for ANY path — including made-up ones. Keep the HTTP status in the table but label it (`200, SPA HTML`) and don't imply backend API health. Probe the real backend health endpoint, not the static frontend host.
+- **Don't parse truncated health bodies.** Tool wrappers often keep only a short `body_preview`; a long field can truncate the JSON before later fields and break parsing. If status is 200 but parsed JSON is `null`, refetch the full body before reporting degraded health.
+- **Slow-endpoint retry.** If an endpoint returns 200 but is unusually slow, retry once or twice before finalizing. Keep the original latency visible in the table, but annotate the flag if it recovers — avoids over-alerting on one-off cold starts.
+- **Browser benchmark accuracy.** Don't count `PerformanceResourceTiming.responseStatus === 0` as a failed request — cross-origin resources often report 0 due to CORS visibility even when they loaded fine. Read the load-time console output *before* clearing the buffer, and clear it between sites so warnings from a prior page aren't attributed to the next one.
+- **Cron run health (if monitored).** When checking a platform's scheduled-job runs (e.g. Render cron), filter the events feed for the actual run-ended event type, not build events — back-to-back build events can bury the last run if you only fetch a small page. Page through until you find a real run result, and don't flag a not-yet-run scheduled job as a failure.
+- **Don't over-alert.** This is an informational digest, not incident response. Keep flags tight and factual.

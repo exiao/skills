@@ -40,13 +40,15 @@ Use a unique temp directory for extraction. Do not put extracted archives inside
 - If the bundle says not to render screenshots unless asked, respect that for inspection. Rendering the target implementation for verification is still fine when working on a live UI.
 - Preserve existing product behavior while applying the design system.
 
-## Bloom-specific notes from the May 2026 bundle
+## Typical token notes from a design bundle
 
-- Light canvas: `#FFFEFA` (Bloom sugar), not pure white.
-- Text: `#171616` (liquorice), not pure black.
-- Secondary text: `#504E4B` / `#74726D`.
-- Primary action: `#118383` petrol blue.
-- Borders: `#CBCAC9`, often 2px on cards.
-- Cards: warm light background, 8px radius, 16px padding, very soft `0 2px 3px rgba(203,202,201,0.5)` shadow.
+A handoff bundle usually defines a tokenized palette. Common patterns worth preserving:
+
+- Use a warm off-white canvas like `#FFFEFA` instead of pure white.
+- Use a near-black text color like `#171616` instead of pure black.
+- Define a secondary text ramp (e.g., `#504E4B` / `#74726D`) rather than a single gray.
+- Pick one primary action color and keep it consistent across CTAs.
+- Use tinted borders (e.g., `#CBCAC9`), often 2px on cards.
+- Cards: warm light background, ~8px radius, ~16px padding, a very soft shadow such as `0 2px 3px rgba(203,202,201,0.5)`.
 - Avoid gradients, glow, blur, heavy shadows, emoji, and unicode-as-icon in product UI.
-- Helvetica Now is canonical when available; fallback to platform sans if the static page cannot ship licensed fonts.
+- Honor the bundle's canonical font when licensing allows; fall back to a platform sans if a static page cannot ship the licensed font.

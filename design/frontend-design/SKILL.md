@@ -28,9 +28,25 @@ Individual skills may require additional context — check the skill's preparati
 
 ## Design Direction
 
+### Audience-Driven Design (Stakeholder Pages)
+
+When building stakeholder-facing pages (project reports, portfolio presentations, progress sites), consult `references/audience-driven-design.md`. The core rule: design for the reader's questions, not the builder's pride. Cut engineering metrics (PRs, commits, skill lists, CI details). Show: the problem, how it works (plain English), proof it works (before/after), sample output they can judge, and verification evidence.
+
+### Refinement Workflow (critique → animate → polish)
+
+When asked to improve an existing page, consult `references/polish-workflow.md`. Run critique first to diagnose (through the audience's lens), animate to add scroll-reveals and hover states, polish for spacing/consistency. Apply all three in a single file rewrite for efficiency.
+
+### Inline SVG Diagrams
+
+When a page needs architecture, flow, or pipeline diagrams, prefer inline SVG over Excalidraw screenshots or images. Consult `references/inline-svg-diagrams.md` for construction patterns, style conventions, and responsive handling. Inline SVG matches the page's fonts and colors exactly, renders crisp at any resolution, and requires no third-party assets.
+
 ### Client-facing visual proposal pages
 
 When the user asks to turn recommendations, copy strategy, product critique, or design feedback into a shareable before/after page, read `references/visual-proposal-pages.md`. Build a polished static page rather than returning only prose. The page should make the recommendation visible: side-by-side before/after panels, proof strips, diagrams, roadmap, copy translation table, and a final recommended architecture. For Surge delivery, write both `index.html` and a primary asset file such as `styles.css`, deploy, then open the production URL and visually verify styling loaded.
+
+### Stakeholder progress report sites
+
+When the user asks to present development progress, research results, or project outcomes as a shareable site for stakeholders/investors, read `references/stakeholder-report-sites.md`. These differ from sales assets: the audience already has context, they want to verify quality and see evidence, not be sold. Lead with proof (sample output, verification data, accuracy metrics), not claims. Key patterns: inline SVG diagrams matching site typography, slide-over panels for full document viewing, details/summary accordions for appendix drill-down, single-hue progress bars (not traffic light colors).
 
 Commit to a BOLD aesthetic direction:
 - **Purpose**: What problem does this interface solve? Who uses it?

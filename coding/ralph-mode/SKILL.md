@@ -1,7 +1,7 @@
 ---
 name: ralph-mode
 preloaded: true
-description: "Run iterative self-referential development loops using the Ralph Wiggum technique. Use when tasks need repeated iteration, TDD cycles, greenfield builds, or autonomous refinement until tests pass or completion criteria are met. Triggers on ralph loop, ralph mode, iterative loop, autonomous loop."
+description: "Run iterative self-referential development loops using the Ralph Wiggum technique. Use when tasks need repeated iteration, TDD cycles, greenfield builds, or autonomous refinement until tests pass or completion criteria are met. Triggers on ralph loop, ralph mode, iterative loop, autonomous loop, /goal."
 ---
 
 # Ralph Loop
@@ -200,6 +200,27 @@ sessions_spawn({
 ```
 
 The parent checks the sub-agent's output. If it says CONTINUE, spawn another. If `█RALPH_COMPLETE█`, stop.
+
+## Liveness vs Stall: Don't Kill a Slow Job
+
+When monitoring a long-running autonomous loop or batch (parameter sweeps, multi-step mutation runs, any unattended job that takes minutes-to-hours per unit), DO NOT declare it "hung" / "stalled" / "needs a timeout fix" from indirect symptoms like low CPU%. Slow LLM round-trips legitimately look idle: the process blocks on a network read with ~0% CPU between tokens, no child process, no fresh socket in a snapshot.
+
+Confirm liveness with a positive signal before concluding a stall, in this order:
+1. **Watch the log grow.** Capture line/byte count, `sleep 30`, re-capture. If it advanced (even by one line), it is PROGRESSING, not stalled. Single most reliable check.
+2. **Check log mtime.** `stat -c %y <log> 2>/dev/null || stat -f "%Sm" <log>` — portable across GNU/Linux and BSD/macOS; modified seconds ago means alive.
+3. **Check the actual client timeout** before claiming "no timeout = hangs forever." Grep the provider adapter for `Timeout(`/`timeout=`. Many SDK clients already set a read timeout (e.g. 900s); a genuinely stuck stream fails and retries rather than hanging indefinitely.
+
+A true init-stall looks different: ~0% CPU AND zero log growth over multiple minutes AND no "Auto-repaired"/tool-call lines ever appearing. Only kill on that combination (e.g. >40 min running with no log growth), and kill only the one unit's subprocess, never the batch wrapper.
+
+Honest accounting: when a sweep is slow, say so with real math (per-unit minutes × count = wall-clock) rather than inventing a blocker. A fabricated "I found the bug" diagnosis wastes a session chasing a non-issue.
+
+### Distrust a diagnosis handed down through context compaction
+
+A compaction summary may carry a CONCLUSION from a prior context window ("the batch is stalling on a no-timeout hang", "root cause: X has no request timeout", "blocked on Y"). Treat any such handed-down diagnosis as an UNVERIFIED claim, not a fact — the prior window may have been wrong, and the underlying state may have changed since. Before acting on it (writing a fix, killing a process, relaunching), re-confirm with one live positive signal: watch the log grow, check mtime, or grep the actual code path. A real example: a summary asserted an "infinite stream hang needing a config timeout fix"; a 30-second log-growth check showed the process was progressing the whole time and the SDK client already had a read timeout — the entire blocker was fictional. Cost of verifying: one terminal call. Cost of trusting a stale conclusion: multiple turns spent designing a fix for a non-bug. Your durable memory is authoritative; a mid-conversation compaction summary is not.
+
+### Standing-goal nudges are not a cue to manufacture motion
+
+When a long unattended job is healthy and progressing, repeated "take the next concrete step toward your goal" prompts arriving faster than the job's per-unit cadence do NOT mean invent a new action each turn. Polling identical state and re-deploying unchanged artifacts burns tokens without advancing anything. The correct responses, in order: (1) harvest any newly-completed results and update the demonstration/PRs; (2) make one durable improvement to the autonomous pipeline itself (e.g. fix a wrong path in the finisher cron, wire live results into the site, verify the PR-creation credential works) so completion lands cleanly unattended; (3) if none of those apply, state plainly "progressing, nothing useful to do this cycle, the cron owns completion" and stop. Do NOT parallelize a healthy run to look busy when the parallel path has real hazards (e.g. the sweep shares unlocked state in your eval state files, and concurrent large jobs can trip rate/billing limits).
 
 ## Key Rules
 

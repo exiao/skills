@@ -36,7 +36,7 @@ Before diving into per-PR fixes, check if all failing PRs share the same root ca
 
 To identify all affected repos at once:
 ```bash
-for REPO in Bloom-Invest/bloom Bloom-Invest/investing-log exiao/skills; do
+for REPO in "$OWNER/$REPO_A" "$OWNER/$REPO_B"; do
   echo "=== $REPO ==="
   gh api "repos/$REPO/contents/.github/workflows/claude-code-review.yml" \
     --jq '.content' 2>/dev/null | base64 -d 2>/dev/null | grep AGENT_TEAMS && echo "  AFFECTED" || echo "  clean"
@@ -63,7 +63,7 @@ done
 
 ## Session Examples
 
-- PR #1667, #1668 (Bloom-Invest/bloom, 2026-05-12): `claude-review` crashed with `Internal error: directory mismatch` due to `AGENT_TEAMS` setting. All other checks green. Fixed by removing the settings block from the workflow YAML (PR #1669).
-- PR #423 (Bloom-Invest/investing-log, 2026-05-12): Same AGENT_TEAMS crash. Fixed via PR #463.
-- PR #423 (Bloom-Invest/investing-log, earlier): `claude-review` failed with `You've hit your org's monthly usage limit`. Treat as org/account infrastructure.
-- PR #1670 (Bloom-Invest/bloom, 2026-05-12): `claude-review` job failed but claude[bot] comment stuck at "Claude Code is working..." (pattern 5). Rerun also failed. All other checks green.
+- Multiple PRs in one repo: `claude-review` crashed with `Internal error: directory mismatch` due to the `AGENT_TEAMS` setting. All other checks green. Fixed by removing the settings block from the workflow YAML in a single follow-up PR.
+- Another repo: same `AGENT_TEAMS` crash. Fixed the same way via a workflow-YAML PR.
+- A PR where `claude-review` failed with `You've hit your org's monthly usage limit`. Treat as org/account infrastructure.
+- A PR where the `claude-review` job failed but the bot comment stuck at "Claude Code is working..." (pattern 5). Rerun also failed. All other checks green.

@@ -76,9 +76,31 @@ Return 1–3 suggestions for the field. Let the researcher pick or edit before l
 
 Autofill is available at any point — during setup or mid-interview.
 
+## Variant Panel Mode (parallel copy/UX testing)
+
+When the goal is comparing N copy/UX variants (welcome messages, paywall copy, chip labels) rather than problem discovery, run a **parallel persona panel** instead of a single interview:
+
+1. Build 4-6 personas spanning the REAL segment axes: experience level (true beginner → power user with their own existing tooling), trust posture (scam-wary, sales-wary, data-privacy-wary), language/locale (include a native speaker of each shipped localization), and channel-nativeness. Adversarial personas (skeptic with substitutes, scared beginner) are the most informative — a variant that converts BOTH extremes is a strong signal.
+2. Dispatch one `delegate_task` subagent per persona (respect the concurrency cap; batch if needed). Each goal must be fully self-contained: full persona bio incl. texting style and core fear, the complete text of EVERY variant, and a fixed output format (`VARIANT N: [reaction] | TAPS: [choice] | SCORE: n/10`, then RANKING and INSIGHT).
+3. Require each persona to (a) react think-aloud in their own voice, (b) pick the chip they'd tap OR what they'd type instead (typing-instead-of-tapping is itself a finding), (c) score 1-10, then step out of character for a ranking + one segment insight.
+4. For localized products, ask the native-speaker persona to flag clunky translations and suggest natural phrasing — this surfaces real localization bugs (gendered greetings, false-friend verbs) that copy review misses.
+5. Synthesize across personas: look for (a) variants that win everywhere (rare, strong), (b) variants that flip meaning by segment (same words read as protection vs. noise vs. exclusion), (c) variants that are "nobody's enemy" (safe floors). Cross-check against third-party research (e.g. NN/g) before recommending.
+6. Always state the caveat: N LLM role-plays are directional, not proof. Unanimity across adversarial personas + converging third-party research is the strongest pre-launch evidence available, but say so explicitly.
+
 ## State to Maintain
 
 Track these across the session:
 - **Character JSON** (generated in step 2, may evolve mid-interview if clarified)
 - **4 Ps** (may be updated via autofill)
 - **Conversation history** (researcher + persona turns only, not meta discussion)
+
+## Copy-Variant Panel Mode (parallel A/B/n testing)
+
+For testing N copy variants (welcome messages, paywall bullets, chip wording) against multiple personas, skip the interview flow and run a parallel panel via delegate_task:
+
+- **One persona per delegated task**, ALL variants inside each task. Personas must span the real segment spread (e.g. for a consumer app: budget-conscious mainstream user, anxious late adopter, non-English WhatsApp native, skeptical power user with existing tooling, true beginner with no prior setup). Include at least one persona the copy might EXCLUDE and one with a competing tool — they surface failures the median persona can't.
+- **Task prompt shape:** persona description with texting style + core fear, then for EACH variant: (1) think-aloud reaction 2-3 sentences, (2) which option they tap OR what they type instead, (3) gut score 1-10. Then step out of character: rank all variants for THIS persona + single biggest insight.
+- **Output format line is mandatory** (`VARIANT N: [reaction] | TAPS: [...] | SCORE: n/10 ... then RANKING and INSIGHT`) or results don't aggregate.
+- For localized copy, give one persona the localized strings and ask for translation-naturalness notes — this catches gendered greetings and register problems (e.g. "vigilar" reading surveillance-y) that translation review misses.
+- **Aggregate by convergence, not average score.** A variant that wins/places across ALL personas (including the adversarial ones) is the signal; a variant that spikes for one persona and tanks for another is a segmentation finding, not a winner. Proven result: post-answer contextual offers beat every upfront wording for all 5 personas — sequencing beats wording.
+- Always state the caveat: N LLM role-plays, directional not proof. Strongest when it agrees with independent evidence (real-user research like NN/g, viral hook data).
