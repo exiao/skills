@@ -11,9 +11,13 @@ Turn zeitgeist signals into content that connects — then delegate creation, di
 
 **The flow:** Zeitgeist → Angles & Hooks → Create (via other skills) → Distribute → Analyze
 
+**How to use this skill:** Synthesize, don't recite. When answering a question, pick the 2-3 frameworks most relevant to the specific situation and weave them into a coherent strategy. Don't list every framework in the skill. A strategy that references 12 frameworks is an index, not advice. The user should walk away with "here's what to do in what order" — not "here are all the concepts that exist."
+
+**Every response must include a research step.** Even format-focused or optimization questions need 2-3 sentences on what to research first and which tools to use. Content strategy without audience research is guessing. If the question is narrow (e.g., "plan a repeatable format"), the research step can be short ("Use `grok-search` to find 5 accounts running similar formats; note which variables drive the most views"), but it must exist.
+
 **NOT this skill:**
 - Writing tweets or posts → `writer`
-- Generating images → `image-generator` or `nano-banana-pro`
+- Generating image cards or stickers → `sticker-creator`
 - Creating TikTok slideshows → video skills
 - Writing articles → `writer`
 - Scheduling → `typefully` or video skills/ReelFarm
@@ -36,7 +40,7 @@ Mine what's working **right now** before writing a single word.
 | Support tickets and FAQs | Objections, misconceptions, friction points |
 | TikTok accounts with <1k followers | Viral signals before algo amplification; comment sentiment on what's actually resonating |
 
-**Skills to use:** `last30days`, `grok-search`, `last30days`, web search
+**Skills to use:** `last30days`, `grok-search`
 
 **Output:** 10-20 hook angles + exact audience language in their own words. Store in `[Campaign]_Research.md`.
 
@@ -261,6 +265,7 @@ Match the angle to a format that amplifies it.
 | Viral Breakdown / Reaction | Dual-screen commentary on a viral post; borrowed traffic + authority positioning | Creator education, niche analysis, weekly pillar content |
 | Three-Screen App Demo | Shows the core product loop in a way creators can repeat: input → processing → result | Influencer-led consumer apps, AI utilities, scanning/logging/analyzer apps |
 | Investigation Arc | Creator reacts to a familiar claim/expert, finds a contradiction, investigates, then reveals proof | Anti-ad UGC, skeptical audiences, finance, health, categories with trust issues |
+| Before/After [Product] | Two-word text overlay ("Before [PRODUCT]" / "After [PRODUCT]") over creator showing emotional transformation. No feature explanation needed. | Any product where the transformation is emotional (confidence, ease, joy), not just functional. AI tools, creative apps, fitness, learning. |
 
 ### Anti-Ad Execution
 
@@ -274,6 +279,10 @@ Execution rules:
 - Drop social proof early when skepticism is high.
 - Let the creator's phrasing stay imperfect if it feels native.
 - Product appears as the thing discovered during the investigation, not the thing announced at the start.
+
+**The 80/20 emotion-to-product ratio:** The best anti-ads spend ~80% of runtime on emotion (frustration, transformation, confidence, joy) and ~20% on product proof (a quick app UI flash, enough to show it's real). The product demo exists to prove legitimacy, not to explain features. If the feature demo exceeds 30% of the video, it's an ad again. (Source: Suno "Before/After" ad, May 2026 — 50s runtime, ~10s of app UI, rest is pure creator emotion)
+
+**No-CTA as positioning:** Some of the strongest ads end on emotion, not a sales pitch. No "download now," no "link in bio," no logo card. The brand name appears in the opening text overlay and that's enough. This works when: (1) the content is so good it gets shared as entertainment, (2) the product name is embedded in the hook text itself, and (3) a CTA would cheapen the emotional payoff. This is walk-away positioning applied to ad creative. Reserve for brand-building, not direct response.
 
 ### Three-Screen App Demo
 
@@ -339,56 +348,9 @@ Source: @thebranding.ai breakdown of multiple creators going viral with the same
 
 ## Step 2b: Pre-Creator Validation (Before Paying Anyone)
 
-**Recreate before you recruit.** Prove a format works on your own account before committing creator budget to it.
+**Recreate before you recruit.** Prove a format works on your own account before committing creator budget. Warm up the account, save viral videos from small accounts, recreate the format yourself, and see traction before paying creators. Includes the Pre-Posting Creative QA Loop, Obsession Filter, and the Daniel/Cal AI/Sway Playbook.
 
-1. **Warm up the account** in the niche. Follow the 5-day TikTok warmup process before posting any content. See `references/tiktok-warmup.md` for the full checklist, retention benchmarks (42%+ watch-through), and account abandonment rules. (Sources: @rossark0, @alexcooldev, @lucaspatiri_, May 2026)
-2. **Save viral videos** from <1k follower accounts; these are pre-algo signals of what's actually resonating
-3. **Analyze why they worked**: hook structure, comment sentiment, format, pacing
-4. **Recreate the format yourself**: don't copy, match the structure and emotional beat
-5. **See early traction** before sourcing any paid creators
-6. **Pre-score finished cuts when a predictor tool is available.** Use this as a proxy, not an oracle. Score 3-5 versions before posting, especially if creator budget or trend timing matters. (Source: @johnvirality on Higgsfield `brain_activity`, May 2026)
-
-### Pre-Posting Creative QA Loop
-
-Source: @johnvirality X guide on Higgsfield Virality Predictor / `brain_activity`, May 2026.
-
-Do not wait three days for platform data when the issue is obvious in the first 15 seconds. Before posting, create a small variant batch and score the cuts against proxy attention metrics.
-
-Workflow:
-1. Generate or edit 3-5 hook variants of the same video. Change only the first-frame approach per variant: face-forward vs environment-forward, direct eye contact vs looking away, frustrated expression vs vulnerable expression, text-first vs action-first.
-2. Run each through the predictor if available. Track hook score, hold rate, viral potential, and any heatmap/report notes.
-3. Pick the winner only if it also passes human taste. A high model score with ugly AI slop still loses brand trust.
-4. Diagnose losers by attention failure:
-   - Silent first 0.5 seconds on Reels UGC: add a diegetic audible stim, such as a pen click, phone set-down, ice clink, typing burst, page flip, or cap pop. Audio can be the pattern interrupt before the viewer processes the first word. (Source: @Jibran_05, May 2026)
-   - Low first-3-second hook score: change first frame, proximity, face, motion, text overlay, or visual contrast.
-   - High hook but low hold: the middle is clickbait or too slow. Add a payoff beat, cut filler, or increase story tension.
-   - Low share/viral potential: add social currency. Make the viewer look smart, funny, early, warned, or seen when they share it.
-5. Regenerate the weakest two variants using the diagnosis and rescore once. Do not loop forever.
-6. Post the strongest scored variant, then compare predictor score against real retention and conversion data.
-
-Use this loop to shorten feedback cycles, not to outsource taste.
-
-### Obsession Filter
-
-Source: Naval Ravikant, `Sell the Truth`, nav.al/sell, May 2026.
-
-Do not build content pillars around topics the creator cannot genuinely sustain. Sales gets easier when the creator is obviously animated by the thing. If every script feels like pushing, the pillar is probably wrong or the angle is too far from the creator's real obsession.
-
-Use before committing to a recurring pillar:
-- Can the creator talk about this without notes for 10 minutes?
-- Do they naturally collect examples without being asked?
-- Would they still explain it if there were no immediate conversion?
-- Does the content feel like kindling for the audience, not homework?
-
-For Bloom, prioritize formats Eric can argue about naturally: bad stock theses, finance-bro nonsense, AI research quality, portfolio reasoning, retail investor psychology.
-
-### Daniel / Cal AI / Sway Playbook
-
-Before paying creators or building more product, check whether the concept can prove demand through content and a manual paid version. The durable lessons: distribution before product, spreadsheet-batched slideshow formats, three-screen product demos, content-niche app scoring, and influencer fit. Load `references/daniel-calai-sway-playbook.md` for the full playbook and Bloom adaptations. (Source: @JosephKChoi interview with Daniel from Cal AI/Sway, May 2026)
-
-Once a format proves out, hand it to creators via `whop-content-rewards` (managed tier). Skip this step only if you're scaling a format already validated in a prior batch.
-
-**Localization:** Use ChatGPT to translate hooks and overlays into Spanish, Portuguese, French, Arabic for international markets. Same content, 4-5x the reach. (Source: @alexcooldev, May 2026)
+> **Load on-demand:** `references/pre-creator-validation.md` for the full TikTok warmup process, virality predictor workflow, obsession filter checklist, and localization strategy.
 
 ---
 
@@ -441,36 +403,9 @@ One file per episode: `$CHARACTERS_DIR/<slug>/scripts/YYYY-MM-DD-episode-title.m
 
 ## Step 2d: Viral Breakdown Pillar
 
-This is a full account pillar — not a one-off format. Run it every week.
+Weekly pillar: react to and annotate 1-3 viral posts in your niche with dual-screen format. Use on-screen keyword labels ("HOOK", "OPEN LOOP", "SOCIAL PROOF") as retention devices. Label every piece "pt 1" for series architecture.
 
-**How it works:**
-- Pick 1–3 viral posts in your niche each week
-- React to + annotate them in dual-screen format (your face/commentary + the source post side by side)
-- Explain the *specific mechanics* of why it worked — not "it's good," but "the credibility drop at 0:08 + the stacked loop at 0:14 are why retention holds past 30 seconds"
-- Label every piece "pt 1" even if there's no pt 2 yet — it signals series, invites return visits, and the algorithm treats it as episodic
-
-**Why it compounds:**
-| Benefit | Mechanism |
-|---------|-----------|
-| Borrowed traffic | Your content surfaces in searches and feeds for the source post's audience |
-| Authority positioning | You're the person who understands the craft, not just a consumer |
-| Series architecture | Built-in return reason; viewers expect more installments |
-
-**Format:** Dual-screen reaction (split-screen or side-by-side layout). If screen recording isn't possible, show the source clip and annotate with on-screen text labels while reacting verbally.
-
-**On-screen keyword labels (retention device):** As you narrate your breakdown, flash bold single-word or short-phrase labels on screen that name the tactic being used: "HOOK", "AVATAR", "MESSAGING", "OPEN LOOP", "SOCIAL PROOF", etc. This serves three purposes:
-1. Viewers feel like they're learning a *system*, not just watching a reaction
-2. Labels create visual rhythm that sustains attention through the middle of the video (the retention dead zone)
-3. Each label is a micro-open-loop: the viewer wants to understand *why* you labeled it that, so they keep watching
-
-Place labels at the moment you identify the tactic, not before. Let the source video play 2-3 seconds first, then drop the label as your "aha" moment. Use bold white or colored text, large enough to read on mobile, centered or near the source video panel.
-
-**Bloom-specific example:**
-- Source: viral TikTok of someone showing their Robinhood portfolio down 40% (2M+ views)
-- Labels you'd drop: "LOSS AVERSION" (the emotional hook), "ROUND NUMBER" (they lost exactly $10K, not $9,847), "SCREENSHOT FORMAT" (looks organic, not produced), "NO CTA" (the virality IS the content, no ask)
-- Your commentary: explain each label as an investing psychology + content strategy concept simultaneously. Double value for the viewer.
-
-**Sourcing:** Use `last30days`, `grok-search`, or `last30days` to find viral posts in the investing/personal finance niche weekly. Look for 50K+ views, especially from accounts under 10K followers (pre-algo signal).
+> **Load on-demand:** `references/viral-breakdown-pillar.md` for the full format, on-screen labels technique, and Bloom-specific examples.
 
 ---
 
@@ -495,39 +430,21 @@ For visual consumer apps, lead with the aspirational result, then reveal the ord
 
 ## Step 2f: Repeatable Daily Format (The Oasis Model)
 
-Most creators chase variety. The highest-growth accounts do the opposite: one format, repeated daily, with only the subject changing.
+Most creators chase variety. The highest-growth accounts do the opposite: one format, repeated daily, with only the subject changing. Two case studies prove this: @oasishealthapp (30M views, 232 identical Reels, $23K/month MRR) and Suno AI creators running "turning texts into songs" at part 65+.
 
-**Case study:** @oasishealthapp — 30M views, 232 Reels, $23K/month MRR. Every single video follows the same structure: test a popular water brand, reveal contaminants, show a score, recommend alternatives. The format never changes. The brand being tested changes.
+Generalized pattern: `[raw material with built-in curiosity] + [AI/tool transformation] + [serial numbering] = compounding series`
 
-**Why repetition beats variety:**
-- The algorithm rewards predictable quality over creative range
-- Viewers know what to expect, so they return (series architecture)
-- Production cost drops to near zero after the first video
-- You optimize one funnel instead of reinventing constantly
-- 232 videos at the same format means 232 data points on what hooks work within that format
+Bloom candidates: "I ran [ticker] through Bloom's AI," "I tested [guru]'s stock pick," or "[Trending stock] — what the AI actually sees." Pick ONE. Run it for 30 days before adding a second format.
 
-**How to build a repeatable format:**
+> **Load on-demand:** `references/repeatable-daily-format.md` for both case studies, the Serialized AI Transformation Pattern table, how to build a repeatable format, part numbering strategy, referral-as-gate loop, and emotional paywall sequencing.
 
-1. **Pick one content structure** that maps to your product's core value (see hooks skill: "Familiar Brand as Villain" for a proven template)
-2. **Define the variable** — the one thing that changes per video (Oasis: the water brand. Bloom: the stock/ticker/guru)
-3. **Hardcode everything else** — intro pattern, data reveal sequence, CTA placement, music, pacing
-4. **Batch production** — once the template exists, produce 10-20 videos per session by swapping the variable
-5. **Post daily** — consistency > quality for algorithm favor. 1-2 posts/day minimum
-6. **Track per-variable performance** — which subjects drive the most views? Double down on those categories
-7. **Variant rule for paid:** when one creative wins, keep the hook and reveal structure fixed. Make 10-12 variants by swapping the person, subject, story, ticker, or result. Creative iteration beats campaign tinkering. (Source: @athcanft X guide, Apr 2026)
+---
 
-**The self-sustaining content loop:**
-```
-Content → App Downloads → Product Usage Data → More Content
-```
-Oasis: lab tests → videos → downloads → subscription revenue → fund more lab tests. Bloom: AI analysis → videos → downloads → usage data → more analysis to feature in videos.
+## Step 2g: Conversion Bridge (Views → Install → Payment)
 
-**Bloom's repeatable format candidates:**
-- "I ran [ticker] through Bloom's AI" — score reveal + what it caught
-- "I tested [guru/influencer]'s stock pick" — AI vs human analysis
-- "[Trending stock] — what the AI actually sees" — timely hook + evergreen format
+Views without installs = entertainment. CTA patterns vary by format: cold traffic should never see "download now" (let them ask what the product is), while warm audiences get direct CTAs. Diagnose drop-offs by funnel step: views → profile visits → link clicks → installs.
 
-Pick ONE. Run it for 30 days before evaluating or adding a second format.
+> **Load on-demand:** `references/conversion-bridge.md` for CTA patterns by format, profile-visit funnel benchmarks, discount bounce-back tactic, and comment-as-distribution mechanic.
 
 ---
 
@@ -537,8 +454,7 @@ Don't write here. Route to the right skill.
 
 | Content Type | Skill |
 |-------------|-------|
-| Tweets / X posts | `writer` |
-| Articles / long-form | `writer` |
+| Tweets, X posts, articles, long-form | `writer` |
 | TikTok slideshows | video skills |
 | Hooks and headlines | `hooks` |
 | Ad copy (paid) | `copywriting` |
@@ -550,143 +466,36 @@ Don't write here. Route to the right skill.
 
 ## Step 4: Distribute
 
-| Platform | Tool |
-|---------|------|
-| LinkedIn, X, Threads | `typefully` skill |
-| TikTok | video skills / ReelFarm |
+| Platform | Tool | Cadence |
+|---------|------|---------|
+| LinkedIn, X, Threads | `typefully` skill | 1/day (LI, Threads), 2/day (X) |
+| TikTok | video skills / ReelFarm | 2-3/day |
 
-**Queue minimums:**
+Batch at least 7 days per session. If queue drops below 3 days, refill immediately.
 
-| Platform | Min Queue | Cadence |
-|---------|-----------|---------|
-| LinkedIn | 7 posts | 1/day |
-| X | 14 posts | 2/day |
-| TikTok | 14-21 posts | 2-3/day |
-| Threads | 7 posts | 1/day |
-
-Batch at least 7 days per session. Never schedule one post at a time. If queue drops below 3 days, refill immediately.
-
-**TikTok at scale:** Batch-create 10-30 pieces per session. Source visuals from Pinterest/Freepik, generate hooks via ChatGPT, assemble in Canva, schedule via Postiz (open-source). For new accounts, use Postiz for drafts only and post manually from the phone. Automate posting only on trusted, established accounts. Some operators run multiple accounts per app targeting different niches/markets; note that coordinated multi-account strategies may violate TikTok's TOS on inauthentic behavior, so evaluate risk and maintain genuine, distinct content per account. (Source: @alexcooldev, May 2026)
-
-> **Load on-demand:** `references/calendar-batching.md` for scheduling strategy and optimal posting times.
+> **Load on-demand:** `references/calendar-batching.md` for scheduling strategy, optimal posting times, and TikTok-at-scale batch production.
 
 ### Geo-Targeting (Instagram / Reels)
 
-Most brands compete in the same saturated metros. Regional markets have lower CPMs, less competition, and engaged audiences who see far less branded content.
+Regional markets have lower CPMs, less competition, and more engaged audiences. Use native location tags (business districts, not just city names) for zero-cost discovery.
 
-**Layer 1 — Native location tags (fully compliant):**
-- Use Instagram's existing location tag library; attach regional business district tags (not just city name) when posting
-- Target specific coworking hubs, financial districts, tech clusters — not "New York City"
-- Surfaces content in location-specific story feeds and Explore pages at zero additional media spend
-
-**Layer 2 — Custom location tags (gray area):**
-- Create new tags via Facebook check-in + VPN to target underserved areas with no existing tag
-- Carries account-level risk if pattern is detectable; vary IP patterns, ensure content is genuinely relevant
-
-**Localization rules (content must feel native, not just tagged):**
-- Adapt industry context reference in the hook to match dominant industry in target city
-- Adapt business size + operational framing to local business profile
-- Adjust tone register: warmer/relationship-oriented in southern markets, direct/efficiency-focused in northern/western
-
-**4-Phase Regional Batch Framework:**
-1. **Market selection** — use Instagram Insights for existing follower geography + check location tag feed competition. Pick 8–12 test markets.
-2. **Production** — write base script, adapt 2–3 localization elements per variant (hook industry ref, operational framing, pain point language). Tag to specific business districts. Schedule at local peak hours (6:30–8:30am, 12–1:30pm, 6:30–9pm local time).
-3. **Evaluate (weeks 2–4)** — rank markets by organic discovery rate + engagement quality. Top 3–5 markets get paid amplification.
-4. **Deepen** — produce second-generation content for winning markets with deeper localization; expand test cohort using learnings.
+> **Load on-demand:** `references/geo-targeting.md` for the full 4-Phase Regional Batch Framework, localization rules, and custom location tag strategy.
 
 ---
 
 ## Step 5: Analyze & Optimize
 
-### Decision Rules (Post Level)
+Use the Two-Axis Diagnostic (views × conversions) to classify every piece of content and decide: scale, tweak, or drop. Track hooks, CTAs, and angles in a leaderboard. Compound winners by recombining proven parts (swap hooks, change formats, shift awareness levels). Run a Monthly Pillar Review on the 1st.
 
-| Views | Action |
-|-------|--------|
-| 50K+ | DOUBLE DOWN — make 3 variations immediately |
-| 10K-50K | Good — keep in rotation, test small tweaks |
-| 1K-10K | Okay — try 1 variation before dropping |
-| <1K (twice) | DROP — radically different approach needed |
+Key decision rules: 50K+ views = double down immediately. <1K twice = full reset. High views + low conversions = CTA problem. Low views + high conversions = hook problem.
 
-**Volume math (creator programs):** You can't predict which video goes viral. But out of 500 videos, 3-5 will break through. Out of 1,800 videos/month, 15-20 cross 100K views and 3-5 cross 1M. The app at $2.7M MRR got there from 15,000+ videos over 18 months. This is math, not luck. (Source: @lucaspatiri_, May 2026)
-
-### Weekly Creator Review
-
-Run this every week when managing creator programs:
-
-1. **Views per creator** — who's performing, who's stalling
-2. **Views per hook** — which hooks drive views across all creators
-3. **Views per format** — talking head vs POV vs reaction vs demo
-4. **Account health** — which accounts are growing vs plateauing
-
-Actions: Rotate out underperformers after 2 weeks. Send winning hooks to ALL creators. When one creator cracks a viral format, every other creator copies it by end of week. See `whop-content-rewards` skill for the full creator briefing method (hooks not scripts).
-
-Source: @lucaspatiri_ (May 2026)
-
-### Two-Axis Diagnostic
-
-| Views | Conversions | Diagnosis | Fix |
-|-------|-------------|-----------|-----|
-| High | High | Scale it | Make variations, increase frequency |
-| High | Low | CTA problem | Hook works, downstream is broken |
-| Low | High | Hook problem | Content converts, needs more reach |
-| Low | Low | Full reset | Try radically different approach |
-
-### Hook Evolution Loop
-
-Track hook text, CTA, platform, and view/conversion data in `hook-performance.json`. Over time this reveals which hook + CTA combos actually drive results.
-
-### Angle Leaderboard and Creative Compounding
-
-Source: @adamtaylorl X article on beating Meta creative fatigue, May 2026.
-
-Do not let winners die in isolation. When a creative works, log the source, format, concept, angle, hook, persona, awareness level, visual structure, CTA, spend, views, CTR, CVR, CPA, and revenue. Use that as an Angle Leaderboard.
-
-Compound winners by recombining proven parts:
-- swap a winning hook onto a previous winning body
-- turn a winning video into a static
-- scale a winning angle into a new format
-- keep the customer language, but change the visual proof
-- keep the visual proof, but move it to a different awareness level
-
-Congruency rule for statics: the largest visual element must match the specific desire in the headline. If the headline changes from generic relief to `back on the golf course`, the image must show the golf course desire, not a generic product benefit.
-
-### Walk-Away Positioning
-
-Source: Naval Ravikant, `Sell the Truth`, nav.al/sell, May 2026.
-
-Some offers get more credible when they preserve the buyer's optionality and show a willingness to walk away. This is useful for high-trust products, creator partnerships, investor-facing content, and premium offers.
-
-Content moves:
-- Publish honest bad-fit criteria.
-- Explain the dealbreakers before the benefits.
-- Focus on upside and long-term alignment, not extracting the maximum small concession now.
-- Avoid desperation CTAs. If the audience is wrong, let them self-select out.
-
-Bloom examples:
-- `Bloom is not a stock-picking signal. It is a reasoning layer.`
-- `If you want guaranteed trades, skip this.`
-- `If you want to understand why you own what you own, this is for you.`
-
-### Monthly Pillar Review (Run on the 1st)
-
-Run 3-5 pillars at once. A pillar = one concept + 1-2 formats.
-
-| Status | Criteria | Action |
-|--------|---------|--------|
-| SCALE | High views + high conversions | Increase frequency |
-| KEEP | Decent and stable | Hold cadence |
-| ELEVATE | Underperforming but sound concept | Change one lever: hook, format, or value density |
-| ROTATE OUT | 2+ months underperforming after elevation | Move to bench |
-
-Retired pillars aren't deleted. Keep `tiktok-marketing/pillar-bench.json` and revisit quarterly.
-
-> **Load on-demand:** `references/analytics-loop.md` and `references/feedback-loop.md` for tracking setup and optimization details.
+> **Load on-demand:** `references/analyze-optimize.md` for decision rules table, weekly creator review, Two-Axis Diagnostic, Hook Evolution Loop, Angle Leaderboard, Walk-Away Positioning, and Monthly Pillar Review.
 
 ---
 
 ## References (Load On-Demand)
 
-Load the relevant file in `references/` when you need implementation detail: analytics/feedback loops, calendar batching, monetization, competitor research, creative research, ad formats, copywriting formulas, content formats, distribution, geo-targeting, interactive content, TikTok warmup, or the Daniel Calai/Sway playbook.
+Load the relevant file in `references/` when you need implementation detail: analytics/feedback loops, calendar batching, monetization, competitor research, creative research, ad formats, copywriting formulas, content formats, distribution, geo-targeting, interactive content, TikTok warmup, the Daniel Calai/Sway playbook, Bloom organic growth case studies (real creator data, verified TikTok accounts, hook patterns that drove downloads), or the Glam Up case study (referral-as-gate, emotional paywall sequencing, price increase paradox, UGC creator playbook).
 
 ---
 
@@ -698,4 +507,4 @@ Load `references/examples-and-tier-lists.md` when you need a complete strategy-c
 
 ## Related Skills
 
-Use adjacent skills as needed: `hooks`, `copywriting`, `writer`, `writer`, video skills, `typefully`, `last30days`, `grok-search`, `last30days`, web search, and `character-creation`.
+Use adjacent skills as needed: `hooks`, `copywriting`, `writer`, `typefully`, `last30days`, `grok-search`, and `character-creation`.

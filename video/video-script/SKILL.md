@@ -110,6 +110,10 @@ Hook → rapid clips → CTA
 Brand shot → Data reveal → Score climax → Alternative CTA
 The subject being tested is the hook (pick brands everyone knows and has opinions on). Data is the drama — make the score reveal feel like a climax, not a footnote. The product appears only at the end as "the tool I used to find this." This format is infinitely repeatable: same structure, different brand/ticker/guru each video. Source: @oasishealthapp (30M views, 232 videos, identical format). Best for: products with data/analysis at their core (fintech, health, comparison tools).
 
+**Emotional transformation (30-60s)**
+"Before [PRODUCT]" struggle → "After [PRODUCT]" text → Brief app UI flash → Creator thriving with the product as collaborator
+The entire ad is about how the product changes how the creator FEELS, not what it does. Structure: ~80% emotion (frustration → joy → confidence), ~20% product proof (quick UI/feature flash, just enough to show it's real). The product demo exists only to prove legitimacy. Key payoff: the creator uses their original skill WITH the AI tool (not replaced by it). No CTA at the end — the brand name is embedded in the "Before/After" text overlay, and the emotional payoff IS the CTA. End on the creator thriving, not a download prompt. Source: Suno "Before/After" ad (May 2026). Best for: AI creative tools, learning apps, any product where the transformation is emotional, not functional.
+
 ### Timing rules
 
 - **Scene 1 (Hook):** 1-3 seconds. Ruthlessly short. If you can say it in 1 second, don't use 3.
@@ -137,6 +141,7 @@ Choose the source type based on what the visual demands:
 - **screen-recording:** Product demos, app walkthroughs. Use for any scene showing the actual product.
 - **image overlay:** Static images, logos, screenshots, text cards. Use for data slides, app store screenshots, brand moments.
 - **talking-head:** Character or person on camera. Requires a character slug or live footage.
+- **contact-sheet:** AI-generated video using a contact sheet for cross-shot consistency. Write as `contact-sheet frame-N + seedance/kling "motion prompt"`. Use when a character or product must look identical across 3+ shots. See `references/contact-sheet-method.md` for the full workflow.
 
 ### Caption highlights
 
