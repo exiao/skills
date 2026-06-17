@@ -147,17 +147,24 @@ find ~/.hermes/episodes -name "*.md" -mtime +90 -delete
 find ~/.hermes/sessions -name "*.jsonl" -mtime +180 -delete
 ```
 
-### 8. Enforce 80% capacity target
+### 8. Enforce capacity target
 
-After all removals and drains, check the current size of MEMORY.md:
+After all removals and drains, check the current size of MEMORY.md and read the
+configured limit from config (do NOT hardcode it — it has changed over time,
+e.g. 6000 → 8000):
 
 ```bash
 wc -c ~/.hermes/memories/MEMORY.md
+LIMIT=$(grep -E '^\s*memory_char_limit:' ~/.hermes/config.yaml | grep -oE '[0-9]+')
+echo "limit=$LIMIT target(70%)=$((LIMIT*70/100))"
 ```
 
-The configured limit is 6000 chars. The target is 80% = 4800 chars.
+The target is **70% of the configured limit** (limit 8000 → target 5600).
+Compute it from `$LIMIT`, never from a memorized number. GC must always leave
+the file below 100% of the limit — parking at 99% is the exact failure mode
+this step exists to prevent.
 
-If the file exceeds 4800 chars, you MUST evict entries to get below the target.
+If the file exceeds the target, evict entries.
 Eviction priority (evict from top priority first):
 1. `[env]` entries older than 21 days (even if still accurate; they can be re-added if needed)
 2. `[proj:*]` entries older than 14 days
@@ -170,10 +177,37 @@ regardless of age. Prefer entries whose content is also captured in a dedicated
 memory file (e.g., `~/.hermes/memories/cpe-research.md`) or in a skill, since
 those can be re-derived.
 
-Before removing, copy evicted entries to `~/.hermes/episodes/.pending.md` in
-the format `MemoryStore\t<content>` so they can potentially be restored later.
+**`[pref]` relocation (the file-stays-at-98% failure mode).** A hot-memory file
+dominated by `[rule]` + `[meta]` + long project `[pref]` entries cannot be
+brought to target by the env/proj/fact ladder above — those are a small slice
+of the bytes. When the file is still over target after that ladder, treat long
+**project-scoped** `[pref]` entries as relocation candidates (NOT eviction —
+prefs encode user-approved decisions, so move them, don't drop them): append the
+content as a dated bullet to the project's dedicated memory file (e.g. Bloom
+prefs → `bloom-architecture.md`), archive the original to `.gc.log`, then remove
+it from MEMORY.md. Generic cross-project prefs stay hot but get a lossless
+shortening pass. Never relocate a `[rule]` — rules are behavioral constraints
+that must stay in the system prompt every session.
 
-Keep evicting until the file is at or below 4800 chars, or only `[rule]` and `[meta]` entries remain.
+**Protected-floor guard (never silently park at 98%).** Compute the byte total
+of `[rule]` + `[meta]` entries alone. If that floor already exceeds the 70%
+target, the target is unreachable without shortening protected entries:
+1. Losslessly shorten the longest `[rule]`/`[meta]` entries (preserve dates,
+   categories, force, and behavioral meaning) until the file is under 100% of
+   the limit.
+2. Relocate every project-scoped `[pref]` per the rule above.
+3. If still over the 70% target, do not loop forever — stop at the lowest
+   achievable byte count and **flag it in the final report** ("protected floor
+   N chars exceeds 70% target M; durable rule set has outgrown hot memory,
+   consider raising memory_char_limit"). Parking just-under-limit with a flag is
+   correct here; parking at 98% with no flag is the bug this guard prevents.
+
+Before removing, archive evicted entries to `~/.hermes/episodes/.gc.log`. Do NOT
+copy evicted entries back to `.pending.md` — that creates a feedback loop where
+entries bounce between MEMORY.md and pending indefinitely.
+
+Keep evicting/relocating until the file is at or below the 70% target, or only
+`[rule]` and `[meta]` entries remain.
 
 ### 9. Log and report
 
