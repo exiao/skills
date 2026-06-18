@@ -238,6 +238,9 @@ Your final response:
 - Never `remove` something whose content you do not understand. Keep it.
 - If MEMORY.md / USER.md is malformed (no entries parse), stop immediately
   and report. Do not attempt repair.
-- All filesystem commands target only `~/.hermes/episodes` and
-  `~/.hermes/sessions`. Never touch `hermes-agent`, `skills`, `plans`,
+- All filesystem **writes/deletes** target only `~/.hermes/episodes` and
+  `~/.hermes/sessions`. Never modify `hermes-agent`, `skills`, `plans`,
   `config.yaml`, `.env`, or anything outside those two directories.
+  Read-only reads needed by this skill are exempt: reading `config.yaml` for the
+  size limit (step 8) and reading `~/.hermes/memories/*.md` for byte counts is
+  fine — the rail forbids writing outside the two dirs, not reading.
