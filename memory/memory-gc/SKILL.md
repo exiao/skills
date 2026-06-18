@@ -32,7 +32,9 @@ editing via `FilePatch` on `~/.hermes/memories/MEMORY.md`. When using FilePatch:
 - If the entry is the LAST in the file (no trailing `§`), remove just the entry
   text and the preceding `\n§\n` from the entry above it.
 - Clean up resulting blank lines with `sed -i '' '/^$/d'` afterward.
-- The same safety rails apply: never touch `[rule]` or `[meta]` entries.
+- The same safety rails apply: never touch `[rule]` or `[meta]` entries
+  (except the step-8 protected-floor guard, which may losslessly *shorten* them,
+  never remove).
 
 **Pitfall — multibyte characters:** MEMORY.md may contain unicode (arrows,
 special chars in old entries). Use Python for age computation rather than
