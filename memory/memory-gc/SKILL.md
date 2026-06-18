@@ -155,7 +155,8 @@ e.g. 6000 → 8000):
 
 ```bash
 wc -c ~/.hermes/memories/MEMORY.md
-LIMIT=$(grep -E '^\s*memory_char_limit:' ~/.hermes/config.yaml | grep -oE '[0-9]+')
+LIMIT=$(grep -E '^\s*memory_char_limit:' ~/.hermes/config.yaml 2>/dev/null | grep -oE '[0-9]+' | head -1)
+LIMIT=${LIMIT:-8000}
 echo "limit=$LIMIT target(70%)=$((LIMIT*70/100))"
 ```
 
@@ -184,10 +185,13 @@ of the bytes. When the file is still over target after that ladder, treat long
 **project-scoped** `[pref]` entries as relocation candidates (NOT eviction —
 prefs encode user-approved decisions, so move them, don't drop them): append the
 content as a dated bullet to the project's dedicated memory file (e.g. Bloom
-prefs → `bloom-architecture.md`), archive the original to `.gc.log`, then remove
-it from MEMORY.md. Generic cross-project prefs stay hot but get a lossless
-shortening pass. Never relocate a `[rule]` — rules are behavioral constraints
-that must stay in the system prompt every session.
+prefs → `bloom-architecture.md`) **via the `memory` tool** (`target` = the
+filename, like Step 4 — never a raw shell append, which would trip the
+filesystem-scope safety rail), archive the original to
+`~/.hermes/episodes/.gc.log`, then remove it from MEMORY.md. Generic
+cross-project prefs stay hot but get a lossless shortening pass. Never relocate a
+`[rule]` — rules are behavioral constraints that must stay in the system prompt
+every session.
 
 **Protected-floor guard (never silently park at 98%).** Compute the byte total
 of `[rule]` + `[meta]` entries alone. If that floor already exceeds the 70%
@@ -226,7 +230,9 @@ Your final response:
 
 ## Safety rails
 
-- Never `remove` a `[rule]` or `[meta]` entry.
+- Never `remove` a `[rule]` or `[meta]` entry. They may be **losslessly
+  shortened** (preserving date, category, and behavioral meaning) only under the
+  protected-floor guard in step 8 — shortened, never removed.
 - Never `remove` something whose content you do not understand. Keep it.
 - If MEMORY.md / USER.md is malformed (no entries parse), stop immediately
   and report. Do not attempt repair.
