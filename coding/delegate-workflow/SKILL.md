@@ -6,7 +6,6 @@ author: Hermes Agent
 metadata:
   hermes:
     tags: [Orchestration, Workflows, Fault-Tolerance, Checkpointing, Multi-Agent, Billing-Proxy]
-    related_skills: [claude-workflows, codex]
 ---
 
 # Delegate Workflow: durable multi-agent orchestration in Hermes
@@ -16,17 +15,17 @@ metadata:
 - **Retry is ad-hoc.** A bad/dead subagent result gets "fixed" by the agent noticing and re-prompting, differently each run.
 - **Results clog context.** Every subagent transcript lands in the window; a 50-agent fan-out degrades the orchestrator past ~70% context.
 
-Claude Code's `ultracode` workflows solve this by moving the plan into a script (see `claude-workflows` skill). This skill does the same thing **natively in Hermes**: a checkpointing Python driver where each "agent" call is a tool-less POST to the local billing proxy. Same durability, you own the driver, it's eval-able, and it uses your subscription quota via the normal billing path (no Claude Code spend cap).
+Claude Code's `ultracode` workflows solve this by moving the plan into a script. This skill does the same thing **natively in Hermes**: a checkpointing Python driver where each "agent" call is a tool-less POST to the local billing proxy. Same durability, you own the driver, it's eval-able, and it uses your subscription quota via the normal billing path (no Claude Code spend cap).
 
 ## When to use this vs alternatives
 
 - **Inline `TaskDelegate` fan-out**, the right tool for "do these 6 independent things now, I'm waiting." No durability needed. Don't reach for this skill.
 - **This skill (delegate-workflow)**, recurring/ownable orchestration that must survive a restart, run unattended, fan out large, or apply a structured verify/vote. E.g. the CPE memo verify gate, a codebase-wide sweep you run weekly, a 100-claim fact-check.
-- **Claude Code `ultracode`** (`claude-workflows` skill), one-off "just sweep this" where you don't want to hand-write a driver and the model can generate the script. Downside: experimental, opaque, hits Claude spend caps.
+- **Claude Code `ultracode`**, one-off "just sweep this" where you don't want to hand-write a driver and the model can generate the script. Downside: experimental, opaque, hits Claude spend caps.
 
 ## The pattern (three mechanisms)
 
-1. **Agent = tool-less proxy POST.** A plain Python script cannot call `TaskDelegate` (that's the agent's tool alone). But it CAN POST to `http://127.0.0.1:18801/v1/messages` with **no `tools` field**, that's the Hermes-native `agent()`. Omitting `tools` is mandatory: the proxy injects Claude-Code tool stubs when it sees `"tools":[`, which 400s (see `claude-code` skill pitfall #13). Model: haiku for cheap mechanical stages, sonnet/opus only where reasoning matters.
+1. **Agent = tool-less proxy POST.** A plain Python script cannot call `TaskDelegate` (that's the agent's tool alone). But it CAN POST to `http://127.0.0.1:18801/v1/messages` with **no `tools` field**, that's the Hermes-native `agent()`. Omitting `tools` is mandatory: the proxy injects Claude-Code tool stubs when it sees `"tools":[`, which 400s. Model: haiku for cheap mechanical stages, sonnet/opus only where reasoning matters.
 2. **Checkpoint per call.** Keep a `checkpoint.json` mapping a stable `key` → result. Before running an agent call, check the checkpoint; if the key is present, return the cached result. Write the checkpoint (atomically, via `os.replace`) immediately after each successful call. This IS the durability + resume: a kill mid-run leaves completed calls cached, and re-running skips them.
 3. **Structured retry + adversarial verify.** Retry each call 3x with backoff, deterministically. For quality (the one thing plain fan-out lacks), run a verify phase: independent agents try to REFUTE each finding and vote; a claim survives only on majority-support.
 
@@ -60,4 +59,4 @@ Run it, kill it mid-phase, re-run without `--reset`: it resumes from `checkpoint
 
 ## Skill source
 
-Built and crash-tested in Hermes this session as the native counterpart to Claude Code dynamic workflows. Companion: `claude-workflows` (the CC path + its runtime internals). To extend: add phases to the reference driver; keep the checkpoint/retry/no-tools invariants.
+Built and crash-tested in Hermes this session as the native counterpart to Claude Code dynamic workflows. To extend: add phases to the reference driver; keep the checkpoint/retry/no-tools invariants.

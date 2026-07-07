@@ -7,7 +7,7 @@ kill mid-run resumes without re-doing completed work.
 
 Usage: python3 workflow_harness.py [--reset]
 """
-import json, os, sys, time, hashlib, urllib.request, urllib.error
+import json, os, sys, time, hashlib, urllib.request, urllib.error, threading
 from concurrent.futures import ThreadPoolExecutor
 
 PROXY = "http://127.0.0.1:18801/v1/messages"
@@ -25,22 +25,29 @@ CLAIMS = [
 # ---- checkpoint: the durability mechanism ----
 def load_ckpt():
     if os.path.exists(CKPT):
-        return json.load(open(CKPT))
+        with open(CKPT) as f:
+            return json.load(f)
     return {"agents": {}}   # key -> result
 
 def save_ckpt(c):
     tmp = CKPT + ".tmp"
-    json.dump(c, open(tmp, "w"), indent=2)
+    with open(tmp, "w") as f:
+        json.dump(c, f, indent=2)
     os.replace(tmp, CKPT)
 
 CKPT_STATE = load_ckpt()
+# Serializes both CKPT_STATE mutation and the save_ckpt tmp-write/replace, so
+# concurrent agent threads (phase 1 runs under ThreadPoolExecutor) can't corrupt
+# the dict mid-dump or race on the shared checkpoint.json.tmp file.
+CKPT_LOCK = threading.Lock()
 
 def agent(key, prompt, max_tokens=400):
     """One agent call. Cached by key: if this key is in the checkpoint, skip the API call.
     THIS is what makes the workflow fault-tolerant + resumable."""
-    if key in CKPT_STATE["agents"]:
-        print(f"  [cached] {key}", flush=True)
-        return CKPT_STATE["agents"][key]
+    with CKPT_LOCK:
+        if key in CKPT_STATE["agents"]:
+            print(f"  [cached] {key}", flush=True)
+            return CKPT_STATE["agents"][key]
     print(f"  [run]    {key}", flush=True)
     body = json.dumps({"model": MODEL, "max_tokens": max_tokens,
                        "messages": [{"role": "user", "content": prompt}]}).encode()
@@ -49,10 +56,13 @@ def agent(key, prompt, max_tokens=400):
         try:
             req = urllib.request.Request(PROXY, data=body,
                 headers={"content-type": "application/json", "anthropic-version": "2023-06-01"})
-            r = json.load(urllib.request.urlopen(req, timeout=90))
-            text = r.get("content", [{}])[0].get("text", "").strip()
-            CKPT_STATE["agents"][key] = text
-            save_ckpt(CKPT_STATE)   # checkpoint immediately, per call
+            with urllib.request.urlopen(req, timeout=90) as resp:
+                r = json.load(resp)
+            content = r.get("content") or [{}]
+            text = content[0].get("text", "").strip()
+            with CKPT_LOCK:
+                CKPT_STATE["agents"][key] = text
+                save_ckpt(CKPT_STATE)   # checkpoint immediately, per call
             return text
         except Exception as e:
             last = e; time.sleep(1.5 * (attempt + 1))
@@ -75,7 +85,10 @@ def phase2_verify(i, claim, research, vote):
         f"Claim: {claim}\nFacts: {research}\n"
         f'Reply with exactly one line: "VERDICT: SUPPORTED" or "VERDICT: REFUTED", then a 10-word reason.',
         max_tokens=80)
-    return "SUPPORTED" if "SUPPORTED" in out.upper().split("REASON")[0] else "REFUTED"
+    # Parse ONLY the VERDICT line, not the free-text reason: a reason like
+    # "not clearly supported by the facts" would otherwise flip REFUTED -> SUPPORTED.
+    verdict_line = next((ln for ln in out.upper().splitlines() if "VERDICT" in ln), out.upper())
+    return "SUPPORTED" if "SUPPORTED" in verdict_line else "REFUTED"
 
 def main():
     if "--reset" in sys.argv and os.path.exists(CKPT):
@@ -97,8 +110,8 @@ def main():
     table = "\n".join(f"{i+1}. [{verdicts[i]}] {CLAIMS[i]}" for i in range(len(CLAIMS)))
     print("\n=== FINAL VERDICTS ===")
     print(table)
-    json.dump({"verdicts": verdicts, "claims": CLAIMS}, open(
-        os.path.join(os.path.dirname(CKPT), "result.json"), "w"), indent=2)
+    with open(os.path.join(os.path.dirname(CKPT), "result.json"), "w") as f:
+        json.dump({"verdicts": verdicts, "claims": CLAIMS}, f, indent=2)
     print(f"\nagent calls in checkpoint: {len(CKPT_STATE['agents'])}")
 
 if __name__ == "__main__":
