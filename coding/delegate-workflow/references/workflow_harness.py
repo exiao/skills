@@ -73,22 +73,33 @@ def parallel(fns, workers=4):
         return list(ex.map(lambda f: f(), fns))
 
 # ---- the workflow (plan-in-code) ----
+def _claim_slug(claim):
+    # Fold the claim's identity into the checkpoint key so editing/reordering
+    # CLAIMS and resuming without --reset can't hit a cache entry computed for a
+    # DIFFERENT claim (index alone would silently return stale research/verdicts).
+    return hashlib.sha1(claim.encode()).hexdigest()[:10]
+
 def phase1_research(i, claim):
-    return agent(f"research:{i}", f"In 2-3 sentences, state the known facts relevant to "
+    return agent(f"research:{i}:{_claim_slug(claim)}", f"In 2-3 sentences, state the known facts relevant to "
                  f"evaluating this claim. Be specific with dates/numbers.\nClaim: {claim}")
 
 def phase2_verify(i, claim, research, vote):
     # adversarial: try to REFUTE, default refuted if uncertain
-    out = agent(f"verify:{i}:{vote}",
+    out = agent(f"verify:{i}:{_claim_slug(claim)}:{vote}",
         f"You are an adversarial fact-checker. TRY TO REFUTE this claim. If you cannot "
         f"clearly confirm it from the facts, default to REFUTED.\n"
         f"Claim: {claim}\nFacts: {research}\n"
         f'Reply with exactly one line: "VERDICT: SUPPORTED" or "VERDICT: REFUTED", then a 10-word reason.',
         max_tokens=80)
-    # Parse ONLY the VERDICT line, not the free-text reason: a reason like
-    # "not clearly supported by the facts" would otherwise flip REFUTED -> SUPPORTED.
-    verdict_line = next((ln for ln in out.upper().splitlines() if "VERDICT" in ln), out.upper())
-    return "SUPPORTED" if "SUPPORTED" in verdict_line else "REFUTED"
+    # Parse ONLY the label right after "VERDICT:", not the whole line: a reason on
+    # the same line ("VERDICT: REFUTED - not supported by the facts") would otherwise
+    # match "SUPPORTED" and flip the verdict. Take the first word after the colon.
+    label = ""
+    for ln in out.upper().splitlines():
+        if "VERDICT" in ln and ":" in ln:
+            label = ln.split(":", 1)[1].strip().split()[0] if ln.split(":", 1)[1].strip() else ""
+            break
+    return "SUPPORTED" if label == "SUPPORTED" else "REFUTED"
 
 def main():
     if "--reset" in sys.argv and os.path.exists(CKPT):

@@ -28,8 +28,9 @@ Find more skills: [OpenClaw](https://github.com/openclaw/openclaw/tree/main/skil
 
 | Category | Skills | Description |
 |----------|--------|-------------|
+| [ai-tools](ai-tools/) | 1 | Invoking other AI coding tools (Claude Code dynamic workflows) from Hermes |
 | [app-store](app-store/) | 28 | App Store Connect, ASO, screenshots, iOS simulators |
-| [coding](coding/) | 10 | PR babysitting, Sentry fixes, code review, simplification, deploy verification, adversarial UX testing, Ralph loops |
+| [coding](coding/) | 11 | PR babysitting, Sentry fixes, code review, simplification, deploy verification, adversarial UX testing, Ralph loops, durable multi-agent workflows |
 | [design](design/) | 33 | UI/UX, Impeccable design system, frontend design, slides, Excalidraw, brand identity, Remotion, stickers, ASCII art |
 | [external-services](external-services/) | 21 | Third-party API integrations and CLIs |
 | [investing](investing/) | 0 | Coming soon |

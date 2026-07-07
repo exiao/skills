@@ -6,7 +6,6 @@ author: Hermes Agent
 metadata:
   hermes:
     tags: [Claude-Code, Workflows, ultracode, Orchestration, Subagents, Billing-Proxy]
-    related_skills: [claude-code, codex]
 ---
 
 # Claude Code Dynamic Workflows from Hermes

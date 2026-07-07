@@ -46,12 +46,12 @@ def parallel(fns, workers=4):            # ThreadPoolExecutor
 # plan-in-code: phases call agent()/parallel(), results held in variables
 ```
 
-Run it, kill it mid-phase, re-run without `--reset`: it resumes from `checkpoint.json` and re-does zero completed work. Verified this session: killed after phase 1 (5 research calls cached), resumed, ran only the 15 verify + synthesize calls, orchestrator context only ever saw the final table.
+Run it, kill it mid-phase, re-run without `--reset`: it resumes from `checkpoint.json` and re-does zero completed work. Verified this session: killed after phase 1 (5 research calls cached), resumed, ran only the 15 verify calls, then synthesized the table locally (phase 3 makes no agent calls), orchestrator context only ever saw the final table.
 
 ## Pitfalls (learned building this)
 
 - **Adversarial "default-to-refuted" over-refutes true claims.** In the test run, "AMD MI300 uses HBM3" (TRUE) was wrongly REFUTED because the refute-default biases toward false-negatives. Before trusting a verify gate on real work (a memo), tune the threshold: require 3/3 to refute rather than defaulting refuted, or add a confirming pass. The bias is a property of the prompt, not a bug.
-- **Keys must be stable across runs.** The resume logic keys on the exact `key` string. Derive it from the work item (`f"verify:{i}:{vote}"`), never from a timestamp or random id, or nothing caches.
+- **Keys must be stable AND identity-bearing.** The resume logic keys on the exact `key` string. Derive it from the work item's identity (`f"verify:{i}:{_claim_slug(claim)}:{vote}"`, index PLUS a hash of the claim), never from a timestamp or random id (nothing caches) and never from index alone (editing/reordering the list silently returns a cache entry computed for a different item).
 - **Write the checkpoint atomically.** `json.dump` to a `.tmp` then `os.replace`, a crash mid-write otherwise corrupts the checkpoint and loses everything.
 - **Don't POST with a `tools` field.** Empties-or-not, the proxy stub-injection 400s. Tool-less calls only; if a stage needs tools, that stage belongs in a real `TaskDelegate`/kanban lane, not this harness.
 - **Background launch:** run the driver with `ShellExec(background=true, notify_on_complete=true)` and redirect to a log; poll the checkpoint for progress. Don't hold it in a foreground turn if it's long.
