@@ -2,7 +2,7 @@
 
 > License: MIT | [Intro to agent skills](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview) | [Free course](https://anthropic.skilljar.com/introduction-to-agent-skills) | [Complete guide](https://resources.anthropic.com/hubfs/The-Complete-Guide-to-Building-Skill-for-Claude.pdf)
 
-A curated collection of 140 skills for [Claude Code](https://docs.anthropic.com/en/docs/claude-code), [Hermes Agent](https://github.com/NousResearch/hermes-agent), and other skill-aware AI agents.
+A curated collection of 141 skills for [Claude Code](https://docs.anthropic.com/en/docs/claude-code), [Hermes Agent](https://github.com/NousResearch/hermes-agent), and other skill-aware AI agents.
 
 Skills are structured prompts that teach AI agents specialized workflows, from App Store optimization to video production to stock research. Each skill is a folder with a `SKILL.md` entry point that agents load on demand when a task matches the skill description.
 
@@ -29,7 +29,7 @@ Find more skills: [OpenClaw](https://github.com/openclaw/openclaw/tree/main/skil
 | Category | Skills | Description |
 |----------|--------|-------------|
 | [app-store](app-store/) | 28 | App Store Connect, ASO, screenshots, iOS simulators |
-| [coding](coding/) | 10 | PR babysitting, Sentry fixes, code review, simplification, deploy verification, adversarial UX testing, Ralph loops |
+| [coding](coding/) | 11 | PR babysitting, Sentry fixes, code review, simplification, deploy and feature verification, adversarial UX testing, Ralph loops |
 | [design](design/) | 33 | UI/UX, Impeccable design system, frontend design, slides, Excalidraw, brand identity, Remotion, stickers, ASCII art |
 | [external-services](external-services/) | 21 | Third-party API integrations and CLIs |
 | [investing](investing/) | 0 | Coming soon |
