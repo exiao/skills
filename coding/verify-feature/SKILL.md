@@ -106,6 +106,45 @@ harness (see `references/isolated-component-harness.md`) and shot-scraper THAT �
 component, never a mock. A UI change reported PASS with no attached capture is not
 verified; downgrade it to BLOCKED and say the capture step didn't run.
 
+### An interaction capture must perform the interaction it claims
+
+If the change is a CLICK (a link becoming clickable, a button, a flow), the video/capture
+has to actually PERFORM that click and show its RESULT — not reveal, scroll, and stop.
+A recording whose script only expands a `<details>`, toggles a "show all", or scrolls to
+bring the element into frame is a screenshot in motion; it proves the element is *visible*,
+never that it *works*. Before attaching a video, reread its own driver script: does a step
+click the exact target the claim is about, and does a later step capture what that click
+produced (the new page, the opened file, the changed state)? If not, the capture does not
+support a PASS for the interaction — it supports "renders", nothing more.
+
+Concrete miss: a "click flow" video that only clicked a `show all` toggle and parked the
+cursor on the one INERT element, never clicking the working links it was meant to prove.
+It was submitted as proof the links open their target. It wasn't.
+
+### `target="_blank"` / new-tab links defeat naive browser-click tools
+
+An anchor with `target="_blank"` opens a NEW tab/window. A `browser_click` on it commonly
+**hangs and times out** (the tool waits on same-tab navigation that never happens) or errors,
+because the result landed in a tab the tool isn't driving. That timeout is a TOOL limitation,
+not evidence the link is broken — and it is NOT permission to fall back to `curl` and then
+report "the browser click reached the route." curl proves the ROUTE serves; it says nothing
+about whether the ANCHOR the user clicks is wired to it. Keep the two claims separate. To
+actually observe the click-through, do one of:
+
+- assert the new tab/page: after the click, switch to the newly-opened target and capture
+  ITS content (the raw file/page the link points at), or listen on the browser network layer
+  for the request the click fires and record its status + content-type;
+- or drive it same-tab: in the record script, read the anchor's `href` and `page.goto` it (or
+  temporarily strip `target="_blank"` in the DOM before clicking) so the navigation is
+  observable and recordable;
+- or, if you genuinely cannot make the browser follow it, say so explicitly: "link → route
+  wiring confirmed by the anchor's href matching a curl-verified endpoint; the in-browser
+  click-through was NOT observed (new-tab tooling limitation)." That is an honest partial,
+  not a PASS on "clicking the link opens the target."
+
+Never merge a curl result and a failed browser click into a single sentence that implies the
+click succeeded.
+
 ## When you ARE the evaluator in a generator/evaluator loop
 
 If verification is happening inside an agent loop (a separate evaluator judging a
