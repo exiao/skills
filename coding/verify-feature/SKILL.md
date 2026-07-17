@@ -46,18 +46,18 @@ change to its surface and drive it there:
 
 | Change reaches | Surface | What you do |
 |----------------|---------|-------------|
-| CLI / TUI | terminal | type the command, capture the pane (ShellExec; `interactive-cli-driving` for prompts) |
+| CLI / TUI | terminal | type the command and capture the pane; drive prompts interactively when needed |
 | Server / API | socket | send the request, capture the response (curl/httpie) |
 | Web / UI (browser) | pixels | drive it and capture with **shot-scraper** — mandatory, see below |
 | iOS-native GUI | pixels | drive it (`ios-simulator`), screenshot |
+| Library | package boundary | exercise the public export — `import pkg`, NOT `import ./src/...` |
+| Prompt / agent config | the agent | run the agent, capture its behavior |
+| CI workflow | Actions | dispatch it, read the run |
 
 **Single component the full app can't build/reach?** When the change is one frontend
 component and the production build OOMs or the surface sits behind auth/a paywall, mount
 just that component in a throwaway Vite harness and screenshot the REAL component (not a
 mock). Recipe in `references/isolated-component-harness.md`.
-| Library | package boundary | exercise the public export — `import pkg`, NOT `import ./src/...` |
-| Prompt / agent config | the agent | run the agent, capture its behavior |
-| CI workflow | Actions | dispatch it, read the run |
 
 **Internal functions are not surfaces.** Something in the repo calls the changed
 function, and that caller ends at one of the rows above. Follow it there. A bash

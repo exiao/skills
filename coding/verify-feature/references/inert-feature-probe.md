@@ -49,7 +49,7 @@ grep -rln '<new_fn>\|<new_module>' .github/workflows/ <pipeline_entrypoint>.py \
 #   (empty -> nothing runs it -> dead code shipped green)
 ```
 
-## 5. Durability: does anything DEFEND the feature on the next run?
+## 4. Durability: does anything DEFEND the feature on the next run?
 
 The subtlest inert case passes probes 1-3 *today* and still rots. A one-time
 migration can make the real corpus fire now (e.g. 56/56 pages validate), but if a
@@ -79,7 +79,7 @@ Verdict: a feature that fires now but has no defending producer is **not done** 
 it needs the producer change (often in a different repo/module than the
 migration). Ship them together, or the migration is cosmetic.
 
-## 4. Adversary test for gates and validators
+## 5. Adversary test for gates and validators
 
 A gate is only as good as what it catches when someone is actually doing the
 wrong thing. Write the violation the way a real developer would write it (no
