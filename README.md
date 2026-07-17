@@ -2,7 +2,7 @@
 
 > License: MIT | [Intro to agent skills](https://platform.claude.com/docs/en/agents-and-tools/agent-skills/overview) | [Free course](https://anthropic.skilljar.com/introduction-to-agent-skills) | [Complete guide](https://resources.anthropic.com/hubfs/The-Complete-Guide-to-Building-Skill-for-Claude.pdf)
 
-A curated collection of 140 skills for [Claude Code](https://docs.anthropic.com/en/docs/claude-code), [Hermes Agent](https://github.com/NousResearch/hermes-agent), and other skill-aware AI agents.
+A curated collection of 142 skills for [Claude Code](https://docs.anthropic.com/en/docs/claude-code), [Hermes Agent](https://github.com/NousResearch/hermes-agent), and other skill-aware AI agents.
 
 Skills are structured prompts that teach AI agents specialized workflows, from App Store optimization to video production to stock research. Each skill is a folder with a `SKILL.md` entry point that agents load on demand when a task matches the skill description.
 
@@ -34,7 +34,7 @@ Find more skills: [OpenClaw](https://github.com/openclaw/openclaw/tree/main/skil
 | [external-services](external-services/) | 21 | Third-party API integrations and CLIs |
 | [investing](investing/) | 0 | Coming soon |
 | [memory](memory/) | 3 | Memory management for persistent agents |
-| [skills-meta](skills-meta/) | 9 | Meta-skills for creating and improving other skills |
+| [skills-meta](skills-meta/) | 11 | Meta-skills for creating, improving, and auditing other skills, personas, and context files |
 | [thinking](thinking/) | 7 | Brainstorming, office hours, user studies, planning |
 | [video](video/) | 18 | Character creation, video editing, production (Kling, Sora, Remotion, ElevenLabs), YouTube content |
 | [writing](writing/) | 11 | Writing, copywriting, content strategy, editing, content evaluation, hooks, outlines, positioning, content pipeline |
