@@ -339,6 +339,7 @@ This skill content is modularized into reference docs for readability.
 - [TikTok Video Hooks (First 1-3 Seconds)](references/tiktok-video-hooks-first-1-3-seconds.md)
 - [Remix Strategy (Alex Ruber)](references/remix-strategy-alex-ruber.md)
 - [The Moneyball Method for Hooks (Social Growth Engineers)](references/the-moneyball-method-for-hooks-social-growth-engineers.md)
+- [Hook Sourcing Pipeline (SGE)](references/hook-sourcing-pipeline.md) — the four supply lines that feed the hook bank: competitor replication (incl. cross-language arbitrage), influencer comment mining, pain-point-to-audience-language, and open prompts. Read this when you're staring at a blank page or the bank has gone stale.
 - [13 Engagement Farming Strategies (SGE)](references/13-engagement-farming-strategies-sge.md)
 - ["Too Good To Be True" Hook Formula (SGE)](references/too-good-to-be-true-hook-formula-sge.md)
 - [Comparison Hook (SGE)](references/comparison-hook-sge.md)
