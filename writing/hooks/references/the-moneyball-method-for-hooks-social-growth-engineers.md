@@ -2,6 +2,8 @@
 
 Don't start from scratch. Source hooks scientifically, like Billy Beane sourced undervalued players.
 
+> The four concrete supply lines that feed this process are in [Hook Sourcing Pipeline](hook-sourcing-pipeline.md).
+
 ### The Process
 1. **Source content from competitors** — pull hooks from similar apps/accounts in your vertical
 2. **Source UGC/creator hooks** — find what creators are saying about competitor products
