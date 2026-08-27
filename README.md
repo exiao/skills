@@ -31,7 +31,7 @@ Find more skills: [OpenClaw](https://github.com/openclaw/openclaw/tree/main/skil
 | [app-store](app-store/) | 28 | App Store Connect, ASO, screenshots, iOS simulators |
 | [coding](coding/) | 11 | PR babysitting, Sentry fixes, code review, simplification, deploy and feature verification, adversarial UX testing, Ralph loops |
 | [design](design/) | 33 | UI/UX, Impeccable design system, frontend design, slides, Excalidraw, brand identity, Remotion, stickers, ASCII art |
-| [external-services](external-services/) | 21 | Third-party API integrations and CLIs |
+| [external-services](external-services/) | 22 | Third-party API integrations and CLIs |
 | [investing](investing/) | 0 | Coming soon |
 | [memory](memory/) | 3 | Memory management for persistent agents |
 | [skills-meta](skills-meta/) | 9 | Meta-skills for creating and improving other skills |
@@ -80,6 +80,7 @@ Skills in this repo integrate with the following third-party services and tools:
 
 | Skill | Service |
 |-------|---------|
+| [atlas-cloud](external-services/atlas-cloud/) | [Atlas Cloud](https://www.atlascloud.ai/) |
 | [apple-search-ads](external-services/apple-search-ads/) | [Apple Search Ads](https://searchads.apple.com) |
 | [app-store-connect](app-store/app-store-connect/) | [App Store Connect API](https://developer.apple.com/app-store-connect/api/) |
 | [appfigures-cli](external-services/appfigures-cli/) | [Appfigures](https://appfigures.com) |
