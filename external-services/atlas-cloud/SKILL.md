@@ -48,10 +48,10 @@ Select one exact model ID, capture its schema URL, and verify both came from the
 MODEL='<model-id-from-catalog>'
 SCHEMA_URL=$(jq -er --arg model "$MODEL" '.data[] | select(.model == $model and .display_console == true) | .schema' /tmp/atlas-models.json)
 curl -fsS "$SCHEMA_URL" > /tmp/atlas-model-schema.json
-jq '.components.schemas.Input | {required, properties}' /tmp/atlas-model-schema.json
+jq '.components.schemas.Input' /tmp/atlas-model-schema.json
 ```
 
-Do not invent parameters or copy a payload from another model. Use only fields accepted by `components.schemas.Input` and satisfy every field in `required`.
+Do not invent parameters or copy a payload from another model. Use only fields accepted by `components.schemas.Input`, and satisfy its unconditional and conditional requirements across `allOf`, `anyOf`, and `oneOf`.
 
 ## Choose the Generation Endpoint
 
@@ -130,7 +130,7 @@ test "$STATUS" = completed || { echo "Prediction is still $STATUS; resume GET po
 jq -r '(.data.outputs // .outputs)[]' /tmp/atlas-prediction.json
 ```
 
-Return the generated URLs and state which model was used. Do not claim a local download succeeded unless the artifact was actually fetched and validated.
+Return outputs according to the selected model contract: media models yield generated URLs, while STT and lyric models yield text in `outputs[0]`; state which model was used. Do not claim a local download succeeded unless the artifact was actually fetched and validated.
 
 ## Failure Rules
 
